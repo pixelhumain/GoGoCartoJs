@@ -43,7 +43,7 @@ declare var App : AppModule;
 /**
 * App initialisation when document ready
 */
-$(document).ready(function()
+export function initializeAppModule()
 {	
    App = new AppModule();      
 
@@ -59,7 +59,7 @@ $(document).ready(function()
    initializeElementMenu();
    initializeVoting();
    initializeReportingAndDeleting();
-});
+}
 
 /*
 * App states names

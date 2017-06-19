@@ -37,7 +37,7 @@ gulp.task("scriptsDirectory", function () {
     return browserify({
         basedir: '.',
         debug: true,
-        entries: ['src/js/app.module.ts'],
+        entries: ['src/js/gogocarto.ts'],
         cache: {},
         packageCache: {}
     })
