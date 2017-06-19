@@ -1,0 +1,51 @@
+{# Menu #}
+{{ foo }}
+<section id="directory-menu"> 
+   {#} {% include '@directory/directory/components/directory-menu/directory-menu.html.twig' %}  #}  
+</section>
+ 
+{# The directory, map or list displaying, and element information bar #} 
+<section id="directory-content">
+  
+  {#{% include '@directory/directory/modals/too-many-markers.html.twig'  %}
+  {% include '@directory/directory/modals/pick-address-for-directions.html.twig'  %}  
+  {% include '@directory/directory/modals/share-element-url.html.twig'  %} 
+  {% include '@directory/directory/modals/vote-for-pending-element.html.twig'  %}
+
+  {% include '@directory/directory/components/spinner-loader.html.twig'  
+            with {'id': 'directory-spinner-loader' }%} #} 
+  
+  <div id="directory-content-map" style="display:none"> 
+    <div id="directory-loading" style="display:none">
+      Chargement...
+    </div>   
+    <div class="show-as-list-button"><i class="icon-list"></i></div>  
+    {# button for openning menu in small screens #}
+    <div id="menu-button"><i class='icon-menu'></i></div> 
+  </div>       
+
+  <div id="directory-content-list" style="display:none">
+    <div class="element-list-title-bar">
+      Résultats
+      <span class="element-list-title-number-results"></span>
+      <span class="element-list-title-text"></span>        
+      <span class="show-as-map-button"> <span class="icon btn-back icon-material-design-icons-1"></span></span>
+      <div class='shadow-bottom'></div>
+    </div>
+    <ul class="collapsible popout custom-scroll-bar" data-collapsible="accordion">
+    </ul>
+  </div>
+
+  {# section conntaining information one a specific element #}
+  <section id="element-info-bar" class="custom-scroll-bar inside-normal-mode" style="display:none">  
+    
+    {# container to receive the twig-js-template element-info, dynamically created #}
+    <div id="element-info"></div> 
+
+    {#{% include '@directory/directory/components/element-menu.html.twig' %}#}
+
+  </section>
+
+  {# overlay to partially mask the directory-content when openning menu in small screens #}
+  <div id="overlay"></div>
+</section>  
