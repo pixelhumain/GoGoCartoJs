@@ -10,7 +10,7 @@
 import { AppModule, AppStates, AppModes } from "../app.module";
 import { BiopenMarker } from "../components/map/biopen-marker.component";
 import { OptionValue, CategoryValue, Option, Category } from "./classes";
-import { capitalize } from "../../commons/commons";
+import { capitalize } from "../commons/commons";
 
 declare let App : AppModule;
 declare var $;

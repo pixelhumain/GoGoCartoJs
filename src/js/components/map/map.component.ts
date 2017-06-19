@@ -2,7 +2,7 @@
 import { AppModule, AppStates } from "../../app.module";
 import { Event, IEvent } from "../../utils/event";
 import { Element } from "../../classes/element.class";
-import { capitalize, slugify } from "../../../commons/commons";
+import { capitalize, slugify } from "../../commons/commons";
 import { GeocodeResult, RawBounds } from "../../modules/geocoder.module";
 /// <reference types="leaflet" />
 

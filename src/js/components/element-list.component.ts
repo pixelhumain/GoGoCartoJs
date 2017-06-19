@@ -10,7 +10,7 @@
 import { AppModule, AppStates } from "../app.module";
 declare let App : AppModule;
 import { ElementsChanged } from "../modules/elements.module";
-import { slugify, capitalize, unslugify } from "../../commons/commons";
+import { slugify, capitalize, unslugify } from "../commons/commons";
 
 import { createListenersForElementMenu, updateFavoriteIcon } from "./element-menu.component";
 import { Element } from "../classes/element.class";

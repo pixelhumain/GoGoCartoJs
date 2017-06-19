@@ -3,7 +3,7 @@ declare let App : AppModule;
 declare var L, $;
 
 import { AppModule } from "../app.module";
-import { slugify, capitalize, unslugify } from "../../commons/commons";
+import { slugify, capitalize, unslugify } from "../commons/commons";
 import { Event, IEvent } from "../utils/event";
 
 /** results type returned by geocoderJS */

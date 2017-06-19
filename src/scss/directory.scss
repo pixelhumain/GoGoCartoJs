@@ -1,31 +1,32 @@
-@import '../../../CoreBundle/Resources/scss/partials/base';
-@import '../../../CoreBundle/Resources/scss/partials/header';
+@import 'modules/normalize';
+@import 'modules/prefixer';
+@import 'modules/variables';
 
+@import 'vendors/materialize';
 @import 'vendors/leaflet';
 @import "vendors/marker-clusterer";
 
-@import "components/directory/helpers-bars";
-@import "components/directory/loaders";
-@import "components/directory/directory-menu/directory-menu";
+@import "components/helpers-bars";
+@import "components/loaders";
+@import "components/directory-menu/directory-menu";
 
-@import 'components/directory/icons';
+@import 'components/icons';
 
-@import 'components/directory/map/marker';
-@import "components/directory/map/cluster";
-@import "components/directory/map/directions";
-@import "components/directory/map/map";
-@import "components/directory/map/map-controls";
+@import 'components/map/marker';
+@import "components/map/cluster";
+@import "components/map/directions";
+@import "components/map/map";
+@import "components/map/map-controls";
 
-@import "components/directory/element-list";
-@import "components/directory/flash-messages";
+@import "components/element-list";
+@import "components/flash-messages";
 
-@import "components/directory/info-bar/info-bar";
+@import "components/info-bar/info-bar";
 
-@import "components/directory/modals/modals";
+@import "components/modals/modals";
 
 @import "components/commons/shadow-bottom";
-//@import "components/commons/search-bar";
-@import "components/commons/auto-complete";
+@import "components/commons/scroll-bar";
 
 body
 {

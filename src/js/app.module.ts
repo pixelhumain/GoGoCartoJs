@@ -34,7 +34,7 @@ import { initializeElementMenu } from "./components/element-menu.component";
 import { initializeVoting } from "./components/vote.component";
 import { initializeReportingAndDeleting } from "./components/reporting-deleting.component";
 
-import { getQueryParams, capitalize } from "../commons/commons";
+import { getQueryParams, capitalize } from "./commons/commons";
 import { Element } from "./classes/element.class";
 import * as Cookies from "./utils/cookies";
 

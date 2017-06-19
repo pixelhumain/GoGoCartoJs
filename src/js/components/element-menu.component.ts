@@ -16,7 +16,7 @@ import { AppModule, AppStates, AppModes } from "../app.module";
 import { Element } from "../classes/element.class";
 declare let App : AppModule;
 
-import { capitalize, slugify } from "../../commons/commons";
+import { capitalize, slugify } from "../commons/commons";
 import { openReportDeleteModal } from './reporting-deleting.component';
 
 export function initializeElementMenu()

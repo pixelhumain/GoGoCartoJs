@@ -10,7 +10,7 @@
 
 
 import { AppModule, AppStates, AppModes } from "../app.module";
-import { slugify, capitalize, parseArrayNumberIntoString, parseStringIntoArrayNumber } from "../../commons/commons";
+import { slugify, capitalize, parseArrayNumberIntoString, parseStringIntoArrayNumber } from "../commons/commons";
 import { Option} from "../classes/option.class";
 import { Category } from "../classes/category.class";
 import { Element } from "../classes/element.class";

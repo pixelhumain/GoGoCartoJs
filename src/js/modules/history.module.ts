@@ -9,7 +9,7 @@
  */
 
 import { Event, IEvent } from "../utils/event";
-import { slugify, capitalize } from "../../commons/commons";
+import { slugify, capitalize } from "../commons/commons";
 import { AppModule, AppStates, AppModes, AppDataType } from "../app.module";
 import { Element } from "../classes/element.class";
 import { ViewPort } from "../components/map/map.component";
