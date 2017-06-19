@@ -1,8 +1,8 @@
 {
   "name": "pagesvertes",
   "version": "2.0.0",
-  "homepage": "https://github.com/Biopen/CartoV3",
-  "description": "Collaborative mapping directory",
+  "homepage": "https://github.com/Biopen/GoGoCartoJS",
+  "description": "Front end directory part of GoGoCarto project",
   "keywords": [
     "map",
     "mapping",
@@ -12,7 +12,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Biopen/CartoV3.git"
+    "url": "https://github.com/Biopen/GoGoCartoJS.git"
   },
   "engines": {
     "node": "6.5.0"

@@ -32,30 +32,12 @@ function handleError(err) {
   this.emit('end');
 }
 
-gulp.task("scriptsHome", function () {
-    return browserify({
-        basedir: '.',
-        debug: true,
-        entries: ['src/Biopen/CoreBundle/Resources/js/home.ts'],
-        cache: {},
-        packageCache: {}
-    })
-    .plugin(tsify)
-    .transform('babelify', {
-        presets: ['es2015'],
-        extensions: ['.ts']
-    })
-    .bundle()
-    .on('error', handleError)
-    .pipe(source('home.js'))
-    .pipe(gulp.dest("web/js"));
-});
 
 gulp.task("scriptsDirectory", function () {
     return browserify({
         basedir: '.',
         debug: true,
-        entries: ['src/Biopen/GeoDirectoryBundle/Resources/js/directory/app.module.ts'],
+        entries: ['src/js/app.module.ts'],
         cache: {},
         packageCache: {}
     })
@@ -67,40 +49,27 @@ gulp.task("scriptsDirectory", function () {
     .bundle()
     .on('error', handleError)
     .pipe(source('directory.js'))
-    .pipe(gulp.dest("web/js"));
+    .pipe(gulp.dest("dist"));
 });
 
-gulp.task('scriptsElementForm', function() {
-  return gulp.src(['src/Biopen/GeoDirectoryBundle/Resources/js/element-form/**/*.js'])
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'))
-    .pipe(jshint.reporter('fail'))
-    .on('error', notify.onError({ message: 'JS hint fail'}))
-    .pipe(concat('element-form.js'))
-    //.pipe(livereload())
-    .pipe(gulp.dest('web/js'));
-});
 
 gulp.task('scriptsLibs', function() {
-  return gulp.src(['src/Biopen/GeoDirectoryBundle/Resources/js/libs/**/*.js', 
-                  '!src/Biopen/GeoDirectoryBundle/Resources/js/libs/materialize/unused/**/*.js',
-                   'web/bundles/fosjsrouting/js/router.js',
+  return gulp.src(['src/js/libs/**/*.js', 
+                  '!src/js/libs/materialize/unused/**/*.js'
                    ])
     .pipe(concat('libs.js'))
     // .pipe(rename({suffix: '.min'}))
     // .pipe(uglify())
-    .pipe(gulp.dest('web/js'));
+    .pipe(gulp.dest('dist'));
     //.pipe(livereload());
     //.pipe(notify({ message: 'Scripts Libs task complete' }));
 });
 
 
 gulp.task('sass', function () {
-  return gulp.src(['src/Biopen/GeoDirectoryBundle/Resources/scss/**/*.scss',
-                  'src/Biopen/CoreBundle/Resources/scss/**/*.scss'])
-    .pipe(sass()
-    .on('error', sass.logError))    
-    .pipe(gulp.dest('web/assets/css'));
+  return gulp.src(['src/scss/**/*.scss'])
+    .pipe(sass().on('error', sass.logError))    
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('prod_styles', function() {
@@ -113,44 +82,37 @@ gulp.task('prod_styles', function() {
 });
 
 gulp.task('gzip_styles', ['prod_styles'], function() {
-  return gulp.src('web/assets/css/**/*.css')
+  return gulp.src('dist/**/*.css')
     //.pipe(rename({suffix: '.min'}))
     //.pipe(minifycss())
     .pipe(gzip())
-    .pipe(gulp.dest('web/assets/css'));
+    .pipe(gulp.dest('dist'));
     //.pipe(notify({ message: 'Styles task complete' }));
 });
 
 gulp.task('concat_directory', function() {
-  return gulp.src(['web/js/directory.js', 
-                   'web/templates/directory-templates.js',
+  return gulp.src(['dist/directory.js', 
+                   'dist/directory-templates.js',
+                   'dist/libs.js',
                    'web/vendors/leaflet-routing-machine.js',
                    ])
-    .pipe(concat('directory_prod.js'))
-    .pipe(gulp.dest('web/js'));
+    .pipe(concat('gogocarto.js'))
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('prod_js', ['concat_directory'], function() {
-  return gulp.src(['web/js/*.js'])
+  return gulp.src(['dist/*.js'])
     .pipe(uglify())
     //.pipe(sourcemaps.init({loadMaps: true}))
     //.pipe(uglify().on('error', gulpUtil.log)) // notice the error event here
     //.pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('web/js'));
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('gzip_js', ['prod_js'],  function() {
-  return gulp.src(['web/js/*.js'])
+  return gulp.src(['dist/*.js'])
     .pipe(gzip())
-    .pipe(gulp.dest('web/js'));
-});
-
-
-gulp.task('images', function() {
-  return gulp.src('web/assets/img/*')
-    .pipe(cache(imagemin({ optimizationLevel: 5, progressive: true, interlaced: true })))
-    .pipe(gulp.dest('web/assets/imgMin'))
-    .pipe(notify({ message: 'Images task complete' }));
+    .pipe(gulp.dest('dist'));
 });
 
 
@@ -158,33 +120,23 @@ gulp.task('watch', function() {
 
   //livereload.listen();
   // Watch .scss files
-  gulp.watch(['src/Biopen/GeoDirectoryBundle/Resources/scss/**/*.scss',
-              'src/Biopen/CoreBundle/Resources/scss/**/*.scss'], 
+  gulp.watch(['src/scss/**/*.scss'], 
               ['sass']);
 
   // Watch .js files
-  gulp.watch(['src/Biopen/GeoDirectoryBundle/Resources/js/directory/**/*.ts', 
-              'src/Biopen/GeoDirectoryBundle/Resources/js/commons/**/*.ts'], 
+  gulp.watch(['src/js/**/*.ts'], 
               ['scriptsDirectory']);
   
-  gulp.watch(['src/Biopen/GeoDirectoryBundle/Resources/js/element-form/**/*.js'], 
-              ['scriptsElementForm']);
-  
-  gulp.watch('src/Biopen/GeoDirectoryBundle/Resources/js/libs/**/*.js', ['scriptsLibs']);
-
-  gulp.watch(['src/Biopen/CoreBundle/Resources/js/**/*.ts'], ['scriptsHome']);
-  // Watch image files
-  //gulp.watch('src/img/*', ['images']);
-
+  gulp.watch('src/js/libs/**/*.js', ['scriptsLibs']);
 
 });
 
 gulp.task('clean', function(cb) {
-    del(['web/assets/css/*.css', 'web/js'], cb);
+    del(['dist'], cb);
 });
 
 gulp.task('build', function() {
-    gulp.start('clean','sass', 'scriptsLibs', 'scriptsHome', 'scriptsElementForm','scriptsDirectory');
+    gulp.start('clean','sass', 'scriptsLibs','scriptsDirectory');
 });
 
 gulp.task('production', function() {
