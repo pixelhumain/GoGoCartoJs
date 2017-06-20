@@ -1,5 +1,3 @@
-{% twig_js name="biopen_twigJs_elementInfo" %}
-
 {# -------------- #}
 {#  ELEMENT INFO  #}
 {# -------------- #}
@@ -16,7 +14,7 @@
 
       <span class="col s12 name">
 
-      {% set mainIcon = element.isPending() ? 'icon-attention' : mainOptionValueToDisplay.option.icon %}
+      {% set mainIcon = 'icon-attention' if element.isPending() else mainOptionValueToDisplay.option.icon %}
         {# Icons #}
         <span class="element-main-icon icon {{ mainIcon }} colorAs {{pendingClass}} hideOnLargeScreen" option-id={{mainOptionValueToDisplay.colorOptionId}}></span>
         <span class="star-names-icons">
@@ -33,10 +31,9 @@
 
         {# Name #}
         {{ element.getProperty('name')|raw }}
-        {{ element.isDeleted ? ' </br><u>(En cours de suppression)</u>' : '' }}
+        {{ '</br><u>(En cours de suppression)</u>' if element.isDeleted }}
  
       </span>
-      <span id="testDiff"></span>
       
     </div>
 
@@ -48,12 +45,9 @@
 
       {# Categories litteral #}
       <span class="inline-option-values col s8 hideOnLargeScreen">
-        {#} {% set isDisabled = mainOptionValueToDisplay.isFilledByFilters ? '' : 'disabled' %}
-        <span class="option-value {{ isDisabled }}">{{ mainOptionValueToDisplay.option.name|capitalize }} 
-        {% if otherOptionsValuesToDisplay.length != 0 %}, {% endif %}</span>#}
 
         {% for optionValue in allOptionsValues %} 
-            {% set isDisabled = optionValue.isFilledByFilters ? '' : 'disabled' %}
+            {% set isDisabled =   '' if optionValue.isFilledByFilters else 'disabled' %}
             <span class="option-value {{ isDisabled }}">{{ optionValue.option.name|capitalize }} {% if not loop.last %}, {% endif %}</span>            
         {% endfor %}
 
@@ -79,7 +73,7 @@
       <div class="vote-section">
         <span class="basic-message">
           <span class="icon-attention"></span>
-          <span class="text">{{ element.status == 0 ? 'Nouvel Acteur' : 'Modifications' }} en cours de validation</span>
+          <span class="text">{{ 'Nouvel Acteur' if element.status == 0 else 'Modifications' }} en cours de validation</span>
           <span class="btn-vote-more-info validation-process-info" onclick='$("#popup-vote").openModal()'>EN SAVOIR PLUS</span>
           <span class="vote-button btn btn-vote waves-effect waves-light">Voter</span>
         </span>        
@@ -138,15 +132,15 @@
         </div>
         {% if not element.isPending() or isAdmin %}
         <div class="menu-element-item item-edit">
-          {% set editText = isAdmin ? 'Modifier' : 'Proposer des modifications' %}
+          {% set editText = 'Modifier' if isAdmin else 'Proposer des modifications' %}
           <span class="menu-icon icon-edit tooltipped" 
           data-position="top" data-delay="0" data-tooltip="{{ editText }}"></span>
           <span class="menu-element-item-text">{{ editText }}</span>
         </div>
         
         <div class="menu-element-item item-delete"> 
-          {% set deleteText = isAdmin ? 'Supprimer' : 'Signaler une erreur' %}
-          {% set deleteIcon = isAdmin ? 'icon-delete' : 'icon-exclamation-1' %}
+          {% set deleteText = 'Supprimer' if isAdmin  else 'Signaler une erreur' %}
+          {% set deleteIcon = 'icon-delete' if isAdmin else 'icon-exclamation-1' %}
           <span class="menu-icon btn-delete {{ deleteIcon }} tooltipped" 
           data-position="top" data-delay="0" data-tooltip="{{ deleteText }}"></span>
           <span class="menu-element-item-text">{{ deleteText }}</span>
@@ -189,9 +183,8 @@
       {# Categories  #}
       <h3>Les catégories</h3> 
       <div class="section row categories">
-        
-        {% include 'twig-js-templates/element-info-category-value.html.njk' with { 'categoryValue' : mainCategoryValue, 'subcategoriesCount' : 1 } %}  
-
+        {% import 'components/element-info-bar/element-info-category-value.html.njk' as categoryRenderer %}
+        {{ categoryRenderer.renderCategoryValue(mainCategoryValue, 1) }}
       </div>
       <div class="divider"></div>
 
