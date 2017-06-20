@@ -28,11 +28,13 @@
 @import "components/commons/shadow-bottom";
 @import "components/commons/scroll-bar";
 
-body
+.gogocarto-container
 {
   @include flexbox();
-  @include flex-flow(column nowrap);
+  @include flex(1 auto);
+  height: 100%;
 }
+
 #directory-menu
 {
     display: none;
@@ -41,14 +43,6 @@ body
     @include transition(height .5s);
 
     @media #{$medium-and-up} { flex: 0 0 22rem; display: block; } 
-}
-
-#page-content 
-{ 
-    @include flexbox();
-    @include flex(1 auto);
-    @include flex-flow(column nowrap);
-    background-color: #dfdfdf 
 }
 
 #directory-container 
