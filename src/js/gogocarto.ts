@@ -1,5 +1,5 @@
 declare var $;
-declare var nunjucks, GoGoCarto : GoGoCartoModule;
+declare var nunjucks, goGoCarto;
 
 import { AppModule, AppDataType, AppModes, AppStates } from './app.module';
 
@@ -19,6 +19,11 @@ export var App;
 export class GoGoCartoModule
 {
 	private options;
+
+	constructor(options)
+	{
+		this.init(options);
+	}
 
 	init(options)
 	{	
@@ -50,4 +55,4 @@ export class GoGoCartoModule
 }
 
 // fill the global variable GoGoCarto with an instance of the GoGoCarto library
-GoGoCarto = new GoGoCartoModule();
+goGoCarto = function(options) { return new GoGoCartoModule(options); }
