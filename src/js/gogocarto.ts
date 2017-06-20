@@ -19,6 +19,8 @@ export var App : AppModule;
 export class GoGoCartoModule
 {
 	private options;
+	// only for debugging
+	app;
 
 	constructor(options)
 	{
@@ -28,14 +30,21 @@ export class GoGoCartoModule
 	init(options)
 	{	
 	   App = new AppModule(); 
+		 // only for debugging
+	   this.app = App;
 
 	   let layout = App.templateModule.render('layout', { mainCategory: options.taxonomy, openHoursCategory: options.openHours});    
 	   $(options.containerId).append(layout);
 
 	   App.categoryModule.createCategoriesFromJson(options.taxonomy, options.openHours);
-
+	   if (App.categoryModule.options.length)
+	   {
+	   		let styles = App.templateModule.render('categories-styles', {'optionList':App.categoryModule.options});
+	   		$('head').append(styles);
+	   }
+	   
 	   App.elementModule.initialize();
-	  
+	   App.directoryMenuComponent.initialize();
 	   App.boundsModule.initialize();
 
 	   let initialState = new HistoryState();

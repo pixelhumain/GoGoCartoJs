@@ -20,7 +20,6 @@ export class DirectoryMenuComponent
 
 	constructor()
 	{
-		this.initialize();
 	}
 
 	initialize()
