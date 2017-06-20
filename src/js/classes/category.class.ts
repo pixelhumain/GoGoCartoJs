@@ -21,9 +21,9 @@ export class Category extends CategoryOptionTreeNode
 		this.id = $categoryJson.id;
 		this.name = $categoryJson.name;
 		this.index = $categoryJson.index;
-		this.singleOption = $categoryJson.single_option;
-		this.enableDescription = $categoryJson.enable_description;
-		this.displayCategoryName = $categoryJson.display_category_name;
+		this.singleOption = $categoryJson.singleOption;
+		this.enableDescription = $categoryJson.enableDescription;
+		this.displayCategoryName = $categoryJson.displayCategoryName;
 		this.depth = $categoryJson.depth;
 		this.mainOwnerId = $categoryJson.mainOwnerId;
 	}

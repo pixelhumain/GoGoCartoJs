@@ -29,13 +29,13 @@ export class Option extends CategoryOptionTreeNode
 		this.id = $optionJson.id;
 		this.name = $optionJson.name;
 		this.index = $optionJson.index;
-		this.nameShort = $optionJson.name_short;
+		this.nameShort = $optionJson.nameShort;
 		this.color = $optionJson.color;
 		this.icon = $optionJson.icon;
-		this.useIconForMarker = $optionJson.use_icon_for_marker;
-		this.useColorForMarker = $optionJson.use_color_for_marker;
-		this.showOpenHours = $optionJson.show_open_hours;
-		this.displayOption = $optionJson.display_option;
+		this.useIconForMarker = $optionJson.useIconForMarker;
+		this.useColorForMarker = $optionJson.useColorForMarker;
+		this.showOpenHours = $optionJson.showOpenHours;
+		this.displayOption = $optionJson.displayOption;
 	}
 
 	addCategory($category : Category) { this.children.push($category);  }
