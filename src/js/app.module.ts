@@ -137,11 +137,6 @@ export class AppModule
 	*/
 	loadHistoryState(historystate : HistoryState, $backFromHistory = false)
 	{
-		// if no backfromhistory that means historystate is actually the INITIAL_STATE
-		// given by symfony, so we need to convert this obect in real Historystate class
-		// if (!$backFromHistory)
-		// 	historystate = new HistoryState().parse(historystate);
-
 		if (historystate === null) return;	
 
 		console.log("loadHistorystate", historystate);	
