@@ -145,7 +145,7 @@ export class HistoryModule
 					route = App.routerModule.generate('biopen_directory_normal', { mode :  mode });	
 					// forjsrouting doesn't support speacial characts like in viewport
 					// so we add them manually
-					if (addressAndViewport) route += '/' + addressAndViewport;
+					//if (addressAndViewport) route += '/' + addressAndViewport;
 					break;
 
 				case AppStates.ShowElement:	
@@ -165,12 +165,12 @@ export class HistoryModule
 					}
 					// forjsrouting doesn't support speacial characts like in viewport
 					// so we add them manually
-					if (addressAndViewport) route += '/' + addressAndViewport;										
+					//if (addressAndViewport) route += '/' + addressAndViewport;										
 					break;		
 			}		
 		}
 
-		if (historyState.filters) route += '?cat=' + historyState.filters;
+		//if (historyState.filters) route += '?cat=' + historyState.filters;
 
 		return route;
 	};

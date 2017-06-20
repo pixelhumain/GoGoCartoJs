@@ -6,6 +6,6 @@ export class RouterModule
 {
 	generate(routeName : string, options? : any, absoluteUrl? : boolean)
 	{
-		return 'test';
+		return 'http://localhost/GoGoCartoJs/web/index.html';
 	}
 }
