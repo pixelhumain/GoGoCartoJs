@@ -1,4 +1,3 @@
-{% if optionList is defined %}
 <style>
 	
 	.bgdSoftColorAs { background-color: #484848 }
@@ -9,7 +8,7 @@
   {% for option in optionList %} 
      {% if option.icon or option.color %}
       {# if no softColor, softcolor equals color #}
-      {% set softColor = option.softColor ? option.softColor : option.color %}
+      {% set softColor = option.softColor if option.softColor else option.color %}
 	    .bgdSoftColorAs[option-id="{{ option.id }}"] { background-color: {{ softColor }} }
 	    .borderSoftColorAs[option-id="{{ option.id }}"] { border-color: {{ softColor }} }
 	    .bgdColorAs[option-id="{{ option.id }}"] { background-color: {{ option.color }} }
@@ -22,4 +21,3 @@
   .bgdColorAs.pending { background-color: #484848 }
   .colorAs.pending { color:#484848 }
 </style>
-{% endif %}
