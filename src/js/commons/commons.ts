@@ -9,12 +9,6 @@
  */
 declare var Routing, $;
 
-export function redirectToDirectory(route, address = $('#search-bar').val(), range = '')
-{    
-    if (!range) window.location.href = Routing.generate(route, { slug : slugify(address) });
-    else window.location.href = Routing.generate(route, { slug : slugify(address), distance : range});
-}
-
 export function slugify(text) : string
 {
   if (!text) return '';

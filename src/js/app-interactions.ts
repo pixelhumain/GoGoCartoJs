@@ -10,7 +10,6 @@
 
 import { AppModule, AppStates, AppModes } from "./app.module";
 declare let App : AppModule;
-import { redirectToDirectory } from "./commons/commons";
 
 //declare var $;
 declare let $ : any;
