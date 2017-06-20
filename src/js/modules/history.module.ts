@@ -15,7 +15,7 @@ import { Element } from "../classes/element.class";
 import { ViewPort } from "../components/map/map.component";
 import * as Cookies from "../utils/cookies";
 
-declare let App : AppModule;
+import { App } from "../gogocarto";
 declare let $;
 declare let Routing;
 

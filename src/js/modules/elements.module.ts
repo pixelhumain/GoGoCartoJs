@@ -9,7 +9,7 @@
  */
 
 import { AppModule, AppStates, AppModes, AppDataType } from "../app.module";
-declare let App : AppModule;
+import { App } from "../gogocarto";
 declare var $;	
 
 import * as Cookies from "../utils/cookies";

@@ -1,6 +1,6 @@
 import { AppModule, AppStates } from "../app.module";
 
-declare let App : AppModule;
+import { App } from "../gogocarto";
 
 export class RouterModule
 {

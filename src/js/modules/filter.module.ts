@@ -16,7 +16,7 @@ import { Category } from "../classes/category.class";
 import { Element } from "../classes/element.class";
 import { CategoryOptionTreeNode } from "../classes/category-option-tree-node.class";
 
-declare let App : AppModule;
+import { App } from "../gogocarto";
 
 export class FilterModule
 {

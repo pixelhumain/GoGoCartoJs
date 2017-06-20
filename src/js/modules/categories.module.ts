@@ -15,7 +15,7 @@ import { Option } from "../classes/option.class";
 export { Category } from "../classes/category.class";
 export { Option } from "../classes/option.class";
 
-declare let App : AppModule;
+import { App } from "../gogocarto";
 declare let $ : any;
 
 

@@ -10,7 +10,7 @@
 import { AppModule, AppStates, AppDataType } from "../app.module";
 import { GeocoderModule, GeocodeResult } from "../modules/geocoder.module";
 declare var google, $;
-declare let App : AppModule;
+import { App } from "../gogocarto";
 
 import { Event, IEvent } from "../utils/event";
 

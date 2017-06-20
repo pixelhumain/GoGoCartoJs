@@ -8,7 +8,7 @@
  * @Last Modified time: 2016-12-13
  */
 import { AppModule, AppStates } from "../app.module";
-declare let App : AppModule;
+import { App } from "../gogocarto";
 import { ElementsChanged } from "../modules/elements.module";
 import { slugify, capitalize, unslugify } from "../commons/commons";
 

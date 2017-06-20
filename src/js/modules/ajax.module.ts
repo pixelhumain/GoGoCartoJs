@@ -12,7 +12,7 @@ import { Event, IEvent } from "../utils/event";
 import { AppModule, AppStates } from "../app.module";
 import { Element } from "../classes/element.class";
 
-declare let App : AppModule;
+import { App } from "../gogocarto";
 declare var $ : any;
 declare let Routing;
 
@@ -80,7 +80,8 @@ export class AjaxModule
 		}
 
 		let dataRequest : any = { bounds : stringifiedBounds, mainOptionId : App.currMainId, fullRepresentation : getFullRepresentation };
-		let route = App.routerModule.generate('biopen_api_elements_in_bounds');
+		//let route = App.routerModule.generate('biopen_api_elements_in_bounds');
+		let route = 'http://localhost/GoGoCarto/web/app_dev.php/api/elementsInBounds';
 		
 		this.sendAjaxElementRequest(new Request(route, dataRequest), expectedFilledBounds);
 	}

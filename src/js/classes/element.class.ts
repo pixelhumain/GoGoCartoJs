@@ -12,7 +12,7 @@ import { BiopenMarker } from "../components/map/biopen-marker.component";
 import { OptionValue, CategoryValue, Option, Category } from "./classes";
 import { capitalize } from "../commons/commons";
 
-declare let App : AppModule;
+import { App } from "../gogocarto";
 declare var $;
 declare let Twig : any, JsDiff : any;
 declare let biopen_twigJs_elementInfo : any;

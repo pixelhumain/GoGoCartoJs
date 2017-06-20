@@ -9,8 +9,7 @@
  */
 /// <reference types="leaflet" />
 
-declare let window, Routing : any;
-declare let INITIAL_STATE, MAIN_CATEGORY, OPENHOURS_CATEGORY, IS_ADMIN;
+declare let window;
 declare var $;
 
 import { GeocoderModule, GeocodeResult } from "./modules/geocoder.module";
@@ -21,6 +20,7 @@ import { AjaxModule } from "./modules/ajax.module";
 import { CategoriesModule } from './modules/categories.module';
 import { DirectionsModule } from "./modules/directions.module";
 import { RouterModule } from "./modules/router.module";
+import { TemplateModule } from "./modules/template.module";
 import { ElementListComponent } from "./components/element-list.component";
 import { InfoBarComponent } from "./components/info-bar.component";
 import { SearchBarComponent } from "./components/search-bar.component";
@@ -33,7 +33,7 @@ import { getQueryParams, capitalize } from "./commons/commons";
 import { Element } from "./classes/element.class";
 import * as Cookies from "./utils/cookies";
 
-declare var App : AppModule;
+import { App } from "./gogocarto";
 
 /*
 * App states names
@@ -83,6 +83,7 @@ export class AppModule
 	directoryMenuComponent = new DirectoryMenuComponent();
 	boundsModule = new BoundsModule();
 	routerModule = new RouterModule();
+	templateModule = new TemplateModule();
 
 	//starRepresentationChoiceModule_ = constellationMode ? new StarRepresentationChoiceModule() : null;
 	

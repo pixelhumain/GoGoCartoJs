@@ -1,7 +1,7 @@
 import { AppModule, AppModes } from "../app.module";
 import { Option } from "./option.class";
 
-declare let App : AppModule;
+import { App } from "../gogocarto";
 declare let $ : any;
 
 export enum CategoryOptionTreeNodeType

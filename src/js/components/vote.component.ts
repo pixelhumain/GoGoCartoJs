@@ -18,7 +18,7 @@ import { AjaxModule } from "../modules/ajax.module";
 import { updateInfoBarSize } from "../app-interactions";
 import { ElementStatus } from "../classes/element.class";
 
-declare let App : AppModule;
+import { App } from "../gogocarto";
 
 import { capitalize, slugify } from "../commons/commons";
 

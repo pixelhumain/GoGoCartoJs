@@ -1,5 +1,5 @@
 declare let GeocoderJS;
-declare let App : AppModule;
+import { App } from "../gogocarto";
 declare var L, $;
 
 import { AppModule } from "../app.module";

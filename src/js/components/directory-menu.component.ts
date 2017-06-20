@@ -12,7 +12,7 @@ declare let $, jQuery : any;
 import { AppModule } from "../app.module";
 import { Category, Option } from "../modules/categories.module";
 import { hideDirectoryMenu } from "../app-interactions";
-declare let App : AppModule;
+import { App } from "../gogocarto";
 
 export class DirectoryMenuComponent
 {	

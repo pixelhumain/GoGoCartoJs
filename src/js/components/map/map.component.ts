@@ -6,7 +6,7 @@ import { capitalize, slugify } from "../../commons/commons";
 import { GeocodeResult, RawBounds } from "../../modules/geocoder.module";
 /// <reference types="leaflet" />
 
-declare let App : AppModule;
+import { App } from "../../gogocarto";
 declare var $, L : any;
 
 export class ViewPort

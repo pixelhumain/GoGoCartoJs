@@ -9,7 +9,7 @@
  */
 import { AppModule, AppStates } from "../app.module";
 import { Element } from "../classes/element.class";
-declare let App : AppModule;
+import { App } from "../gogocarto";
 
 import { Event, IEvent } from "../utils/event";
 import { updateMapSize, updateInfoBarSize } from "../app-interactions";

@@ -11,7 +11,7 @@ import { AppModule, AppStates } from "../../app.module";
 import { drawLineBetweenPoints } from "./map-drawing";
 import { Element } from "../../classes/element.class";
 
-declare let App : AppModule;
+import { App } from "../../gogocarto";
 declare let $;
 
 declare let Twig : any;

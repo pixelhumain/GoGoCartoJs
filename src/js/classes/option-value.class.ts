@@ -1,7 +1,7 @@
 import { AppModule } from "../app.module";
 import { Category, Option, CategoryValue} from "./classes";
 
-declare let App : AppModule;
+import { App } from "../gogocarto";
 
 export class OptionValue
 {
