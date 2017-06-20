@@ -28,38 +28,11 @@ import { MapComponent, ViewPort } from "./components/map/map.component";
 import { BiopenMarker } from "./components/map/biopen-marker.component";
 import { HistoryModule, HistoryState } from './modules/history.module';
 import { BoundsModule } from './modules/bounds.module';
-
-import { initializeAppInteractions } from "./app-interactions";
-import { initializeElementMenu } from "./components/element-menu.component";
-import { initializeVoting } from "./components/vote.component";
-import { initializeReportingAndDeleting } from "./components/reporting-deleting.component";
-
 import { getQueryParams, capitalize } from "./commons/commons";
 import { Element } from "./classes/element.class";
 import * as Cookies from "./utils/cookies";
 
 declare var App : AppModule;
-
-/**
-* App initialisation when document ready
-*/
-export function initializeAppModule()
-{	
-   App = new AppModule();      
-
-   App.categoryModule.createCategoriesFromJson(MAIN_CATEGORY, OPENHOURS_CATEGORY);
-
-   App.elementModule.initialize();
-  
-   App.boundsModule.initialize();
-
-   App.loadHistoryState();
-
-   initializeAppInteractions();
-   initializeElementMenu();
-   initializeVoting();
-   initializeReportingAndDeleting();
-}
 
 /*
 * App states names
@@ -120,7 +93,7 @@ export class AppModule
 	private stateElementId : number = null;
 
 	// let us know if current log user is Admin
-	readonly isUserAdmin : boolean = IS_ADMIN;
+	readonly isUserAdmin : boolean = false;
 
 
 	// when click on marker it also triger click on map
@@ -156,15 +129,15 @@ export class AppModule
 	initializeMapFeatures() {	};
 
 	/*
-	* Load initial state with INITIAL_STATE provided by symfony controller or
+	* Load initial state or
 	  with state poped by window history manager
 	*/
-	loadHistoryState(historystate : HistoryState = INITIAL_STATE, $backFromHistory = false)
+	loadHistoryState(historystate : HistoryState, $backFromHistory = false)
 	{
 		// if no backfromhistory that means historystate is actually the INITIAL_STATE
 		// given by symfony, so we need to convert this obect in real Historystate class
-		if (!$backFromHistory)
-			historystate = new HistoryState().parse(historystate);
+		// if (!$backFromHistory)
+		// 	historystate = new HistoryState().parse(historystate);
 
 		if (historystate === null) return;	
 
