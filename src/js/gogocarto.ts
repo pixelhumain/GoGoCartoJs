@@ -35,7 +35,7 @@ export class GoGoCarto
 	constructor(options)
 	{
 		nunjucks.configure('../src/views', { autoescape: true });
-		let layout = nunjucks.render('layout.html.njk', { mainCategory: options.taxonomy });
+		let layout = nunjucks.render('layout.html.njk', { mainCategory: options.taxonomy, openHoursCategory: options.openHours });
 		$('#gogocarto').append(layout);
 		this.initializeAppModule(options);
 	}

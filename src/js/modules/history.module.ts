@@ -129,12 +129,12 @@ export class HistoryModule
 
 		if (App.dataType == AppDataType.SearchResults)
 		{
-			route = Routing.generate('biopen_directory_search', { mode :  mode, text : historyState.text });	
+			route = App.routerModule.generate('biopen_directory_search', { mode :  mode, text : historyState.text });	
 		}		
 		else if (App.mode == AppModes.List)
 		{
 			// in list mode we don't care about state
-			route = Routing.generate('biopen_directory_normal', { mode :  mode });	
+			route = App.routerModule.generate('biopen_directory_normal', { mode :  mode });	
 			if (addressAndViewport) route += '/' + addressAndViewport;
 		}
 		else
@@ -142,7 +142,7 @@ export class HistoryModule
 			switch (App.state)
 			{
 				case AppStates.Normal:	
-					route = Routing.generate('biopen_directory_normal', { mode :  mode });	
+					route = App.routerModule.generate('biopen_directory_normal', { mode :  mode });	
 					// forjsrouting doesn't support speacial characts like in viewport
 					// so we add them manually
 					if (addressAndViewport) route += '/' + addressAndViewport;
@@ -157,11 +157,11 @@ export class HistoryModule
 
 					if (App.state == AppStates.ShowDirections)
 					{
-						route = Routing.generate('biopen_directory_showDirections', { name :  capitalize(slugify(element.name)), id : element.id });	
+						route = App.routerModule.generate('biopen_directory_showDirections', { name :  capitalize(slugify(element.name)), id : element.id });	
 					}	
 					else
 					{
-						route = Routing.generate('biopen_directory_showElement', { name :  capitalize(slugify(element.name)), id : element.id });	
+						route = App.routerModule.generate('biopen_directory_showElement', { name :  capitalize(slugify(element.name)), id : element.id });	
 					}
 					// forjsrouting doesn't support speacial characts like in viewport
 					// so we add them manually

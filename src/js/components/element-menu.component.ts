@@ -110,7 +110,7 @@ export function createListenersForElementMenu(object)
 	object.find('.tooltipped').tooltip();
 
 	object.find('.item-edit').click(function() {
-		window.location.href = Routing.generate('biopen_element_edit', { id : getCurrentElementIdShown() }); 
+		window.location.href = App.routerModule.generate('biopen_element_edit', { id : getCurrentElementIdShown() }); 
 	});
 
 	object.find('.item-delete').click(function() 
@@ -153,7 +153,7 @@ export function createListenersForElementMenu(object)
 		}
 		else
 		{
-			url = Routing.generate('biopen_directory_showElement', { name :  capitalize(slugify(element.name)), id : element.id }, true);	
+			url = App.routerModule.generate('biopen_directory_showElement', { name :  capitalize(slugify(element.name)), id : element.id }, true);	
 		}
 
 		modal.find('.input-simple-modal').val(url);

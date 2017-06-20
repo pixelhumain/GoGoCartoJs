@@ -57,7 +57,7 @@ export class AjaxModule
 	// 	}
 
 	// 	let dataRequest = new DataAroundRequest($location.lat, $location.lng, $distance, $maxResults, App.currMainId);
-	// 	let route = Routing.generate('biopen_api_elements_around_location');	
+	// 	let route = App.routerModule.generate('biopen_api_elements_around_location');	
 		
 	// 	this.sendAjaxElementRequest(new Request(route, dataRequest));
 	// }
@@ -80,7 +80,7 @@ export class AjaxModule
 		}
 
 		let dataRequest : any = { bounds : stringifiedBounds, mainOptionId : App.currMainId, fullRepresentation : getFullRepresentation };
-		let route = Routing.generate('biopen_api_elements_in_bounds');
+		let route = App.routerModule.generate('biopen_api_elements_in_bounds');
 		
 		this.sendAjaxElementRequest(new Request(route, dataRequest), expectedFilledBounds);
 	}
@@ -155,7 +155,7 @@ export class AjaxModule
 	getElementById(elementId, callbackSuccess?, callbackFailure?)
 	{
 		let start = new Date().getTime();
-		let route = Routing.generate('biopen_api_element_by_id');
+		let route = App.routerModule.generate('biopen_api_element_by_id');
 
 		$.ajax({
 			url: route,
@@ -182,7 +182,7 @@ export class AjaxModule
 
 	vote(elementId :number, voteValue : number, comment : string, callbackSuccess?, callbackFailure?)
 	{
-		let route = Routing.generate('biopen_vote_for_element');
+		let route = App.routerModule.generate('biopen_vote_for_element');
 
 		$.ajax({
 			url: route,
@@ -205,7 +205,7 @@ export class AjaxModule
 
 	reportError(elementId :number, reportValue : number, comment : string, userMail : string, callbackSuccess?, callbackFailure?)
 	{
-		let route = Routing.generate('biopen_report_error_for_element');
+		let route = App.routerModule.generate('biopen_report_error_for_element');
 
 		$.ajax({
 			url: route,
@@ -228,7 +228,7 @@ export class AjaxModule
 
 	deleteElement(elementId, message: string, callbackSuccess?, callbackFailure?)
 	{
-		let route = Routing.generate('biopen_delete_element');
+		let route = App.routerModule.generate('biopen_delete_element');
 
 		$.ajax({
 			url: route,
@@ -251,7 +251,7 @@ export class AjaxModule
 
 	searchElements(text: string, callbackSuccess?, callbackFailure?)
 	{
-		let route = Routing.generate('biopen_api_elements_from_text');
+		let route = App.routerModule.generate('biopen_api_elements_from_text');
 
 		$.ajax({
 			url: route,
