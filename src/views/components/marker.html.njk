@@ -1,5 +1,3 @@
-{% twig_js name="biopen_twigJs_marker" %}
-
 <div class="marker-name bgdColorAs {{pendingClass}}" option-id={{mainOptionValueToDisplay.colorOptionId}} style="display:none">{{ element.name | capitalize }}</div>
 
 <div class="marker-wrapper colorAs {{pendingClass}}" option-id="{{mainOptionValueToDisplay.colorOptionId}}" id="marker-{{ element.id }}">
@@ -7,8 +5,9 @@
 	<div class="rotate animate icon-marker"></div>
 	
 	<div class="iconInsideMarker-wrapper rotate">
-		{% set mainIcon = element.isPending() ? 'icon-attention' :  mainOptionValueToDisplay.option.icon %}
-		<div class="iconInsideMarker colorAs {{pendingClass}} {{ mainOptionValueToDisplay.isFilledByFilters ? '' : 'disabled' }} {{mainIcon}}" option-id={{ mainOptionValueToDisplay.option.color ? mainOptionValueToDisplay.optionId : mainOptionValueToDisplay.colorOptionId }}>
+		{% set mainIcon = 'icon-attention' if element.isPending() else mainOptionValueToDisplay.option.icon %}
+		<div class="iconInsideMarker colorAs {{pendingClass}} {{ 'disabled' if not mainOptionValueToDisplay.isFilledByFilters }} {{mainIcon}}" 
+		option-id={{ mainOptionValueToDisplay.optionId if mainOptionValueToDisplay.option.color else mainOptionValueToDisplay.colorOptionId }}>
 	</div>
 
 	{% set nbreOthersOptions = otherOptionsValuesToDisplay.length %}	
@@ -24,11 +23,12 @@
     	
 			{% for otherOptionValue in otherOptionsValuesToDisplay %}
 
-				{% set disableOption = otherOptionValue.isFilledByFilters == false ? 'disabled' : '' %}
+				{% set disableOption = 'disabled' if not otherOptionValue.isFilledByFilters %}
 
-				<div class="moreIconWrapper {{ disableOption }} {{ otherOptionValue.colorOptionId ? 'colorAs' : '' }} {{pendingClass}}" style="left:{{ 32 * loop.index0 }}px"
+				<div class="moreIconWrapper {{ disableOption }} {{ 'colorAs' if otherOptionValue.colorOptionId }} {{pendingClass}}" style="left:{{ 32 * loop.index0 }}px"
 						option-id={{ otherOptionValue.colorOptionId }}>
-					<span class="moreIcon iconInsideMarker {{ disableOption }} {{ otherOptionValue.option.icon }} colorAs {{pendingClass}}" option-id={{ otherOptionValue.option.color ? otherOptionValue.optionId : otherOptionValue.colorOptionId }}>
+					<span class="moreIcon iconInsideMarker {{ disableOption }} {{ otherOptionValue.option.icon }} colorAs {{pendingClass}}" 
+						option-id={{ otherOptionValue.optionId if otherOptionValue.option.color else otherOptionValue.colorOptionId }}>
 					</span>
 			 	</div>
 

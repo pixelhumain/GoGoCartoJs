@@ -13,9 +13,7 @@ import { OptionValue, CategoryValue, Option, Category } from "./classes";
 import { capitalize } from "../commons/commons";
 
 import { App } from "../gogocarto";
-declare var $;
-declare let Twig : any, JsDiff : any;
-declare let biopen_twigJs_elementInfo : any;
+declare var $, JsDiff : any;
 
 
 export enum ElementStatus 
@@ -532,7 +530,7 @@ export class Element
 	isPending() { return this.status == ElementStatus.PendingAdd || this.status == ElementStatus.PendingModification; }
 	isDeleted() { return this.status <= ElementStatus.AdminRefused }
 
-	// use twig template js to create the html representation of the element
+	// use template js to create the html representation of the element
 	getHtmlRepresentation() 
 	{	
 		if (!this.isFullyLoaded)
@@ -554,7 +552,7 @@ export class Element
 			mainCategoryValue = this.getOptionTree().children[0];
 		//console.log("GetHtmlRepresentation " + this.distance + " km", this.getOptionTree().children[0]);
 
-		let html = Twig.render(biopen_twigJs_elementInfo, 
+		let html = App.templateModule.render('element-info-bar', 
 		{
 			element : this, 
 			showDistance: App.geocoder.getLocation() ? true : false,

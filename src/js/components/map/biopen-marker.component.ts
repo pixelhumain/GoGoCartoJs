@@ -14,9 +14,6 @@ import { Element } from "../../classes/element.class";
 import { App } from "../../gogocarto";
 declare let $;
 
-declare let Twig : any;
-declare let biopen_twigJs_marker : any;
-
 export class BiopenMarker
 {
 	id_ : string;
@@ -122,7 +119,7 @@ export class BiopenMarker
 		// if (optionstoDisplay[0])
 		// 	showMoreIcon = !optionstoDisplay[0].useColorForMarker || !optionstoDisplay[0].useIconForMarker;
 
-		let htmlMarker = Twig.render(biopen_twigJs_marker, 
+		let htmlMarker = App.templateModule.render('marker', 
 		{
 			element : element, 
 			mainOptionValueToDisplay: optionstoDisplay[0],
