@@ -12,8 +12,7 @@
 		</div> 
 
 		{# MAIN OPTIONS ICONS & TOOLTIP #}
-		{% for key, mainOption in mainCategory.options %}
-
+		{% for mainOption in mainCategory.options %}
 			<div class="icon main-icon {{ mainOption.icon }}"  id="main-option-icon-{{mainOption.id}}" data-option-id="{{ mainOption.id }}">
 				<div class="main-option-tooltip">{{ mainOption.name }}</div>
 			</div>
@@ -65,25 +64,24 @@
 				{# ALL CATEGORIES MENU #}
 				<div id="main-option-all" class="main-option-subcategories-container" style="display:none">		
 
-					{% import 'components/directory-menu/category-item2.html.njk' as categoryItem %}
-					{{ categoryItem.renderItem(mainCategory, false) }} 
+					{% import 'components/directory-menu/category-item.html.njk' as categoryRenderer %}
+					{{ categoryRenderer.renderItem(mainCategory, false) }} 
 
 				</div>
 
 
-				{# MAIN OPTIONS MENU 
-				{% for key, mainOption in mainCategory.options %}
+				{# MAIN OPTIONS MENU #}
+				{% for mainOption in mainCategory.options %}
 
 					<div id="main-option-{{ mainOption.id }}" class="main-option-subcategories-container" style="display:none">		
 
-						{% for key, category in mainOption.subcategories %}
-							{{ category.renderItem(category, true) }} 
-
-					{% endfor %} 
+						{% for category in mainOption.subcategories %}
+							{{ categoryRenderer.renderItem(category, true) }} 
+						{% endfor %} 
 
 					</div>
 
-				{% endfor %}#}
+				{% endfor %}
 
 				{# OPEN HOURS FILTER
 				<div id="open-hours-filter" class="" style="display:none">		

@@ -26,7 +26,7 @@
 	{# ---- CATEGORY LIST OPTIONS ----- #}
 	<div class="options-wrapper" {% if not category.showExpanded %} style="display:none"{% endif %}>
 
-	{% for key, option in category.options %} 
+	{% for option in category.options %} 
 
 		{% set isSubcategories = recursive and option.subcategories|length %}
 
@@ -68,13 +68,13 @@
 
     </li>
 
-    {#{% if recursive %}
-    	<div class="subcategories-wrapper" {% if option.showExpanded is defined and not option.showExpanded%} style="display:none"{% endif %}>
-	    {% for subkey, subcategory in option.subcategories %}
+    {% if recursive %}
+    	<div class="subcategories-wrapper" {% if not option.showExpanded%} style="display:none"{% endif %}>
+	    {% for subcategory in option.subcategories %}
 	    		{{ renderItem(subcategory, true) }}
 			{% endfor %} 
 			</div>
-		{% endif %}#}
+		{% endif %}
 
 	 {% endfor %}
 
