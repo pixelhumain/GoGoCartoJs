@@ -156,7 +156,7 @@ export class AjaxModule
 	getElementById(elementId, callbackSuccess?, callbackFailure?)
 	{
 		let start = new Date().getTime();
-		let route = App.routerModule.generate('biopen_api_element_by_id');
+		let route = 'http://localhost/GoGoCarto/web/app_dev.php/api/element';
 
 		$.ajax({
 			url: route,
@@ -167,7 +167,7 @@ export class AjaxModule
 				if (response)
 				{
 					let end = new Date().getTime();
-					window.console.log("receive elementById in " + (end-start) + " ms", response);			
+					console.log("receive elementById in " + (end-start) + " ms", response);			
 
 					if (callbackSuccess) callbackSuccess(response); 
 					//this.onNewElement.emit(response);							
@@ -183,7 +183,7 @@ export class AjaxModule
 
 	vote(elementId :number, voteValue : number, comment : string, callbackSuccess?, callbackFailure?)
 	{
-		let route = App.routerModule.generate('biopen_vote_for_element');
+		let route = 'http://localhost/GoGoCarto/web/app_dev.php/interact/vote';
 
 		$.ajax({
 			url: route,
@@ -206,7 +206,7 @@ export class AjaxModule
 
 	reportError(elementId :number, reportValue : number, comment : string, userMail : string, callbackSuccess?, callbackFailure?)
 	{
-		let route = App.routerModule.generate('biopen_report_error_for_element');
+		let route = 'http://localhost/GoGoCarto/web/app_dev.php/interact/report';
 
 		$.ajax({
 			url: route,
@@ -229,7 +229,7 @@ export class AjaxModule
 
 	deleteElement(elementId, message: string, callbackSuccess?, callbackFailure?)
 	{
-		let route = App.routerModule.generate('biopen_delete_element');
+		let route = 'http://localhost/GoGoCarto/web/app_dev.php/interact/delete';
 
 		$.ajax({
 			url: route,
@@ -252,7 +252,7 @@ export class AjaxModule
 
 	searchElements(text: string, callbackSuccess?, callbackFailure?)
 	{
-		let route = App.routerModule.generate('biopen_api_elements_from_text');
+		let route = 'http://localhost/GoGoCarto/web/app_dev.php/api/search';
 
 		$.ajax({
 			url: route,
