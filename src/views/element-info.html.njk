@@ -111,7 +111,7 @@
       </div>
       {#
         WARNING
-        If you modify this menu-element, please report changes in element-menu.html.twig also.
+        If you modify this menu-element, please report changes in element-menu.html.njk also.
         this is a lack of feature in TwigJsTemplate who does not implements the twig "include" method
       #}
       <div class="menu-element bgdSoftColorAs {{pendingClass}}" option-id={{mainOptionValueToDisplay.colorOptionId}}>  
@@ -190,7 +190,7 @@
       <h3>Les catégories</h3> 
       <div class="section row categories">
         
-        {% include '@directory/directory/twig-js-templates/element-info-category-value.html.twig' with { 'categoryValue' : mainCategoryValue, 'subcategoriesCount' : 1 } %}  
+        {% include 'twig-js-templates/element-info-category-value.html.njk' with { 'categoryValue' : mainCategoryValue, 'subcategoriesCount' : 1 } %}  
 
       </div>
       <div class="divider"></div>

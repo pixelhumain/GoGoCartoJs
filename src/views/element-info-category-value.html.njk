@@ -50,7 +50,7 @@
 	{% for subcategory in optionValue.children %}
 
 		{% if not (loop.first and displayFirstCategoryInline) %}
-			{% include '@directory/directory/twig-js-templates/element-info-category-value.html.twig' with { 'categoryValue' : subcategory, 'subcategoriesCount' : subcategoriesCount } %} 
+			{% include 'twig-js-templates/element-info-category-value.html.njk' with { 'categoryValue' : subcategory, 'subcategoriesCount' : subcategoriesCount } %} 
 		{% endif %}
 
 	{% endfor %} 
