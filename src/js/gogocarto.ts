@@ -14,7 +14,7 @@ export class GoGoCartoOptions
 	taxonomy
 }
 
-export var App;
+export var App : AppModule;
 
 export class GoGoCartoModule
 {
