@@ -1,0 +1,25 @@
+<div id="directory-menu-main-container">
+
+  <div class="directory-menu-header bgdSoftColorAs">		
+
+		<span class="btn-close-menu icon icon-material-design-icons-1"></span>
+		{% include 'components/search-bar.html.njk'  %} 	
+
+		<div class="directions-header">
+			<h3>Calcul d'itinéraire</h3>
+			<span class="icon icon-close btn-close" id="btn-close-directions"></span>
+		</div>		
+		
+		<div class="shadow-bottom"></div>
+	</div>	
+
+	<div class="directory-menu-content">
+	  
+	  {% import 'components/spinner-loader.html.njk' as spinnerLoader %}
+		{{ spinnerLoader.create('directory-menu-spinner-loader') }}
+
+	  {% include 'components/directory-menu/filters-menu.html.njk' %}
+
+	 </div>
+
+</div>
