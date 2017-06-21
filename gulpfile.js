@@ -55,15 +55,12 @@ gulp.task("scriptsDirectory", function () {
 
 
 gulp.task('scriptsLibs', function() {
-  return gulp.src(['src/js/libs/**/*.js', 
-                  '!src/js/libs/materialize/unused/**/*.js'
+  return gulp.src(['src/js/libs/**/!(leaflet-routing-machine)*.js', 
+                  'src/js/libs/leaflet-routing-machine.js' ,
+                  '!src/js/libs/materialize/unused/**/*.js',
                    ])
     .pipe(concat('libs.js'))
-    // .pipe(rename({suffix: '.min'}))
-    // .pipe(uglify())
     .pipe(gulp.dest('dist'));
-    //.pipe(livereload());
-    //.pipe(notify({ message: 'Scripts Libs task complete' }));
 });
 
 gulp.task('templates', function() {
@@ -100,8 +97,7 @@ gulp.task('gzip_styles', ['prod_styles'], function() {
 gulp.task('concat_directory', function() {
   return gulp.src(['dist/directory.js', 
                    'dist/templates.js',
-                   'dist/libs.js',
-                   //'web/vendors/leaflet-routing-machine.js',
+                   'dist/libs.js'
                    ])
     .pipe(concat('gogocarto.js'))
     .pipe(gulp.dest('dist'));
