@@ -66,7 +66,7 @@ export class HistoryModule
 	updateCurrState(options?)
 	{
 		//console.log("Update Curr State");
-		if (!history.state) { console.log("curr state null");this.pushNewState();}
+		if (!history.state) { console.log("curr state null");this.pushNewState();return;}
 		this.updateHistory(false, options);
 	};
 
@@ -134,18 +134,14 @@ export class HistoryModule
 		else if (App.mode == AppModes.List)
 		{
 			// in list mode we don't care about state
-			route = App.routerModule.generate('biopen_directory_normal', { mode :  mode });	
-			//if (addressAndViewport) route += '/' + addressAndViewport;
+			route = App.routerModule.generate('biopen_directory_normal', { mode :  mode, addressAndViewport: addressAndViewport });	
 		}
 		else
 		{
 			switch (App.state)
 			{
 				case AppStates.Normal:	
-					route = App.routerModule.generate('biopen_directory_normal', { mode :  mode });	
-					// forjsrouting doesn't support speacial characts like in viewport
-					// so we add them manually
-					//if (addressAndViewport) route += '/' + addressAndViewport;
+					route = App.routerModule.generate('biopen_directory_normal', { mode :  mode, addressAndViewport: addressAndViewport });	
 					break;
 
 				case AppStates.ShowElement:	
@@ -157,20 +153,17 @@ export class HistoryModule
 
 					if (App.state == AppStates.ShowDirections)
 					{
-						route = App.routerModule.generate('biopen_directory_showDirections', { name :  capitalize(slugify(element.name)), id : element.id });	
+						route = App.routerModule.generate('biopen_directory_showDirections', { name :  capitalize(slugify(element.name)), id : element.id, addressAndViewport: addressAndViewport });	
 					}	
 					else
 					{
-						route = App.routerModule.generate('biopen_directory_showElement', { name :  capitalize(slugify(element.name)), id : element.id });	
-					}
-					// forjsrouting doesn't support speacial characts like in viewport
-					// so we add them manually
-					//if (addressAndViewport) route += '/' + addressAndViewport;										
+						route = App.routerModule.generate('biopen_directory_showElement', { name :  capitalize(slugify(element.name)), id : element.id, addressAndViewport: addressAndViewport });	
+					}						
 					break;		
 			}		
 		}
 
-		//if (historyState.filters) route += '?cat=' + historyState.filters;
+		if (historyState.filters) route += '?cat=' + historyState.filters;
 
 		return route;
 	};

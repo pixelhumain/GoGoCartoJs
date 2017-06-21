@@ -45,16 +45,9 @@ export class GoGoCartoModule
 	   
 	   App.elementModule.initialize();
 	   App.directoryMenuComponent.initialize();
-	   App.boundsModule.initialize();
+	   App.boundsModule.initialize();	   
 
-	   let initialState = new HistoryState();
-	   initialState.address = '';
-	   initialState.dataType = AppDataType.All;
-	   initialState.mode = AppModes.Map;
-	   initialState.state = AppStates.Normal;
-	   initialState.viewport = null;
-
-	   App.loadHistoryState(initialState);
+	   App.routerModule.loadInitialState();
 
 	   initializeAppInteractions();
 	   initializeElementMenu();
