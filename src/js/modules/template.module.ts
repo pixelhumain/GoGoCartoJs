@@ -7,8 +7,11 @@ export class TemplateModule
 {
 	constructor()
 	{
+		// we can configure this path and the templates names from GoGoCarto
+		// to override default templates
+		// As default templates are precompiled into javascript templates.js file
+		// if there is some templates we did not override, nunjucks will get the precompiled one
 		nunjucks.configure('../src/views', { autoescape: true });
-		//nunjucks.precompile('../src/views');
 	}
 
 	render(templateName : string, options : any) : string
