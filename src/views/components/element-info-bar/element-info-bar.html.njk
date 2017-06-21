@@ -30,8 +30,8 @@
         {% endif %}
 
         {# Name #}
-        {{ element.getProperty('name')|raw }}
-        {{ '</br><u>(En cours de suppression)</u>' if element.isDeleted }}
+        {{ element.getProperty('name') }}
+        {% if element.isDeleted() %}</br><u>(En cours de suppression)</u>{% endif %}
  
       </span>
       
