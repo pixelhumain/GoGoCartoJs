@@ -3,7 +3,7 @@
   <div class="modal-content">
   	<form>
 
-  		{% if is_granted('ROLE_ADMIN') %}
+  		{% if isAdmin %}
 
   			<h5 id="modal-title">Supprimer <span class="elementName"></span> ?</h5>
   			<p>Un mail sera envoyé à l'acteur</p>	
@@ -49,7 +49,7 @@
 				<button type="button" 
 						id="submit-error"		
 						class="btn waves-effect waves-light">
-						{{ is_granted('ROLE_ADMIN') ? 'Supprimer' : 'Envoyer' }}
+						{{ 'Supprimer' if isAdmin else 'Envoyer' }}
 				</button>
 			</div>
 
