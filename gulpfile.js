@@ -22,6 +22,7 @@ var source = require('vinyl-source-stream');
 var tsify = require("tsify");
 var uglify = require('gulp-uglify');
 const notifier = require('node-notifier');
+const nunjucks = require('gulp-nunjucks');
 
 function handleError(err) {
   console.log(err.toString());
@@ -65,6 +66,12 @@ gulp.task('scriptsLibs', function() {
     //.pipe(notify({ message: 'Scripts Libs task complete' }));
 });
 
+gulp.task('templates', function() {
+  return gulp.src(['src/views/**/*.html.njk', '!src/views/nearest-mode/**/*.html.njk'])
+    .pipe(nunjucks.precompile())
+    .pipe(concat('templates.js'))
+    .pipe(gulp.dest('dist'))
+});
 
 gulp.task('sass', function () {
   return gulp.src(['src/scss/**/*.scss'])
@@ -92,9 +99,9 @@ gulp.task('gzip_styles', ['prod_styles'], function() {
 
 gulp.task('concat_directory', function() {
   return gulp.src(['dist/directory.js', 
-                   'dist/directory-templates.js',
+                   'dist/templates.js',
                    'dist/libs.js',
-                   'web/vendors/leaflet-routing-machine.js',
+                   //'web/vendors/leaflet-routing-machine.js',
                    ])
     .pipe(concat('gogocarto.js'))
     .pipe(gulp.dest('dist'));
@@ -129,6 +136,8 @@ gulp.task('watch', function() {
   
   gulp.watch('src/js/libs/**/*.js', ['scriptsLibs']);
 
+  gulp.watch('src/views/**/*.js', ['templates']);
+
 });
 
 gulp.task('clean', function(cb) {
@@ -136,7 +145,7 @@ gulp.task('clean', function(cb) {
 });
 
 gulp.task('build', function() {
-    gulp.start('clean','sass', 'scriptsLibs','scriptsDirectory');
+    gulp.start('clean','sass', 'scriptsLibs','scriptsDirectory', 'templates');
 });
 
 gulp.task('production', function() {

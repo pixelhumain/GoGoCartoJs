@@ -8,6 +8,7 @@ export class TemplateModule
 	constructor()
 	{
 		nunjucks.configure('../src/views', { autoescape: true });
+		//nunjucks.precompile('../src/views');
 	}
 
 	render(templateName : string, options : any) : string
