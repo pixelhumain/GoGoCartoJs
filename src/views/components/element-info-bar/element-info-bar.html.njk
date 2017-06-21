@@ -30,7 +30,7 @@
         {% endif %}
 
         {# Name #}
-        {{ element.getProperty('name') }}
+        {{ element.getProperty('name')|safe }}
         {% if element.isDeleted() %}</br><u>(En cours de suppression)</u>{% endif %}
  
       </span>
@@ -41,7 +41,7 @@
     <div class='collapsible-header-more row'>
 
       {# Description #}
-      <span class="description col s12">{{ element.getProperty('description')|raw }}</span> 
+      <span class="description col s12">{{ element.getProperty('description')|safe }}</span> 
 
       {# Categories litteral #}
       <span class="inline-option-values col s8 hideOnLargeScreen">
@@ -158,22 +158,22 @@
       <div class="section row sectionInfos">
 
         {# Address #}
-        <span class="col s12 address">{{ element.getProperty('address')|raw }}</span>
+        <span class="col s12 address">{{ element.getProperty('address')|safe }}</span>
         
         {# Tel #}
         {% if element.tel %}
-          <span class="col s12 tel">{{ element.getProperty('tel')|raw }}</span>
+          <span class="col s12 tel">{{ element.getProperty('tel')|safe }}</span>
         {% endif %}
 
         {# Mail #}
         {% if element.mail %}
-          <span class="col s12 tel"><a href="mailto:{{ element.mail }}">{{  element.getProperty('mail')|raw }}</a>
+          <span class="col s12 tel"><a href="mailto:{{ element.mail }}">{{  element.getProperty('mail')|safe }}</a>
           </span>
         {% endif %}
 
         {# WebSite #}
         {% if element.webSite %}
-          <span class="col s12 tel"><a href="{{ element.webSite }}" target="_blank">{{ element.getProperty('webSite')|raw }}</a>
+          <span class="col s12 tel"><a href="{{ element.webSite }}" target="_blank">{{ element.getProperty('webSite')|safe }}</a>
           </span>
         {% endif %}
 
@@ -206,7 +206,7 @@
         {% endfor %}          
 
         {% if element.openHoursMoreInfos %}
-          <div class='col' {% if count != 0 %}style="margin-top:1rem;"{% endif %}>{{ element.getProperty('openHoursMoreInfos')|raw }}</div> 
+          <div class='col' {% if count != 0 %}style="margin-top:1rem;"{% endif %}>{{ element.getProperty('openHoursMoreInfos')|safe }}</div> 
           {% set count = count + 1 %} 
         {% endif %}
 

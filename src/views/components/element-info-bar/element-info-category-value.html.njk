@@ -40,7 +40,7 @@
 
 	    </span>
 	    {% if categoryValue.category.enableDescription %}
-	    	<span class="col s6 m7 option-description"><span class="{{ optionValue.diff }}">{{ optionValue.description|raw }}</span></span>
+	    	<span class="col s6 m7 option-description"><span class="{{ optionValue.diff }}">{{ optionValue.description|safe }}</span></span>
 	    {% endif %}
 	  </div>
 
