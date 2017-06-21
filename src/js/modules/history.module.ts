@@ -135,7 +135,7 @@ export class HistoryModule
 		{
 			// in list mode we don't care about state
 			route = App.routerModule.generate('biopen_directory_normal', { mode :  mode });	
-			if (addressAndViewport) route += '/' + addressAndViewport;
+			//if (addressAndViewport) route += '/' + addressAndViewport;
 		}
 		else
 		{
