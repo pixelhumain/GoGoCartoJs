@@ -153,7 +153,7 @@ export function createListenersForElementMenu(object)
 		}
 		else
 		{
-			url = App.routerModule.generate('biopen_directory_showElement', { name :  capitalize(slugify(element.name)), id : element.id }, true);	
+			url = App.routerModule.generate('gogocarto_showElement', { name :  capitalize(slugify(element.name)), id : element.id }, true);	
 		}
 
 		modal.find('.input-simple-modal').val(url);

@@ -37,7 +37,7 @@ export class GoGoCartoModule
 	// return the given hash to add to url so gogocarto app will open on specific element
 	getElementRouteHash($elementId, $elementName = 'find')
 	{
-		return this.app.routerModule.generate('biopen_directory_showElement', { id: $elementId, name: $elementName });
+		return this.app.routerModule.generate('gogocarto_showElement', { id: $elementId, name: $elementName });
 	}
 
 	private checkForDistantConfifuration(options : string|any)

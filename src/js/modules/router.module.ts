@@ -11,7 +11,7 @@ export class RouterModule
 	constructor()
 	{
 		routie({
-			'biopen_directory_normal /:mode/:addressAndViewport?': (mode, addressAndViewport = '') =>
+			'gogocarto_normal /:mode/:addressAndViewport?': (mode, addressAndViewport = '') =>
 			{
 				let initialState = new HistoryState();
 				let parsedAddressAndViewport = this.parseAddressViewport(addressAndViewport);
@@ -25,7 +25,7 @@ export class RouterModule
 				// timeout to let App variable being accesible
 				setTimeout( () => { App.loadHistoryState(initialState); }, 0);				
 			},
-			'biopen_directory_showElement /acteur/:name/:id/:addressAndViewport?': (name, id, addressAndViewport = '') =>
+			'gogocarto_showElement /acteur/:name/:id/:addressAndViewport?': (name, id, addressAndViewport = '') =>
 			{
 				let initialState = new HistoryState();
 				let parsedAddressAndViewport = this.parseAddressViewport(addressAndViewport);
@@ -40,7 +40,7 @@ export class RouterModule
 				// timeout to let App variable being accesible
 				setTimeout( () => { App.loadHistoryState(initialState); }, 0);	
 			},
-			'biopen_directory_showDirections /itineraire/:name/:id/:addressAndViewport?': (name, id, addressAndViewport = '') =>
+			'gogocarto_showDirections /itineraire/:name/:id/:addressAndViewport?': (name, id, addressAndViewport = '') =>
 			{
 				let initialState = new HistoryState();
 				let parsedAddressAndViewport = this.parseAddressViewport(addressAndViewport);
@@ -52,7 +52,7 @@ export class RouterModule
 				initialState.viewport = new ViewPort().fromString(parsedAddressAndViewport[1]);
 				initialState.id = id;
 			},
-			'biopen_directory_search /:mode/recherche/:text': (mode, text) =>
+			'gogocarto_search /:mode/recherche/:text': (mode, text) =>
 			{
 				let initialState = new HistoryState();
 
