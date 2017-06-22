@@ -109,8 +109,9 @@ export function createListenersForElementMenu(object)
 {
 	object.find('.tooltipped').tooltip();
 
-	object.find('.item-edit').click(function() {
-		window.location.href = App.routerModule.generate('biopen_element_edit', { id : getCurrentElementIdShown() }); 
+	object.find('.item-edit').click(function() 
+	{
+		window.location.href = App.config.editElementUrl + getCurrentElementIdShown();
 	});
 
 	object.find('.item-delete').click(function() 

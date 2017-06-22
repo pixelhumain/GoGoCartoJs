@@ -21,6 +21,9 @@ export class GoGoConfig
   readonly deleteApiUrl : string = '';
   readonly searchApiUrl : string = '';
 
+  // Urls
+  readonly editElementUrl : string = '';
+
   // login
   readonly userRole = '';
 	readonly loginAction : () => void = function() {};
