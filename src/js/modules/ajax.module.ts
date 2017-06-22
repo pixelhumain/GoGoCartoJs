@@ -80,8 +80,8 @@ export class AjaxModule
 		}
 
 		let dataRequest : any = { bounds : stringifiedBounds, mainOptionId : App.currMainId, fullRepresentation : getFullRepresentation };
-		//let route = App.routerModule.generate('biopen_api_elements_in_bounds');
-		let route = 'http://localhost/GoGoCarto/web/app_dev.php/api/elementsInBounds';
+
+		let route = App.config.elementInBoundsApiUrl;
 		
 		this.sendAjaxElementRequest(new Request(route, dataRequest), expectedFilledBounds);
 	}
@@ -156,7 +156,7 @@ export class AjaxModule
 	getElementById(elementId, callbackSuccess?, callbackFailure?)
 	{
 		let start = new Date().getTime();
-		let route = 'http://localhost/GoGoCarto/web/app_dev.php/api/element';
+		let route = App.config.elementApiUrl;
 
 		$.ajax({
 			url: route,
@@ -183,7 +183,7 @@ export class AjaxModule
 
 	vote(elementId :number, voteValue : number, comment : string, callbackSuccess?, callbackFailure?)
 	{
-		let route = 'http://localhost/GoGoCarto/web/app_dev.php/interact/vote';
+		let route = App.config.voteApiUrl;
 
 		$.ajax({
 			url: route,
@@ -206,7 +206,7 @@ export class AjaxModule
 
 	reportError(elementId :number, reportValue : number, comment : string, userMail : string, callbackSuccess?, callbackFailure?)
 	{
-		let route = 'http://localhost/GoGoCarto/web/app_dev.php/interact/report';
+		let route = App.config.reportApiUrl;
 
 		$.ajax({
 			url: route,
@@ -229,7 +229,7 @@ export class AjaxModule
 
 	deleteElement(elementId, message: string, callbackSuccess?, callbackFailure?)
 	{
-		let route = 'http://localhost/GoGoCarto/web/app_dev.php/interact/delete';
+		let route = App.config.deleteApiUrl;
 
 		$.ajax({
 			url: route,
@@ -252,7 +252,7 @@ export class AjaxModule
 
 	searchElements(text: string, callbackSuccess?, callbackFailure?)
 	{
-		let route = 'http://localhost/GoGoCarto/web/app_dev.php/api/search';
+		let route = App.config.searchApiUrl; 
 
 		$.ajax({
 			url: route,

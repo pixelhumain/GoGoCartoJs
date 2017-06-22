@@ -20,7 +20,14 @@
             $(document).ready(function()
             {
                 carto = goGoCarto('#gogocarto', {
-                    'taxonomy' : "http://localhost/GoGoCarto/web/app_dev.php/api/taxonomy"
+                    taxonomy: "http://localhost/GoGoCarto/web/app_dev.php/api/taxonomy",
+                    elementApiUrl: 'http://localhost/GoGoCarto/web/app_dev.php/api/element',
+                    elementInBoundsApiUrl: 'http://localhost/GoGoCarto/web/app_dev.php/api/elementsInBounds',
+                    searchApiUrl: 'http://localhost/GoGoCarto/web/app_dev.php/api/search',
+                    deleteApiUrl:'http://localhost/GoGoCarto/web/app_dev.php/interact/delete',
+                    reportApiUrl: 'http://localhost/GoGoCarto/web/app_dev.php/interact/report',
+                    voteApiUrl: 'http://localhost/GoGoCarto/web/app_dev.php/interact/vote',
+                    userRole: 'admin'
                 });
             });
         </script>
