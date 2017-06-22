@@ -32,6 +32,7 @@ import { HistoryModule, HistoryState } from './modules/history.module';
 import { BoundsModule } from './modules/bounds.module';
 import { getQueryParams, capitalize } from "./commons/commons";
 import { Element } from "./classes/element.class";
+import { GoGoConfig } from "./classes/gogo-config.class";
 import * as Cookies from "./utils/cookies";
 
 import { App } from "./gogocarto";
@@ -69,6 +70,8 @@ export enum AppDataType
 */
 export class AppModule
 {		
+	readonly config : GoGoConfig;
+
 	geocoderModule_ = new GeocoderModule();
 	filterModule_ = new FilterModule();
 	elementsModule_ = new ElementsModule();
@@ -113,8 +116,10 @@ export class AppModule
 	// Because if too many markers are shown, browser slow down
 	maxElementsToShowOnMap_ = 1000;	
 
-	constructor()
+	constructor($config : any)
 	{
+		this.config = new GoGoConfig($config);
+
 		this.infoBarComponent_.onShow.do( (elementId) => { this.handleInfoBarShow(elementId); });
   	this.infoBarComponent_.onHide.do( ()=> { this.handleInfoBarHide(); });
 	
