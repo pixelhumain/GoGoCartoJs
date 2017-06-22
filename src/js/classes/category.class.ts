@@ -18,14 +18,14 @@ export class Category extends CategoryOptionTreeNode
 	{
 		super(CategoryOptionTreeNodeType.Category, '#category-', '#subcategorie-checkbox-', '.options-wrapper');
 
-		this.id = $categoryJson.id;
-		this.name = $categoryJson.name;
-		this.index = $categoryJson.index;
-		this.singleOption = $categoryJson.singleOption;
-		this.enableDescription = $categoryJson.enableDescription;
-		this.displayCategoryName = $categoryJson.displayCategoryName;
-		this.depth = $categoryJson.depth;
-		this.mainOwnerId = $categoryJson.mainOwnerId;
+		this.id = $categoryJson.id || 0;
+		this.name = $categoryJson.name || 'catégorie';
+		this.index = $categoryJson.index || 0;
+		this.singleOption = $categoryJson.singleOption || false;
+		this.enableDescription = $categoryJson.enableDescription || false;
+		this.displayCategoryName = $categoryJson.displayCategoryName || false;
+		this.depth = $categoryJson.depth || 0;
+		this.mainOwnerId = $categoryJson.mainOwnerId || null;
 	}
 
 	addOption($option : Option) { this.children.push($option); }
