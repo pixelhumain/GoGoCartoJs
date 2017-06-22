@@ -26,6 +26,7 @@ export class CategoriesModule
 
 	mainCategory : Category;
 	openHoursCategory : Category;
+	defaultOpenHoursCategory : Category = new Category({ name: "Horaires d'ouverture", depth: '-1'});
 
 	openHoursFiltersDays : string[] = [];
 
@@ -38,6 +39,7 @@ export class CategoriesModule
 	createCategoriesFromJson(mainCatgeoryJson, openHoursCategoryJson)
 	{
 		this.mainCategory = this.recursivelyCreateCategoryAndOptions(mainCatgeoryJson);
+		openHoursCategoryJson = openHoursCategoryJson || this.defaultOpenHoursCategory;
 		this.openHoursCategory = this.recursivelyCreateCategoryAndOptions(openHoursCategoryJson);
 
 		this.updateOpenHoursFilter();

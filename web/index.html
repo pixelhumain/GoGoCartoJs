@@ -11,16 +11,9 @@
         <script>
             $(document).ready(function()
             {
-                $.getJSON( "http://localhost/GoGoCarto/web/app_dev.php/api/taxonomy", function(data) 
-                {
-                    console.log("taxonomy", data);
-                    
-                    carto = goGoCarto({
-                        'taxonomy' : data.mainCategory,
-                        'openHours' : data.openHours,
-                        'containerId' : '#gogocarto'
-                    });
-                }); 
+                carto = goGoCarto('#gogocarto', {
+                        'taxonomy' : "http://localhost/GoGoCarto/web/app_dev.php/api/taxonomy"
+                });
             });
         </script>
         
