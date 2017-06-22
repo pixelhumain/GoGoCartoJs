@@ -1,38 +1,27 @@
 var gulp = require('gulp'),
     sass = require('gulp-sass'),
-    autoprefixer = require('gulp-autoprefixer'),
     minifycss = require('gulp-minify-css'),
-    jshint = require('gulp-jshint'),
     uglify = require('gulp-uglify'),
-    ts = require("gulp-typescript"),
-    imagemin = require('gulp-imagemin'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat'),
     notify = require('gulp-notify'),
-    cache = require('gulp-cache'),
-    gzip = require('gulp-gzip');
-    //livereload = require('gulp-livereload'),
+    gzip = require('gulp-gzip'),
     del = require('del'),
-    gutil = require('gulp-util'),
-    babel = require('gulp-babel');
+    browserify = require("browserify"),
+    source = require('vinyl-source-stream'),
+    tsify = require("tsify"),
+    notifier = require('node-notifier'),
+    nunjucks = require('gulp-nunjucks');
 
-var gulp = require("gulp");
-var browserify = require("browserify");
-var source = require('vinyl-source-stream');
-var tsify = require("tsify");
-var uglify = require('gulp-uglify');
-const notifier = require('node-notifier');
-const nunjucks = require('gulp-nunjucks');
-
-function handleError(err) {
+function handleError(err) 
+{
   console.log(err.toString());
   notifier.notify({
-  'title': 'Gulp worflow',
-  'message': 'Typescript error'
+    'title': 'Gulp worflow',
+    'message': 'Typescript error'
   });
   this.emit('end');
 }
-
 
 gulp.task("scriptsDirectory", function () {
     return browserify({
@@ -52,7 +41,6 @@ gulp.task("scriptsDirectory", function () {
     .pipe(source('directory.js'))
     .pipe(gulp.dest("dist"));
 });
-
 
 gulp.task('scriptsLibs', function() {
   return gulp.src(['src/js/libs/**/!(leaflet-routing-machine)*.js', 
@@ -87,8 +75,6 @@ gulp.task('prod_styles', function() {
 
 gulp.task('gzip_styles', ['prod_styles'], function() {
   return gulp.src('dist/**/*.css')
-    //.pipe(rename({suffix: '.min'}))
-    //.pipe(minifycss())
     .pipe(gzip())
     .pipe(gulp.dest('dist'));
     //.pipe(notify({ message: 'Styles task complete' }));
@@ -106,9 +92,6 @@ gulp.task('concat_directory', function() {
 gulp.task('prod_js', ['concat_directory'], function() {
   return gulp.src(['dist/*.js'])
     .pipe(uglify())
-    //.pipe(sourcemaps.init({loadMaps: true}))
-    //.pipe(uglify().on('error', gulpUtil.log)) // notice the error event here
-    //.pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('dist'));
 });
 
@@ -119,16 +102,11 @@ gulp.task('gzip_js', ['prod_js'],  function() {
 });
 
 
-gulp.task('watch', function() {
+gulp.task('watch', function() 
+{
+  gulp.watch(['src/scss/**/*.scss'], ['sass']);
 
-  //livereload.listen();
-  // Watch .scss files
-  gulp.watch(['src/scss/**/*.scss'], 
-              ['sass']);
-
-  // Watch .js files
-  gulp.watch(['src/js/**/*.ts'], 
-              ['scriptsDirectory']);
+  gulp.watch(['src/js/**/*.ts'], ['scriptsDirectory']);
   
   gulp.watch('src/js/libs/**/*.js', ['scriptsLibs']);
 
