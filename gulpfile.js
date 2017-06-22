@@ -39,7 +39,7 @@ gulp.task("scriptsDirectory", function () {
     .bundle()
     .on('error', handleError)
     .pipe(source('directory.js'))
-    .pipe(gulp.dest("dist"));
+    .pipe(gulp.dest("build"));
 });
 
 gulp.task('scriptsLibs', function() {
@@ -48,14 +48,14 @@ gulp.task('scriptsLibs', function() {
                   '!src/js/libs/materialize/unused/**/*.js',
                    ])
     .pipe(concat('libs.js'))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('build'));
 });
 
 gulp.task('templates', function() {
   return gulp.src(['src/views/**/*.html.njk', '!src/views/nearest-mode/**/*.html.njk'])
     .pipe(nunjucks.precompile())
     .pipe(concat('templates.js'))
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('build'))
 });
 
 gulp.task('sass', function () {
@@ -74,20 +74,26 @@ gulp.task('prod_styles', function() {
 });
 
 gulp.task('gzip_styles', ['prod_styles'], function() {
-  return gulp.src('dist/**/*.css')
+  return gulp.src('build/**/*.css')
     .pipe(gzip())
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('build'));
     //.pipe(notify({ message: 'Styles task complete' }));
 });
 
 gulp.task('concat_directory', function() {
-  return gulp.src(['dist/directory.js', 
-                   'dist/templates.js',
-                   'dist/libs.js'
+  return gulp.src(['build/directory.js', 
+                   'build/templates.js',
+                   'build/libs.js'
                    ])
     .pipe(concat('gogocarto.js'))
     .pipe(gulp.dest('dist'));
 });
+
+gulp.task('dist_css', function() {
+  return gulp.src(['web/assets/css/**/*'])
+    .pipe(gulp.dest('dist'));
+});
+
 
 gulp.task('prod_js', ['concat_directory'], function() {
   return gulp.src(['dist/*.js'])
@@ -114,12 +120,20 @@ gulp.task('watch', function()
 
 });
 
-gulp.task('clean', function(cb) {
+gulp.task('cleanBuild', function(cb) {
+    del(['build'], cb);
+});
+
+gulp.task('cleanDist', function(cb) {
     del(['dist'], cb);
 });
 
 gulp.task('build', function() {
-    gulp.start('clean','sass', 'scriptsLibs','scriptsDirectory', 'templates');
+    gulp.start('cleanBuild','sass', 'scriptsLibs','scriptsDirectory', 'templates');
+});
+
+gulp.task('dist', function() {
+    gulp.start('cleanDist', 'concat_directory','dist_css');
 });
 
 gulp.task('production', function() {
