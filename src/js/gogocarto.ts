@@ -29,7 +29,12 @@ export class GoGoCartoModule
 		this.checkForDistantConfifuration(options);
 	}
 
-	checkForDistantConfifuration(options : string|any)
+	setUserRole($role)
+	{
+		this.app.loginModule.setRole($role);
+	}
+
+	private checkForDistantConfifuration(options : string|any)
 	{
 		if ( typeof options === 'object')
 		{

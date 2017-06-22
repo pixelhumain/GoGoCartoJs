@@ -11,9 +11,18 @@ export enum ElementStatus
 
 export class GoGoConfig
 {
-	// Default values
 	readonly taxonomy: any = null;
-	readonly elementsApiUrl : string = '';
+
+  // APIs
+	readonly elementApiUrl : string = '';
+  readonly elementInBoundsApiUrl : string = '';
+  readonly voteApiUrl : string = '';
+  readonly reportApiUrl : string = '';
+  readonly deleteApiUrl : string = '';
+  readonly searchApiUrl : string = '';
+
+  // login
+  readonly userRole = '';
 	readonly loginAction : () => void = function() {};
 
 	constructor(config : any)

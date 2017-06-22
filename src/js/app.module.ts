@@ -88,7 +88,7 @@ export class AppModule
 	boundsModule = new BoundsModule();
 	routerModule = new RouterModule();
 	templateModule = new TemplateModule();
-	loginModule = new LoginModule();
+	loginModule;
 	//starRepresentationChoiceModule_ = constellationMode ? new StarRepresentationChoiceModule() : null;
 	
 	// curr state of the app
@@ -98,10 +98,6 @@ export class AppModule
 
 	// somes states need a element id, we store it in this property
 	private stateElementId : number = null;
-
-	// let us know if current log user is Admin
-	readonly isUserAdmin : boolean = false;
-
 
 	// when click on marker it also triger click on map
 	// when click on marker we put isClicking to true during
@@ -119,6 +115,7 @@ export class AppModule
 	constructor($config : any)
 	{
 		this.config = new GoGoConfig($config);
+		this.loginModule = new LoginModule(this.config.userRole);
 
 		this.infoBarComponent_.onShow.do( (elementId) => { this.handleInfoBarShow(elementId); });
   	this.infoBarComponent_.onHide.do( ()=> { this.handleInfoBarHide(); });
