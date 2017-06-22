@@ -132,7 +132,7 @@ gulp.task('watch', function() {
   
   gulp.watch('src/js/libs/**/*.js', ['scriptsLibs']);
 
-  gulp.watch('src/views/**/*.js', ['templates']);
+  gulp.watch('src/views/**/*.njk', ['templates']);
 
 });
 
