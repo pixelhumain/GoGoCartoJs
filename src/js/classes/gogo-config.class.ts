@@ -12,6 +12,7 @@ export enum ElementStatus
 export class GoGoConfig
 {
 	readonly taxonomy: any = null;
+  readonly openHours: any = null;
 
   // APIs
 	readonly elementApiUrl : string = '';
