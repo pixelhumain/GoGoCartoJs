@@ -67,7 +67,7 @@ export class RouterModule
 	loadInitialState()
 	{
 		//console.log("initial route", window.location.hash);
-		routie.navigate(window.location.hash);
+		routie.navigate(window.location.hash || '/carte');
 	}
 
 	generate(routeName : string, options? : any, absoluteUrl? : boolean)
