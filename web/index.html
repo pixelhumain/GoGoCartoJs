@@ -2,6 +2,14 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <style>
+            html, body, #gogocarto
+            {
+              height: 100%;
+              width: 100%;  
+            }
+        </style>
+
         <link rel="stylesheet" href="assets/css/directory.css"> 
         <link rel="stylesheet" href="assets/img/icon/styles.css">
         <link href="https://fonts.googleapis.com/css?family=Kalam|Gloria+Hallelujah" rel="stylesheet"> 
@@ -12,7 +20,7 @@
             $(document).ready(function()
             {
                 carto = goGoCarto('#gogocarto', {
-                        'taxonomy' : "http://localhost/GoGoCarto/web/app_dev.php/api/taxonomy"
+                    'taxonomy' : "http://localhost/GoGoCarto/web/app_dev.php/api/taxonomy"
                 });
             });
         </script>
@@ -24,19 +32,3 @@
     
 </html>
 
-<style>
-    html
-    {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        background-color:rgb(234, 234, 234);
-    }
-
-    body, #gogocarto
-    {
-      height: 100%;
-      width: 100%;  
-    }
-
-</style>
