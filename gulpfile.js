@@ -81,9 +81,9 @@ gulp.task('gzip_styles', ['prod_styles'], function() {
 });
 
 gulp.task('concat_directory', function() {
-  return gulp.src(['build/directory.js', 
+  return gulp.src(['build/libs.js',
                    'build/templates.js',
-                   'build/libs.js'
+                   'build/directory.js', 
                    ])
     .pipe(concat('gogocarto.js'))
     .pipe(gulp.dest('dist'));
@@ -133,7 +133,7 @@ gulp.task('build', function() {
 });
 
 gulp.task('dist', function() {
-    gulp.start('cleanDist', 'concat_directory','dist_css');
+    gulp.start('concat_directory','dist_css');
 });
 
 gulp.task('production', function() {
