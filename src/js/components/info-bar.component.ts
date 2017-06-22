@@ -75,7 +75,7 @@ export class InfoBarComponent
 		{
 			domMenu.addClass("pending");
 			createListenersForVoting();
-			if (!App.isUserAdmin) $('#element-info-bar .menu-element-item.item-edit, #element-info-bar .menu-element-item.item-delete').hide();
+			if (!App.loginModule.isAdmin()) $('#element-info-bar .menu-element-item.item-edit, #element-info-bar .menu-element-item.item-delete').hide();
 		}
 		else
 		{

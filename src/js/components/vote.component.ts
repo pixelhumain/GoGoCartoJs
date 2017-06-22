@@ -89,7 +89,6 @@ export function initializeVoting()
 		{
 			$('#modal-vote #select-error').show();
 		}
-
 	});
 }
 
@@ -105,20 +104,17 @@ export function createListenersForVoting()
 {
 	$(".vote-button").click( function(e)
 	{
-		if ($('#btn-login').is(':visible')) 
+		if (!App.loginModule.isUserLogged()) 
 		{
-			$('#popup-login').openModal();
+			App.loginModule.loginAction();
 			return;
 		}
 		else
 		{
 			let element = App.elementModule.getElementById(getCurrentElementIdShown());
 
-			console.log("vote for", element.name);
-			if (App.isUserAdmin || element.status == ElementStatus.PendingModification)
+			if (App.loginModule.isAdmin() || element.status == ElementStatus.PendingModification)
 			{
-				console.log("show short", App.isUserAdmin);
-				console.log("Vote status = ", ElementStatus[element.status]);
 				$('#modal-vote .long-options').hide();
 				$('#modal-vote .short-options').show();
 			}

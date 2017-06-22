@@ -564,7 +564,7 @@ export class Element
 			starNames : starNames,
 			mainCategoryValue : mainCategoryValue,
 			pendingClass : this.isPending() || this.isDeleted()  ? 'pending' : '',
-			isAdmin : App.isUserAdmin,
+			isAdmin : App.loginModule.isAdmin(),
 		});
 
 		

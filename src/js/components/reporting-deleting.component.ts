@@ -55,7 +55,7 @@ export function initializeReportingAndDeleting()
 
 	$('#popup-report-error #submit-error').click(() => 
 	{
-		if (App.isUserAdmin)
+		if (App.loginModule.isAdmin())
 		{
 			let elementId = getCurrentElementIdShown();	
 			let message = $('#popup-report-error .input-comment').val();
