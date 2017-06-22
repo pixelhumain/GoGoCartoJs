@@ -21,7 +21,7 @@ export class GoGoCartoModule
 	private options;
 	private containerSelector : string = '';
 	// only for debugging
-	app;
+	app: AppModule;
 
 	constructor(containerSelector : string, options = {})
 	{
@@ -46,7 +46,7 @@ export class GoGoCartoModule
 		}		
 	};
 
-	checkForDistantTaxonomy(options : any)
+	private checkForDistantTaxonomy(options : any)
 	{
 		if (!options.taxonomy)
 		{
@@ -64,13 +64,13 @@ export class GoGoCartoModule
 		}		
 	};
 
-	init(taxonomy, options)
+	private init(taxonomy, options)
 	{	
 	   App = new AppModule(options); 
 		 // only for debugging
 	   this.app = App;
 
-	   let layout = App.templateModule.render('layout', { mainCategory: taxonomy, openHoursCategory: options.openHours });
+	   let layout = App.templateModule.render('layout', { mainCategory: taxonomy, openHoursCategory: options.openHours, isAdmin : options.userRole == 'admin' });
 	   	   
 	   if ($(this.containerSelector).length == 0) console.warn('[GoGoCarto] The container "' + this.containerSelector + '" was not found');
 	   else $(this.containerSelector).append(layout);
