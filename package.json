@@ -36,7 +36,6 @@
     "node-notifier": "^4.6.1",
     "tsify": "^2.0.7",
     "typescript": "^2.1.4",
-    "uglify-js": "^2.7.5",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.8.0"
   }
