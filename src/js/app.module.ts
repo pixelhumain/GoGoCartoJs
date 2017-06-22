@@ -20,6 +20,7 @@ import { AjaxModule } from "./modules/ajax.module";
 import { CategoriesModule } from './modules/categories.module';
 import { DirectionsModule } from "./modules/directions.module";
 import { RouterModule } from "./modules/router.module";
+import { LoginModule } from "./modules/login.module";
 import { TemplateModule } from "./modules/template.module";
 import { ElementListComponent } from "./components/element-list.component";
 import { InfoBarComponent } from "./components/info-bar.component";
@@ -84,7 +85,7 @@ export class AppModule
 	boundsModule = new BoundsModule();
 	routerModule = new RouterModule();
 	templateModule = new TemplateModule();
-
+	loginModule = new LoginModule();
 	//starRepresentationChoiceModule_ = constellationMode ? new StarRepresentationChoiceModule() : null;
 	
 	// curr state of the app
