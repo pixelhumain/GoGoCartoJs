@@ -1197,7 +1197,7 @@ nav ul a span.badge {
 
 @font-face {
   font-family: "Roboto";
-  src: local(Roboto Regular), url("../fonts/Roboto/Roboto-Regular.woff2") format("woff2"), url("../fonts/Roboto/Roboto-Regular.woff") format("woff"), url("../fonts/Roboto/Roboto-Regular.ttf") format("truetype");
+  src: local(Roboto Regular), url("fonts/Roboto/Roboto-Regular.woff2") format("woff2"), url("fonts/Roboto/Roboto-Regular.woff") format("woff"), url("fonts/Roboto/Roboto-Regular.ttf") format("truetype");
   font-weight: 400; }
 
 a {

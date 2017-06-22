@@ -2,4 +2,4 @@
 /TODO
 .sass-cache
 /build/
-web/assets/css/gogocarto\.css
+web/assets/*.css

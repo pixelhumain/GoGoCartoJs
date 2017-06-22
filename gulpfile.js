@@ -61,15 +61,15 @@ gulp.task('templates', function() {
 gulp.task('sass', function () {
   return gulp.src(['src/scss/**/*.scss'])
     .pipe(sass().on('error', sass.logError))    
-    .pipe(gulp.dest('web/assets/css'));
+    .pipe(gulp.dest('web/assets'));
 });
 
 gulp.task('prod_styles', function() {
-  return gulp.src('web/assets/css/**/*.css')
-    //.pipe(rename({suffix: '.min'}))
+  return gulp.src('web/assets/*.css')
+    .pipe(rename({suffix: '.min'}))
     .pipe(minifycss())
     .pipe(gzip())
-    .pipe(gulp.dest('web/assets/css'));
+    .pipe(gulp.dest('dist'));
     //.pipe(notify({ message: 'Styles task complete' }));
 });
 
@@ -90,13 +90,14 @@ gulp.task('concat_directory', function() {
 });
 
 gulp.task('dist_css', function() {
-  return gulp.src(['web/assets/css/**/*'])
+  return gulp.src(['web/assets/**/*'])
     .pipe(gulp.dest('dist'));
 });
 
 
 gulp.task('prod_js', ['concat_directory'], function() {
   return gulp.src(['dist/*.js'])
+    .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
     .pipe(gulp.dest('dist'));
 });
