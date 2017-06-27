@@ -1,3 +1,5 @@
+import { Roles } from "../modules/login.module";
+
 export enum ElementStatus 
 {
   Deleted = -4,
@@ -26,7 +28,7 @@ export class GoGoConfig
   readonly editElementUrl : string = '';
 
   // login
-  readonly userRole = '';
+  readonly userRole : Roles | string = 0;
 	readonly loginAction : () => void = function() {};
 
 	constructor(config : any)

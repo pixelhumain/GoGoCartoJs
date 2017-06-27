@@ -4,34 +4,38 @@ import { App } from "../gogocarto";
 
 declare var routie: any, $;
 
-enum Roles 
+export enum Roles 
 {
-	Anonymus = 0,
+	Anonymous = 0,
 	Logged = 1,
 	Admin = 2
 }
 
 export class LoginModule
 {
-	constructor(private role_ : string = '')
-	{	
-	}
+	private role_ : Roles;
 
-	isGranted($role)
-	{
-		return this.role_ >= $role;
-	}
+	constructor($role : Roles | string = Roles.Anonymous) { this.setRole($role); }
+
+	isGranted($role : Roles) { return this.role_ >= $role; }
 
 	isAdmin() { return this.isGranted(Roles.Admin); }
+
 	isUserLogged() { return this.isGranted(Roles.Logged); }
 
-	setRole($role)
-  {
-      this.role_ = $role;
-  }
+	setRole($role : Roles | string)
+	{ 
+		if (typeof $role == 'string')
+		{
+			this.role_ = $role == 'admin' ? Roles.Admin : $role == 'user' ? Roles.Logged : Roles.Anonymous;
+		}
+		else
+		{
+			this.role_ = $role;
+		}		
+	}
 
-  loginAction()
-  {
-  	App.config.loginAction();
-  }
+	getRole() { return this.role_; }
+
+  loginAction() { App.config.loginAction(); }
 }
