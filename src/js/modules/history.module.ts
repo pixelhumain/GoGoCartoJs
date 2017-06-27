@@ -129,19 +129,19 @@ export class HistoryModule
 
 		if (App.dataType == AppDataType.SearchResults)
 		{
-			route = App.routerModule.generate('gogocarto_search', { mode :  mode, text : historyState.text });	
+			route = App.routerModule.generate('search', { mode :  mode, text : historyState.text });	
 		}		
 		else if (App.mode == AppModes.List)
 		{
 			// in list mode we don't care about state
-			route = App.routerModule.generate('gogocarto_normal', { mode :  mode, addressAndViewport: addressAndViewport });	
+			route = App.routerModule.generate('normal', { mode :  mode, addressAndViewport: addressAndViewport });	
 		}
 		else
 		{
 			switch (App.state)
 			{
 				case AppStates.Normal:	
-					route = App.routerModule.generate('gogocarto_normal', { mode :  mode, addressAndViewport: addressAndViewport });	
+					route = App.routerModule.generate('normal', { mode :  mode, addressAndViewport: addressAndViewport });	
 					break;
 
 				case AppStates.ShowElement:	
@@ -153,11 +153,11 @@ export class HistoryModule
 
 					if (App.state == AppStates.ShowDirections)
 					{
-						route = App.routerModule.generate('gogocarto_showDirections', { name :  capitalize(slugify(element.name)), id : element.id, addressAndViewport: addressAndViewport });	
+						route = App.routerModule.generate('show_directions', { name :  capitalize(slugify(element.name)), id : element.id, addressAndViewport: addressAndViewport });	
 					}	
 					else
 					{
-						route = App.routerModule.generate('gogocarto_showElement', { name :  capitalize(slugify(element.name)), id : element.id, addressAndViewport: addressAndViewport });	
+						route = App.routerModule.generate('show_element', { name :  capitalize(slugify(element.name)), id : element.id, addressAndViewport: addressAndViewport });	
 					}						
 					break;		
 			}		
