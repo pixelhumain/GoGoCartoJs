@@ -60,6 +60,24 @@ export function initializeAppInteractions()
 	$('#directory-content-list .show-as-map-button').click(() => {		
 		App.setMode(AppModes.Map);
 	});
+
+	$('#directory-content-map #change-layers').click( function(e : Event) 
+	{
+		$('#directory-content-map .leaflet-control-layers').show();
+		$('#directory-content-map #close-layers-panel').show();
+
+		e.preventDefault();
+		e.stopPropagation();
+	});
+
+	$('#directory-content-map #close-layers-panel').click( function(e : Event) 
+	{		
+		$('#directory-content-map .leaflet-control-layers').hide();
+		$('#directory-content-map #close-layers-panel').hide();	
+
+		e.preventDefault();
+		e.stopPropagation();
+	});	
 	
 	// if (onlyInputAdressMode)
 	// {

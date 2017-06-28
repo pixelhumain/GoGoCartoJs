@@ -63,6 +63,38 @@ a.leaflet-control-zoom-out {
     }
 }
 
+.layers-button
+{
+    position: absolute;
+
+    &#close-layers-panel 
+    { 
+        z-index: 10000; 
+        background-color: transparent;
+        color: #888888;
+
+        &:hover { background-color: transparent; color: #616161; }
+
+        i { font-size: 16px; line-height: 40px;}
+    }
+    
+    z-index: 500;
+    top: 100px;
+    background-color: white;
+    color: #3d3d3d;
+    right: 20px;
+    width: 33px;
+    height: 33px;
+    text-align: center;
+    
+    &:hover{ cursor : pointer; background-color: #f4f4f4;}
+
+    i {
+        font-size: 18px;        
+        line-height: 35px;       
+    }
+}
+
 #menu-button
 {
 	position: absolute;
@@ -90,3 +122,50 @@ a.leaflet-control-zoom-out {
 }
 
 #menu-button:hover {cursor: pointer;}
+
+.leaflet-control-layers-toggle
+{
+    display:none;
+}
+.leaflet-control-layers
+{
+    padding: 5px 15px 10px 15px;
+    display: none;
+    position: relative;
+    z-index: 600;
+    margin-right: 19px !important;
+    margin-top: 15px !important;
+}
+
+.leaflet-control-layers-list
+{
+    display: block !important;
+    position: relative !important;
+}
+
+.leaflet-control-layers-selector:checked + span
+{
+    font-weight: bold;
+}
+
+.leaflet-control-layers-base
+{
+    label
+    {
+        text-transform: uppercase;
+        padding-top: 4px;
+        line-height: 1.4rem;
+        border-bottom: 1px dashed #cccccc;
+
+        &:hover
+        {
+            background-color: #f4f4f4;
+            cursor: pointer;
+        }
+
+        &:last-child
+        {
+            border: none;
+        }
+    }    
+}

@@ -4,6 +4,8 @@ import { Event, IEvent } from "../../utils/event";
 import { Element } from "../../classes/element.class";
 import { capitalize, slugify } from "../../commons/commons";
 import { GeocodeResult, RawBounds } from "../../modules/geocoder.module";
+import * as Cookies from "../../utils/cookies";
+
 /// <reference types="leaflet" />
 
 import { App } from "../../gogocarto";
@@ -86,8 +88,51 @@ export class MapComponent
 			return;
 		}
 
+		// L.tileLayer("", {
+		//     minZoom: 1,
+		//     maxZoom: 19
+		// }).addTo(this.map_);
+
+		// payant			
+		let mapbox = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2ViYWxsb3QiLCJhIjoiY2l4MGtneGVjMDF0aDJ6cWNtdWFvc2Y3YSJ9.nIZr6G2t08etMzft_BHHUQ');
+		let mapboxlight = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2ViYWxsb3QiLCJhIjoiY2l4MGtneGVjMDF0aDJ6cWNtdWFvc2Y3YSJ9.nIZr6G2t08etMzft_BHHUQ');
+		
+		// gratuit (je crois)
+		let cartodb = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'); // pas mal; très clair. 5ko
+		let hydda = L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png'); // pas mal ! 20ko
+		let wikimedia = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png'); // sympa mais version démo je crois
+		let monochrome = L.tileLayer('http://www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png'); // ça passe
+		let lyrk  = L.tileLayer('http://tiles.lyrk.org/ls/{z}/{x}/{y}?apikey =982c82cc765f42cf950a57de0d891076'); // pas mal; mais zomm max 16. 20ko
+		let osmfr = L.tileLayer('//{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png');
+		let stamen = L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png');		
+		let openriver = L.tileLayer('http://{s}.tile.openstreetmap.fr/openriverboatmap/{z}/{x}/{y}.png');
+
+		let transport = L.tileLayer('http://{s}.tile2.opencyclemap.org/transport/{z}/{x}/{y}.png'); // belle mais y'a les layers transport partout !
+		let thunderforest = L.tileLayer('http://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png'); // pas très joli		
+
+		let baseLayers = {
+			'hydda' : hydda,
+			'mapbox' : mapbox, 
+			'mapboxlight' : mapboxlight, 
+			'cartodb' : cartodb, 			
+			'wikimedia' : wikimedia,
+			'monochrome' : monochrome, 
+			'lyrk'  : lyrk, 
+			'osmfr' : osmfr, 
+			'stamen' : stamen,
+			'openriver' : openriver, 
+			'transport' : transport,  
+			'thunderforest' : thunderforest, 
+			'Pas de fond' : L.tileLayer(''),
+		};
+
+		// Get defaultBaseLayer from Cookie if possible
+		let baseLayerId = Cookies.readCookie('defaultBaseLayer');
+		let defaultBaseLayer = baseLayers.hasOwnProperty(baseLayerId) ? baseLayers[baseLayerId] : baseLayers.hydda;
+
 		this.map_ = L.map('directory-content-map', {
-		    zoomControl: false
+		    zoomControl: false,
+		    layers: [defaultBaseLayer]
 		});
 
 		this.markerClustererGroup = L.markerClusterGroup({
@@ -114,32 +159,9 @@ export class MapComponent
 
 		this.addMarkerClusterGroup();		
 
-		L.control.zoom({
-		   position:'topright'
-		}).addTo(this.map_);
+		L.control.zoom({position:'topright'}).addTo(this.map_);		
 
-		// payant
-		let mapbox = 'https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2ViYWxsb3QiLCJhIjoiY2l4MGtneGVjMDF0aDJ6cWNtdWFvc2Y3YSJ9.nIZr6G2t08etMzft_BHHUQ';
-		let mapboxlight = 'https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2ViYWxsb3QiLCJhIjoiY2l4MGtneGVjMDF0aDJ6cWNtdWFvc2Y3YSJ9.nIZr6G2t08etMzft_BHHUQ';
-		// mapbox : joli, 0.5Ko
-
-		// gratuit (je crois)
-		let cartodb = 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'; // pas mal, très clair. 5ko
-		let hydda = 'http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png'; // pas mal ! 20ko
-		let wikimedia = 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png'; // sympa mais version démo je crois
-		let monochrome = 'http://www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png'; // ça passe
-		let lyrk  = 'http://tiles.lyrk.org/ls/{z}/{x}/{y}?apikey=982c82cc765f42cf950a57de0d891076'; // pas mal, mais zomm max 16. 20ko
-		let osmfr = '//{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png';
-		let stamen = 'http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png';		
-		let openriver = 'http://{s}.tile.openstreetmap.fr/openriverboatmap/{z}/{x}/{y}.png';
-
-		let transport = 'http://{s}.tile2.opencyclemap.org/transport/{z}/{x}/{y}.png'; // belle mais y'a les layers transport partout !
-		let thunderforest = 'http://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png'; // pas très joli		
-
-		L.tileLayer("", {
-		    minZoom: 1,
-		    maxZoom: 19
-		}).addTo(this.map_);
+		L.control.layers(baseLayers, {}, {position:'topright', collapsed: false}).addTo(this.map_);		
 
 		this.map_.on('click', (e) => { this.onClick.emit(); });
 		this.map_.on('moveend', (e) => 
@@ -163,7 +185,17 @@ export class MapComponent
 			App.boundsModule.extendBounds(ratio, this.map_.getBounds());
 			this.onIdle.emit(); 
 		});
-		this.map_.on('load', (e) => { this.isMapLoaded = true; this.onMapLoaded.emit(); });
+		this.map_.on('load', (e) => 
+		{ 
+			this.isMapLoaded = true; 
+			this.onMapLoaded.emit(); 
+
+			// listen for base layer selection, to store value in cookie
+			$('#directory-content-map .leaflet-control-layers-selector').change( function(e) 
+			{		
+				Cookies.createCookie('defaultBaseLayer', $(this).siblings('span').text());
+			});
+		});
 
 		this.resize();		
 
