@@ -26,6 +26,8 @@ export class InfoBarComponent
 
 	elementVisible : Element = null;
 
+	loaderTimer = null;
+
 	onShow = new Event<number>();
 	onHide = new Event<boolean>();
 
@@ -62,29 +64,42 @@ export class InfoBarComponent
 			},
 			() => {
 				console.log("Ajax failure for elementId", elementId);
-			});
+			});			
+
+			// if ajax retrieving take more than 500ms, we show spinner loader
+			this.loaderTimer = setTimeout( () => 
+			{ 
+				$('#info-bar-overlay').fadeIn();					
+				this.show(); 
+			}, 500); 	
 			return;
-		}		
+		}
+		else
+		{
+			// clearing loader
+			clearTimeout(this.loaderTimer);
+			$('#info-bar-overlay').fadeOut();
 
-		$('#element-info').html(element.getHtmlRepresentation());			
+			$('#element-info').html(element.getHtmlRepresentation());		
+			
+			let domMenu = $('#element-info-bar .menu-element');
+			createListenersForElementMenu(domMenu);	
+			createListenersForVoting();
 
-		let domMenu = $('#element-info-bar .menu-element');
-		createListenersForElementMenu(domMenu);	
-		createListenersForVoting();
+			updateFavoriteIcon(domMenu, element);
 
-		updateFavoriteIcon(domMenu, element);
+			// on large screen info bar is displayed aside and so we have enough space
+			// to show menu actions details in full text
+			showFullTextMenu(domMenu, this.isDisplayedAside());
 
-		// on large screen info bar is displayed aside and so we have enough space
-		// to show menu actions details in full text
-		showFullTextMenu(domMenu, this.isDisplayedAside());
-
-		$('#btn-close-bandeau-detail').click(() =>
-		{  		
-			this.hide();
-			return false;
-		});
-		
-		$('#element-info .collapsible-header').click(() => {this.toggleDetails(); });
+			$('#btn-close-bandeau-detail').click(() =>
+			{  		
+				this.hide();
+				return false;
+			});
+			
+			$('#element-info .collapsible-header').click(() => {this.toggleDetails(); });
+		}						
 		
 		this.show();
 
@@ -161,6 +176,8 @@ export class InfoBarComponent
 
 			this.onHide.emit(true);
 		}
+
+		setTimeout( () => $('#element-info').html(''), 350);
 
 		if (this.elementVisible && this.elementVisible.marker) this.elementVisible.marker.showNormalSize(true);
 

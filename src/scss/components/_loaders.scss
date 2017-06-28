@@ -1,4 +1,4 @@
-#directory-spinner-loader
+#directory-spinner-loader, #info-bar-spinner-loader
 {
     position: absolute;
     margin: auto;
@@ -32,4 +32,12 @@
     color: #272626;
     padding: .2rem 0;
     text-align: center;
+}
+
+#info-bar-overlay
+{
+    background-color: rgba(0, 0, 0, 0.17);
+    z-index: 10;
+    top: 0; left: 0; bottom: 0; right: 0;
+    position: absolute;
 }
