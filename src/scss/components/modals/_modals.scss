@@ -1,6 +1,7 @@
 #modal-pick-address.modal, #modal-directions-fail.modal
 {
     position: absolute;
+    .modal-footer { background-color: #444; }
 }  
 
 .simple-modal.modal
@@ -26,8 +27,7 @@
 
   .modal-footer
   {
-    padding-right: 2.5rem;
-    background-color: #444;
+    padding-right: 2.5rem;    
 
     .modal-action
     {

@@ -21,10 +21,6 @@ import { openReportDeleteModal } from './reporting-deleting.component';
 
 export function initializeElementMenu()
 {	
-	//   MENU PROVIDER
-	let menu_element = $('#element-info-bar .menu-element');
-	createListenersForElementMenu(menu_element);	
-
 	$('#popup-report-error #select-reason').material_select();
 	$('#modal-vote #select-vote').material_select();
 
@@ -140,7 +136,6 @@ export function createListenersForElementMenu(object)
 		let modal = $('#modal-share-element');
 
 		modal.find(".modal-footer").attr('option-id',element.colorOptionId);
-		//modal.find(".input-simple-modal").removeClass().addClass("input-simple-modal " + element.colorOptionId);
 
 		let url;
 		if (App.mode == AppModes.Map)
@@ -149,7 +144,7 @@ export function createListenersForElementMenu(object)
 		}
 		else
 		{
-			url = App.routerModule.generate('show_element', { name :  capitalize(slugify(element.name)), id : element.id }, true);	
+			url = window.location.origin + window.location.pathname + App.routerModule.generate('show_element', { name :  capitalize(slugify(element.name)), id : element.id }, true);	
 		}
 
 		modal.find('.input-simple-modal').val(url);
