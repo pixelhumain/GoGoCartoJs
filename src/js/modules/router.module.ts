@@ -80,7 +80,7 @@ export class RouterModule
 	{		
 		// check GET parameters inside the hash
 		let splited = window.location.hash.split('?');
-		console.log(splited);
+		//console.log(splited);
 		if (splited.length > 1) this.GETParams = this.parseGETparam();
 
 		// navigate "silently" because if no, the routie is called twice
