@@ -13,7 +13,7 @@ import { App } from "../gogocarto";
 
 import { Event, IEvent } from "../utils/event";
 import { updateMapSize, updateInfoBarSize } from "../app-interactions";
-import { updateFavoriteIcon, showFullTextMenu } from "./element-menu.component";
+import { createListenersForElementMenu, updateFavoriteIcon, showFullTextMenu } from "./element-menu.component";
 
 import { createListenersForVoting } from "../components/vote.component";
 
@@ -66,29 +66,17 @@ export class InfoBarComponent
 			return;
 		}		
 
-		$('#element-info').html(element.getHtmlRepresentation());
+		$('#element-info').html(element.getHtmlRepresentation());			
 
 		let domMenu = $('#element-info-bar .menu-element');
-		domMenu.attr('option-id', element.colorOptionId);
-
-		if (element.isPending() || element.isDeleted() ) 
-		{
-			domMenu.addClass("pending");
-			createListenersForVoting();
-			if (!App.loginModule.isAdmin()) $('#element-info-bar .menu-element-item.item-edit, #element-info-bar .menu-element-item.item-delete').hide();
-		}
-		else
-		{
-			domMenu.removeClass("pending");
-			$('#element-info-bar .menu-element-item.item-edit, #element-info-bar .menu-element-item.item-delete').show();
-		} 
+		createListenersForElementMenu(domMenu);	
+		createListenersForVoting();
 
 		updateFavoriteIcon(domMenu, element);
 
 		// on large screen info bar is displayed aside and so we have enough space
 		// to show menu actions details in full text
 		showFullTextMenu(domMenu, this.isDisplayedAside());
-
 
 		$('#btn-close-bandeau-detail').click(() =>
 		{  		

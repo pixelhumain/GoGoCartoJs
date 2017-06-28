@@ -1,6 +1,7 @@
 .menu-element
 {
 	height: 3rem;
+	z-index: 10;
 	position: absolute;
 	bottom: 0;
 	text-align: center;
@@ -81,5 +82,11 @@
 	.menu-element 
 	{
 		position: relative;
+		display:none;
+	}
+
+	.element-item.active
+	{
+		.menu-element { display: block;}
 	}
 }

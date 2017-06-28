@@ -2,15 +2,13 @@
 * @Author: Sebastian Castro
 * @Date:   2017-05-11 11:26:03
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-05-11 11:26:11
+* @Last Modified time: 2017-06-28 13:31:32
 */
 .interactive-section
 {
 	background-color: $primary-color;//#4a8680;
 	padding: 0 1rem 0 .8rem;
 	@media #{$medium-and-up} { padding: 0 1rem 0 1.6rem; }
-	// border-top: 1px solid #565656;
-	// border-bottom: 1px solid #797979;
 	position: relative;
 	line-height: 3rem;
 
@@ -21,5 +19,18 @@
 	  color: white;
 	  line-height: 1.7rem;
     padding: .6rem 0;
+	}
+}
+
+#directory-content-list
+{
+	.interactive-section
+	{
+		display:none;
+	}
+
+	.element-item.active
+	{
+		.interactive-section { display: block;}
 	}
 }

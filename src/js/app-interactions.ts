@@ -215,7 +215,6 @@ export function updateInfoBarSize()
 		if (window.matchMedia("(max-width: 1200px)").matches) 
 		{
 	  	$('#element-info-bar .moreDetails').css('height', 'auto');
-	  	$('#element-info-bar .collapsible-body').css('margin-top','0px');
 	  } 
 		else 
 		{			
@@ -223,10 +222,11 @@ export function updateInfoBarSize()
 	  	let height = elementInfoBar.outerHeight(true);
 			height -= elementInfoBar.find('.collapsible-header').outerHeight(true);
 			height -= elementInfoBar.find('.starRepresentationChoice-helper:visible').outerHeight(true);
+			height -= elementInfoBar.find('.interactive-section:visible').outerHeight(true);
 			height -= elementInfoBar.find(".menu-element").outerHeight(true);
+			//height += 2;
 
 	  	$('#element-info-bar .collapsible-body').css('height', height);
-	  	$('#element-info-bar .collapsible-body').css('margin-top', elementInfoBar.find('.collapsible-header').outerHeight(true)+elementInfoBar.find('.starRepresentationChoice-helper:visible').outerHeight(true));
 		}
 	}
 }

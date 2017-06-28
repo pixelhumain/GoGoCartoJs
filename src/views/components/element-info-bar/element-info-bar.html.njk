@@ -11,7 +11,6 @@
     {# Header Title #}
     <div class='collapsible-header-title row'> 
 
-
       <span class="col s12 name">
 
       {% set mainIcon = 'icon-attention' if element.isPending() else mainOptionValueToDisplay.option.icon %}
@@ -65,10 +64,12 @@
       <a><span class="col s4 right-align moreInfos hideOnLargeScreen">Plus d'infos</span></a>
       <a><span class="col s4 right-align lessInfos hideOnLargeScreen" style="display:none">Moins d'infos</span></a>
 
-    </div>
+    </div>    
 
-    {% if not listingMode %}
-    <div class="interactive-section">  
+  </div>
+
+  {# INTERACTIVE SECTION #}
+  <div class="interactive-section">  
       {% if element.isPending() %}
       <div class="vote-section">
         <span class="basic-message">
@@ -80,76 +81,52 @@
       </div>
       {% endif %}
       <div class="result-message" style="display:none"></div>
-    </div>
-    {% endif %}
+  </div>
 
+  {# MENU #}
+  <div class="menu-element bgdSoftColorAs {{pendingClass}}" option-id={{mainOptionValueToDisplay.colorOptionId}}>  
+    <div class="menu-element-item item-add-favorite" style="display:none">
+      <span class="menu-icon icon-star-empty icon-favorite tooltipped" 
+      data-position="top" data-delay="0" data-tooltip="Enregistrer comme favoris"></span>
+      <span class="menu-element-item-text">Enregistrer</span>
+    </div>
+    <div class="menu-element-item item-remove-favorite" style="display:none">
+      <span class="menu-icon icon-star-full icon-favorite tooltipped"
+      data-position="top" data-delay="0" data-tooltip="Retirer des favoris"></span>
+      <span class="menu-element-item-text favorite">Enregistré</span>
+    </div>
+    <div class="menu-element-item item-share">
+      <span class="menu-icon icon-share-alt tooltipped"
+      data-position="top" data-delay="0" data-tooltip="Partager l'URL"></span>
+      <span class="menu-element-item-text">Partager l'URL</span>
+    </div>
+    <div class="menu-element-item item-directions">
+      <span class="menu-icon icon-directions tooltipped" 
+      data-position="top" data-delay="0" data-tooltip="Itinéraire vers cet élément"></span>
+      <span class="menu-element-item-text">Itinéraire</span>
+    </div>
+
+    {% if not element.isPending() or isAdmin %}
+    <div class="menu-element-item item-edit">
+      {% set editText = 'Modifier' if isAdmin else 'Proposer des modifications' %}
+      <span class="menu-icon icon-edit tooltipped" 
+      data-position="top" data-delay="0" data-tooltip="{{ editText }}"></span>
+      <span class="menu-element-item-text">{{ editText }}</span>
+    </div>
+    
+    <div class="menu-element-item item-delete"> 
+      {% set deleteText = 'Supprimer' if isAdmin  else 'Signaler une erreur' %}
+      {% set deleteIcon = 'icon-delete' if isAdmin else 'icon-exclamation-1' %}
+      <span class="menu-icon btn-delete {{ deleteIcon }} tooltipped" 
+      data-position="top" data-delay="0" data-tooltip="{{ deleteText }}"></span>
+      <span class="menu-element-item-text">{{ deleteText }}</span>
+    </div>  
+    {% endif %}        
   </div>
 
   {# BODY #}
-  <div class="collapsible-body moreDetails custom-scroll-bar"> 
-  
-    {# Menu in listing mode #}
-    {% if listingMode %}
-      <div class="interactive-section">  
-        {% if element.isPending() %}
-        <div class="vote-section">
-          <span class="basic-message">
-            <span class="icon-attention"></span>
-            <span class="text">Acteur en cours de validation </span>
-            <span class="btn-vote-more-info validation-process-info" onclick='$("#popup-vote").openModal()'>EN SAVOIR PLUS</span>
-            <span class="vote-button btn btn-vote waves-effect waves-light">Voter</span>
-          </span>        
-        </div>
-        {% endif %}
-        <div class="result-message" style="display:none"></div>
-      </div>
-      {#
-        WARNING
-        If you modify this menu-element, please report changes in element-menu.html.njk also.
-        this is a lack of feature in TwigJsTemplate who does not implements the twig "include" method
-      #}
-      <div class="menu-element bgdSoftColorAs {{pendingClass}}" option-id={{mainOptionValueToDisplay.colorOptionId}}>  
+  <div class="collapsible-body moreDetails custom-scroll-bar">
 
-        <div class="menu-element-item item-add-favorite" style="display:none">
-          <span class="menu-icon icon-star-empty icon-favorite tooltipped" 
-          data-position="top" data-delay="0" data-tooltip="Enregistrer comme favoris"></span>
-          <span class="menu-element-item-text">Enregistrer</span>
-        </div>
-        <div class="menu-element-item item-remove-favorite" style="display:none">
-          <span class="menu-icon icon-star-full icon-favorite tooltipped"
-          data-position="top" data-delay="0" data-tooltip="Retirer des favoris"></span>
-          <span class="menu-element-item-text favorite">Enregistré</span>
-        </div>
-        <div class="menu-element-item item-share">
-          <span class="menu-icon icon-share-alt tooltipped"
-          data-position="top" data-delay="0" data-tooltip="Partager l'URL"></span>
-          <span class="menu-element-item-text">Partager l'URL</span>
-        </div>
-        <div class="menu-element-item item-directions">
-          <span class="menu-icon icon-directions tooltipped" 
-          data-position="top" data-delay="0" data-tooltip="Itinéraire vers cet élément"></span>
-          <span class="menu-element-item-text">Itinéraire</span>
-        </div>
-        {% if not element.isPending() or isAdmin %}
-        <div class="menu-element-item item-edit">
-          {% set editText = 'Modifier' if isAdmin else 'Proposer des modifications' %}
-          <span class="menu-icon icon-edit tooltipped" 
-          data-position="top" data-delay="0" data-tooltip="{{ editText }}"></span>
-          <span class="menu-element-item-text">{{ editText }}</span>
-        </div>
-        
-        <div class="menu-element-item item-delete"> 
-          {% set deleteText = 'Supprimer' if isAdmin  else 'Signaler une erreur' %}
-          {% set deleteIcon = 'icon-delete' if isAdmin else 'icon-exclamation-1' %}
-          <span class="menu-icon btn-delete {{ deleteIcon }} tooltipped" 
-          data-position="top" data-delay="0" data-tooltip="{{ deleteText }}"></span>
-          <span class="menu-element-item-text">{{ deleteText }}</span>
-        </div>  
-        {% endif %}
-            
-      </div> 
-    {% endif %}
-  
     {# Body Main Container #}
     <div class="collapsible-body-main-content"> 
 
@@ -210,11 +187,10 @@
           {% set count = count + 1 %} 
         {% endif %}
 
-        {% if count == 0 %}<div class='col'> Non renseignées </div>{% endif %} 
-      
+        {% if count == 0 %}<div class='col'> Non renseignées </div>{% endif %}       
       </div> 
-
     </div>
-  </div>
+  </div> {# end BODY #}
+
 </li>
 

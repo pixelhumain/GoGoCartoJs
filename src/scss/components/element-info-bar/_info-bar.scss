@@ -18,9 +18,8 @@
 
     .element-item
     {
-        .menu-element { display: none; } 
         .element-main-icon { display:none; }
-        .star-names-icons { display:block; }            
+        .star-names-icons { display:block; }           
     }
 
     &.inside-normal-mode
@@ -31,7 +30,7 @@
 
     #element-info
     {
-        margin-bottom: 2.9rem; // pour le element-menu
+        margin-bottom: 3rem; // pour le element-menu
 
         .moreDetails 
         { 
