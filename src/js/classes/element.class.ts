@@ -565,6 +565,7 @@ export class Element
 			mainCategoryValue : mainCategoryValue,
 			pendingClass : this.isPending() || this.isDeleted()  ? 'pending' : '',
 			isAdmin : App.loginModule.isAdmin(),
+			editUrl : App.config.editElementUrl + this.id,
 		});
 
 		

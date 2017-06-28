@@ -109,9 +109,10 @@
     {% if not element.isPending() or isAdmin %}
     <div class="menu-element-item item-edit">
       {% set editText = 'Modifier' if isAdmin else 'Proposer des modifications' %}
+      <a href={{ editUrl }}>
       <span class="menu-icon icon-edit tooltipped" 
       data-position="top" data-delay="0" data-tooltip="{{ editText }}"></span>
-      <span class="menu-element-item-text">{{ editText }}</span>
+      <span class="menu-element-item-text">{{ editText }}</span></a>
     </div>
     
     <div class="menu-element-item item-delete"> 
