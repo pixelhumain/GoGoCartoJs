@@ -97,7 +97,7 @@ export class RouterModule
 	private parseAddressViewport($addressViewport)
   {
       // precaution in case GET param still in hash
-			//$addressViewport = $addressViewport.split('?')[0];
+			$addressViewport = $addressViewport.split('?')[0];
 
       let splited = $addressViewport.split('@');
 
