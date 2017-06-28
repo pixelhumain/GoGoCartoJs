@@ -250,6 +250,8 @@ export class ElementsModule
 		{
 			element = elements[i];
 
+			if (!element) break;
+
 			// in List mode we don't need to check bounds;
 			let elementInBounds = (App.mode == AppModes.List) || App.mapComponent.extendedContains(element.position);
 
