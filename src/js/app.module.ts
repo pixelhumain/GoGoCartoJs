@@ -522,6 +522,9 @@ export class AppModule
 		let result = this.boundsModule.calculateFreeBounds($getFullRepresentation);
 		//console.log("checkForNewelementToRetrieve, calculateBounds", result);
 		if (result === null) return; // nothing to do, all elements already retrieved
+
+		$('#directory-list-spinner-loader').show();
+
 		let freeBounds = result.freeBounds;
 		let expectedFilledBounds = result.expectedFillBounds;
 		if (freeBounds && freeBounds.length > 0) this.ajaxModule.getElementsInBounds(freeBounds, $getFullRepresentation, expectedFilledBounds); 
@@ -574,6 +577,8 @@ export class AppModule
 	handleNewElementsReceivedFromServer(result)
 	{		
 		let elementsJson = result.data;
+
+		$('#directory-list-spinner-loader').hide();
 		
 		let	elements = this.elementModule.addJsonElements(elementsJson, true, result.fullRepresentation);
 		//console.log("new Elements length", newElements.length);

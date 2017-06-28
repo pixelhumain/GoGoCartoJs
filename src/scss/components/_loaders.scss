@@ -10,6 +10,17 @@
     }
 }
 
+#directory-list-spinner-loader
+{
+    position: relative;
+    margin-top: 40px;
+    z-index: 500;
+    
+    .spinner-layer {
+        border-color: white;
+    }
+}
+
 #directory-loading
 {
     position: absolute;

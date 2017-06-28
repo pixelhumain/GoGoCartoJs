@@ -94,7 +94,7 @@ export class GoGoCartoModule
 	   App.elementModule.initialize();
 	   App.directoryMenuComponent.initialize();
 	   App.boundsModule.initialize();	   
-
+	   App.elementListComponent.initialize();
 	   App.routerModule.loadInitialState();
 
 	   initializeAppInteractions();

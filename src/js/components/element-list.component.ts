@@ -37,10 +37,15 @@ export class ElementListComponent
 	isInitialized : boolean = false;
 
 	constructor()
+	{		
+	}
+
+	initialize()
 	{
 		// detect when user reach bottom of list
 		var that = this;
-		$('#directory-content-list ul').on('scroll', function(e) {
+		$('#directory-content-list ul').on('scroll', function(e) 
+		{
 			if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {            
 		    	that.handleBottom();
 		  }
@@ -118,7 +123,7 @@ export class ElementListComponent
 		for(let i = 0; i < endIndex; i++)
 		{
 			element = elementsToDisplay[i];
-			$('#directory-content-list ul').append(element.getHtmlRepresentation());
+			$('#directory-content-list ul').prepend(element.getHtmlRepresentation());
 			let domMenu = $('#element-info-'+element.id +' .menu-element');
 			createListenersForElementMenu(domMenu);	
 			updateFavoriteIcon(domMenu, element)		
