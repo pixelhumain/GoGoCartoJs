@@ -107,12 +107,12 @@ var Routie = function(w, isModule) {
   var routie = function(path, fn) {
     if (typeof fn == 'function') {
       addHandler(path, fn);
-      routie.reload();
+      //routie.reload();
     } else if (typeof path == 'object') {
       for (var p in path) {
         addHandler(p, path[p]);
       }
-      routie.reload();
+      //routie.reload();
     } else if (typeof fn === 'undefined') {
       routie.navigate(path);
     }
@@ -201,7 +201,7 @@ var Routie = function(w, isModule) {
       w.detachEvent('onhashchange', hashChanged);
     }
   };
-  addListener();
+  //addListener();
 
   if (isModule){
     return routie;

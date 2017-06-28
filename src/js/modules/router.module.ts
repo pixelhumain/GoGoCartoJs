@@ -8,6 +8,8 @@ declare var routie: any, $;
 
 export class RouterModule
 {
+	GETParams = { cat: ''};
+
 	constructor()
 	{
 		routie({
@@ -21,6 +23,7 @@ export class RouterModule
 				initialState.state = AppStates.Normal;				
 				initialState.address = parsedAddressAndViewport[0];
 				initialState.viewport = new ViewPort().fromString(parsedAddressAndViewport[1]);
+				initialState.filters = this.GETParams.cat;
 
 				// timeout to let App variable being accesible
 				setTimeout( () => { App.loadHistoryState(initialState); }, 0);				
@@ -36,6 +39,7 @@ export class RouterModule
 				initialState.address = parsedAddressAndViewport[0];
 				initialState.viewport = new ViewPort().fromString(parsedAddressAndViewport[1]);
 				initialState.id = id;
+				initialState.filters = this.GETParams.cat;
 
 				// timeout to let App variable being accesible
 				setTimeout( () => { App.loadHistoryState(initialState); }, 0);	
@@ -51,6 +55,10 @@ export class RouterModule
 				initialState.address = parsedAddressAndViewport[0];
 				initialState.viewport = new ViewPort().fromString(parsedAddressAndViewport[1]);
 				initialState.id = id;
+				initialState.filters = this.GETParams.cat;
+
+				// timeout to let App variable being accesible
+				setTimeout( () => { App.loadHistoryState(initialState); }, 0);	
 			},
 			'search /:mode/recherche/:text': (mode, text) =>
 			{
@@ -60,25 +68,37 @@ export class RouterModule
 				initialState.mode = AppModes.Map;
 				initialState.state = AppStates.Normal;				
 				initialState.text = text;
+				initialState.filters = this.GETParams.cat;
+
+				// timeout to let App variable being accesible
+				setTimeout( () => { App.loadHistoryState(initialState); }, 0);
 			}
 		});		
 	}
 
 	loadInitialState()
-	{
-		//console.log("initial route", window.location.hash);
-		routie.navigate(window.location.hash || '/carte');
+	{		
+		// check GET parameters inside the hash
+		let splited = window.location.hash.split('?');
+		console.log(splited);
+		if (splited.length > 1) this.GETParams = this.parseGETparam();
+
+		// navigate "silently" because if no, the routie is called twice
+		routie.navigate(splited[0] || '/carte');
+		routie.reload();
 	}
 
 	generate(routeName : string, options? : any, absoluteUrl? : boolean)
 	{
-		// console.log("Generate", options);
-		// console.log("result", routie.lookup(routeName, options));
 		return '#' + routie.lookup(routeName, options);
 	}
 
+	// address and viewport are joined into one string, seperated by "@"
 	private parseAddressViewport($addressViewport)
   {
+      // precaution in case GET param still in hash
+			//$addressViewport = $addressViewport.split('?')[0];
+
       let splited = $addressViewport.split('@');
 
       if (splited.length == 1)
@@ -90,4 +110,22 @@ export class RouterModule
           return splited;
       }  
   }
+
+  // obtain the GET parameters from the url ( ?=parameter=value), also inside the hash
+  parseGETparam(param? : string) 
+  {
+		var vars = {};
+		window.location.href.replace( window.location.hash.split('?')[0], '' ).replace( 
+			/[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+			function( m, key, value ) { // callback
+				vars[key] = value !== undefined ? value : '';
+				return vars[key];
+			}
+		);
+
+		if ( param ) {
+			return vars[param] ? vars[param] : null;	
+		}
+		return vars;
+	}
 }

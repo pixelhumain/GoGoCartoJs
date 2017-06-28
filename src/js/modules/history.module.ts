@@ -26,6 +26,7 @@ $(document).ready(function()
    {
 	  //console.log("\n\nOnpopState ", event.state.filters);
 	  let historystate : HistoryState = event.state;
+	  if (!historystate) return;
 	  // transform jsonViewport into ViewPort object (if we don't do so,
 	  // the ViewPort methods will not be accessible)
 	  historystate.viewport = $.extend(new ViewPort(), event.state.viewport);

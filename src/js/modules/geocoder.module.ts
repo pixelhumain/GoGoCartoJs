@@ -83,7 +83,7 @@ export class GeocoderModule
 			{
 				this.geocoder.geocode( address, (results : GeocodeResult[]) =>
 				{			
-					if (results !== null) 
+					if (results !== null && results.length > 0) 
 					{				
 						this.lastResults = results;
 						this.lastResultBounds = this.latLngBoundsFromRawBounds(this.lastResults[0].getBounds());
