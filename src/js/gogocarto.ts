@@ -73,35 +73,37 @@ export class GoGoCartoModule
 
 	private init(taxonomy, options)
 	{	
-	   App = new AppModule(options); 
-		 // only for debugging
-	   this.app = App;
+		App = new AppModule(options); 
+		// only for debugging
+		this.app = App;
 
-	   let layout = App.templateModule.render('layout', { mainCategory: taxonomy, openHoursCategory: options.openHours, isAdmin: options.userRole == 2 });
-	   	   
-	   if ($(this.containerSelector).length == 0) console.warn('[GoGoCarto] The container "' + this.containerSelector + '" was not found');
-	   else $(this.containerSelector).append(layout);
+		let layout = App.templateModule.render('layout', { mainCategory: taxonomy, openHoursCategory: options.openHours, isAdmin: options.userRole == 2 });
+		   
+		if ($(this.containerSelector).length == 0) console.warn('[GoGoCarto] The container "' + this.containerSelector + '" was not found');
+		else $(this.containerSelector).append(layout);
 
-	   App.categoryModule.createCategoriesFromJson(taxonomy, options.openHours);
-	   if (App.categoryModule.options.length)
-	   {
-	   		let styles = App.templateModule.render('categories-styles', {'optionList':App.categoryModule.options});
-	   		let domToAddStyles = $('head').length ? $('head') : $('html');
-	   		if (domToAddStyles.length) domToAddStyles.append(styles);
-	   		else 	console.warn("[GoGoCarto] Cannot find Dom 'head' or 'html' to add styles");
-	   }
-	   
-	   App.elementModule.initialize();
-	   App.directoryMenuComponent.initialize();
-	   App.boundsModule.initialize();	   
-	   App.elementListComponent.initialize();
-	   App.routerModule.loadInitialState();
-	   App.searchBarComponent.initialize();
+		App.categoryModule.createCategoriesFromJson(taxonomy, options.openHours);
+		if (App.categoryModule.options.length)
+		{
+			let styles = App.templateModule.render('categories-styles', {'optionList':App.categoryModule.options});
+			let domToAddStyles = $('head').length ? $('head') : $('html');
+			if (domToAddStyles.length) domToAddStyles.append(styles);
+			else 	console.warn("[GoGoCarto] Cannot find Dom 'head' or 'html' to add styles");
+		}
 
-	   initializeAppInteractions();
-	   initializeElementMenu();
-	   initializeVoting();
-	   initializeReportingAndDeleting();
+		setTimeout( () => {
+			App.elementModule.initialize();
+			App.directoryMenuComponent.initialize();
+			App.boundsModule.initialize();	   
+			App.elementListComponent.initialize();
+			App.routerModule.loadInitialState();
+			App.searchBarComponent.initialize();
+
+			initializeAppInteractions();
+			initializeElementMenu();
+			initializeVoting();
+			initializeReportingAndDeleting();
+		}, 0);	   
 	}
 }
 
