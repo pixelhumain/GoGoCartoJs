@@ -2,9 +2,17 @@
 {
 	position: absolute;
   left: 1.2rem;
-  line-height: 3rem;
   font-size: 1.2rem;
-  color: #BDBDBD;
+  color: #777;
+  height: 2rem;
+  line-height: 2rem;
+
+  &:before
+  {
+  	line-height: 2rem;
+  }
+
+  @media #{$small-only} { left: 3.5rem; }
 
   &:hover
   {
@@ -15,12 +23,24 @@
 
 #search-bar
 {
-	text-align: center;
-	text-transform: capitalize;
+	text-transform: uppercase;
+	font-size: .8rem;
 	padding: 0 .5rem 0 .5rem;
-	border: 3px solid #BDBDBD;
 	box-shadow: none !important;
-	@include border-radius(10px);
+	margin: 0;
+  text-align: left;
+  padding-left: 2.2rem;    
+  height: 2rem;
+  border: none;
+  width: 100%;
+  background-color: white;
+  @include border-radius(5px);
+  @include box-sizing(border-box);
+
+  &:focus
+  {
+  	border-color: $secondary-color;
+  }
 
 	&.invalid
 	{
@@ -53,6 +73,42 @@
     {
     	border-color: #6B6B6B;
     }    
+}
+
+#search-bar-container
+{
+	height: 3.5rem;
+  padding: .7rem;
+	text-align: center;
+	margin: 0;
+	padding-bottom: 0;
+  padding-left: 3rem;
+
+  @media #{$medium-and-up} { padding-left: .7rem; }      
+}
+
+#search-distance-component
+{
+	margin: 0rem .8rem 0 .8rem;
+
+	#search-distance-container
+	{
+    display: inline-block;
+  	width: calc(100% - 55px);
+
+		#search-distance-input
+		{
+			border: none;
+		}
+	}
+
+	#search-distance-value-container
+	{
+		float: right;
+  	line-height: 2.3rem;
+  	width: 55px;
+  	text-align: right;
+	}
 }
 
 .search-options
