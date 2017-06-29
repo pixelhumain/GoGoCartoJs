@@ -3817,7 +3817,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     left: 0;
     bottom: 0;
     right: 0;
-    z-index: 50; }
+    z-index: 1; }
     .gogocarto-container #directory-spinner-loader .spinner-layer, .gogocarto-container #info-bar-spinner-loader .spinner-layer {
       border-color: white; }
   .gogocarto-container #directory-list-spinner-loader {
@@ -3849,21 +3849,38 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
   .gogocarto-container #search-bar-icon {
     position: absolute;
     left: 1.2rem;
-    line-height: 3rem;
     font-size: 1.2rem;
-    color: #BDBDBD; }
+    color: #777;
+    height: 2rem;
+    line-height: 2rem; }
+    .gogocarto-container #search-bar-icon:before {
+      line-height: 2rem; }
+    @media only screen and (max-width: 600px) {
+      .gogocarto-container #search-bar-icon {
+        left: 3.5rem; } }
     .gogocarto-container #search-bar-icon:hover {
       color: #4A7874;
       cursor: pointer; }
   .gogocarto-container #search-bar {
-    text-align: center;
-    text-transform: capitalize;
+    text-transform: uppercase;
+    font-size: .8rem;
     padding: 0 .5rem 0 .5rem;
-    border: 3px solid #BDBDBD;
     box-shadow: none !important;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px; }
+    margin: 0;
+    text-align: left;
+    padding-left: 2.2rem;
+    height: 2rem;
+    border: none;
+    width: 100%;
+    background-color: white;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+    .gogocarto-container #search-bar:focus {
+      border-color: #4A7874; }
     .gogocarto-container #search-bar.invalid {
       border-color: #B90303 !important; }
     .gogocarto-container #search-bar::-webkit-input-placeholder {
@@ -3882,6 +3899,28 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       color: white; }
     .gogocarto-container #search-bar:focus {
       border-color: #6B6B6B; }
+  .gogocarto-container #search-bar-container {
+    height: 3.5rem;
+    padding: .7rem;
+    text-align: center;
+    margin: 0;
+    padding-bottom: 0;
+    padding-left: 3rem; }
+    @media only screen and (min-width: 601px) {
+      .gogocarto-container #search-bar-container {
+        padding-left: .7rem; } }
+  .gogocarto-container #search-distance-component {
+    margin: 0rem .8rem 0 .8rem; }
+    .gogocarto-container #search-distance-component #search-distance-container {
+      display: inline-block;
+      width: calc(100% - 55px); }
+      .gogocarto-container #search-distance-component #search-distance-container #search-distance-input {
+        border: none; }
+    .gogocarto-container #search-distance-component #search-distance-value-container {
+      float: right;
+      line-height: 2.3rem;
+      width: 55px;
+      text-align: right; }
   .gogocarto-container .search-options {
     padding: 0 .7rem;
     padding-bottom: .7rem; }
@@ -4565,53 +4604,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           left: 40%;
           position: absolute;
           display: none; }
-  .gogocarto-container #search-bar {
-    margin: 0;
-    text-align: left;
-    padding-left: 2rem;
-    height: 2rem;
-    border: none;
-    width: 100%;
-    background-color: white;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box; }
-    .gogocarto-container #search-bar:focus {
-      border-color: #4A7874; }
-  .gogocarto-container #search-bar-icon {
-    color: #777;
-    height: 2rem;
-    line-height: 2rem; }
-    .gogocarto-container #search-bar-icon:before {
-      line-height: 2rem; }
-    @media only screen and (max-width: 600px) {
-      .gogocarto-container #search-bar-icon {
-        left: 3.5rem; } }
-  .gogocarto-container #search-bar-container {
-    height: 3.5rem;
-    padding: .7rem;
-    text-align: center;
-    margin: 0;
-    padding-bottom: 0;
-    padding-left: 3rem; }
-    @media only screen and (min-width: 601px) {
-      .gogocarto-container #search-bar-container {
-        padding-left: .7rem; } }
-  .gogocarto-container #search-distance-component {
-    margin: 0rem .8rem 0 .8rem; }
-    .gogocarto-container #search-distance-component #search-distance-container {
-      display: inline-block;
-      width: calc(100% - 55px); }
-      .gogocarto-container #search-distance-component #search-distance-container #search-distance-input {
-        border: none; }
-    .gogocarto-container #search-distance-component #search-distance-value-container {
-      float: right;
-      line-height: 2.3rem;
-      width: 55px;
-      text-align: right; }
   .gogocarto-container .cluster {
     z-index: 2; }
   .gogocarto-container .icon {
