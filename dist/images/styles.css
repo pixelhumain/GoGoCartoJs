@@ -392,3 +392,6 @@
 .icon-no-eye:before {
   content: "\6a";
 }
+.icon-layers:before {
+  content: "\70";
+}
