@@ -8,7 +8,7 @@
  * @Last Modified time: 2016-12-13
  */
 
-import { Event, IEvent } from "../utils/event";
+import { Event } from "../utils/event";
 import { slugify, capitalize } from "../commons/commons";
 import { AppModule, AppStates, AppModes, AppDataType } from "../app.module";
 import { Element } from "../classes/element.class";

@@ -13,7 +13,7 @@ import { App } from "../gogocarto";
 declare var $;	
 
 import * as Cookies from "../utils/cookies";
-import { Event, IEvent } from "../utils/event";
+import { Event } from "../utils/event";
 import { Element } from "../classes/element.class";
 import { BiopenMarker } from "../components/map/biopen-marker.component";
 

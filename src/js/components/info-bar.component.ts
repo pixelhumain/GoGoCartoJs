@@ -11,7 +11,7 @@ import { AppModule, AppStates } from "../app.module";
 import { Element } from "../classes/element.class";
 import { App } from "../gogocarto";
 
-import { Event, IEvent } from "../utils/event";
+import { Event } from "../utils/event";
 import { updateMapSize, updateInfoBarSize } from "../app-interactions";
 import { createListenersForElementMenu, updateFavoriteIcon, showFullTextMenu } from "./element-menu.component";
 

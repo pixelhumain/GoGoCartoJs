@@ -12,7 +12,7 @@ import { GeocoderModule, GeocodeResult } from "../modules/geocoder.module";
 declare var google, $;
 import { App } from "../gogocarto";
 
-import { Event, IEvent } from "../utils/event";
+import { Event } from "../utils/event";
 
 export class SearchBarComponent
 {

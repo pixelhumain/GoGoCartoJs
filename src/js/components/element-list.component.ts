@@ -14,7 +14,7 @@ import { slugify, capitalize, unslugify } from "../commons/commons";
 
 import { createListenersForElementMenu, updateFavoriteIcon } from "./element-menu.component";
 import { Element } from "../classes/element.class";
-import { Event, IEvent } from "../utils/event";
+import { Event } from "../utils/event";
 
 import { createListenersForVoting } from "../components/vote.component";
 

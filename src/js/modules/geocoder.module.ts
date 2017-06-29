@@ -4,7 +4,7 @@ declare var L, $;
 
 import { AppModule } from "../app.module";
 import { slugify, capitalize, unslugify } from "../commons/commons";
-import { Event, IEvent } from "../utils/event";
+import { Event } from "../utils/event";
 
 /** results type returned by geocoderJS */
 export interface GeocodeResult
