@@ -46,6 +46,7 @@ gulp.task('scriptsLibs', function() {
   return gulp.src(['src/js/libs/**/!(leaflet-routing-machine)*.js', 
                   'src/js/libs/leaflet-routing-machine.js' ,
                   '!src/js/libs/materialize/unused/**/*.js',
+                  '!src/js/libs/nunjucks.js',
                    ])
     .pipe(concat('libs.js'))
     .pipe(gulp.dest('build'));
@@ -65,18 +66,17 @@ gulp.task('sass', function () {
 });
 
 gulp.task('prod_styles', function() {
-  return gulp.src('web/assets/*.css')
+  return gulp.src('dist/*!(*.min).css')
     .pipe(rename({suffix: '.min'}))
     .pipe(minifycss())
-    .pipe(gzip())
     .pipe(gulp.dest('dist'));
     //.pipe(notify({ message: 'Styles task complete' }));
 });
 
 gulp.task('gzip_styles', ['prod_styles'], function() {
-  return gulp.src('build/**/*.css')
+  return gulp.src('dist/*.min.css')
     .pipe(gzip())
-    .pipe(gulp.dest('build'));
+    .pipe(gulp.dest('dist'));
     //.pipe(notify({ message: 'Styles task complete' }));
 });
 
@@ -89,21 +89,21 @@ gulp.task('concat_directory', function() {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('dist_css', function() {
+gulp.task('dist_assets', function() {
   return gulp.src(['web/assets/**/*'])
     .pipe(gulp.dest('dist'));
 });
 
 
 gulp.task('prod_js', ['concat_directory'], function() {
-  return gulp.src(['dist/*.js'])
+  return gulp.src(['dist/*!(*.min).js'])
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
     .pipe(gulp.dest('dist'));
 });
 
 gulp.task('gzip_js', ['prod_js'],  function() {
-  return gulp.src(['dist/*.js'])
+  return gulp.src(['dist/*.min.js'])
     .pipe(gzip())
     .pipe(gulp.dest('dist'));
 });
@@ -134,7 +134,7 @@ gulp.task('build', function() {
 });
 
 gulp.task('dist', function() {
-    gulp.start('concat_directory','dist_css');
+    gulp.start('concat_directory','dist_assets');
 });
 
 gulp.task('production', function() {
