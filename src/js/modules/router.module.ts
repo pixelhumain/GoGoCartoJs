@@ -96,19 +96,19 @@ export class RouterModule
 	// address and viewport are joined into one string, seperated by "@"
 	private parseAddressViewport($addressViewport)
   {
-      // precaution in case GET param still in hash
-			$addressViewport = $addressViewport.split('?')[0];
+    // precaution in case GET param still in hash
+		$addressViewport = $addressViewport.split('?')[0];
 
-      let splited = $addressViewport.split('@');
+    let splited = $addressViewport.split('@');
 
-      if (splited.length == 1)
-      {
-          return [$addressViewport, ''];
-      }
-      else
-      {
-          return splited;
-      }  
+    if (splited.length == 1)
+    {
+        return [$addressViewport, ''];
+    }
+    else
+    {
+        return splited;
+    }  
   }
 
   // obtain the GET parameters from the url ( ?=parameter=value), also inside the hash
