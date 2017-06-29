@@ -24,8 +24,11 @@ export class SearchBarComponent
 
 	constructor(domId : string)
 	{	
-		this.domId = domId;
+		this.domId = domId;		
+	}
 
+	initialize()
+	{
 		// handle all validation by user (enter press, icon click...)
 		this.domElement().keyup((e) =>
 		{    

@@ -96,6 +96,7 @@ export class GoGoCartoModule
 	   App.boundsModule.initialize();	   
 	   App.elementListComponent.initialize();
 	   App.routerModule.loadInitialState();
+	   App.searchBarComponent.initialize();
 
 	   initializeAppInteractions();
 	   initializeElementMenu();
