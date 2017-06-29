@@ -80,12 +80,12 @@ export class RouterModule
 	{		
 		// check GET parameters inside the hash
 		let splited = window.location.hash.split('?');
-		//console.log(splited);
+		
 		if (splited.length > 1) this.GETParams = this.parseGETparam();
 
-		// navigate "silently" because if no, the routie is called twice
 		routie.navigate(splited[0] || '/carte');
-		routie.reload();
+		// let the hash being changed with a timeOut
+		setTimeout(() => routie.reload(), 0);
 	}
 
 	generate(routeName : string, options? : any, absoluteUrl? : boolean)
