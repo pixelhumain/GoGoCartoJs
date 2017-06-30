@@ -129,7 +129,7 @@ a.leaflet-control-zoom-out {
 }
 .leaflet-control-layers
 {
-    padding: 5px 15px 10px 15px;
+    padding: 0 !important;
     display: none;
     position: relative;
     z-index: 600;
@@ -140,7 +140,10 @@ a.leaflet-control-zoom-out {
 .leaflet-control-layers-list
 {
     display: block !important;
+    padding: 5px 15px 10px;
     position: relative !important;
+
+    @extend .custom-scroll-bar-light
 }
 
 .leaflet-control-layers-selector:checked + span
@@ -169,3 +172,4 @@ a.leaflet-control-zoom-out {
         }
     }    
 }
+
