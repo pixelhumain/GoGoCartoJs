@@ -162,6 +162,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
 		border-radius: 50%;
         z-index: 10;
 
+        .iconInsideMarker { line-height: 22px; }
+
         &.disabled { color: grey !important };
     	// TODO rajouter prefix border radius        
 	}	
