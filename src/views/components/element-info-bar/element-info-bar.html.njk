@@ -74,7 +74,7 @@
       <div class="vote-section">
         <span class="basic-message">
           <span class="icon-attention"></span>
-          <span class="text">{{ 'Nouvel Acteur' if element.status == 0 else 'Modifications' }} en cours de validation</span>
+          <span class="text">{{ 'Nouvel Acteur' if element.status == ElementStatus.PendingAdd else 'Modifications' }} en cours de validation</span>
           <span class="btn-vote-more-info validation-process-info" onclick='$("#popup-vote").openModal()'>EN SAVOIR PLUS</span>
           <span class="vote-button btn btn-vote waves-effect waves-light">{{ 'Décider' if isAdmin else 'Voter' }}</span>
         </span>        
@@ -106,22 +106,24 @@
       <span class="menu-element-item-text">Itinéraire</span>
     </div>
 
-    {% if not element.isPending() or isAdmin %}
-    <div class="menu-element-item item-edit">
-      {% set editText = 'Modifier' if isAdmin else 'Proposer des modifications' %}
-      <a href={{ editUrl }}>
-      <span class="menu-icon icon-edit tooltipped" 
-      data-position="top" data-delay="0" data-tooltip="{{ editText }}"></span>
-      <span class="menu-element-item-text">{{ editText }}</span></a>
-    </div>
-    
-    <div class="menu-element-item item-delete"> 
-      {% set deleteText = 'Supprimer' if isAdmin  else 'Signaler une erreur' %}
-      {% set deleteIcon = 'icon-delete' if isAdmin else 'icon-exclamation-1' %}
-      <span class="menu-icon btn-delete {{ deleteIcon }} tooltipped" 
-      data-position="top" data-delay="0" data-tooltip="{{ deleteText }}"></span>
-      <span class="menu-element-item-text">{{ deleteText }}</span>
-    </div>  
+    {% if not element.isPending() or isAdmin %} 
+      <div class="menu-element-item item-edit">
+        {% set editText = 'Modifier' if isAdmin else 'Proposer des modifications' %}
+        <a href={{ editUrl }}>
+        <span class="menu-icon icon-edit tooltipped" 
+        data-position="top" data-delay="0" data-tooltip="{{ editText }}"></span>
+        <span class="menu-element-item-text">{{ editText }}</span></a>
+      </div>
+    {% endif %}
+
+    {% if not element.isPending() or (isAdmin and element.status == ElementStatus.PendingModification) %} 
+      <div class="menu-element-item item-delete"> 
+        {% set deleteText = 'Supprimer' if isAdmin  else 'Signaler une erreur' %}
+        {% set deleteIcon = 'icon-delete' if isAdmin else 'icon-exclamation-1' %}
+        <span class="menu-icon btn-delete {{ deleteIcon }} tooltipped" 
+        data-position="top" data-delay="0" data-tooltip="{{ deleteText }}"></span>
+        <span class="menu-element-item-text">{{ deleteText }}</span>
+      </div>  
     {% endif %}        
   </div>
 
