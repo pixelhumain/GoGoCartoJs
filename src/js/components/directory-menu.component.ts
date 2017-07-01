@@ -24,6 +24,8 @@ export class DirectoryMenuComponent
 
 	initialize()
 	{	
+		$('#hide-menu-btn').tooltip();
+
 		// -------------------------------
 		// --------- FAVORITE-------------
 		// -------------------------------

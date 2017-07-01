@@ -29,6 +29,30 @@
       position: relative;
       background-color: $primary-color;
 
+      #hide-menu-btn
+      {        
+        position: absolute;
+        right: 0px;
+        top: 0;
+        width: 24px;
+        bottom: 0;
+        @include flexbox();
+        @include align(center);
+
+        .arrow-left
+        {          
+          position: absolute;
+          border: solid 8px;
+          border-color: transparent #eeeeee transparent transparent;
+        }  
+
+        &:hover
+        {
+          cursor: pointer;
+          .arrow-left { border-color: transparent white transparent transparent; }
+        }              
+      }
+
       .btn-close
       {
         position: absolute;
@@ -57,8 +81,9 @@
 
       @media #{$medium-and-up} 
       {
-        width: 103%;
+        width: calc(100% + 12px);
         border-radius: 0 0 5px 5px;
+        padding-right: 15px;
 
         .btn-close-menu { display:none }
       }
