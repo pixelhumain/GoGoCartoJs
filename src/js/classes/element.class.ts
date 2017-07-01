@@ -566,6 +566,7 @@ export class Element
 			pendingClass : this.isPending() || this.isDeleted()  ? 'pending' : '',
 			isAdmin : App.loginModule.isAdmin(),
 			editUrl : App.config.editElementUrl + this.id,
+			ElementStatus: ElementStatus,
 		});
 
 		
