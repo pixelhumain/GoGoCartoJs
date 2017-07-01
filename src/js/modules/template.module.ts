@@ -14,7 +14,7 @@ export class TemplateModule
 		nunjucks.configure('../src/views', { autoescape: true });
 	}
 
-	render(templateName : string, options : any) : string
+	render(templateName : string, options : any = {}) : string
 	{
 		let fileUrl = '';
 
@@ -24,7 +24,8 @@ export class TemplateModule
 			case 'marker': fileUrl = 'components/marker.html.njk'; break;
 			case 'categories-styles': fileUrl = 'categories-styles.html.njk'; break;
 			case 'element-info-bar': fileUrl = 'components/element-info-bar/element-info-bar.html.njk'; break;
-			default: console.error('No template associated to templateName', templateName);
+			case 'vote-modal-content': fileUrl = 'modals/vote-for-pending-element-content.html.njk'; break;
+			default: console.warn('[GoGoCarto] No template associated to templateName', templateName);
 		}
 
 		return nunjucks.render(fileUrl, options);

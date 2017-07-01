@@ -26,6 +26,7 @@ export function initializeVoting()
 {	
 	//console.log("initialize vote");	
 
+	// open a modal containing description of the validation process
 	$(".validation-process-info").click( (e) => 
 	{
 		$("#popup-vote").openModal();	
@@ -67,12 +68,12 @@ export function initializeVoting()
 
 						// reload Element, and add flash message
 						App.infoBarComponent.showElement(element.id, () => {
-							addFalshMessage(responseMessage);
+							addFlashMessage(responseMessage);
 						});
 					}
 					else
 					{
-						addFalshMessage(responseMessage);
+						addFlashMessage(responseMessage);
 					}					
 				}
 				else
@@ -92,18 +93,12 @@ export function initializeVoting()
 	});
 }
 
-function addFalshMessage(message)
-{
-	let elementInfo = getCurrentElementInfoBarShown();
-	elementInfo.find(".vote-section").find('.basic-message').hide();	
-	elementInfo.find('.result-message').html(message).show();
-	App.infoBarComponent.show();
-}
-
 export function createListenersForVoting()
 {
+	// vote-button is located on the element-info-bar of a pending element
 	$(".vote-button").click( function(e)
 	{
+		// restrict vote to logged users
 		if (!App.loginModule.isUserLogged()) 
 		{
 			App.loginModule.loginAction();
@@ -113,20 +108,12 @@ export function createListenersForVoting()
 		{
 			let element = App.elementModule.getElementById(getCurrentElementIdShown());
 
-			if (App.loginModule.isAdmin() || element.status == ElementStatus.PendingModification)
-			{
-				$('#modal-vote .long-options').hide();
-				$('#modal-vote .short-options').show();
-			}
-			else
-			{
-				$('#modal-vote .long-options').show();
-				$('#modal-vote .short-options').hide();
-			}
-			$('#modal-vote .option-radio-btn:checked').prop('checked', false);
-			$('#modal-vote .input-comment').val("");
-			$('#modal-vote #select-error').hide();
-			$('#modal-vote .elementName').text(capitalize(element.name));
+			// dynamically create vote template
+			$('#vote-modal-content').html(App.templateModule.render('vote-modal-content', { 
+				element: element, 
+				ElementStatus: ElementStatus, 
+				isAdmin: App.loginModule.isAdmin() 
+			}));
 
 			$('#modal-vote').openModal({
 		    dismissible: true, 
@@ -140,5 +127,13 @@ export function createListenersForVoting()
 		e.stopImmediatePropagation();
   	e.preventDefault();
 	});
+}
+
+function addFlashMessage(message)
+{
+	let elementInfo = getCurrentElementInfoBarShown();
+	elementInfo.find(".vote-section").find('.basic-message').hide();	
+	elementInfo.find('.result-message').html(message).show();
+	App.infoBarComponent.show();
 }
 

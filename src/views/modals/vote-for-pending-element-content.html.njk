@@ -1,0 +1,49 @@
+<h5>{{ 'Décidez pour' if isAdmin else 'Donnez votre avis concernant' }} l'acteur <span class="elementName">{{ element.name }}</span></h5>
+
+<p id="select-error" class="error">Vous devez sélectionner votre vote !</p>
+
+{% set isPendingAdd = element.status == ElementStatus.PendingAdd %}
+
+{% if isAdmin or not isPendingAdd %}
+	
+	<input class="option-radio-btn "value="-1" name="voteOption" type="radio" id="option7"/>
+  <label class="option-radio-label" for="option7">
+  	{% if isAdmin %}
+  		Refuser {{ "l'ajout" if isPendingAdd else 'les modifications' }}
+  	{% else %}
+  		Je suis ne suis pas d'accord avec les modifications proposées
+  	{% endif %}
+  </label>
+
+	<input class="option-radio-btn "value="1" name="voteOption" type="radio" id="option6"/>
+  <label class="option-radio-label" for="option6">
+  	{% if isAdmin %}
+  		Accepter {{ "l'ajout" if isPendingAdd else 'les modifications' }}
+  	{% else %}
+  		Je valide les modifications proposées
+  	{% endif %}
+  </label>  
+
+{% else %}
+
+		<input class="option-radio-btn "value="-2" name="voteOption" type="radio" id="option3"/>
+	  <label class="option-radio-label" for="option3">Cet acteur ne respecte pas la charte de près de chez nous, et ne doit donc pas y être répertorié</label>
+
+	  <input class="option-radio-btn "value="-1" name="voteOption" type="radio" id="option4"/>
+	  <label class="option-radio-label" for="option4">Cet acteur n'existe pas</label>
+
+	  <input class="option-radio-btn "value="0" name="voteOption" type="radio" id="option0"/>
+	  <label class="option-radio-label" for="option0">Cet acteur existe mais les informations indiquées ne sont pas correctes</label>
+
+	  <input class="option-radio-btn "value="1" name="voteOption" type="radio" id="option1"/>
+	  <label class="option-radio-label" for="option1">Cet acteur existe, mais je n'en sais pas plus sur lui</label>
+
+	  <input class="option-radio-btn "value="2" name="voteOption" type="radio" id="option2"/>
+	  <label class="option-radio-label" for="option2">Cet acteur existe et je valide l'exactitude des informations renseignées</label>  
+
+{% endif %}
+
+<div class="input-field">
+	{% set placeHolder = "Justificatif en cas de refus (qui sera inséré dans l'e-mail automatique)" if isAdmin else "Commentaire optionnel pour la modération" %}
+	<input class="input-comment" type="text" placeholder="{{ placeHolder }}"/>
+</div>
