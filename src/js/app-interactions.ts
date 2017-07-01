@@ -16,16 +16,6 @@ declare let $ : any;
 
 export function initializeAppInteractions()
 {	
-	//animation pour lien d'ancre dans la page
-   /* $('a[href^="#"]').click(function(){  
-	    let target = $(this).attr("href");
-	    $('html, body').animate({scrollTop: $(target).offset().top}, 700);
-	    return false;  
-	}); */		
-
-	/*$('#menu-button').click(animate_up_bandeau_options);
-	$('#overlay').click(animate_down_bandeau_options);*/
-
 	updateComponentsSize();
 
 	$('#btn-bandeau-helper-close').click(hideBandeauHelper);
@@ -78,20 +68,6 @@ export function initializeAppInteractions()
 		e.preventDefault();
 		e.stopPropagation();
 	});	
-	
-	// if (onlyInputAdressMode)
-	// {
-	// 	showOnlyInputAdress();
-	// }
-
-	// $('#list_tab').click(function(){
-	// 	$("#directory-content-list").show();
-	// 	$('#directory-container').hide();
-	// });
-	// $('#directory-content-map_tab').click(function(){		
-	// 	$('#directory-container').show();
-	// 	$("#directory-content-list").hide();
-	// });
 }
 
 export function showDirectoryMenu()
@@ -199,17 +175,6 @@ export function updateMapSize(elementInfoBar_height = $('#element-info-bar').out
 
 export function updateInfoBarSize()
 {
-	if ($('#element-info-bar').width() < 600)
-	{
-		$('#element-info-bar').removeClass("largeWidth");
-		$('#element-info-bar').addClass("smallWidth");
-	}
-	else
-	{
-		$('#element-info-bar').addClass("largeWidth");
-		$('#element-info-bar').removeClass("smallWidth");
-	}
-
 	if("matchMedia" in window) 
 	{	
 		if (window.matchMedia("(max-width: 1200px)").matches) 
