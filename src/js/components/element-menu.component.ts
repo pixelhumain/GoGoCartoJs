@@ -138,14 +138,7 @@ export function createListenersForElementMenu(object)
 		modal.find(".modal-footer").attr('option-id',element.colorOptionId);
 
 		let url;
-		if (App.mode == AppModes.Map)
-		{
-			url = window.location.href;
-		}
-		else
-		{
-			url = window.location.origin + window.location.pathname + App.routerModule.generate('show_element', { name :  capitalize(slugify(element.name)), id : element.id }, true);	
-		}
+		url = window.location.origin + window.location.pathname + App.routerModule.generate('show_element', { name :  capitalize(slugify(element.name)), id : element.id }, true);	
 
 		modal.find('.input-simple-modal').val(url);
 		modal.openModal({
