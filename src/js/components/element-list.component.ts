@@ -123,7 +123,7 @@ export class ElementListComponent
 		for(let i = 0; i < endIndex; i++)
 		{
 			element = elementsToDisplay[i];
-			$('#directory-content-list ul').prepend(element.getHtmlRepresentation());
+			$('#directory-content-list ul').append(element.getHtmlRepresentation());
 			let domMenu = $('#element-info-'+element.id +' .menu-element');
 			createListenersForElementMenu(domMenu);	
 			updateFavoriteIcon(domMenu, element)		
