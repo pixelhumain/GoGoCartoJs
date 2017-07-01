@@ -88,7 +88,7 @@ export class AppModule
 	boundsModule = new BoundsModule();
 	routerModule = new RouterModule();
 	templateModule = new TemplateModule();
-	loginModule;
+	loginModule : LoginModule;
 	//starRepresentationChoiceModule_ = constellationMode ? new StarRepresentationChoiceModule() : null;
 	
 	// curr state of the app
