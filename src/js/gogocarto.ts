@@ -77,7 +77,7 @@ export class GoGoCartoModule
 		// only for debugging
 		this.app = App;
 
-		let layout = App.templateModule.render('layout', { mainCategory: taxonomy, openHoursCategory: options.openHours, isAdmin: options.userRole == 2 });
+		let layout = App.templateModule.render('layout', { mainCategory: taxonomy, openHoursCategory: options.openHours, isAdmin: App.loginModule.isAdmin() });
 		   
 		if ($(this.containerSelector).length == 0) console.warn('[GoGoCarto] The container "' + this.containerSelector + '" was not found');
 		else $(this.containerSelector).append(layout);
