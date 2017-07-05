@@ -53,8 +53,7 @@ export function initializeAppInteractions()
 
 	$('#directory-content-map #change-layers').click( function(e : Event) 
 	{
-		$('#directory-content-map .leaflet-control-layers').show();
-		$('#directory-content-map #close-layers-panel').show();
+		showControlLayers();
 
 		e.preventDefault();
 		e.stopPropagation();
@@ -62,12 +61,23 @@ export function initializeAppInteractions()
 
 	$('#directory-content-map #close-layers-panel').click( function(e : Event) 
 	{		
-		$('#directory-content-map .leaflet-control-layers').hide();
-		$('#directory-content-map #close-layers-panel').hide();	
+		hideControlLayers();
 
 		e.preventDefault();
 		e.stopPropagation();
 	});	
+}
+
+export function showControlLayers()
+{
+	$('#directory-content-map .leaflet-control-layers').show();
+	$('#directory-content-map #close-layers-panel').show();
+}
+
+export function hideControlLayers()
+{
+	$('#directory-content-map .leaflet-control-layers').hide();
+	$('#directory-content-map #close-layers-panel').hide();	
 }
 
 export function showDirectoryMenu()
