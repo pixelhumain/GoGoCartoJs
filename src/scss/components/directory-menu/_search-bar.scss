@@ -12,7 +12,7 @@
   	line-height: 2rem;
   }
 
-  @media #{$small-only} { left: 3.5rem; }
+  @media (max-width : 850px) { left: 3.5rem; }
 
   &:hover
   {
@@ -84,7 +84,7 @@
 	padding-bottom: 0;
   padding-left: 3rem;
 
-  @media #{$medium-and-up} { padding-left: .7rem; }      
+  @media (min-width : 850px) { padding-left: .7rem; }      
 }
 
 #search-distance-component

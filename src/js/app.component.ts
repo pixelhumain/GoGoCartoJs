@@ -56,7 +56,7 @@ export class AppComponent
 			App.setMode(AppModes.Map);
 		});
 
-		if ($('.gogocarto-container').width() <= 600) this.hideDirectoryMenu();
+		if ($('.gogocarto-container').width() <= 850) this.hideDirectoryMenu();
 		else this.showDirectoryMenu();
 	}
 
@@ -64,14 +64,16 @@ export class AppComponent
 	{
 		if (!$('#directory-menu').is(':visible'))
 		{
+			$('#show-directory-menu-button').hide();
 			$('#directory-menu').css('left','-' + $('#directory-menu').width() + 'px');	
+			$('#directory-content').animate({'margin-left': '340px'}, 350,'swing');
+			$('.show-as-list-button').animate({'left': '35px'}, 350,'swing');
 			$('#directory-menu').show().animate({'left':'0'},350,'swing', () =>
-			{ 
-				$('#show-directory-menu-button').hide();
-				$('.show-as-list-button').css('left', '30px');	
-				$('#directory-content').css('margin-left', $('#directory-menu').width() + 'px'); 
+			{ 							
 				this.updateMapSize();
 				this.updateComponentsSize();
+				App.infoBarComponent.refresh();
+				App.directoryMenuComponent.updateMainOptionBackground();
 			});					
 		}
 	}
@@ -80,15 +82,15 @@ export class AppComponent
 	{
 		$('.btn-close-menu.large-screen').hideTooltip();
 
-		$('#directory-content').css('margin-left','0');		
+		$('#directory-content').animate({'margin-left':'0'}, 200,'swing');		
 		$('#show-directory-menu-button').show();
-		$('.show-as-list-button').css('left', '100px');
-
+		$('.show-as-list-button').animate({'left': '50px'}, 350,'swing');
 		$('#directory-menu').animate({'left': '-' + $('#directory-menu').width() + 'px'},250,'swing',function()
 		{ 
 			$(this).hide();
 			App.component.updateMapSize(); 
 			App.component.updateComponentsSize(); 
+			App.infoBarComponent.refresh();
 		});
 	}	
 

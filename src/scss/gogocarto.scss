@@ -38,7 +38,7 @@
     position:absolute;      
     height:100%;
     width: 100%; 
-    @media #{$medium-and-up} { width: 340px; } 
+    @media (min-width : 850px) { width: 340px; } 
   } 
 
   #directory-content

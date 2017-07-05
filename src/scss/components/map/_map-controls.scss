@@ -18,26 +18,42 @@ a.leaflet-control-zoom-out {
 #show-directory-menu-button
 {
     position: absolute;
-    left: 1rem;
-    text-align: center;
-    top: 1rem;
-    width: 3rem;
-    height: 3rem;
+    left: -32px;
+    top: 25px;
+    padding: 5px 15px 5px 41px; 
+    @include transform(rotate(90deg));
     background-color: white;
     z-index: 500;
+    background-color: #de5a5f;
     cursor: pointer;
-    @extend .z-depth-1;
-    color: #555;
+    color: #fff;
+    font-size: 1rem;
+    @include border-radius(0 5px 0 0);
 
-    > i
+    @media #{$small-only}
     {
-        font-size: 2rem;
-        height: 3rem;
-        &:before { line-height: 3rem }
+        top: 30px;
+        left: -35px;
+        padding: 0px 15px 0px 40px;
+    }
+
+    .arrow-right
+    {
+        position: absolute;
+        border: solid 8px;
+        border-color: transparent transparent #eeeeee transparent;
+        left: 15px;
+        top: 2px;
+
+        @media #{$small-only}
+        {
+            top: -2px;
+        }
     }
 }
 
-.show-as-list-button {
+.show-as-list-button 
+{
     position: absolute;
     z-index: 500;
     top: 15px;

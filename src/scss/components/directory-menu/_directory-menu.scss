@@ -81,7 +81,7 @@
 
       @include transition(all .5s);
 
-      @media #{$medium-and-up} 
+      @media (min-width : 850px)
       {
         width: calc(100% + 12px);
         border-radius: 0 0 5px 5px;
