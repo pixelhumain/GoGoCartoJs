@@ -1,4 +1,9 @@
 (function ($) {
+
+    $.fn.hideTooltip = function (options) {
+      $('#' + $(this).attr('data-tooltip-id')).hide();
+    };
+    
     $.fn.tooltip = function (options) {
         var timeout = null,
         counter = null,
