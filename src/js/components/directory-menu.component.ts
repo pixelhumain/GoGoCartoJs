@@ -176,11 +176,12 @@ export class DirectoryMenuComponent
 		App.elementModule.updateElementsToDisplay(true,true);
 	}
 
+	// the main option selected got a specific background, who can vertically translate
 	updateMainOptionBackground()
 	{
 		let optionId = this.currentActiveMainOptionId;
 
-		if(!$('#directory-menu').is(':visible')) { console.log("directory not visible");return; }
+		if(!$('#directory-menu').is(':visible') || !$('#main-option-icon-' + optionId).position()) { console.log("directory not visible");return; }
 
 		$('#active-main-option-background').animate({top: $('#main-option-icon-' + optionId).position().top}, 500, 'easeOutQuart');
 
