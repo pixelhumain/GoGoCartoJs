@@ -163,6 +163,20 @@ export class MapComponent
 
 		L.control.layers(baseLayers, {}, {position:'topright', collapsed: false}).addTo(this.map_);		
 
+		$('#directory-content-map #change-layers').click( (e) =>
+		{
+			this.showControlLayers();
+			e.preventDefault();
+			e.stopPropagation();
+		});
+
+		$('#directory-content-map #close-layers-panel').click( (e) =>
+		{		
+			this.hideControlLayers();
+			e.preventDefault();
+			e.stopPropagation();
+		});	
+
 		this.map_.on('click', (e) => { this.onClick.emit(); });
 		this.map_.on('moveend', (e) => 
 		{ 
@@ -343,5 +357,17 @@ export class MapComponent
 	showNormalHiddenClusters()
 	{
 		$('.marker-cluster').removeClass('halfHidden');
+	}
+
+	showControlLayers()
+	{
+		$('#directory-content-map .leaflet-control-layers').show();
+		$('#directory-content-map #close-layers-panel').show();
+	}
+
+	hideControlLayers()
+	{
+		$('#directory-content-map .leaflet-control-layers').hide();
+		$('#directory-content-map #close-layers-panel').hide();	
 	}
 }

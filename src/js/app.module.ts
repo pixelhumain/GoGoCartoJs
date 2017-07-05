@@ -33,7 +33,6 @@ import { BoundsModule } from './modules/bounds.module';
 import { getQueryParams, capitalize } from "./commons/commons";
 import { Element } from "./classes/element.class";
 import { GoGoConfig } from "./classes/gogo-config.class";
-import { hideControlLayers } from './app-interactions'
 import * as Cookies from "./utils/cookies";
 
 import { App } from "./gogocarto";
@@ -543,7 +542,7 @@ export class AppModule
 			this.setState(AppStates.ShowElement, { id : App.infoBarComponent.getCurrElementId() });		
 
 		this.searchBarComponent.hideSearchOptions();	
-		hideControlLayers();
+		this.mapComponent.hideControlLayers();
 	};
 
 	handleGeocodeResult()
