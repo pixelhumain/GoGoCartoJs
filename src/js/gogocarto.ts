@@ -4,7 +4,6 @@ declare var nunjucks, goGoCarto;
 import { AppModule, AppDataType, AppModes, AppStates } from './app.module';
 
 import { HistoryState } from "./modules/history.module";
-import { initializeAppInteractions } from "./app-interactions";
 import { initializeElementMenu } from "./components/element-menu.component";
 import { initializeVoting } from "./components/vote.component";
 import { initializeReportingAndDeleting } from "./components/reporting-deleting.component";
@@ -98,8 +97,8 @@ export class GoGoCartoModule
 			App.elementListComponent.initialize();
 			App.routerModule.loadInitialState();
 			App.searchBarComponent.initialize();
-
-			initializeAppInteractions();
+			App.component.initialize();
+			
 			initializeElementMenu();
 			initializeVoting();
 			initializeReportingAndDeleting();

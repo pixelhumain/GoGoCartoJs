@@ -23,7 +23,7 @@ export class AppComponent
 	{	
 		this.updateComponentsSize();
 
-		$('#btn-bandeau-helper-close').click(this.hideBandeauHelper);
+		$('#btn-bandeau-helper-close').click(() => this.hideBandeauHelper());
 
 		$('.flash-message .btn-close').click( function() { $(this).parent().slideUp('fast', function() { this.updateComponentsSize(); }); });
 
@@ -36,13 +36,13 @@ export class AppComponent
 		window.onresize = () =>
 		{
 		   if (res) {clearTimeout(res); }
-		   res = setTimeout(this.updateComponentsSize,200);
+		   res = setTimeout(this.updateComponentsSize(),200);
 		};	
 		
 		//Menu CARTE	
-		$('#menu-button').click(this.showDirectoryMenu);
-		$('#overlay').click(this.hideDirectoryMenu);
-		$('#directory-menu .btn-close-menu').click(this.hideDirectoryMenu);
+		$('#show-directory-menu-button').click(() => this.showDirectoryMenu());
+		$('#map-overlay').click(() => this.hideDirectoryMenu());
+		$('#directory-menu .btn-close-menu').click(() => this.hideDirectoryMenu());
 
 		$('#directory-content-map .show-as-list-button').click((e : Event) => {		
 			App.setTimeoutClicking();
@@ -55,27 +55,31 @@ export class AppComponent
 		$('#directory-content-list .show-as-map-button').click(() => {		
 			App.setMode(AppModes.Map);
 		});	
+
 	}
 
 	showDirectoryMenu()
 	{
-		App.infoBarComponent.hide();  
-		$('#overlay').css('z-index','10');
-		$('#overlay').animate({'opacity': '.6'},700);
+		// App.infoBarComponent.hide();  
+		// $('#map-overlay').css('z-index','10');
+		// $('#map-overlay').animate({'opacity': '.6'},700);
 		$('#directory-menu').show( "slide", {direction: 'left', easing: 'swing'} , 350, () => { App.directoryMenuComponent.updateMainOptionBackground() } );
-		
+		$('#show-directory-menu-button').hide();
+		$('.show-as-list-button').css('left', '30px');
 		//$('#directory-menu').css('width','0px').show().animate({'width': '240px'},700);
 	}
 
 	hideDirectoryMenu()
 	{
-		$('#overlay').css('z-index','-1');
-		$('#overlay').animate({'opacity': '.0'},500);
+		console.log("hide menu");
+		// $('#map-overlay').css('z-index','-1');
+		// $('#map-overlay').animate({'opacity': '.0'},500);
+		$('.show-as-list-button').css('left', '100px');
 		$('#directory-menu').hide( "slide", {direction: 'left', easing: 'swing'} , 250 );
+		$('#show-directory-menu-button').show();
+		$('.btn-close-menu.large-screen').hideTooltip();
 		//$('#directory-menu').animate({'width': '0px'},700).hide();
-	}
-
-	
+	}	
 
 	hideBandeauHelper()
 	{
@@ -94,8 +98,11 @@ export class AppComponent
 	updateComponentsSize()
 	{	
 		//$("#bandeau_option").css('height',$( window ).height()-$('header').height());
-		//console.log("Update component size");
+		console.log("Update component size", $('.gogocarto-container').width());
 		$('#page-content').css('height','auto');
+
+		if ($('.gogocarto-container').width() <= 600) this.hideDirectoryMenu();
+		else this.showDirectoryMenu();
 
 		let content_height = $(window).height() - $('header').height();
 		content_height -= $('.flash-messages-container').outerHeight(true);
@@ -107,8 +114,6 @@ export class AppComponent
 		this.updateInfoBarSize();	
 		this.updateMapSize();
 	}
-
-
 	
 	updateMapSize(elementInfoBar_height = $('#element-info-bar').outerHeight(true))
 	{		

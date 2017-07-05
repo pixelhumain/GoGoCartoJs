@@ -192,12 +192,12 @@ export class InfoBarComponent
 		{
 			this.hideDetails();
 			$('#bandeau_helper').css('z-index',20).animate({'opacity': '1'},500);
-			$('#menu-button').fadeIn();		
+			$('#show-directory-menu-button').fadeIn();		
 		}
 		else
 		{
 			$('#bandeau_helper').animate({'opacity': '0'},500).css('z-index',-1);
-			$('#menu-button').fadeOut();
+			$('#show-directory-menu-button').fadeOut();
 
 			$('#element-info-bar .moreInfos').hide();
 			$('#element-info-bar .lessInfos').show();	

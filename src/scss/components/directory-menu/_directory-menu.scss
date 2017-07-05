@@ -29,15 +29,16 @@
       position: relative;
       background-color: $primary-color;
 
-      #hide-menu-btn
+      .btn-close-menu.large-screen
       {        
         position: absolute;
         right: 0px;
         top: 0;
         width: 24px;
         bottom: 0;
-        @include flexbox();
+        
         @include align(center);
+        display:none;
 
         .arrow-left
         {          
@@ -53,6 +54,15 @@
         }              
       }
 
+      .btn-close-menu.small-screen
+      { 
+        color:white;
+        position: absolute;
+        z-index: 20;
+        top: 7px;
+        left: 8px;
+      }   
+
       .btn-close
       {
         position: absolute;
@@ -66,16 +76,7 @@
           color: white;
           cursor: pointer;
         }
-      }
-
-      .btn-close-menu 
-      { 
-        color:white;
-        position: absolute;
-        z-index: 20;
-        top: 7px;
-        left: 8px;
-      }      
+      }         
 
       @include transition(all .5s);
 
@@ -85,7 +86,8 @@
         border-radius: 0 0 5px 5px;
         padding-right: 15px;
 
-        .btn-close-menu { display:none }
+        .btn-close-menu.large-screen { @include flexbox(); }
+        .btn-close-menu.small-screen { display:none }
       }
     }
 

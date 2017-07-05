@@ -23,7 +23,7 @@ export class DirectoryMenuComponent
 
 	initialize()
 	{	
-		$('#hide-menu-btn').tooltip();
+		$('.btn-close-menu.large-screen').tooltip();
 
 		// -------------------------------
 		// --------- FAVORITE-------------
