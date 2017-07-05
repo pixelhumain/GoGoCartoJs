@@ -12,7 +12,6 @@ import { Element } from "../classes/element.class";
 import { App } from "../gogocarto";
 
 import { Event } from "../utils/event";
-import { updateMapSize, updateInfoBarSize } from "../app-interactions";
 import { createListenersForElementMenu, updateFavoriteIcon, showFullTextMenu } from "./element-menu.component";
 
 import { createListenersForVoting } from "../components/vote.component";
@@ -131,8 +130,8 @@ export class InfoBarComponent
 			elementInfoBar_newHeight += $('#element-info-bar .starRepresentationChoice-helper:visible').height();
 
 			$('#element-info-bar').css('height', elementInfoBar_newHeight);
-			updateInfoBarSize();
-			updateMapSize(elementInfoBar_newHeight);
+			App.component.updateInfoBarSize();
+			App.component.updateMapSize(elementInfoBar_newHeight);
 		}	
 		else
 		{
@@ -142,10 +141,10 @@ export class InfoBarComponent
 			if (!$('#element-info-bar').is(':visible'))
 			{
 				$('#element-info-bar').css('right','-500px');			
-				$('#element-info-bar').show().animate({'right':'0'},350,'swing',function(){ updateMapSize(0); });
+				$('#element-info-bar').show().animate({'right':'0'},350,'swing',function(){ App.component.updateMapSize(0); });
 			}
 			
-			updateInfoBarSize();
+			App.component.updateInfoBarSize();
 			//$('#element-info-bar').show("slide", {direction: 'rigth', easing: 'swing'} , 350 );
 		}
 
@@ -161,7 +160,7 @@ export class InfoBarComponent
 				this.hideDetails();
 				$('#element-info-bar').css('height','0');
 				$('#element-info-bar').hide();
-				updateMapSize(0);
+				App.component.updateMapSize(0);
 			}
 			else
 			{
@@ -170,7 +169,7 @@ export class InfoBarComponent
 
 				if ($('#element-info-bar').is(':visible'))
 				{		
-					$('#element-info-bar').animate({'right':'-500px'},350,'swing',function(){ $(this).hide();updateMapSize(0);  });
+					$('#element-info-bar').animate({'right':'-500px'},350,'swing',function(){ $(this).hide();App.component.updateMapSize(0);  });
 				}		
 			}
 
@@ -219,7 +218,7 @@ export class InfoBarComponent
 
 		  	$('#element-info-bar .collapsible-body').css('height', height);
 			
-			updateMapSize(elementInfoBar_newHeight);			
+			App.component.updateMapSize(elementInfoBar_newHeight);			
 		}	
 	};
 
@@ -237,7 +236,7 @@ export class InfoBarComponent
 
 			$('#element-info-bar').css('height', elementInfoBar_newHeight);
 
-			updateMapSize(elementInfoBar_newHeight);	
+			App.component.updateMapSize(elementInfoBar_newHeight);	
 		}	
 	};
 }

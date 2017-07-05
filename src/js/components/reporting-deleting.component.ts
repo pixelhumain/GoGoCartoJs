@@ -15,7 +15,6 @@ declare let Routing : any;
 import { AppModule, AppStates, AppModes } from "../app.module";
 import { getCurrentElementIdShown, getCurrentElementInfoBarShown } from "./element-menu.component";
 import { AjaxModule } from "../modules/ajax.module";
-import { updateComponentsSize } from "../app-interactions";
 import { ElementStatus } from "../classes/element.class";
 
 import { App } from "../gogocarto";

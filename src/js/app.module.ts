@@ -12,6 +12,7 @@
 declare let window;
 declare var $;
 
+import { AppComponent } from './app.component';
 import { GeocoderModule, GeocodeResult } from "./modules/geocoder.module";
 import { FilterModule } from "./modules/filter.module";
 import { ElementsModule, ElementsChanged } from "./modules/elements.module";
@@ -72,6 +73,7 @@ export class AppModule
 {		
 	readonly config : GoGoConfig;
 
+	component = new AppComponent();
 	geocoderModule_ = new GeocoderModule();
 	filterModule_ = new FilterModule();
 	elementsModule_ = new ElementsModule();
