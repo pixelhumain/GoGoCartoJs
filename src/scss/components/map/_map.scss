@@ -2,7 +2,6 @@
 {   
     position: relative;
     z-index: 10;
-    @media #{$medium-and-down} { margin-right: 0 !important; }
     @include flex(1 auto);
     //@include transition(height .5s);
     @include box-shadow-1(inset 0px 5px 5px 0px rgba(119, 119, 119, 0.75)  );

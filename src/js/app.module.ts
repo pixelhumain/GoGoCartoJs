@@ -119,7 +119,6 @@ export class AppModule
 		this.config = new GoGoConfig($config);
 		this.loginModule = new LoginModule(this.config.userRole);
 
-		this.infoBarComponent_.onShow.do( (elementId) => { this.handleInfoBarShow(elementId); });
   	this.infoBarComponent_.onHide.do( ()=> { this.handleInfoBarHide(); });
 	
 		this.mapComponent_.onMapReady.do( () => { this.initializeMapFeatures(); });
@@ -637,18 +636,6 @@ export class AppModule
 		{
 			this.setState(AppStates.Normal);
 		}
-	};
-
-	handleInfoBarShow(elementId)
-	{
-		//let statesToAvoid = [AppStates.ShowDirections,AppStates.ShowElementAlone,AppStates.StarRepresentationChoice];
-		//if ($.inArray(this.state, statesToAvoid) == -1 ) this.setState(AppStates.ShowElement, {id: elementId});		
-	};
-
-	updateMaxElements() 
-	{ 
-		this.maxElementsToShowOnMap_ = Math.min(Math.floor($('#directory-content-map').width() * $('#directory-content-map').height() / 1000), 1000);
-		//window.console.log("setting max elements " + this.maxElementsToShowOnMap_);
 	};
 
 	setTimeoutClicking() 

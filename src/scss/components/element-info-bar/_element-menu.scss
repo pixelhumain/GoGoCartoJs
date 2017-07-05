@@ -1,3 +1,8 @@
+#element-info-bar.display-aside
+{
+	.menu-element { height: auto }
+}
+
 .menu-element
 {
 	height: 3rem;
@@ -6,8 +11,6 @@
 	bottom: 0;
 	text-align: center;
 	width: 100%;
-
-	@media #{$large-only} { height: auto; }
 
 	.menu-element-item-text { display: none; }
 

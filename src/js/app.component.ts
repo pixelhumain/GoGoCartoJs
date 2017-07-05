@@ -17,7 +17,7 @@ declare let $ : any;
 export class AppComponent
 {
 	private slideOptions = { duration: 500, easing: "easeOutQuart", queue: false, complete: function() {}};
-	private matchMediaBigSize_old;
+	private matchMediaBigSize;
 
 	initialize()
 	{	
@@ -54,31 +54,42 @@ export class AppComponent
 
 		$('#directory-content-list .show-as-map-button').click(() => {		
 			App.setMode(AppModes.Map);
-		});	
+		});
 
+		if ($('.gogocarto-container').width() <= 600) this.hideDirectoryMenu();
+		else this.showDirectoryMenu();
 	}
 
 	showDirectoryMenu()
 	{
-		// App.infoBarComponent.hide();  
-		// $('#map-overlay').css('z-index','10');
-		// $('#map-overlay').animate({'opacity': '.6'},700);
-		$('#directory-menu').show( "slide", {direction: 'left', easing: 'swing'} , 350, () => { App.directoryMenuComponent.updateMainOptionBackground() } );
-		$('#show-directory-menu-button').hide();
-		$('.show-as-list-button').css('left', '30px');
-		//$('#directory-menu').css('width','0px').show().animate({'width': '240px'},700);
+		if (!$('#directory-menu').is(':visible'))
+		{
+			$('#directory-menu').css('left','-' + $('#directory-menu').width() + 'px');	
+			$('#directory-menu').show().animate({'left':'0'},350,'swing', () =>
+			{ 
+				$('#show-directory-menu-button').hide();
+				$('.show-as-list-button').css('left', '30px');	
+				$('#directory-content').css('margin-left', $('#directory-menu').width() + 'px'); 
+				this.updateMapSize();
+				this.updateComponentsSize();
+			});					
+		}
 	}
 
 	hideDirectoryMenu()
 	{
-		console.log("hide menu");
-		// $('#map-overlay').css('z-index','-1');
-		// $('#map-overlay').animate({'opacity': '.0'},500);
-		$('.show-as-list-button').css('left', '100px');
-		$('#directory-menu').hide( "slide", {direction: 'left', easing: 'swing'} , 250 );
-		$('#show-directory-menu-button').show();
 		$('.btn-close-menu.large-screen').hideTooltip();
-		//$('#directory-menu').animate({'width': '0px'},700).hide();
+
+		$('#directory-content').css('margin-left','0');		
+		$('#show-directory-menu-button').show();
+		$('.show-as-list-button').css('left', '100px');
+
+		$('#directory-menu').animate({'left': '-' + $('#directory-menu').width() + 'px'},250,'swing',function()
+		{ 
+			$(this).hide();
+			App.component.updateMapSize(); 
+			App.component.updateComponentsSize(); 
+		});
 	}	
 
 	hideBandeauHelper()
@@ -86,107 +97,36 @@ export class AppComponent
 		$('#bandeau_helper').slideUp(this.slideOptions);
 	}
 
-	showOnlyInputAdress()
-	{
-		this.hideBandeauHelper();
-		$('#directory-content').css('margin-left','0');
-		$('#bandeau_tabs').hide();
-		$('#directory-content-list').hide();
-		this.updateComponentsSize();
-	}
-
 	updateComponentsSize()
 	{	
-		//$("#bandeau_option").css('height',$( window ).height()-$('header').height());
-		console.log("Update component size", $('.gogocarto-container').width());
-		$('#page-content').css('height','auto');
-
-		if ($('.gogocarto-container').width() <= 600) this.hideDirectoryMenu();
-		else this.showDirectoryMenu();
-
-		let content_height = $(window).height() - $('header').height();
-		content_height -= $('.flash-messages-container').outerHeight(true);
-		$("#directory-container").css('height',content_height);
-		$("#directory-content-list").css('height',content_height);
-
-		if (App) setTimeout(App.updateMaxElements(), 500);
-
-		this.updateInfoBarSize();	
-		this.updateMapSize();
-	}
-	
-	updateMapSize(elementInfoBar_height = $('#element-info-bar').outerHeight(true))
-	{		
-		//console.log("updateMapSize", elementInfoBar_height);
-		if("matchMedia" in window) 
-		{	
-			if (window.matchMedia("(max-width: 600px)").matches) 
-		  	{
-		  		$("#directory-menu").css('height',$("#directory-content").height()-elementInfoBar_height);	
-		  	}
-		  	else
-		  	{
-		  		$("#directory-menu").css('height','100%');
-		  	}
-
-			if (window.matchMedia("(max-width: 1200px)").matches) 
+		// show element info bar aside or at the bottom depending of direcoty-content width
+		if ($('#directory-content').width() > 1200)
+		{
+			if (!$('#element-info-bar').hasClass('display-aside'))
 			{
-			  	if (this.matchMediaBigSize_old) elementInfoBar_height = 0;
-
-			  	//console.log("resize map height to", $("#directory-content").outerHeight()-elementInfoBar_height);
-			  	$("#directory-content-map").css('height',$("#directory-content").outerHeight()-elementInfoBar_height);		  	
-
-			  	this.matchMediaBigSize_old = false;
-		  	} 
-			else 
-			{			
-			  	$("#directory-content-map").css('height',$("#directory-content").height());	
-			  	if ($('#element-info-bar').is(":visible")) 
-		  		{
-		  			$('#directory-content-map').css('margin-right','540px');
-		  			$('#bandeau_helper').css('margin-right','540px');
-		  			
-		  		}
-			  	else 
-		  		{
-		  			$('#directory-content-map').css('margin-right','0px');
-		  			$('#bandeau_helper').css('margin-right','0px');
-		  		}
-			  	this.matchMediaBigSize_old = true; 	
-			}
-		}
+				$('#element-info-bar').addClass('display-aside');
+				$('#element-info-bar').removeClass('display-bottom');
+				App.infoBarComponent.refresh();
+			}			
+		}	
 		else
 		{
-			console.error("Match Media not available");
-		}
-
-		// après 500ms l'animation de redimensionnement est terminé
-		// on trigger cet évenement pour que la carte se redimensionne vraiment
-		if (App.mapComponent) setTimeout(function() { App.mapComponent.resize(); },500);
-	}
-
-	updateInfoBarSize()
-	{
-		if("matchMedia" in window) 
-		{	
-			if (window.matchMedia("(max-width: 1200px)").matches) 
+			if (!$('#element-info-bar').hasClass('display-bottom'))
 			{
-		  	$('#element-info-bar .moreDetails').css('height', 'auto');
-		  } 
-			else 
-			{			
-		  	let elementInfoBar = $("#element-info-bar");
-		  	let height = elementInfoBar.outerHeight(true);
-				height -= elementInfoBar.find('.collapsible-header').outerHeight(true);
-				height -= elementInfoBar.find('.starRepresentationChoice-helper:visible').outerHeight(true);
-				height -= elementInfoBar.find('.interactive-section:visible').outerHeight(true);
-				height -= elementInfoBar.find(".menu-element").outerHeight(true);
-				//height += 2;
-
-		  	$('#element-info-bar .collapsible-body').css('height', height);
+				$('#element-info-bar').removeClass('display-aside');
+				$('#element-info-bar').addClass('display-bottom');
+				$('#directory-content-map').css('margin-right', '0');
+				App.infoBarComponent.refresh();
 			}
 		}
 	}
+	
+	// the leaflet map need to be resized with a specific function
+	updateMapSize()
+	{		
+		if (App.mapComponent) setTimeout(function() { App.mapComponent.resize(); },0);
+	}
+	
 }
 
 
