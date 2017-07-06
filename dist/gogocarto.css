@@ -415,7 +415,7 @@ ul {
 .z-depth-0 {
   box-shadow: none !important; }
 
-.z-depth-1, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .gogocarto-container .show-as-list-button, .gogocarto-container #menu-button {
+.z-depth-1, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
 
 .z-depth-1-half, .btn:hover, .btn-large:hover, .btn-floating:hover {
@@ -3855,7 +3855,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     line-height: 2rem; }
     .gogocarto-container #search-bar-icon:before {
       line-height: 2rem; }
-    @media only screen and (max-width: 600px) {
+    @media (max-width: 850px) {
       .gogocarto-container #search-bar-icon {
         left: 3.5rem; } }
     .gogocarto-container #search-bar-icon:hover {
@@ -3884,13 +3884,13 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     .gogocarto-container #search-bar.invalid {
       border-color: #B90303 !important; }
     .gogocarto-container #search-bar::-webkit-input-placeholder {
-      color: #BDBDBD; }
+      color: #4c4c4c; }
     .gogocarto-container #search-bar::-moz-placeholder {
-      color: #BDBDBD; }
+      color: #4c4c4c; }
     .gogocarto-container #search-bar:-ms-input-placeholder {
-      color: #BDBDBD; }
+      color: #4c4c4c; }
     .gogocarto-container #search-bar:-moz-placeholder {
-      color: #BDBDBD; }
+      color: #4c4c4c; }
     .gogocarto-container #search-bar::selection {
       background: #4A7874;
       color: white; }
@@ -3906,7 +3906,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     margin: 0;
     padding-bottom: 0;
     padding-left: 3rem; }
-    @media only screen and (min-width: 601px) {
+    @media (min-width: 850px) {
       .gogocarto-container #search-bar-container {
         padding-left: .7rem; } }
   .gogocarto-container #search-distance-component {
@@ -4535,11 +4535,17 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     display: none;
     position: relative; }
   .gogocarto-container #directory-menu {
+    z-index: 200;
+    background-color: white;
+    overflow-y: hidden;
+    -webkit-transition: height 0.5s;
+    -moz-transition: height 0.5s;
+    -o-transition: height 0.5s;
+    -ms-transition: height 0.5s;
+    transition: height 0.5s;
     -webkit-box-shadow: 4px 0 2px rgba(0, 0, 0, 0.2), -1px 0 2px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 4px 0 2px rgba(0, 0, 0, 0.2), -1px 0 2px rgba(0, 0, 0, 0.2);
-    box-shadow: 4px 0 2px rgba(0, 0, 0, 0.2), -1px 0 2px rgba(0, 0, 0, 0.2);
-    z-index: 200;
-    overflow-y: hidden; }
+    box-shadow: 4px 0 2px rgba(0, 0, 0, 0.2), -1px 0 2px rgba(0, 0, 0, 0.2); }
     @media only screen and (min-width: 601px) {
       .gogocarto-container #directory-menu {
         overflow: visible; } }
@@ -4564,6 +4570,31 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         -o-transition: all 0.5s;
         -ms-transition: all 0.5s;
         transition: all 0.5s; }
+        .gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .btn-close-menu.large-screen {
+          position: absolute;
+          right: 0px;
+          top: 0;
+          width: 24px;
+          bottom: 0;
+          -webkit-flex-align: center;
+          -ms-flex-align: center;
+          -webkit-align-items: center;
+          align-items: center;
+          display: none; }
+          .gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .btn-close-menu.large-screen .arrow-left {
+            position: absolute;
+            border: solid 8px;
+            border-color: transparent #eeeeee transparent transparent; }
+          .gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .btn-close-menu.large-screen:hover {
+            cursor: pointer; }
+            .gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .btn-close-menu.large-screen:hover .arrow-left {
+              border-color: transparent white transparent transparent; }
+        .gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .btn-close-menu.small-screen {
+          color: white;
+          position: absolute;
+          z-index: 20;
+          top: 7px;
+          left: 8px; }
         .gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .btn-close {
           position: absolute;
           bottom: .3rem;
@@ -4573,17 +4604,18 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           .gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .btn-close:hover {
             color: white;
             cursor: pointer; }
-        .gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .btn-close-menu {
-          color: white;
-          position: absolute;
-          z-index: 20;
-          top: 7px;
-          left: 8px; }
-        @media only screen and (min-width: 601px) {
+        @media (min-width: 850px) {
           .gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header {
-            width: 103%;
-            border-radius: 0 0 5px 5px; }
-            .gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .btn-close-menu {
+            width: calc(100% + 12px);
+            border-radius: 0 0 5px 5px;
+            padding-right: 15px; }
+            .gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .btn-close-menu.large-screen {
+              display: -webkit-box;
+              display: -moz-box;
+              display: -ms-flexbox;
+              display: -webkit-flex;
+              display: flex; }
+            .gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .btn-close-menu.small-screen {
               display: none; } }
       .gogocarto-container #directory-menu #directory-menu-main-container .shadow-bottom {
         bottom: -8px; }
@@ -4608,7 +4640,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     z-index: 2; }
   .gogocarto-container .icon {
     font-size: 22px;
-    color: #4A7874;
     padding-top: 3px;
     float: left;
     margin-right: 1rem; }
@@ -4729,6 +4760,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       border: 3px solid;
       border-radius: 50%;
       z-index: 10; }
+      .gogocarto-container .moreIconContainer .moreIconWrapper .iconInsideMarker {
+        line-height: 22px; }
       .gogocarto-container .moreIconContainer .moreIconWrapper.disabled {
         color: grey !important; }
   .gogocarto-container .halfHidden {
@@ -4934,10 +4967,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     -webkit-box-shadow: inset 0px 5px 5px 0px rgba(119, 119, 119, 0.75);
     -moz-box-shadow: inset 0px 5px 5px 0px rgba(119, 119, 119, 0.75);
     box-shadow: inset 0px 5px 5px 0px rgba(119, 119, 119, 0.75); }
-    @media only screen and (max-width: 1200px) {
-      .gogocarto-container #directory-content-map {
-        margin-right: 0 !important; } }
-  .gogocarto-container #overlay {
+  .gogocarto-container #map-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -4958,11 +4988,44 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
   .gogocarto-container .leaflet-control-zoom.leaflet-bar.leaflet-control {
     margin-right: 20px;
     margin-top: 20px; }
+  .gogocarto-container #show-directory-menu-button {
+    position: absolute;
+    left: -32px;
+    top: 25px;
+    padding: 5px 15px 5px 41px;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+    background-color: white;
+    z-index: 500;
+    background-color: #de5a5f;
+    cursor: pointer;
+    color: #fff;
+    font-size: 1rem;
+    -webkit-border-radius: 0 5px 0 0;
+    -moz-border-radius: 0 5px 0 0;
+    border-radius: 0 5px 0 0; }
+    @media only screen and (max-width: 600px) {
+      .gogocarto-container #show-directory-menu-button {
+        top: 30px;
+        left: -35px;
+        padding: 0px 15px 0px 40px; } }
+    .gogocarto-container #show-directory-menu-button .arrow-right {
+      position: absolute;
+      border: solid 8px;
+      border-color: transparent transparent #eeeeee transparent;
+      left: 15px;
+      top: 2px; }
+      @media only screen and (max-width: 600px) {
+        .gogocarto-container #show-directory-menu-button .arrow-right {
+          top: -2px; } }
   .gogocarto-container .show-as-list-button {
     position: absolute;
     z-index: 500;
     top: 15px;
-    left: 100px;
+    left: 30px;
     color: #3d3d3d;
     background-color: #ffffff;
     padding: .5rem 1rem;
@@ -4974,6 +5037,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     font-size: 14px !important;
     padding: 5px 10px;
     background: #fff;
+    -webkit-box-shadow: 2px 3px 1px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 2px 3px 1px rgba(0, 0, 0, 0.25);
     box-shadow: 2px 3px 1px rgba(0, 0, 0, 0.25);
     cursor: pointer;
     text-align: center;
@@ -4991,10 +5056,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     .gogocarto-container .show-as-list-button:after {
       content: "Liste"; }
     @media only screen and (min-width: 601px) {
-      .gogocarto-container .show-as-list-button {
-        left: 30px; }
-        .gogocarto-container .show-as-list-button:after {
-          content: "Afficher sous forme de liste"; } }
+      .gogocarto-container .show-as-list-button:after {
+        content: "Afficher sous forme de liste"; } }
   .gogocarto-container .layers-button {
     position: absolute;
     z-index: 500;
@@ -5021,30 +5084,10 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     .gogocarto-container .layers-button i {
       font-size: 18px;
       line-height: 35px; }
-  .gogocarto-container #menu-button {
-    position: absolute;
-    left: 1rem;
-    text-align: center;
-    top: 1rem;
-    width: 3rem;
-    height: 3rem;
-    background-color: white;
-    z-index: 500;
-    color: #555; }
-    .gogocarto-container #menu-button > i {
-      font-size: 2rem;
-      height: 3rem; }
-      .gogocarto-container #menu-button > i:before {
-        line-height: 3rem; }
-    @media only screen and (min-width: 601px) {
-      .gogocarto-container #menu-button {
-        display: none !important; } }
-  .gogocarto-container #menu-button:hover {
-    cursor: pointer; }
   .gogocarto-container .leaflet-control-layers-toggle {
     display: none; }
   .gogocarto-container .leaflet-control-layers {
-    padding: 5px 15px 10px 15px;
+    padding: 0 !important;
     display: none;
     position: relative;
     z-index: 600;
@@ -5052,6 +5095,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     margin-top: 15px !important; }
   .gogocarto-container .leaflet-control-layers-list {
     display: block !important;
+    padding: 5px 15px 10px;
     position: relative !important; }
   .gogocarto-container .leaflet-control-layers-selector:checked + span {
     font-weight: bold; }
@@ -5093,10 +5137,9 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       line-height: 3rem;
       text-align: right;
       padding: 0 2rem;
-      padding-left: 1rem;
       color: #F5F3F3;
       background-color: #404040; }
-      @media only screen and (min-width: 901px) {
+      @media only screen and (min-width: 601px) {
         .gogocarto-container #directory-content-list .element-list-title-bar {
           padding-left: 3rem;
           padding-right: calc(3rem + 20px); } }
@@ -5111,6 +5154,14 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       width: 100%;
       overflow-y: auto;
       margin: 0;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -ms-flex-flow: column nowrap;
+      -webkit-flex-flow: column nowrap;
+      flex-flow: column nowrap;
       padding-left: 0rem;
       padding-right: 0rem; }
       @media only screen and (min-width: 901px) {
@@ -5123,10 +5174,12 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           padding-right: 10rem; } }
       .gogocarto-container #directory-content-list ul.collapsible.custom-scroll-bar::-webkit-scrollbar, .gogocarto-container #directory-content-list ul.collapsible.leaflet-routing-alt::-webkit-scrollbar, .gogocarto-container #directory-content-list ul.collapsible.leaflet-routing-geocoders::-webkit-scrollbar, .gogocarto-container #directory-content-list ul.collapsible.leaflet-routing-error::-webkit-scrollbar {
         width: 14px; }
-    .gogocarto-container #directory-content-list .element-item .icon-close {
-      display: none; }
-    .gogocarto-container #directory-content-list .element-item .distance {
-      margin-right: 0; }
+    .gogocarto-container #directory-content-list .element-item {
+      display: block; }
+      .gogocarto-container #directory-content-list .element-item .icon-close {
+        display: none; }
+      .gogocarto-container #directory-content-list .element-item .distance {
+        margin-right: 0; }
     .gogocarto-container #directory-content-list .collapsible-header {
       border-bottom: 1px solid #abaaaa;
       background-color: white; }
@@ -5134,6 +5187,14 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       margin: 0; }
     .gogocarto-container #directory-content-list .collapsible.popout > li.active {
       margin: 1rem 0; }
+    .gogocarto-container #directory-content-list .spinner-loader {
+      -webkit-box-ordinal-group: 1000000;
+      -moz-box-ordinal-group: 1000000;
+      -ms-flex-order: 1000000;
+      -webkit-order: 1000000;
+      order: 1000000; }
+  .gogocarto-container #element-info-bar.display-aside .menu-element {
+    height: auto; }
   .gogocarto-container .menu-element {
     height: 3rem;
     z-index: 10;
@@ -5141,9 +5202,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     bottom: 0;
     text-align: center;
     width: 100%; }
-    @media only screen and (min-width: 1201px) {
-      .gogocarto-container .menu-element {
-        height: auto; } }
     .gogocarto-container .menu-element .menu-element-item-text {
       display: none; }
     .gogocarto-container .menu-element.full-text {
@@ -5253,9 +5311,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         .gogocarto-container .element-item .collapsible-header .collapsible-header-more .description {
           margin-bottom: .7rem;
           text-align: justify; }
-    @media only screen and (max-width: 1200px) {
-      .gogocarto-container .element-item .collapsible-header {
-        background-color: white !important; } }
     .gogocarto-container .element-item .collapsible-body {
       background-color: #F7F7F7;
       padding: 0;
@@ -5324,34 +5379,35 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
             color: #BFBFBF !important; }
         .gogocarto-container .element-item .collapsible-body .category-wrapper .option-value.disabled {
           color: #9C9C9C !important; }
-  @media only screen and (min-width: 1201px) {
-    .gogocarto-container #element-info-bar .element-item .collapsible-header {
-      border: none;
-      color: white;
-      cursor: default;
-      width: 100%; }
-      .gogocarto-container #element-info-bar .element-item .collapsible-header .collapsible-header-title {
-        position: relative;
-        margin-bottom: .8rem;
-        line-height: 2.5rem;
-        font-weight: normal; }
-        .gogocarto-container #element-info-bar .element-item .collapsible-header .collapsible-header-title .distance {
-          font-size: 1.3rem; }
-        .gogocarto-container #element-info-bar .element-item .collapsible-header .collapsible-header-title .icon-close {
-          font-size: 1.5rem;
-          margin-top: 0; }
-      .gogocarto-container #element-info-bar .element-item .collapsible-header .collapsible-header-more {
-        margin-bottom: 1rem; }
-      .gogocarto-container #element-info-bar .element-item .collapsible-header .name {
-        font-size: 1.8rem; }
-      .gogocarto-container #element-info-bar .element-item .collapsible-header .name, .gogocarto-container #element-info-bar .element-item .collapsible-header .description {
-        width: 100% !important;
-        text-align: left; }
-      .gogocarto-container #element-info-bar .element-item .collapsible-header .description {
-        margin-bottom: 0; }
-    .gogocarto-container #element-info-bar .element-item .collapsible-body {
-      height: 100%;
-      overflow-y: auto; } }
+  .gogocarto-container #element-info-bar.display-bottom .collapsible-header {
+    background-color: white !important; }
+  .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header {
+    border: none;
+    color: white;
+    cursor: default;
+    width: 100%; }
+    .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .collapsible-header-title {
+      position: relative;
+      margin-bottom: .8rem;
+      line-height: 2.5rem;
+      font-weight: normal; }
+      .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .collapsible-header-title .distance {
+        font-size: 1.3rem; }
+      .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .collapsible-header-title .icon-close {
+        font-size: 1.5rem;
+        margin-top: 0; }
+    .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .collapsible-header-more {
+      margin-bottom: 1rem; }
+    .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .name {
+      font-size: 1.8rem; }
+    .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .name, .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .description {
+      width: 100% !important;
+      text-align: left; }
+    .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .description {
+      margin-bottom: 0; }
+  .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-body {
+    height: 100%;
+    overflow-y: auto; }
   .gogocarto-container .element-item span.added {
     color: #3a772c; }
   .gogocarto-container .element-item span.removed {
@@ -5414,15 +5470,35 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     z-index: 10;
     position: relative;
     will-change: height;
-    -webkit-transition: height 0.5s;
-    -moz-transition: height 0.5s;
-    -o-transition: height 0.5s;
-    -ms-transition: height 0.5s;
-    transition: height 0.5s;
     -webkit-box-shadow: 0 -8px 8px -5px rgba(173, 173, 173, 0.75);
     -moz-box-shadow: 0 -8px 8px -5px rgba(173, 173, 173, 0.75);
     box-shadow: 0 -8px 8px -5px rgba(173, 173, 173, 0.75);
     background-color: #F7F7F7; }
+    .gogocarto-container #element-info-bar.display-bottom {
+      right: 0 !important; }
+    .gogocarto-container #element-info-bar.display-aside {
+      position: absolute;
+      width: 540px;
+      top: 0;
+      right: 0;
+      height: 100% !important;
+      overflow-y: visible;
+      -webkit-box-shadow: 0px 6px 9px 2px rgba(119, 119, 119, 0.75);
+      -moz-box-shadow: 0px 6px 9px 2px rgba(119, 119, 119, 0.75);
+      box-shadow: 0px 6px 9px 2px rgba(119, 119, 119, 0.75); }
+      .gogocarto-container #element-info-bar.display-aside .element-main-icon {
+        display: none !important; }
+      .gogocarto-container #element-info-bar.display-aside .star-names-icons {
+        display: none !important; }
+      .gogocarto-container #element-info-bar.display-aside .icon-close {
+        padding-left: 1rem;
+        color: #CECECE; }
+        .gogocarto-container #element-info-bar.display-aside .icon-close:hover {
+          color: white; }
+      .gogocarto-container #element-info-bar.display-aside #element-info .moreDetails {
+        display: block !important; }
+      .gogocarto-container #element-info-bar.display-aside #element-info .hideOnLargeScreen {
+        display: none !important; }
     .gogocarto-container #element-info-bar .element-item .element-main-icon {
       display: none; }
     .gogocarto-container #element-info-bar .element-item .star-names-icons {
@@ -5444,33 +5520,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       .gogocarto-container #element-info-bar .icon-close:hover {
         color: #4A7874;
         cursor: pointer; }
-  @media only screen and (max-width: 1200px) {
-    .gogocarto-container #element-info-bar {
-      right: 0 !important; } }
-  @media only screen and (min-width: 1201px) {
-    .gogocarto-container #element-info-bar {
-      position: absolute;
-      width: 540px;
-      top: 0;
-      right: 0;
-      height: 100% !important;
-      overflow-y: visible;
-      -webkit-box-shadow: 0px 6px 9px 2px rgba(119, 119, 119, 0.75);
-      -moz-box-shadow: 0px 6px 9px 2px rgba(119, 119, 119, 0.75);
-      box-shadow: 0px 6px 9px 2px rgba(119, 119, 119, 0.75); }
-      .gogocarto-container #element-info-bar .element-main-icon {
-        display: none !important; }
-      .gogocarto-container #element-info-bar .star-names-icons {
-        display: none !important; }
-      .gogocarto-container #element-info-bar .icon-close {
-        padding-left: 1rem;
-        color: #CECECE; }
-        .gogocarto-container #element-info-bar .icon-close:hover {
-          color: white; }
-    .gogocarto-container #element-info .moreDetails {
-      display: block !important; }
-    .gogocarto-container #element-info .hideOnLargeScreen {
-      display: none !important; } }
   .gogocarto-container #modal-pick-address.modal, .gogocarto-container #modal-directions-fail.modal {
     position: absolute; }
     .gogocarto-container #modal-pick-address.modal .modal-footer, .gogocarto-container #modal-directions-fail.modal .modal-footer {
@@ -5561,52 +5610,32 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     border-radius: 10px;
     border: 3px solid #f6f6f6;
     background-color: #C5C5C5; }
-  .gogocarto-container .custom-scroll-bar-light::-webkit-scrollbar-track, .gogocarto-container #directory-menu .sub-categories .sub-categories-content ul::-webkit-scrollbar-track {
+  .gogocarto-container .custom-scroll-bar-light::-webkit-scrollbar-track, .gogocarto-container #directory-menu .sub-categories .sub-categories-content ul::-webkit-scrollbar-track, .gogocarto-container .leaflet-control-layers-list::-webkit-scrollbar-track {
     background-color: #f6f6f6;
     border: 1px solid #f0f0f0; }
-  .gogocarto-container .custom-scroll-bar-light::-webkit-scrollbar, .gogocarto-container #directory-menu .sub-categories .sub-categories-content ul::-webkit-scrollbar {
+  .gogocarto-container .custom-scroll-bar-light::-webkit-scrollbar, .gogocarto-container #directory-menu .sub-categories .sub-categories-content ul::-webkit-scrollbar, .gogocarto-container .leaflet-control-layers-list::-webkit-scrollbar {
     width: 7px; }
-  .gogocarto-container .custom-scroll-bar-light::-webkit-scrollbar-thumb, .gogocarto-container #directory-menu .sub-categories .sub-categories-content ul::-webkit-scrollbar-thumb {
+  .gogocarto-container .custom-scroll-bar-light::-webkit-scrollbar-thumb, .gogocarto-container #directory-menu .sub-categories .sub-categories-content ul::-webkit-scrollbar-thumb, .gogocarto-container .leaflet-control-layers-list::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
     background-color: #c3c3c3; }
   .gogocarto-container #directory-menu {
-    display: none;
-    background-color: white;
-    width: 100%;
-    -webkit-transition: height 0.5s;
-    -moz-transition: height 0.5s;
-    -o-transition: height 0.5s;
-    -ms-transition: height 0.5s;
-    transition: height 0.5s; }
-    @media only screen and (min-width: 601px) {
+    position: absolute;
+    height: 100%;
+    width: 100%; }
+    @media (min-width: 850px) {
       .gogocarto-container #directory-menu {
-        flex: 0 0 22rem;
-        display: block; } }
-  .gogocarto-container #directory-container {
-    position: relative;
-    -webkit-box-flex: 1 auto;
-    -moz-box-flex: 1 auto;
-    -webkit-flex: 1 auto;
-    -ms-flex: 1 auto;
-    flex: 1 auto;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -ms-flex-flow: row nowrap;
-    -webkit-flex-flow: row nowrap;
-    flex-flow: row nowrap; }
+        width: 340px; } }
   .gogocarto-container #directory-content {
     position: relative;
+    background-color: #9e9e9e;
+    overflow: hidden;
     -webkit-box-flex: 1 auto;
     -moz-box-flex: 1 auto;
     -webkit-flex: 1 auto;
     -ms-flex: 1 auto;
     flex: 1 auto;
-    background-color: #9e9e9e;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -5614,13 +5643,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     display: flex;
     -ms-flex-flow: column nowrap;
     -webkit-flex-flow: column nowrap;
-    flex-flow: column nowrap;
-    overflow: hidden; }
-    @media screen and (min-width: 1200px) {
-      .gogocarto-container #directory-content {
-        -ms-flex-flow: row nowrap;
-        -webkit-flex-flow: row nowrap;
-        flex-flow: row nowrap; } }
+    flex-flow: column nowrap; }
   .gogocarto-container h1 {
     font-size: 2.5rem;
     text-align: center;
