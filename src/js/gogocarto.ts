@@ -7,6 +7,7 @@ import { HistoryState } from "./modules/history.module";
 import { initializeElementMenu } from "./components/element-menu.component";
 import { initializeVoting } from "./components/vote.component";
 import { initializeReportingAndDeleting } from "./components/reporting-deleting.component";
+import { getQueryParams } from "./commons/commons";
 import { Roles } from "./modules/login.module";
 
 export var App : AppModule;
@@ -72,11 +73,15 @@ export class GoGoCartoModule
 
 	private init(taxonomy, options)
 	{	
-		App = new AppModule(options); 
-		// only for debugging
-		this.app = App;
+		let urlParams : any = getQueryParams(window.location.search);
+		let isIframe : boolean = urlParams.iframe ? urlParams.iframe : false;
 
-		let layout = App.templateModule.render('layout', { mainCategory: taxonomy, openHoursCategory: options.openHours, isAdmin: App.loginModule.isAdmin() });
+		App = new AppModule(options, isIframe);
+
+		// only for debugging
+		this.app = App;		
+
+		let layout = App.templateModule.render('layout', { mainCategory: taxonomy, openHoursCategory: options.openHours, isAdmin: App.loginModule.isAdmin(), isIframe: isIframe });
 		   
 		if ($(this.containerSelector).length == 0) console.warn('[GoGoCarto] The container "' + this.containerSelector + '" was not found');
 		else $(this.containerSelector).append(layout);

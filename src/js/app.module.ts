@@ -72,6 +72,7 @@ export enum AppDataType
 export class AppModule
 {		
 	readonly config : GoGoConfig;
+	readonly isIframe : boolean = false;
 
 	component = new AppComponent();
 	geocoderModule_ = new GeocoderModule();
@@ -114,9 +115,11 @@ export class AppModule
 	// Because if too many markers are shown, browser slow down
 	maxElementsToShowOnMap_ = 1000;	
 
-	constructor($config : any)
+	constructor($config : any, $isIframe = false)
 	{
 		this.config = new GoGoConfig($config);
+		this.isIframe = $isIframe;
+		
 		this.loginModule = new LoginModule(this.config.userRole);
 
   	this.infoBarComponent_.onHide.do( ()=> { this.handleInfoBarHide(); });
