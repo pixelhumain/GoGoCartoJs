@@ -149,21 +149,33 @@ export class FilterModule
 		if (addingMode)
 		{
 			if (mainOptionSlug == 'all')
+			{
 				App.categoryModule.mainCategory.toggle(false, false);
+				App.categoryModule.mainCategory.toggleVisibility(false);
+			}
 			else
 			{
 				for (let cat of App.categoryModule.getMainOptionBySlug(mainOptionSlug).subcategories)
-					for(let option of cat.options) option.toggle(false, false);
+					for(let option of cat.options) 
+						{
+							option.toggle(false, false);
+							option.toggleVisibility(false);
+						}
 			}
 
 			App.categoryModule.openHoursCategory.toggle(false, false);
+			App.categoryModule.openHoursCategory.toggleVisibility(false);
 		}
 
 		for(let filterId of filters)
 		{
 			let option = App.categoryModule.getOptionById(filterId);
 			if (!option) console.log("Error loadings filters : " + filterId);
-			else option.toggle(addingMode, false);
+			else 
+			{
+				option.toggle(addingMode, false);
+				option.toggleVisibility(addingMode);
+			}
 		}
 
 		if (mainOptionSlug == 'all') App.categoryModule.mainCategory.updateState();

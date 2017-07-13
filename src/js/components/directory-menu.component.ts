@@ -179,16 +179,17 @@ export class DirectoryMenuComponent
 	// the main option selected got a specific background, who can vertically translate
 	updateMainOptionBackground()
 	{
-		let optionId = this.currentActiveMainOptionId;
+		let optionId = this.currentActiveMainOptionId;		
 
-		if(!$('#main-option-icon-' + optionId).position()) { console.log("directory not loaded");return; }
-
-		$('#active-main-option-background').animate({top: $('#main-option-icon-' + optionId).position().top}, 500, 'easeOutQuart');
 		$('.main-option-subcategories-container:not(#main-option-' + optionId + ')').hide();
 		$('#main-option-' + optionId).fadeIn(600);
 
 		$('.main-categories .main-icon').removeClass('active');
 		$('#main-option-icon-' + optionId).addClass('active');
+
+		if(!$('#main-option-icon-' + optionId).position()) { console.log("directory not loaded");return; }
+
+		$('#active-main-option-background').animate({top: $('#main-option-icon-' + optionId).position().top}, 500, 'easeOutQuart');
 	}
 }
 

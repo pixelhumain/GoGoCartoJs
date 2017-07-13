@@ -102,6 +102,12 @@ export class CategoryOptionTreeNode
 			}
 	}
 
+	toggleVisibility(value : boolean)
+	{
+		if (value) this.getDom().show();
+		else this.getDom().hide();
+	}
+
 	updateState()
 	{
 		if (this.isMainOption()) return;

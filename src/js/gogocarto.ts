@@ -74,14 +74,22 @@ export class GoGoCartoModule
 	private init(taxonomy, options)
 	{	
 		let urlParams : any = getQueryParams(window.location.search);
-		let isIframe : boolean = urlParams.iframe ? urlParams.iframe : false;
+		let isIframe : boolean = urlParams.iframe ? urlParams.iframe == 1 : false;
+		let fullTaxonomy : boolean = urlParams.fullTaxonomy ? urlParams.fullTaxonomy == 1 : true;
 
 		App = new AppModule(options, isIframe);
 
 		// only for debugging
 		this.app = App;		
 
-		let layout = App.templateModule.render('layout', { mainCategory: taxonomy, openHoursCategory: options.openHours, isAdmin: App.loginModule.isAdmin(), isIframe: isIframe });
+		let layout = App.templateModule.render('layout', 
+		{ 
+			mainCategory: taxonomy, 
+			openHoursCategory: options.openHours, 
+			isAdmin: App.loginModule.isAdmin(), 
+			isIframe: isIframe, 
+			fullTaxonomy: fullTaxonomy,
+		});
 		   
 		if ($(this.containerSelector).length == 0) console.warn('[GoGoCarto] The container "' + this.containerSelector + '" was not found');
 		else $(this.containerSelector).append(layout);

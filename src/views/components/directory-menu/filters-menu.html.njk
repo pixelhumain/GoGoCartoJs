@@ -3,6 +3,7 @@
 <div class="filter-menu">	
 
 	{# MAIN CATEGORIE SIDE BAR #}
+	{% if fullTaxonomy %}
 	<div class="main-categories">
 
 		<div class="icon main-icon-background" id="active-main-option-background"></div>
@@ -20,6 +21,7 @@
 		{% endfor %}
 
 	</div>
+	{% endif %}
 
 	<div class="sub-categories">
 

@@ -73,6 +73,7 @@ export class AppModule
 {		
 	readonly config : GoGoConfig;
 	readonly isIframe : boolean = false;
+	readonly loadFullTaxonomy : boolean = true;
 
 	component = new AppComponent();
 	geocoderModule_ = new GeocoderModule();
@@ -115,10 +116,11 @@ export class AppModule
 	// Because if too many markers are shown, browser slow down
 	maxElementsToShowOnMap_ = 1000;	
 
-	constructor($config : any, $isIframe = false)
+	constructor($config : any, $isIframe = false, $loadFullTaxonomy = true)
 	{
 		this.config = new GoGoConfig($config);
 		this.isIframe = $isIframe;
+		this.loadFullTaxonomy = $loadFullTaxonomy;
 		
 		this.loginModule = new LoginModule(this.config.userRole);
 
