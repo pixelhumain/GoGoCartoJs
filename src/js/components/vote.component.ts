@@ -28,7 +28,7 @@ export function initializeVoting()
 	// open a modal containing description of the validation process
 	$(".validation-process-info").click( (e) => 
 	{
-		$("#popup-vote").openModal();	
+		$("#modal-contribution").openModal();	
 		e.stopPropagation();
   	e.stopImmediatePropagation();
   	e.preventDefault();
