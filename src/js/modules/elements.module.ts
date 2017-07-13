@@ -14,7 +14,7 @@ declare var $;
 
 import * as Cookies from "../utils/cookies";
 import { Event } from "../utils/event";
-import { Element } from "../classes/element.class";
+import { Element, ElementStatus } from "../classes/element.class";
 import { BiopenMarker } from "../components/map/biopen-marker.component";
 
 export interface ElementsChanged
@@ -108,17 +108,20 @@ export class ElementsModule
 		{
 			elementJson = elementList[newIds[i].index];
 
-			element = new Element(elementJson);		
+			element = new Element(elementJson);
 
-			for (let mainId of element.mainOptionOwnerIds)
+			if (!App.isIframe || element.status != ElementStatus.PendingAdd)
 			{
-				this.everyElements_[mainId].push(element);
-			}				
-			this.everyElements_['all'].push(element);
-			this.everyElementsId_.push(element.id);
-			newElements.push(element);
+				for (let mainId of element.mainOptionOwnerIds)
+				{
+					this.everyElements_[mainId].push(element);
+				}				
+				this.everyElements_['all'].push(element);
+				this.everyElementsId_.push(element.id);
+				newElements.push(element);
 
-			element.initialize();
+				element.initialize();
+			}			
 		}
 
 		elementsConverted = elementsConverted.concat(newElements);

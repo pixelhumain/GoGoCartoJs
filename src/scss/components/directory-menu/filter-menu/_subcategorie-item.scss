@@ -2,8 +2,14 @@
 * @Author: Sebastian Castro
 * @Date:   2017-03-02 08:57:20
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-05-14 09:08:40
+* @Last Modified time: 2017-07-13 11:43:27
 */
+
+.sub-categories-content.no-top-divider > ul > .main-option-subcategories-container>  .category-wrapper > .subcategory-item
+{
+	border-top: none !important;
+	margin-top: 0 !important;  
+}
 
 .subcategory-item
 {

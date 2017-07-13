@@ -5,14 +5,14 @@
 	<div class="rotate animate icon-marker"></div>
 	
 	<div class="iconInsideMarker-wrapper rotate">
-		{% set mainIcon = 'icon-attention' if element.isPending() else mainOptionValueToDisplay.option.icon %}
+		{% set mainIcon = 'icon-attention' if showPending else mainOptionValueToDisplay.option.icon %}
 		<div class="iconInsideMarker colorAs {{pendingClass}} {{ 'disabled' if not mainOptionValueToDisplay.isFilledByFilters }} {{mainIcon}}" 
 		option-id={{ mainOptionValueToDisplay.optionId if mainOptionValueToDisplay.option.color else mainOptionValueToDisplay.colorOptionId }}>
 	</div>
 
 	{% set nbreOthersOptions = otherOptionsValuesToDisplay.length %}	
 
-	{% if nbreOthersOptions > 0 and showMoreIcon and not element.isPending() %}
+	{% if nbreOthersOptions > 0 and showMoreIcon and not showPending %}
 
 		{% set widthMoreOption = nbreOthersOptions * 39 + 5  %}   	
 

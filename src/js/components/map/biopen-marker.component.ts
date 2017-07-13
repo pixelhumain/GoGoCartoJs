@@ -126,7 +126,8 @@ export class BiopenMarker
 			otherOptionsValuesToDisplay: optionstoDisplay.slice(1), 
 			showMoreIcon : showMoreIcon,
 			disableMarker : disableMarker,
-			pendingClass : element.isPending() ? 'pending' : ''
+			pendingClass : element.isPending() && !App.isIframe ? 'pending' : '',
+			showPending : element.isPending() && !App.isIframe,
 		});
 
 		// save the class because it has been modified by marker cluster adding or

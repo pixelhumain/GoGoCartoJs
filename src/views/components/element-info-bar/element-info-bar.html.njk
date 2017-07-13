@@ -13,7 +13,7 @@
 
       <span class="col s12 name">
 
-      {% set mainIcon = 'icon-attention' if element.isPending() else mainOptionValueToDisplay.option.icon %}
+      {% set mainIcon = 'icon-attention' if showPending else mainOptionValueToDisplay.option.icon %}
         {# Icons #}
         <span class="element-main-icon icon {{ mainIcon }} colorAs {{pendingClass}} hideOnLargeScreen" option-id={{mainOptionValueToDisplay.colorOptionId}}></span>
         <span class="star-names-icons">
@@ -70,7 +70,7 @@
 
   {# INTERACTIVE SECTION #}
   <div class="interactive-section">  
-      {% if element.isPending() %}
+      {% if showPending %}
       <div class="vote-section">
         <span class="basic-message">
           <span class="icon-attention"></span>
@@ -85,6 +85,8 @@
 
   {# MENU #}
   <div class="menu-element bgdSoftColorAs {{pendingClass}}" option-id={{mainOptionValueToDisplay.colorOptionId}}>  
+    
+    {% if not isIframe %} 
     <div class="menu-element-item item-add-favorite" style="display:none">
       <span class="menu-icon icon-star-empty icon-favorite tooltipped" 
       data-position="top" data-delay="0" data-tooltip="Enregistrer comme favoris"></span>
@@ -95,6 +97,8 @@
       data-position="top" data-delay="0" data-tooltip="Retirer des favoris"></span>
       <span class="menu-element-item-text favorite">Enregistré</span>
     </div>
+    {% endif %}
+    
     <div class="menu-element-item item-share">
       <span class="menu-icon icon-share-alt tooltipped"
       data-position="top" data-delay="0" data-tooltip="Partager l'URL"></span>
@@ -109,7 +113,7 @@
     {% if not element.isPending() or isAdmin %} 
       <div class="menu-element-item item-edit">
         {% set editText = 'Modifier' if isAdmin else 'Proposer des modifications' %}
-        <a href={{ editUrl }}>
+        <a href={{ editUrl }} {% if isIframe %}target="_blank"{% endif %}>
         <span class="menu-icon icon-edit tooltipped" 
         data-position="top" data-delay="0" data-tooltip="{{ editText }}"></span>
         <span class="menu-element-item-text">{{ editText }}</span></a>

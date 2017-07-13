@@ -25,9 +25,10 @@
 
 		<div class="sub-categorie-main-title" id="menu-subcategories-title">Tous les acteurs</div>
 
-			<div class="sub-categories-content">
+			<div class="sub-categories-content {{ 'no-top-divider' if isIframe }}">
 			<ul>
 
+				{% if not isIframe %}
 				{# FAVORITE #}
 				<li class="subcategorie-option-item row" id="filter-favorite" data-position="right" data-delay="300" data-tooltip="Afficher uniquement les favoris">
 			    <span class="icon icon-star-full"></span>
@@ -42,7 +43,7 @@
 			    </div>
 				</li>
 
-				{# ELEMENT WITH PENDING STATUS#}
+				{# ELEMENT WITH PENDING STATUS#}				
 				<li class="subcategorie-option-item row" id="filter-pending" data-position="right" data-delay="300" data-tooltip="Afficher les éléments en attente de validation">
 			    <span class="icon icon-attention"></span>
 			    {% if isAdmin %}
@@ -59,6 +60,7 @@
 			    	</div>
 			    </div>
 				</li>
+				{% endif %}
 
 
 				{# ALL CATEGORIES MENU #}
