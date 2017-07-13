@@ -12,8 +12,12 @@
     
     {% include 'modals/pick-address-for-directions.html.njk'  %}  
     {% include 'modals/share-element-url.html.njk'  %} 
-    {% include 'modals/vote-for-pending-element.html.njk'  %}
-    {% include 'modals/contribution-information.html.njk'  %}
+    
+    {% if not isIframe %}
+      {% include 'modals/vote-for-pending-element.html.njk'  %}
+      {% include 'modals/contribution-information.html.njk'  %}
+      {% include 'modals/export-iframe.html.njk' %}
+    {% endif %}
 
     {% import 'components/spinner-loader.html.njk' as spinnerLoader%}
     {{ spinnerLoader.create('directory-spinner-loader') }}
@@ -28,8 +32,16 @@
       
       <div class="show-as-list-button"><i class="icon-list"></i></div>  
       
-      <div id="change-layers" class="layers-button leaflet-bar"><i class="icon-layers"></i></div> 
+      <div id="change-layers" class="layers-button leaflet-bar" data-tooltip="Changer le fond de carte" data-position="left" data-delay="300">
+        <i class="icon-layers"></i>
+      </div> 
       <div id="close-layers-panel" class="layers-button" style="display:none"><i class="icon-close"></i></div>
+
+      {% if not isIframe %}
+        <div id="export-iframe-btn" class="layers-button leaflet-bar" data-tooltip="Exporter une iframe" data-position="left" data-delay="300">
+          <i class="icon-share-alt"></i>
+        </div> 
+      {% endif %}
       
     </div>       
 

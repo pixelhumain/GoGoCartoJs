@@ -94,24 +94,39 @@
   }
 }
 
-
-#too-many-markers-modal
+#modal-iframe
 {
-	display:none;
-	position: absolute;
-    left: 0;
-    right: 0;
-    opacity: 0;
-    top: 45%;
-    width: 50%;
-    max-width: 500px;
-    padding: .5rem;
-    margin: 0 auto;
+  .subtitle
+  {
     text-align: center;
-    z-index: 50;
-    background-color: #4b7975;
-    color: white;
-    border: 2px solid #335250;
-	border-radius: 10px;
-	@extend .z-depth-2; 
+    font-style: italic;
+    margin-bottom: 1.5rem;
+  }
+
+  label { font-size: .8rem }
+
+  .iframe-input
+  {
+    width: 80px;
+    border: 1px solid #969696;
+    border-radius: 5px;
+    height: 2rem;
+    font-size: .9rem;
+    font-family: "Lucida Console", Monaco, monospace;
+    margin: 1rem;
+    text-align: center;
+    background-color: whitesmoke;
+  }
+
+  #iframe-code
+  {
+    width: 100%;
+    padding: 1rem;
+    background-color: #f1f1f1;
+    @include border-radius(5px);
+    box-shadow: none;
+    font-family: "Lucida Console", Monaco, monospace;
+    border: 1px dashed #c1c1c1;
+    margin-bottom: 1rem;
+  }
 }

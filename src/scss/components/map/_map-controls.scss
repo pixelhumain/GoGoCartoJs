@@ -87,8 +87,6 @@ a.leaflet-control-zoom-out {
         line-height: 1rem;
         padding-top: 3px;
         margin-right: 10px;
-
-        
     }
 
     &:after{ content:"Liste"}
@@ -129,6 +127,11 @@ a.leaflet-control-zoom-out {
         font-size: 18px;        
         line-height: 35px;       
     }
+}
+
+#export-iframe-btn
+{
+    top: 148px;
 }
 
 .leaflet-control-layers-toggle

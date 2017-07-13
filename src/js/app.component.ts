@@ -32,6 +32,17 @@ export class AppComponent
 			App.setState(AppStates.ShowElement, { id : App.infoBarComponent.getCurrElementId() });
 		});
 
+		$('#export-iframe-btn').click( () => 
+		{ 
+			this.updateIframeCode();
+			$('#modal-iframe').openModal(); 
+		});
+
+		// update iframe code when params change
+		$('#modal-iframe .iframe-param').change( () => { this.updateIframeCode(); });
+
+		$('#change-layers, #export-iframe-btn').tooltip();
+
 		let res;
 		window.onresize = () =>
 		{
@@ -127,6 +138,22 @@ export class AppComponent
 	updateMapSize()
 	{		
 		if (App.mapComponent) setTimeout(function() { App.mapComponent.resize(); },0);
+	}
+
+	updateIframeCode()
+	{
+		console.log("update iframe");
+		let src = window.location.origin + window.location.pathname;
+		src += window.location.search.length > 0 ? window.location.search + '&' : '?';
+		src += 'iframe=1';
+		if ($('#part-taxonomy-checkbox').is(':checked')) src += '&fullTaxonomy=0';
+		src += window.location.hash;
+
+		let width = $('#iframe-width').val() ? $('#iframe-width').val() : '800';
+		let height = $('#iframe-height').val() ? $('#iframe-height').val() : '600';
+
+		let iframeCode = `<iframe width="${width}" height="${height}" src="${src}" frameborder="0" marginheight="0" marginwidth="0"></iframe>`
+		$('#modal-iframe #iframe-code').val(iframeCode);
 	}
 	
 }

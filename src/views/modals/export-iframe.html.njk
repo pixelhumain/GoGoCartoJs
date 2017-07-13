@@ -1,0 +1,38 @@
+<!-- Pop up message alerte-->
+<div id="modal-iframe" class="modal action-modal custom-scroll-bar-light">
+  <div class="modal-content">
+  	<form>
+	    <h5 id="modal-title">Copiez ce code Html dans votre site web !</h5>
+	    <p class="subtitle">L'iframe sera initialisée dans la position actuelle de la carte. Déplacez la carte dans la position voulue avant d'ouvrir cette fenêtre !</p>	 
+
+	    <label for="iframe-width">Largeur</label>
+	    <input type="number" class="iframe-input iframe-param" id="iframe-width" placeholder="800"/>      
+
+      <label for="iframe-height">Hauteur</label>
+      <input type="number" class="iframe-input iframe-param" id="iframe-height" placeholder="600"/>
+      
+
+      <input type="checkbox" class="iframe-param" id="part-taxonomy-checkbox" />
+      <label for="part-taxonomy-checkbox">Afficher uniquement les catégories actuellement sélectionnées</label>
+
+			<div class="input-field">
+				<input class="validate" 
+	    	   type="textarea"
+	    	   id="iframe-code"  
+	    	   onClick="this.setSelectionRange(0, this.value.length)" 
+		    />
+			</div>
+			
+			<div class="footer">				
+				<button type="button"
+					onclick="$('#modal-iframe').closeModal()"  
+					class="btn waves-effect waves-light">
+				OK!
+			</button>
+			</div>
+
+		</form>	    
+
+  </div>
+   
+</div>
