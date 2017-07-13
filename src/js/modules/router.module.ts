@@ -8,7 +8,7 @@ declare var routie: any, $;
 
 export class RouterModule
 {
-	GETParams = { cat: ''};
+	filtersSerializedParam : string = '';
 
 	constructor()
 	{
@@ -23,7 +23,7 @@ export class RouterModule
 				initialState.state = AppStates.Normal;				
 				initialState.address = parsedAddressAndViewport[0];
 				initialState.viewport = new ViewPort().fromString(parsedAddressAndViewport[1]);
-				initialState.filters = this.GETParams.cat;
+				initialState.filters = this.filtersSerializedParam;
 
 				// timeout to let App variable being accesible
 				setTimeout( () => { App.loadHistoryState(initialState); }, 0);				
@@ -39,7 +39,7 @@ export class RouterModule
 				initialState.address = parsedAddressAndViewport[0];
 				initialState.viewport = new ViewPort().fromString(parsedAddressAndViewport[1]);
 				initialState.id = id;
-				initialState.filters = this.GETParams.cat;
+				initialState.filters = this.filtersSerializedParam;
 
 				// timeout to let App variable being accesible
 				setTimeout( () => { App.loadHistoryState(initialState); }, 0);	
@@ -55,7 +55,7 @@ export class RouterModule
 				initialState.address = parsedAddressAndViewport[0];
 				initialState.viewport = new ViewPort().fromString(parsedAddressAndViewport[1]);
 				initialState.id = id;
-				initialState.filters = this.GETParams.cat;
+				initialState.filters = this.filtersSerializedParam;
 
 				// timeout to let App variable being accesible
 				setTimeout( () => { App.loadHistoryState(initialState); }, 0);	
@@ -68,7 +68,7 @@ export class RouterModule
 				initialState.mode = AppModes.Map;
 				initialState.state = AppStates.Normal;				
 				initialState.text = text;
-				initialState.filters = this.GETParams.cat;
+				initialState.filters = this.filtersSerializedParam;
 
 				// timeout to let App variable being accesible
 				setTimeout( () => { App.loadHistoryState(initialState); }, 0);
@@ -79,9 +79,9 @@ export class RouterModule
 	loadInitialState()
 	{		
 		// check GET parameters inside the hash
-		let splited = window.location.hash.split('?');
+		let splited = window.location.hash.split('?cat=');
 		
-		if (splited.length > 1) this.GETParams = this.parseGETparam();
+		if (splited.length > 1) this.filtersSerializedParam = splited[1];
 
 		routie.navigate(splited[0] || '/carte');
 		// let the hash being changed with a timeOut
@@ -111,21 +111,23 @@ export class RouterModule
     }  
   }
 
-  // obtain the GET parameters from the url ( ?=parameter=value), also inside the hash
-  parseGETparam(param? : string) 
-  {
-		var vars = {};
-		window.location.href.replace( window.location.hash.split('?')[0], '&' ).replace( 
-			/[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
-			function( m, key, value ) { // callback
-				vars[key] = value !== undefined ? value : '';
-				return vars[key];
-			}
-		);
+ //  // obtain the GET parameters from the url ( ?=parameter=value), also inside the hash
+ //  parseGETparam(param? : string) 
+ //  {
+	// 	var vars = {};
+		
+	// 	window.location.href.replace( window.location.hash.split('?')[0], '' ).replace( 
+	// 		/[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+	// 		function( m, key, value ) { // callback
+	// 			vars[key] = value !== undefined ? value : '';
+	// 			return vars[key];
+	// 		}
+	// 	);
 
-		if ( param ) {
-			return vars[param] ? vars[param] : null;	
-		}
-		return vars;
-	}
+	// 	if ( param ) {
+	// 		return vars[param] ? vars[param] : null;	
+	// 	}
+	// 	return vars;
+
+	// }
 }
