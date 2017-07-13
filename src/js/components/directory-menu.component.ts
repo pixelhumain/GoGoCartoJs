@@ -184,8 +184,7 @@ export class DirectoryMenuComponent
 		if(!$('#main-option-icon-' + optionId).position()) { console.log("directory not loaded");return; }
 
 		$('#active-main-option-background').animate({top: $('#main-option-icon-' + optionId).position().top}, 500, 'easeOutQuart');
-
-		$('.main-option-subcategories-container').hide();
+		$('.main-option-subcategories-container:not(#main-option-' + optionId + ')').hide();
 		$('#main-option-' + optionId).fadeIn(600);
 
 		$('.main-categories .main-icon').removeClass('active');
