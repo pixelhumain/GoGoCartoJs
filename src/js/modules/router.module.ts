@@ -115,7 +115,7 @@ export class RouterModule
   parseGETparam(param? : string) 
   {
 		var vars = {};
-		window.location.href.replace( window.location.hash.split('?')[0], '' ).replace( 
+		window.location.href.replace( window.location.hash.split('?')[0], '&' ).replace( 
 			/[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
 			function( m, key, value ) { // callback
 				vars[key] = value !== undefined ? value : '';
