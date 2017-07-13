@@ -421,7 +421,7 @@ ul {
 .z-depth-1-half, .btn:hover, .btn-large:hover, .btn-floating:hover {
   box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); }
 
-.z-depth-2, .gogocarto-container #markerDirectionResult, .gogocarto-container #too-many-markers-modal {
+.z-depth-2, .gogocarto-container #markerDirectionResult {
   box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }
 
 .z-depth-3 {
@@ -3730,7 +3730,7 @@ select {
 * @Author: Sebastian Castro
 * @Date:   2017-03-02 08:57:20
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-05-14 09:08:40
+* @Last Modified time: 2017-07-13 11:43:27
 */
   /*
 * @Author: Sebastian Castro
@@ -4214,6 +4214,9 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       border-color: #565656; }
     .gogocarto-container #filter-pending .pending-checkbox + label:before {
       color: #565656; }
+  .gogocarto-container .sub-categories-content.no-top-divider > ul > .main-option-subcategories-container > .category-wrapper > .subcategory-item {
+    border-top: none !important;
+    margin-top: 0 !important; }
   .gogocarto-container .subcategory-item {
     position: relative;
     line-height: 3rem;
@@ -5084,6 +5087,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     .gogocarto-container .layers-button i {
       font-size: 18px;
       line-height: 35px; }
+  .gogocarto-container #export-iframe-btn {
+    top: 148px; }
   .gogocarto-container .leaflet-control-layers-toggle {
     display: none; }
   .gogocarto-container .leaflet-control-layers {
@@ -5571,23 +5576,33 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     margin-top: .5rem;
     display: block !important;
     height: auto !important; }
-  .gogocarto-container #too-many-markers-modal {
-    display: none;
-    position: absolute;
-    left: 0;
-    right: 0;
-    opacity: 0;
-    top: 45%;
-    width: 50%;
-    max-width: 500px;
-    padding: .5rem;
-    margin: 0 auto;
+  .gogocarto-container #modal-iframe .subtitle {
     text-align: center;
-    z-index: 50;
-    background-color: #4b7975;
-    color: white;
-    border: 2px solid #335250;
-    border-radius: 10px; }
+    font-style: italic;
+    margin-bottom: 1.5rem; }
+  .gogocarto-container #modal-iframe label {
+    font-size: .8rem; }
+  .gogocarto-container #modal-iframe .iframe-input {
+    width: 80px;
+    border: 1px solid #969696;
+    border-radius: 5px;
+    height: 2rem;
+    font-size: .9rem;
+    font-family: "Lucida Console", Monaco, monospace;
+    margin: 1rem;
+    text-align: center;
+    background-color: whitesmoke; }
+  .gogocarto-container #modal-iframe #iframe-code {
+    width: 100%;
+    padding: 1rem;
+    background-color: #f1f1f1;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: none;
+    font-family: "Lucida Console", Monaco, monospace;
+    border: 1px dashed #c1c1c1;
+    margin-bottom: 1rem; }
   .gogocarto-container .shadow-bottom {
     width: 100%;
     margin-right: 0;
