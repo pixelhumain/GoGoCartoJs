@@ -24,7 +24,7 @@ export class GoGoConfig
 {
   readonly data =
   {
-      taxonomy: null,
+      taxonomy: '',
       elementApiUrl: '',
       elementInBoundsApiUrl: '',
       showPending: true,
@@ -39,7 +39,7 @@ export class GoGoConfig
       edit:       new GoGoFeature(),
       report:     new GoGoFeature(),
       delete:     new GoGoFeature(),
-      pending:   new GoGoFeature(),
+      pending:    new GoGoFeature(),
       vote:       new GoGoFeature(),
       search:     new GoGoFeature(),
   };
@@ -64,7 +64,7 @@ export class GoGoConfig
     {
         if (that.hasOwnProperty(prop))
         {
-          if (prop == 'roles' || typeof object[prop] != 'object')
+          if (prop == 'roles' || typeof that[prop] != 'object')
             that[prop] = object[prop];
           else            
             this.recursiveFillProperty(that[prop], object[prop]);
