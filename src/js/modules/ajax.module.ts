@@ -81,7 +81,7 @@ export class AjaxModule
 
 		let dataRequest : any = { bounds : stringifiedBounds, mainOptionId : App.currMainId, fullRepresentation : getFullRepresentation };
 
-		let route = App.config.elementInBoundsApiUrl;
+		let route = App.config.data.elementInBoundsApiUrl;
 		
 		this.sendAjaxElementRequest(new Request(route, dataRequest), expectedFilledBounds);
 	}
@@ -156,7 +156,7 @@ export class AjaxModule
 	getElementById(elementId, callbackSuccess?, callbackFailure?)
 	{
 		let start = new Date().getTime();
-		let route = App.config.elementApiUrl;
+		let route = App.config.data.elementApiUrl;
 
 		$.ajax({
 			url: route,
@@ -183,7 +183,7 @@ export class AjaxModule
 
 	vote(elementId :number, voteValue : number, comment : string, callbackSuccess?, callbackFailure?)
 	{
-		let route = App.config.voteApiUrl;
+		let route = App.config.features.vote.url;
 
 		$.ajax({
 			url: route,
@@ -206,7 +206,7 @@ export class AjaxModule
 
 	reportError(elementId :number, reportValue : number, comment : string, userMail : string, callbackSuccess?, callbackFailure?)
 	{
-		let route = App.config.reportApiUrl;
+		let route = App.config.features.report.url;
 
 		$.ajax({
 			url: route,
@@ -229,7 +229,7 @@ export class AjaxModule
 
 	deleteElement(elementId, message: string, callbackSuccess?, callbackFailure?)
 	{
-		let route = App.config.deleteApiUrl;
+		let route = App.config.features.delete.url;
 
 		$.ajax({
 			url: route,
@@ -252,7 +252,7 @@ export class AjaxModule
 
 	searchElements(text: string, callbackSuccess?, callbackFailure?)
 	{
-		let route = App.config.searchApiUrl; 
+		let route = App.config.features.search.url; 
 
 		$.ajax({
 			url: route,

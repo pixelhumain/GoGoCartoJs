@@ -567,7 +567,7 @@ export class Element
 			pendingClass : (this.isPending() || this.isDeleted()) && !App.isIframe  ? 'pending' : '',
 			showPending : this.isPending() && !App.isIframe,
 			isAdmin : App.loginModule.isAdmin(),
-			editUrl : App.config.editElementUrl + this.id,
+			editUrl : App.config.features.edit.url + this.id,
 			ElementStatus: ElementStatus,
 			isIframe : App.isIframe,
 		});

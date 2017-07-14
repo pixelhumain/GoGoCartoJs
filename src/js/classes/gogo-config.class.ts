@@ -1,4 +1,5 @@
 import { Roles } from "../modules/login.module";
+import { App } from "../gogocarto";
 
 export enum ElementStatus 
 {
@@ -11,40 +12,79 @@ export enum ElementStatus
   CollaborativeValidate = 2
 }
 
+export class GoGoFeature
+{
+  active : boolean = true;
+  url : string = '';
+  roles : string[] = ['anonymous', 'user', 'admin'];
+}
+
 export class GoGoConfig
 {
-	readonly taxonomy: any = null;
-  readonly openHours: any = null;
-
-  // APIs
-	readonly elementApiUrl : string = '';
-  readonly elementInBoundsApiUrl : string = '';
-  readonly voteApiUrl : string = '';
-  readonly reportApiUrl : string = '';
-  readonly deleteApiUrl : string = '';
-  readonly searchApiUrl : string = '';
-
-  // Urls
-  readonly editElementUrl : string = '';
-
-  // login
-  readonly userRole : Roles | string = 0;
-	readonly loginAction : () => void = function() {};
+  readonly data =
+  {
+      taxonomy: null,
+      elementApiUrl: '',
+      elementInBoundsApiUrl: '',
+  };
+  readonly features =
+  {
+      favorite:   new GoGoFeature(),
+      share:      new GoGoFeature(),
+      directions: new GoGoFeature(),
+      export:     new GoGoFeature(),
+      layers:     new GoGoFeature(),
+      edit:       new GoGoFeature(),
+      report:     new GoGoFeature(),
+      delete:     new GoGoFeature(),
+      vote:       new GoGoFeature(),
+      search:     new GoGoFeature(),
+  };
+  readonly security =
+  {
+      userRole: 'anonymous',
+      loginAction: function() { console.warn("[GoGoCarto] You need login to access this feature"); }
+  };  
 
 	constructor(config : any)
 	{
     // Copy all the defined options
     // All the options non specified will be initialized with default values
-    for(var prop in config) 
+    this.recursiveFillProperty(this, config);
+
+    console.log(this);
+	}
+
+  recursiveFillProperty(that, object)
+  {
+    for(var prop in object) 
     {
-        if (this.hasOwnProperty(prop))
+        if (that.hasOwnProperty(prop))
         {
-        	this[prop] = config[prop];
+          if (prop == 'roles' || typeof object[prop] != 'object')
+            that[prop] = object[prop];
+          else            
+            this.recursiveFillProperty(that[prop], object[prop]);
         }
         else
         {
-        	console.warn("[GoGoCarto] Config option '" + prop + "' does not exist");
+          console.warn("[GoGoCarto] Config option '" + prop + "' does not exist");
         }
     }
-	}
+  }
+
+  isFeatureAvailable(featureName) : boolean
+  {
+    if (!this.features.hasOwnProperty(featureName)) { console.warn(`[GoGoCartoJs] feature ${featureName} doesn't exist`); return; }
+
+    let feature = this.features[featureName];
+
+    let roleProvided = true;
+    if (feature.hasOwnProperty('roles'))
+    {
+      roleProvided = feature.roles.indexOf(App.loginModule.getStringifyRole()) >= 0;
+    }
+
+    return feature.active && roleProvided;
+  }
 }

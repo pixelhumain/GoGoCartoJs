@@ -122,7 +122,7 @@ export class AppModule
 		this.isIframe = $isIframe;
 		this.loadFullTaxonomy = $loadFullTaxonomy;
 		
-		this.loginModule = new LoginModule(this.config.userRole);
+		this.loginModule = new LoginModule(this.config.security.userRole);
 
   	this.infoBarComponent_.onHide.do( ()=> { this.handleInfoBarHide(); });
 	

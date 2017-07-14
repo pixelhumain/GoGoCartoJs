@@ -7,7 +7,7 @@ declare var routie: any, $;
 export enum Roles 
 {
 	Anonymous = 0,
-	Logged = 1,
+	User = 1,
 	Admin = 2
 }
 
@@ -21,13 +21,13 @@ export class LoginModule
 
 	isAdmin() { return this.isGranted(Roles.Admin); }
 
-	isUserLogged() { return this.isGranted(Roles.Logged); }
+	isUserLogged() { return this.isGranted(Roles.User); }
 
 	setRole($role : Roles | string)
 	{ 
 		if (typeof $role == 'string')
 		{
-			this.role_ = $role == 'admin' ? Roles.Admin : $role == 'user' ? Roles.Logged : Roles.Anonymous;
+			this.role_ = $role == 'admin' ? Roles.Admin : $role == 'user' ? Roles.User : Roles.Anonymous;
 		}
 		else
 		{
@@ -37,5 +37,7 @@ export class LoginModule
 
 	getRole() { return this.role_; }
 
-  loginAction() { App.config.loginAction(); }
+	getStringifyRole() { return Roles[this.role_].toLowerCase(); }
+
+  loginAction() { App.config.security.loginAction(); }
 }

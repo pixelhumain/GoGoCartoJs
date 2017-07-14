@@ -55,19 +55,19 @@ export class GoGoCartoModule
 
 	private checkForDistantTaxonomy(options : any)
 	{
-		if (!options.taxonomy)
+		if (!options.data.taxonomy)
 		{
 			console.warn("[GoGoCarto] You must provide a taxonomy (url or Json object)");
 			return;
 		}
 
-		if ( typeof options.taxonomy === 'object')
+		if ( typeof options.data.taxonomy === 'object')
 		{
-			this.init(options.taxonomy, options);
+			this.init(options.data.taxonomy, options);
 		}
 		else
 		{
-		 	$.getJSON( options.taxonomy, (data) =>  { this.init(data, options); }); 
+		 	$.getJSON( options.data.taxonomy, (data) =>  { this.init(data, options); }); 
 		}		
 	};
 
