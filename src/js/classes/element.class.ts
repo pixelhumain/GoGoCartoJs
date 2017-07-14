@@ -562,14 +562,12 @@ export class Element
 			mainOptionValueToDisplay: optionstoDisplay[0], 
 			otherOptionsValuesToDisplay: optionstoDisplay.slice(1),  
 			starNames : starNames,
-			mainCategoryValue : mainCategoryValue,
-			// in iframe the pending modifications are not displayed, just the old version
-			pendingClass : (this.isPending() || this.isDeleted()) && !App.isIframe  ? 'pending' : '',
-			showPending : this.isPending() && !App.isIframe,
+			mainCategoryValue : mainCategoryValue,			
 			isAdmin : App.loginModule.isAdmin(),
 			editUrl : App.config.features.edit.url + this.id,
 			ElementStatus: ElementStatus,
 			isIframe : App.isIframe,
+			config : App.config,
 		});
 
 		
@@ -582,7 +580,7 @@ export class Element
 		let value = capitalizeConfiguration[propertyName] ? capitalize(this[propertyName]) : this[propertyName];
 
 		// in iframe the pending modifications are not displayed, just the old version
-		if (this.status != ElementStatus.PendingModification || App.isIframe || !this.modifiedElement || !this.modifiedElement[propertyName]) return value;
+		if (this.status != ElementStatus.PendingModification || !App.config.isFeatureAvailable('pending') || !this.modifiedElement || !this.modifiedElement[propertyName]) return value;
 
     let modifiedValue = capitalizeConfiguration[propertyName] ? capitalize(this.modifiedElement[propertyName]) : this.modifiedElement[propertyName],
     spanClass = '',

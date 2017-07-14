@@ -89,6 +89,7 @@ export class GoGoCartoModule
 			isAdmin: App.loginModule.isAdmin(), 
 			isIframe: isIframe, 
 			fullTaxonomy: fullTaxonomy,
+			config: App.config
 		});
 		   
 		if ($(this.containerSelector).length == 0) console.warn('[GoGoCarto] The container "' + this.containerSelector + '" was not found');

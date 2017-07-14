@@ -27,43 +27,44 @@
 
 		<div class="sub-categorie-main-title" id="menu-subcategories-title">Tous les acteurs</div>
 
-			<div class="sub-categories-content {{ 'no-top-divider' if isIframe }}">
+			<div class="sub-categories-content {{ 'no-top-divider' if not config.isFeatureActivated('favorite') and not config.isFeatureActivated('pending') }}">
 			<ul>
-
-				{% if not isIframe %}
+				
 				{# FAVORITE #}
-				<li class="subcategorie-option-item row" id="filter-favorite" data-position="right" data-delay="300" data-tooltip="Afficher uniquement les favoris">
-			    <span class="icon icon-star-full"></span>
-			    <span class="option-name">Favoris</span> 
+				{% if config.isFeatureActivated('favorite') %}
+					<li class="subcategorie-option-item row" id="filter-favorite" data-position="right" data-delay="300" data-tooltip="Afficher uniquement les favoris">
+				    <span class="icon icon-star-full"></span>
+				    <span class="option-name">Favoris</span> 
 
-			    {# --- CHECKBOX ---- #}
-					<div class="checkbox-wrapper">
-						<div class="checkbox-container">
-				      <input type="checkbox" class="subcategorie-option-checkbox favorite-checkbox" id="favorite-checkbox" data-type='favorite' data="favorite" />
-				      <label for="favorite-checkbox" ></label>
-			    	</div>
-			    </div>
-				</li>
-
-				{# ELEMENT WITH PENDING STATUS#}				
-				<li class="subcategorie-option-item row" id="filter-pending" data-position="right" data-delay="300" data-tooltip="Afficher les éléments en attente de validation">
-			    <span class="icon icon-attention"></span>
-			    {% if isAdmin %}
-			    	<span class="option-name">Attente validation</span><span class="icon icon-eye" id="show-only-pending"></span></span> 
-		    	{% else %}
-		    		<span class="option-name"><span class="validation-process-info">En cours de validation</span></span> 
-		    	{% endif %}
-
-			    {# --- CHECKBOX ---- #}
-					<div class="checkbox-wrapper">
-						<div class="checkbox-container">
-				      <input type="checkbox" checked class="subcategorie-option-checkbox pending-checkbox" id="pending-checkbox" data-type='pending' data="pending" />
-				      <label for="pending-checkbox" ></label>
-			    	</div>
-			    </div>
-				</li>
+				    {# --- CHECKBOX ---- #}
+						<div class="checkbox-wrapper">
+							<div class="checkbox-container">
+					      <input type="checkbox" class="subcategorie-option-checkbox favorite-checkbox" id="favorite-checkbox" data-type='favorite' data="favorite" />
+					      <label for="favorite-checkbox" ></label>
+				    	</div>
+				    </div>
+					</li>
 				{% endif %}
 
+				{# ELEMENT WITH PENDING STATUS#}	
+				{% if config.isFeatureActivated('pending') %}
+					<li class="subcategorie-option-item row" id="filter-pending" data-position="right" data-delay="300" data-tooltip="Afficher les éléments en attente de validation">
+				    <span class="icon icon-attention"></span>
+				    {% if isAdmin %}
+				    	<span class="option-name">Attente validation</span><span class="icon icon-eye" id="show-only-pending"></span></span> 
+			    	{% else %}
+			    		<span class="option-name"><span class="validation-process-info">En cours de validation</span></span> 
+			    	{% endif %}
+
+				    {# --- CHECKBOX ---- #}
+						<div class="checkbox-wrapper">
+							<div class="checkbox-container">
+					      <input type="checkbox" checked class="subcategorie-option-checkbox pending-checkbox" id="pending-checkbox" data-type='pending' data="pending" />
+					      <label for="pending-checkbox" ></label>
+				    	</div>
+				    </div>
+					</li>
+				{% endif %}
 
 				{# ALL CATEGORIES MENU #}
 				<div id="main-option-all" class="main-option-subcategories-container" style="display:none">		

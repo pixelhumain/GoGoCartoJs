@@ -156,7 +156,7 @@ export class InfoBarComponent
 		setTimeout( () => {
 			if (this.elementVisible)
 			{
-				console.log("map conatins element", App.mapComponent.contains(this.elementVisible.position));
+				//console.log("map conatins element", App.mapComponent.contains(this.elementVisible.position));
 				if (!App.mapComponent.contains(this.elementVisible.position))
 				{
 					App.mapComponent.panToLocation(this.elementVisible.position);

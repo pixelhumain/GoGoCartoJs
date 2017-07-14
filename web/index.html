@@ -29,14 +29,17 @@
                     features:
                     {
                         search: { url: 'http://localhost/GoGoCarto/web/app_dev.php/api/search' },
-                        delete: { url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/delete', roles: ['admin'] },
+                        delete: { url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/delete', roles: ['admin'], inIframe: false },
                         report: { url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/report', roles: ['anonymous', 'user'] },
-                        vote:   { url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/vote',   roles: ['user', 'admin'] },
+                        vote:   { url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/vote',   roles: ['user', 'admin'], inIframe: false },
                         edit:   { url: 'http://localhost/GoGoCarto/web/app_dev.php/acteurs/edit/' },
+                        favorite: { inIframe: false },
+                        export:   { inIframe: false },
+                        pending:  { inIframe: false, roles: ['user', 'admin'] },
                     },
                     security:
                     {
-                        userRole: 'user',
+                        userRole: 'anonymous',
                         loginAction: function() { console.log("needToLog"); }
                     },         
                 });

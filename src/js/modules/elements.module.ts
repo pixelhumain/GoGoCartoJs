@@ -62,10 +62,13 @@ export class ElementsModule
 
 	checkCookies()
 	{
-		for(let j = 0; j < this.favoriteIds_.length; j++)
+		if (App.config.isFeatureActivated('favorite'))
+		{
+			for(let j = 0; j < this.favoriteIds_.length; j++)
 	  	{
 	  		this.addFavorite(this.favoriteIds_[j], false);
 	  	}
+	  }
 	};
 
 	addJsonElements (elementList, checkIfAlreadyExist = true, isFullRepresentation : boolean) 

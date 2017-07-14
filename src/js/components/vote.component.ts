@@ -97,8 +97,8 @@ export function createListenersForVoting()
 	// vote-button is located on the element-info-bar of a pending element
 	$(".vote-button").click( function(e)
 	{
-		// restrict vote to logged users
-		if (!App.loginModule.isUserLogged()) 
+		// restrict vote to specific roles
+		if (!App.config.isFeatureAvailable('vote')) 
 		{
 			App.loginModule.loginAction();
 			return;

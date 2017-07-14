@@ -17,6 +17,7 @@ export class GoGoFeature
   active : boolean = true;
   url : string = '';
   roles : string[] = ['anonymous', 'user', 'admin'];
+  inIframe : boolean = true;
 }
 
 export class GoGoConfig
@@ -26,6 +27,7 @@ export class GoGoConfig
       taxonomy: null,
       elementApiUrl: '',
       elementInBoundsApiUrl: '',
+      showPending: true,
   };
   readonly features =
   {
@@ -37,6 +39,7 @@ export class GoGoConfig
       edit:       new GoGoFeature(),
       report:     new GoGoFeature(),
       delete:     new GoGoFeature(),
+      pending:   new GoGoFeature(),
       vote:       new GoGoFeature(),
       search:     new GoGoFeature(),
   };
@@ -73,9 +76,17 @@ export class GoGoConfig
     }
   }
 
+  isFeatureActivated(featureName) : boolean
+  {
+    if (!this.features.hasOwnProperty(featureName)) { console.warn(`[GoGoCartoJs] feature ${featureName} doesn't exist`); return false; }
+
+    return this.features[featureName].active && (!App.isIframe || this.features[featureName].inIframe);
+  }
+
+  // is feature is activated and the actual user is granted to use it
   isFeatureAvailable(featureName) : boolean
   {
-    if (!this.features.hasOwnProperty(featureName)) { console.warn(`[GoGoCartoJs] feature ${featureName} doesn't exist`); return; }
+    if (!this.features.hasOwnProperty(featureName)) { console.warn(`[GoGoCartoJs] feature ${featureName} doesn't exist`); return false; }
 
     let feature = this.features[featureName];
 
@@ -85,6 +96,8 @@ export class GoGoConfig
       roleProvided = feature.roles.indexOf(App.loginModule.getStringifyRole()) >= 0;
     }
 
-    return feature.active && roleProvided;
+    return this.isFeatureActivated(featureName) && roleProvided;
   }
+
+  
 }
