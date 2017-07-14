@@ -165,6 +165,7 @@ export class MapComponent
 
 		$('#directory-content-map #change-layers').click( (e) =>
 		{
+			$('#directory-content-map #change-layers').hideTooltip();
 			this.showControlLayers();
 			e.preventDefault();
 			e.stopPropagation();

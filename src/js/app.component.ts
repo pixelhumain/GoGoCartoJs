@@ -34,6 +34,7 @@ export class AppComponent
 
 		$('#export-iframe-btn').click( () => 
 		{ 
+			$('#export-iframe-btn').hideTooltip();
 			this.updateIframeCode();
 			$('#modal-iframe').openModal(); 
 		});
