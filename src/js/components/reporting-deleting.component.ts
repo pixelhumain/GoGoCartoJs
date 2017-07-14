@@ -21,69 +21,47 @@ import { App } from "../gogocarto";
 
 import { capitalize, slugify } from "../commons/commons";
 
-export function openReportDeleteModal()
+export function openReportModal()
 {
 	let element = App.elementModule.getElementById(getCurrentElementIdShown());
-		//window.console.log(element.name);
-		$('#popup-report-error .elementName').text(capitalize(element.name));
+	//window.console.log(element.name);
+	$('#popup-report-error .elementName').text(capitalize(element.name));
 
-		$('#popup-report-error .input-comment').val('');
-		$('#popup-report-error .option-radio-btn:checked').prop('checked', false);
-		$('#popup-report-error #select-error').hide();
-		$('#popup-report-error #mail-error').hide();
+	$('#popup-report-error .input-comment').val('');
+	$('#popup-report-error .option-radio-btn:checked').prop('checked', false);
+	$('#popup-report-error #select-error').hide();
+	$('#popup-report-error #mail-error').hide();
 
-		if (App.isUserLogged()) 
-		{
-			$('#popup-report-error .input-mail').hide();
-		}
-		else
-		{
-			$('#popup-report-error .input-mail').val('');
-			$('#popup-report-error .input-mail').show();
-		}
-
-		$('#popup-report-error').openModal({
-		      dismissible: true, 
-		      opacity: 0.5, 
-		      in_duration: 300, 
-		      out_duration: 200
-    		});
-}
-export function initializeReportingAndDeleting()
-{	
-
-	$('#popup-report-error #submit-error').click(() => 
+	if (App.isUserLogged()) 
 	{
-		if (App.loginModule.isAdmin())
-		{
-			let elementId = getCurrentElementIdShown();	
-			let message = $('#popup-report-error .input-comment').val();
+		$('#popup-report-error .input-mail').hide();
+	}
+	else
+	{
+		$('#popup-report-error .input-mail').val('');
+		$('#popup-report-error .input-mail').show();
+	}
 
-			App.ajaxModule.deleteElement(elementId, message, (response) =>
-			{
-				let responseMessage = response.message;
-				let success = response.success;
+	$('#popup-report-error').openModal();
+}
 
-				if (success)
-				{
-					$('#popup-report-error').closeModal();
-					let elementInfo = getCurrentElementInfoBarShown();
-					elementInfo.find('.result-message').html(responseMessage).show();
-					App.infoBarComponent.show();
-				}
-				else
-				{
-					$('#popup-report-error #select-error').text(responseMessage).show();
-				}
-			},
-			(errorMessage) => 
-			{
-				console.log("error", errorMessage);
-				$('#popup-report-error #select-error').text(errorMessage).show();
-			});			
-		}
-		else
-		{
+export function openDeleteModal()
+{
+	$('#popup-delete').openModal();
+
+	let element = App.elementModule.getElementById(getCurrentElementIdShown());
+	//window.console.log(element.name);
+	$('#popup-delete .elementName').text(capitalize(element.name));
+
+	$('#popup-delete .input-comment').val('');
+	$('#popup-delete .option-radio-btn:checked').prop('checked', false);
+	$('#popup-delete #select-error').hide();
+}
+
+export function initializeReportingAndDeleting()
+{
+	$('#popup-report-error #submit-report').click(() => 
+	{
 			let reportValue = $('#popup-report-error .option-radio-btn:checked').attr('value');
 			let userMail = $('#popup-report-error .input-mail').val();
 
@@ -104,10 +82,9 @@ export function initializeReportingAndDeleting()
 			if (!errors)
 			{			
 				let elementId = getCurrentElementIdShown();	
-				let comment = $('#popup-report-error .input-comment').val();
-				
+				let comment = $('#popup-report-error .input-comment').val();				
 
-				console.log("send vote " +reportValue + " to element id ", elementId);
+				//console.log("send report " +reportValue + " to element id ", elementId);
 
 				App.ajaxModule.reportError(elementId, reportValue, comment, userMail, (response) =>
 				{
@@ -130,9 +107,36 @@ export function initializeReportingAndDeleting()
 				{
 					$('#popup-report-error #select-error').text(errorMessage).show();
 				});			
-			}
-		}		
+			}	
+	});
 
+	$('#popup-delete #submit-delete').click(() => 
+	{
+			let elementId = getCurrentElementIdShown();	
+			let message = $('#popup-delete .input-comment').val();
+
+			App.ajaxModule.deleteElement(elementId, message, (response) =>
+			{
+				let responseMessage = response.message;
+				let success = response.success;
+
+				if (success)
+				{
+					$('#popup-delete').closeModal();
+					let elementInfo = getCurrentElementInfoBarShown();
+					elementInfo.find('.result-message').html(responseMessage).show();
+					App.infoBarComponent.show();
+				}
+				else
+				{
+					$('#popup-delete #select-error').text(responseMessage).show();
+				}
+			},
+			(errorMessage) => 
+			{
+				console.log("error", errorMessage);
+				$('#popup-delete #select-error').text(errorMessage).show();
+			});	
 	});
 }
 

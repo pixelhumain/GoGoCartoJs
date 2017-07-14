@@ -120,14 +120,20 @@
       </div>
     {% endif %}
 
+    <div class="menu-element-item item-report"> 
+      <span class="menu-icon btn-report icon-exclamation-1 tooltipped" 
+      data-position="top" data-delay="0" data-tooltip="Signaler une erreur"></span>
+      <span class="menu-element-item-text">Signaler une erreur</span>
+    </div>  
+
+    <div class="menu-element-item item-delete"> 
+      <span class="menu-icon btn-delete icon-delete tooltipped" 
+      data-position="top" data-delay="0" data-tooltip="Supprimer"></span>
+      <span class="menu-element-item-text">Supprimer</span>
+    </div>  
+
     {% if not element.isPending() or (isAdmin and element.status == ElementStatus.PendingModification) %} 
-      <div class="menu-element-item item-delete"> 
-        {% set deleteText = 'Supprimer' if isAdmin  else 'Signaler une erreur' %}
-        {% set deleteIcon = 'icon-delete' if isAdmin else 'icon-exclamation-1' %}
-        <span class="menu-icon btn-delete {{ deleteIcon }} tooltipped" 
-        data-position="top" data-delay="0" data-tooltip="{{ deleteText }}"></span>
-        <span class="menu-element-item-text">{{ deleteText }}</span>
-      </div>  
+      
     {% endif %}        
   </div>
 

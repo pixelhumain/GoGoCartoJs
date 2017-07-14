@@ -1,0 +1,31 @@
+<!-- Pop up message alerte-->
+<div id="popup-delete" class="modal action-modal">
+  <div class="modal-content">
+  	<form>
+
+  			<h5 id="modal-title">Supprimer <span class="elementName"></span> ?</h5>
+  			<p>Un mail sera envoyé à l'acteur</p>	
+  			<p id="select-error" class="error"></p> 
+				<div class="input-field">
+						<input class="input-comment materialize-textarea" type="text" placeholder="Message optionnel explicatif"/>
+				</div>		
+			
+			<div class="footer">
+				<button type="button"
+						onclick="$('#popup-delete').closeModal()"  
+						class="waves-effect waves-teal btn-flat">
+					Annuler
+				</button>
+				
+				<button type="button" 
+						id="submit-delete"		
+						class="btn waves-effect waves-light">
+						Supprimer
+				</button>
+			</div>
+
+		</form>	    
+
+  </div>
+   
+</div>

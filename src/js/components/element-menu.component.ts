@@ -17,11 +17,10 @@ import { Element } from "../classes/element.class";
 import { App } from "../gogocarto";
 
 import { capitalize, slugify } from "../commons/commons";
-import { openReportDeleteModal } from './reporting-deleting.component';
+import { openDeleteModal, openReportModal } from './reporting-deleting.component';
 
 export function initializeElementMenu()
 {	
-	$('#popup-report-error #select-reason').material_select();
 	$('#modal-vote #select-vote').material_select();
 
 	// button to confirm calculate idrections in modal pick address for directions
@@ -86,7 +85,12 @@ export function createListenersForElementMenu(object)
 
 	object.find('.item-delete').click(function() 
 	{		
-		openReportDeleteModal();
+		openDeleteModal();
+	});
+
+	object.find('.item-report').click(function() 
+	{		
+		openReportModal();
 	});
 
 	object.find('.item-directions').click(function() 

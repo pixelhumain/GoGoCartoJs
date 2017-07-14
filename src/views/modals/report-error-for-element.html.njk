@@ -3,17 +3,6 @@
   <div class="modal-content">
   	<form>
 
-  		{% if isAdmin %}
-
-  			<h5 id="modal-title">Supprimer <span class="elementName"></span> ?</h5>
-  			<p>Un mail sera envoyé à l'acteur</p>	
-  			<p id="select-error" class="error"></p> 
-				<div class="input-field">
-						<input class="input-comment materialize-textarea" type="text" placeholder="Message optionnel explicatif"/>
-				</div>
-				
-  		{% else %}
-
 		    <h5 id="modal-title">Signaler une erreur concernant <span class="elementName"></span></h5>
 		    <p>Quelle erreur voulez-vous signaler ?</p>	 
 
@@ -36,8 +25,6 @@
 				<div class="input-field">
 						<input class="input-comment" type="text" placeholder="Commentaire optionnel pour la modération"/>
 				</div>
-
-			{% endif %}
 			
 			<div class="footer">
 				<button type="button"
@@ -47,9 +34,9 @@
 				</button>
 				
 				<button type="button" 
-						id="submit-error"		
+						id="submit-report"		
 						class="btn waves-effect waves-light">
-						{{ 'Supprimer' if isAdmin else 'Envoyer' }}
+						Envoyer
 				</button>
 			</div>
 
