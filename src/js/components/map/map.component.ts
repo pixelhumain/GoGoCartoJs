@@ -88,26 +88,21 @@ export class MapComponent
 			return;
 		}
 
-		// L.tileLayer("", {
-		//     minZoom: 1,
-		//     maxZoom: 19
-		// }).addTo(this.map_);
-
 		// payant			
 		let mapbox = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2ViYWxsb3QiLCJhIjoiY2l4MGtneGVjMDF0aDJ6cWNtdWFvc2Y3YSJ9.nIZr6G2t08etMzft_BHHUQ');
 		let mapboxlight = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2ViYWxsb3QiLCJhIjoiY2l4MGtneGVjMDF0aDJ6cWNtdWFvc2Y3YSJ9.nIZr6G2t08etMzft_BHHUQ');
 		
 		// gratuit (je crois)
-		let cartodb = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'); // pas mal; très clair. 5ko
+		let cartodb = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png'); // pas mal; très clair. 5ko
 		let hydda = L.tileLayer('https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png'); // pas mal ! 20ko
 		let wikimedia = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png'); // sympa mais version démo je crois
 		let monochrome = L.tileLayer('https://www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png'); // ça passe
 		let lyrk  = L.tileLayer('https://tiles.lyrk.org/ls/{z}/{x}/{y}?apikey =982c82cc765f42cf950a57de0d891076'); // pas mal; mais zomm max 16. 20ko
 		let osmfr = L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png');
-		let stamen = L.tileLayer('https://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png');		
+		let stamen = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png');	
+		let stamenTerrain = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png');		
+		let stamenWaterColor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.png');			
 		let openriver = L.tileLayer('https://{s}.tile.openstreetmap.fr/openriverboatmap/{z}/{x}/{y}.png');
-
-		let transport = L.tileLayer('https://{s}.tile2.opencyclemap.org/transport/{z}/{x}/{y}.png'); // belle mais y'a les layers transport partout !
 		let thunderforest = L.tileLayer('https://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png'); // pas très joli		
 
 		let baseLayers = {
@@ -119,9 +114,10 @@ export class MapComponent
 			'monochrome' : monochrome, 
 			'lyrk'  : lyrk, 
 			'osmfr' : osmfr, 
-			'stamen' : stamen,
-			'openriver' : openriver, 
-			'transport' : transport,  
+			// 'stamen' : stamen,
+			// 'stamenTerrain' : stamenTerrain,
+			'WaterColor' : stamenWaterColor,
+			//'openriver' : openriver,  
 			'thunderforest' : thunderforest, 
 			'Pas de fond' : L.tileLayer(''),
 		};
