@@ -47,10 +47,10 @@
 				{% endif %}
 
 				{# ELEMENT WITH PENDING STATUS#}	
-				{% if config.isFeatureActivated('pending') %}
+				{% if config.isFeatureAvailable('pending') %}
 					<li class="subcategorie-option-item row" id="filter-pending" data-position="right" data-delay="300" data-tooltip="Afficher les éléments en attente de validation">
 				    <span class="icon icon-attention"></span>
-				    {% if isAdmin %}
+				    {% if config.isFeatureAvailable('directModeration') %}
 				    	<span class="option-name">Attente validation</span><span class="icon icon-eye" id="show-only-pending"></span></span> 
 			    	{% else %}
 			    		<span class="option-name"><span class="validation-process-info">En cours de validation</span></span> 

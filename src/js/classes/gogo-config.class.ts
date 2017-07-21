@@ -16,8 +16,10 @@ export class GoGoFeature
 {
   active : boolean = true;
   url : string = '';
-  roles : string[] = ['anonymous', 'user', 'admin'];
+  roles : string[] = ['anonymous', 'anonymous_with_mail', 'user', 'admin'];
   inIframe : boolean = true;
+
+  hasRole(role) { return this.roles.indexOf(role) >= 0; }
 }
 
 export class GoGoConfig
@@ -36,12 +38,18 @@ export class GoGoConfig
       directions: new GoGoFeature(),
       export:     new GoGoFeature(),
       layers:     new GoGoFeature(),
-      edit:       new GoGoFeature(),
-      report:     new GoGoFeature(),
-      delete:     new GoGoFeature(),
       pending:    new GoGoFeature(),
-      vote:       new GoGoFeature(),
       search:     new GoGoFeature(),
+
+      add:        new GoGoFeature(),
+      edit:       new GoGoFeature(),      
+      delete:     new GoGoFeature(),
+      report:     new GoGoFeature(),      
+      vote:       new GoGoFeature(),
+
+      directModeration:        new GoGoFeature(),
+      collaborativeModeration: new GoGoFeature(),
+      
   };
   readonly security =
   {
@@ -93,11 +101,26 @@ export class GoGoConfig
     let roleProvided = true;
     if (feature.hasOwnProperty('roles'))
     {
-      roleProvided = feature.roles.indexOf(App.loginModule.getStringifyRole()) >= 0;
+      roleProvided = feature.hasRole(App.loginModule.getStringifyRole());
     }
 
     return this.isFeatureActivated(featureName) && roleProvided;
   }
 
-  
+  isFeatureNeedMailInput(featureName) : boolean
+  {
+    if (!this.features.hasOwnProperty(featureName)) { console.warn(`[GoGoCartoJs] feature ${featureName} doesn't exist`); return false; }
+
+    let feature = this.features[featureName];
+
+    return App.loginModule.getRole() == Roles.Anonymous && feature.haseRole('anonymous_with_mail');
+  }
+
+  isFeatureOnlyForAdmin(featureName) : boolean
+  {
+    if (!this.features.hasOwnProperty(featureName)) { console.warn(`[GoGoCartoJs] feature ${featureName} doesn't exist`); return false; }
+
+    let feature = this.features[featureName];
+    return feature.roles.length == 0 && feature.roles[0] == 'admin';
+  }  
 }

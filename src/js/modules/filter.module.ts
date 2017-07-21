@@ -44,10 +44,17 @@ export class FilterModule
 	checkIfElementPassFilters (element : Element) : boolean
 	{
 		if (this.showOnlyFavorite_) return element.isFavorite;
-		
-		if (this.showOnlyPending_) return element.isPending();
 
-		if(!this.showPending_ && element.isPending()) return false;
+		if (App.config.isFeatureAvailable('pending'))
+		{
+			if (this.showOnlyPending_) return element.isPending();
+
+			if(!this.showPending_ && element.isPending()) return false;
+		}
+		else
+		{
+			if(element.isPending()) return false;
+		}		
 
 		if (App.currMainId == 'all')
 		{

@@ -71,14 +71,14 @@
 
   {# INTERACTIVE SECTION #}
   <div class="interactive-section"> 
-      {% if element.isPending() and config.isFeatureAvailable('pending') %}
+      {% if element.isPending() %}
       <div class="vote-section">
         <span class="basic-message">
           <span class="icon-attention"></span>
           <span class="text">{{ 'Nouvel Acteur' if element.status == ElementStatus.PendingAdd else 'Modifications' }} en cours de validation</span>
           {% if config.isFeatureActivated('vote') %}
             <span class="btn-vote-more-info validation-process-info" onclick='$("#modal-contribution").openModal()'>EN SAVOIR PLUS</span>
-            <span class="vote-button btn btn-vote waves-effect waves-light">{{ 'Décider' if isAdmin else 'Voter' }}</span>
+            <span class="vote-button btn btn-vote waves-effect waves-light">{{ 'Décider' if config.isFeatureAvailable('directModeration') else 'Voter' }}</span>
             {% endif %}
         </span>        
       </div>
@@ -118,9 +118,9 @@
       </div>
     {% endif %}
 
-    {% if config.isFeatureAvailable('edit') and (not element.isPending() or isAdmin) %} 
+    {% if config.isFeatureAvailable('edit') and (not element.isPending() or config.isFeatureAvailable('directModeration')) %} 
       <div class="menu-element-item item-edit">
-        {% set editText = 'Modifier' if isAdmin else 'Proposer des modifications' %}
+        {% set editText = 'Modifier' if config.isFeatureAvailable('directModeration') else 'Proposer des modifications' %}
         <a href={{ editUrl }} {% if isIframe %}target="_blank"{% endif %}>
         <span class="menu-icon icon-edit tooltipped" 
         data-position="top" data-delay="0" data-tooltip="{{ editText }}"></span>
