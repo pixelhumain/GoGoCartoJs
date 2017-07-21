@@ -24,7 +24,6 @@ a.leaflet-control-zoom-out {
     @include transform(rotate(90deg));
     background-color: white;
     z-index: 500;
-    background-color: #de5a5f;
     cursor: pointer;
     color: #fff;
     font-size: 1rem;
@@ -58,7 +57,6 @@ a.leaflet-control-zoom-out {
     z-index: 500;
     top: 15px;
     left: 30px;
-    color: #3d3d3d;
     background-color: #ffffff;
     padding: .5rem 1rem;
 
@@ -67,8 +65,6 @@ a.leaflet-control-zoom-out {
     font-weight: normal;
     font-size: 14px;
 
-    // deuxième version
-    color: $primary-color;
     font-size: 14px !important;
     padding: 5px 10px;
     background: #fff;

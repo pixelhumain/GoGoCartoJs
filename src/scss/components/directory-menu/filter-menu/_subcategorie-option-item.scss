@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-03-02 08:57:20
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-03-24 13:59:18
+* @Last Modified time: 2017-07-21 18:11:03
 */
 .subcategorie-option-item
 {
@@ -25,7 +25,7 @@
 	    	border-color: #545454 transparent transparent transparent; 
     	}    	
 
-	    &:hover .arrow-after { margin-bottom: -5px; border-color: #de5a5f transparent transparent transparent; }
+	    &:hover .arrow-after { margin-bottom: -5px; /*border-color: #de5a5f transparent transparent transparent;*/ }
 	  }
   }
 
@@ -39,7 +39,7 @@
 			{ 
 				border: solid 6px;
 	    	margin-bottom: 1px;
-	    	border-color:  transparent transparent #de5a5f transparent; 
+	    	//border-color:  transparent transparent #de5a5f transparent; 
 	    }
     }
 	}
@@ -96,7 +96,7 @@
 		{
 			&:before
 			{
-				color: $primary-color;
+				//color: $primary-color;
 				//border-color:black;
 			}
 		}
@@ -138,7 +138,7 @@
 
     &:not(.option-collapsible)
     {
-    	.subcategorie-option-checkbox + label:before { color: $primary-color; }
+    	//.subcategorie-option-checkbox + label:before { color: $primary-color; }
     }
 	}	
 

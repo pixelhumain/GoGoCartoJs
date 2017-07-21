@@ -6,7 +6,6 @@
 #directory-menu
 {
 	z-index: 200;
-  background-color: white;
 	overflow-y:hidden; 
   @include transition(height .5s);
   @include box-shadow(4px 0 2px rgba(0, 0, 0, 0.2), -1px 0 2px rgba(0, 0, 0, 0.2));
@@ -22,13 +21,11 @@
     @include flex-flow(column);
     width: 100%;
     height: 100%;
-    background-color: #272626;
 
     .directory-menu-header
     {      
       width: 100%;
       position: relative;
-      background-color: $primary-color;
 
       .btn-close-menu.large-screen
       {        

@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-03-02 08:57:20
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-07-13 11:43:27
+* @Last Modified time: 2017-07-21 18:53:47
 */
 
 .sub-categories-content.no-top-divider > ul > .main-option-subcategories-container>  .category-wrapper > .subcategory-item
@@ -23,22 +23,6 @@
 
   border-top: 2px dashed #eeeeee;
   margin-top: 1rem;  
-
-  &:not(.expanded) 
-  { 
-  	margin-bottom: -.7rem; 
-
-  	.name-wrapper
-		{
-    	.arrow-after
-    	{
-    		margin-bottom: -2px !important;
-	    	border-color: #272626 transparent transparent transparent !important;
-    	}    	
-
-	    &:hover .arrow-after{ border-color: $primary-color transparent transparent transparent !important;}
-	  }
-  }
 
   &.first
   {
@@ -64,8 +48,24 @@
 	  &:hover
 	  {	  	
 	  	cursor: pointer;
-	  	color: $primary-color;
-	  	.arrow-after { border-color:  transparent transparent $primary-color transparent; }
+	  	// color: $primary-color;
+	  	// .arrow-after { border-color:  transparent transparent $primary-color transparent; }
+	  }
+  }
+
+  &:not(.expanded) 
+  { 
+  	margin-bottom: -.7rem; 
+
+  	.name-wrapper
+		{
+    	.arrow-after
+    	{
+    		margin-bottom: -2px !important;
+	    	border-color: #272626 transparent transparent transparent;
+    	}    	
+
+	    //&:hover .arrow-after{ border-color: $primary-color transparent transparent transparent !important;}
 	  }
   }
 

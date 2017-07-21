@@ -1,7 +1,7 @@
 <div class="gogocarto-container">
 
   {# Menu #}
-  <section id="directory-menu" style="display:none"> 
+  <section id="directory-menu" class="gogo-bg-neutral-dark" style="display:none"> 
      {% include 'components/directory-menu/directory-menu.html.njk' %} 
   </section>
    
@@ -36,7 +36,7 @@
     {% import 'components/spinner-loader.html.njk' as spinnerLoader%}
     {{ spinnerLoader.create('directory-spinner-loader') }}
 
-    <div id="show-directory-menu-button" style="display:none"><span class='arrow-right'></span>Menu</div> 
+    <div id="show-directory-menu-button gogo-bg-primary" style="display:none"><span class='arrow-right'></span>Menu</div> 
     
     <div id="directory-content-map" style="display:none"> 
 
@@ -44,7 +44,7 @@
         Chargement...
       </div> 
       
-      <div class="show-as-list-button"><i class="icon-list"></i></div>  
+      <div class="show-as-list-button gogo-primary"><i class="icon-list"></i></div>  
       
       {% if config.isFeatureActivated('layers') %}
         <div id="change-layers" class="layers-button leaflet-bar" data-tooltip="Changer le fond de carte" data-position="left" data-delay="300">
@@ -61,8 +61,8 @@
       
     </div>       
 
-    <div id="directory-content-list" style="display:none">
-      <div class="element-list-title-bar">
+    <div id="directory-content-list" class="gogo-bg-background" style="display:none">
+      <div class="element-list-title-bar gogo-bg-neutral">
         Résultats
         <span class="element-list-title-number-results"></span>
         <span class="element-list-title-text"></span>        

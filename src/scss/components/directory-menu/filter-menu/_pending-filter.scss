@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-04-16 16:21:51
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-05-09 16:22:59
+* @Last Modified time: 2017-07-21 18:13:09
 */
 
 $pending-color: #565656;
@@ -12,8 +12,6 @@ $pending-color: #565656;
 	margin-bottom: -.6rem;
 	color: $pending-color;
 
-	.icon { color:inherit !important }
-
 	#show-only-pending
 	{
 		float: right;
@@ -21,7 +19,6 @@ $pending-color: #565656;
 
 		&:hover
 		{
-			color: $primary-color !important;
 			cursor: pointer;
 		}
 	}

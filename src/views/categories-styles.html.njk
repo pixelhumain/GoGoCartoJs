@@ -1,5 +1,44 @@
+{% macro createcolor(name, value) %}
+  .gogo-{{ name }} { color: {{ value }}; }
+  .gogo-h-{{ name }}:hover { color: {{ value }} !important; }
+  .gogo-bg-{{ name }} { background-color: {{ value }}; }
+  .gogo-h-bg-{{ name }}:hover { background-color: {{ value }} !important; }
+  .gogo-border-{{ name }} { border-color: {{ value }}; }
+  .gogo-h-border-{{ name }}:hover { border-color: {{ value }} !important; }
+{% endmacro %}
+
 <style>
-	
+
+  {% set darkBlue = '#354254' %}
+  {% set blue = '#6b7e9b' %}
+  {% set greyLight = '#f4f4f4' %}
+  {% set green = '#bdc900' %}
+  {% set pink = '#bd2d86' %}
+
+  {% set neutralDark = darkBlue %}
+  {% set neutral = blue %}
+  {% set neutralLight = greyLight %}
+  {% set secondary = green %}
+  {% set primary = pink %}
+
+  {# DESIGN #}
+  {{ createcolor('neutral-dark', neutralDark) }}
+  {{ createcolor('neutral', neutral) }}
+  {{ createcolor('neutral-light', neutralLight) }}
+  {{ createcolor('primary', primary) }}
+  {{ createcolor('secondary', secondary) }}
+  
+  {{ createcolor('background', greyLight) }}
+
+  .subcategory-item:not(.expanded) .name-wrapper:hover > .arrow-after { border-color: {{ primary }} transparent transparent  transparent; }
+  .subcategory-item .name-wrapper:hover { color: {{ primary }}; }
+  .subcategory-item .name-wrapper:hover > .arrow-after { border-color:  transparent transparent {{ primary }} transparent; }
+  .subcategorie-option-item:hover .subcategorie-option-checkbox + label:before { color: {{ primary }} }
+  .subcategorie-option-item:not(.expanded) .icon-name-wrapper:hover .arrow-after { border-color: {{ primary }} transparent transparent transparent; }
+  .icon-name-wrapper:hover .arrow-after { border-color:  transparent transparent {{ primary }} transparent; }
+  a { color: {{ primary }}; }
+
+  {# TAXONOMY #}
 	.bgdSoftColorAs { background-color: #484848 }
   .borderSoftColorAs { border-color: #484848 }
   .bgdColorAs { background-color: #484848 }
@@ -20,4 +59,8 @@
   .borderSoftColorAs.pending { border-color: #616161 }
   .bgdColorAs.pending { background-color: #484848 }
   .colorAs.pending { color:#484848 }
+
+  
+
 </style>
+
