@@ -226,7 +226,8 @@ export class InfoBarComponent
 
 			let elementInfoBar = $("#element-info-bar");
 		  let height =  $('.gogocarto-container').height();
-			height -= elementInfoBar.find('.collapsible-header').outerHeight(true);
+			height -= elementInfoBar.find('.collapsible-header').outerHeight(true);			
+			height -= elementInfoBar.find('.interactive-section').outerHeight(true);	
 			height -= elementInfoBar.find('.starRepresentationChoice-helper:visible').outerHeight(true);
 			height -= elementInfoBar.find(".menu-element").outerHeight(true);
 
