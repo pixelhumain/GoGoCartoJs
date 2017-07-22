@@ -15,7 +15,7 @@
 		{# MAIN OPTIONS ICONS & TOOLTIP #}
 		{% for mainOption in mainCategory.options %}
 			<div class="icon main-icon {{ mainOption.icon }} gogo-neutral gogo-h-neutral-light"  id="main-option-icon-{{mainOption.id}}" data-option-id="{{ mainOption.id }}">
-				<div class="main-option-tooltip gogo-bg-neutral-dark">{{ mainOption.name }}</div>
+				<div class="main-option-tooltip gogo-bg-neutral-dark-transparent">{{ mainOption.name }}</div>
 			</div>
 
 		{% endfor %}
@@ -64,6 +64,10 @@
 				    	</div>
 				    </div>
 					</li>
+				{% endif %}
+
+				{% if config.isFeatureAvailable('pending') or config.isFeatureActivated('favorite') %}
+					<div style="margin-bottom:-.6rem"></div>
 				{% endif %}
 
 				{# ALL CATEGORIES MENU #}

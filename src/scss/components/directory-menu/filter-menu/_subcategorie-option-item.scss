@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-03-02 08:57:20
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-07-21 18:11:03
+* @Last Modified time: 2017-07-22 10:00:58
 */
 .subcategorie-option-item
 {
@@ -22,7 +22,7 @@
     	.arrow-after
     	{
     		margin-bottom: -3px;
-	    	border-color: #545454 transparent transparent transparent; 
+	    	//border-color: #545454 transparent transparent transparent; 
     	}    	
 
 	    &:hover .arrow-after { margin-bottom: -5px; /*border-color: #de5a5f transparent transparent transparent;*/ }
@@ -50,7 +50,7 @@
     margin-left: 1rem;
     border: solid 5px;
    	margin-bottom: 1px;
-    border-color:  transparent transparent #545454 transparent ;
+    //border-color:  transparent transparent #545454 transparent ;
   }
 
 
@@ -142,18 +142,18 @@
     }
 	}	
 
-	&.disabled 
-  {
-  	.icon { color: $option-disabled-color; }
+	// &.disabled 
+ //  {
+ //  	.icon { color: $option-disabled-color; }
 
-  	color: #828282;
+ //  	color: #828282;
 
-  	.subcategorie-option-checkbox + label:before
-  	{
-  		border-color: $option-disabled-color;
-  	}
-  	.arrow-after { border-color: #828282 transparent transparent transparent ;}
-  }
+ //  	.subcategorie-option-checkbox + label:before
+ //  	{
+ //  		border-color: $option-disabled-color;
+ //  	}
+ //  	.arrow-after { border-color: #828282 transparent transparent transparent ;}
+ //  }
 
 	
 

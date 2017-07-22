@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-03-02 08:57:20
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-07-21 18:53:47
+* @Last Modified time: 2017-07-22 10:19:55
 */
 
 .sub-categories-content.no-top-divider > ul > .main-option-subcategories-container>  .category-wrapper > .subcategory-item
@@ -41,7 +41,7 @@
 	    margin-left: 1rem;
 	    margin-bottom: 2px;
 	    border: solid 5px;
-	    border-color: transparent transparent #272626 transparent;
+	    // border-color: transparent transparent #272626 transparent;
 	    //@include transition(all .2s);
 	  }
 
@@ -62,7 +62,7 @@
     	.arrow-after
     	{
     		margin-bottom: -2px !important;
-	    	border-color: #272626 transparent transparent transparent;
+	    	//border-color: #272626 transparent transparent transparent;
     	}    	
 
 	    //&:hover .arrow-after{ border-color: $primary-color transparent transparent transparent !important;}
@@ -105,8 +105,8 @@
 					top: 9px !important;
 			    width: 17px;
 			    height: 17px;
-			    color : #717171;
-			    background-color: #717171;
+			    // color : #717171;
+			    // background-color: #717171;
 			    border: 2px solid ;	
 			    @include transition(all .3s);	    
 				}
@@ -127,19 +127,19 @@
 		}
 	}
 
-	&.disabled 
-  {
-  	.icon { color: $option-disabled-color; }
+	// &.disabled 
+ //  {
+ //  	.icon { color: $option-disabled-color; }
 
-  	color: #828282;
+ //  	color: #828282;
 
-  	.subcategorie-checkbox + label:after
-  	{
-  		color: #9a9a9a !important;
-  	}
+ //  	.subcategorie-checkbox + label:after
+ //  	{
+ //  		color: #9a9a9a !important;
+ //  	}
 
-  	.arrow-after { border-color: #828282 transparent transparent transparent ;}
-  }
+ //  	.arrow-after { border-color: #828282 transparent transparent transparent ;}
+ //  }
 
   
 

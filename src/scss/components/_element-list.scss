@@ -12,7 +12,7 @@
 	{
 		float: left;
 		text-decoration: underline;
-		&:hover { cursor: pointer; color:$primary-color; }
+		&:hover { cursor: pointer; }
 
 		.btn-back { color: inherit !important;     height: 2rem;}
 
@@ -36,7 +36,6 @@
     padding: 0 2rem;
     @media #{$medium-and-up} { padding-left: 3rem; padding-right: calc(3rem + 20px); }
 		@media #{$large-only} {padding-left: 10rem; padding-right: calc(10rem + 20px); }	
-	  color: #eee;  
 	}	
 
 	ul.collapsible

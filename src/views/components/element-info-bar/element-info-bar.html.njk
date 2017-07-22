@@ -44,7 +44,7 @@
       <span class="description col s12">{{ element.getProperty('description')|safe }}</span> 
 
       {# Categories litteral #}
-      <span class="inline-option-values col s8 hideOnLargeScreen">
+      <span class="inline-option-values gogo-neutral col s8 hideOnLargeScreen">
 
         {% for optionValue in allOptionsValues %} 
             {% set isDisabled =   '' if optionValue.isFilledByFilters else 'disabled' %}

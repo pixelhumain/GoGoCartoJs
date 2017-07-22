@@ -10,33 +10,100 @@
 <style>
 
   {% set darkBlue = '#354254' %}
+  {% set darkBlueTransparent = 'rgba(53, 66, 84, 0.9)' %}
+  {% set softDarkblue = '#5c6c86' %}
   {% set blue = '#6b7e9b' %}
   {% set greyLight = '#f4f4f4' %}
+  {% set blueLight = '#c2c9d4' %}
   {% set green = '#bdc900' %}
   {% set pink = '#bd2d86' %}
 
   {% set neutralDark = darkBlue %}
+  {% set neutralDarkTransparent = darkBlueTransparent %}
+  {% set neutralSoftDark = softDarkblue %}
   {% set neutral = blue %}
   {% set neutralLight = greyLight %}
   {% set secondary = green %}
   {% set primary = pink %}
+  {% set background = greyLight %}
+  {% set textColor = neutral %}
+  {% set disableColor = blueLight %}
+  {% set listTitle = neutralDark %}
+  {% set listTitleBackground = background %}
+
+  {% set mainFont = 'Roboto' %}
+  {% set titleFont = 'Lobster' %}
+  {% set taxonomyMainTitleFont = titleFont %}
 
   {# DESIGN #}
   {{ createcolor('neutral-dark', neutralDark) }}
+  {{ createcolor('neutral-dark-transparent', neutralDarkTransparent) }}
   {{ createcolor('neutral', neutral) }}
+  {{ createcolor('neutral-soft-dark', neutralSoftDark ) }}
   {{ createcolor('neutral-light', neutralLight) }}
   {{ createcolor('primary', primary) }}
-  {{ createcolor('secondary', secondary) }}
-  
-  {{ createcolor('background', greyLight) }}
+  {{ createcolor('secondary', secondary) }}  
+  {{ createcolor('background', background) }}
+  {{ createcolor('disabled', disableColor) }}
+  {{ createcolor('list-title', listTitle) }}
+  {{ createcolor('list-title-background', listTitleBackground) }}
 
-  .subcategory-item:not(.expanded) .name-wrapper:hover > .arrow-after { border-color: {{ primary }} transparent transparent  transparent; }
-  .subcategory-item .name-wrapper:hover { color: {{ primary }}; }
-  .subcategory-item .name-wrapper:hover > .arrow-after { border-color:  transparent transparent {{ primary }} transparent; }
-  .subcategorie-option-item:hover .subcategorie-option-checkbox + label:before { color: {{ primary }} }
-  .subcategorie-option-item:not(.expanded) .icon-name-wrapper:hover .arrow-after { border-color: {{ primary }} transparent transparent transparent; }
-  .icon-name-wrapper:hover .arrow-after { border-color:  transparent transparent {{ primary }} transparent; }
+  html
+  {
+    font-family: {{ mainFont }}, sans-serif;
+    color: {{ neutralDark }};
+  }
+
+  .gogo-font-title { font-family: {{ titleFont }}, sans-serif;}
+  .sub-categorie-main-title { font-family: {{ taxonomyMainTitleFont }}, sans-serif; }
+
+  .collapsible-header:hover .moreInfos, .collapsible-header:hover .lessInfos { color: {{ primary }}; }
+  
+  .subcategorie-option-item:hover          .subcategorie-option-checkbox + label:before { color: {{ primary }} }  
+  .subcategorie-option-item:not(.expanded) .icon-name-wrapper       .arrow-after { border-color: {{ neutralDark }} transparent transparent transparent; }
+  .subcategorie-option-item:not(.expanded) .icon-name-wrapper:hover .arrow-after { border-color: {{ primary }} transparent transparent transparent !important; }
+  .subcategorie-option-item.expanded       .icon-name-wrapper       .arrow-after { border-color:  transparent transparent {{ neutralDark }} transparent; }
+  .subcategorie-option-item.expanded       .icon-name-wrapper:hover .arrow-after { border-color:  transparent transparent {{ primary }} transparent !important; }
+  
+  .subcategorie-option-item.disabled { color: {{ disableColor }}; }
+  .subcategorie-option-item.disabled .subcategorie-option-checkbox + label:before { border-color: {{ disableColor }}; }
+  .subcategorie-option-item.disabled .icon { color: {{ disableColor }}; }
+  .subcategorie-option-item.disabled .arrow-after { border-color: {{ disableColor }} transparent transparent transparent ;}
+
+  .subcategory-item                .name-wrapper:hover { color: {{ primary }}; }
+  .subcategory-item:not(.expanded) .name-wrapper       .arrow-after { border-color: {{ neutralDark }} transparent transparent  transparent; }
+  .subcategory-item:not(.expanded) .name-wrapper:hover .arrow-after { border-color: {{ primary }} transparent transparent  transparent !important; }
+  .subcategory-item.expanded       .name-wrapper       .arrow-after { border-color:  transparent transparent {{ neutralDark }} transparent; }
+  .subcategory-item.expanded       .name-wrapper:hover .arrow-after { border-color:  transparent transparent {{ primary }} transparent !important; }
+
+  .subcategory-item.disabled { color: {{ disableColor }}; }
+  .subcategory-item.disabled .subcategorie-checkbox + label:after { border-color: {{ disableColor }} !important; }
+  .subcategory-item.disabled .icon { color: {{ disableColor }}; }
+  .subcategory-item.disabled .name-wrapper .arrow-after { border-color: {{ disableColor }} transparent transparent transparent ;}
+  .subcategory-item.disabled.expanded .name-wrapper .arrow-after { border-color:  transparent transparent {{ disableColor }} transparent ;}
+
+  .subcategory-item .checkbox-wrapper .checkbox-container .subcategorie-checkbox + label:after { color: {{ neutralSoftDark }}; background-color: {{ neutralSoftDark }} }
+
   a { color: {{ primary }}; }
+
+  .btn
+  {
+    color: #fff;
+    background-color: {{ secondary }};
+    border-radius: 7px;
+    font-weight: bold;
+    box-shadow: none;
+    padding: 0 3rem;
+  }
+
+  .btn:hover
+  {
+    background-color: {{ secondary }};
+    box-shadow: 0 2px 6px 0px rgba(0, 0, 0, 0), 0 3px 11px 0 rgba(0, 0, 0, 0.15);
+  }
+
+  .backdrop { background-color: {{ neutralDarkTransparent }}; } // tooltip
+      
 
   {# TAXONOMY #}
 	.bgdSoftColorAs { background-color: #484848 }
