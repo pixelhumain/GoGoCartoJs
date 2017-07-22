@@ -36,6 +36,8 @@
     padding: 0 2rem;
     @media #{$medium-and-up} { padding-left: 3rem; padding-right: calc(3rem + 20px); }
 		@media #{$large-only} {padding-left: 10rem; padding-right: calc(10rem + 20px); }	
+
+		#list-title-shadow-bottom { display:none }
 	}	
 
 	ul.collapsible

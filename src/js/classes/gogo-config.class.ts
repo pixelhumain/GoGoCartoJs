@@ -55,7 +55,30 @@ export class GoGoConfig
   {
       userRole: 'anonymous',
       loginAction: function() { console.warn("[GoGoCarto] You need login to access this feature"); }
-  };  
+  };
+  // see gogo-styles for defaut values
+  readonly colors =
+  {
+    neutralDark: undefined ,
+    neutralDarkTransparent: undefined ,
+    neutralSoftDark: undefined ,
+    neutral: undefined ,
+    neutralLight: undefined ,
+    secondary: undefined ,
+    primary: undefined ,
+    background: undefined ,
+
+    textColor: undefined ,
+    disableColor: undefined ,
+    listTitle: undefined ,
+    listTitleBackBtn: undefined,
+    listTitleBackground: undefined ,
+    searchBar: undefined, 
+
+    mainFont: undefined ,
+    titleFont: undefined ,
+    taxonomyMainTitleFont: undefined ,     
+  }
 
 	constructor(config : any)
 	{

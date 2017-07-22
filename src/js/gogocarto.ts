@@ -98,7 +98,7 @@ export class GoGoCartoModule
 		App.categoryModule.createCategoriesFromJson(taxonomy, options.openHours);
 		if (App.categoryModule.options.length)
 		{
-			let styles = App.templateModule.render('categories-styles', {'optionList':App.categoryModule.options});
+			let styles = App.templateModule.render('gogo-styles', {'optionList':App.categoryModule.options, 'config':App.config});
 			let domToAddStyles = $('head').length ? $('head') : $('html');
 			if (domToAddStyles.length) domToAddStyles.append(styles);
 			else 	console.warn("[GoGoCarto] Cannot find Dom 'head' or 'html' to add styles");

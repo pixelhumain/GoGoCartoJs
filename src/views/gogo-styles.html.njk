@@ -9,31 +9,28 @@
 
 <style>
 
-  {% set darkBlue = '#354254' %}
-  {% set darkBlueTransparent = 'rgba(53, 66, 84, 0.9)' %}
-  {% set softDarkblue = '#5c6c86' %}
-  {% set blue = '#6b7e9b' %}
-  {% set greyLight = '#f4f4f4' %}
-  {% set blueLight = '#c2c9d4' %}
-  {% set green = '#bdc900' %}
-  {% set pink = '#bd2d86' %}
+  {# Main colors #}
+  {% set neutralDark     = config.colors.neutralDark      | default('#272626') %}  
+  {% set neutralSoftDark = config.colors.neutralSoftDark  | default('#717171') %}
+  {% set neutral         = config.colors.neutral          | default('#676565') %}
+  {% set neutralLight    = config.colors.neutralLight     | default('#eeeeee') %}
+  {% set secondary       = config.colors.secondary        | default('#4A7874') %}
+  {% set primary         = config.colors.primary          | default('#de5a5f') %}
+  {% set background      = config.colors.background       | default('#4A7874') %}
 
-  {% set neutralDark = darkBlue %}
-  {% set neutralDarkTransparent = darkBlueTransparent %}
-  {% set neutralSoftDark = softDarkblue %}
-  {% set neutral = blue %}
-  {% set neutralLight = greyLight %}
-  {% set secondary = green %}
-  {% set primary = pink %}
-  {% set background = greyLight %}
-  {% set textColor = neutral %}
-  {% set disableColor = blueLight %}
-  {% set listTitle = neutralDark %}
-  {% set listTitleBackground = background %}
+  {% set mainFont  = config.colors.mainFont  | default('Roboto') %}
+  {% set titleFont = config.colors.titleFont | default('Roboto') %}
 
-  {% set mainFont = 'Roboto' %}
-  {% set titleFont = 'Lobster' %}
-  {% set taxonomyMainTitleFont = titleFont %}
+  {# secondary colors #}
+  {% set neutralDarkTransparent = config.colors.neutralDarkTransparent  | default('rgba(64,64,64,.88)') %}
+  {% set textColor              = config.colors.textColor               | default(neutralDark) %}
+  {% set disableColor           = config.colors.disableColor            | default('#828282') %}
+  {% set listTitle              = config.colors.listTitle               | default(neutralLight) %}
+  {% set listTitleBackBtn       = config.colors.listTitleBackBtn        | default(neutralLight) %}
+  {% set listTitleBackground    = config.colors.listTitleBackground     | default(neutralDarkTransparent) %}
+  {% set searchBar              = config.colors.searchBar               | default(primary) %}
+
+  {% set taxonomyMainTitleFont  = config.colors.taxonomyMainTitleFont   | default(mainFont) %}
 
   {# DESIGN #}
   {{ createcolor('neutral-dark', neutralDark) }}
@@ -45,14 +42,18 @@
   {{ createcolor('secondary', secondary) }}  
   {{ createcolor('background', background) }}
   {{ createcolor('disabled', disableColor) }}
-  {{ createcolor('list-title', listTitle) }}
-  {{ createcolor('list-title-background', listTitleBackground) }}
 
   html
   {
     font-family: {{ mainFont }}, sans-serif;
-    color: {{ neutralDark }};
+    color: {{ textColor }};
   }
+
+  .directory-menu-header { background-color: {{ searchBar }} }
+
+  .element-list-title-bar { color: {{ listTitle }}; background-color: {{ listTitleBackground }} }
+  .element-list-title-bar .show-as-map-button       { color: {{ listTitleBackBtn }}; }
+  .element-list-title-bar .show-as-map-button:hover { color: {{ primary }}; }
 
   .gogo-font-title { font-family: {{ titleFont }}, sans-serif;}
   .sub-categorie-main-title { font-family: {{ taxonomyMainTitleFont }}, sans-serif; }
@@ -89,18 +90,13 @@
   .btn
   {
     color: #fff;
-    background-color: {{ secondary }};
-    border-radius: 7px;
-    font-weight: bold;
-    box-shadow: none;
-    padding: 0 3rem;
+    background-color: {{ primary }};
   }
 
   .btn:hover
   {
-    background-color: {{ secondary }};
-    box-shadow: 0 2px 6px 0px rgba(0, 0, 0, 0), 0 3px 11px 0 rgba(0, 0, 0, 0.15);
-  }
+    background-color: {{ primary }};
+  }  
 
   .backdrop { background-color: {{ neutralDarkTransparent }}; } // tooltip
       

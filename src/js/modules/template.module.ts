@@ -22,7 +22,7 @@ export class TemplateModule
 		{
 			case 'layout': fileUrl = 'layout.html.njk'; break;
 			case 'marker': fileUrl = 'components/marker.html.njk'; break;
-			case 'categories-styles': fileUrl = 'categories-styles.html.njk'; break;
+			case 'gogo-styles': fileUrl = 'gogo-styles.html.njk'; break;
 			case 'element-info-bar': fileUrl = 'components/element-info-bar/element-info-bar.html.njk'; break;
 			case 'vote-modal-content': fileUrl = 'modals/vote-for-pending-element-content.html.njk'; break;
 			default: console.warn('[GoGoCarto] No template associated to templateName', templateName);

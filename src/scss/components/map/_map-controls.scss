@@ -22,7 +22,6 @@ a.leaflet-control-zoom-out {
     top: 25px;
     padding: 5px 15px 5px 41px; 
     @include transform(rotate(90deg));
-    background-color: white;
     z-index: 500;
     cursor: pointer;
     color: #fff;

@@ -46,6 +46,11 @@ export class ElementListComponent
 		var that = this;
 		$('#directory-content-list ul').on('scroll', function(e) 
 		{
+			if($(this).scrollTop() > 0)
+				$("#list-title-shadow-bottom").show();
+			else
+				$("#list-title-shadow-bottom").hide();
+
 			if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {            
 		    	that.handleBottom();
 		  }
