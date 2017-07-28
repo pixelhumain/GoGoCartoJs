@@ -95,6 +95,8 @@ export function createListenersForElementMenu(object)
 
 	object.find('.item-directions').click(function() 
 	{
+		$(this).find('.icon-directions').hideTooltip();
+
 		let element = App.elementModule.getElementById(getCurrentElementIdShown());
 
 		if (App.state !== AppStates.Constellation && !App.geocoder.getLocation())

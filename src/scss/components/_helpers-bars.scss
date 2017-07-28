@@ -5,7 +5,6 @@
     text-align: center;
     color: #F5F3F3;
     font-weight: 400;
-    background-color: $secondary-color;
 
     .btn-select-as-representant 
     {
@@ -14,7 +13,6 @@
         text-transform: none;
         height: 2rem;
     	line-height: 2rem;
-        background-color: $secondary-color;
     }
 }
 
@@ -47,7 +45,6 @@
         left: 0;
         right: 0;
         padding: 1rem 2.5rem 1rem 1rem;
-        background-color: $primary-color;
         color: white;
 
         @include transition(margin-right .5s);

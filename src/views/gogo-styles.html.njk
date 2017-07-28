@@ -29,6 +29,7 @@
   {% set listTitleBackBtn       = config.colors.listTitleBackBtn        | default(neutralLight) %}
   {% set listTitleBackground    = config.colors.listTitleBackground     | default(neutralDarkTransparent) %}
   {% set searchBar              = config.colors.searchBar               | default(primary) %}
+  {% set interactiveColor       = config.colors.interactiveSection      | default(primary) %}
 
   {% set taxonomyMainTitleFont  = config.colors.taxonomyMainTitleFont   | default(mainFont) %}
 
@@ -49,6 +50,11 @@
     color: {{ textColor }};
   }
 
+  h1
+  {
+    font-family: {{ titleFont }};
+  }
+
   .directory-menu-header { background-color: {{ searchBar }} }
 
   .element-list-title-bar { color: {{ listTitle }}; background-color: {{ listTitleBackground }} }
@@ -59,6 +65,17 @@
   .sub-categorie-main-title { font-family: {{ taxonomyMainTitleFont }}, sans-serif; }
 
   .collapsible-header:hover .moreInfos, .collapsible-header:hover .lessInfos { color: {{ primary }}; }
+
+  .interactive-section { background-color: {{ interactiveColor }}; }
+
+  #search-bar::selection {
+      background: {{ searchBar }}; 
+      color: white;
+  }
+  #search-bar::-moz-selection {
+      background: {{ searchBar }}; 
+      color: white;
+  }
   
   .subcategorie-option-item:hover          .subcategorie-option-checkbox + label:before { color: {{ primary }} }  
   .subcategorie-option-item:not(.expanded) .icon-name-wrapper       .arrow-after { border-color: {{ neutralDark }} transparent transparent transparent; }

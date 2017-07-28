@@ -40,9 +40,9 @@
         .icon-close
         {   
             padding-left: 1rem;
-            color: #CECECE;
+            color: #CECECE !important;
 
-            &:hover { color: white; }
+            &:hover { color: white !important; }
         }
 
         #element-info 
@@ -86,7 +86,6 @@
         float: right;
         margin: 0;
         font-size: 1.2rem;
-        color: #3D3D3D;
         margin-top: -.1rem;
 
         &:hover
