@@ -37,17 +37,12 @@
   @include border-radius(5px);
   @include box-sizing(border-box);
 
-  &:focus
-  {
-  	border-color: $secondary-color;
-  }
-
 	&.invalid
 	{
 		border-color: $error-color !important;
 	}
 
-    &::-webkit-input-placeholder { 
+  &::-webkit-input-placeholder { 
 		color: #4c4c4c;
 	}
 	&::-moz-placeholder { 
@@ -59,20 +54,6 @@
 	&:-moz-placeholder { 
 		color: #4c4c4c;
 	}
-
-	&::selection {
-  		background: $secondary-color; 
-  		color: white;
-	}
-	&::-moz-selection {
-  		background: $secondary-color; 
-  		color: white;
-	}
-
-    &:focus
-    {
-    	border-color: #6B6B6B;
-    }    
 }
 
 #search-bar-container
