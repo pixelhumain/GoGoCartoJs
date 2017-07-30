@@ -74,6 +74,7 @@ export class GoGoConfig
     listTitleBackBtn: undefined,
     listTitleBackground: undefined ,
     searchBar: undefined, 
+    interactiveSection: undefined,
 
     mainFont: undefined ,
     titleFont: undefined ,
