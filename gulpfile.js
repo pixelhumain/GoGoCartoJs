@@ -98,7 +98,9 @@ gulp.task('concat_css', function() {
 });
 
 gulp.task('dist_assets', ['concat_css'], function() {
-  return gulp.src(['web/assets/images/**/*', '!web/assets/images/carto.zip', '!web/assets/images/styles.css'])
+    gulp.src(['web/assets/images/fonts/*'])
+    .pipe(gulp.dest('dist/fonts/'));
+  return gulp.src(['web/assets/images/*.png'])
     .pipe(gulp.dest('dist/images/'));
 });
 
