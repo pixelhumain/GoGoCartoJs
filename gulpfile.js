@@ -89,9 +89,17 @@ gulp.task('concat_directory', function() {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('dist_assets', function() {
-  return gulp.src(['web/assets/**/*'])
+gulp.task('concat_css', function() {
+  return gulp.src(['web/assets/gogocarto.css',
+                   'web/assets/images/styles.css'
+                   ])
+    .pipe(concat('gogocarto.css'))
     .pipe(gulp.dest('dist'));
+});
+
+gulp.task('dist_assets', ['concat_css'], function() {
+  return gulp.src(['web/assets/images/**/*', '!web/assets/images/carto.zip', '!web/assets/images/styles.css'])
+    .pipe(gulp.dest('dist/images/'));
 });
 
 
