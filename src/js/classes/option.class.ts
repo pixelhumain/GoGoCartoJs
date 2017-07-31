@@ -12,6 +12,7 @@ export class Option extends CategoryOptionTreeNode
 	nameShort: string;
 	index : number;
 	color : string;
+	softColor : string;
 	icon : string;
 	useIconForMarker: boolean;
 	useColorForMarker : boolean;
@@ -31,6 +32,7 @@ export class Option extends CategoryOptionTreeNode
 		this.index = $optionJson.index;
 		this.nameShort = $optionJson.nameShort;
 		this.color = $optionJson.color;
+		this.softColor = $optionJson.softColor;
 		this.icon = $optionJson.icon;
 		this.useIconForMarker = $optionJson.useIconForMarker;
 		this.useColorForMarker = $optionJson.useColorForMarker;
