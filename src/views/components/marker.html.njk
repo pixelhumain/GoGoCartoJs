@@ -2,10 +2,10 @@
 
 <div class="marker-wrapper colorAs {{pendingClass}}" option-id="{{mainOptionValueToDisplay.colorOptionId}}" id="marker-{{ element.id }}">
 
-	<div class="rotate animate icon-marker"></div>
+	<div class="rotate animate gogo-icon-marker"></div>
 	
 	<div class="iconInsideMarker-wrapper rotate">
-		{% set mainIcon = 'icon-attention' if showPending else mainOptionValueToDisplay.option.icon %}
+		{% set mainIcon = 'gogo-icon-attention' if showPending else mainOptionValueToDisplay.option.icon %}
 		<div class="iconInsideMarker colorAs {{pendingClass}} {{ 'disabled' if not mainOptionValueToDisplay.isFilledByFilters }} {{mainIcon}}" 
 		option-id={{ mainOptionValueToDisplay.optionId if mainOptionValueToDisplay.option.color else mainOptionValueToDisplay.colorOptionId }}>
 	</div>
@@ -16,7 +16,7 @@
 
 		{% set widthMoreOption = nbreOthersOptions * 39 + 5  %}   	
 
-    	<div class="icon-plus-circle animate rotate"></div>
+    	<div class="gogo-icon-plus-circle animate rotate"></div>
 
     	<div class="moreIconContainer animate rotate" 
     		  style="width:{{ widthMoreOption }}px">
@@ -39,7 +39,7 @@
 	{% endif %}
 
 	{% if element.isFavorite %}
-		<div class="icon-star-full animate rotate"></div>
+		<div class="gogo-icon-star-full animate rotate"></div>
 	{% endif %}
 
 </div>

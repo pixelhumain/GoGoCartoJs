@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-03-02 08:57:20
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-07-22 10:00:58
+* @Last Modified time: 2017-07-31 16:34:21
 */
 .subcategorie-option-item
 {
@@ -17,7 +17,7 @@
 
 	&:not(.expanded) 
   { 
-  	.icon-name-wrapper 
+  	.gogo-icon-name-wrapper 
 		{
     	.arrow-after
     	{
@@ -29,7 +29,7 @@
 	  }
   }
 
-	.icon-name-wrapper 
+	.gogo-icon-name-wrapper 
 	{
     margin-right: 3rem;
 

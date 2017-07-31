@@ -95,7 +95,7 @@ export function createListenersForElementMenu(object)
 
 	object.find('.item-directions').click(function() 
 	{
-		$(this).find('.icon-directions').hideTooltip();
+		$(this).find('.gogo-icon-directions').hideTooltip();
 
 		let element = App.elementModule.getElementById(getCurrentElementIdShown());
 

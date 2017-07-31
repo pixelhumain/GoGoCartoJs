@@ -275,7 +275,7 @@ export class MapComponent
 			this.waitingBounds = bounds;
 			return;
 		}
-		if (this.isMapLoaded && animate) App.map().flyToBounds(bounds);
+		if (this.isMapLoaded && animate) App.map().fitBounds(bounds);
 		else App.map().fitBounds(bounds);
 	}		
 
@@ -289,7 +289,7 @@ export class MapComponent
 		zoom = zoom || this.getZoom() || 12;
 		console.log("panTolocation", location);
 
-		if (this.isMapLoaded && animate) this.map_.flyTo(location, zoom);
+		if (this.isMapLoaded && animate) this.map_.setView(location, zoom);
 		else this.map_.setView(location, zoom);
 	};
 

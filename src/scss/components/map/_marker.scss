@@ -51,7 +51,7 @@
 
 	&:hover { cursor: pointer; }
 
-    .icon-marker
+    .gogo-icon-marker
     {
         width: inherit;
         height: inherit;
@@ -102,7 +102,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
 }
 
 // l'icone pour dire qu'il y a plusieurs produits dans ce fourisseur
-.icon-plus-circle
+.gogo-icon-plus-circle
 {
 	position: absolute;
     top: -7px;
@@ -118,7 +118,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
 }
 
 // l'icone pour dire qu'il y a plusieurs produits dans ce fourisseur
-.marker-wrapper .icon-star-full
+.marker-wrapper .gogo-icon-star-full
 {
     position: absolute;
     top: -10px;
@@ -128,7 +128,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     color: #d9dad9;
 }
 
-.icon-star-full:before
+.gogo-icon-star-full:before
 {
     border-radius: 50%;
     padding: 1px;
@@ -180,7 +180,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     {
         .marker-wrapper { right: -8px; bottom: -6px; }
         .marker-wrapper.BigSize  { right: -4px; bottom: -2px  !important; }
-        .icon-marker { @include transform( rotate(-45deg) ); }
+        .gogo-icon-marker { @include transform( rotate(-45deg) ); }
         .iconInsideMarker-wrapper
         {
             left: 6px !important;
@@ -188,8 +188,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
             height: 25px;
             top: 9px;
         }
-        .icon-plus-circle { top: -7px; right: -7px; }
-        .icon-star-full{ top: -10px; right: -7px; }
+        .gogo-icon-plus-circle { top: -7px; right: -7px; }
+        .gogo-icon-star-full{ top: -10px; right: -7px; }
         .moreIconContainer { left: 30px; }
         .marker-name { bottom: 47px; left: -50px;}
     }
@@ -197,7 +197,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     {
         .marker-wrapper  { right: -35px; bottom: -6px; }
         .marker-wrapper.BigSize  { right: -39px; bottom: -2px !important; }
-        .icon-marker { @include transform( rotate(45deg) ); }
+        .gogo-icon-marker { @include transform( rotate(45deg) ); }
         .iconInsideMarker-wrapper
         {
             left: 11px !important;
@@ -205,8 +205,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
             height: 25px;
             top: 1px;
         }
-        .icon-plus-circle { top: -7px; right: -8px; }
-        .icon-star-full{ top: -9px; right: -8px; }
+        .gogo-icon-plus-circle { top: -7px; right: -8px; }
+        .gogo-icon-star-full{ top: -9px; right: -8px; }
         .moreIconContainer { left: 30px }
         .marker-name { bottom: 47px; left: -10px;}
     }
@@ -215,7 +215,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     {
         .marker-wrapper { right: -13px; bottom: -1px; }
         .marker-wrapper.BigSize  { right: -10px; bottom: 4px  !important; }
-        .icon-marker { @include transform( rotate(-25deg) ); }
+        .gogo-icon-marker { @include transform( rotate(-25deg) ); }
         .iconInsideMarker-wrapper
         {
             right: 6px !important;
@@ -223,8 +223,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
             height: 25px;
             top: 7px;
         }
-        .icon-plus-circle { top: -7px; right: -7px; }
-        .icon-star-full{ top: -10px; right: -7px; }
+        .gogo-icon-plus-circle { top: -7px; right: -7px; }
+        .gogo-icon-star-full{ top: -10px; right: -7px; }
         .moreIconContainer { left: 30px; }
         .marker-name { bottom: 51px; left: -44px;}
     }
@@ -232,7 +232,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     {
         .marker-wrapper  { right: -30px; bottom: -2px; }
         .marker-wrapper.BigSize  { right: -33px; bottom: 4px !important; }
-        .icon-marker { @include transform( rotate(25deg) ); }
+        .gogo-icon-marker { @include transform( rotate(25deg) ); }
         .iconInsideMarker-wrapper
         {
             left: 9px !important;
@@ -240,8 +240,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
             height: 25px;
             top: 3px;
         }
-        .icon-plus-circle { top: -7px; right: -8px; }
-        .icon-star-full{ top: -9px; right: -8px; }
+        .gogo-icon-plus-circle { top: -7px; right: -8px; }
+        .gogo-icon-star-full{ top: -9px; right: -8px; }
         .moreIconContainer { left: 30px }
         .marker-name { bottom: 56px; left: -10px;}
     }

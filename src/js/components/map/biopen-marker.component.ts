@@ -66,7 +66,7 @@ export class BiopenMarker
 
 
 		//this.update();	
-		this.leafletMarker_.setIcon(L.divIcon({className: 'leaflet-marker-container', html: "<span id=\"marker-"+ this.id_ + "\" icon-marker></span>"}));
+		this.leafletMarker_.setIcon(L.divIcon({className: 'leaflet-marker-container', html: "<span id=\"marker-"+ this.id_ + "\" gogo-icon-marker></span>"}));
 	};	
 
 	isDisplayedOnElementInfoBar()
@@ -157,7 +157,7 @@ export class BiopenMarker
 		let domMarker = this.domMarker();
 		domMarker.parent().find('.marker-name').show();
 		domMarker.find('.moreIconContainer').show();
-		domMarker.find('.icon-plus-circle').hide();
+		domMarker.find('.gogo-icon-plus-circle').hide();
 		
 		if (!this.isHalfHidden_ && this.polyline_)
 		{
@@ -176,7 +176,7 @@ export class BiopenMarker
 		this.removeClassToLeafletMarker_("BigSize");
 		domMarker.parent().find('.marker-name').hide();
 		domMarker.find('.moreIconContainer').hide();
-		domMarker.find('.icon-plus-circle').show();
+		domMarker.find('.gogo-icon-plus-circle').show();
 		
 		if (!this.isHalfHidden_ && this.polyline_)
 		{
@@ -225,7 +225,7 @@ export class BiopenMarker
 		this.addClassToLeafletMarker_("halfHidden");
 		let domMarker = this.domMarker();
 		domMarker.css('z-index','1');
-		domMarker.find('.icon-plus-circle').addClass("halfHidden");
+		domMarker.find('.gogo-icon-plus-circle').addClass("halfHidden");
 		domMarker.find('.moreIconContainer').addClass("halfHidden");
 		if (this.polyline_) this.setPolylineOptions({
 				strokeOpacity: 0.1,
@@ -240,7 +240,7 @@ export class BiopenMarker
 		this.removeClassToLeafletMarker_("halfHidden");
 		let domMarker = this.domMarker();
 		domMarker.css('z-index','10');
-		domMarker.find('.icon-plus-circle').removeClass("halfHidden");
+		domMarker.find('.gogo-icon-plus-circle').removeClass("halfHidden");
 		domMarker.find('.moreIconContainer').removeClass("halfHidden");
 		
 		if (this.polyline_) this.setPolylineOptions({

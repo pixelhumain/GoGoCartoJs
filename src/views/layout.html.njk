@@ -44,18 +44,18 @@
         Chargement...
       </div> 
       
-      <div class="show-as-list-button gogo-primary"><i class="icon-list"></i></div>  
+      <div class="show-as-list-button gogo-primary"><i class="gogo-icon-list"></i></div>  
       
       {% if config.isFeatureActivated('layers') %}
         <div id="change-layers" class="layers-button leaflet-bar" data-tooltip="Changer le fond de carte" data-position="left" data-delay="300">
-          <i class="icon-layers"></i>
+          <i class="gogo-icon-layers"></i>
         </div> 
-        <div id="close-layers-panel" class="layers-button" style="display:none"><i class="icon-close"></i></div>
+        <div id="close-layers-panel" class="layers-button" style="display:none"><i class="gogo-icon-close"></i></div>
       {% endif %}
       
       {% if config.isFeatureActivated('export') %}
         <div id="export-iframe-btn" class="layers-button leaflet-bar" data-tooltip="Exporter une iframe" data-position="left" data-delay="300">
-          <i class="icon-share-alt"></i>
+          <i class="gogo-icon-share-alt"></i>
         </div> 
       {% endif %}
       
@@ -66,7 +66,7 @@
         Résultats
         <span class="element-list-title-number-results"></span>
         <span class="element-list-title-text"></span>        
-        <span class="show-as-map-button gogo-neutral-dark gogo-h-primary"> <span class="icon btn-back icon-material-design-icons-1"></span></span>
+        <span class="show-as-map-button gogo-neutral-dark gogo-h-primary"> <span class="icon btn-back gogo-icon-material-design-icons-1"></span></span>
         <div class='shadow-bottom' id="list-title-shadow-bottom"></div>
       </div>
       <ul class="collapsible popout custom-scroll-bar" data-collapsible="accordion">

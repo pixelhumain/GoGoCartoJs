@@ -69,14 +69,14 @@ export class DirectoryMenuComponent
 
 		$('#show-only-pending').click(function(e : Event)
 		{			
-			let check = $('#show-only-pending').hasClass('icon-eye');
+			let check = $('#show-only-pending').hasClass('gogo-icon-eye');
 			App.filterModule.showOnlyPending(check);
 			App.elementModule.updateElementsToDisplay(!check);
 
 			if (check)
-				$('#show-only-pending').removeClass('icon-eye').addClass('icon-no-eye');
+				$('#show-only-pending').removeClass('gogo-icon-eye').addClass('gogo-icon-no-eye');
 			else
-				$('#show-only-pending').removeClass('icon-no-eye').addClass('icon-eye');
+				$('#show-only-pending').removeClass('gogo-icon-no-eye').addClass('gogo-icon-eye');
 
 			e.stopPropagation();
 			e.stopImmediatePropagation();
@@ -121,7 +121,7 @@ export class DirectoryMenuComponent
 		// -------------------------------
 		// ------ SUB OPTIONS ------------
 		// -------------------------------
-		$('.subcategorie-option-item:not(#filter-favorite):not(#filter-pending) .icon-name-wrapper').click(function(e : Event)
+		$('.subcategorie-option-item:not(#filter-favorite):not(#filter-pending) .gogo-icon-name-wrapper').click(function(e : Event)
 		{
 			let optionId = $(this).attr('data-option-id');
 			let option = App.categoryModule.getOptionById(optionId);
@@ -185,11 +185,11 @@ export class DirectoryMenuComponent
 		$('#main-option-' + optionId).fadeIn(600);
 
 		$('.main-categories .main-icon').removeClass('active');
-		$('#main-option-icon-' + optionId).addClass('active');
+		$('#main-option-gogo-icon-' + optionId).addClass('active');
 
-		if(!$('#main-option-icon-' + optionId).position()) { console.log("directory not loaded");return; }
+		if(!$('#main-option-gogo-icon-' + optionId).position()) { console.log("directory not loaded");return; }
 
-		$('#active-main-option-background').animate({top: $('#main-option-icon-' + optionId).position().top}, 500, 'easeOutQuart');
+		$('#active-main-option-background').animate({top: $('#main-option-gogo-icon-' + optionId).position().top}, 500, 'easeOutQuart');
 	}
 }
 

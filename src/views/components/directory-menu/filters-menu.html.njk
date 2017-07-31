@@ -6,15 +6,15 @@
 	{% if fullTaxonomy %}
 	<div class="main-categories gogo-bg-neutral-dark">
 
-		<div class="icon main-icon-background gogo-bg-neutral" id="active-main-option-background"></div>
+		<div class="icon main-gogo-icon-background gogo-bg-neutral" id="active-main-option-background"></div>
 
-		<div class="icon main-icon active icon-users gogo-neutral gogo-h-neutral-light" id="main-option-icon-all" data-option-id="all">
+		<div class="icon main-icon active gogo-icon-users gogo-neutral gogo-h-neutral-light" id="main-option-gogo-icon-all" data-option-id="all">
 			<div class="main-option-tooltip gogo-bg-neutral-dark">Tous les acteurs</div>
 		</div> 
 
 		{# MAIN OPTIONS ICONS & TOOLTIP #}
 		{% for mainOption in mainCategory.options %}
-			<div class="icon main-icon {{ mainOption.icon }} gogo-neutral gogo-h-neutral-light"  id="main-option-icon-{{mainOption.id}}" data-option-id="{{ mainOption.id }}">
+			<div class="icon main-icon {{ mainOption.icon }} gogo-neutral gogo-h-neutral-light"  id="main-option-gogo-icon-{{mainOption.id}}" data-option-id="{{ mainOption.id }}">
 				<div class="main-option-tooltip gogo-bg-neutral-dark-transparent">{{ mainOption.name }}</div>
 			</div>
 
@@ -33,7 +33,7 @@
 				{# FAVORITE #}
 				{% if config.isFeatureActivated('favorite') %}
 					<li class="subcategorie-option-item row" id="filter-favorite" data-position="right" data-delay="300" data-tooltip="Afficher uniquement les favoris">
-				    <span class="icon icon-star-full"></span>
+				    <span class="icon gogo-icon-star-full"></span>
 				    <span class="option-name">Favoris</span> 
 
 				    {# --- CHECKBOX ---- #}
@@ -49,9 +49,9 @@
 				{# ELEMENT WITH PENDING STATUS#}	
 				{% if config.isFeatureAvailable('pending') %}
 					<li class="subcategorie-option-item row" id="filter-pending" data-position="right" data-delay="300" data-tooltip="Afficher les éléments en attente de validation">
-				    <span class="icon icon-attention"></span>
+				    <span class="icon gogo-icon-attention"></span>
 				    {% if config.isFeatureAvailable('directModeration') %}
-				    	<span class="option-name">Attente validation</span><span class="icon icon-eye gogo-h-primary" id="show-only-pending"></span></span> 
+				    	<span class="option-name">Attente validation</span><span class="icon gogo-icon-eye gogo-h-primary" id="show-only-pending"></span></span> 
 			    	{% else %}
 			    		<span class="option-name"><span class="validation-process-info">En cours de validation</span></span> 
 			    	{% endif %}

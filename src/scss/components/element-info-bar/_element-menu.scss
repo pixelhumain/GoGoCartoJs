@@ -50,7 +50,7 @@
 			font-size: 20px;	
 			float: left;			
 
-			&.icon-favorite { font-size: 18px; }
+			&.gogo-icon-favorite { font-size: 18px; }
 
 			
 			&:before
@@ -62,7 +62,7 @@
 			{
 				font-size: 22px;
 
-				&.icon-favorite { font-size: 20px; }
+				&.gogo-icon-favorite { font-size: 20px; }
 
 				&:before
 				{
@@ -71,7 +71,7 @@
 			}
 		}
 
-		.icon-star-full:before
+		.gogo-icon-star-full:before
 		{
 			padding: 2px;
 			padding-bottom: 3px;

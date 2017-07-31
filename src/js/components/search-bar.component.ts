@@ -119,11 +119,14 @@ export class SearchBarComponent
 	showSearchOptions()
 	{
 		$('.search-options').slideDown(350);
+		if (!$('#directory-menu-main-container .directory-menu-header').hasClass("expanded")) 
+			$('#directory-menu-main-container .directory-menu-header').addClass("expanded");
 	}
 
 	hideSearchOptions()
 	{
 		$('.search-options').slideUp(350);
+		$('#directory-menu-main-container .directory-menu-header').removeClass("expanded");
 		this.domElement().blur();
 	}
 
