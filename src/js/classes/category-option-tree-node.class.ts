@@ -102,10 +102,15 @@ export class CategoryOptionTreeNode
 			}
 	}
 
-	toggleVisibility(value : boolean)
+	toggleVisibility(value : boolean, recursive : boolean = false)
 	{
+		//console.log("toggle visibility ", value);
 		if (value) this.getDom().show();
 		else this.getDom().hide();
+
+		if (value && this.getOwner()) this.getOwner().toggleVisibility(true);
+
+		if (recursive) for (let child of this.children) child.toggleVisibility(value, true);
 	}
 
 	updateState()

@@ -77,7 +77,7 @@ export class GoGoCartoModule
 		let isIframe : boolean = urlParams.iframe ? urlParams.iframe == 1 : false;
 		let fullTaxonomy : boolean = urlParams.fullTaxonomy ? urlParams.fullTaxonomy == 1 : true;
 
-		App = new AppModule(options, isIframe);
+		App = new AppModule(options, isIframe, fullTaxonomy);
 
 		// only for debugging
 		this.app = App;		

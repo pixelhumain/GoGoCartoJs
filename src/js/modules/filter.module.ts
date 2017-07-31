@@ -149,8 +149,8 @@ export class FilterModule
 
 		let filters = parseStringIntoArrayNumber(filtersString);
 
-		//console.log('filters', filters);
-		//console.log('addingMode', addingMode);
+		console.log('filters', filters);
+		console.log('addingMode', addingMode);
 
 		// if addingMode, we first put all the filter to false
 		if (addingMode)
@@ -158,20 +158,24 @@ export class FilterModule
 			if (mainOptionSlug == 'all')
 			{
 				App.categoryModule.mainCategory.toggle(false, false);
-				App.categoryModule.mainCategory.toggleVisibility(false);
+				if (!App.loadFullTaxonomy) 
+					for(let option of App.categoryModule.mainCategory.options) 
+					{
+						if (!App.loadFullTaxonomy) option.toggleVisibility(false);
+					}
 			}
 			else
 			{
 				for (let cat of App.categoryModule.getMainOptionBySlug(mainOptionSlug).subcategories)
 					for(let option of cat.options) 
-						{
-							option.toggle(false, false);
-							option.toggleVisibility(false);
-						}
+					{
+						option.toggle(false, false);
+						if (!App.loadFullTaxonomy) option.toggleVisibility(false, true);
+					}
 			}
 
 			App.categoryModule.openHoursCategory.toggle(false, false);
-			App.categoryModule.openHoursCategory.toggleVisibility(false);
+			if (!App.loadFullTaxonomy) App.categoryModule.openHoursCategory.toggleVisibility(false);
 		}
 
 		for(let filterId of filters)
@@ -181,7 +185,7 @@ export class FilterModule
 			else 
 			{
 				option.toggle(addingMode, false);
-				option.toggleVisibility(addingMode);
+				if (!App.loadFullTaxonomy) option.toggleVisibility(addingMode);
 			}
 		}
 
