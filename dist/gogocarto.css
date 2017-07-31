@@ -3707,13 +3707,13 @@ select {
 * @Author: Sebastian Castro
 * @Date:   2017-02-28 13:25:52
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-07-21 17:44:28
+* @Last Modified time: 2017-07-31 16:34:21
 */
   /*
 * @Author: Sebastian Castro
 * @Date:   2017-03-02 09:08:21
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-04-16 16:24:15
+* @Last Modified time: 2017-07-31 16:34:21
 */
   /*
 * @Author: Sebastian Castro
@@ -3731,7 +3731,7 @@ select {
 * @Author: Sebastian Castro
 * @Date:   2017-03-02 08:57:20
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-07-22 10:00:58
+* @Last Modified time: 2017-07-31 16:34:21
 */
   /*
 * @Author: Sebastian Castro
@@ -3753,7 +3753,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
 * @Author: Sebastian Castro
 * @Date:   2017-05-05 12:23:12
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-05-11 11:26:30
+* @Last Modified time: 2017-07-31 16:34:21
 */
   /*
 * @Author: Sebastian Castro
@@ -4164,10 +4164,10 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       height: 100%; } }
   .gogocarto-container #filter-favorite {
     color: #cc8901; }
-    .gogocarto-container #filter-favorite .icon-star-full {
+    .gogocarto-container #filter-favorite .gogo-icon-star-full {
       color: white;
       font-size: 18px; }
-      .gogocarto-container #filter-favorite .icon-star-full:before {
+      .gogocarto-container #filter-favorite .gogo-icon-star-full:before {
         padding: 2px;
         padding-bottom: 3px;
         border: none; }
@@ -4263,14 +4263,14 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     height: 2.8rem;
     overflow: hidden;
     text-overflow: ellipsis; }
-    .gogocarto-container .subcategorie-option-item:not(.expanded) .icon-name-wrapper .arrow-after {
+    .gogocarto-container .subcategorie-option-item:not(.expanded) .gogo-icon-name-wrapper .arrow-after {
       margin-bottom: -3px; }
-    .gogocarto-container .subcategorie-option-item:not(.expanded) .icon-name-wrapper:hover .arrow-after {
+    .gogocarto-container .subcategorie-option-item:not(.expanded) .gogo-icon-name-wrapper:hover .arrow-after {
       margin-bottom: -5px;
       /*border-color: #de5a5f transparent transparent transparent;*/ }
-    .gogocarto-container .subcategorie-option-item .icon-name-wrapper {
+    .gogocarto-container .subcategorie-option-item .gogo-icon-name-wrapper {
       margin-right: 3rem; }
-      .gogocarto-container .subcategorie-option-item .icon-name-wrapper:hover .arrow-after {
+      .gogocarto-container .subcategorie-option-item .gogo-icon-name-wrapper:hover .arrow-after {
         border: solid 6px;
         margin-bottom: 1px; }
     .gogocarto-container .subcategorie-option-item .arrow-after {
@@ -4417,7 +4417,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       .gogocarto-container #directory-menu .main-categories .icon.active {
         color: white;
         padding-right: 8px; }
-    .gogocarto-container #directory-menu .main-categories .main-icon-background {
+    .gogocarto-container #directory-menu .main-categories .main-gogo-icon-background {
       position: absolute;
       top: .6rem;
       border-radius: 0 50% 50% 0; }
@@ -4624,7 +4624,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           left: 6px !important; } }
     .gogocarto-container .marker-wrapper:hover {
       cursor: pointer; }
-    .gogocarto-container .marker-wrapper .icon-marker {
+    .gogocarto-container .marker-wrapper .gogo-icon-marker {
       width: inherit;
       height: inherit;
       line-height: inherit;
@@ -4655,23 +4655,23 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       color: grey !important; }
     .gogocarto-container .iconInsideMarker:before {
       line-height: inherit; }
-  .gogocarto-container .icon-plus-circle {
+  .gogocarto-container .gogo-icon-plus-circle {
     position: absolute;
     top: -7px;
     z-index: 3;
     font-size: 16px;
     right: -7px; }
-    .gogocarto-container .icon-plus-circle:before {
+    .gogocarto-container .gogo-icon-plus-circle:before {
       border-radius: 50%;
       background-color: #F1F1F1; }
-  .gogocarto-container .marker-wrapper .icon-star-full {
+  .gogocarto-container .marker-wrapper .gogo-icon-star-full {
     position: absolute;
     top: -10px;
     z-index: 3;
     font-size: 14px;
     right: -8px;
     color: #d9dad9; }
-  .gogocarto-container .icon-star-full:before {
+  .gogocarto-container .gogo-icon-star-full:before {
     border-radius: 50%;
     padding: 1px;
     padding-bottom: 2px;
@@ -4709,7 +4709,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
   .gogocarto-container .leaflet-marker-container.rotateLeft .marker-wrapper.BigSize {
     right: -4px;
     bottom: -2px  !important; }
-  .gogocarto-container .leaflet-marker-container.rotateLeft .icon-marker {
+  .gogocarto-container .leaflet-marker-container.rotateLeft .gogo-icon-marker {
     -webkit-transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);
     -ms-transform: rotate(-45deg);
@@ -4720,10 +4720,10 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     width: 25px;
     height: 25px;
     top: 9px; }
-  .gogocarto-container .leaflet-marker-container.rotateLeft .icon-plus-circle {
+  .gogocarto-container .leaflet-marker-container.rotateLeft .gogo-icon-plus-circle {
     top: -7px;
     right: -7px; }
-  .gogocarto-container .leaflet-marker-container.rotateLeft .icon-star-full {
+  .gogocarto-container .leaflet-marker-container.rotateLeft .gogo-icon-star-full {
     top: -10px;
     right: -7px; }
   .gogocarto-container .leaflet-marker-container.rotateLeft .moreIconContainer {
@@ -4737,7 +4737,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
   .gogocarto-container .leaflet-marker-container.rotateRight .marker-wrapper.BigSize {
     right: -39px;
     bottom: -2px !important; }
-  .gogocarto-container .leaflet-marker-container.rotateRight .icon-marker {
+  .gogocarto-container .leaflet-marker-container.rotateRight .gogo-icon-marker {
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
@@ -4748,10 +4748,10 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     width: 25px;
     height: 25px;
     top: 1px; }
-  .gogocarto-container .leaflet-marker-container.rotateRight .icon-plus-circle {
+  .gogocarto-container .leaflet-marker-container.rotateRight .gogo-icon-plus-circle {
     top: -7px;
     right: -8px; }
-  .gogocarto-container .leaflet-marker-container.rotateRight .icon-star-full {
+  .gogocarto-container .leaflet-marker-container.rotateRight .gogo-icon-star-full {
     top: -9px;
     right: -8px; }
   .gogocarto-container .leaflet-marker-container.rotateRight .moreIconContainer {
@@ -4765,7 +4765,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
   .gogocarto-container .leaflet-marker-container.rotateSoftLeft .marker-wrapper.BigSize {
     right: -10px;
     bottom: 4px  !important; }
-  .gogocarto-container .leaflet-marker-container.rotateSoftLeft .icon-marker {
+  .gogocarto-container .leaflet-marker-container.rotateSoftLeft .gogo-icon-marker {
     -webkit-transform: rotate(-25deg);
     -moz-transform: rotate(-25deg);
     -ms-transform: rotate(-25deg);
@@ -4776,10 +4776,10 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     width: 25px;
     height: 25px;
     top: 7px; }
-  .gogocarto-container .leaflet-marker-container.rotateSoftLeft .icon-plus-circle {
+  .gogocarto-container .leaflet-marker-container.rotateSoftLeft .gogo-icon-plus-circle {
     top: -7px;
     right: -7px; }
-  .gogocarto-container .leaflet-marker-container.rotateSoftLeft .icon-star-full {
+  .gogocarto-container .leaflet-marker-container.rotateSoftLeft .gogo-icon-star-full {
     top: -10px;
     right: -7px; }
   .gogocarto-container .leaflet-marker-container.rotateSoftLeft .moreIconContainer {
@@ -4793,7 +4793,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
   .gogocarto-container .leaflet-marker-container.rotateSoftRight .marker-wrapper.BigSize {
     right: -33px;
     bottom: 4px !important; }
-  .gogocarto-container .leaflet-marker-container.rotateSoftRight .icon-marker {
+  .gogocarto-container .leaflet-marker-container.rotateSoftRight .gogo-icon-marker {
     -webkit-transform: rotate(25deg);
     -moz-transform: rotate(25deg);
     -ms-transform: rotate(25deg);
@@ -4804,10 +4804,10 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     width: 25px;
     height: 25px;
     top: 3px; }
-  .gogocarto-container .leaflet-marker-container.rotateSoftRight .icon-plus-circle {
+  .gogocarto-container .leaflet-marker-container.rotateSoftRight .gogo-icon-plus-circle {
     top: -7px;
     right: -8px; }
-  .gogocarto-container .leaflet-marker-container.rotateSoftRight .icon-star-full {
+  .gogocarto-container .leaflet-marker-container.rotateSoftRight .gogo-icon-star-full {
     top: -9px;
     right: -8px; }
   .gogocarto-container .leaflet-marker-container.rotateSoftRight .moreIconContainer {
@@ -5093,7 +5093,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         width: 14px; }
     .gogocarto-container #directory-content-list .element-item {
       display: block; }
-      .gogocarto-container #directory-content-list .element-item .icon-close {
+      .gogocarto-container #directory-content-list .element-item .gogo-icon-close {
         display: none; }
       .gogocarto-container #directory-content-list .element-item .distance {
         margin-right: 0; }
@@ -5143,18 +5143,18 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       .gogocarto-container .menu-element .menu-element-item .menu-icon {
         font-size: 20px;
         float: left; }
-        .gogocarto-container .menu-element .menu-element-item .menu-icon.icon-favorite {
+        .gogocarto-container .menu-element .menu-element-item .menu-icon.gogo-icon-favorite {
           font-size: 18px; }
         .gogocarto-container .menu-element .menu-element-item .menu-icon:before {
           line-height: 2.8rem; }
         @media only screen and (min-width: 601px) {
           .gogocarto-container .menu-element .menu-element-item .menu-icon {
             font-size: 22px; }
-            .gogocarto-container .menu-element .menu-element-item .menu-icon.icon-favorite {
+            .gogocarto-container .menu-element .menu-element-item .menu-icon.gogo-icon-favorite {
               font-size: 20px; }
             .gogocarto-container .menu-element .menu-element-item .menu-icon:before {
               line-height: 3rem; } }
-      .gogocarto-container .menu-element .menu-element-item .icon-star-full:before {
+      .gogocarto-container .menu-element .menu-element-item .gogo-icon-star-full:before {
         padding: 2px;
         padding-bottom: 3px;
         border: none; }
@@ -5291,7 +5291,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         padding-right: 0; }
         .gogocarto-container .element-item .collapsible-body .category-wrapper .option-value .icon {
           font-size: 20px; }
-          .gogocarto-container .element-item .collapsible-body .category-wrapper .option-value .icon.icon-marker {
+          .gogocarto-container .element-item .collapsible-body .category-wrapper .option-value .icon.gogo-icon-marker {
             font-size: 19px; }
           .gogocarto-container .element-item .collapsible-body .category-wrapper .option-value .icon.disabled {
             color: #BFBFBF !important; }
@@ -5311,7 +5311,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       font-weight: normal; }
       .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .collapsible-header-title .distance {
         font-size: 1.3rem; }
-      .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .collapsible-header-title .icon-close {
+      .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .collapsible-header-title .gogo-icon-close {
         font-size: 1.5rem;
         margin-top: 0; }
     .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .collapsible-header-more {
@@ -5336,7 +5336,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     color: rgba(0, 0, 0, 0.87) !important; }
   .gogocarto-container #element-info .collapsible-header span.added {
     color: #3ab33a; }
-  .gogocarto-container .vote-section .icon-attention {
+  .gogocarto-container .vote-section .gogo-icon-attention {
     color: white;
     font-size: 20px;
     padding-top: 3px;
@@ -5407,10 +5407,10 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         display: none !important; }
       .gogocarto-container #element-info-bar.display-aside .star-names-icons {
         display: none !important; }
-      .gogocarto-container #element-info-bar.display-aside .icon-close {
+      .gogocarto-container #element-info-bar.display-aside .gogo-icon-close {
         padding-left: 1rem;
         color: #CECECE !important; }
-        .gogocarto-container #element-info-bar.display-aside .icon-close:hover {
+        .gogocarto-container #element-info-bar.display-aside .gogo-icon-close:hover {
           color: white !important; }
       .gogocarto-container #element-info-bar.display-aside #element-info .moreDetails {
         display: block !important; }
@@ -5428,12 +5428,12 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       margin-bottom: 3rem; }
       .gogocarto-container #element-info-bar #element-info .moreDetails {
         display: none; }
-    .gogocarto-container #element-info-bar .icon-close {
+    .gogocarto-container #element-info-bar .gogo-icon-close {
       float: right;
       margin: 0;
       font-size: 1.2rem;
       margin-top: -.1rem; }
-      .gogocarto-container #element-info-bar .icon-close:hover {
+      .gogocarto-container #element-info-bar .gogo-icon-close:hover {
         cursor: pointer; }
   .gogocarto-container #modal-pick-address.modal, .gogocarto-container #modal-directions-fail.modal {
     position: absolute; }
@@ -5575,3 +5575,197 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     @media screen and (min-width: 600px) {
       .gogocarto-container h1 {
         font-size: 3.5rem; } }
+
+@charset "UTF-8";
+
+@font-face {
+  font-family: "gogocarto";
+  src:url("fonts/gogocarto.eot");
+  src:url("fonts/gogocarto.eot?#iefix") format("embedded-opentype"),
+    url("fonts/gogocarto.woff") format("woff"),
+    url("fonts/gogocarto.ttf") format("truetype"),
+    url("fonts/gogocarto.svg#gogocarto") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "gogocarto" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="gogo-icon-"]:before,
+[class*=" gogo-icon-"]:before {
+  font-family: "gogocarto" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.gogo-icon-marker:before {
+  content: "\61";
+}
+.gogo-icon-account-circle:before {
+  content: "\62";
+}
+.gogo-icon-delete:before {
+  content: "\63";
+}
+.gogo-icon-description:before {
+  content: "\64";
+}
+.gogo-icon-star-full:before {
+  content: "\65";
+}
+.gogo-icon-icon-copy-hours:before {
+  content: "\66";
+}
+.gogo-icon-starcircle:before {
+  content: "\67";
+}
+.gogo-icon-no-eye:before {
+  content: "\68";
+}
+.gogo-icon-eye:before {
+  content: "\69";
+}
+.gogo-icon-attention:before {
+  content: "\6a";
+}
+.gogo-icon-mail:before {
+  content: "\6b";
+}
+.gogo-icon-marker-symbol:before {
+  content: "\6c";
+}
+.gogo-icon-phone:before {
+  content: "\6d";
+}
+.gogo-icon-add-circle:before {
+  content: "\6e";
+}
+.gogo-icon-plus-circle-1:before {
+  content: "\6f";
+}
+.gogo-icon-clear:before {
+  content: "\70";
+}
+.gogo-icon-redo:before {
+  content: "\71";
+}
+.gogo-icon-day:before {
+  content: "\72";
+}
+.gogo-icon-exclamation-1:before {
+  content: "\73";
+}
+.gogo-icon-edit:before {
+  content: "\74";
+}
+.gogo-icon-menu:before {
+  content: "\75";
+}
+.gogo-icon-person:before {
+  content: "\76";
+}
+.gogo-icon-directions:before {
+  content: "\77";
+}
+.gogo-icon-layers:before {
+  content: "\78";
+}
+.gogo-icon-directory:before {
+  content: "\79";
+}
+.gogo-icon-locate:before {
+  content: "\7a";
+}
+.gogo-icon-material-design-icons-1:before {
+  content: "\41";
+}
+.gogo-icon-people:before {
+  content: "\42";
+}
+.gogo-icon-add-element:before {
+  content: "\43";
+}
+.gogo-icon-internet:before {
+  content: "\44";
+}
+.gogo-icon-star-empty:before {
+  content: "\45";
+}
+.gogo-icon-share-alt:before {
+  content: "\46";
+}
+.gogo-icon-expand:before {
+  content: "\47";
+}
+.gogo-icon-angle-right:before {
+  content: "\48";
+}
+.gogo-icon-arrow-circle-down:before {
+  content: "\49";
+}
+.gogo-icon-facebook:before {
+  content: "\4a";
+}
+.gogo-icon-external-link:before {
+  content: "\4b";
+}
+.gogo-icon-gplus:before {
+  content: "\4c";
+}
+.gogo-icon-home:before {
+  content: "\4d";
+}
+.gogo-icon-info:before {
+  content: "\4e";
+}
+.gogo-icon-list:before {
+  content: "\4f";
+}
+.gogo-icon-lock:before {
+  content: "\50";
+}
+.gogo-icon-plus-circle:before {
+  content: "\51";
+}
+.gogo-icon-search:before {
+  content: "\52";
+}
+.gogo-icon-close:before {
+  content: "\53";
+}
+.gogo-icon-user-plus:before {
+  content: "\54";
+}
+.gogo-icon-users:before {
+  content: "\55";
+}
+.gogo-icon-unlock:before {
+  content: "\56";
+}
+.gogo-icon-yahoo:before {
+  content: "\57";
+}
+.gogo-icon-twitter:before {
+  content: "\58";
+}
+.gogo-icon-partner-3:before {
+  content: "\59";
+}
