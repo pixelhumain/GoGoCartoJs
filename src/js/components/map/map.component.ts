@@ -275,8 +275,9 @@ export class MapComponent
 			this.waitingBounds = bounds;
 			return;
 		}
-		if (this.isMapLoaded && animate) App.map().fitBounds(bounds);
-		else App.map().fitBounds(bounds);
+		/*if (this.isMapLoaded && animate) App.map().flyToBounds(bounds);
+		else*/ App.map().fitBounds(bounds);
+		setTimeout( () => { App.handleMapIdle(); console.log("force idle"); }, 500);
 	}		
 
 	fitDefaultBounds()
@@ -289,8 +290,8 @@ export class MapComponent
 		zoom = zoom || this.getZoom() || 12;
 		console.log("panTolocation", location);
 
-		if (this.isMapLoaded && animate) this.map_.setView(location, zoom);
-		else this.map_.setView(location, zoom);
+		/*if (this.isMapLoaded && animate) this.map_.flyTo(location, zoom);
+		else*/ this.map_.setView(location, zoom);
 	};
 
 	// the actual displayed map radius (distance from croner to center)
