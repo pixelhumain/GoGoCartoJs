@@ -110,8 +110,8 @@ export function createListenersForVoting()
 			// dynamically create vote template
 			$('#vote-modal-content').html(App.templateModule.render('vote-modal-content', { 
 				element: element, 
-				ElementStatus: ElementStatus, 
-				isAdmin: App.loginModule.isAdmin() 
+				ElementStatus: ElementStatus,
+				isAdmin: App.config.isFeatureAvailable('directModeration')
 			}));
 
 			$('#modal-vote').openModal({
