@@ -610,8 +610,7 @@ export class Element
 			let new_key, new_key_translated, newDailySlot;
 			for(let key in this.openHours)
 			{
-				new_key = key.split('_')[1];
-				new_key_translated = this.translateDayKey(new_key);				
+				new_key_translated = this.translateDayKey(key);				
 				newDailySlot = this.formateDailyTimeSlot(this.openHours[key]);
 				
 				if (newDailySlot)
@@ -628,13 +627,13 @@ export class Element
 	{
 		switch(dayKey)
 		{
-			case 'monday': return 'lundi';
-			case 'tuesday': return 'mardi';
-			case 'wednesday': return 'mercredi';
-			case 'thursday': return 'jeudi';
-			case 'friday': return 'vendredi';
-			case 'saturday': return 'samedi';
-			case 'sunday': return 'dimanche';
+			case 'Monday': return 'lundi';
+			case 'Tuesday': return 'mardi';
+			case 'Wednesday': return 'mercredi';
+			case 'Thursday': return 'jeudi';
+			case 'Friday': return 'vendredi';
+			case 'Saturday': return 'samedi';
+			case 'Sunday': return 'dimanche';
 		}
 
 		return '';
@@ -644,16 +643,17 @@ export class Element
 	{		
 		if (dailySlot === null)
 		{		
-			return 'fermé';
+			//return 'fermé';
+			return null;
 		}
 		let result = '';
-		if (dailySlot.slot1start)
+		if (dailySlot.slot1start !== null)
 		{
 			result+= this.formateDate(dailySlot.slot1start);
 			result+= ' - ';
 			result+= this.formateDate(dailySlot.slot1end);
 		}
-		if (dailySlot.slot2start)
+		if (dailySlot.slot2start !== null)
 		{
 			result+= ' et ';
 			result+= this.formateDate(dailySlot.slot2start);
@@ -666,7 +666,7 @@ export class Element
 	formateDate(date) 
 	{		
 		if (!date) return;
-		return date.split('T')[1].split(':00+0100')[0];
+		return date.date.split(':00.000000')[0].split('1970-01-01 ')[1];
 	};
 
 	isCurrentStarChoiceRepresentant() 
