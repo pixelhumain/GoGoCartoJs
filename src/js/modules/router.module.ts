@@ -83,7 +83,10 @@ export class RouterModule
 		
 		if (splited.length > 1) this.filtersSerializedParam = splited[1];
 
-		routie.navigate(splited[0] || '/carte');
+		let routeHash = splited[0];
+		if (!routeHash || routeHash[0] != '/') routeHash = '/carte';
+		routie.navigate(routeHash);
+
 		// let the hash being changed with a timeOut
 		setTimeout(() => routie.reload(), 0);
 	}
