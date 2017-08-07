@@ -1898,9 +1898,11 @@ L.LatLngBounds.prototype = {
 		var sw = this._southWest,
 		    ne = this._northEast,
 		    sw2 = bounds.getSouthWest(),
-		    ne2 = bounds.getNorthEast(),
+		    ne2 = bounds.getNorthEast();
 
-		    latIntersects = (ne2.lat >= sw.lat) && (sw2.lat <= ne.lat),
+		if (!sw || !ne || !sw2|| !ne2) { return false; }
+
+		var latIntersects = (ne2.lat >= sw.lat) && (sw2.lat <= ne.lat),
 		    lngIntersects = (ne2.lng >= sw.lng) && (sw2.lng <= ne.lng);
 
 		return latIntersects && lngIntersects;
