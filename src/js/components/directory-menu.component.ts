@@ -98,6 +98,14 @@ export class DirectoryMenuComponent
 			that.setMainOption(optionId);
 		});
 
+		// follow main active option background when user scroll through main options
+		$('.main-categories').on('scroll', () =>
+		{
+			$('#active-main-option-background').css('top', $('#main-option-gogo-icon-' + this.currentActiveMainOptionId).position().top);
+		});
+
+		
+
 		// ----------------------------------
 		// ------ CATEGORIES ----------------
 		// ----------------------------------
