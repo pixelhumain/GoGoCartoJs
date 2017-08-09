@@ -20,17 +20,18 @@ export class BoundsModule
 
 	// the bounds including all our map (here France)
 	maxBounds : L.LatLngBounds;
+	defaultCenter : L.LatLng;
 
 	constructor()
 	{
-		// france
-		let corner1 = L.latLng(52, 10);
-		let corner2 = L.latLng(40, -5);
-		this.maxBounds = L.latLngBounds(corner1, corner2);
+		
 	}
 
 	initialize()
 	{
+		this.maxBounds = App.config.map.defaultBounds;
+		this.defaultCenter = App.config.map.defaultCenter;
+
 		for(let mainOptionId of App.categoryModule.getMainOptionsIdsWithAll())
 		{
 			this.fullRepresentationFilledBound[mainOptionId] = null;

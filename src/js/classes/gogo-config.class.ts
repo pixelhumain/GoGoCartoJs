@@ -31,6 +31,12 @@ export class GoGoConfig
       elementInBoundsApiUrl: '',
       showPending: true,
   };
+  readonly map =
+  {
+      // france
+      defaultBounds : L.latLngBounds(L.latLng(52, 10), L.latLng(40, -5)),
+      defaultCenter : L.latLng(46, 0),
+  };
   readonly features =
   {
       favorite:   new GoGoFeature(),
