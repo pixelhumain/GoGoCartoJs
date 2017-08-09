@@ -41,7 +41,7 @@ export class BoundsModule
 		}
 	}	
 
-	createBoundsFromLocation($location : L.LatLng, $radius = 30)
+	createBoundsFromLocation($location : L.LatLng, $radius = 10)
 	{
 		let degree = $radius / 110 / 2;
 		this.extendedBounds = L.latLngBounds(L.latLng($location.lat - degree, $location.lng - degree), L.latLng($location.lat + degree, $location.lng + degree) );
