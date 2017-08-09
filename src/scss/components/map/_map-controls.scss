@@ -127,6 +127,7 @@ a.leaflet-control-zoom-out {
 #export-iframe-btn
 {
     top: 148px;
+    @media screen and (max-width: 900px) { display:none; }
 }
 
 .leaflet-control-layers-toggle
