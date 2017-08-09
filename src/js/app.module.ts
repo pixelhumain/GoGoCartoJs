@@ -265,11 +265,16 @@ export class AppModule
 				$('#directory-content-map').hide();
 				$('#directory-content-list').show();
 
-				if (App.geocoder.getLocation()) 
-				{
-					this.boundsModule.createBoundsFromLocation(App.geocoder.getLocation());
-					this.checkForNewElementsToRetrieve(true);
-				}
+				let centerLocation : L.LatLng;
+
+				if (App.geocoder.getLocation()) centerLocation = App.geocoder.getLocation();
+				else if (App.mapComponent.getCenter()) centerLocation = App.mapComponent.getCenter();
+				else centerLocation = App.boundsModule.defaultCenter;
+
+				console.log("passing list mode, location = ", centerLocation);
+
+				this.boundsModule.createBoundsFromLocation(centerLocation);
+				this.checkForNewElementsToRetrieve(true);
 			}
 
 			// if previous mode wasn't null 
