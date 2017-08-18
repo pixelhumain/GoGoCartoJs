@@ -26,6 +26,8 @@ export function initializeElementMenu()
 	// button to confirm calculate idrections in modal pick address for directions
 	$('#modal-pick-address #btn-calculate-directions').click(() => handleDirectionsPickingAddress());
 	$('#modal-pick-address input').keyup((e) => { if(e.keyCode == 13) handleDirectionsPickingAddress(); });
+
+	$('#popup-send-mail #submit-mail').click(() => { handleSubmitMail(); });
 }
 
 function handleDirectionsPickingAddress()
@@ -49,6 +51,59 @@ function handleDirectionsPickingAddress()
 	{
 		$('#modal-pick-address input').addClass('invalid');
 	}
+}
+
+function handleSubmitMail()
+{	
+	let userMail = $('#popup-send-mail .input-mail').val();
+	let mailSubject = $('#popup-send-mail .input-mail-subject').val();
+	let mailContent = $('#popup-send-mail .input-mail-content').val();
+
+	$('#popup-send-mail #message-error').hide();
+	$('#popup-send-mail #content-error').hide();
+	$('#popup-send-mail #mail-error').hide();
+
+	let errors = false;
+	if (!mailSubject || !mailContent)
+	{
+		$('#popup-send-mail #content-error').show();
+		errors = true;
+	}
+	if (!userMail || $('#popup-send-mail .input-mail').hasClass('invalid'))
+	{
+		$('#popup-send-mail #mail-error').show();
+		errors = true;
+	}
+	if (!errors)
+	{			
+		let elementId = getCurrentElementIdShown();	
+		let comment = $('#popup-send-mail .input-comment').val();				
+
+		let route = App.config.features.sendMail.url;
+		let data = { elementId: elementId, subject: mailSubject, content: mailContent, userMail : userMail };
+
+		App.ajaxModule.sendRequest(route, 'post', data, (response) =>
+		{
+			let success = response.success;
+			let responseMessage = response.message;
+
+			if (success)
+			{
+				$('#popup-send-mail').closeModal();
+				let elementInfo = getCurrentElementInfoBarShown();
+				elementInfo.find('.result-message').html(responseMessage).show();
+				App.infoBarComponent.show();
+			}
+			else
+			{
+				$('#popup-send-mail #message-error').text(responseMessage).show();
+			}
+		},
+		(errorMessage) => 
+		{
+			$('#popup-send-mail #message-error').text(errorMessage).show();
+		});			
+	}	
 }
 
 export function updateFavoriteIcon(object, element : Element)
@@ -83,16 +138,25 @@ export function createListenersForElementMenu(object)
 {
 	object.find('.tooltipped').tooltip();
 
+	// ----------------------
+	//       DELETE
+	// ----------------------
 	object.find('.item-delete').click(function() 
 	{		
 		openDeleteModal();
 	});
 
+	// ----------------------
+	//       REPORT
+	// ----------------------
 	object.find('.item-report').click(function() 
 	{		
 		openReportModal();
 	});
 
+	// ----------------------
+	//     DIRECTIONS
+	// ----------------------
 	object.find('.item-directions').click(function() 
 	{
 		$(this).find('.gogo-icon-directions').hideTooltip();
@@ -114,6 +178,9 @@ export function createListenersForElementMenu(object)
 		else App.setState(AppStates.ShowDirections,{id: getCurrentElementIdShown()});
 	});
 
+	// ----------------------
+	//         SHARE
+	// ----------------------
 	object.find('.item-share').click(function()
 	{
 		let element = App.elementModule.getElementById(getCurrentElementIdShown());
@@ -134,6 +201,9 @@ export function createListenersForElementMenu(object)
    	});
 	});	
 	
+	// ----------------------
+	//        FAVORITE
+	// ----------------------
 	object.find('.item-add-favorite').click(function() 
 	{
 		let element = App.elementModule.getElementById(getCurrentElementIdShown());
@@ -158,6 +228,31 @@ export function createListenersForElementMenu(object)
 
 		if (App.mode == AppModes.Map) element.marker.update();
 	});	
+
+	// ----------------------
+	//         MAIL
+	// ----------------------
+	object.parent().find('.send-mail-btn').click(function()
+	{
+		let element = App.elementModule.getElementById(getCurrentElementIdShown());
+		$('#popup-send-mail .elementName').text(capitalize(element.name));
+
+		$('#popup-send-mail .input-mail-subject').val('');
+		$('#popup-send-mail .input-mail-content').val('');
+		$('#popup-send-mail #content-error').hide();
+		$('#popup-send-mail #mail-error').hide();
+
+		if (App.isUserLogged()) 
+		{
+			$('#popup-send-mail .input-mail').hide();
+		}
+		else
+		{
+			$('#popup-send-mail .input-mail').show();
+		}
+
+		$('#popup-send-mail').openModal();
+	});
 }
 
 export function getCurrentElementIdShown() : number

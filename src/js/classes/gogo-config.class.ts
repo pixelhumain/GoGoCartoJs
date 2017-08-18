@@ -48,10 +48,12 @@ export class GoGoConfig
       search:     new GoGoFeature(),
 
       add:        new GoGoFeature(),
-      edit:       new GoGoFeature(),      
+      edit:       new GoGoFeature(), 
+           
       delete:     new GoGoFeature(),
       report:     new GoGoFeature(),      
       vote:       new GoGoFeature(),
+      sendMail:   new GoGoFeature(),
 
       directModeration:        new GoGoFeature(),
       collaborativeModeration: new GoGoFeature(),
@@ -60,7 +62,9 @@ export class GoGoConfig
   readonly security =
   {
       userRole: 'anonymous',
-      loginAction: function() { console.warn("[GoGoCarto] You need login to access this feature"); }
+      loginAction: function() { console.warn("[GoGoCarto] You need login to access this feature"); },
+
+      hideMailsByShowingSendMailButton: true,
   };
   // see gogo-styles for defaut values
   readonly colors =

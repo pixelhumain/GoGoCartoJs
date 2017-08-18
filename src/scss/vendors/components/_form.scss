@@ -2,10 +2,6 @@
 select:focus {
   outline: 1px solid lighten($secondary-color, 47%);
 }
-button:focus {
-  outline: none;
-  background-color: lighten($button-color, 4%);
-}
 
 label {
   font-size: $label-font-size;

@@ -60,11 +60,12 @@
                     },
                     features:
                     {
-                        search: { url: 'http://localhost/GoGoCarto/web/app_dev.php/api/search' },
-                        delete: { url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/delete', roles: ['admin'], inIframe: false },
-                        report: { url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/report', roles: ['anonymous', 'user'] },
-                        vote:   { url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/vote',   roles: ['user', 'admin'], inIframe: false },
-                        edit:   { url: 'http://localhost/GoGoCarto/web/app_dev.php/acteurs/edit/' },
+                        search:   { url: 'http://localhost/GoGoCarto/web/app_dev.php/api/search' },
+                        delete:   { url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/delete', roles: ['admin'], inIframe: false },
+                        report:   { url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/report', roles: ['anonymous', 'user'] },
+                        vote:     { url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/vote',   roles: ['user', 'admin'], inIframe: false },
+                        edit:     { url: 'http://localhost/GoGoCarto/web/app_dev.php/acteurs/edit/' },
+                        sendMail: { url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/sendMail' },
                         favorite: { inIframe: false },
                         export:   { inIframe: false },
                         pending:  { inIframe: false, roles: ['user', 'admin'] },
@@ -72,8 +73,8 @@
                     },
                     security:
                     {
-                        userRole: 'user',
-                        loginAction: function() { console.log("needToLog"); }
+                        userRole: 'anonymous',
+                        loginAction: function() { console.log("needToLog"); },
                     }, 
                     colors:
                     {

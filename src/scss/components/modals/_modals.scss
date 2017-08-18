@@ -73,6 +73,15 @@
     line-height: 2.5rem;
   }
 
+  label.small-label
+  {
+    display: block;
+    font-size: .85rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: -1.8rem;
+  }
+
   .elementName
   {
     font-style: italic;

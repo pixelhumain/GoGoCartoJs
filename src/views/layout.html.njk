@@ -33,6 +33,10 @@
       {% include 'modals/contribution-information.html.njk'  %}      
     {% endif %}
 
+    {% if config.security.hideMailsByShowingSendMailButton %}
+      {% include 'modals/send-mail-to-element.html.njk'  %}    
+    {% endif %}
+
     {% import 'components/spinner-loader.html.njk' as spinnerLoader%}
     {{ spinnerLoader.create('directory-spinner-loader') }}
 
