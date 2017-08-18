@@ -47,21 +47,6 @@ export class AjaxModule
 
 	constructor() { }  
 
-	// getElementsAroundLocation($location, $distance, $maxResults = 0)
-	// {
-	// 	// if invalid location we abort
-	// 	if (!$location || !$location.lat) 
-	// 	{
-	// 		console.log("Ajax invalid request", $location);
-	// 		return;
-	// 	}
-
-	// 	let dataRequest = new DataAroundRequest($location.lat, $location.lng, $distance, $maxResults, App.currMainId);
-	// 	let route = App.routerModule.generate('biopen_api_elements_around_location');	
-		
-	// 	this.sendAjaxElementRequest(new Request(route, dataRequest));
-	// }
-
 	getElementsInBounds($bounds : L.LatLngBounds[], getFullRepresentation : boolean = false, expectedFilledBounds : L.LatLngBounds)
 	{
 		// if invalid location we abort
@@ -181,17 +166,17 @@ export class AjaxModule
 		});
 	};
 
-	vote(elementId :number, voteValue : number, comment : string, callbackSuccess?, callbackFailure?)
+	sendRequest(route : string, method : string, data : any, callbackSuccess?, callbackFailure?)
 	{
-		let route = App.config.features.vote.url;
+		//console.log("SendAjaxRequest to " + route, data);
 
 		$.ajax({
 			url: route,
-			method: "post",
-			data: { elementId: elementId, value: voteValue, comment: comment },
+			method: method,
+			data: data,
 			success: response => 
 			{	        
-				console.log("Vote response", response);
+				//console.log("Ajax response", response);
 				if (response)
 				{					
 					if (callbackSuccess) callbackSuccess(response); 						
@@ -203,74 +188,4 @@ export class AjaxModule
 			}
 		});
 	}
-
-	reportError(elementId :number, reportValue : number, comment : string, userMail : string, callbackSuccess?, callbackFailure?)
-	{
-		let route = App.config.features.report.url;
-
-		$.ajax({
-			url: route,
-			method: "post",
-			data: { elementId: elementId, value: reportValue, comment: comment, userMail : userMail },
-			success: response => 
-			{	        
-				console.log("Report response", response);
-				if (response)
-				{					
-					if (callbackSuccess) callbackSuccess(response); 						
-				}				       
-			},
-			error: response =>
-			{
-				if (callbackFailure) callbackFailure(response.data); 		
-			}
-		});
-	}
-
-	deleteElement(elementId, message: string, callbackSuccess?, callbackFailure?)
-	{
-		let route = App.config.features.delete.url;
-
-		$.ajax({
-			url: route,
-			method: "post",
-			data: { elementId: elementId, message: message },
-			success: response => 
-			{	        
-				console.log("Delete response", response);
-				if (response)
-				{					
-					if (callbackSuccess) callbackSuccess(response); 						
-				}				       
-			},
-			error: response =>
-			{
-				if (callbackFailure) callbackFailure(response.data); 		
-			}
-		});
-	}
-
-	searchElements(text: string, callbackSuccess?, callbackFailure?)
-	{
-		let route = App.config.features.search.url; 
-
-		$.ajax({
-			url: route,
-			method: "get",
-			data: { text: text },
-			success: response => 
-			{	        
-				console.log("Search response", response);
-				if (response)
-				{					
-					if (callbackSuccess) callbackSuccess(response); 						
-				}				       
-			},
-			error: response =>
-			{
-				if (callbackFailure) callbackFailure(response.data); 		
-			}
-		});
-	}
-
 }

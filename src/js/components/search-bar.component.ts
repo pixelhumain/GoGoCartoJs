@@ -94,8 +94,10 @@ export class SearchBarComponent
 		this.setValue($text);
 		this.currSearchText = $text;
 
-		App.ajaxModule.searchElements(
-		$text,
+		let route = App.config.features.search.url;
+		let data =  { text: $text }; 
+
+		App.ajaxModule.sendRequest(route, 'get', data,
 		(searchResult) => 
 		{
 			let result = App.elementModule.addJsonElements(searchResult.data, true, true);

@@ -47,7 +47,10 @@ export function initializeVoting()
 
 			console.log("send vote " +voteValue + " to element id ", elementId);
 
-			App.ajaxModule.vote(elementId, voteValue, comment, (response) =>
+			let route = App.config.features.vote.url;
+			let data = { elementId: elementId, value: voteValue, comment: comment };
+
+			App.ajaxModule.sendRequest(route, 'post', data, (response) =>
 			{				
 				let responseMessage = response.message;
 				let newstatus = response.data;

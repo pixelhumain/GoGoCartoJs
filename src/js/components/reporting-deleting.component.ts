@@ -86,7 +86,10 @@ export function initializeReportingAndDeleting()
 
 				//console.log("send report " +reportValue + " to element id ", elementId);
 
-				App.ajaxModule.reportError(elementId, reportValue, comment, userMail, (response) =>
+				let route = App.config.features.report.url;
+				let data =  { elementId: elementId, value: reportValue, comment: comment, userMail : userMail };
+
+				App.ajaxModule.sendRequest(route, 'post', data, (response) =>
 				{
 					let success = response.success;
 					let responseMessage = response.message;
@@ -115,7 +118,10 @@ export function initializeReportingAndDeleting()
 			let elementId = getCurrentElementIdShown();	
 			let message = $('#popup-delete .input-comment').val();
 
-			App.ajaxModule.deleteElement(elementId, message, (response) =>
+			let route = App.config.features.delete.url;
+			let data = { elementId: elementId, message: message };
+
+			App.ajaxModule.sendRequest(route, 'post', data, (response) =>
 			{
 				let responseMessage = response.message;
 				let success = response.success;
