@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-02-28 13:25:52
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-08-21 16:17:33
+* @Last Modified time: 2017-08-21 17:39:37
 */
 @import 'favorite-filter';
 @import 'pending-filter';
@@ -102,9 +102,11 @@
 		.sub-categorie-main-title
 		{
 			height: 3rem;
-			line-height: 3rem;
+			line-height: 3rem;			
 			font-weight:bold;
 			text-align:center;	
+
+			@media #{$small-only} { font-size: 1.2rem;}
 		}
 
 		.sub-categories-content
