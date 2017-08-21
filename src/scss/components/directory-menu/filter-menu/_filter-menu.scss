@@ -26,8 +26,12 @@
 		width: 3.5rem;
 		padding-top: .6rem;
     height: 100%;
-    overflow-y: auto;
-    overflow-x:visible;
+
+    @media #{$small-only} 
+    {
+    	overflow-y: auto;
+    	overflow-x:hidden;
+    }    
 
     .icon
     {
