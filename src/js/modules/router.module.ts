@@ -28,7 +28,7 @@ export class RouterModule
 				// timeout to let App variable being accesible
 				setTimeout( () => { App.loadHistoryState(initialState); }, 0);				
 			},
-			'show_element /acteur/:name/:id/:addressAndViewport?': (name, id, addressAndViewport = '') =>
+			'show_element /fiche/:name/:id/:addressAndViewport?': (name, id, addressAndViewport = '') =>
 			{
 				let initialState = new HistoryState();
 				let parsedAddressAndViewport = this.parseAddressViewport(addressAndViewport);

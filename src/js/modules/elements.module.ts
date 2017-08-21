@@ -88,7 +88,7 @@ export class ElementsModule
 		let newIds = elementsIdsReceived.filter((obj) => {return this.everyElementsId_.indexOf(obj.id) < 0;});
 		let elementToUpdateIds = [];
 		// if (newIds.length != elementList.length)
-		// 	console.log("DES ACTEURS EXISTAIENT DEJA", elementList.length - newIds.length)
+		// 	console.log("DES ELEMENTS EXISTAIENT DEJA", elementList.length - newIds.length)
 		if (isFullRepresentation)
 		{			
 			let elementToUpdateIds = elementsIdsReceived.filter((obj) => {return this.everyElementsId_.indexOf(obj.id) >= 0;});

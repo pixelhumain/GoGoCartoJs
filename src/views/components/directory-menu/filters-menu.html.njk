@@ -9,7 +9,7 @@
 		<div class="icon main-gogo-icon-background gogo-bg-neutral" id="active-main-option-background"></div>
 
 		<div class="icon main-icon active gogo-icon-users gogo-neutral gogo-h-neutral-light" id="main-option-gogo-icon-all" data-option-id="all">
-			<div class="main-option-tooltip gogo-bg-neutral-dark">Tous les acteurs</div>
+			<div class="main-option-tooltip gogo-bg-neutral-dark">Tous les {{ config.text.elementPlural }}</div>
 		</div> 
 
 		{# MAIN OPTIONS ICONS & TOOLTIP #}
@@ -25,7 +25,7 @@
 
 	<div class="sub-categories">
 
-		<div class="sub-categorie-main-title gogo-neutral-dark" id="menu-subcategories-title">Tous les acteurs</div>
+		<div class="sub-categorie-main-title gogo-neutral-dark" id="menu-subcategories-title"></div>
 
 			<div class="sub-categories-content {{ 'no-top-divider' if not config.isFeatureActivated('favorite') and not config.isFeatureActivated('pending') }}">
 			<ul>

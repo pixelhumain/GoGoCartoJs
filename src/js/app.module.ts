@@ -364,7 +364,7 @@ export class AppModule
 						},
 						(error) => 
 						{ 
-							alert("Cet acteur n'existe pas ou a été supprimé !"); 
+							alert("Cet élément n'existe pas ou a été supprimé !"); 
 							this.setState(AppStates.Normal);
 						}
 					);						
@@ -682,18 +682,18 @@ export class AppModule
 		}
 		else if (this.mode_ == AppModes.List)
 		{		
-			title = 'Liste des acteurs ' + this.getLocationAddressForTitle();		
+			title = 'Liste des ' + App.config.text.elementPlural + ' ' + this.getLocationAddressForTitle();		
 		}
 		else
 		{
 			switch (this.state_)
 			{
 				case AppStates.ShowElement:				
-					title = 'Acteur - ' + elementName;
+					title = App.config.text.element + ' - ' + elementName;
 					break;	
 
 				case AppStates.ShowElementAlone:
-					title = 'Acteur - ' + elementName;
+					title = App.config.text.element + ' - ' + elementName;
 					break;
 
 				case AppStates.ShowDirections:
@@ -701,7 +701,7 @@ export class AppModule
 					break;
 
 				case AppStates.Normal:			
-					title = 'Carte des acteurs ' + this.getLocationAddressForTitle();			
+					title = 'Carte des ' + App.config.text.elementPlural + ' ' + this.getLocationAddressForTitle();			
 					break;
 			}
 		}

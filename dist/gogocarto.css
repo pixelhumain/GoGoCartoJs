@@ -1765,10 +1765,6 @@ a.waves-effect .waves-ripple {
 select:focus {
   outline: 1px solid #d0e2e0; }
 
-button:focus {
-  outline: none;
-  background-color: #2ab7a9; }
-
 label {
   font-size: 0.8rem;
   color: #3D3D3D; }
@@ -3707,7 +3703,7 @@ select {
 * @Author: Sebastian Castro
 * @Date:   2017-02-28 13:25:52
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-07-31 16:34:21
+* @Last Modified time: 2017-08-21 16:17:33
 */
   /*
 * @Author: Sebastian Castro
@@ -3874,13 +3870,13 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     .gogocarto-container #search-bar.invalid {
       border-color: #B90303 !important; }
     .gogocarto-container #search-bar::-webkit-input-placeholder {
-      color: #4c4c4c; }
+      color: #949494; }
     .gogocarto-container #search-bar::-moz-placeholder {
-      color: #4c4c4c; }
+      color: #949494; }
     .gogocarto-container #search-bar:-ms-input-placeholder {
-      color: #4c4c4c; }
+      color: #949494; }
     .gogocarto-container #search-bar:-moz-placeholder {
-      color: #4c4c4c; }
+      color: #949494; }
   .gogocarto-container #search-bar-container {
     height: 3.5rem;
     padding: .7rem;
@@ -4384,7 +4380,9 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
   .gogocarto-container #directory-menu .main-categories {
     width: 3.5rem;
     padding-top: .6rem;
-    height: 100%; }
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: visible; }
     .gogocarto-container #directory-menu .main-categories .icon {
       width: 3.5rem;
       height: 3.5rem;
@@ -4501,6 +4499,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       height: 100%; }
       .gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header {
         width: 100%;
+        z-index: 2;
         position: relative;
         -webkit-transition: all 0.5s;
         -moz-transition: all 0.5s;
@@ -4555,7 +4554,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
             .gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .btn-close-menu.small-screen {
               display: none; } }
       .gogocarto-container #directory-menu #directory-menu-main-container .shadow-bottom {
-        bottom: -8px; }
+        bottom: -8px;
+        border-top: none; }
       .gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-content {
         display: -webkit-box;
         display: -moz-box;
@@ -4820,7 +4820,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     margin-top: 5px;
     text-align: center;
     border-radius: 50%;
-    font: 13px sans-serif;
+    font-size: 13px;
     font-weight: 600;
     color: white;
     box-shadow: 4px -2px 5px 0px rgba(167, 167, 167, 0.56); }
@@ -5003,6 +5003,9 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       line-height: 35px; }
   .gogocarto-container #export-iframe-btn {
     top: 148px; }
+    @media screen and (max-width: 900px) {
+      .gogocarto-container #export-iframe-btn {
+        display: none; } }
   .gogocarto-container .leaflet-control-layers-toggle {
     display: none; }
   .gogocarto-container .leaflet-control-layers {
@@ -5253,6 +5256,11 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         /* padding-left: 1.3rem; */ }
       .gogocarto-container .element-item .collapsible-body .description {
         text-align: justify; }
+      .gogocarto-container .element-item .collapsible-body .send-mail-btn {
+        font-size: .8rem;
+        margin: .4rem 0 .5rem 0;
+        line-height: 1.8rem;
+        height: 1.8rem; }
       .gogocarto-container .element-item .collapsible-body .section.categories h3 {
         margin-bottom: 1rem; }
       .gogocarto-container .element-item .collapsible-body .sectionInfos, .gogocarto-container .element-item .collapsible-body .sectionOpenHours {
@@ -5475,6 +5483,12 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     text-align: center;
     margin-bottom: 1.5rem;
     line-height: 2.5rem; }
+  .gogocarto-container .modal.action-modal label.small-label {
+    display: block;
+    font-size: .85rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: -1.8rem; }
   .gogocarto-container .modal.action-modal .elementName {
     font-style: italic;
     font-size: 1.5rem; }

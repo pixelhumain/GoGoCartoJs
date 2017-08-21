@@ -160,7 +160,7 @@ export class DirectoryMenuComponent
 
 		if (optionId == 'all')
 		{
-			$('#menu-subcategories-title').text("Tous les acteurs");
+			$('#menu-subcategories-title').text("Tous les " + App.config.text.elementPlural);
 			$('#open-hours-filter').hide();
 		}
 		else

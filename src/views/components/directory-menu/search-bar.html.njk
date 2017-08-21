@@ -3,7 +3,7 @@
 	<a class="gogo-icon-search gogo-h-primary" id="search-bar-icon"></a>
 
     <input class="validate" 
-    	   placeholder="Rechercher un lieu, un acteur" 
+    	   placeholder="Rechercher un lieu, {{ config.text.elementIndefinite }}" 
     	   type="text" 
     	   id="search-bar" 
     	   name="adresse" 
@@ -19,7 +19,7 @@
     <input class="search-option-radio-btn" data-name="place" name="search-type-option" type="radio" id="search-option-place" checked/>
     <label class="search-option-radio-label" for="search-option-place">Un lieu</label>
     <input class="search-option-radio-btn" data-name="element" name="search-type-option" type="radio" id="search-option-element"/>
-    <label class="search-option-radio-label" for="search-option-element">Un Acteur</label>
+    <label class="search-option-radio-label" for="search-option-element">{{ config.text.elementIndefinite | capitalize }}</label>
     
     <button id="search-btn" class="search-btn btn waves-effects">chercher</button>
     <button id="search-cancel-btn" class="search-btn btn waves-effects" style="display:none">
@@ -30,7 +30,7 @@
 </div>
 
 <div class="search-results" style="display:none">
-    <span class="search-result-label">Résultats : <span id="search-result-number"></span> acteur(s) trouvé(s)</span>
+    <span class="search-result-label">Résultats : <span id="search-result-number"></span> {{ config.text.element }}(s) trouvé-e(s)</span>
     <span class="icon gogo-icon-close btn-close" id="btn-close-search-result"></span>
 </div>
 

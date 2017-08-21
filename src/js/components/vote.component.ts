@@ -114,7 +114,8 @@ export function createListenersForVoting()
 			$('#vote-modal-content').html(App.templateModule.render('vote-modal-content', { 
 				element: element, 
 				ElementStatus: ElementStatus,
-				isAdmin: App.config.isFeatureAvailable('directModeration')
+				isAdmin: App.config.isFeatureAvailable('directModeration'),
+				eldisplayName: App.config.text.elementDefinite
 			}));
 
 			$('#modal-vote').openModal({
