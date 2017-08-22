@@ -140,7 +140,7 @@ export class Element
 		}
 		this.address = elementJson.address;
 		this.description = elementJson.description || '';
-		this.tel = elementJson.tel ? elementJson.tel.replace(/(.{2})(?!$)/g,"$1 ") : '';	
+		this.tel = this.getFormatedTel(elementJson.tel);	
 		this.webSite = elementJson.webSite;
 		this.mail = elementJson.mail;
 		this.openHours = elementJson.openHours;
@@ -199,6 +199,13 @@ export class Element
 			diffOptionsValues.push(newOv);
 		}
 		return diffOptionsValues;
+	}
+
+	private getFormatedTel(value)
+	{
+		if (!value) return '';
+		if (value.length == 10) return value.replace(/(.{2})(?!$)/g,"$1 ");
+		return value;
 	}
 
 	private createOptionValues(optionsValuesJson)
