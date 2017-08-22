@@ -19,93 +19,6 @@ import { App } from "../gogocarto";
 import { capitalize, slugify } from "../commons/commons";
 import { openDeleteModal, openReportModal } from './reporting-deleting.component';
 
-export function initializeElementMenu()
-{	
-	$('#modal-vote #select-vote').material_select();
-
-	// button to confirm calculate idrections in modal pick address for directions
-	$('#modal-pick-address #btn-calculate-directions').click(() => handleDirectionsPickingAddress());
-	$('#modal-pick-address input').keyup((e) => { if(e.keyCode == 13) handleDirectionsPickingAddress(); });
-
-	$('#popup-send-mail #submit-mail').click(() => { handleSubmitMail(); });
-}
-
-function handleDirectionsPickingAddress()
-{
-	let address = $('#modal-pick-address input').val();
-		
-	if (address)
-	{			
-		App.setState(AppStates.ShowDirections,{id: getCurrentElementIdShown()});
-
-		App.geocoder.geocodeAddress(address,
-		() => {
-			$("#modal-pick-address .modal-error-msg").hide();
-			$('#modal-pick-address').closeModal();				
-		},
-		() => {
-			$("#modal-pick-address .modal-error-msg").show();
-		});			
-	}
-	else
-	{
-		$('#modal-pick-address input').addClass('invalid');
-	}
-}
-
-function handleSubmitMail()
-{	
-	let userMail = $('#popup-send-mail .input-mail').val();
-	let mailSubject = $('#popup-send-mail .input-mail-subject').val();
-	let mailContent = $('#popup-send-mail .input-mail-content').val();
-
-	$('#popup-send-mail #message-error').hide();
-	$('#popup-send-mail #content-error').hide();
-	$('#popup-send-mail #mail-error').hide();
-
-	let errors = false;
-	if (!mailSubject || !mailContent)
-	{
-		$('#popup-send-mail #content-error').show();
-		errors = true;
-	}
-	if (!userMail || $('#popup-send-mail .input-mail').hasClass('invalid'))
-	{
-		$('#popup-send-mail #mail-error').show();
-		errors = true;
-	}
-	if (!errors)
-	{			
-		let elementId = getCurrentElementIdShown();	
-		let comment = $('#popup-send-mail .input-comment').val();				
-
-		let route = App.config.features.sendMail.url;
-		let data = { elementId: elementId, subject: mailSubject, content: mailContent, userMail : userMail };
-
-		App.ajaxModule.sendRequest(route, 'post', data, (response) =>
-		{
-			let success = response.success;
-			let responseMessage = response.message;
-
-			if (success)
-			{
-				$('#popup-send-mail').closeModal();
-				let elementInfo = getCurrentElementInfoBarShown();
-				elementInfo.find('.result-message').html(responseMessage).show();
-				App.infoBarComponent.show();
-			}
-			else
-			{
-				$('#popup-send-mail #message-error').text(responseMessage).show();
-			}
-		},
-		(errorMessage) => 
-		{
-			$('#popup-send-mail #message-error').text(errorMessage).show();
-		});			
-	}	
-}
-
 export function updateFavoriteIcon(object, element : Element)
 {
 	if (!element.isFavorite) 
@@ -237,7 +150,7 @@ export function createListenersForElementMenu(object)
 		let element = App.elementModule.getElementById(getCurrentElementIdShown());
 		$('#popup-send-mail .elementName').text(capitalize(element.name));
 
-		$('#popup-send-mail .input-mail-subject').val('');
+		$('#popup-send-mail .input-mail-subject').val(App.loginModule.getUserMail());
 		$('#popup-send-mail .input-mail-content').val('');
 		$('#popup-send-mail #content-error').hide();
 		$('#popup-send-mail #mail-error').hide();
@@ -253,6 +166,94 @@ export function createListenersForElementMenu(object)
 
 		$('#popup-send-mail').openModal();
 	});
+}
+
+export function initializeElementMenu()
+{	
+	$('#modal-vote #select-vote').material_select();
+
+	// button to confirm calculate idrections in modal pick address for directions
+	$('#modal-pick-address #btn-calculate-directions').click(() => handleDirectionsPickingAddress());
+	$('#modal-pick-address input').keyup((e) => { if(e.keyCode == 13) handleDirectionsPickingAddress(); });
+
+	$('#popup-send-mail #submit-mail').click(() => { handleSubmitMail(); });
+}
+
+function handleDirectionsPickingAddress()
+{
+	let address = $('#modal-pick-address input').val();
+		
+	if (address)
+	{			
+		App.setState(AppStates.ShowDirections,{id: getCurrentElementIdShown()});
+
+		App.geocoder.geocodeAddress(address,
+		() => {
+			$("#modal-pick-address .modal-error-msg").hide();
+			$('#modal-pick-address').closeModal();				
+		},
+		() => {
+			$("#modal-pick-address .modal-error-msg").show();
+		});			
+	}
+	else
+	{
+		$('#modal-pick-address input').addClass('invalid');
+	}
+}
+
+function handleSubmitMail()
+{	
+	let userMail = $('#popup-send-mail .input-mail').val();
+	let mailSubject = $('#popup-send-mail .input-mail-subject').val();
+	let mailContent = $('#popup-send-mail .input-mail-content').val();
+
+	$('#popup-send-mail #message-error').hide();
+	$('#popup-send-mail #content-error').hide();
+	$('#popup-send-mail #mail-error').hide();
+
+	let errors = false;
+	if (!mailSubject || !mailContent)
+	{
+		$('#popup-send-mail #content-error').show();
+		errors = true;
+	}
+	if (!userMail || $('#popup-send-mail .input-mail').hasClass('invalid'))
+	{
+		$('#popup-send-mail #mail-error').show();
+		$('#popup-send-mail .input-mail').show();
+		errors = true;
+	}
+	if (!errors)
+	{			
+		let elementId = getCurrentElementIdShown();	
+		let comment = $('#popup-send-mail .input-comment').val();				
+
+		let route = App.config.features.sendMail.url;
+		let data = { elementId: elementId, subject: mailSubject, content: mailContent, userMail : userMail };
+
+		App.ajaxModule.sendRequest(route, 'post', data, (response) =>
+		{
+			let success = response.success;
+			let responseMessage = response.message;
+
+			if (success)
+			{
+				$('#popup-send-mail').closeModal();
+				let elementInfo = getCurrentElementInfoBarShown();
+				elementInfo.find('.result-message').html(responseMessage).show();
+				App.infoBarComponent.show();
+			}
+			else
+			{
+				$('#popup-send-mail #message-error').text(responseMessage).show();
+			}
+		},
+		(errorMessage) => 
+		{
+			$('#popup-send-mail #message-error').text(errorMessage).show();
+		});			
+	}	
 }
 
 export function getCurrentElementIdShown() : number
