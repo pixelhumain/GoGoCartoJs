@@ -689,11 +689,11 @@ export class AppModule
 			switch (this.state_)
 			{
 				case AppStates.ShowElement:				
-					title = App.config.text.element + ' - ' + elementName;
+					title = capitalize(App.config.text.element) + ' - ' + elementName;
 					break;	
 
 				case AppStates.ShowElementAlone:
-					title = App.config.text.element + ' - ' + elementName;
+					title = capitalize(App.config.text.element) + ' - ' + elementName;
 					break;
 
 				case AppStates.ShowDirections:
