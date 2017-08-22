@@ -35,6 +35,11 @@ export class GoGoCartoModule
 		this.app.loginModule.setRole($role);
 	}
 
+	setUserMail($mail : string)
+	{
+		this.app.loginModule.setUserMail($mail);
+	}
+
 	/** return the given hash to add to url so gogocarto app will open on specific element */
 	getElementRouteHash($elementId, $elementName = 'find')
 	{

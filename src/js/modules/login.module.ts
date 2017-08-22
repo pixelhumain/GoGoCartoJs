@@ -14,6 +14,7 @@ export enum Roles
 export class LoginModule
 {
 	private role_ : Roles;
+	private userMail : string = '';
 
 	constructor($role : Roles | string = Roles.Anonymous) { this.setRole($role); }
 
@@ -34,6 +35,10 @@ export class LoginModule
 			this.role_ = $role;
 		}		
 	}
+
+	setUserMail(userMail) { this.userMail = userMail; }
+
+	getUserMail() { return this.userMail; }
 
 	getRole() { return this.role_; }
 
