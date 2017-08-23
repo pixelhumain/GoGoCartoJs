@@ -429,11 +429,18 @@ export class AppModule
 				{
 					if (this.mode == AppModes.List)
 					{
-						this.mapComponent.onMapReady.do(() => 
+						if (!this.mapComponent.isInitialized)
+						{
+							this.mapComponent.onMapReady.do(() => 
+							{
+								calculateRoute(origin, element);
+								this.mapComponent.onMapReady.off(() => { calculateRoute(origin, element); });
+							});
+						}
+						else
 						{
 							calculateRoute(origin, element);
-							this.mapComponent.onMapReady.off(() => { calculateRoute(origin, element); });
-						});
+						}						
 
 						this.setMode(AppModes.Map, false, false);
 					} 
