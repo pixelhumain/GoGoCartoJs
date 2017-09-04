@@ -105,6 +105,7 @@ export class ElementListComponent
 		for(element of elementsToDisplay)
 		{
 			element.updateDistance();
+			element.updateIsInMapBounds();
 		}
 		elementsToDisplay.sort(this.compareDistance);
 
@@ -160,10 +161,10 @@ export class ElementListComponent
 		}		
 	}
 
-	private compareDistance(a,b) 
+	private compareDistance(a:Element,b:Element) 
 	{  
-	  if (a.distance == b.distance) return 0;
-	  return a.distance < b.distance ? -1 : 1;
+	  if (a.distanceFromBoundsCenter == b.distanceFromBoundsCenter) return 0;
+	  return a.distanceFromBoundsCenter < b.distanceFromBoundsCenter ? -1 : 1;
 	}
 }
 

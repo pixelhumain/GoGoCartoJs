@@ -267,8 +267,10 @@ export class AppModule
 
 				let centerLocation : L.LatLng;
 
-				if (App.geocoder.getLocation()) centerLocation = App.geocoder.getLocation();
-				else if (App.mapComponent.getCenter()) centerLocation = App.mapComponent.getCenter();
+				/*if (App.geocoder.getLocation()) centerLocation = App.geocoder.getLocation();
+				else if (*/
+				if (App.mapComponent.getCenter()) centerLocation = App.mapComponent.getCenter();
+			  else if (App.geocoder.getLocation()) centerLocation = App.geocoder.getLocation();
 				else centerLocation = App.boundsModule.defaultCenter;
 
 				console.log("passing list mode, location = ", centerLocation);

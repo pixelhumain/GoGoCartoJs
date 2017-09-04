@@ -78,6 +78,7 @@ export class Element
 	isFullyLoaded : boolean = false;
 
 	distance : number;
+	distanceFromBoundsCenter : number;
 
 	isInitialized_ :boolean = false;
 
@@ -86,6 +87,7 @@ export class Element
 
 	isVisible_ : boolean = false;
 	isInElementList : boolean= false;
+	isInMapBounds : boolean = false;
 
 	//TODO
 	biopenMarker_ : BiopenMarker = null;
@@ -526,12 +528,22 @@ export class Element
 	updateDistance()
 	{
 		this.distance = null;
+		this.distanceFromBoundsCenter = null;
+
+		this.distanceFromBoundsCenter = App.boundsModule.extendedBounds.getCenter().distanceTo(this.position) / 1000;
+
 		if (App.geocoder.getLocation()) 
 			this.distance = App.mapComponent.distanceFromLocationTo(this.position);
-		else if (App.mapComponent.getCenter())
-			this.distance = App.mapComponent.getCenter().distanceTo(this.position);
-		// distance vol d'oiseau, on arrondi et on l'augmente un peu
+		else
+			this.distance = this.distanceFromBoundsCenter;
+		
+		// Making the distance more realistic multiplying
 		this.distance = this.distance ? Math.round(1.2*this.distance) : null;
+	}
+
+	updateIsInMapBounds()
+	{
+		this.isInMapBounds = App.mapComponent.isMapBounds() && App.map().getBounds().contains(this.position);
 	}
 
 	isPending() { return this.status == ElementStatus.PendingAdd || this.status == ElementStatus.PendingModification; }
