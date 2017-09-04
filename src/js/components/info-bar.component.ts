@@ -218,8 +218,7 @@ export class InfoBarComponent
 		{
 			$('#bandeau_helper').animate({'opacity': '0'},500).css('z-index',-1);
 
-			$('#element-info-bar .moreInfos').hide();
-			$('#element-info-bar .lessInfos').show();				
+			$('#element-info-bar .element-item').addClass('active');		
 			$('#element-info-bar .moreDetails').show();		
 
 			$('#element-info-bar').animate({'height':'100%'},400,'swing');
@@ -242,8 +241,7 @@ export class InfoBarComponent
 		if ($('#element-info-bar .moreDetails').is(':visible'))
 		{
 			$('#element-info-bar .moreDetails').hide();
-			$('#element-info-bar .moreInfos').show();
-			$('#element-info-bar .lessInfos').hide();
+			$('#element-info-bar .element-item').removeClass('active');	
 
 			let elementInfoBar_newHeight = $('#element-info').outerHeight(true) + $('#element-info-bar .starRepresentationChoice-helper:visible').height();
 

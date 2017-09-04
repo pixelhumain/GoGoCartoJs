@@ -30,7 +30,15 @@
   	margin-bottom: 1rem;
 	}
 
-	.lessInfos, .moreInfos { font-weight: bold; }
+  &.active {
+    .expandLabel:before { content: "Moins d'infos" }
+  }
+
+  &:not(.active) { 
+    .expandLabel:before { content: "Plus d'infos" }
+  }
+
+	.expandLabel { font-weight: bold; }
 	
 	.collapsible-header
 	{
