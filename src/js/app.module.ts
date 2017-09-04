@@ -335,10 +335,31 @@ export class AppModule
 
 			case AppStates.ShowElement:
 				if (!options.id) return;
+				element = this.elementById(options.id);
+
+				if (this.mode == AppModes.List)
+				{
+					if (!this.mapComponent.isInitialized)
+					{
+						this.mapComponent.onMapReady.do(() => 
+						{
+							this.mapComponent.panToLocation(element.position, 14, false);
+							this.infoBarComponent.showElement(options.id);
+						});
+					}
+					else
+					{
+						this.mapComponent.panToLocation(element.position, 14, false);						
+						this.infoBarComponent.showElement(options.id);
+					}						
+
+					this.setMode(AppModes.Map, false, false);
+				} 
+				else
+				{
+					this.infoBarComponent.showElement(options.id);
+				}			
 				
-				this.elementById(options.id).marker.showNormalHidden();
-				this.elementById(options.id).marker.showBigSize();
-				this.infoBarComponent.showElement(options.id);
 
 				break;	
 
