@@ -106,6 +106,9 @@ export class FilterModule
 				let checkedOptions = category.checkedOptions;
 				let elementOptions = element.getOptionValueByCategoryId(category.id);
 
+				// if this element don't have any option in this category, don't need to check
+				if (elementOptions.length == 0) return true;
+
 				let isSomeOptionInCategoryCheckedOptions = elementOptions.some(optionValue => checkedOptions.indexOf(optionValue.option) > -1); 
 
 				if (log) console.log("--" + ecart + "isSomeOptionInCategoryCheckedOptions", isSomeOptionInCategoryCheckedOptions);
