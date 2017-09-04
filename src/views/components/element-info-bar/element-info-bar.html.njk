@@ -101,6 +101,14 @@
         <span class="menu-element-item-text favorite">Enregistré</span>
       </div>
     {% endif %}
+
+    {% if not isMapMode %}
+      <div class="menu-element-item item-show-on-map"> 
+        <span class="menu-icon gogo-icon-locate tooltipped" 
+        data-position="top" data-delay="0" data-tooltip="Afficher sur la carte"></span>
+        <span class="menu-element-item-text">Voir sur la carte</span>
+      </div>     
+    {% endif %}
     
     {% if config.isFeatureAvailable('share') %} 
       <div class="menu-element-item item-share">

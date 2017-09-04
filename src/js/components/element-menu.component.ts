@@ -72,7 +72,7 @@ export function createListenersForElementMenu(object)
 	// ----------------------
 	object.find('.item-directions').click(function() 
 	{
-		$(this).find('.gogo-icon-directions').hideTooltip();
+		$(this).find('.menu-icon').hideTooltip();
 
 		let element = App.elementModule.getElementById(getCurrentElementIdShown());
 
@@ -89,6 +89,15 @@ export function createListenersForElementMenu(object)
    		});
 		}
 		else App.setState(AppStates.ShowDirections,{id: getCurrentElementIdShown()});
+	});
+
+	// ----------------------
+	//     SHOW ON MAP
+	// ----------------------
+	object.find('.item-show-on-map').click(function() 
+	{
+		$(this).find('.menu-icon').hideTooltip();
+		App.setState(AppStates.ShowElement ,{id: getCurrentElementIdShown()});
 	});
 
 	// ----------------------

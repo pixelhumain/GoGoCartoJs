@@ -573,6 +573,7 @@ export class Element
 			editUrl : App.config.features.edit.url + this.id,
 			ElementStatus: ElementStatus,
 			isIframe : App.isIframe,
+			isMapMode : App.mode == AppModes.Map,
 			config : App.config,
 		});
 
