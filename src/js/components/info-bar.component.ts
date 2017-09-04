@@ -42,6 +42,15 @@ export class InfoBarComponent
 	{
 		let element = App.elementModule.getElementById(elementId);
 
+		element.marker.showNormalHidden();
+		element.marker.showBigSize();
+
+		setTimeout( () => 
+		{ 
+			element.marker.showNormalHidden();
+			element.marker.showBigSize();
+		}, 500); 	
+
 		//console.log("showElement", element);
 
 		// if element already visible
