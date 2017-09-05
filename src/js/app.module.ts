@@ -89,7 +89,7 @@ export class AppModule
 	historyModule = new HistoryModule();
 	categoryModule = new CategoriesModule();
 	directoryMenuComponent = new DirectoryMenuComponent();
-	boundsModule = new BoundsModule();
+	boundsModule : BoundsModule;
 	routerModule = new RouterModule();
 	templateModule = new TemplateModule();
 	loginModule : LoginModule;
@@ -136,6 +136,8 @@ export class AppModule
 
 		this.mapComponent_.onIdle.do( () => { this.handleMapIdle();  });
 		this.mapComponent_.onClick.do( () => { this.handleMapClick(); });		
+
+		this.boundsModule = new BoundsModule(this.config);
 	}
 
 	initializeMapFeatures() {	};
