@@ -3211,7 +3211,7 @@ if (typeof module === 'object' && module.exports) {
 			},
 			maxGeocoderTolerance: 200,
 			autocompleteOptions: {},
-			language: 'en',
+			language: 'fr',
 		},
 
 		initialize: function(wp, i, nWps, options) {
@@ -4575,7 +4575,7 @@ module.exports = L.Routing = {
 			polylinePrecision: 5,
 			useHints: true,
 			suppressDemoServerWarning: false,
-			language: 'en'
+			language: 'fr'
 		},
 
 		initialize: function(options) {
