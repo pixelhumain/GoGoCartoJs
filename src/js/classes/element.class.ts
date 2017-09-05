@@ -528,9 +528,7 @@ export class Element
 	updateDistance()
 	{
 		this.distance = null;
-		this.distanceFromBoundsCenter = null;
-
-		this.distanceFromBoundsCenter = App.boundsModule.extendedBounds.getCenter().distanceTo(this.position) / 1000;
+		this.distanceFromBoundsCenter = App.boundsModule.extendedBounds ? App.boundsModule.extendedBounds.getCenter().distanceTo(this.position) / 1000 : null;
 
 		if (App.geocoder.getLocation()) 
 			this.distance = App.mapComponent.distanceFromLocationTo(this.position);
