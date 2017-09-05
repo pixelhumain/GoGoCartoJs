@@ -777,7 +777,7 @@ export class AppModule
 	elements() { return this.elementsModule_.currVisibleElements();  };
 	elementById(id) { return this.elementsModule_.getElementById(id);  };
 
-	isUserLogged() { return $('#btn-logout').is(':visible'); }
+	isUserLogged() { return this.loginModule.isUserLogged }
 	get constellation() { return null; }
 
 	get currMainId() { return this.directoryMenuComponent.currentActiveMainOptionId; }
