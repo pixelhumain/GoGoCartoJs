@@ -1,6 +1,6 @@
 import { AppModule, AppStates } from "../app.module";
 import { Element } from "../classes/element.class";
-
+import { GoGoConfig } from "../classes/gogo-config.class";
 import { App } from "../gogocarto";
 
 export class BoundsModule
@@ -22,16 +22,14 @@ export class BoundsModule
 	maxBounds : L.LatLngBounds;
 	defaultCenter : L.LatLng;
 
-	constructor()
+	constructor(config : GoGoConfig)
 	{
-		
+		this.maxBounds = config.map.defaultBounds;
+		this.defaultCenter = config.map.defaultCenter;
 	}
 
 	initialize()
 	{
-		this.maxBounds = App.config.map.defaultBounds;
-		this.defaultCenter = App.config.map.defaultCenter;
-
 		for(let mainOptionId of App.categoryModule.getMainOptionsIdsWithAll())
 		{
 			this.fullRepresentationFilledBound[mainOptionId] = null;
