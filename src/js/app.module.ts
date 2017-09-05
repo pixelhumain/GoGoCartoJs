@@ -31,7 +31,7 @@ import { MapComponent, ViewPort } from "./components/map/map.component";
 import { BiopenMarker } from "./components/map/biopen-marker.component";
 import { HistoryModule, HistoryState } from './modules/history.module';
 import { BoundsModule } from './modules/bounds.module';
-import { getQueryParams, capitalize } from "./commons/commons";
+import { getQueryParams, capitalize, unslugify } from "./commons/commons";
 import { Element } from "./classes/element.class";
 import { GoGoConfig } from "./classes/gogo-config.class";
 import * as Cookies from "./utils/cookies";
@@ -269,13 +269,24 @@ export class AppModule
 
 				let centerLocation : L.LatLng;
 
+				let address = App.geocoder.lastAddressRequest;
+
 				/*if (App.geocoder.getLocation()) centerLocation = App.geocoder.getLocation();
 				else if (*/
-				if (App.mapComponent.getCenter()) centerLocation = App.mapComponent.getCenter();
-			  else if (App.geocoder.getLocation()) centerLocation = App.geocoder.getLocation();
-				else centerLocation = App.boundsModule.defaultCenter;
+				if (App.mapComponent.isInitialized) {
+					centerLocation = App.mapComponent.getCenter();
+			  	App.elementListComponent.setTitle(' autour du centre de la carte');
+				}
+			  else if (App.geocoder.getLocation()) {			  	
+			  	centerLocation = App.geocoder.getLocation();
+					App.elementListComponent.setTitle(' autour de <i>' + capitalize(unslugify(address)) + '</i>');
+			  }
+				else {
+					centerLocation = App.boundsModule.defaultCenter;
+					App.elementListComponent.setTitle('');
+				}
 
-				console.log("passing list mode, location = ", centerLocation);
+				console.log("passing list mode, location = ", centerLocation);					
 
 				this.boundsModule.createBoundsFromLocation(centerLocation);
 				this.checkForNewElementsToRetrieve(true);
@@ -287,7 +298,6 @@ export class AppModule
 
 			// update history if we need to
 			if (oldMode != null && !$backFromHistory) this.historyModule.pushNewState();
-
 
 			this.elementModule.clearCurrentsElement();
 			this.elementModule.updateElementsToDisplay(true);
@@ -561,10 +571,17 @@ export class AppModule
 	{
 		if (this.dataType != AppDataType.All) return;
 
-		//console.log("checkForNewelementToRetrieve, fullRepresentation", $getFullRepresentation);
+		// console.log("checkForNewelementToRetrieve, fullRepresentation", $getFullRepresentation);
 		let result = this.boundsModule.calculateFreeBounds($getFullRepresentation);
-		//console.log("checkForNewelementToRetrieve, calculateBounds", result);
-		if (result === null) return; // nothing to do, all elements already retrieved
+		// console.log("checkForNewelementToRetrieve, calculateBounds", result);
+		if (result.status == "allRetrieved") return; // nothing to do, all elements already retrieved
+		else if (result.status == "included") 
+		{
+			// We simulate the end of an successeful ajax request 
+			App.boundsModule.updateFilledBoundsWithBoundsReceived(result.expectedFillBounds, App.currMainId,  $getFullRepresentation);
+			this.handleNewElementsReceivedFromServer({'data': [], 'fullRepresentation': $getFullRepresentation});
+			return;
+		}
 
 		$('#directory-list-spinner-loader').show();
 
@@ -608,9 +625,13 @@ export class AppModule
 			}
 			else
 			{
-				this.boundsModule.createBoundsFromLocation(this.geocoder.getLocation());
+				let location = this.geocoder.getLocation() ? this.geocoder.getLocation() : this.boundsModule.defaultCenter;
+				this.boundsModule.createBoundsFromLocation(location);
 				this.elementModule.clearCurrentsElement();
 				this.elementModule.updateElementsToDisplay(true);
+				let address = App.geocoder.lastAddressRequest;
+				if (this.geocoder.getLocation()) App.elementListComponent.setTitle(' autour de <i>' + capitalize(unslugify(address))) + '</i>';
+				else App.elementListComponent.setTitle('');
 			}			
 
 			this.updateDocumentTitle();

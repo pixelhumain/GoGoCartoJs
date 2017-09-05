@@ -114,7 +114,7 @@ export class BoundsModule
 		let expectedBounds;
 
 		// if we already complete the retrieving (i.e. all element are already received)
-		if (this.currRetrievingComplete($getFullRepresentation)) return null;
+		if (this.currRetrievingComplete($getFullRepresentation)) return { status: "allRetrieved", "freeBounds" : null, "expectedFillBounds" : null };
 
 		let currFilledBound = this.currFilledBound($getFullRepresentation);
 
@@ -225,10 +225,10 @@ export class BoundsModule
 			else
 			{
 				// extended bounds included in filledbounds
-				return null;
+				return { "status": "included", "freeBounds" : null, "expectedFillBounds" : currFilledBound };
 			}
 		}		
 
-		return { "freeBounds" : freeBounds, "expectedFillBounds" : expectedBounds};
+		return { "freeBounds" : freeBounds, "expectedFillBounds" : expectedBounds, "status": "success"};
 	}
 }

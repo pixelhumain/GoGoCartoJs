@@ -368,4 +368,9 @@ export class MapComponent
 		$('#directory-content-map .leaflet-control-layers').hide();
 		$('#directory-content-map #close-layers-panel').hide();	
 	}
+
+	isMapBounds() 
+  { 
+    return this.getMap() && this.getMap().getBounds(); 
+  } 
 }

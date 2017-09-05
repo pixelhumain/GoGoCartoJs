@@ -65,12 +65,6 @@ export class ElementListComponent
 		this.clear();		
 
 		this.draw($elementsResult.elementsToDisplay, false);
-		
-		let address = App.geocoder.lastAddressRequest;
-		if (address)
-			this.setTitle(' autour de <i>' + capitalize(unslugify(address))) + '</i>';
-		else
-			this.setTitle(' autour du centre de la carte');
 	}
 
 	setTitle($value : string)
