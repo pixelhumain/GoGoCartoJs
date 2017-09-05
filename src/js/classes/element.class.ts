@@ -596,9 +596,8 @@ export class Element
 	getProperty(propertyName)
 	{
 		let value = capitalizeConfiguration[propertyName] ? capitalize(this[propertyName]) : this[propertyName];
-
 		// in iframe the pending modifications are not displayed, just the old version
-		if (this.status != ElementStatus.PendingModification || !App.config.isFeatureAvailable('pending') || !this.modifiedElement || !this.modifiedElement[propertyName]) return value;
+		if (this.status != ElementStatus.PendingModification || !App.config.isFeatureAvailable('pending') || !this.modifiedElement) return value;
 
     let modifiedValue = capitalizeConfiguration[propertyName] ? capitalize(this.modifiedElement[propertyName]) : this.modifiedElement[propertyName],
     spanClass = '',
