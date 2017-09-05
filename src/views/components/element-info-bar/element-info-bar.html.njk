@@ -26,7 +26,7 @@
         {# Distance and Close Button #}
         <span class="icon gogo-icon-close gogo-h-primary" id="btn-close-bandeau-detail"></span>
         {% if showDistance and element.distance != null %}
-          <span class="right-align distance">~ {{ element.distance }} km</span>
+          <span class="right-align distance">~ {{ element.distance if isMapMode else element.distanceFromBoundsCenter }} km</span>
         {% endif %}
 
         {# Name #}

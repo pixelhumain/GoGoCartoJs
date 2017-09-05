@@ -539,6 +539,7 @@ export class Element
 		
 		// Making the distance more realistic multiplying
 		this.distance = this.distance ? Math.round(1.2*this.distance) : null;
+		this.distanceFromBoundsCenter = this.distanceFromBoundsCenter ? Math.round(1.2*this.distanceFromBoundsCenter) : null;
 	}
 
 	updateIsInMapBounds()
