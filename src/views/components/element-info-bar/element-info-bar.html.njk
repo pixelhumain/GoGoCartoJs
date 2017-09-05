@@ -174,10 +174,11 @@
         {# Mail #}
         {% if config.isFeatureAvailable('sendMail') and element.mail %}
           <span class="col s12 tel">
-          {% if config.security.hideMailsByShowingSendMailButton %}
+          {# if element is pending we need to show the email no matter the security rules #}
+          {% if config.security.hideMailsByShowingSendMailButton and not (element.isPending() and config.isFeatureAvailable('pending')) %}
             <button class="btn send-mail-btn">Envoyer un Mail</button>
           {% else %}
-            <a href="mailto:{{ element.mail }}">{{  element.getProperty('mail')|safe }}</a>            
+            <a href="mailto:{{ element.mail }}">{{ element.getProperty('mail')|safe }}</a>            
           {% endif %}
           </span>
         {% endif %}
