@@ -101,17 +101,11 @@
 .gogo-icon-menu:before {
   content: "\75";
 }
-.gogo-icon-person:before {
-  content: "\76";
-}
 .gogo-icon-directions:before {
   content: "\77";
 }
 .gogo-icon-layers:before {
   content: "\78";
-}
-.gogo-icon-directory:before {
-  content: "\79";
 }
 .gogo-icon-locate:before {
   content: "\7a";
@@ -193,4 +187,7 @@
 }
 .gogo-icon-map:before {
   content: "\5a";
+}
+.gogo-icon-ellipsis:before {
+  content: "\30";
 }
