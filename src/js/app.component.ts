@@ -79,7 +79,7 @@ export class AppComponent
 			$('#show-directory-menu-button').hide();
 			$('#directory-menu').css('left','-' + $('#directory-menu').width() + 'px');	
 			$('#directory-content').animate({'margin-left': '340px'}, 350,'swing');
-			$('.show-as-list-button').animate({'left': '35px'}, 350,'swing');
+			$('#map-gogo-controls').animate({'padding-left': '10px'}, 350,'swing');
 			$('#directory-menu').show().animate({'left':'0'},350,'swing', () =>
 			{ 							
 				this.updateMapSize();
@@ -96,13 +96,14 @@ export class AppComponent
 
 		$('#directory-content').animate({'margin-left':'0'}, 200,'swing');		
 		$('#show-directory-menu-button').show();
-		$('.show-as-list-button').animate({'left': '50px'}, 350,'swing');
+		$('#map-gogo-controls').animate({'padding-left': '0px'}, 350,'swing');
 		$('#directory-menu').animate({'left': '-' + $('#directory-menu').width() + 'px'},250,'swing',function()
 		{ 
 			$(this).hide();
 			App.component.updateMapSize(); 
 			App.component.updateComponentsSize(); 
 			App.infoBarComponent.refresh();
+			$(this).find('.tooltipped').tooltip('remove');	
 		});
 	}	
 

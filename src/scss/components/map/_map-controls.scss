@@ -15,58 +15,51 @@ a.leaflet-control-zoom-out {
     margin-top: 20px;
 }
 
-#show-directory-menu-button
+#map-gogo-controls
 {
     position: absolute;
-    left: -32px;
-    top: 25px;
-    padding: 5px 15px 5px 41px; 
-    @include transform(rotate(90deg));
     z-index: 500;
-    cursor: pointer;
-    color: #fff;
-    font-size: 1rem;
-    @include border-radius(0 5px 0 0);
-
-    @media #{$small-only}
-    {
-        top: 30px;
-        left: -35px;
-        padding: 0px 15px 0px 40px;
+    left: 15px;
+    top: 15px;
+    
+    @media #{$medium-and-up} {
+        left: 20px;
+        top: 20px;
     }
+}
 
-    .arrow-right
-    {
-        position: absolute;
-        border: solid 8px;
-        border-color: transparent transparent #eeeeee transparent;
-        left: 15px;
-        top: 2px;
+#show-directory-menu-button
+{
+    left: 15px;
+    color: white;
 
-        @media #{$small-only}
-        {
-            top: -2px;
-        }
+    i {
+      margin-right: 5px !important;
     }
 }
 
 .show-as-list-button 
 {
-    position: absolute;
-    z-index: 500;
-    top: 15px;
-    left: 30px;
     background-color: #ffffff;
-    padding: .5rem 1rem;
 
+    &:after{ content:"Liste"}
+
+    @media #{$medium-and-up} 
+    {
+        &:after { content: "Afficher sous forme de liste"}
+    }
+}
+
+.gogo-map-control
+{
+    margin-right: 15px;
+    display: inline-block;
     line-height: 1.5;
     font-family: "Roboto", sans-serif;
     font-weight: normal;
-    font-size: 14px;
 
     font-size: 14px !important;
     padding: 5px 10px;
-    background: #fff;
     @include box-shadow-1(2px 3px 1px rgba(0,0,0,.25));
     cursor: pointer;
     text-align: center;
@@ -82,13 +75,6 @@ a.leaflet-control-zoom-out {
         line-height: 1rem;
         padding-top: 3px;
         margin-right: 10px;
-    }
-
-    &:after{ content:"Liste"}
-
-    @media #{$medium-and-up} 
-    {
-        &:after { content: "Afficher sous forme de liste"}
     }
 }
 

@@ -38,17 +38,22 @@
     {% endif %}
 
     {% import 'components/spinner-loader.html.njk' as spinnerLoader%}
-    {{ spinnerLoader.create('directory-spinner-loader') }}
-
-    <div id="show-directory-menu-button" class="gogo-bg-primary" style="display:none"><span class='arrow-right'></span>Menu</div> 
+    {{ spinnerLoader.create('directory-spinner-loader') }}    
     
     <div id="directory-content-map" style="display:none"> 
 
       <div id="directory-loading" style="display:none">
         Chargement...
       </div> 
-      
-      <div class="show-as-list-button gogo-primary"><i class="gogo-icon-list"></i></div>  
+
+      <div id="map-gogo-controls">
+        <div id="show-directory-menu-button" class="gogo-bg-primary gogo-map-control" style="display:none">  
+          <span class="text">Menu</span>
+          <i class="gogo-icon-angle-right"></i>
+        </div> 
+        
+        <div class="show-as-list-button gogo-map-control gogo-primary"><i class="gogo-icon-list"></i></div>  
+      </div>
       
       {% if config.isFeatureActivated('layers') %}
         <div id="change-layers" class="layers-button leaflet-bar" data-tooltip="Changer le fond de carte" data-position="left" data-delay="300">
