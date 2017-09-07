@@ -46,6 +46,11 @@ export class GoGoCartoModule
 		return this.app.routerModule.generate('show_element', { id: $elementId, name: $elementName });
 	}
 
+	showDirectoryMenu()
+	{
+		this.app.component.showDirectoryMenu();
+	}
+
 	private checkForDistantConfifuration(options : string|any)
 	{
 		if ( typeof options === 'object')
