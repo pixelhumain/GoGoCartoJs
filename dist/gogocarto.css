@@ -1649,7 +1649,8 @@ a.waves-effect .waves-ripple {
       .modal .modal-content {
         padding: 40px; } }
   .modal .modal-close {
-    cursor: pointer; }
+    cursor: pointer;
+    color: white; }
   .modal .modal-footer {
     border-radius: 0 0 2px 2px;
     background-color: #fafafa;
@@ -4478,7 +4479,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     display: none;
     position: relative; }
   .gogocarto-container #directory-menu {
-    z-index: 200;
+    z-index: 700;
     overflow-y: hidden;
     -webkit-transition: height 0.5s;
     -moz-transition: height 0.5s;
@@ -4914,51 +4915,35 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
   .gogocarto-container .leaflet-control-zoom.leaflet-bar.leaflet-control {
     margin-right: 20px;
     margin-top: 20px; }
+  .gogocarto-container #map-gogo-controls {
+    position: absolute;
+    z-index: 500;
+    left: 15px;
+    top: 15px; }
+    @media only screen and (min-width: 601px) {
+      .gogocarto-container #map-gogo-controls {
+        left: 20px;
+        top: 20px; } }
   .gogocarto-container #show-directory-menu-button {
-    position: absolute;
-    left: -32px;
-    top: 25px;
-    padding: 5px 15px 5px 41px;
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    transform: rotate(90deg);
-    z-index: 500;
-    cursor: pointer;
-    color: #fff;
-    font-size: 1rem;
-    -webkit-border-radius: 0 5px 0 0;
-    -moz-border-radius: 0 5px 0 0;
-    border-radius: 0 5px 0 0; }
-    @media only screen and (max-width: 600px) {
-      .gogocarto-container #show-directory-menu-button {
-        top: 30px;
-        left: -35px;
-        padding: 0px 15px 0px 40px; } }
-    .gogocarto-container #show-directory-menu-button .arrow-right {
-      position: absolute;
-      border: solid 8px;
-      border-color: transparent transparent #eeeeee transparent;
-      left: 15px;
-      top: 2px; }
-      @media only screen and (max-width: 600px) {
-        .gogocarto-container #show-directory-menu-button .arrow-right {
-          top: -2px; } }
+    left: 15px;
+    color: white; }
+    .gogocarto-container #show-directory-menu-button i {
+      margin-right: 5px !important; }
   .gogocarto-container .show-as-list-button {
-    position: absolute;
-    z-index: 500;
-    top: 15px;
-    left: 30px;
-    background-color: #ffffff;
-    padding: .5rem 1rem;
+    background-color: #ffffff; }
+    .gogocarto-container .show-as-list-button:after {
+      content: "Liste"; }
+    @media only screen and (min-width: 601px) {
+      .gogocarto-container .show-as-list-button:after {
+        content: "Afficher sous forme de liste"; } }
+  .gogocarto-container .gogo-map-control {
+    margin-right: 15px;
+    display: inline-block;
     line-height: 1.5;
     font-family: "Roboto", sans-serif;
     font-weight: normal;
-    font-size: 14px;
     font-size: 14px !important;
     padding: 5px 10px;
-    background: #fff;
     -webkit-box-shadow: 2px 3px 1px rgba(0, 0, 0, 0.25);
     -moz-box-shadow: 2px 3px 1px rgba(0, 0, 0, 0.25);
     box-shadow: 2px 3px 1px rgba(0, 0, 0, 0.25);
@@ -4967,19 +4952,14 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     border: 1px dashed transparent;
     border-color: #a5a5a5;
     border-radius: 5px; }
-    .gogocarto-container .show-as-list-button:hover {
+    .gogocarto-container .gogo-map-control:hover {
       cursor: pointer; }
-    .gogocarto-container .show-as-list-button i {
+    .gogocarto-container .gogo-map-control i {
       font-size: 1rem;
       float: left;
       line-height: 1rem;
       padding-top: 3px;
       margin-right: 10px; }
-    .gogocarto-container .show-as-list-button:after {
-      content: "Liste"; }
-    @media only screen and (min-width: 601px) {
-      .gogocarto-container .show-as-list-button:after {
-        content: "Afficher sous forme de liste"; } }
   .gogocarto-container .layers-button {
     position: absolute;
     z-index: 500;
@@ -5045,23 +5025,33 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     border-left: none;
     height: 100%; }
     .gogocarto-container #directory-content-list .show-as-map-button {
-      float: left;
+      position: absolute;
+      z-index: 200;
+      left: 1rem;
       text-decoration: underline; }
+      @media only screen and (min-width: 601px) {
+        .gogocarto-container #directory-content-list .show-as-map-button {
+          left: 1.5rem; } }
+      @media only screen and (min-width: 1201px) {
+        .gogocarto-container #directory-content-list .show-as-map-button {
+          left: 10rem; } }
       .gogocarto-container #directory-content-list .show-as-map-button:hover {
         cursor: pointer; }
       .gogocarto-container #directory-content-list .show-as-map-button .btn-back {
         color: inherit !important;
         height: 2rem; }
       @media only screen and (min-width: 901px) {
-        .gogocarto-container #directory-content-list .show-as-map-button:before {
-          content: "Retour à la carte"; } }
+        .gogocarto-container #directory-content-list .show-as-map-button {
+          left: 3rem; }
+          .gogocarto-container #directory-content-list .show-as-map-button:after {
+            content: "Retour à la carte"; } }
     .gogocarto-container #directory-content-list .element-list-title-bar {
       display: block;
       position: relative;
       width: 100%;
       line-height: 3rem;
       text-align: right;
-      padding: 0 2rem; }
+      padding: 0 1rem; }
       @media only screen and (min-width: 601px) {
         .gogocarto-container #directory-content-list .element-list-title-bar {
           padding-left: 3rem;
@@ -5198,7 +5188,11 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       line-height: 2rem;
       padding: 0 1rem;
       margin-bottom: 1rem; }
-    .gogocarto-container .element-item .lessInfos, .gogocarto-container .element-item .moreInfos {
+    .gogocarto-container .element-item.active .expandLabel:before {
+      content: "Moins d'infos"; }
+    .gogocarto-container .element-item:not(.active) .expandLabel:before {
+      content: "Plus d'infos"; }
+    .gogocarto-container .element-item .expandLabel {
       font-weight: bold; }
     .gogocarto-container .element-item .collapsible-header {
       padding: .5rem 0 0 0; }
@@ -5397,7 +5391,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     display: block; }
   .gogocarto-container #element-info-bar {
     height: 0px;
-    z-index: 10;
+    z-index: 600;
     position: relative;
     will-change: height;
     -webkit-box-shadow: 0 -8px 8px -5px rgba(173, 173, 173, 0.75);
@@ -5698,17 +5692,11 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
 .gogo-icon-menu:before {
   content: "\75";
 }
-.gogo-icon-person:before {
-  content: "\76";
-}
 .gogo-icon-directions:before {
   content: "\77";
 }
 .gogo-icon-layers:before {
   content: "\78";
-}
-.gogo-icon-directory:before {
-  content: "\79";
 }
 .gogo-icon-locate:before {
   content: "\7a";
@@ -5790,4 +5778,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
 }
 .gogo-icon-map:before {
   content: "\5a";
+}
+.gogo-icon-ellipsis:before {
+  content: "\30";
 }
