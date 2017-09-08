@@ -11,8 +11,9 @@
 import { AppModule, AppStates, AppModes } from "./app.module";
 import { App } from "./gogocarto";
 
+
 //declare var $;
-declare let $ : any;
+declare let $, window : any;
 
 export class AppComponent
 {
@@ -50,6 +51,20 @@ export class AppComponent
 		   if (res) {clearTimeout(res); }
 		   res = setTimeout(this.updateComponentsSize(),200);
 		};	
+
+		// on resize end
+		$(window).bind('resize', (e) =>
+		{
+		    window.resizeEvt;
+		    $(window).resize(() =>
+		    {
+		        clearTimeout(window.resizeEvt);
+		        window.resizeEvt = setTimeout(() =>
+		        {
+		            this.updateDirectoryMenuSize();
+		        }, 250);
+		    });
+		});
 		
 		//Menu CARTE	
 		$('#show-directory-menu-button').click(() => this.showDirectoryMenu());
@@ -88,6 +103,8 @@ export class AppComponent
 				App.directoryMenuComponent.updateMainOptionBackground();
 			});					
 		}
+
+		this.updateDirectoryMenuSize()
 	}
 
 	hideDirectoryMenu()
@@ -133,13 +150,27 @@ export class AppComponent
 				$('#directory-content-map').css('margin-right', '0');
 				App.infoBarComponent.refresh();
 			}
-		}
+		}		
 	}
 	
 	// the leaflet map need to be resized with a specific function
 	updateMapSize()
 	{		
 		if (App.mapComponent) setTimeout(function() { App.mapComponent.resize(); },0);
+	}
+
+	// fixs menu overflow scrollable depending on screen height
+	updateDirectoryMenuSize()
+	{
+		let filterMenu = $('#directory-menu-main-container .filter-menu');
+		let menuContainer = $('#directory-menu-main-container .directory-menu-content');
+
+		filterMenu.css('height', '100%');
+
+		if (filterMenu.height() < menuContainer.height()) 
+		{
+			filterMenu.css('height', 'auto');
+		} 
 	}
 
 	updateIframeCode()

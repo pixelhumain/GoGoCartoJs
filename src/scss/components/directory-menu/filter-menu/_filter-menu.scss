@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-02-28 13:25:52
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-08-21 17:39:37
+* @Last Modified time: 2017-09-08 11:03:55
 */
 @import 'favorite-filter';
 @import 'pending-filter';
@@ -19,6 +19,7 @@
     @include flexbox();
     @include flex-flow(row nowrap); 
     @include flex(1 auto);
+    @media #{$small-only} { height: 100% }
   }
 
 	.main-categories
@@ -26,12 +27,6 @@
 		width: 3.5rem;
 		padding-top: .6rem;
     height: 100%;
-
-    @media #{$small-only} 
-    {
-    	overflow-y: auto;
-    	overflow-x:hidden;
-    }    
 
     .icon
     {

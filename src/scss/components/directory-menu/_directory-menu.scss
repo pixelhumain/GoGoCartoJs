@@ -102,6 +102,8 @@
       @include flex(1 auto);
       position: relative;
 
+      @media #{$small-only} { overflow: scroll; }          
+
       #directory-menu-spinner-loader
       {
         top: 40%;
