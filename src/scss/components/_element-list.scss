@@ -12,9 +12,11 @@
 	{
 		position:absolute;
 		z-index: 200;
-		left: 1rem;
-		@media #{$medium-and-up} { left: 1.5rem; }
-		@media #{$large-only} { left: 10rem; }	
+		padding-left: 1rem;
+    left: 0;
+    height: 100%;
+		@media #{$medium-and-up} { left: .5rem; }
+		@media #{$large-only} { left: 9rem; }	
 		text-decoration: underline;
 		&:hover { cursor: pointer; }
 
@@ -22,7 +24,7 @@
 
 		@media #{$medium2-and-up} 
 		{
-			left: 3rem;
+			left: 2rem;
 			&:after
 			{
 				content : "Retour à la carte";
