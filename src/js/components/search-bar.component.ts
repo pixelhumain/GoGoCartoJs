@@ -72,6 +72,10 @@ export class SearchBarComponent
 		$('#search-cancel-btn').show();
 		$('#search-btn').hide();
 
+		// if directory menu take full width
+		if ($('#directory-menu').width() == $('.gogocarto-container').width())
+			App.component.hideDirectoryMenu();
+
 		let searchType = $('.search-option-radio-btn:checked').attr('data-name');	
 		switch (searchType)
 		{
