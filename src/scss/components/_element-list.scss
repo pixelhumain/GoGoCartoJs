@@ -16,7 +16,7 @@
     left: 0;
     height: 100%;
 		@media #{$medium-and-up} { left: .5rem; }
-		@media #{$large-only} { left: 9rem; }	
+		@media #{$large-only} { left: 9rem !important; }	
 		text-decoration: underline;
 		&:hover { cursor: pointer; }
 
