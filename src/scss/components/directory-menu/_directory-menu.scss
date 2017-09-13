@@ -70,8 +70,10 @@
       {
         position: absolute;
         bottom: .3rem;
-        right: 1rem;
+        right: 0;
         margin: 0;
+        padding: 0 1rem;
+        z-index: 50;
         color: #CECECE;
 
         &:hover
