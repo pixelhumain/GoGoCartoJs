@@ -77,7 +77,7 @@ export class FilterModule
 			{
 				isPassingFilters = element.openHoursDays.some( (day : any) => App.categoryModule.openHoursFiltersDays.indexOf(day) > -1);
 			}
-
+			
 			return isPassingFilters;
 		}		
 	}
@@ -107,7 +107,7 @@ export class FilterModule
 				let elementOptions = element.getOptionValueByCategoryId(category.id);
 
 				// if this element don't have any option in this category, don't need to check
-				if (elementOptions.length == 0) return true;
+				if (elementOptions.length == 0) return false;
 
 				let isSomeOptionInCategoryCheckedOptions = elementOptions.some(optionValue => checkedOptions.indexOf(optionValue.option) > -1); 
 
