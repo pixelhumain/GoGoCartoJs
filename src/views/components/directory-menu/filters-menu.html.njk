@@ -50,11 +50,12 @@
 				{% if config.isFeatureAvailable('pending') %}
 					<li class="subcategorie-option-item row" id="filter-pending" data-position="right" data-delay="300" data-tooltip="Afficher les éléments en attente de validation">
 				    <span class="icon gogo-icon-attention"></span>
-				    {% if config.isFeatureAvailable('directModeration') %}
+				    {#{% if config.isFeatureAvailable('directModeration') %}
 				    	<span class="option-name">Attente validation</span><span class="icon gogo-icon-eye gogo-h-primary" id="show-only-pending"></span></span> 
 			    	{% else %}
 			    		<span class="option-name"><span class="validation-process-info">En cours de validation</span></span> 
-			    	{% endif %}
+			    	{% endif %}#}
+			    	<span class="option-name">A valider</span><span class="icon gogo-icon-eye gogo-h-primary" id="show-only-pending"></span></span> 
 
 				    {# --- CHECKBOX ---- #}
 						<div class="checkbox-wrapper">
