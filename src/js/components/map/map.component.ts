@@ -174,7 +174,7 @@ export class MapComponent
 			e.stopPropagation();
 		});	
 
-		this.map_.on('click', (e) => { this.onClick.emit(); });
+		this.map_.on('singleclick', (e) => { this.onClick.emit(); });
 		this.map_.on('moveend', (e) => 
 		{ 
 			let visibleMarkersLength = $('.leaflet-marker-icon:visible').length;
