@@ -88,7 +88,11 @@ export class SearchBarComponent
 					});
 				break;
 			case "element":
-				this.searchElements(this.domElement().val());
+				let value = this.domElement().val();
+				if (value)
+					this.searchElements(this.domElement().val());
+				else
+					this.clearSearchResult();
 				break;
 		}
 	}
@@ -151,9 +155,11 @@ export class SearchBarComponent
 	clearSearchResult(resetValue = true)
 	{
 		App.setDataType(AppDataType.All);
-		this.hideSearchResultLabel();
+		this.hideSearchResultLabel();		
+		this.clearLoader();	
 		this.currSearchText = '';
 		if (resetValue) this.setValue("");
+		setTimeout( () => { this.hideSearchOptions(); }, 200);
 	}
 
 	setValue($value : string)
