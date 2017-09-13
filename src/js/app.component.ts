@@ -67,7 +67,7 @@ export class AppComponent
 		});
 		
 		//Menu CARTE	
-		$('#show-directory-menu-button').click(() => this.showDirectoryMenu());
+		$('.show-directory-menu-button').click(() => this.showDirectoryMenu());
 		$('#map-overlay').click(() => this.hideDirectoryMenu());
 		$('#directory-menu .btn-close-menu').click(() => this.hideDirectoryMenu());
 
@@ -91,7 +91,7 @@ export class AppComponent
 	{
 		if (!$('#directory-menu').is(':visible'))
 		{
-			$('#show-directory-menu-button').hide();
+			$('.show-directory-menu-button').hide();
 			$('#directory-menu').css('left','-' + $('#directory-menu').width() + 'px');	
 			$('#directory-content').animate({'margin-left': '340px'}, 350,'swing');
 			$('#map-gogo-controls').animate({'padding-left': '10px'}, 350,'swing');
@@ -112,7 +112,7 @@ export class AppComponent
 		$('.btn-close-menu.large-screen').hideTooltip();
 
 		$('#directory-content').animate({'margin-left':'0'}, 200,'swing');		
-		$('#show-directory-menu-button').show();
+		$('.show-directory-menu-button').show();
 		$('#map-gogo-controls').animate({'padding-left': '0px'}, 350,'swing');
 		$('#directory-menu').animate({'left': '-' + $('#directory-menu').width() + 'px'},250,'swing',function()
 		{ 
