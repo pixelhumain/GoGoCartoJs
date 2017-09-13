@@ -5,12 +5,17 @@
 		<span class="btn-close-menu small-screen icon gogo-icon-material-design-icons-1"></span>
 		{% include 'components/directory-menu/search-bar.html.njk'  %} 	
 
-		<div class="directions-header">
-			<h3>Calcul d'itinéraire</h3>
-			<span class="icon gogo-icon-close btn-close" id="btn-close-directions"></span>
-		</div>	
-
 		<div class="btn-close-menu large-screen tooltipped" data-tooltip="Fermer le menu" data-position="right" data-delay="300"><span class="arrow-left"></span></div>	
+
+		<div class="search-results subheader" style="display:none">
+		    <span class="search-result-label">Résultats : <span id="search-result-number"></span> {{ config.text.element }}(s) trouvé-e(s)</span>
+		    <span class="icon gogo-icon-close btn-close" id="btn-close-search-result"></span>
+		</div>
+
+		<div class="directions-header subheader">
+		    <h3>Calcul d'itinéraire</h3>
+		    <span class="icon gogo-icon-close btn-close" id="btn-close-directions"></span>
+		</div>
 		
 		<div class="shadow-bottom"></div>
 	</div>	

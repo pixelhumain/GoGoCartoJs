@@ -64,24 +64,40 @@
         padding: 0 1rem;
         height: 3.5rem;
         line-height: 4rem;
-      }   
+      }  
 
-      .btn-close
+      .subheader
       {
-        position: absolute;
-        bottom: .3rem;
-        right: 0;
-        margin: 0;
-        padding: 0 1rem;
-        z-index: 50;
-        color: #CECECE;
-
-        &:hover
+        position: relative;
+        &.search-results
         {
-          color: white;
-          cursor: pointer;
+          padding: 0 0 .7rem 1rem;
+
+          .btn-close { top: -3px !important; }
+
+          .search-result-label
+          {
+            color: white;
+          }
         }
-      }         
+
+        .btn-close
+        {
+          position: absolute;
+          margin: 0;
+          right: 0;
+          top: 7px;
+          padding: 0 1rem;
+          z-index: 50;
+          color: #CECECE;
+
+          &:hover
+          {
+            color: white;
+            cursor: pointer;
+          }
+        }       
+      }           
 
       @include transition(all .5s);
 
