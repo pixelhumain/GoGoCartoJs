@@ -102,6 +102,8 @@ export class Element
 
 	needToBeUpdatedWhenShown : boolean = true;
 
+	searchScore : number = null;
+
 	constructor(elementJson : any)
 	{
 		// when we get the compact json representation of the element from the server
@@ -150,6 +152,8 @@ export class Element
 
 		// initialize formated open hours
 		this.getFormatedOpenHours();
+
+		this.searchScore = elementJson.searchScore;
 
 		this.isFullyLoaded = true;
 	}
