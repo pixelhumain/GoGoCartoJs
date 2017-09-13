@@ -251,28 +251,27 @@ export class AppModule
 	*/
 	setMode($mode : AppModes, $backFromHistory : boolean = false, $updateTitleAndState = true)
 	{
-		if ($mode != this.mode_)
-		{			
-			if ($mode == AppModes.Map)
+		if ($mode == AppModes.Map)
+		{
+			$('#directory-content-map').show();
+			$('#directory-content-list').hide();				
+
+			this.mapComponent.init();
+
+			if (this.mapComponent_.isMapLoaded) this.boundsModule.extendBounds(0, this.mapComponent.getBounds());
+		}
+		else
+		{
+			$('#directory-content-map').hide();
+			$('#directory-content-list').show();	
+
+			console.log("list mode",App.geocoder.getLocation());			
+
+			if (App.dataType == AppDataType.All)
 			{
-				$('#directory-content-map').show();
-				$('#directory-content-list').hide();				
-
-				this.mapComponent.init();
-
-				if (this.mapComponent_.isMapLoaded) this.boundsModule.extendBounds(0, this.mapComponent.getBounds());
-			}
-			else
-			{
-				$('#directory-content-map').hide();
-				$('#directory-content-list').show();
-
 				let centerLocation : L.LatLng;
-
 				let address = App.geocoder.lastAddressRequest;
 
-				/*if (App.geocoder.getLocation()) centerLocation = App.geocoder.getLocation();
-				else if (*/
 				if (App.mapComponent.isInitialized) {
 					centerLocation = App.mapComponent.getCenter();
 			  	App.elementListComponent.setTitle(' autour du centre de la carte');
@@ -291,24 +290,30 @@ export class AppModule
 				this.boundsModule.createBoundsFromLocation(centerLocation);
 				this.checkForNewElementsToRetrieve(true);
 			}
-
-			// if previous mode wasn't null 
-			let oldMode = this.mode_;
-			this.mode_ = $mode;
-
-			// update history if we need to
-			if (oldMode != null && !$backFromHistory) this.historyModule.pushNewState();
-
-			this.elementModule.clearCurrentsElement();
-			this.elementModule.updateElementsToDisplay(true);
-
-			if ($updateTitleAndState)
+			else if (App.dataType == AppDataType.SearchResults)
 			{
-				this.updateDocumentTitle();			
+				App.elementModule.updateElementsToDisplay(true,false);
+				this.elementListComponent.setTitle(' de <i>' + capitalize(unslugify(this.searchBarComponent.getCurrSearchText())) + '</i>');
+			}
+			
+		}
 
-				// after clearing, we set the current state again
-				if ($mode == AppModes.Map) this.setState(this.state, {id : this.stateElementId});	
-			}				
+		// if previous mode wasn't null 
+		let oldMode = this.mode_;
+		this.mode_ = $mode;
+
+		// update history if we need to
+		if (oldMode != null && !$backFromHistory) this.historyModule.pushNewState();
+
+		this.elementModule.clearCurrentsElement();
+		this.elementModule.updateElementsToDisplay(true);
+
+		if ($updateTitleAndState)
+		{
+			this.updateDocumentTitle();			
+
+			// after clearing, we set the current state again
+			if ($mode == AppModes.Map) this.setState(this.state, {id : this.stateElementId});	
 		}
 	}
 
@@ -581,9 +586,7 @@ export class AppModule
 			App.boundsModule.updateFilledBoundsWithBoundsReceived(result.expectedFillBounds, App.currMainId,  $getFullRepresentation);
 			this.handleNewElementsReceivedFromServer({'data': [], 'fullRepresentation': $getFullRepresentation});
 			return;
-		}
-
-		$('#directory-list-spinner-loader').show();
+		}		
 
 		let freeBounds = result.freeBounds;
 		let expectedFilledBounds = result.expectedFillBounds;
@@ -607,7 +610,7 @@ export class AppModule
 
 	handleGeocodeResult()
 	{
-		//console.log("handleGeocodeResult", results);
+		//console.log("handleGeocodeResult", this.geocoder.getLocation());
 		$('#directory-spinner-loader').hide();
 
 		if (this.state == AppStates.ShowDirections)	
@@ -630,8 +633,8 @@ export class AppModule
 				this.elementModule.clearCurrentsElement();
 				this.elementModule.updateElementsToDisplay(true);
 				let address = App.geocoder.lastAddressRequest;
-				if (this.geocoder.getLocation()) App.elementListComponent.setTitle(' autour de <i>' + capitalize(unslugify(address))) + '</i>';
-				else App.elementListComponent.setTitle('');
+				if (this.geocoder.getLocation()) 
+					App.elementListComponent.setTitle(' autour de <i>' + capitalize(unslugify(address))) + '</i>';
 			}			
 
 			this.updateDocumentTitle();
@@ -641,9 +644,7 @@ export class AppModule
 
 	handleNewElementsReceivedFromServer(result)
 	{		
-		let elementsJson = result.data;
-
-		$('#directory-list-spinner-loader').hide();
+		let elementsJson = result.data;		
 		
 		let	elements = this.elementModule.addJsonElements(elementsJson, true, result.fullRepresentation);
 		//console.log("new Elements length", newElements.length);
@@ -664,7 +665,7 @@ export class AppModule
 
 		if (this.mode_ == AppModes.List)
 		{
-			this.elementListComponent.update(result);
+			this.elementListComponent.update(result.elementsToDisplay);
 		}
 		else
 		{

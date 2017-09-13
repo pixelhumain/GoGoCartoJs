@@ -140,6 +140,11 @@ export class ElementsModule
 		this.searchResultElements_ = elements;
 	}
 
+	getSearchElements() : Element[]
+	{
+		return this.searchResultElements_;
+	}
+
 	showElement(element : Element)
 	{
 		element.show();
@@ -258,7 +263,9 @@ export class ElementsModule
 
 			if (!element) break;
 
-			let elementInBounds = App.boundsModule.extendedBounds.contains(element.position);
+			let elementInBounds = false;
+			if (App.mode == AppModes.List && App.dataType != AppDataType.All) elementInBounds = true;
+			else elementInBounds = App.boundsModule.extendedBounds.contains(element.position);
 
 			if ( elementInBounds && filterModule.checkIfElementPassFilters(element))
 			{

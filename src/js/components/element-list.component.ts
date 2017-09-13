@@ -7,7 +7,7 @@
  * @license    MIT License
  * @Last Modified time: 2016-12-13
  */
-import { AppModule, AppStates } from "../app.module";
+import { AppModule, AppStates, AppDataType } from "../app.module";
 import { App } from "../gogocarto";
 import { ElementsChanged } from "../modules/elements.module";
 import { slugify, capitalize, unslugify } from "../commons/commons";
@@ -57,18 +57,20 @@ export class ElementListComponent
 		});
 	}
 
-	update($elementsResult : ElementsChanged) 
+	update($elementsToDisplay : Element[]) 
 	{
 		//console.log("elementList update", $elementsResult);
-		if ($elementsResult.elementsToDisplay.length == 0) this.stepsCount = 1;
+		if ($elementsToDisplay.length == 0) this.stepsCount = 1;
 
+		$('#directory-list-spinner-loader').hide();
 		this.clear();		
 
-		this.draw($elementsResult.elementsToDisplay, false);
+		this.draw($elementsToDisplay, false);
 	}
 
 	setTitle($value : string)
 	{
+		console.log("set title", $value);
 		$('.element-list-title-text').html($value);
 	}
 
@@ -96,12 +98,15 @@ export class ElementListComponent
 
 		//console.log('ElementList draw', elementsToDisplay.length);
 
-		for(element of elementsToDisplay)
+		if (App.dataType == AppDataType.All)
 		{
-			element.updateDistance();
-			element.updateIsInMapBounds();
+			for(element of elementsToDisplay) element.updateDistance();
+			elementsToDisplay.sort(this.compareDistance);
 		}
-		elementsToDisplay.sort(this.compareDistance);
+		else if (App.dataType == AppDataType.SearchResults)
+		{
+			elementsToDisplay.sort(this.compareSearchScore);
+		}		
 
 		let maxElementsToDisplay = this.ELEMENT_LIST_SIZE_STEP * this.stepsCount;
 		let endIndex = Math.min(maxElementsToDisplay, elementsToDisplay.length);  
@@ -109,9 +114,13 @@ export class ElementListComponent
 		// if the list is not full, we send ajax request
 		if ( elementsToDisplay.length < maxElementsToDisplay)
 		{
-			// expand bounds
-			App.boundsModule.extendBounds(0.5);
-			App.checkForNewElementsToRetrieve(true);		
+			if (App.dataType == AppDataType.All)
+			{
+				// expand bounds
+				App.boundsModule.extendBounds(0.5);
+				$('#directory-list-spinner-loader').show();
+				App.checkForNewElementsToRetrieve(true);		
+			}			
 		}	
 		else
 		{
@@ -159,6 +168,12 @@ export class ElementListComponent
 	{  
 	  if (a.distanceFromBoundsCenter == b.distanceFromBoundsCenter) return 0;
 	  return a.distanceFromBoundsCenter < b.distanceFromBoundsCenter ? -1 : 1;
+	}
+
+	private compareSearchScore(a:Element,b:Element) 
+	{  
+	  if (a.searchScore == b.searchScore) return 0;
+	  return a.searchScore < b.searchScore ? -1 : 1;
 	}
 }
 

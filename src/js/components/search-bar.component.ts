@@ -7,7 +7,7 @@
  * @license    MIT License
  * @Last Modified time: 2016-08-31
  */
-import { AppModule, AppStates, AppDataType } from "../app.module";
+import { AppModule, AppStates, AppDataType, AppModes } from "../app.module";
 import { GeocoderModule, GeocodeResult } from "../modules/geocoder.module";
 declare var google, $;
 import { App } from "../gogocarto";
@@ -51,8 +51,6 @@ export class SearchBarComponent
 		this.domElement().on('focus', () => { this.showSearchOptions(); });
 
 		this.domElement().on('keyup', () => this.showSearchOptions());
-
-		//$('.directory-menu-header').on('mouseleave', this.hideSearchOptions);
 	}
 
 	handleGeocodeResult()
@@ -111,12 +109,16 @@ export class SearchBarComponent
 			let result = App.elementModule.addJsonElements(searchResult.data, true, true);
 			App.elementModule.setSearchResultElement(result.elementsConverted);
 			App.setDataType(AppDataType.SearchResults, $backFromHistory);
+			App.directoryMenuComponent.setMainOption('all');
 
 			this.clearLoader();			
-			this.showSearchResultLabel(searchResult.data.length);
+			this.showSearchResultLabel(searchResult.data.length);	
 
 			if (searchResult.data.length > 0)
+			{
+				App.setMode(AppModes.List);
 				App.mapComponent.fitElementsBounds(result.elementsConverted);
+			}
 			else
 				App.mapComponent.fitDefaultBounds();
 		},
@@ -154,11 +156,14 @@ export class SearchBarComponent
 
 	clearSearchResult(resetValue = true)
 	{
-		App.setDataType(AppDataType.All);
+		App.setDataType(AppDataType.All);		
 		this.hideSearchResultLabel();		
 		this.clearLoader();	
 		this.currSearchText = '';
-		if (resetValue) this.setValue("");
+		if (resetValue) {
+			this.setValue("");
+			App.elementListComponent.setTitle("");
+		}
 		setTimeout( () => { this.hideSearchOptions(); }, 200);
 	}
 
