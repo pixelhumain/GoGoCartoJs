@@ -29,8 +29,7 @@ export class DirectoryMenuComponent
 		// --------- FAVORITE-------------
 		// -------------------------------
 		$('#filter-favorite').click(function(e : Event)
-		{
-			
+		{			
 			let favoriteCheckbox = $('#favorite-checkbox');
 
 			let checkValue = !favoriteCheckbox.is(':checked');
@@ -179,11 +178,13 @@ export class DirectoryMenuComponent
 		//console.log("setMainOptionId " + optionId + " / oldOption : " + oldId);
 		if (oldId != null) App.historyModule.updateCurrState();
 
-		App.elementListComponent.reInitializeElementToDisplayLength();
+		setTimeout( () => {
+			App.elementListComponent.reInitializeElementToDisplayLength();
 		
-		App.boundsModule.updateFilledBoundsAccordingToNewMainOptionId();
-		App.checkForNewElementsToRetrieve();
-		App.elementModule.updateElementsToDisplay(true,true);
+			App.boundsModule.updateFilledBoundsAccordingToNewMainOptionId();
+			App.checkForNewElementsToRetrieve();
+			App.elementModule.updateElementsToDisplay(true,true);
+		}, 400);		
 	}
 
 	// the main option selected got a specific background, who can vertically translate
@@ -192,14 +193,14 @@ export class DirectoryMenuComponent
 		let optionId = this.currentActiveMainOptionId;		
 
 		$('.main-option-subcategories-container:not(#main-option-' + optionId + ')').hide();
-		$('#main-option-' + optionId).fadeIn(600);
+		$('#main-option-' + optionId).fadeIn(400);
 
 		$('.main-categories .main-icon').removeClass('active');
 		$('#main-option-gogo-icon-' + optionId).addClass('active');
 
 		if(!$('#main-option-gogo-icon-' + optionId).position()) { console.log("directory not loaded");return; }
 
-		$('#active-main-option-background').animate({top: $('#main-option-gogo-icon-' + optionId).position().top}, 500, 'easeOutQuart');
+		$('#active-main-option-background').animate({top: $('#main-option-gogo-icon-' + optionId).position().top}, 400, 'easeOutQuart');
 	}
 }
 
