@@ -18,6 +18,8 @@ import { CategoryOptionTreeNode } from "../classes/category-option-tree-node.cla
 
 import { App } from "../gogocarto";
 
+declare var $ : any;
+
 export class FilterModule
 {
 	showOnlyFavorite_ : boolean = false;
@@ -152,52 +154,55 @@ export class FilterModule
 
 		let filters = parseStringIntoArrayNumber(filtersString);
 
-		console.log('filters', filters);
-		console.log('addingMode', addingMode);
+		//console.log('filters', filters);		
 
-		// if addingMode, we first put all the filter to false
-		if (addingMode)
+		if (filters.length > 0)
 		{
+			//console.log('addingMode', addingMode);
+			
 			if (mainOptionSlug == 'all')
 			{
-				App.categoryModule.mainCategory.toggle(false, false);
-				if (!App.loadFullTaxonomy) 
+				if (App.loadFullTaxonomy) App.categoryModule.mainCategory.toggle(!addingMode, false);
+				else
+				{
+					// if no loadFullTaxonomy, by default the main-categrories side menu is not displayed
+					$('.main-categories').show();
 					for(let option of App.categoryModule.mainCategory.options) 
 					{
-						if (!App.loadFullTaxonomy) option.toggleVisibility(false);
+						option.toggleVisibility(!addingMode);
 					}
+				}
 			}
 			else
 			{
 				for (let cat of App.categoryModule.getMainOptionBySlug(mainOptionSlug).subcategories)
 					for(let option of cat.options) 
 					{
-						option.toggle(false, false);
-						if (!App.loadFullTaxonomy) option.toggleVisibility(false, true);
+						if (App.loadFullTaxonomy) option.toggle(!addingMode, false);
+						else option.toggleVisibility(!addingMode, true);
 					}
 			}
 
-			App.categoryModule.openHoursCategory.toggle(false, false);
-			if (!App.loadFullTaxonomy) App.categoryModule.openHoursCategory.toggleVisibility(false);
-		}
-
-		for(let filterId of filters)
-		{
-			let option = App.categoryModule.getOptionById(filterId);
-			if (!option) console.log("Error loadings filters : " + filterId);
-			else 
+			for(let filterId of filters)
 			{
-				option.toggle(addingMode, false);
-				if (!App.loadFullTaxonomy) option.toggleVisibility(addingMode);
+				let option = App.categoryModule.getOptionById(filterId);
+				if (!option) console.log("Error loadings filters : " + filterId);
+				else 
+				{
+					if (App.loadFullTaxonomy)  option.toggle(addingMode, false);
+					if (!App.loadFullTaxonomy) option.toggleVisibility(addingMode);
+				}
 			}
+
+			if (App.loadFullTaxonomy)
+			{
+				if (mainOptionSlug == 'all') App.categoryModule.mainCategory.updateState();
+				else App.categoryModule.getMainOptionBySlug(mainOptionSlug).recursivelyUpdateStates();
+			}
+
+			App.elementModule.updateElementsToDisplay(true);
+			//App.historyModule.updateCurrState();
 		}
-
-		if (mainOptionSlug == 'all') App.categoryModule.mainCategory.updateState();
-		else App.categoryModule.getMainOptionBySlug(mainOptionSlug).recursivelyUpdateStates();
-
-		App.elementModule.updateElementsToDisplay(true);
-		//App.historyModule.updateCurrState();
-
 	}
 
 	getFiltersToString() : string

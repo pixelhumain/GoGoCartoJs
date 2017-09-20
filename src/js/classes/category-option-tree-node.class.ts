@@ -18,8 +18,12 @@ export enum CategoryOptionTreeNodeType
 export class CategoryOptionTreeNode 
 {
 	id : number;
+	name : string;
 
 	children : CategoryOptionTreeNode[] = [];
+
+	// is the node han't be touched for now, it's on it's first initialized state
+	isPristine : boolean = true;
 
 	ownerId : number = null;
 	// l'id de la mainOption, ou "all" pour une mainOption
@@ -59,6 +63,7 @@ export class CategoryOptionTreeNode
 	{
 		this.isChecked = bool;
 		this.getDomCheckbox().prop("checked", bool);
+		this.isPristine = false;
 	}
 
 	setDisabled(bool : boolean)
@@ -73,6 +78,7 @@ export class CategoryOptionTreeNode
 		{
 			this.getDom().removeClass('disabled');
 		}
+		this.isPristine = false;
 	}
 
 	toggle(value : boolean = null, humanAction : boolean = true)
@@ -81,10 +87,18 @@ export class CategoryOptionTreeNode
 			if (value != null) check = value;
 			else check = !this.isChecked;
 
+			if (this.isOption() && this.isPristine && humanAction)
+			{
+				this.getSiblingsPristine().forEach( (node) => {
+					node.toggle(false, false);
+				});
+				// force check to true, becasue in pristine mode input is unchecked but option class is checked and not disabled
+				check = true;
+			}			
+
 			this.setChecked(check);
 			this.setDisabled(!check);
 
-			// in All mode, we clicks directly on the mainOption, but don't want to all checkbox in MainOptionFilter to disable
 			if (!this.isMainOption()) 
 			{
 				for (let child of this.children) child.toggle(check, false);
@@ -105,8 +119,15 @@ export class CategoryOptionTreeNode
 	toggleVisibility(value : boolean, recursive : boolean = false)
 	{
 		//console.log("toggle visibility ", value);
+		this.isChecked = value;
+
 		if (value) this.getDom().show();
-		else this.getDom().hide();
+		else { this.getDom().hide();}
+
+		if (this.isMainOption())
+		{
+			$('#main-option-gogo-icon-' + this.id).toggle(value);
+		}
 
 		if (value && this.getOwner()) this.getOwner().toggleVisibility(true);
 
@@ -168,5 +189,10 @@ export class CategoryOptionTreeNode
 			this.getDomChildren().stop(true,false).slideDown({ duration: 350, easing: "easeOutQuart", queue: false, complete: function() {$(this).css('height', '');}});
 			this.getDom().addClass('expanded');
 		}
+	}
+
+	getSiblingsPristine() : CategoryOptionTreeNode[]
+	{
+		return this.getOwner().children.filter( (node) => node.isPristine && node.id != this.id); 
 	}
 }

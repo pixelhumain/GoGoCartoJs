@@ -6,8 +6,7 @@ import { App } from "../gogocarto";
 declare let $ : any;
 
 export class Category extends CategoryOptionTreeNode
-{ 
-	name : string;
+{ 	
 	index: number;
 	singleOption : boolean;
 	enableDescription : boolean;

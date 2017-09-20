@@ -3,8 +3,7 @@
 <div class="filter-menu">	
 
 	{# MAIN CATEGORIE SIDE BAR #}
-	{% if fullTaxonomy %}
-	<div class="main-categories gogo-bg-neutral-dark custom-scroll-bar-light">
+	<div class="main-categories gogo-bg-neutral-dark custom-scroll-bar-light" {{  '' if fullTaxonomy else 'style="display:none"' }}>
 
 		<div class="icon main-gogo-icon-background gogo-bg-neutral" id="active-main-option-background"></div>
 
@@ -17,11 +16,9 @@
 			<div class="icon main-icon {{ mainOption.icon }} gogo-neutral gogo-h-neutral-light"  id="main-option-gogo-icon-{{mainOption.id}}" data-option-id="{{ mainOption.id }}">
 				<div class="main-option-tooltip gogo-bg-neutral-dark-transparent">{{ mainOption.name }}</div>
 			</div>
-
 		{% endfor %}
 
 	</div>
-	{% endif %}
 
 	<div class="sub-categories">
 

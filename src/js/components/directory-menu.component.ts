@@ -134,7 +134,9 @@ export class DirectoryMenuComponent
 			let optionId = $(this).attr('data-option-id');
 			let option = App.categoryModule.getOptionById(optionId);
 
-			option.isCollapsible() ? option.toggleChildrenDetail() : option.toggle();
+			if (option.isMainOption()) App.directoryMenuComponent.setMainOption(option.id);
+			else if (option.isCollapsible()) option.toggleChildrenDetail()
+			else option.toggle();
 		});
 
 		$('.subcategorie-option-item:not(#filter-favorite):not(#filter-pending) .checkbox-wrapper').click(function(e)

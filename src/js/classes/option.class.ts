@@ -8,7 +8,6 @@ declare let $ : any;
 export class Option extends CategoryOptionTreeNode
 { 
 	id : number;
-	name : string;
 	nameShort: string;
 	index : number;
 	color : string;
