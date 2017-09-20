@@ -116,8 +116,8 @@ export class MapComponent
 		    animate: false,
 		    maxClusterRadius: (zoom) =>
 		    {
-		    	if (zoom > 10) return 50;
-		    	if (zoom > 7) return 60;
+		    	if (zoom > 10) return 60;
+		    	if (zoom > 7) return 70;
 		    	else return 70;
 		    }
 		});
