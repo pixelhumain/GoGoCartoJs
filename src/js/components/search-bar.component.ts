@@ -18,6 +18,12 @@ export class SearchBarComponent
 {
 	domId;
 
+	placeholders = {
+		default: "",
+		place: "",
+		element: ""
+	}
+
 	domElement() { return $(`${this.domId}`); }
 
 	private currSearchText : string = '';
@@ -51,6 +57,16 @@ export class SearchBarComponent
 		this.domElement().on('focus', () => { this.showSearchOptions(); });
 
 		this.domElement().on('keyup', () => this.showSearchOptions());
+
+		this.placeholders = {
+			default: "Recherchez un lieu, " + App.config.text.elementIndefinite + "...",
+			place: "Entrez une adresse, un CP, une ville...",
+			element: "Entrez le nom d'" + App.config.text.elementIndefinite
+		}
+
+		this.updateSearchPlaceholder();
+
+		$('.search-option-radio-btn').change( () => this.updateSearchPlaceholder() );
 	}
 
 	handleGeocodeResult()
@@ -74,8 +90,7 @@ export class SearchBarComponent
 		if ($('#directory-menu').width() == $('.gogocarto-container').width())
 			App.component.hideDirectoryMenu();
 
-		let searchType = $('.search-option-radio-btn:checked').attr('data-name');	
-		switch (searchType)
+		switch (this.searchType())
 		{
 			case "place":
 				App.geocoder.geocodeAddress(this.domElement().val(),
@@ -131,8 +146,26 @@ export class SearchBarComponent
 	showSearchOptions()
 	{
 		$('.search-options').slideDown(350);
-		if (!$('#directory-menu-main-container .directory-menu-header').hasClass("expanded")) 
+		if (!this.isSearchOptionVisible()) 
 			$('#directory-menu-main-container .directory-menu-header').addClass("expanded");
+
+		this.updateSearchPlaceholder();
+	}
+
+	updateSearchPlaceholder()
+	{
+		let placeholder = ''
+		if (!this.isSearchOptionVisible()) placeholder = this.placeholders.default;
+		else
+		{
+			switch (this.searchType())
+			{
+				case "place":   placeholder = this.placeholders.place;   break;
+				case "element": placeholder = this.placeholders.element; break;
+			}
+		}			
+
+		this.domElement().attr("placeholder", placeholder);
 	}
 
 	hideSearchOptions()
@@ -140,6 +173,7 @@ export class SearchBarComponent
 		$('.search-options').slideUp(350);
 		$('#directory-menu-main-container .directory-menu-header').removeClass("expanded");
 		this.domElement().blur();
+		this.updateSearchPlaceholder();
 	}
 
 	showSearchResultLabel($number : number)
@@ -173,5 +207,15 @@ export class SearchBarComponent
 	}  
 
 	getCurrSearchText() { return this.currSearchText; }
+
+	isSearchOptionVisible() : boolean
+	{
+		return $('#directory-menu-main-container .directory-menu-header').hasClass("expanded");
+	}
+
+	searchType() : string
+	{
+		return $('.search-option-radio-btn:checked').attr('data-name');
+	}
     
 }
