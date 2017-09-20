@@ -67,6 +67,8 @@ export class SearchBarComponent
 		this.updateSearchPlaceholder();
 
 		$('.search-option-radio-btn').change( () => this.updateSearchPlaceholder() );
+
+		$('#directory-content, .directory-menu-content, header').click( () => this.hideSearchOptions() );
 	}
 
 	handleGeocodeResult()
@@ -169,11 +171,11 @@ export class SearchBarComponent
 	}
 
 	hideSearchOptions()
-	{
-		$('.search-options').slideUp(350);
+	{		
 		$('#directory-menu-main-container .directory-menu-header').removeClass("expanded");
 		this.domElement().blur();
 		this.updateSearchPlaceholder();
+		$('.search-options').slideUp(250);
 	}
 
 	showSearchResultLabel($number : number)

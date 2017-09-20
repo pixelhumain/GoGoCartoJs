@@ -603,8 +603,7 @@ export class AppModule
 			this.infoBarComponent.hide(); 		
 		else if (this.state == AppStates.ShowDirections)
 			this.setState(AppStates.ShowElement, { id : App.infoBarComponent.getCurrElementId() });		
-
-		this.searchBarComponent.hideSearchOptions();	
+		
 		this.mapComponent.hideControlLayers();
 	};
 
