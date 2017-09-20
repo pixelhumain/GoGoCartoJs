@@ -7,10 +7,8 @@
  * @license    MIT License
  * @Last Modified time: 2016-08-31
  */
-export function createCookie(name,value) 
+export function createCookie(name, value, days = 100) 
 {
-	let days = 100;
-
 	let date = new Date();
 	date.setTime(date.getTime()+(days*24*60*60*1000));
 	let expires = "; expires="+date.toUTCString();
