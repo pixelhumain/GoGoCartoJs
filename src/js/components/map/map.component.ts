@@ -88,43 +88,17 @@ export class MapComponent
 			return;
 		}
 
-		// payant			
-		let mapbox = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2ViYWxsb3QiLCJhIjoiY2l4MGtneGVjMDF0aDJ6cWNtdWFvc2Y3YSJ9.nIZr6G2t08etMzft_BHHUQ');
-		let mapboxlight = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2ViYWxsb3QiLCJhIjoiY2l4MGtneGVjMDF0aDJ6cWNtdWFvc2Y3YSJ9.nIZr6G2t08etMzft_BHHUQ');
-		
-		// gratuit (je crois)
-		let cartodb = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png'); // pas mal; très clair. 5ko
-		let hydda = L.tileLayer('https://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png'); // pas mal ! 20ko
-		let wikimedia = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png'); // sympa mais version démo je crois
-		let monochrome = L.tileLayer('https://www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png'); // ça passe
-		let lyrk  = L.tileLayer('https://tiles.lyrk.org/ls/{z}/{x}/{y}?apikey =982c82cc765f42cf950a57de0d891076'); // pas mal; mais zomm max 16. 20ko
-		let osmfr = L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png');
-		let stamen = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.png');	
-		let stamenTerrain = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png');		
-		let stamenWaterColor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.png');			
-		let openriver = L.tileLayer('https://{s}.tile.openstreetmap.fr/openriverboatmap/{z}/{x}/{y}.png');
-		let thunderforest = L.tileLayer('https://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png'); // pas très joli		
 
-		let baseLayers = {
-			'hydda' : hydda,
-			'mapbox' : mapbox, 
-			'mapboxlight' : mapboxlight, 
-			'cartodb' : cartodb, 			
-			'wikimedia' : wikimedia,
-			'monochrome' : monochrome, 
-			'lyrk'  : lyrk, 
-			'osmfr' : osmfr, 
-			// 'stamen' : stamen,
-			// 'stamenTerrain' : stamenTerrain,
-			'WaterColor' : stamenWaterColor,
-			//'openriver' : openriver,  
-			'thunderforest' : thunderforest, 
-			'Pas de fond' : L.tileLayer(''),
-		};
+		let configTileLayers = App.config.map.tileLayers;
+		let baseLayers = {};
+		for(let tileLayer of configTileLayers)
+		{
+			baseLayers[tileLayer.name] = L.tileLayer(tileLayer.url)
+		}
 
 		// Get defaultBaseLayer from Cookie if possible
 		let baseLayerId = Cookies.readCookie('defaultBaseLayer');
-		let defaultBaseLayer = baseLayers.hasOwnProperty(baseLayerId) ? baseLayers[baseLayerId] : baseLayers.hydda;
+		let defaultBaseLayer = baseLayers.hasOwnProperty(baseLayerId) ? baseLayers[baseLayerId] : baseLayers[App.config.map.defaultTileLayer];
 
 		this.map_ = L.map('directory-content-map', {
 		    zoomControl: false,
@@ -143,8 +117,8 @@ export class MapComponent
 		    maxClusterRadius: (zoom) =>
 		    {
 		    	if (zoom > 10) return 50;
-		    	if (zoom > 7) return 75;
-		    	else return 100;
+		    	if (zoom > 7) return 60;
+		    	else return 70;
 		    }
 		});
 
