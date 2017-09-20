@@ -3707,7 +3707,7 @@ select {
 * @Author: Sebastian Castro
 * @Date:   2017-02-28 13:25:52
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-09-08 11:03:55
+* @Last Modified time: 2017-09-20 14:13:41
 */
   /*
 * @Author: Sebastian Castro
@@ -4418,6 +4418,20 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       position: absolute;
       top: .6rem;
       border-radius: 0 50% 50% 0; }
+  .gogocarto-container #directory-menu #main-option-all .gogo-icon-name-wrapper:hover:after {
+    content: "+";
+    font-size: 1.4rem;
+    font-weight: normal;
+    background-color: #eeeeee;
+    padding: 3px 11px;
+    border-radius: 3px;
+    margin-left: 5px;
+    top: 5px;
+    line-height: 1rem;
+    position: absolute;
+    right: 10px;
+    z-index: 10;
+    top: 11px; }
   .gogocarto-container #directory-menu .sub-categories {
     -webkit-box-flex: 1 auto;
     -moz-box-flex: 1 auto;
@@ -4992,7 +5006,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         color: #616161; }
       .gogocarto-container .layers-button#close-layers-panel i {
         font-size: 16px;
-        line-height: 40px; }
+        line-height: 44px;
+        margin-left: 2px; }
     .gogocarto-container .layers-button:hover {
       cursor: pointer;
       background-color: #f4f4f4; }
@@ -5015,7 +5030,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     margin-top: 15px !important; }
   .gogocarto-container .leaflet-control-layers-list {
     display: block !important;
-    padding: 5px 15px 10px;
+    padding: 5px 25px 10px 15px;
     position: relative !important; }
   .gogocarto-container .leaflet-control-layers-selector:checked + span {
     font-weight: bold; }
