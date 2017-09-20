@@ -1,4 +1,4 @@
-{% macro renderItem(category, recursive) %}
+{% macro renderItem(category, recursive, isCheckable) %}
 <div class="category-wrapper depth-{{category.depth}}">
 
 	{# ---- CATEGORY TITLE IF REQUIRED ----- #}
@@ -13,13 +13,15 @@
 			{% if not category.unexpandable %}<div class="arrow-after"></div>	{% endif %}
 		</div>
 
-		{# --- CHECKBOX ---- #}
-		<div class="checkbox-wrapper" data-category-id='{{ category.id }}'>
-			<div class="checkbox-container">
-		      <input type="checkbox" class="subcategorie-checkbox filled-in" id="subcategorie-checkbox-{{ category.id }}" checked="checked" data-category-id='{{ category.id }}'/>
-		      <label for="subcategorie-checkbox-{{ category.id }}"></label>
+		{% if isCheckable %}
+			{# --- CHECKBOX ---- #}
+			<div class="checkbox-wrapper" data-category-id='{{ category.id }}'>
+				<div class="checkbox-container">
+			      <input type="checkbox" class="subcategorie-checkbox filled-in" id="subcategorie-checkbox-{{ category.id }}" checked="checked" data-category-id='{{ category.id }}'/>
+			      <label for="subcategorie-checkbox-{{ category.id }}"></label>
+				</div>
 			</div>
-		</div>
+		{% endif %}
 	</li>
 	{% endif %}
 
@@ -52,26 +54,28 @@
 					{# --- ARROW COLAPSIBLE ---- #}
 					{% if isSubcategories %}<div class="arrow-after"></div>{% endif %}
 					
-				</div>
+				</div>				
 
-				{# --- SHOW ONLY---- #}
-				<!-- <span class="icon btn-show-only gogo-icon-material-eye"></span>  -->
-
+				{% if isCheckable %}
 				{# --- CHECKBOX ---- #}
 				<div class="checkbox-wrapper" data-option-id='{{ option.id }}' >
 					<div class="checkbox-container">
 					  <input type="checkbox" class="subcategorie-option-checkbox {{ 'tooltipped' if isSubcategories }}" 
-					  id="option-checkbox-{{ option.id }}" checked="checked"  {% if isSubcategories %} data-position="right" data-delay="400" data-tooltip="Cocher/Décocher tout"{% endif %}/>
+					  id="option-checkbox-{{ option.id }}" {% if isSubcategories %} data-position="right" data-delay="400" data-tooltip="Cocher/Décocher tout"{% endif %}/>
 					  <label class="gogo-h-primary" for="option-checkbox-{{ option.id }}"></label>
 					</div>
 				</div>
+				{% else %}
+					{# --- SHOW ONLY---- #}
+					<span class="icon btn-show-only gogo-icon-material-eye"></span> 
+				{% endif %}
 
     </li>
 
     {% if recursive %}
     	<div class="subcategories-wrapper" {% if not option.showExpanded%} style="display:none"{% endif %}>
 	    {% for subcategory in option.subcategories %}
-	    		{{ renderItem(subcategory, true) }}
+	    		{{ renderItem(subcategory, true, isCheckable) }}
 			{% endfor %} 
 			</div>
 		{% endif %}

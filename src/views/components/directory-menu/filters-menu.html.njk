@@ -72,7 +72,7 @@
 				<div id="main-option-all" class="main-option-subcategories-container" style="display:none">		
 
 					{% import 'components/directory-menu/category-item.html.njk' as categoryRenderer %}
-					{{ categoryRenderer.renderItem(mainCategory, false) }} 
+					{{ categoryRenderer.renderItem(mainCategory, false, config.menu.showCheckboxForMainOptions) }} 
 
 				</div>
 
@@ -83,7 +83,7 @@
 					<div id="main-option-{{ mainOption.id }}" class="main-option-subcategories-container" style="display:none">		
 
 						{% for category in mainOption.subcategories %}
-							{{ categoryRenderer.renderItem(category, true) }} 
+							{{ categoryRenderer.renderItem(category, true, config.menu.showCheckboxForSubOptions) }} 
 						{% endfor %} 
 
 					</div>
@@ -92,7 +92,7 @@
 
 				{# OPEN HOURS FILTER #}
 				<div id="open-hours-filter" class="" style="display:none">		
-					{{ categoryRenderer.renderItem(openHoursCategory, false) }} 
+					{{ categoryRenderer.renderItem(openHoursCategory, false, config.menu.showCheckboxForSubOptions) }} 
 				</div> 
 
 			</ul>

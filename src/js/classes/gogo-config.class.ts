@@ -56,6 +56,11 @@ export class GoGoConfig
       elementInBoundsApiUrl: '',
       showPending: true,
   };
+  readonly menu =
+  {
+    showCheckboxForMainOptions: false,
+    showCheckboxForSubOptions: true,
+  };
   readonly map =
   {
       // france
