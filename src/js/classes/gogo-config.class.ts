@@ -152,7 +152,7 @@ export class GoGoConfig
           {
             let new_prop;
             switch(prop) {
-              case 'defaultBounds' : new_prop = L.latLngBounds(object[prop]);console.log(object[prop]); console.log(new_prop);break;
+              case 'defaultBounds' : new_prop = L.latLngBounds(object[prop]);break;
               case 'defaultCenter' : new_prop = L.latLng(object[prop]);break;
               default: new_prop = object[prop];break;
             }
