@@ -32,21 +32,22 @@
 
 		{% set isSubcategories = recursive and option.subcategories|length %}
 
-    <li class="subcategorie-option-item row {{ 'option-collapsible' if isSubcategories}} {{ 'expanded' if option.showExpanded }}"    		
+    <li class="subcategorie-option-item row 
+    					{{ 'option-collapsible' if isSubcategories}} {{ 'expanded' if option.showExpanded }} 
+    					{{ 'tooltipped' if option.textHelper and not isSubcategories }}"    		
     		id="option-{{ option.id }}"
+    		data-position="right" data-delay="0" data-tooltip="{{ option.textHelper }}"
     		{% if not option.displayOption %} style="display:none"{% endif %}>
     	
     		{# --- ICON & NAME--- #}
-    		<div class="gogo-icon-name-wrapper {{'tooltipped' if isSubcategories}}" data-option-id='{{ option.id }}' 
-    					{% if isSubcategories %}data-position="right" data-delay="400" data-tooltip="Afficher/Masquer le détail"{% endif %}>
+    		<div class="gogo-icon-name-wrapper {#{{'tooltipped' if isSubcategories}}"#}" data-option-id='{{ option.id }}' 
+    					{#{% if isSubcategories %}data-position="right" data-delay="400" data-tooltip="Afficher/Masquer le détail"{% endif %}#}>
 
 					{# --- ICON ---- #}
 					{% set iconClass =  option.icon if option.icon else ( 'gogo-icon-marker' if option.useColorForMarker else '') %}	
 					{% if iconClass %}    
 						<span class="icon {{ iconClass }} colorAs" option-id='{{ option.id }}' ></span>
 					{% endif %}
-
-
 
 					{# --- NAME ---- #}
 					<span class="option-name">{{  option.nameShort if option.nameShort else option.name }}</span> 

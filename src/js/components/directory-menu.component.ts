@@ -24,6 +24,7 @@ export class DirectoryMenuComponent
 	initialize()
 	{	
 		$('.btn-close-menu.large-screen').tooltip();
+		$('.filter-menu .tooltipped').tooltip();
 
 		// -------------------------------
 		// --------- FAVORITE-------------
@@ -43,8 +44,6 @@ export class DirectoryMenuComponent
 			e.stopImmediatePropagation();
 			e.preventDefault();
 		});
-
-		$('#filter-favorite').tooltip();
 
 		// -------------------------------
 		// --------- PENDING-------------
@@ -81,9 +80,6 @@ export class DirectoryMenuComponent
 			e.stopImmediatePropagation();
 			e.preventDefault();
 		});
-
-		$('#filter-pending').tooltip();
-
 
 
 		// -------------------------------
