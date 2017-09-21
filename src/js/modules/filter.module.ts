@@ -132,7 +132,13 @@ export class FilterModule
 		let splited = string.split('@');
 		let mainOptionSlug = splited[0];
 
-		let mainOptionId = mainOptionSlug == 'all' ? 'all' : App.categoryModule.getMainOptionBySlug(mainOptionSlug).id;
+		let mainOptionId;
+		if (mainOptionSlug == 'all') mainOptionId = 'all';
+		else
+		{
+			let mainOption = App.categoryModule.getMainOptionBySlug(mainOptionSlug);
+			mainOptionId = mainOption ? mainOption.id : 'all';
+		} 
 		App.directoryMenuComponent.setMainOption(mainOptionId);		
 
 		let filtersString : string;
