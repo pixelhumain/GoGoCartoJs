@@ -1,6 +1,7 @@
 {% macro createcolor(name, value) %}
   .gogo-{{ name }} { color: {{ value }}; }
   .gogo-h-{{ name }}:hover { color: {{ value }} !important; }
+  .gogo-h-{{ name }}.hover { color: {{ value }} !important; }
   .gogo-bg-{{ name }} { background-color: {{ value }}; }
   .gogo-h-bg-{{ name }}:hover { background-color: {{ value }} !important; }
   .gogo-border-{{ name }} { border-color: {{ value }}; }

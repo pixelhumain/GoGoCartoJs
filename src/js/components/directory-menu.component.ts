@@ -125,6 +125,19 @@ export class DirectoryMenuComponent
 			
 		});			
 
+		// Add surbrillance in main-categories sidebar filters menu whenn hovering a main category
+		$('#main-option-all .gogo-icon-name-wrapper').hover( 
+			function(e : Event) {
+				let optionId = $(this).attr('data-option-id');
+				let sidebarIcon = $('#main-option-gogo-icon-' + optionId);
+				if (!sidebarIcon.hasClass('hover')) sidebarIcon.addClass('hover');
+			},
+			function(e : Event) {
+				let optionId = $(this).attr('data-option-id');
+				let sidebarIcon = $('#main-option-gogo-icon-' + optionId);
+				sidebarIcon.removeClass('hover');
+			}
+		);
 		// -------------------------------
 		// ------ SUB OPTIONS ------------
 		// -------------------------------
