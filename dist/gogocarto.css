@@ -3707,7 +3707,7 @@ select {
 * @Author: Sebastian Castro
 * @Date:   2017-02-28 13:25:52
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-09-20 14:13:41
+* @Last Modified time: 2017-09-21 14:16:53
 */
   /*
 * @Author: Sebastian Castro
@@ -4403,7 +4403,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           position: absolute;
           left: 4rem;
           top: .5rem;
-          /* bottom: 0; */
           height: 2.5rem;
           line-height: 2.5rem;
           z-index: 100;
@@ -4432,6 +4431,12 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     right: 10px;
     z-index: 10;
     top: 11px; }
+  .gogocarto-container #directory-menu .secondary-filters {
+    padding: 0;
+    height: auto;
+    border-top: 2px dashed #eeeeee;
+    margin-top: 1rem;
+    padding-top: .5rem; }
   .gogocarto-container #directory-menu .sub-categories {
     -webkit-box-flex: 1 auto;
     -moz-box-flex: 1 auto;
@@ -4455,7 +4460,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       -moz-border-radius: 5px;
       border-radius: 5px;
       padding-right: 5px;
-      padding-top: 5px;
+      padding-top: 0px;
       background-color: white; }
       .gogocarto-container #directory-menu .sub-categories .sub-categories-content ul {
         height: 100%;
