@@ -132,11 +132,35 @@ export class ElementListComponent
 		for(let i = 0; i < endIndex; i++)
 		{
 			element = elementsToDisplay[i];
-			$('#directory-content-list ul').append(element.getHtmlRepresentation());
-			let domMenu = $('#element-info-'+element.id +' .menu-element');
-			createListenersForElementMenu(domMenu);	
+			
+			let elementDom = $('#element-info-'+element.id);
+			let domMenu = elementDom.find('.menu-element');			
+			let directoryListContentDom = $('#directory-content-list');
+			let listContainerDom = $('#directory-content-list ul.collapsible');
+
+			listContainerDom.append(element.getHtmlRepresentation());
+			createListenersForElementMenu(domMenu);
+
+			// check the visibility of an item after it has been expanded
+			elementDom.find('.collapsible-header').click(function() {
+				setTimeout( () => { 
+					// if all elementDom expanded is not visible					
+					let elementDistanceToTop = elementDom.offset().top - listContainerDom.offset().top;
+
+					if ( (elementDom.offset().top - directoryListContentDom.offset().top + elementDom.height()) > (directoryListContentDom.outerHeight() + 150))
+					{
+						listContainerDom.animate({scrollTop: listContainerDom.scrollTop() + elementDom.offset().top - listContainerDom.offset().top}, 550);
+					}					
+					// if element is too high
+					else if ( elementDistanceToTop < 0 ) 
+					{
+						listContainerDom.animate({scrollTop: listContainerDom.scrollTop() + elementDistanceToTop}, 300);
+					}
+				}, 300);
+			});
 			updateFavoriteIcon(domMenu, element)		
 		}
+
 
 		createListenersForVoting();
 
