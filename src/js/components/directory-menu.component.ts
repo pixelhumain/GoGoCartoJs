@@ -184,6 +184,8 @@ export class DirectoryMenuComponent
 
 		this.updateMainOptionBackground();
 
+		App.infoBarComponent.hide();
+
 		//console.log("setMainOptionId " + optionId + " / oldOption : " + oldId);
 		if (oldId != null) App.historyModule.updateCurrState();
 
