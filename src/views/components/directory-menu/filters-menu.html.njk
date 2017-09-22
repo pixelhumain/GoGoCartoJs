@@ -63,7 +63,7 @@
 
 					{# ELEMENT WITH PENDING STATUS#}	
 					{% if config.isFeatureAvailable('pending') %}
-						<li class="subcategorie-option-item row" id="filter-pending" data-position="right" data-delay="300" data-tooltip="Afficher les éléments en attente de validation">
+						<li class="subcategorie-option-item row tooltipped" id="filter-pending" data-position="right" data-delay="300" data-tooltip="Afficher les éléments en attente de validation">
 					    <span class="icon gogo-icon-attention"></span>
 					    {#{% if config.isFeatureAvailable('directModeration') %}
 					    	<span class="option-name">Attente validation</span><span class="icon gogo-icon-eye gogo-h-primary" id="show-only-pending"></span></span> 
@@ -84,7 +84,7 @@
 
 					{# FAVORITE #}
 					{% if config.isFeatureActivated('favorite') %}
-						<li class="subcategorie-option-item row" id="filter-favorite" data-position="right" data-delay="300" data-tooltip="Afficher uniquement les favoris">
+						<li class="subcategorie-option-item row tooltipped" id="filter-favorite" data-position="right" data-delay="300" data-tooltip="Afficher uniquement les favoris">
 					    <span class="icon gogo-icon-star-full"></span>
 					    <span class="option-name">Vos favoris</span> 
 
