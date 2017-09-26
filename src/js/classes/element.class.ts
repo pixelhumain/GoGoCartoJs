@@ -65,6 +65,7 @@ export class Element
 	openHoursDays : string[] = [];
 	openHoursMoreInfos : any;
 	mainOptionOwnerIds : number[] = [];
+	commitment : string;
 
 	optionsValues : OptionValue[] = [];
 	optionValuesByCatgeory : OptionValue[][] = [];
@@ -144,6 +145,7 @@ export class Element
 		}
 		this.address = elementJson.address;
 		this.description = elementJson.description || '';
+		this.commitment = elementJson.commitment || '';
 		this.tel = this.getFormatedTel(elementJson.tel);	
 		this.webSite = elementJson.webSite;
 		this.mail = elementJson.mail;

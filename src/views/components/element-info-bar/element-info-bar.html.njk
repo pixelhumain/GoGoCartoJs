@@ -200,6 +200,16 @@
       </div>
       <div class="info-bar-divider"></div>
 
+      {% set commitment = element.getProperty('commitment') %}
+      {% if commitment is not empty %}
+        <h3>Engagement Citoyen</h3>   
+        <div class="section row sectionInfos">
+          {# Address #}
+          <span class="col s12 commitment">{{ commitment|safe }}</span>  
+        </div>
+        <div class="info-bar-divider"></div>
+      {% endif %}
+
       {# Open Hours #}
       <h3>Horaires d'ouverture</h3>   
       <div class="section row sectionOpenHours">  
