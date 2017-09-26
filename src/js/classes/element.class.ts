@@ -231,13 +231,16 @@ export class Element
 		{
 			newOption = new OptionValue(optionValueJson);
 
-			if (newOption.option.isMainOption()) this.mainOptionOwnerIds.push(newOption.optionId);
+			if (newOption.option)
+			{
+				if (newOption.option.isMainOption()) this.mainOptionOwnerIds.push(newOption.optionId);
 
-			this.optionsValues.push(newOption);
+				this.optionsValues.push(newOption);
 
-			// put options value in specific easy accessible array for better performance
-			if (!this.optionValuesByCatgeory[newOption.option.ownerId]) this.optionValuesByCatgeory[newOption.option.ownerId] = [];
-			this.optionValuesByCatgeory[newOption.option.ownerId].push(newOption);
+				// put options value in specific easy accessible array for better performance
+				if (!this.optionValuesByCatgeory[newOption.option.ownerId]) this.optionValuesByCatgeory[newOption.option.ownerId] = [];
+				this.optionValuesByCatgeory[newOption.option.ownerId].push(newOption);
+			}			
 		}
 
 		if(alreadyCreated)
