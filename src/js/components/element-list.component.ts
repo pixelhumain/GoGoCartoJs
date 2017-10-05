@@ -132,13 +132,15 @@ export class ElementListComponent
 		for(let i = 0; i < endIndex; i++)
 		{
 			element = elementsToDisplay[i];
-			
-			let elementDom = $('#element-info-'+element.id);
-			let domMenu = elementDom.find('.menu-element');			
-			let directoryListContentDom = $('#directory-content-list');
+
 			let listContainerDom = $('#directory-content-list ul.collapsible');
 
 			listContainerDom.append(element.getHtmlRepresentation());
+			
+			let elementDom = $('#element-info-'+element.id);
+			let domMenu = elementDom.find('.menu-element');			
+			let directoryListContentDom = $('#directory-content-list');			
+			
 			createListenersForElementMenu(domMenu);
 
 			// check the visibility of an item after it has been expanded
