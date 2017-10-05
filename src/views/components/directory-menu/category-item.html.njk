@@ -36,7 +36,7 @@
     					{{ 'option-collapsible' if isSubcategories}} {{ 'expanded' if option.showExpanded }} 
     					{{ 'tooltipped' if option.textHelper and not isSubcategories }}"    		
     		id="option-{{ option.id }}"
-    		data-position="right" data-delay="0" data-tooltip="{{ option.textHelper }}"
+    		data-position="right" data-delay="700" data-tooltip="{{ option.textHelper | capitalize }}"
     		{% if not option.displayOption %} style="display:none"{% endif %}>
     	
     		{# --- ICON & NAME--- #}
