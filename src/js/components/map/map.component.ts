@@ -88,7 +88,6 @@ export class MapComponent
 			return;
 		}
 
-
 		let configTileLayers = App.config.map.tileLayers;
 		let baseLayers = {};
 		for(let tileLayer of configTileLayers)

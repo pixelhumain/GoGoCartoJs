@@ -13,6 +13,19 @@ export class RouterModule
 	constructor()
 	{
 		routie({
+			'geolocalize /:mode/autour-de-moi': (mode) =>
+			{
+				let initialState = new HistoryState();
+
+				initialState.dataType = AppDataType.All;
+				initialState.mode = mode == 'carte' ? AppModes.Map : AppModes.List;
+				initialState.state = AppStates.Normal;				
+				initialState.address = 'geolocalize';
+				initialState.filters = this.filtersSerializedParam;
+
+				// timeout to let App variable being accesible
+				setTimeout( () => { App.loadHistoryState(initialState); }, 0);				
+			},
 			'normal /:mode/:addressAndViewport?': (mode, addressAndViewport = '') =>
 			{
 				let initialState = new HistoryState();

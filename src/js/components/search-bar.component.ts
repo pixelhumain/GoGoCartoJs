@@ -52,6 +52,9 @@ export class SearchBarComponent
 
 		$('#btn-close-search-result').click( () => this.clearSearchResult());	
 
+		$('#search-geolocalize').tooltip();
+		$('#search-geolocalize').click( () => this.geolocateUser());
+
 		$('#search-type-select').material_select();
 
 		this.domElement().on('focus', () => { this.showSearchOptions(); });
@@ -110,6 +113,16 @@ export class SearchBarComponent
 					this.clearSearchResult();
 				break;
 		}
+	}
+
+	geolocateUser()
+	{
+		App.geocoder.geolocateUser( (result:L.LatLng) => 
+		{
+			this.clearSearchResult(false);
+			this.hideSearchOptions();			
+			this.clearLoader();
+		});
 	}
 
 	searchElements($text : string, $backFromHistory = false)

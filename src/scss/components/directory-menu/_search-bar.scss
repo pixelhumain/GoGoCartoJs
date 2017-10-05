@@ -1,7 +1,6 @@
-#search-bar-icon
+.search-icon
 {
-	position: absolute;
-  left: 1.2rem;
+	position: absolute;  
   font-size: 1.2rem;
   color: #777;
   height: 2rem;
@@ -10,15 +9,24 @@
   &:before
   {
   	line-height: 2rem;
-  }
-
-  @media (max-width : 850px) { left: 4.5rem; }
+  }  
 
   &:hover
   {
   	cursor: pointer;
   }
 } 
+
+#search-bar-icon
+{
+  left: 1.2rem;
+  @media (max-width : 850px) { left: 4.5rem; }
+}
+
+#search-geolocalize
+{
+  right: 1.4rem;
+}
 
 #search-bar
 {

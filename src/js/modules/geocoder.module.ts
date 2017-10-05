@@ -28,12 +28,14 @@ export class GeocoderModule
 	lastResults : GeocodeResult[] = null;
 	lastResultBounds : L.LatLngBounds = null;
 
+	private location : L.LatLng = null;
+
 	onGeocodeResult = new Event<any>();
+	onGeolocalizationResult = new Event<L.LatLng>();
 
 	getLocation() : L.LatLng
 	{
-		if (!this.lastResults || !this.lastResults[0]) return null;
-		return L.latLng(this.lastResults[0].getCoordinates());
+		return this.location;		
 	}
 
 	getBounds() : L.LatLngBounds
@@ -90,6 +92,9 @@ export class GeocoderModule
 						this.lastResults = results;
 						this.lastResultBounds = this.latLngBoundsFromRawBounds(this.lastResults[0].getBounds());
 
+						if (this.lastResults && this.lastResults[0]) this.location = L.latLng(this.lastResults[0].getCoordinates());
+						else location = null;
+
 						this.onGeocodeResult.emit();
 
 						if (callbackComplete) callbackComplete(results);	
@@ -124,5 +129,26 @@ export class GeocoderModule
 				callbackComplete(results);
 			}	
 		}			
-	};
+	}
+
+	geolocateUser(callbackComplete?)
+	{
+		if (navigator.geolocation)
+			navigator.geolocation.getCurrentPosition((position) => {
+				let latlng = L.latLng(position.coords.latitude, position.coords.longitude);
+				this.handleGeolocalisationResponse(latlng, callbackComplete);
+			});
+		else
+			$.getJSON("http://freegeoip.net/json/", (data) => {
+		    let latlng = L.latLng(data.latitude, data.longitude);
+		    this.handleGeolocalisationResponse(latlng, callbackComplete);
+			});
+	}
+
+	private handleGeolocalisationResponse(latlng, callbackComplete)
+	{
+		this.location = latlng;
+    this.onGeolocalizationResult.emit(latlng);
+    callbackComplete(latlng);
+	}
 }

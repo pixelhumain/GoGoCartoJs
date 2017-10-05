@@ -133,6 +133,7 @@ export class AppModule
 		this.elementsModule_.onElementsChanged.do( (elementsChanged)=> { this.handleElementsChanged(elementsChanged); });
 	
 		this.geocoderModule_.onGeocodeResult.do( () => { this.handleGeocodeResult(); this.searchBarComponent.handleGeocodeResult(); });
+		this.geocoderModule_.onGeolocalizationResult.do( (position) => { this.handleGeolocalizationResult(position); });
 
 		this.mapComponent_.onIdle.do( () => { this.handleMapIdle();  });
 		this.mapComponent_.onClick.do( () => { this.handleMapClick(); });		
@@ -207,26 +208,33 @@ export class AppModule
 		// if no viewport and state normal we geocode on default location
 		if (historystate.dataType == AppDataType.All && (historystate.address || (!historystate.viewport && historystate.state === AppStates.Normal))) 
 		{
-			this.geocoderModule_.geocodeAddress(
-				historystate.address, 
-				(results) => 
-				{ 
-					// if viewport is given, nothing to do, we already did initialization
-					// with viewport
-					if (historystate.viewport && historystate.mode == AppModes.Map) return;
-					// fit bounds anyway so the mapcomponent will register this requested bounds for later
-					this.mapComponent.fitBounds(this.geocoder.getBounds());
-				},
-				() => {
-					// failure callback
-					this.searchBarComponent.setValue("Erreur de localisation : " + historystate.address);
-					if (!historystate.viewport) 
-					{
-						// geocode default location
-						this.geocoderModule_.geocodeAddress('');
-					}
-				}	
-			);
+			if (historystate.address == "geolocalize")
+			{
+				this.searchBarComponent.geolocateUser();
+			}
+			else
+			{
+				this.geocoderModule_.geocodeAddress(
+					historystate.address, 
+					(results) => 
+					{ 
+						// if viewport is given, nothing to do, we already did initialization
+						// with viewport
+						if (historystate.viewport && historystate.mode == AppModes.Map) return;
+						// fit bounds anyway so the mapcomponent will register this requested bounds for later
+						this.mapComponent.fitBounds(this.geocoder.getBounds());
+					},
+					() => {
+						// failure callback
+						this.searchBarComponent.setValue("Erreur de localisation : " + historystate.address);
+						if (!historystate.viewport) 
+						{
+							// geocode default location
+							this.geocoderModule_.geocodeAddress('');
+						}
+					}	
+				);
+			}			
 		}
 
 		if (historystate.id) 
@@ -618,8 +626,7 @@ export class AppModule
 		}		
 		else
 		{
-			// if just address was given
-			if (this.mode == AppModes.Map && this.state != AppStates.ShowElementAlone)
+			if (this.mode == AppModes.Map)
 			{
 				this.infoBarComponent.hide();
 				this.setState(AppStates.Normal);					
@@ -638,7 +645,25 @@ export class AppModule
 			this.updateDocumentTitle();
 		}				
 	}
-	
+
+	handleGeolocalizationResult(location)
+	{
+		if (this.mode == AppModes.Map)
+		{
+			this.infoBarComponent.hide();
+			this.setState(AppStates.Normal);
+			App.mapComponent.panToLocation(location, 14, false);			
+		}
+		else
+		{
+			this.boundsModule.createBoundsFromLocation(location);
+			this.elementModule.clearCurrentsElement();
+			this.elementModule.updateElementsToDisplay(true);
+			App.elementListComponent.setTitle(' autour de <i>ma position</i>');
+			// save the viewport if we go to map after
+			App.mapComponent.setViewPort(new ViewPort(location.lat, location.lng, 14));
+		}		
+	}	
 
 	handleNewElementsReceivedFromServer(result)
 	{		

@@ -1,6 +1,9 @@
 <div class="input-field" id="search-bar-container" > 
 
-	<a class="gogo-icon-search gogo-h-primary" id="search-bar-icon"></a>
+	<a class="gogo-icon-search gogo-h-primary search-icon" id="search-bar-icon"></a>
+
+    <a class="gogo-icon-locate gogo-h-primary search-icon tooltipped" id="search-geolocalize"
+        data-position="right" data-delay="0" data-tooltip="Geolocaliser votre position"></a>
 
     <input class="validate" 
     	   type="text" 
@@ -10,7 +13,7 @@
     	   {% if config.address %}
     	   value="{{ config.address | replace({'-': ' '}) | capitalize }}" 
     	   {% endif %}
-    />
+    />    
     
 </div>
 
