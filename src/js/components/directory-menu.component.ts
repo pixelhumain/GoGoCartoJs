@@ -36,6 +36,12 @@ export class DirectoryMenuComponent
 			let checkValue = !favoriteCheckbox.is(':checked');
 
 			App.filterModule.showOnlyFavorite(checkValue);
+
+			if (checkValue) {
+				App.filterModule.showOnlyPending(false);
+				$('#pending-checkbox').prop('checked',false);
+			}
+			
 			App.elementModule.updateElementsToDisplay(!checkValue);
 
 			favoriteCheckbox.prop('checked',checkValue);
@@ -55,8 +61,14 @@ export class DirectoryMenuComponent
 
 			let checkValue = !pendingCheckbox.is(':checked');
 
-			App.filterModule.showPending(checkValue);
-			App.elementModule.updateElementsToDisplay(checkValue);
+			App.filterModule.showOnlyPending(checkValue);
+			
+			if (checkValue) {
+				App.filterModule.showOnlyFavorite(false);
+				$('#favorite-checkbox').prop('checked',false);
+			}
+
+			App.elementModule.updateElementsToDisplay(!checkValue);
 
 			pendingCheckbox.prop('checked',checkValue);
 
@@ -65,21 +77,21 @@ export class DirectoryMenuComponent
 			e.preventDefault();
 		});
 
-		$('#show-only-pending').click(function(e : Event)
-		{			
-			let check = $('#show-only-pending').hasClass('gogo-icon-eye');
-			App.filterModule.showOnlyPending(check);
-			App.elementModule.updateElementsToDisplay(!check);
+		// $('#show-only-pending').click(function(e : Event)
+		// {			
+		// 	let check = $('#show-only-pending').hasClass('gogo-icon-eye');
+		// 	App.filterModule.showOnlyPending(check);
+		// 	App.elementModule.updateElementsToDisplay(!check);
 
-			if (check)
-				$('#show-only-pending').removeClass('gogo-icon-eye').addClass('gogo-icon-no-eye');
-			else
-				$('#show-only-pending').removeClass('gogo-icon-no-eye').addClass('gogo-icon-eye');
+		// 	if (check)
+		// 		$('#show-only-pending').removeClass('gogo-icon-eye').addClass('gogo-icon-no-eye');
+		// 	else
+		// 		$('#show-only-pending').removeClass('gogo-icon-no-eye').addClass('gogo-icon-eye');
 
-			e.stopPropagation();
-			e.stopImmediatePropagation();
-			e.preventDefault();
-		});
+		// 	e.stopPropagation();
+		// 	e.stopImmediatePropagation();
+		// 	e.preventDefault();
+		// });
 
 
 		// -------------------------------

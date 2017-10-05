@@ -55,7 +55,7 @@
 
 				<li class="subcategory-item expanded unexpandable">
 					<div class="name-wrapper">		
-						<span class="name">Autres Filtres</span>
+						<span class="name">Afficher uniquement</span>
 					</div>
 				</li>
 
@@ -63,19 +63,18 @@
 
 					{# ELEMENT WITH PENDING STATUS#}	
 					{% if config.isFeatureAvailable('pending') %}
-						<li class="subcategorie-option-item row tooltipped" id="filter-pending" data-position="right" data-delay="300" data-tooltip="Afficher les éléments en attente de validation">
+						<li class="subcategorie-option-item row tooltipped" id="filter-pending" 
+								data-position="right" data-delay="700" data-tooltip="Afficher uniquement les élément en cours de validation">
 					    <span class="icon gogo-icon-attention"></span>
-					    {#{% if config.isFeatureAvailable('directModeration') %}
-					    	<span class="option-name">Attente validation</span><span class="icon gogo-icon-eye gogo-h-primary" id="show-only-pending"></span></span> 
-				    	{% else %}
-				    		<span class="option-name"><span class="validation-process-info">En cours de validation</span></span> 
-				    	{% endif %}#}
-				    	<span class="option-name">A valider</span><span class="icon gogo-icon-eye gogo-h-primary" id="show-only-pending"></span></span> 
+				    	<span class="option-name">
+				    		<span class="validation-process-info">En cours de validation</span>
+				    		<!-- <span class="icon gogo-icon-eye gogo-h-primary tooltipped" id="show-only-pending" data-position="right" </span> -->
+				    	</span> 
 
 					    {# --- CHECKBOX ---- #}
 							<div class="checkbox-wrapper">
 								<div class="checkbox-container">
-						      <input type="checkbox" checked class="subcategorie-option-checkbox pending-checkbox" id="pending-checkbox" data-type='pending' data="pending" />
+						      <input type="checkbox" class="subcategorie-option-checkbox pending-checkbox show-unique-checkbox" id="pending-checkbox" data-type='pending' data="pending" />
 						      <label for="pending-checkbox" ></label>
 					    	</div>
 					    </div>
@@ -84,14 +83,14 @@
 
 					{# FAVORITE #}
 					{% if config.isFeatureActivated('favorite') %}
-						<li class="subcategorie-option-item row tooltipped" id="filter-favorite" data-position="right" data-delay="300" data-tooltip="Afficher uniquement les favoris">
+						<li class="subcategorie-option-item row tooltipped" id="filter-favorite" data-position="right" data-delay="700" data-tooltip="Afficher uniquement les favoris">
 					    <span class="icon gogo-icon-star-full"></span>
 					    <span class="option-name">Vos favoris</span> 
 
 					    {# --- CHECKBOX ---- #}
 							<div class="checkbox-wrapper">
 								<div class="checkbox-container">
-						      <input type="checkbox" class="subcategorie-option-checkbox favorite-checkbox" id="favorite-checkbox" data-type='favorite' data="favorite" />
+						      <input type="checkbox" class="subcategorie-option-checkbox favorite-checkbox show-unique-checkbox" id="favorite-checkbox" data-type='favorite' data="favorite" />
 						      <label for="favorite-checkbox" ></label>
 					    	</div>
 					    </div>
