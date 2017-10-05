@@ -5,6 +5,7 @@ declare var L, $;
 import { AppModule } from "../app.module";
 import { slugify, capitalize, unslugify } from "../commons/commons";
 import { Event } from "../utils/event";
+import { ViewPort } from "../components/map/map.component";
 
 /** results type returned by geocoderJS */
 export interface GeocodeResult
@@ -31,7 +32,7 @@ export class GeocoderModule
 	private location : L.LatLng = null;
 
 	onGeocodeResult = new Event<any>();
-	onGeolocalizationResult = new Event<L.LatLng>();
+	onGeolocalizationResult = new Event<ViewPort>();
 
 	getLocation() : L.LatLng
 	{
@@ -135,20 +136,24 @@ export class GeocoderModule
 	{
 		if (navigator.geolocation)
 			navigator.geolocation.getCurrentPosition((position) => {
-				let latlng = L.latLng(position.coords.latitude, position.coords.longitude);
-				this.handleGeolocalisationResponse(latlng, callbackComplete);
-			});
+				// associate zoom to accuracy
+				let zoom = 17 - Math.log(position.coords.accuracy / 3000) * Math.LOG2E;
+				zoom = Math.min(zoom, 16);
+				zoom = Math.max(zoom, 8);
+				let viewPort = new ViewPort(position.coords.latitude, position.coords.longitude, zoom);
+				this.handleGeolocalisationResponse(viewPort, callbackComplete);
+			}, () => {}, {enableHighAccuracy: true});
 		else
 			$.getJSON("http://freegeoip.net/json/", (data) => {
-		    let latlng = L.latLng(data.latitude, data.longitude);
-		    this.handleGeolocalisationResponse(latlng, callbackComplete);
+		    let viewPort = new ViewPort(data.latitude, data.longitude, 14);
+		    this.handleGeolocalisationResponse(viewPort, callbackComplete);
 			});
 	}
 
-	private handleGeolocalisationResponse(latlng, callbackComplete)
+	private handleGeolocalisationResponse(viewPort : ViewPort, callbackComplete)
 	{
-		this.location = latlng;
-    this.onGeolocalizationResult.emit(latlng);
-    callbackComplete(latlng);
+		this.location = viewPort.toLocation();
+    this.onGeolocalizationResult.emit(viewPort);
+    callbackComplete(viewPort);
 	}
 }

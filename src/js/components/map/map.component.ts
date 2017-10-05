@@ -45,6 +45,11 @@ export class ViewPort
 
 		return this;
 	}
+
+	toLocation()
+	{
+		return L.latLng(this.lat, this.lng);
+	}
 }
 
 

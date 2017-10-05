@@ -11,6 +11,7 @@ import { AppModule, AppStates, AppDataType, AppModes } from "../app.module";
 import { GeocoderModule, GeocodeResult } from "../modules/geocoder.module";
 declare var google, $;
 import { App } from "../gogocarto";
+import { ViewPort } from "./map/map.component";
 
 import { Event } from "../utils/event";
 
@@ -117,9 +118,10 @@ export class SearchBarComponent
 
 	geolocateUser()
 	{
-		App.geocoder.geolocateUser( (result:L.LatLng) => 
+		App.geocoder.geolocateUser( (result:ViewPort) => 
 		{
-			this.clearSearchResult(false);
+			this.clearSearchResult(true);
+			this.setValue("Geolocalisé");
 			this.hideSearchOptions();			
 			this.clearLoader();
 		});

@@ -133,7 +133,7 @@ export class AppModule
 		this.elementsModule_.onElementsChanged.do( (elementsChanged)=> { this.handleElementsChanged(elementsChanged); });
 	
 		this.geocoderModule_.onGeocodeResult.do( () => { this.handleGeocodeResult(); this.searchBarComponent.handleGeocodeResult(); });
-		this.geocoderModule_.onGeolocalizationResult.do( (position) => { this.handleGeolocalizationResult(position); });
+		this.geocoderModule_.onGeolocalizationResult.do( (viewPort : ViewPort) => { this.handleGeolocalizationResult(viewPort); });
 
 		this.mapComponent_.onIdle.do( () => { this.handleMapIdle();  });
 		this.mapComponent_.onClick.do( () => { this.handleMapClick(); });		
@@ -646,22 +646,22 @@ export class AppModule
 		}				
 	}
 
-	handleGeolocalizationResult(location)
+	handleGeolocalizationResult(viewPort)
 	{
 		if (this.mode == AppModes.Map)
 		{
 			this.infoBarComponent.hide();
 			this.setState(AppStates.Normal);
-			App.mapComponent.panToLocation(location, 14, false);			
+			App.mapComponent.panToLocation(viewPort.toLocation(), viewPort.zoom, false);			
 		}
 		else
 		{
-			this.boundsModule.createBoundsFromLocation(location);
+			this.boundsModule.createBoundsFromLocation(viewPort.toLocation());
 			this.elementModule.clearCurrentsElement();
 			this.elementModule.updateElementsToDisplay(true);
 			App.elementListComponent.setTitle(' autour de <i>ma position</i>');
 			// save the viewport if we go to map after
-			App.mapComponent.setViewPort(new ViewPort(location.lat, location.lng, 14));
+			App.mapComponent.setViewPort(viewPort);
 		}		
 	}	
 
