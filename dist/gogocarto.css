@@ -3838,20 +3838,23 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     bottom: 0;
     right: 0;
     position: absolute; }
-  .gogocarto-container #search-bar-icon {
+  .gogocarto-container .search-icon {
     position: absolute;
-    left: 1.2rem;
     font-size: 1.2rem;
     color: #777;
     height: 2rem;
     line-height: 2rem; }
-    .gogocarto-container #search-bar-icon:before {
+    .gogocarto-container .search-icon:before {
       line-height: 2rem; }
+    .gogocarto-container .search-icon:hover {
+      cursor: pointer; }
+  .gogocarto-container #search-bar-icon {
+    left: 1.2rem; }
     @media (max-width: 850px) {
       .gogocarto-container #search-bar-icon {
         left: 4.5rem; } }
-    .gogocarto-container #search-bar-icon:hover {
-      cursor: pointer; }
+  .gogocarto-container #search-geolocalize {
+    right: 1.4rem; }
   .gogocarto-container #search-bar {
     text-transform: uppercase;
     font-size: .8rem;
