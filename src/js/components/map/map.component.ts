@@ -284,7 +284,7 @@ export class MapComponent
 
 	contains(position : L.LatLngExpression) : boolean
 	{
-		if (position)
+		if (position && this.isMapLoaded)
 		{
 			 return this.map_.getBounds().contains(position);
 		}

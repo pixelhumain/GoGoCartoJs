@@ -23,10 +23,7 @@ export class DisplayElementAloneModule
 
 	begin(elementId : string, panToElementLocation : boolean = true) 
 	{	
-		//console.log("DisplayElementAloneModule begin", panToElementLocation);
-
-		let element = App.elementById(elementId);
-		this.elementShownAlone_ = element;			
+		// console.log("DisplayElementAloneModule begin", panToElementLocation);		
 
 		if (this.elementShownAlone_ !== null) 
 		{
@@ -34,16 +31,21 @@ export class DisplayElementAloneModule
 			this.elementShownAlone_.isShownAlone = false;
 		}
 
+		let element = App.elementById(elementId);	
+		this.elementShownAlone_ = element;			
+
 		App.elementModule.clearCurrentsElement();
 
-		App.infoBarComponent.showElement(element.id);
+		App.infoBarComponent.showElement(element.id);	
 
+		// we set a timeout to let the infobar show up
+		// if we not do so, the map will not be centered in the element.position	
 		if (panToElementLocation)
-		{
-			// we set a timeout to let the infobar show up
-			// if we not do so, the map will not be centered in the element.position
-			setTimeout( () => {App.mapComponent.panToLocation(element.position, 12, false);}, 500);
-		}
+		{		
+				App.mapComponent.resize();
+				App.mapComponent.panToLocation(element.position, 12, false);
+				setTimeout( () => { App.mapComponent.resize();App.mapComponent.panToLocation(element.position, 12, false); }, 500);
+		}			
 	};
 
 	end () 

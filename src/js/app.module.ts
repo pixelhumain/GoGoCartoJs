@@ -180,7 +180,7 @@ export class AppModule
 			this.directoryMenuComponent.setMainOption('all');
 		}		
 
-		if (historystate.dataType == AppDataType.All && historystate.viewport)
+		if (historystate.dataType == AppDataType.All && historystate.viewport && historystate.state != AppStates.ShowElementAlone)
 		{			
 			// if map not loaded we just set the mapComponent viewport without changing the
 			// actual viewport of the map, because it will be done in
@@ -231,14 +231,16 @@ export class AppModule
 
 		if (historystate.id) 
 		{
-			this.setState(
-				historystate.state,
-				{
-					id: historystate.id, 
-					panToLocation: (historystate.viewport === null)
-				},
-				$backFromHistory);
-			$('#directory-spinner-loader').hide();			
+			setTimeout( () => { 
+				this.setState(
+					historystate.state,
+					{
+						id: historystate.id, 
+						panToLocation: (historystate.viewport === null)
+					},
+					$backFromHistory);
+				$('#directory-spinner-loader').hide();		
+			}, 400);	
 		}
 		else
 		{
@@ -377,30 +379,27 @@ export class AppModule
 				else
 				{
 					this.infoBarComponent.showElement(options.id);
-				}			
-				
+				}
 
 				break;	
 
 			case AppStates.ShowElementAlone:
 				if (!options.id) return;
 
+				this.infoBarComponent.show();
 				element = this.elementById(options.id);
 				if (element)
 				{
-					this.DEAModule.begin(element.id, options.panToLocation);					
+					this.DEAModule.begin(element.id, true);					
 				}
 				else
 				{
 					this.ajaxModule_.getElementById(options.id,
 						(elementJson) => {
 							this.elementModule.addJsonElements([elementJson], true, true);
-							this.DEAModule.begin(elementJson.id, options.panToLocation);
+							this.DEAModule.begin(elementJson.id, true);
 							this.updateDocumentTitle(options);
-							this.historyModule.pushNewState(options);
-							// we get element around so if the user end the DPAMdoule
-							// the elements will already be available to display
-							//this.ajaxModule.getElementsInBounds([this.mapComponent.getBounds()]);	 
+							this.historyModule.pushNewState(options); 
 						},
 						(error) => 
 						{ 
