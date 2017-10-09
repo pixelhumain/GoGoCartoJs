@@ -199,7 +199,7 @@ export class ElementListComponent
 	private compareSearchScore(a:Element,b:Element) 
 	{  
 	  if (a.searchScore == b.searchScore) return 0;
-	  return a.searchScore < b.searchScore ? -1 : 1;
+	  return a.searchScore < b.searchScore ? 1 : -1;
 	}
 }
 
