@@ -118,7 +118,7 @@ export class InfoBarComponent
 
 	refresh()
 	{
-		if (this.elementVisible) this.showElement(this.elementVisible.id);
+		if (this.elementVisible) setTimeout(this.showElement(this.elementVisible.id), 500);
 	}
 
 	show()

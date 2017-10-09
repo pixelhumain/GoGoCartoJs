@@ -18,7 +18,6 @@ declare let $, window : any;
 export class AppComponent
 {
 	private slideOptions = { duration: 500, easing: "easeOutQuart", queue: false, complete: function() {}};
-	private matchMediaBigSize;
 
 	initialize()
 	{	
@@ -67,7 +66,7 @@ export class AppComponent
 		});
 		
 		//Menu CARTE	
-		$('.show-directory-menu-button').click(() => this.showDirectoryMenu());
+		$('.show-directory-menu-button').click((e) => { this.showDirectoryMenu(); e.preventDefault();e.stopPropagation();});
 		$('#map-overlay').click(() => this.hideDirectoryMenu());
 		$('#directory-menu .btn-close-menu').click(() => this.hideDirectoryMenu());
 
@@ -99,7 +98,6 @@ export class AppComponent
 			{ 							
 				this.updateMapSize();
 				this.updateComponentsSize();
-				App.infoBarComponent.refresh();
 				App.directoryMenuComponent.updateMainOptionBackground();
 			});					
 		}
@@ -119,7 +117,6 @@ export class AppComponent
 			$(this).hide();
 			App.component.updateMapSize(); 
 			App.component.updateComponentsSize(); 
-			App.infoBarComponent.refresh();
 			$(this).find('.tooltipped').tooltip('remove');	
 		});
 	}	
