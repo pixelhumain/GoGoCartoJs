@@ -5376,7 +5376,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         font-size: 1.3rem; }
       .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .collapsible-header-title .gogo-icon-close {
         font-size: 1.5rem;
-        margin-top: 0; }
+        margin-top: -.8rem; }
     .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .collapsible-header-more {
       margin-bottom: 1rem; }
     .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .name {
