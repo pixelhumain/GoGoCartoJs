@@ -12,8 +12,16 @@ import { GeocoderModule, GeocodeResult } from "../modules/geocoder.module";
 declare var google, $;
 import { App } from "../gogocarto";
 import { ViewPort } from "./map/map.component";
+import { Option } from "../modules/categories.module";
 
 import { Event } from "../utils/event";
+
+class CategorySearchResult
+{
+	option : Option;
+	matchScore : number;
+	searchTextLeft : string;
+}
 
 export class SearchBarComponent
 {
@@ -96,25 +104,39 @@ export class SearchBarComponent
 		if ($('#directory-menu').width() == $('.gogocarto-container').width())
 			App.component.hideDirectoryMenu();
 
-		switch (this.searchType())
-		{
-			case "place":
-				App.geocoder.geocodeAddress(this.domElement().val(),
-					(result) => {
-						this.clearSearchResult(false);
-						this.hideSearchOptions();
-						App.mapComponent.fitBounds(App.geocoder.getBounds(), true);
-					});
-				break;
-			case "element":
-				let value = this.domElement().val();
-				if (value)
-					this.searchElements(this.domElement().val());
-				else
-					this.clearSearchResult();
-				break;
-		}
+		let searchText = this.domElement().val();
+
+		// App.geocoder.geocodeAddress(searchText,
+		// (result) => {
+		// 	console.log("geocode result", result);
+		// 	// this.clearSearchResult(false);
+		// 	// this.hideSearchOptions();
+		// 	// App.mapComponent.fitBounds(App.geocoder.getBounds(), true);
+		// });
+
+		//this.searchElements(searchText);
+
+		let results = this.searchInsideCategory(searchText);
+
+		console.log(results);		
+		console.log(results.map( (r) => r.option.name + " // Score = " + r.matchScore));
+
+		// switch (this.searchType())
+		// {
+		// 	case "place":
+				
+		// 		break;
+		// 	case "element":
+		// 		let value = this.domElement().val();
+		// 		if (value)
+		// 			this.searchElements(this.domElement().val());
+		// 		else
+		// 			this.clearSearchResult();
+		// 		break;
+		// }
 	}
+
+	
 
 	geolocateUser()
 	{
@@ -127,6 +149,71 @@ export class SearchBarComponent
 		});
 	}
 
+	searchInsideCategory($text : string) : CategorySearchResult[]
+	{
+		if (!$text) return null;
+
+		let regexpr = this.getSearchRegExprFromString($text);
+
+		let results = [];
+		let searchOptionsResult = App.categoryModule.options.forEach( (option) => 
+		{
+			let result = this.getOptionMatchResult(option, $text, regexpr);
+			if (result) results.push(result);			
+		});
+
+		if (results.length == 0) { console.log("no matching");return null;}
+		
+		results.sort( (a,b) => b.matchScore - a.matchScore);
+		return results;		
+	}
+
+	private getSearchRegExprFromString($text) : string
+	{
+		$text = this.stripBeginAndEndSpaces($text);
+		let keywords = this.explodeWords($text);		
+		let regexpr = "";
+		keywords.forEach( (value, index) => regexpr += (index == 0 ? "" : "|") + value);
+		return regexpr;
+	}
+
+	private getOptionMatchResult($option, $text, $regexpr) : CategorySearchResult
+	{
+		let matchs = $option.name.match(new RegExp($regexpr, 'gi'));
+		let matchsShort = $option.nameShort.match(new RegExp($regexpr, 'gi'));
+
+		if (matchs == null && matchsShort == null) return null;
+
+		let matchScore = matchs ? matchs.join().length / $option.name.length : 0;
+		let matchShortScore = matchsShort ? matchsShort.join().length / $option.nameShort.length : 0;
+		matchs = matchScore > matchShortScore ? matchs : matchsShort;
+		matchScore = matchScore > matchShortScore ? matchScore : matchShortScore;
+
+		let textLeft = this.getRemainingStringAfterMatch($text, matchs);
+		
+		return {'option':$option, 'matchScore': matchScore, 'searchTextLeft':textLeft};
+	}
+
+	private getRemainingStringAfterMatch($text, $matchs) : string
+	{
+		let textLeft = $text;
+		textLeft = this.removeWords(textLeft, $matchs);
+		textLeft = this.stripBeginAndEndSpaces(textLeft);
+		return textLeft;
+	}	
+
+	private stripBeginAndEndSpaces($text : string) { return $text.replace(/^\s+/, '').replace(/\s+$/, ''); }
+
+	private explodeWords($text : string) { return $text.split(/[\s,]+/); }
+
+	private removeWords($text : string, $words : string[]) : string
+	{
+		for(let word of $words) $text = $text.replace(new RegExp(word, 'ig'), "");
+		return $text;
+	}
+
+	
+
 	searchElements($text : string, $backFromHistory = false)
 	{		
 		this.setValue($text);
@@ -138,21 +225,22 @@ export class SearchBarComponent
 		App.ajaxModule.sendRequest(route, 'get', data,
 		(searchResult) => 
 		{
-			let result = App.elementModule.addJsonElements(searchResult.data, true, true);
-			App.elementModule.setSearchResultElement(result.elementsConverted);
-			App.setDataType(AppDataType.SearchResults, $backFromHistory);
-			App.directoryMenuComponent.setMainOption('all');
+			console.log("search elements result", searchResult);
+			// let result = App.elementModule.addJsonElements(searchResult.data, true, true);
+			// App.elementModule.setSearchResultElement(result.elementsConverted);
+			// App.setDataType(AppDataType.SearchResults, $backFromHistory);
+			// App.directoryMenuComponent.setMainOption('all');
 
-			this.clearLoader();			
-			this.showSearchResultLabel(searchResult.data.length);	
+			// this.clearLoader();			
+			// this.showSearchResultLabel(searchResult.data.length);	
 
-			if (searchResult.data.length > 0)
-			{
-				App.setMode(AppModes.List);
-				App.mapComponent.fitElementsBounds(result.elementsConverted);
-			}
-			else
-				App.mapComponent.fitDefaultBounds();
+			// if (searchResult.data.length > 0)
+			// {
+			// 	App.setMode(AppModes.List);
+			// 	App.mapComponent.fitElementsBounds(result.elementsConverted);
+			// }
+			// else
+			// 	App.mapComponent.fitDefaultBounds();
 		},
 		(error) =>
 		{
