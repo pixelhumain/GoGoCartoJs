@@ -71,10 +71,7 @@
 		height: calc(100% - 3rem);
 		width: 100%;
 		overflow-y: auto;
-		margin :0;	
-
-		@include flexbox();
-		@include flex-flow(column nowrap);
+		margin :0;
 
 		padding-left: 0rem; padding-right: 0rem;
 		@media #{$medium2-and-up} { padding-left: 3rem; padding-right: 3rem; }
