@@ -122,17 +122,12 @@ export class AjaxModule
 			{
 			  this.isRetrievingElements = false;
 			  clearTimeout(this.loaderTimer);
+			  setTimeout( () => $('#directory-loading').hide(), 250);
 			  if (this.requestWaitingToBeExecuted)
 			  {
 			  	 //console.log("REQUEST WAITING TO BE EXECUTED, fullRepresentation", this.waitingRequestFullRepresentation);
 			  	 App.checkForNewElementsToRetrieve(this.waitingRequestFullRepresentation);
-			  	 //this.sendAjaxElementRequest(this.waitingRequest);
 			  	 this.requestWaitingToBeExecuted = false;
-			  }
-			  else
-			  {
-			  	 //console.log("Ajax request complete");			  	 
-				 $('#directory-loading').hide();
 			  }
 			},
 		});
