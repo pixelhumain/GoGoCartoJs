@@ -3580,8 +3580,10 @@ select {
 .leaflet-oldie .leaflet-popup-tip {
   width: 24px;
   margin: 0 auto;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)";
-  filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678); }
+  /*
+	Seems to be a problem on safari
+	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)";
+	filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678);*/ }
 
 .leaflet-oldie .leaflet-popup-tip-container {
   margin-top: -1px; }
@@ -4542,7 +4544,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           align-items: center;
           display: none; }
           .gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .btn-close-menu.large-screen .arrow-left {
-            position: absolute;
             border: solid 8px;
             border-color: transparent #eeeeee transparent transparent; }
           .gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .btn-close-menu.large-screen:hover {
@@ -5125,14 +5126,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       width: 100%;
       overflow-y: auto;
       margin: 0;
-      display: -webkit-box;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      -ms-flex-flow: column nowrap;
-      -webkit-flex-flow: column nowrap;
-      flex-flow: column nowrap;
       padding-left: 0rem;
       padding-right: 0rem; }
       @media only screen and (min-width: 901px) {
