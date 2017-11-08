@@ -32,6 +32,7 @@ var diffConfiguration =
 	name: JsDiff.diffWords,
 	description: JsDiff.diffWords,
 	address: JsDiff.diffWords,
+	commitment: JsDiff.diffWords,
 	tel: JsDiff.diffSentences,
 	webSite: JsDiff.diffSentences,
 	mail: JsDiff.diffSentences,
@@ -611,8 +612,9 @@ export class Element
     let modifiedValue = capitalizeConfiguration[propertyName] ? capitalize(this.modifiedElement[propertyName]) : this.modifiedElement[propertyName],
     spanClass = '',
     span = null;
-		let diff = diffConfiguration[propertyName](value, modifiedValue),
-		    display = document.createElement('div'),
+    let DiffMethod = diffConfiguration[propertyName] ? diffConfiguration[propertyName] : JsDiff.diffSentences
+		let diff = DiffMethod(value, modifiedValue);
+		let display = document.createElement('div'),
 		    fragment = document.createDocumentFragment();
 
 		diff.forEach(function(part)
