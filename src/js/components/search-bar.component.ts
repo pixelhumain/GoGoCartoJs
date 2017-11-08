@@ -106,37 +106,25 @@ export class SearchBarComponent
 
 		let searchText = this.domElement().val();
 
-		// App.geocoder.geocodeAddress(searchText,
-		// (result) => {
-		// 	console.log("geocode result", result);
-		// 	// this.clearSearchResult(false);
-		// 	// this.hideSearchOptions();
-		// 	// App.mapComponent.fitBounds(App.geocoder.getBounds(), true);
-		// });
-
-		//this.searchElements(searchText);
-
-		let results = this.searchInsideCategory(searchText);
-
-		console.log(results);		
-		console.log(results.map( (r) => r.option.name + " // Score = " + r.matchScore));
-
-		// switch (this.searchType())
-		// {
-		// 	case "place":
-				
-		// 		break;
-		// 	case "element":
-		// 		let value = this.domElement().val();
-		// 		if (value)
-		// 			this.searchElements(this.domElement().val());
-		// 		else
-		// 			this.clearSearchResult();
-		// 		break;
-		// }
-	}
-
-	
+		switch (this.searchType()) 
+    { 
+      case "place": 
+        App.geocoder.geocodeAddress(searchText, 
+          (result) => { 
+            this.clearSearchResult(false); 
+            this.hideSearchOptions(); 
+            App.mapComponent.fitBounds(App.geocoder.getBounds(), true); 
+          }); 
+        break; 
+      case "element": 
+        let value = this.domElement().val(); 
+        if (value) 
+          this.searchElements(searchText); 
+        else 
+          this.clearSearchResult(); 
+        break; 
+    } 
+	}	
 
 	geolocateUser()
 	{
@@ -210,9 +198,7 @@ export class SearchBarComponent
 	{
 		for(let word of $words) $text = $text.replace(new RegExp(word, 'ig'), "");
 		return $text;
-	}
-
-	
+	}	
 
 	searchElements($text : string, $backFromHistory = false)
 	{		
@@ -225,22 +211,21 @@ export class SearchBarComponent
 		App.ajaxModule.sendRequest(route, 'get', data,
 		(searchResult) => 
 		{
-			console.log("search elements result", searchResult);
-			// let result = App.elementModule.addJsonElements(searchResult.data, true, true);
-			// App.elementModule.setSearchResultElement(result.elementsConverted);
-			// App.setDataType(AppDataType.SearchResults, $backFromHistory);
-			// App.directoryMenuComponent.setMainOption('all');
-
-			// this.clearLoader();			
-			// this.showSearchResultLabel(searchResult.data.length);	
-
-			// if (searchResult.data.length > 0)
-			// {
-			// 	App.setMode(AppModes.List);
-			// 	App.mapComponent.fitElementsBounds(result.elementsConverted);
-			// }
-			// else
-			// 	App.mapComponent.fitDefaultBounds();
+			let result = App.elementModule.addJsonElements(searchResult.data, true, true); 
+      App.elementModule.setSearchResultElement(result.elementsConverted); 
+      App.setDataType(AppDataType.SearchResults, $backFromHistory); 
+      App.directoryMenuComponent.setMainOption('all'); 
+ 
+      this.clearLoader();       
+      this.showSearchResultLabel(searchResult.data.length);   
+ 
+      if (searchResult.data.length > 0) 
+      { 
+        App.setMode(AppModes.List); 
+        App.mapComponent.fitElementsBounds(result.elementsConverted); 
+      } 
+      else 
+        App.mapComponent.fitDefaultBounds(); 
 		},
 		(error) =>
 		{
