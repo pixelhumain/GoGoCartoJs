@@ -90,7 +90,8 @@ export class InfoBarComponent
 
 			$('#element-info').html(element.getHtmlRepresentation());		
 			
-			let domMenu = $('#element-info-bar .menu-element');
+			let domMenu = this.domMenu();
+
 			createListenersForElementMenu(domMenu);	
 			createListenersForVoting();
 
@@ -115,6 +116,11 @@ export class InfoBarComponent
 
 		App.updateDocumentTitle();
 	};
+
+	domMenu() 
+	{
+		return $('#element-info-bar .menu-element');
+	}
 
 	refresh()
 	{
@@ -221,10 +227,13 @@ export class InfoBarComponent
 		if ( $('#element-info-bar .moreDetails').is(':visible') )
 		{
 			this.hideDetails();
+			showFullTextMenu(this.domMenu(), false);
 			$('#bandeau_helper').css('z-index',20).animate({'opacity': '1'},500);
 		}
 		else
 		{
+			if (this.domMenu().width() >= 400) showFullTextMenu(this.domMenu(), true);
+
 			$('#bandeau_helper').animate({'opacity': '0'},500).css('z-index',-1);
 
 			$('#element-info-bar .element-item').addClass('active');		
