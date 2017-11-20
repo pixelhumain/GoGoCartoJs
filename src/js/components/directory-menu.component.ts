@@ -225,6 +225,11 @@ export class DirectoryMenuComponent
 
 		$('#active-main-option-background').animate({top: $('#main-option-gogo-icon-' + optionId).position().top}, 400, 'easeOutQuart');
 	}
+
+	width() : string
+	{
+		return $('#directory-menu').width() + 'px';
+	}
 }
 
 

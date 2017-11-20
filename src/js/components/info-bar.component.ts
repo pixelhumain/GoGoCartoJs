@@ -32,7 +32,7 @@ export class InfoBarComponent
 
 	getCurrElementId() : string { return this.elementVisible ? this.elementVisible.id : null}
 
-	private isDisplayedAside()
+	isDisplayedAside()
 	{
 		return $('#element-info-bar').hasClass('display-aside');
 	}
@@ -148,14 +148,8 @@ export class InfoBarComponent
 		{
 			if (!$('#element-info-bar').is(':visible'))
 			{
-				$('#element-info-bar').css('right','-540px');			
-				$('#element-info-bar').show().animate({'right':'0'},350,'swing', () =>
-				{
-					$('#directory-content-map').css('margin-right','540px');
-		  		$('#bandeau_helper').css('margin-right','540px');
-		  		App.component.updateMapSize();
-		  		this.checkIfMarkerStillVisible();		  		
-				});
+				$('#element-info-bar').css('right','-' + this.width());			
+				$('#element-info-bar').show().animate({'right':'0'},350,'swing', () => { this.update() });
 			}
 			
 			this.updateInfoBarSize();
@@ -163,6 +157,32 @@ export class InfoBarComponent
 
 		this.isVisible = true;
 	};
+
+	update(animate : boolean = false, width : string = this.width())
+	{		
+		if (!this.isVisible) return;
+		
+		if (animate)
+		{
+			$('#directory-content-map').animate({'margin-right': width}, 350, 'swing');
+			$('#bandeau_helper').animate({'margin-right': width}, 350, 'swing');
+		}
+		else
+		{
+			$('#directory-content-map').css('margin-right', width);
+			$('#bandeau_helper').css('margin-right', width);
+		}
+		
+		setTimeout(() => { 
+			App.component.updateMapSize();
+			this.checkIfMarkerStillVisible();	
+		}, 350);			 
+	}
+
+	private width() : string 
+	{
+		return $('#element-info-bar').width() + 'px';
+	}
 
 	checkIfMarkerStillVisible()
 	{

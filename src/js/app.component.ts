@@ -87,12 +87,12 @@ export class AppComponent
 	}
 
 	showDirectoryMenu()
-	{
+	{	
 		if (!$('#directory-menu').is(':visible'))
-		{
+		{			
 			$('.show-directory-menu-button').hide();
-			$('#directory-menu').css('left','-' + $('#directory-menu').width() + 'px');	
-			$('#directory-content').animate({'margin-left': '340px'}, 350,'swing');
+			$('#directory-menu').css('left','-' + App.directoryMenuComponent.width());	
+			$('#directory-content').animate({'margin-left': App.directoryMenuComponent.width()}, 350,'swing');
 			$('#map-gogo-controls').animate({'padding-left': '10px'}, 350,'swing');
 			$('#directory-menu').show().animate({'left':'0'},350,'swing', () =>
 			{ 							
@@ -126,16 +126,24 @@ export class AppComponent
 		$('#bandeau_helper').slideUp(this.slideOptions);
 	}
 
+	mapWidth() { return $('#directory-content').width(); }
+	pagewidth() { return $('.gogocarto-container').width(); }
+
 	updateComponentsSize()
 	{	
+		let menuwidth = this.pagewidth() > 850 ? this.pagewidth() > 1450 ? '340px' : '310px' : '100%';
+		$('#directory-menu').css('width', menuwidth);
+
+		let infoBarHasChangeDisplayMode = false;
 		// show element info bar aside or at the bottom depending of direcoty-content width
-		if ($('#directory-content').width() > 1200)
+		if (this.mapWidth() > 900)
 		{
 			if (!$('#element-info-bar').hasClass('display-aside'))
 			{
 				$('#element-info-bar').addClass('display-aside');
 				$('#element-info-bar').removeClass('display-bottom');
 				App.infoBarComponent.refresh();
+				infoBarHasChangeDisplayMode = true;
 			}			
 		}	
 		else
@@ -143,16 +151,38 @@ export class AppComponent
 			if (!$('#element-info-bar').hasClass('display-bottom'))
 			{
 				$('#element-info-bar').removeClass('display-aside');
-				$('#element-info-bar').addClass('display-bottom');
-				$('#directory-content-map').css('margin-right', '0');
-				App.infoBarComponent.refresh();
+				$('#element-info-bar').addClass('display-bottom');				
+				setTimeout( () => { App.infoBarComponent.refresh(); }, 0);
+				infoBarHasChangeDisplayMode = true;
 			}
-		}		
+			$('#directory-content-map').css('margin-right', '0');
+		}	
+
+		if ($('#element-info-bar').hasClass('display-aside'))	
+		{
+			let infoBarwidth = this.mapWidth() > 1100 ? '540px' : '470px';
+			if (infoBarHasChangeDisplayMode)
+				$('#element-info-bar').css('width', infoBarwidth);
+			else
+				$('#element-info-bar').animate({'width': infoBarwidth}, 350, "swing");
+			
+			App.infoBarComponent.update(!infoBarHasChangeDisplayMode, infoBarwidth);
+		}
+		else $('#element-info-bar').css('width', 'auto');
+
+		if ($('#directory-menu').is(':visible'))
+		{
+			setTimeout(function() { 
+				$('#directory-content').css('margin-left', App.directoryMenuComponent.width());
+			},0);		
+		}
+		else $('#directory-content').css('margin-left', 0);
 	}
 	
 	// the leaflet map need to be resized with a specific function
 	updateMapSize()
 	{		
+		if (!App.infoBarComponent.isDisplayedAside()) $('#directory-content-map').css('margin-right', '0');
 		if (App.mapComponent) setTimeout(function() { App.mapComponent.resize(); },0);
 	}
 
