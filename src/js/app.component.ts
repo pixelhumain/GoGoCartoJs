@@ -168,7 +168,11 @@ export class AppComponent
 			
 			App.infoBarComponent.update(!infoBarHasChangeDisplayMode, infoBarwidth);
 		}
-		else $('#element-info-bar').css('width', 'auto');
+		else if (infoBarHasChangeDisplayMode)
+		{
+			$('#element-info-bar').css('width', 'auto');
+			setTimeout( () => { $('#element-info-bar').css('width', 'auto'); }, 400);
+		}
 
 		if ($('#directory-menu').is(':visible'))
 		{
