@@ -43,6 +43,7 @@ var capitalizeConfiguration =
 {
 	name: true,
 	description: true,
+	descriptionMore: true,
 	address: true,
 	tel: false,
 	webSite: false,
@@ -58,6 +59,7 @@ export class Element
 	position : L.LatLng;
 	address : string;
 	description : string;
+	descriptionMore: string;
 	modifiedElement : Element = null;
 	tel : string;
 	webSite : string;
@@ -145,7 +147,10 @@ export class Element
 			this.modifiedElement.createOptionValues(diffOptionValues);
 		}
 		this.address = elementJson.address;
-		this.description = elementJson.description || '';
+		this.description = capitalize(elementJson.description) || '';
+		this.descriptionMore = capitalize(elementJson.descriptionMore) || '';
+		this.checkForMergeDescriptions();
+
 		this.commitment = elementJson.commitment || '';
 		this.tel = this.getFormatedTel(elementJson.tel);	
 		this.webSite = elementJson.webSite;
@@ -208,6 +213,15 @@ export class Element
 			diffOptionsValues.push(newOv);
 		}
 		return diffOptionsValues;
+	}
+
+	private checkForMergeDescriptions()
+	{
+		if (this.description.length + this.descriptionMore.length < 300)
+		{
+			this.description = this.description + '<br /> ' + this.descriptionMore;
+			this.descriptionMore = '';
+		}
 	}
 
 	private getFormatedTel(value)

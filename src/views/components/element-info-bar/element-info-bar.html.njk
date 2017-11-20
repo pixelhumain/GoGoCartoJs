@@ -159,6 +159,13 @@
     {# Body Main Container #}
     <div class="collapsible-body-main-content"> 
 
+      {% set descriptionMore = element.getProperty('descriptionMore') %}
+      {% if descriptionMore %}
+          <!-- <h3>Précisions</h3>    -->
+          <div class="section row sectionDescriptionMore" style="padding-bottom:0">
+            <span class="col s12 description">{{ descriptionMore|safe }}</span>  
+          </div>
+        {% endif %}
       {# Contact infos #}
       <h3>Informations générales</h3>   
       <div class="section row sectionInfos">
@@ -200,12 +207,13 @@
       </div>
       <div class="info-bar-divider"></div>
 
+      
       {% set commitment = element.getProperty('commitment') %}
+      
       {% if commitment %}
         <h3>Engagement Citoyen</h3>   
-        <div class="section row sectionInfos">
-          {# Address #}
-          <span class="col s12 commitment">{{ commitment|safe }}</span>  
+        <div class="section row">
+          <span class="col s12 description">{{ commitment|safe }}</span>  
         </div>
         <div class="info-bar-divider"></div>
       {% endif %}
