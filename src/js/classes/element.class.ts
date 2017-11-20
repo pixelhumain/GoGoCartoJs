@@ -58,6 +58,8 @@ export class Element
 	name : string;
 	position : L.LatLng;
 	address : string;
+	city: string;
+	postalCode: string;
 	description : string;
 	descriptionMore: string;
 	modifiedElement : Element = null;
@@ -147,6 +149,8 @@ export class Element
 			this.modifiedElement.createOptionValues(diffOptionValues);
 		}
 		this.address = elementJson.address;
+		this.city = elementJson.city;
+		this.postalCode = elementJson.postalCode;
 		this.description = capitalize(elementJson.description) || '';
 		this.descriptionMore = capitalize(elementJson.descriptionMore) || '';
 		this.checkForMergeDescriptions();
@@ -645,7 +649,7 @@ export class Element
 		return display.innerHTML;
 	}
 
-	getFormatedOpenHours() 
+	getFormatedOpenHours()
 	{		
 		if (this.formatedOpenHours_ === null )
 		{		

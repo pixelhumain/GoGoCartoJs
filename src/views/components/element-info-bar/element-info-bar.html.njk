@@ -10,7 +10,7 @@
   <div class="collapsible-header bgdSoftColorAs {{pendingClass}}" option-id={{mainOptionValueToDisplay.colorOptionId}}>
     
     {# Header Title #}
-    <div class='collapsible-header-title row'> 
+    <div class='collapsible-header-title row'>
 
       <span class="col s12 name">
 
@@ -26,8 +26,12 @@
         {# Distance and Close Button #}
         <span class="icon gogo-icon-close gogo-h-primary" id="btn-close-bandeau-detail"></span>
         {% if showDistance and element.distance != null %}
-          <span class="right-align distance">~ {{ element.distance if isMapMode else element.distanceFromBoundsCenter }} km</span>
+          <span class="distance">~ {{ element.distance if isMapMode else element.distanceFromBoundsCenter }} km</span>
         {% endif %}
+        <span class="location">
+          {% if element.postalCode %}<span class="postalCode">{{ element.postalCode }}</span>{% endif %}
+          {% if element.postalCode %}<span class="city"> {{ element.city }}</span>{% endif %}
+        </span>
 
         {# Name #}
         {{ element.getProperty('name')|safe }}

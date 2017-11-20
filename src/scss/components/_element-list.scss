@@ -89,7 +89,17 @@
 		// .star-names-icons {display:block}
 		display: block;
 		.gogo-icon-close {display:none}
-		.distance{ margin-right: 0;}
+		.distance{ 
+			margin-right: 0;
+			margin-left: 6px;
+		}
+		.location{ 
+			display: inline-block;
+			float: right;
+			margin-left: 1rem;
+			.postalCode { font-size: .9rem; }
+			.city { }
+		}
 	}
 
 	.collapsible-header
