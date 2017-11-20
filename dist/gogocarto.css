@@ -5143,7 +5143,14 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       .gogocarto-container #directory-content-list .element-item .gogo-icon-close {
         display: none; }
       .gogocarto-container #directory-content-list .element-item .distance {
-        margin-right: 0; }
+        margin-right: 0;
+        margin-left: 6px; }
+      .gogocarto-container #directory-content-list .element-item .location {
+        display: inline-block;
+        float: right;
+        margin-left: 1rem; }
+        .gogocarto-container #directory-content-list .element-item .location .postalCode {
+          font-size: .95rem; }
     .gogocarto-container #directory-content-list .collapsible-header {
       border-bottom: 1px solid #abaaaa;
       background-color: white; }
@@ -5160,7 +5167,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
   .gogocarto-container #element-info-bar.display-aside .menu-element {
     height: auto; }
   .gogocarto-container .menu-element {
-    height: 3rem;
     z-index: 10;
     position: absolute;
     bottom: 0;
@@ -5168,6 +5174,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     width: 100%; }
     .gogocarto-container .menu-element .menu-element-item-text {
       display: none; }
+    .gogocarto-container .menu-element:not(.full-text) {
+      height: 3rem; }
     .gogocarto-container .menu-element.full-text {
       padding: .5rem 0 .8rem 0; }
       .gogocarto-container .menu-element.full-text .menu-element-item-text {
@@ -5263,7 +5271,9 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
             padding: 0 1rem; } }
         .gogocarto-container .element-item .collapsible-header .collapsible-header-title .distance {
           float: right;
-          margin: 0 1rem; }
+          margin-left: 1rem; }
+        .gogocarto-container .element-item .collapsible-header .collapsible-header-title .location {
+          display: none; }
       .gogocarto-container .element-item .collapsible-header .collapsible-header-more {
         line-height: 1.5rem;
         padding: 0;
@@ -5284,8 +5294,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       background-color: #F7F7F7;
       padding: 0;
       overflow-y: auto;
-      position: relative;
-      /* .categorie { text-decoration: underline; } */ }
+      position: relative; }
       .gogocarto-container .element-item .collapsible-body .collapsible-body-main-content {
         padding: 0 0rem 1rem .5rem; }
         @media only screen and (min-width: 601px) {
@@ -5300,10 +5309,9 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         margin-bottom: 0; }
       .gogocarto-container .element-item .collapsible-body .section {
         padding-top: .9rem; }
-      .gogocarto-container .element-item .collapsible-body .categorie, .gogocarto-container .element-item .collapsible-body .adresse, .gogocarto-container .element-item .collapsible-body .tel {
-        /* padding-left: 1.3rem; */ }
       .gogocarto-container .element-item .collapsible-body .description {
-        text-align: justify; }
+        text-align: justify;
+        line-height: 1.5; }
       .gogocarto-container .element-item .collapsible-body .send-mail-btn {
         font-size: .8rem;
         margin: .4rem 0 .5rem 0;
@@ -5313,6 +5321,9 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         margin-bottom: 1rem; }
       .gogocarto-container .element-item .collapsible-body .sectionInfos, .gogocarto-container .element-item .collapsible-body .sectionOpenHours {
         line-height: 2rem; }
+      .gogocarto-container .element-item .collapsible-body .sectionDescriptionMore {
+        padding-bottom: 0;
+        padding-top: 1.5rem; }
       .gogocarto-container .element-item .collapsible-body .category-wrapper .strong {
         text-decoration: underline; }
       .gogocarto-container .element-item .collapsible-body .category-wrapper .category-wrapper {
@@ -5451,7 +5462,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       right: 0 !important; }
     .gogocarto-container #element-info-bar.display-aside {
       position: absolute;
-      width: 540px;
       top: 0;
       right: 0;
       height: 100% !important;
@@ -5611,11 +5621,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     background-color: #c3c3c3; }
   .gogocarto-container #directory-menu {
     position: absolute;
-    height: 100%;
-    width: 100%; }
-    @media (min-width: 850px) {
-      .gogocarto-container #directory-menu {
-        width: 340px; } }
+    height: 100%; }
   .gogocarto-container #directory-content {
     position: relative;
     background-color: #9e9e9e;
