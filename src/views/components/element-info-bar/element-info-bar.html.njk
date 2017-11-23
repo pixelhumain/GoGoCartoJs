@@ -30,7 +30,7 @@
         {% endif %}
         <span class="location">
           {% if element.postalCode %}<span class="postalCode">{{ element.postalCode }}</span>{% endif %}
-          {% if element.postalCode %}<span class="city"> {{ element.city }}</span>{% endif %}
+          {% if element.addressLocality %}<span class="city"> {{ element.addressLocality }}</span>{% endif %}
         </span>
 
         {# Name #}
@@ -178,25 +178,25 @@
         <span class="col s12 address">{{ element.getProperty('address')|safe }}</span>
         
         {# Tel #}
-        {% if element.tel %}
-          <span class="col s12 tel">{{ element.getProperty('tel')|safe }}</span>
+        {% if element.telephone %}
+          <span class="col s12 tel">{{ element.getProperty('telephone')|safe }}</span>
         {% endif %}
 
         {# Mail #}
-        {% if (config.isFeatureAvailable('sendMail') and element.mail) or element.isPending() %}
+        {% if (config.isFeatureAvailable('sendMail') and element.email) or element.isPending() %}
           <span class="col s12 tel">
           {# if element is pending we need to show the email no matter the security rules #}
           {% if config.security.hideMailsByShowingSendMailButton and not (element.isPending() and config.isFeatureAvailable('pending')) %}
             <button class="btn send-mail-btn">Envoyer un Mail</button>
           {% else %}
-            <a href="mailto:{{ element.mail }}">{{ element.getProperty('mail')|safe }}</a>            
+            <a href="mailto:{{ element.email }}">{{ element.getProperty('email')|safe }}</a>            
           {% endif %}
           </span>
         {% endif %}
 
         {# WebSite #}
-        {% if element.webSite %}
-          <span class="col s12 tel"><a href="{{ element.webSite }}" target="_blank">{{ element.getProperty('webSite')|safe }}</a>
+        {% if element.website %}
+          <span class="col s12 tel"><a href="{{ element.website }}" target="_blank">{{ element.getProperty('website')|safe }}</a>
           </span>
         {% endif %}
 

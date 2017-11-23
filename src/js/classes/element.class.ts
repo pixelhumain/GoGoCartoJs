@@ -31,11 +31,11 @@ var diffConfiguration =
 {
 	name: JsDiff.diffWords,
 	description: JsDiff.diffWords,
-	address: JsDiff.diffWords,
+	address: JsDiff.diffSentences,
 	commitment: JsDiff.diffWords,
-	tel: JsDiff.diffSentences,
-	webSite: JsDiff.diffSentences,
-	mail: JsDiff.diffSentences,
+	telephone: JsDiff.diffSentences,
+	website: JsDiff.diffSentences,
+	email: JsDiff.diffSentences,
 	openHoursMoreInfos: JsDiff.diffSentences,
 }
 
@@ -44,10 +44,10 @@ var capitalizeConfiguration =
 	name: true,
 	description: true,
 	descriptionMore: true,
-	address: true,
-	tel: false,
-	webSite: false,
-	mail: false,
+	address: false,
+	telephone: false,
+	website: false,
+	email: false,
 	openHoursMoreInfos: true,
 }
 
@@ -57,15 +57,15 @@ export class Element
 	status : ElementStatus;
 	name : string;
 	position : L.LatLng;
-	address : string;
-	city: string;
+	streetAddress : string;
+	addressLocality: string;
 	postalCode: string;
 	description : string;
 	descriptionMore: string;
 	modifiedElement : Element = null;
-	tel : string;
-	webSite : string;
-	mail : string;
+	telephone : string;
+	website : string;
+	email : string;
 	openHours : any;
 	openHoursDays : string[] = [];
 	openHoursMoreInfos : any;
@@ -134,7 +134,7 @@ export class Element
 		if (!this.id)
 		{
 			this.id = elementJson.id;
-			this.position = L.latLng(elementJson.coordinates.lat, elementJson.coordinates.lng);
+			this.position = L.latLng(elementJson.geo.latitude, elementJson.geo.longitude);
 			this.name = elementJson.name;
 			this.status = elementJson.status;			
 		}
@@ -148,17 +148,17 @@ export class Element
 			let diffOptionValues = this.getDiffOptionValues(elementJson.optionValues, elementJson.modifiedElement.optionValues);
 			this.modifiedElement.createOptionValues(diffOptionValues);
 		}
-		this.address = elementJson.address;
-		this.city = elementJson.city;
-		this.postalCode = elementJson.postalCode;
+		this.streetAddress = capitalize(elementJson.address.streetAddress || '');
+		this.addressLocality = capitalize(elementJson.address.addressLocality || '');
+		this.postalCode = elementJson.address.postalCode;
 		this.description = capitalize(elementJson.description) || '';
 		this.descriptionMore = capitalize(elementJson.descriptionMore) || '';
 		this.checkForMergeDescriptions();
 
 		this.commitment = elementJson.commitment || '';
-		this.tel = this.getFormatedTel(elementJson.tel);	
-		this.webSite = elementJson.webSite;
-		this.mail = elementJson.mail;
+		this.telephone = this.getFormatedTel(elementJson.telephone);	
+		this.website = elementJson.website;
+		this.email = elementJson.email || '';
 		this.openHours = elementJson.openHours;
 		this.openHoursMoreInfos =  elementJson.openHoursMoreInfos;		
 
@@ -576,6 +576,15 @@ export class Element
 	isPending() { return this.status == ElementStatus.PendingAdd || this.status == ElementStatus.PendingModification; }
 	isDeleted() { return this.status <= ElementStatus.AdminRefused }
 
+	getFormatedAddress()
+	{
+		let result = "";
+    if (this.streetAddress) result += this.streetAddress + ', ';
+    if (this.postalCode) result += this.postalCode + ' ';
+    if (this.addressLocality) result += this.addressLocality;
+    return result;
+	}
+
 	// use template js to create the html representation of the element
 	getHtmlRepresentation() 
 	{	
@@ -623,11 +632,12 @@ export class Element
 
 	getProperty(propertyName)
 	{
-		let value = capitalizeConfiguration[propertyName] ? capitalize(this[propertyName]) : this[propertyName];
+		let value = this.getFormatedValue(this, propertyName);
+		
 		// in iframe the pending modifications are not displayed, just the old version
 		if (this.status != ElementStatus.PendingModification || !App.config.isFeatureAvailable('pending') || !this.modifiedElement) return value;
 
-    let modifiedValue = capitalizeConfiguration[propertyName] ? capitalize(this.modifiedElement[propertyName]) : this.modifiedElement[propertyName],
+    let modifiedValue = this.getFormatedValue(this.modifiedElement, propertyName),
     spanClass = '',
     span = null;
     let DiffMethod = diffConfiguration[propertyName] ? diffConfiguration[propertyName] : JsDiff.diffSentences
@@ -647,6 +657,16 @@ export class Element
 		display.appendChild(fragment);
 
 		return display.innerHTML;
+	}
+
+	private getFormatedValue(element, propertyName)
+	{
+		let value;
+		if (propertyName == 'address') value = element.getFormatedAddress();
+		else value = element[propertyName]
+		
+		value = capitalizeConfiguration[propertyName] ? capitalize(value) : value;
+		return value;
 	}
 
 	getFormatedOpenHours()
