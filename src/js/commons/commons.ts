@@ -28,7 +28,7 @@ export function unslugify(text : string) : string
 
 export function capitalize(text)
 {
-    return text ? text.substr(0,1).toUpperCase()+text.substr(1,text.length).toLowerCase() : "";
+    return text ? text.substr(0,1).toUpperCase()+text.substr(1,text.length) : "";
 }
 
 export function getQueryParams(qs) 
