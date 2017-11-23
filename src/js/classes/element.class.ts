@@ -18,6 +18,7 @@ declare var $, JsDiff : any;
 
 export enum ElementStatus 
 {
+  ModifiedElement = -5,
   Deleted = -4,
   CollaborativeRefused = -3,
   AdminRefused = -2,    
@@ -168,60 +169,14 @@ export class Element
 		this.searchScore = elementJson.searchScore;
 
 		this.isFullyLoaded = true;
-	}
-
-	private getDiffOptionValues(optionValues, newOptionValues)
-	{
-		let diffOptionsValues = [];
-		let newOVIds = newOptionValues.map((obj) => obj.optionId);
-		let oldOVIds = optionValues.map((obj) => obj.optionId);
-		for(let ov of optionValues)
-		{
-			if (newOVIds.indexOf(ov.optionId) == -1)
-			{
-				ov.diff = 'removed';
-				diffOptionsValues.push(ov);
-			}
-		}
-		for(let newOv of newOptionValues)
-		{
-			let index = oldOVIds.indexOf(newOv.optionId);
-			if (index == -1)
-			{
-				newOv.diff = 'added';
-			}
-			else
-			{				
-				let modifiedValue = capitalize(newOv.description);
-		    let value = capitalize(optionValues[index].description),
-		    spanClass = '',
-		    span = null;
-				let diff = JsDiff.diffWords(value, modifiedValue),
-				    display = document.createElement('div'),
-				    fragment = document.createDocumentFragment();
-
-				diff.forEach(function(part)
-				{
-				  spanClass = part.added ? 'added' : part.removed ? 'removed' : 'equals';
-				  span = document.createElement('span');
-				  if (spanClass) span.className = spanClass;
-				  span.appendChild(document.createTextNode(part.value));
-				  fragment.appendChild(span);
-				});
-
-				display.appendChild(fragment);
-
-				newOv.description = display.innerHTML;
-				newOv.diff = 'equals';
-			}
-			diffOptionsValues.push(newOv);
-		}
-		return diffOptionsValues;
-	}
+	}	
 
 	private checkForMergeDescriptions()
 	{
-		if (this.description.length + this.descriptionMore.length < 300)
+    if ( this.status != ElementStatus.PendingModification &&
+         this.status != ElementStatus.ModifiedElement &&
+         this.descriptionMore.length > 0 && 
+         (this.description.length + this.descriptionMore.length) < 300)
 		{
 			this.description = this.description + '<br /> ' + this.descriptionMore;
 			this.descriptionMore = '';
@@ -425,6 +380,55 @@ export class Element
 			optionValue.addCategoryValue(categoryValue);
 		} 
 	}
+
+  private getDiffOptionValues(optionValues, newOptionValues)
+  {
+    let diffOptionsValues = [];
+    let newOVIds = newOptionValues.map((obj) => obj.optionId);
+    let oldOVIds = optionValues.map((obj) => obj.optionId);
+    for(let ov of optionValues)
+    {
+      if (newOVIds.indexOf(ov.optionId) == -1)
+      {
+        ov.diff = 'removed';
+        diffOptionsValues.push(ov);
+      }
+    }
+    for(let newOv of newOptionValues)
+    {
+      let index = oldOVIds.indexOf(newOv.optionId);
+      if (index == -1)
+      {
+        newOv.diff = 'added';
+      }
+      else
+      {        
+        let modifiedValue = capitalize(newOv.description);
+        let value = capitalize(optionValues[index].description),
+        spanClass = '',
+        span = null;
+        let diff = JsDiff.diffWords(value, modifiedValue),
+            display = document.createElement('div'),
+            fragment = document.createDocumentFragment();
+
+        diff.forEach(function(part)
+        {
+          spanClass = part.added ? 'added' : part.removed ? 'removed' : 'equals';
+          span = document.createElement('span');
+          if (spanClass) span.className = spanClass;
+          span.appendChild(document.createTextNode(part.value));
+          fragment.appendChild(span);
+        });
+
+        display.appendChild(fragment);
+
+        newOv.description = display.innerHTML;
+        newOv.diff = 'equals';
+      }
+      diffOptionsValues.push(newOv);
+    }
+    return diffOptionsValues;
+  }
 
 	fillOptionId($optionId : number) : OptionValue
 	{
@@ -637,9 +641,13 @@ export class Element
 		// in iframe the pending modifications are not displayed, just the old version
 		if (this.status != ElementStatus.PendingModification || !App.config.isFeatureAvailable('pending') || !this.modifiedElement) return value;
 
-    let modifiedValue = this.getFormatedValue(this.modifiedElement, propertyName),
-    spanClass = '',
+    let modifiedValue = this.getFormatedValue(this.modifiedElement, propertyName);
+
+    if (!value && !modifiedValue) return '';
+
+    let spanClass = '',
     span = null;
+
     let DiffMethod = diffConfiguration[propertyName] ? diffConfiguration[propertyName] : JsDiff.diffSentences
 		let diff = DiffMethod(value, modifiedValue);
 		let display = document.createElement('div'),

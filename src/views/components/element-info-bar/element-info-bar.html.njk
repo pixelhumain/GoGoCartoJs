@@ -178,8 +178,9 @@
         <span class="col s12 address">{{ element.getProperty('address')|safe }}</span>
         
         {# Tel #}
-        {% if element.telephone %}
-          <span class="col s12 tel">{{ element.getProperty('telephone')|safe }}</span>
+        {% set telephone = element.getProperty('telephone') %}
+        {% if telephone %}
+          <span class="col s12 tel">{{ telephone|safe }}</span>
         {% endif %}
 
         {# Mail #}
@@ -195,8 +196,9 @@
         {% endif %}
 
         {# WebSite #}
-        {% if element.website %}
-          <span class="col s12 tel"><a href="{{ element.website }}" target="_blank">{{ element.getProperty('website')|safe }}</a>
+        {% set website = element.getProperty('website') %}
+        {% if website %}
+          <span class="col s12 tel"><a href="{{ element.website }}" target="_blank">{{ website|safe }}</a>
           </span>
         {% endif %}
 
@@ -212,8 +214,7 @@
       <div class="info-bar-divider"></div>
 
       
-      {% set commitment = element.getProperty('commitment') %}
-      
+      {% set commitment = element.getProperty('commitment') %}      
       {% if commitment %}
         <h3>Engagement Citoyen</h3>   
         <div class="section row">
@@ -239,8 +240,9 @@
           {% endif %}
         {% endfor %}          
 
-        {% if element.openHoursMoreInfos %}
-          <div class='col' {% if count != 0 %}style="margin-top:1rem;"{% endif %}>{{ element.getProperty('openHoursMoreInfos')|safe }}</div> 
+        {% set openHoursMoreInfos = element.getProperty('openHoursMoreInfos') %}      
+        {% if openHoursMoreInfos %}
+          <div class='col' {% if count != 0 %}style="margin-top:1rem;"{% endif %}>{{ openHoursMoreInfos|safe }}</div> 
           {% set count = count + 1 %} 
         {% endif %}
 
