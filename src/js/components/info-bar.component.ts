@@ -121,7 +121,11 @@ export class InfoBarComponent
 	refresh()
 	{
 		console.log("info bar REFRESH");
-		if (this.isVisible) this.show();
+		
+		if (this.isVisible) {
+			this.show();
+			setTimeout( () => { this.show(); }, 200);
+		}
 	}
 
 	show()
@@ -134,7 +138,6 @@ export class InfoBarComponent
 			elementInfoBar_newHeight += $('#element-info-bar .starRepresentationChoice-helper:visible').height();
 
 			this.updateInfoBarSize();
-
 			$('#element-info-bar').stop(true).animate({'height': elementInfoBar_newHeight}, 350, 'swing', () => 
 			{
 				App.component.updateMapSize();
@@ -146,13 +149,17 @@ export class InfoBarComponent
 			if (!$('#element-info-bar').is(':visible'))
 			{
 				$('#element-info-bar').css('right','-' + this.width());			
-				$('#element-info-bar').show().stop(true).animate({'right':'0'},350,'swing', () => { App.component.updateDirectoryContentMarginIfInfoBarDisplayedAside() });
+				$('#element-info-bar').show().stop(true).animate({'right':'0'},350,'swing', () => { 
+					App.component.updateDirectoryContentMarginIfInfoBarDisplayedAside();
+					this.checkIfMarkerStillVisible();
+				});
 			}
-			// just to be sure, put the right property to 0 few ms after
-			setTimeout( () => { $('#element-info-bar').stop(true).css('right', '0'); }, 400);
 			
-			this.checkIfMarkerStillVisible();
 			this.updateInfoBarSize();
+			setTimeout( () => { 
+				// just to be sure, put the right property to 0 few ms after
+				$('#element-info-bar').stop(true).css('right', '0'); 				
+			}, 400);				
 		}
 
 		// on large screen info bar is displayed aside and so we have enough space
@@ -178,6 +185,8 @@ export class InfoBarComponent
 				if (!App.mapComponent.contains(this.elementVisible.position))
 				{
 					App.mapComponent.panToLocation(this.elementVisible.position);
+					this.elementVisible.marker.showBigSize();
+					setTimeout( () => { this.elementVisible.marker.showBigSize(); }, 200);
 					setTimeout( () => { this.elementVisible.marker.showBigSize(); }, 1000);
 				}		
 			}	
