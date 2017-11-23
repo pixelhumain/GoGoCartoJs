@@ -306,6 +306,12 @@ if (function(a) {
 
           case "postal_code":
             c.postal_code = b.address_components[d].long_name;
+            break;
+
+          case "country":
+            c.country = b.address_components[d].long_name;
+            c.countryCode = b.address_components[d].short_name;
+            break;
         }
         return c;
     };
