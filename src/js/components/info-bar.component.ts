@@ -40,18 +40,9 @@ export class InfoBarComponent
 	// App.infoBarComponent.showElement;
 	showElement(elementId, callback = null) 
 	{
-		let element = App.elementModule.getElementById(elementId);
+		let element = App.elementModule.getElementById(elementId);		
 
-		element.marker.showNormalHidden();
-		element.marker.showBigSize();
-
-		setTimeout( () => 
-		{ 
-			element.marker.showNormalHidden();
-			element.marker.showBigSize();
-		}, 500); 	
-
-		//console.log("showElement", element);
+		// console.log("showElement", element);
 
 		// if element already visible
 		if (this.elementVisible)
@@ -95,11 +86,7 @@ export class InfoBarComponent
 			createListenersForElementMenu(domMenu);	
 			createListenersForVoting();
 
-			updateFavoriteIcon(domMenu, element);
-
-			// on large screen info bar is displayed aside and so we have enough space
-			// to show menu actions details in full text
-			showFullTextMenu(domMenu, this.isDisplayedAside());
+			updateFavoriteIcon(domMenu, element);			
 
 			$('#btn-close-bandeau-detail').click(() =>
 			{  		
@@ -111,6 +98,15 @@ export class InfoBarComponent
 		}						
 		
 		this.show();		
+
+		element.marker.showNormalHidden();
+		element.marker.showBigSize();
+
+		setTimeout( () => 
+		{ 
+			element.marker.showNormalHidden();
+			element.marker.showBigSize();
+		}, 500); 	
 
 		this.onShow.emit(elementId);
 
@@ -124,7 +120,8 @@ export class InfoBarComponent
 
 	refresh()
 	{
-		if (this.elementVisible) setTimeout(this.showElement(this.elementVisible.id), 500);
+		console.log("info bar REFRESH");
+		if (this.isVisible) this.show();
 	}
 
 	show()
@@ -138,7 +135,7 @@ export class InfoBarComponent
 
 			this.updateInfoBarSize();
 
-			$('#element-info-bar').animate({'height': elementInfoBar_newHeight}, 350, 'swing', () => 
+			$('#element-info-bar').stop(true).animate({'height': elementInfoBar_newHeight}, 350, 'swing', () => 
 			{
 				App.component.updateMapSize();
 				this.checkIfMarkerStillVisible();		  		
@@ -149,37 +146,23 @@ export class InfoBarComponent
 			if (!$('#element-info-bar').is(':visible'))
 			{
 				$('#element-info-bar').css('right','-' + this.width());			
-				$('#element-info-bar').show().animate({'right':'0'},350,'swing', () => { this.update() });
+				$('#element-info-bar').show().stop(true).animate({'right':'0'},350,'swing', () => { App.component.updateDirectoryContentMarginIfInfoBarDisplayedAside() });
 			}
+			// just to be sure, put the right property to 0 few ms after
+			setTimeout( () => { $('#element-info-bar').stop(true).css('right', '0'); }, 400);
 			
+			this.checkIfMarkerStillVisible();
 			this.updateInfoBarSize();
 		}
 
+		// on large screen info bar is displayed aside and so we have enough space
+		// to show menu actions details in full text
+		showFullTextMenu(this.domMenu(), this.isDisplayedAside());
+
 		this.isVisible = true;
-	};
+	};	
 
-	update(animate : boolean = false, width : string = this.width())
-	{		
-		if (!this.isVisible) return;
-		
-		if (animate)
-		{
-			$('#directory-content-map').animate({'margin-right': width}, 350, 'swing');
-			$('#bandeau_helper').animate({'margin-right': width}, 350, 'swing');
-		}
-		else
-		{
-			$('#directory-content-map').css('margin-right', width);
-			$('#bandeau_helper').css('margin-right', width);
-		}
-		
-		setTimeout(() => { 
-			App.component.updateMapSize();
-			this.checkIfMarkerStillVisible();	
-		}, 350);			 
-	}
-
-	private width() : string 
+	width() : string 
 	{
 		return $('#element-info-bar').width() + 'px';
 	}

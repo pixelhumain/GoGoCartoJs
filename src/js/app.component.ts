@@ -17,6 +17,8 @@ declare let $, window : any;
 
 export class AppComponent
 {
+	inforBarAnimationTimer;
+
 	private slideOptions = { duration: 500, easing: "easeOutQuart", queue: false, complete: function() {}};
 
 	initialize()
@@ -47,8 +49,9 @@ export class AppComponent
 		let res;
 		window.onresize = () =>
 		{
-		   if (res) {clearTimeout(res); }
-		   res = setTimeout(this.updateComponentsSize(),200);
+		   if (res) { clearTimeout(res); }
+		   res = setTimeout( () => { console.log("On resize update component size");this.updateComponentsSize(); },200);
+		   // this.updateComponentsSize();
 		};	
 
 		// on resize end
@@ -152,26 +155,26 @@ export class AppComponent
 			{
 				$('#element-info-bar').removeClass('display-aside');
 				$('#element-info-bar').addClass('display-bottom');				
-				setTimeout( () => { App.infoBarComponent.refresh(); }, 0);
+				App.infoBarComponent.refresh();
 				infoBarHasChangeDisplayMode = true;
 			}
-			$('#directory-content-map').css('margin-right', '0');
+			$('#directory-content-map').stop(true).css('margin-right', '0');
 		}	
 
 		if ($('#element-info-bar').hasClass('display-aside'))	
-		{
+		{			
 			let infoBarwidth = this.mapWidth() > 1100 ? '540px' : '470px';
+
 			if (infoBarHasChangeDisplayMode)
 				$('#element-info-bar').css('width', infoBarwidth);
 			else
 				$('#element-info-bar').animate({'width': infoBarwidth}, 350, "swing");
 			
-			App.infoBarComponent.update(!infoBarHasChangeDisplayMode, infoBarwidth);
+			this.updateDirectoryContentMarginIfInfoBarDisplayedAside(!infoBarHasChangeDisplayMode, infoBarwidth);
 		}
-		else if (infoBarHasChangeDisplayMode)
+		else
 		{
-			$('#element-info-bar').css('width', 'auto');
-			setTimeout( () => { $('#element-info-bar').css('width', 'auto'); }, 400);
+			$('#element-info-bar').stop(true).css('width', 'auto');
 		}
 
 		if ($('#directory-menu').is(':visible'))
@@ -182,11 +185,28 @@ export class AppComponent
 		}
 		else $('#directory-content').css('margin-left', 0);
 	}
+
+	updateDirectoryContentMarginIfInfoBarDisplayedAside(animate : boolean = false, width : string = App.infoBarComponent.width())
+	{		
+		if (!App.infoBarComponent.isVisible) return;
+		if (animate)
+		{
+			$('#directory-content-map').stop(true).animate({'margin-right': width}, 350, 'swing');
+			$('#bandeau_helper').stop(true).animate({'margin-right': width}, 350, 'swing');
+		}
+		else
+		{
+			$('#directory-content-map').stop(true).css('margin-right', width);
+			$('#bandeau_helper').stop(true).css('margin-right', width);
+		}
+		
+		App.component.updateMapSize();
+	}
 	
 	// the leaflet map need to be resized with a specific function
 	updateMapSize()
 	{		
-		if (!App.infoBarComponent.isDisplayedAside()) $('#directory-content-map').css('margin-right', '0');
+		if (!App.infoBarComponent.isDisplayedAside()) $('#directory-content-map').stop(true).css('margin-right', '0');
 		if (App.mapComponent) setTimeout(function() { App.mapComponent.resize(); },0);
 	}
 
@@ -206,7 +226,6 @@ export class AppComponent
 
 	updateIframeCode()
 	{
-		console.log("update iframe");
 		let src = window.location.origin + window.location.pathname;
 		src += window.location.search.length > 0 ? window.location.search + '&' : '?';
 		src += 'iframe=1';
