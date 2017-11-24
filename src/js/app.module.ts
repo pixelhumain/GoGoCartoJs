@@ -139,6 +139,8 @@ export class AppModule
 		this.mapComponent_.onClick.do( () => { this.handleMapClick(); });		
 
 		this.boundsModule = new BoundsModule(this.config);
+
+		Cookies.createCookie('firstVisit', 'done');
 	}
 
 	initializeMapFeatures() {	};
