@@ -119,9 +119,7 @@ export class InfoBarComponent
 	}
 
 	refresh()
-	{
-		console.log("info bar REFRESH");
-		
+	{		
 		if (this.isVisible) {
 			this.show();
 			setTimeout( () => { this.show(); }, 200);
