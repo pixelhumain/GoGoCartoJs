@@ -5252,7 +5252,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     .gogocarto-container .element-item .expandLabel {
       font-weight: bold; }
     .gogocarto-container .element-item .collapsible-header {
-      padding: .5rem 0 0 0; }
+      padding: 0; }
       .gogocarto-container .element-item .collapsible-header i {
         margin-right: 0;
         padding-left: 0.3rem; }
@@ -5263,12 +5263,13 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         overflow: hidden;
         text-overflow: ellipsis;
         line-height: 2rem;
-        margin: .5rem 0;
+        padding: .5rem 0;
         font-weight: bold;
         /* @extend .colorAs; */ }
         @media only screen and (min-width: 601px) {
           .gogocarto-container .element-item .collapsible-header .collapsible-header-title {
-            padding: 0 1rem; } }
+            padding: 1rem;
+            padding-bottom: .5rem; } }
         .gogocarto-container .element-item .collapsible-header .collapsible-header-title .distance {
           float: right;
           margin-left: 1rem; }
@@ -5311,7 +5312,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         padding-top: .9rem; }
       .gogocarto-container .element-item .collapsible-body .description {
         text-align: justify;
-        line-height: 1.5; }
+        line-height: 1.5;
+        padding-right: 1.5rem; }
       .gogocarto-container .element-item .collapsible-body .send-mail-btn {
         font-size: .8rem;
         margin: .4rem 0 .5rem 0;
@@ -5373,21 +5375,21 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     width: 100%; }
     .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .collapsible-header-title {
       position: relative;
-      margin-bottom: .8rem;
       line-height: 2.5rem;
       font-weight: normal; }
       .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .collapsible-header-title .distance {
-        font-size: 1.3rem; }
+        font-size: 1.3rem;
+        color: inherit; }
       .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .collapsible-header-title .gogo-icon-close {
         font-size: 1.5rem;
         margin-top: -.8rem; }
     .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .collapsible-header-more {
       margin-bottom: 1rem; }
     .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .name {
-      font-size: 1.8rem; }
-    .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .name, .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .description {
-      width: 100% !important;
+      font-size: 1.8rem;
       text-align: left; }
+    .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .name, .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .description {
+      width: 100% !important; }
     .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .description {
       margin-bottom: 0; }
   .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-body {
@@ -5498,9 +5500,10 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       float: right;
       margin: 0;
       font-size: 1.2rem;
-      padding: 1rem 1.5rem .0rem 1.5rem;
+      padding: 1rem 1.5rem 1rem 1.5rem;
       margin-top: -.9rem;
-      margin-right: -1.5rem; }
+      margin-right: -1.5rem;
+      margin-bottom: -1rem; }
       .gogocarto-container #element-info-bar .gogo-icon-close:hover {
         cursor: pointer; }
   .gogocarto-container #modal-pick-address.modal, .gogocarto-container #modal-directions-fail.modal {
