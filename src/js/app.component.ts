@@ -136,6 +136,8 @@ export class AppComponent
 	{	
 		let menuwidth = this.pagewidth() > 850 ? this.pagewidth() > 1450 ? '340px' : '310px' : '100%';
 		$('#directory-menu').css('width', menuwidth);
+		if (menuwidth == '310px') $('#directory-menu').addClass('small-width');
+		else $('#directory-menu').removeClass('small-width');
 
 		let infoBarHasChangeDisplayMode = false;
 		// show element info bar aside or at the bottom depending of direcoty-content width
@@ -164,6 +166,9 @@ export class AppComponent
 		if ($('#element-info-bar').hasClass('display-aside'))	
 		{			
 			let infoBarwidth = this.mapWidth() > 1100 ? '540px' : '470px';
+
+			if (infoBarwidth == '470px') $('#element-info-bar').addClass('small-width');
+			else $('#element-info-bar').removeClass('small-width');
 
 			if (infoBarHasChangeDisplayMode)
 				$('#element-info-bar').css('width', infoBarwidth);
