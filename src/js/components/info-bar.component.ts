@@ -128,6 +128,10 @@ export class InfoBarComponent
 
 	show()
 	{
+		// on large screen info bar is displayed aside and so we have enough space
+		// to show menu actions details in full text
+		showFullTextMenu(this.domMenu(), this.isDisplayedAside());
+		
 		if (!this.isDisplayedAside())
 		{
 			$('#element-info-bar').show();
