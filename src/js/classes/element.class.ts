@@ -30,10 +30,10 @@ export enum ElementStatus
 
 var diffConfiguration =
 {
-	name: JsDiff.diffWords,
-	description: JsDiff.diffWords,
+	name: JsDiff.diffSentences,
+	description: JsDiff.diffSentences,
 	address: JsDiff.diffSentences,
-	commitment: JsDiff.diffWords,
+	commitment: JsDiff.diffSentences,
 	telephone: JsDiff.diffSentences,
 	website: JsDiff.diffSentences,
 	email: JsDiff.diffSentences,
