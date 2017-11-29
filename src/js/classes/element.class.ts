@@ -645,6 +645,9 @@ export class Element
 
     if (!value && !modifiedValue) return '';
 
+    value = value || '';
+    modifiedValue = modifiedValue || '';
+
     let spanClass = '',
     span = null;
 
