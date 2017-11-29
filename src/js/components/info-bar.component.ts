@@ -162,11 +162,7 @@ export class InfoBarComponent
 				// just to be sure, put the right property to 0 few ms after
 				$('#element-info-bar').stop(true).css('right', '0'); 				
 			}, 400);				
-		}
-
-		// on large screen info bar is displayed aside and so we have enough space
-		// to show menu actions details in full text
-		showFullTextMenu(this.domMenu(), this.isDisplayedAside());
+		}	
 
 		this.isVisible = true;
 	};	
