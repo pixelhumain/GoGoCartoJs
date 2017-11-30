@@ -11,7 +11,6 @@ export class Category extends CategoryOptionTreeNode
 	singleOption : boolean;
 	enableDescription : boolean;
 	displayCategoryName : boolean;
-	depth : number;
 
 	constructor($categoryJson : any)
 	{
@@ -25,9 +24,10 @@ export class Category extends CategoryOptionTreeNode
 		this.displayCategoryName = $categoryJson.displayCategoryName || false;
 		this.depth = $categoryJson.depth || 0;
 		this.mainOwnerId = $categoryJson.mainOwnerId || null;
+		this.isActive = $categoryJson.displayCategoryName;
 	}
 
-	addOption($option : Option) { this.children.push($option); }
+	addOption($option : Option) { $option.depth = this.depth; this.children.push($option); }
 
 	get options() : Option[] { return <Option[]> this.children; }
 

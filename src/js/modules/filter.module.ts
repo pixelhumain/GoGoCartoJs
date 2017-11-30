@@ -106,7 +106,7 @@ export class FilterModule
 				if (log) console.log("--" + ecart + "Category", category.name);
 
 				let checkedOptions = category.checkedOptions;
-				let elementOptions = element.getOptionValueByCategoryId(category.id);
+				let elementOptions = element.getOptionValueByCategoryId(category.id).filter((optValue) => !optValue.option.isMainOption());
 
 				// if this element don't have any option in this category, don't need to check
 				if (elementOptions.length == 0) return false;
@@ -144,7 +144,7 @@ export class FilterModule
 		let filtersString : string;
 		let addingMode : boolean;
 
-		if ( splited.length == 2)
+		if (splited.length == 2)
 		{
 			filtersString = splited[1];
 
@@ -153,7 +153,7 @@ export class FilterModule
 
 			filtersString = filtersString.substring(1);
 		}
-		else if ( splited.length > 2)
+		else if (splited.length > 2)
 		{
 			console.error("Error spliting in loadFilterFromString");
 		}
@@ -164,7 +164,7 @@ export class FilterModule
 
 		if (filters.length > 0)
 		{
-			//console.log('addingMode', addingMode);
+			// console.log('addingMode', addingMode);
 			
 			if (mainOptionSlug == 'all')
 			{
@@ -184,7 +184,7 @@ export class FilterModule
 				for (let cat of App.categoryModule.getMainOptionBySlug(mainOptionSlug).subcategories)
 					for(let option of cat.options) 
 					{
-						if (App.loadFullTaxonomy) option.toggle(!addingMode, false);
+						if (App.loadFullTaxonomy) option.toggle(!addingMode, false, -10); // seting originDepth to -10 to avoid stoping propagation
 						else option.toggleVisibility(!addingMode, true);
 					}
 			}

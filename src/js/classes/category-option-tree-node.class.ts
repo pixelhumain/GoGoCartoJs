@@ -21,6 +21,7 @@ export class CategoryOptionTreeNode
 	name : string;
 
 	children : CategoryOptionTreeNode[] = [];
+	depth : number;
 
 	// is the node han't be touched for now, it's on it's first initialized state
 	isPristine : boolean = true;
@@ -31,6 +32,7 @@ export class CategoryOptionTreeNode
 
 	isChecked : boolean = true;
 	isDisabled : boolean = false;	
+	isActive : boolean = true;
 
 	constructor(private TYPE : CategoryOptionTreeNodeType, private DOM_ID : string,private DOM_CHECKBOX_ID : string,private DOM_CHILDREN_CLASS : string) {};
 
@@ -81,34 +83,45 @@ export class CategoryOptionTreeNode
 		this.isPristine = false;
 	}
 
-	toggle(value : boolean = null, humanAction : boolean = true)
+	toggle(value : boolean = null, humanAction : boolean = true, originDepth = null)
 	{		
+			// set toggle propagation to detetec independant categories (i.e. categories who actually belong to other category
+			// but who has been displayed outside of this category with curstom depth)
+			if (this.needToStopPropagation(originDepth)) { 
+				// we stop prograpagation on Categories, but we need to undo the previous action on parent Option
+				// so we call update state to check the state parent option need to be
+				console.log("stop propagation on", this.name);
+				if (this.getOwner()) this.getOwner().updateState(null, false);
+				return;
+			}
+
 			let check;
 			if (value != null) check = value;
 			else check = !this.isChecked;
 
 			if (this.isOption() && this.isPristine && humanAction)
 			{
-				this.getSiblingsPristine().forEach( (node) => {
+				this.recursivelyGetPristine(this).forEach( (node) => {
 					node.toggle(false, false);
 				});
 				// force check to true, becasue in pristine mode input is unchecked but option class is checked and not disabled
 				check = true;
 			}			
 
+			if (this.id == 10438) console.log("toogle viande", check);
 			this.setChecked(check);
 			this.setDisabled(!check);
 
 			if (!this.isMainOption()) 
 			{
-				for (let child of this.children) child.toggle(check, false);
+				for (let child of this.children) child.toggle(check, false, originDepth || this.depth);
 			}
 
 			if (this.mainOwnerId == 'openhours') App.categoryModule.updateOpenHoursFilter();
 
 			if(humanAction)
 			{
-				if (this.getOwner()) this.getOwner().updateState();
+				if (this.getOwner()) this.getOwner().updateState(this.depth);
 				
 				//if (App.mode == AppModes.Map) App.elementModule.updateElementsIcons(true);
 				App.elementModule.updateElementsToDisplay(check, true);
@@ -134,9 +147,11 @@ export class CategoryOptionTreeNode
 		if (recursive) for (let child of this.children) child.toggleVisibility(value, true);
 	}
 
-	updateState()
+	updateState(originDepth = null, propage = true)
 	{
 		if (this.isMainOption()) return;
+
+		if (this.id == 10438) console.log("update state viande");		
 
 		if (this.children.length == 0) 
 			this.setDisabled(!this.isChecked);
@@ -152,14 +167,18 @@ export class CategoryOptionTreeNode
 				this.setDisabled(false);
 
 			let checkedChildrenCount = this.children.filter( (child : CategoryOptionTreeNode) => child.isChecked).length;
-
 			if (checkedChildrenCount == this.children.length)
 				this.setChecked(true);
 			else
 				this.setChecked(false)
 		}		
 
-		if (this.getOwner())  this.getOwner().updateState();	
+		if (this.getOwner() && propage) this.getOwner().updateState(originDepth);	
+	}
+
+	private needToStopPropagation(originDepth)
+	{
+		return originDepth && !this.isOption() && this.depth == originDepth && this.isActive;
 	}
 
 	recursivelyUpdateStates()
@@ -194,5 +213,16 @@ export class CategoryOptionTreeNode
 	getSiblingsPristine() : CategoryOptionTreeNode[]
 	{
 		return this.getOwner().children.filter( (node) => node.isPristine && node.id != this.id); 
+	}
+
+	private recursivelyGetPristine(currOption : CategoryOptionTreeNode)
+	{
+		let resultNodes = [];
+		resultNodes = resultNodes.concat(currOption.getSiblingsPristine());
+		let parentOption = currOption.getOwner().getOwner();
+		if (parentOption.isMainOption()) return resultNodes;
+		else resultNodes = resultNodes.concat(this.recursivelyGetPristine(parentOption));		
+
+		return resultNodes;
 	}
 }
