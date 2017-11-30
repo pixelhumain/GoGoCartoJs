@@ -107,6 +107,7 @@ export class GoGoConfig
   readonly security =
   {
       userRole: 'anonymous',
+      userEmail: '',
       loginAction: function() { console.warn("[GoGoCarto] You need login to access this feature"); },
 
       hideMailsByShowingSendMailButton: true,

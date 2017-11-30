@@ -16,7 +16,11 @@ export class LoginModule
 	private role_ : Roles;
 	private userMail : string = '';
 
-	constructor($role : Roles | string = Roles.Anonymous) { this.setRole($role); }
+	constructor($role : Roles | string = Roles.Anonymous, $userEmail : string = '') 
+	{ 
+		this.setRole($role); 
+		this.setUserMail($userEmail);
+	}
 
 	isGranted($role : Roles) { return this.role_ >= $role; }
 

@@ -122,7 +122,7 @@ export class AppModule
 		this.isIframe = $isIframe;
 		this.loadFullTaxonomy = $loadFullTaxonomy;
 		
-		this.loginModule = new LoginModule(this.config.security.userRole);
+		this.loginModule = new LoginModule(this.config.security.userRole, this.config.security.userEmail);
 
   	this.infoBarComponent_.onHide.do( ()=> { this.handleInfoBarHide(); });
 	
@@ -803,7 +803,7 @@ export class AppModule
 	elements() { return this.elementsModule_.currVisibleElements();  };
 	elementById(id) { return this.elementsModule_.getElementById(id);  };
 
-	isUserLogged() { return this.loginModule.isUserLogged }
+	isUserLogged() { return this.loginModule.isUserLogged(); }
 	get constellation() { return null; }
 
 	get currMainId() { return this.directoryMenuComponent.currentActiveMainOptionId; }

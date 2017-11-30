@@ -159,17 +159,19 @@ export function createListenersForElementMenu(object)
 		let element = App.elementModule.getElementById(getCurrentElementIdShown());
 		$('#popup-send-mail .elementName').text(capitalize(element.name));
 
-		$('#popup-send-mail .input-mail-subject').val(App.loginModule.getUserMail());
 		$('#popup-send-mail .input-mail-content').val('');
+		$('#popup-send-mail .input-mail-subject').val('');
 		$('#popup-send-mail #content-error').hide();
 		$('#popup-send-mail #mail-error').hide();
 
-		if (App.isUserLogged()) 
+		if (App.loginModule.getUserMail())
 		{
 			$('#popup-send-mail .input-mail').hide();
+			$('#popup-send-mail .input-mail').val(App.loginModule.getUserMail());
 		}
 		else
 		{
+			$('#popup-send-mail .input-mail').val('');
 			$('#popup-send-mail .input-mail').show();
 		}
 
