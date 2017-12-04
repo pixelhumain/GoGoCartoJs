@@ -1,0 +1,89 @@
+{# Body Main Container #}
+<div class="collapsible-body-main-content"> 
+
+  {% set descriptionMore = element.getProperty('descriptionMore') %}
+  {% if descriptionMore %}
+      <!-- <h3>Précisions</h3>    -->
+      <div class="section row sectionDescriptionMore" style="padding-bottom:0">
+        <span class="col s12 description">{{ descriptionMore|safe }}</span>  
+      </div>
+    {% endif %}
+  {# Contact infos #}
+  <h3>Informations générales</h3>   
+  <div class="section row sectionInfos">
+
+    {# Address #}
+    <span class="col s12 address">{{ element.getProperty('address')|safe }}</span>
+    
+    {# Tel #}
+    {% set telephone = element.getProperty('telephone') %}
+    {% if telephone %}
+      <span class="col s12 tel">{{ telephone|safe }}</span>
+    {% endif %}
+
+    {# Mail #}
+    {% if (config.isFeatureAvailable('sendMail') and element.email) or element.isPending() %}
+      <span class="col s12 tel">
+      {# if element is pending we need to show the email no matter the security rules #}
+      {% if config.security.hideMailsByShowingSendMailButton and not (element.isPending() and config.isFeatureAvailable('pending')) %}
+        <button class="btn send-mail-btn">Envoyer un Mail</button>
+      {% else %}
+        <a href="mailto:{{ element.email }}">{{ element.getProperty('email')|safe }}</a>            
+      {% endif %}
+      </span>
+    {% endif %}
+
+    {# WebSite #}
+    {% set website = element.getProperty('website') %}
+    {% if website %}
+      <span class="col s12 tel"><a href="{{ element.website }}" target="_blank">{{ website|safe }}</a>
+      </span>
+    {% endif %}
+
+  </div>
+  <div class="info-bar-divider"></div>
+  
+  {# Categories  #}
+  <h3>catégories</h3> 
+  <div class="section row categories">
+    {% import 'components/element-info-bar/element-info-category-value.html.njk' as categoryRenderer %}
+    {{ categoryRenderer.renderCategoryValue(mainCategoryValue, 1) }}
+  </div>
+  <div class="info-bar-divider"></div>
+
+  
+  {% set commitment = element.getProperty('commitment') %}      
+  {% if commitment %}
+    <h3>Engagement Citoyen</h3>   
+    <div class="section row">
+      <span class="col s12 description">{{ commitment|safe }}</span>  
+    </div>
+    <div class="info-bar-divider"></div>
+  {% endif %}
+
+  {# Open Hours #}
+  <h3>Horaires d'ouverture</h3>   
+  <div class="section row sectionOpenHours">  
+    {% set count = 0 %} 
+
+    {% for key, horaire in element.getFormatedOpenHours() %} 
+      {% if horaire != null %}
+
+        <div class='row'>
+          <span class="col s3 day">{{ key|capitalize }}</span>
+          <span class="col s9 openHours">{{ horaire }} </span>
+        </div>
+        {% set count = count + 1 %} 
+
+      {% endif %}
+    {% endfor %}          
+
+    {% set openHoursMoreInfos = element.getProperty('openHoursMoreInfos') %}      
+    {% if openHoursMoreInfos %}
+      <div class='col' {% if count != 0 %}style="margin-top:1rem;"{% endif %}>{{ openHoursMoreInfos|safe }}</div> 
+      {% set count = count + 1 %} 
+    {% endif %}
+
+    {% if count == 0 %}<div class='col'> Non renseignées </div>{% endif %}       
+  </div> 
+</div>

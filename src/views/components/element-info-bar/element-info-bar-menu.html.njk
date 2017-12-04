@@ -1,0 +1,65 @@
+<div class="menu-element bgdSoftColorAs {{pendingClass}}" option-id={{mainOptionValueToDisplay.colorOptionId}}>  
+  
+  {% if config.isFeatureAvailable('favorite') %} 
+    <div class="menu-element-item item-add-favorite" style="display:none">
+      <span class="menu-icon gogo-icon-star-empty gogo-icon-favorite tooltipped" 
+      data-position="top" data-delay="0" data-tooltip="Enregistrer comme favoris"></span>
+      <span class="menu-element-item-text">Enregistrer</span>
+    </div>
+    <div class="menu-element-item item-remove-favorite" style="display:none">
+      <span class="menu-icon gogo-icon-star-full gogo-icon-favorite tooltipped"
+      data-position="top" data-delay="0" data-tooltip="Retirer des favoris"></span>
+      <span class="menu-element-item-text favorite">Enregistré</span>
+    </div>
+  {% endif %}
+
+  {% if not isMapMode %}
+    <div class="menu-element-item item-show-on-map"> 
+      <span class="menu-icon gogo-icon-locate tooltipped" 
+      data-position="top" data-delay="0" data-tooltip="Afficher sur la carte"></span>
+      <span class="menu-element-item-text">Voir sur la carte</span>
+    </div>     
+  {% endif %}
+  
+  {% if config.isFeatureAvailable('share') %} 
+    <div class="menu-element-item item-share">
+      <span class="menu-icon gogo-icon-share-alt tooltipped"
+      data-position="top" data-delay="0" data-tooltip="Partager l'URL"></span>
+      <span class="menu-element-item-text">Partager l'URL</span>
+    </div>
+  {% endif %}
+
+  {% if config.isFeatureAvailable('directions') %} 
+    <div class="menu-element-item item-directions">
+      <span class="menu-icon gogo-icon-directions tooltipped" 
+      data-position="top" data-delay="0" data-tooltip="Itinéraire vers cet élément"></span>
+      <span class="menu-element-item-text">Itinéraire</span>
+    </div>
+  {% endif %}
+
+  {% if config.isFeatureAvailable('edit') and (not element.isPending() or config.isFeatureAvailable('directModeration')) %} 
+    <div class="menu-element-item item-edit">
+      {% set editText = 'Modifier' if config.isFeatureAvailable('directModeration') else 'Proposer des modifications' %}
+      <a href={{ editUrl }} {% if isIframe %}target="_blank"{% endif %}>
+      <span class="menu-icon gogo-icon-edit tooltipped" 
+      data-position="top" data-delay="0" data-tooltip="{{ editText }}"></span>
+      <span class="menu-element-item-text">{{ editText }}</span></a>
+    </div>
+  {% endif %}
+
+  {% if config.isFeatureAvailable('report') and not element.isPending() %} 
+    <div class="menu-element-item item-report"> 
+      <span class="menu-icon btn-report gogo-icon-exclamation-1 tooltipped" 
+      data-position="top" data-delay="0" data-tooltip="Signaler une erreur"></span>
+      <span class="menu-element-item-text">Signaler une erreur</span>
+    </div>
+  {% endif %}     
+
+  {% if config.isFeatureAvailable('delete') and element.status != ElementStatus.PendingAdd %} 
+    <div class="menu-element-item item-delete"> 
+      <span class="menu-icon btn-delete gogo-icon-delete tooltipped" 
+      data-position="top" data-delay="0" data-tooltip="Supprimer"></span>
+      <span class="menu-element-item-text">Supprimer</span>
+    </div>  
+  {% endif %}     
+</div>

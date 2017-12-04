@@ -1,0 +1,62 @@
+{# Header Title #}
+<div class='collapsible-header-title row'>
+
+  <span class="col s12 name">
+
+  {% set mainIcon = 'gogo-icon-attention' if element.isPending() and config.isFeatureAvailable('pending') else mainOptionValueToDisplay.option.icon %}
+    {# Icons #}
+    <span class="element-main-icon icon {{ mainIcon }} colorAs {{pendingClass}} hideOnLargeScreen" option-id={{mainOptionValueToDisplay.colorOptionId}}></span>
+    <span class="star-names-icons">
+      {% for starName in starNames %} 
+          <span class="icon gogo-icon-{{starName}}"></span>
+        {% endfor %}
+    </span>   
+       
+    {# Distance and Close Button #}
+    <span class="icon gogo-icon-close gogo-h-primary" id="btn-close-bandeau-detail"></span>            
+
+    {# Name #}
+    {{ element.getProperty('name')|safe }}
+    {% if element.isDeleted() %}</br><u>(En cours de suppression)</u>{% endif %}
+
+    {% if showDistance and element.distance != null %}
+      <span class="distance gogo-neutral">~ {{ element.distance if isMapMode else element.distanceFromBoundsCenter }} km</span>
+    {% endif %}    
+
+    <span class="location gogo-neutral">
+      {% if element.postalCode %}<span class="postalCode">{{ element.postalCode }}</span>{% endif %}
+      {% if element.addressLocality %}<span class="city"> {{ element.addressLocality }}</span>{% endif %}
+    </span>
+
+  </span>
+  
+</div>
+
+{# Header More #}
+<div class='collapsible-header-more row'>
+
+  {# Description #}
+  <span class="description col s12">{{ element.getProperty('description')|safe }}</span> 
+
+  {# Categories litteral #}
+  <span class="inline-option-values gogo-neutral col s8 hideOnLargeScreen">
+
+    {% for optionValue in allOptionsValues %} 
+        {% set isDisabled =   '' if optionValue.isFilledByFilters else 'disabled' %}
+        <span class="option-value {{ isDisabled }}">{{ optionValue.option.name|capitalize }} {% if not loop.last %}, {% endif %}</span>            
+    {% endfor %}
+
+  </span>      
+
+  {# Select as Representant (constellation mode) #}
+  <span class="col s4 right-align btn-select-as-representant-container" style="display:none">
+    <button class="btn btn-select-as-representant waves-effect waves-light" >Sélectionner</button> 
+  </span>
+
+  {# Representant Label(constellation mode) #}
+  <span class="col s4 right-align starRespresentantLabel" style="display:none">Element principal</span>
+
+  {# Toggle Details Buttons #}
+  <a><span class="col s4 right-align expandLabel gogo-neutral-dark hideOnLargeScreen"></span></a>
+
+</div> 
