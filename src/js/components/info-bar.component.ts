@@ -42,7 +42,7 @@ export class InfoBarComponent
 	{
 		let element = App.elementModule.getElementById(elementId);		
 
-		// console.log("showElement", element);
+		console.log("showElement", element);
 
 		// if element already visible
 		if (this.elementVisible)
@@ -85,6 +85,8 @@ export class InfoBarComponent
 
 			createListenersForElementMenu(domMenu);	
 			createListenersForVoting();
+
+			$('.info-bar-tabs').tabs();			
 
 			updateFavoriteIcon(domMenu, element);			
 
@@ -158,9 +160,11 @@ export class InfoBarComponent
 			}
 			
 			this.updateInfoBarSize();
+			this.showBodyMainTab();
+
 			setTimeout( () => { 
 				// just to be sure, put the right property to 0 few ms after
-				$('#element-info-bar').stop(true).css('right', '0'); 				
+				$('#element-info-bar').stop(true).css('right', '0'); 			
 			}, 400);				
 		}	
 
@@ -258,7 +262,9 @@ export class InfoBarComponent
 			height -= elementInfoBar.find('.starRepresentationChoice-helper:visible').outerHeight(true);
 			height -= elementInfoBar.find(".menu-element").outerHeight(true);
 
-		  $('#element-info-bar .collapsible-body').css('height', height);					
+		  $('#element-info-bar .collapsible-body').css('height', height);	
+
+		  this.showBodyMainTab();
 		}	
 	};
 
@@ -296,5 +302,7 @@ export class InfoBarComponent
 	  	$('#element-info-bar .collapsible-body').css('height', height);
 		}
 	}	
+
+	private showBodyMainTab() { $('#element-info-bar .info-bar-tabs').tabs('select_tab', 'body-main-tab-content'); }
 }
 
