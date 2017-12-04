@@ -610,8 +610,6 @@ export class Element
 		}
 		this.update();	
 		this.updateDistance();
-		//let starNames = App.state == AppStates.Constellation ? App.constellation.getStarNamesRepresentedByElementId(this.id) : [];
-		let starNames : any[] = [];
 
 		let optionstoDisplay = this.getIconsToDisplay();
 
@@ -631,13 +629,13 @@ export class Element
 			allOptionsValues: this.getCurrOptionsValues().filter( (oV) => oV.option.displayOption).sort( (a,b) => a.isFilledByFilters ? -1 : 1),
 			mainOptionValueToDisplay: optionstoDisplay[0], 
 			otherOptionsValuesToDisplay: optionstoDisplay.slice(1),  
-			starNames : starNames,
 			mainCategoryValue : mainCategoryValue,
 			editUrl : App.config.features.edit.url + this.id,
 			ElementStatus: ElementStatus,
+			ElementModerationState: ElementModerationState,
 			isIframe : App.isIframe,
 			isMapMode : App.mode == AppModes.Map,
-			config : App.config,
+			config : App.config
 		});
 
 		
@@ -767,12 +765,6 @@ export class Element
 		}
 		return false;	
 	};
-
-
-
-
-
-
 
 
 

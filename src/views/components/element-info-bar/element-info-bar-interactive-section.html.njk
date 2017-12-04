@@ -1,16 +1,43 @@
 <div class="interactive-section"> 
   {% if element.isPending() %}
-  <div class="vote-section">
-    <span class="basic-message">
-      <span class="gogo-icon-attention"></span>
-      <span class="text validation-process-info" onclick='$("#modal-contribution").openModal()'>{{ 'Nouvel ' ~ config.text.element if element.status == ElementStatus.PendingAdd else 'Modifications' }} 
-                         en cours de validation</span>
-      {% if config.isFeatureActivated('vote') %}
-        <span class="btn-vote-more-info validation-process-info" onclick='$("#modal-contribution").openModal()'>EN SAVOIR PLUS</span>
-        <span class="vote-button btn btn-vote waves-effect waves-light">{{ 'Décider' if config.isFeatureAvailable('directModeration') else 'Voter' }}</span>
-        {% endif %}
-    </span>        
-  </div>
+    <div class="vote-section">
+      <span class="basic-message">
+        <span class="gogo-icon-attention"></span>
+        <span class="text validation-process-info" onclick='$("#modal-contribution").openModal()'>{{ 'Nouvel ' ~ config.text.element if element.status == ElementStatus.PendingAdd else 'Modifications' }} 
+                           en cours de validation</span>
+        {% if config.isFeatureActivated('vote') %}
+          <span class="btn-vote-more-info validation-process-info" onclick='$("#modal-contribution").openModal()'>EN SAVOIR PLUS</span>
+          <span class="vote-button btn action-btn waves-effect waves-light">{{ 'Décider' if config.isFeatureAvailable('directModeration') else 'Voter' }}</span>
+          {% endif %}
+      </span>        
+    </div>
   {% endif %}
+
+  {% set moderationStates = {
+    '-2':'Erreur de géolocalisation',
+    '-1':'Aucune catégorie renseignée',
+    '0':'Pas de modération nécessaire', 
+    '1':'Erreurs signalées', 
+    '2':'Votes non consensuels',  
+    '3':'En attente depuis trop longtemps' 
+    }
+  %} 
+
+  {% if element.needsModeration() and config.isFeatureActivated('moderation') %}
+    <div class="moderation-section">
+      <span class="basic-message">
+        <span class="gogo-icon-moderation"></span>
+        <span class="text">{{ moderationStates[element.moderationState] }}</span>
+        {% if config.isFeatureAvailable('directModeration') %}
+          {% if element.moderationState == ElementModerationState.ReportsSubmitted %} 
+            <span class="mark-moderated btn action-btn waves-effect waves-light">Marquer comme résolu</span>
+          {% endif %}
+        {% endif %}
+      </span>        
+    </div>
+  {% endif %}
+
+  {# div used to show the reponse message from API actions #}
   <div class="result-message" style="display:none"></div>
+
 </div>

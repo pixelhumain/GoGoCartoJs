@@ -103,6 +103,8 @@ export class GoGoConfig
 
       directModeration:        new GoGoFeature(),
       collaborativeModeration: new GoGoFeature(),
+
+      elementHistory: new GoGoFeature()
       
   };
   readonly security =

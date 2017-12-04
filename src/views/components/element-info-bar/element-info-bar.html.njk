@@ -7,7 +7,8 @@
     data-element-id="{{ element.id }}">
 
   {% set pendingClass = 'pending' if (element.isPending() or element.isDeleted()) and config.isFeatureAvailable('pending') else '' %}
-  
+  {% set isHistoryAvailable = config.isFeatureAvailable('elementHistory') %}
+
   {# HEADER #}
   <div class="collapsible-header bgdSoftColorAs {{pendingClass}}" option-id={{mainOptionValueToDisplay.colorOptionId}}>    
      {% include here ~ 'element-info-bar-header.html.njk'  %}  
@@ -19,18 +20,26 @@
   {# MENU #}
   {% include here ~ 'element-info-bar-menu.html.njk'  %}  
 
+  {# Tabs selector #}
+  {% if isHistoryAvailable %}
+    <ul class="tabs info-bar-tabs tabs-fixed-width moreDetails">
+      <li class="tab "><a class="active" href="#body-main-tab-content">Fiche</a></li>
+      <li class="tab "><a href="#body-admin-tab-content">Historique</a></li>
+    </ul>
+  {% endif %}
+
   {# BODY #}
   <div class="collapsible-body moreDetails custom-scroll-bar">
-    <div class="col s12">
-      <ul class="tabs info-bar-tabs">
-        <li class="tab col s6"><a class="active" href="#body-main-tab-content">Fiche</a></li>
-        <li class="tab col s6"><a href="#body-admin-tab-content">Historique</a></li>
-      </ul>
-    </div>
-    <div id="body-main-tab-content" class="col s12">
+    
+    <div id="body-main-tab-content">
       {% include here ~ 'element-info-bar-body.html.njk'  %}  
     </div>
-    <div id="body-admin-tab-content" class="col s12">Adddmin</div>    
+
+    {% if isHistoryAvailable %}
+      <div id="body-admin-tab-content">
+        {% include here ~ 'element-info-bar-admin.html.njk'  %}  
+      </div>   
+    {% endif %} 
   </div> 
 
 </li>

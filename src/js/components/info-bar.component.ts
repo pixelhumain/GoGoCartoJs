@@ -251,8 +251,9 @@ export class InfoBarComponent
 			$('#bandeau_helper').animate({'opacity': '0'},500).css('z-index',-1);
 
 			$('#element-info-bar .element-item').addClass('active');		
-			$('#element-info-bar .moreDetails').show();		
-
+			$('#element-info-bar .moreDetails').show();	
+			$('#element-info-bar .moreDetails.tabs').css('display','flex');		
+			
 			$('#element-info-bar').animate({'height':'100%'},400,'swing');
 
 			let elementInfoBar = $("#element-info-bar");
@@ -296,6 +297,7 @@ export class InfoBarComponent
 			height -= elementInfoBar.find('.collapsible-header').outerHeight(true);
 			height -= elementInfoBar.find('.starRepresentationChoice-helper:visible').outerHeight(true);
 			height -= elementInfoBar.find('.interactive-section:visible').outerHeight(true);
+			height -= elementInfoBar.find('.info-bar-tabs:visible').outerHeight(true);
 			height -= elementInfoBar.find(".menu-element").outerHeight(true);
 			//height += 2;
 
