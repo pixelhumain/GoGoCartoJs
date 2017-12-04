@@ -90,6 +90,7 @@ export class GoGoConfig
       export:     new GoGoFeature(),
       layers:     new GoGoFeature(),
       pending:    new GoGoFeature(),
+      moderation: new GoGoFeature(),
       search:     new GoGoFeature(),
 
       add:        new GoGoFeature(),

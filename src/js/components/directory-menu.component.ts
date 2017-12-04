@@ -40,9 +40,11 @@ export class DirectoryMenuComponent
 			if (checkValue) {
 				App.filterModule.showOnlyPending(false);
 				$('#pending-checkbox').prop('checked',false);
+				App.filterModule.showOnlyModeration(false);
+				$('#moderation-checkbox').prop('checked',false);
 			}
 			
-			App.elementModule.updateElementsToDisplay(!checkValue);
+			App.elementModule.updateElementsToDisplay(true);
 
 			favoriteCheckbox.prop('checked',checkValue);
 
@@ -55,8 +57,7 @@ export class DirectoryMenuComponent
 		// --------- PENDING-------------
 		// -------------------------------
 		$('#filter-pending').click(function(e : Event)
-		{
-			
+		{			
 			let pendingCheckbox = $('#pending-checkbox');
 
 			let checkValue = !pendingCheckbox.is(':checked');
@@ -66,9 +67,11 @@ export class DirectoryMenuComponent
 			if (checkValue) {
 				App.filterModule.showOnlyFavorite(false);
 				$('#favorite-checkbox').prop('checked',false);
+				App.filterModule.showOnlyModeration(false);
+				$('#moderation-checkbox').prop('checked',false);
 			}
 
-			App.elementModule.updateElementsToDisplay(!checkValue);
+			App.elementModule.updateElementsToDisplay(true);
 
 			pendingCheckbox.prop('checked',checkValue);
 
@@ -77,21 +80,32 @@ export class DirectoryMenuComponent
 			e.preventDefault();
 		});
 
-		// $('#show-only-pending').click(function(e : Event)
-		// {			
-		// 	let check = $('#show-only-pending').hasClass('gogo-icon-eye');
-		// 	App.filterModule.showOnlyPending(check);
-		// 	App.elementModule.updateElementsToDisplay(!check);
+		// -------------------------------
+		// --------- MODERAITON-------------
+		// -------------------------------
+		$('#filter-moderation').click(function(e : Event)
+		{			
+			let moderationCheckbox = $('#moderation-checkbox');
 
-		// 	if (check)
-		// 		$('#show-only-pending').removeClass('gogo-icon-eye').addClass('gogo-icon-no-eye');
-		// 	else
-		// 		$('#show-only-pending').removeClass('gogo-icon-no-eye').addClass('gogo-icon-eye');
+			let checkValue = !moderationCheckbox.is(':checked');
 
-		// 	e.stopPropagation();
-		// 	e.stopImmediatePropagation();
-		// 	e.preventDefault();
-		// });
+			App.filterModule.showOnlyModeration(checkValue);
+			
+			if (checkValue) {
+				App.filterModule.showOnlyFavorite(false);
+				$('#favorite-checkbox').prop('checked',false);
+				App.filterModule.showOnlyPending(false);
+				$('#pending-checkbox').prop('checked',false);
+			}
+
+			App.elementModule.updateElementsToDisplay(true);
+
+			moderationCheckbox.prop('checked',checkValue);
+
+			e.stopPropagation();
+			e.stopImmediatePropagation();
+			e.preventDefault();
+		});
 
 
 		// -------------------------------
@@ -149,7 +163,7 @@ export class DirectoryMenuComponent
 		// -------------------------------
 		// ------ SUB OPTIONS ------------
 		// -------------------------------
-		$('.subcategorie-option-item:not(#filter-favorite):not(#filter-pending) .gogo-icon-name-wrapper').click(function(e : Event)
+		$('.subcategorie-option-item:not(#filter-favorite):not(#filter-pending):not(#filter-moderation) .gogo-icon-name-wrapper').click(function(e : Event)
 		{
 			let optionId = $(this).attr('data-option-id');
 			let option = App.categoryModule.getOptionById(optionId);
@@ -159,7 +173,7 @@ export class DirectoryMenuComponent
 			else option.toggle();
 		});
 
-		$('.subcategorie-option-item:not(#filter-favorite):not(#filter-pending) .checkbox-wrapper').click(function(e)
+		$('.subcategorie-option-item:not(#filter-favorite):not(#filter-pending):not(#filter-moderation) .checkbox-wrapper').click(function(e)
 		{		
 			e.stopPropagation();
 			e.stopImmediatePropagation();

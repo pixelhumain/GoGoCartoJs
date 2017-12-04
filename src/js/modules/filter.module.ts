@@ -25,6 +25,7 @@ export class FilterModule
 	showOnlyFavorite_ : boolean = false;
 	showPending_ : boolean = true;
 	showOnlyPending_ : boolean = false;
+	showOnlyModeration_ : boolean = false;
 
 	constructor() {	}
 
@@ -43,9 +44,16 @@ export class FilterModule
 		this.showOnlyPending_ = bool;
 	};
 
+	showOnlyModeration(bool : boolean)
+	{
+		this.showOnlyModeration_ = bool;
+	};
+
 	checkIfElementPassFilters (element : Element) : boolean
 	{
 		if (this.showOnlyFavorite_) return element.isFavorite;
+
+		if (this.showOnlyModeration_ && !element.needsModeration()) return false;
 
 		if (App.config.isFeatureAvailable('pending'))
 		{

@@ -1,0 +1,83 @@
+/*
+* @Author: Sebastian Castro
+* @Date:   2017-12-04 10:41:19
+* @Last Modified by:   Sebastian Castro
+* @Last Modified time: 2017-12-04 10:44:42
+*/
+$pending-color: #565656;
+$moderation-color: #c53f36;
+
+#filter-moderation
+{
+  color: $moderation-color;
+
+  &:hover
+  {
+    background-color: white;
+  }
+
+  .moderation-checkbox:not(:checked) + label:before
+  {
+    background-color: transparent;
+    border-color:$moderation-color;
+  }
+
+  .moderation-checkbox + label:before
+  {
+    color:$moderation-color;
+  }  
+}
+
+#filter-pending
+{
+  color: $pending-color;
+
+  &:hover
+  {
+    background-color: white;
+  } 
+
+  .pending-checkbox:not(:checked) + label:before
+  {
+    background-color: transparent;
+    border-color:$pending-color;
+  }
+
+  .pending-checkbox + label:before
+  {
+    color:$pending-color;
+  }  
+}
+
+#filter-favorite
+{
+  color: $favorite-color;
+
+  .gogo-icon-star-full
+  {
+    color: white;
+    font-size: 18px;
+    &:before
+    {
+      padding: 2px;
+      padding-bottom: 3px;
+      border: none;
+    }
+  }
+
+  &:hover
+  {
+    background-color: white;
+  } 
+
+  .favorite-checkbox:not(:checked) + label:before
+  {
+    background-color: transparent;
+    border-color:$favorite-color;
+  }
+
+  .favorite-checkbox + label:before
+  {
+    color:$favorite-color;
+  }  
+}

@@ -28,6 +28,16 @@ export enum ElementStatus
   CollaborativeValidate = 2
 }
 
+export enum ElementModerationState
+{
+  GeolocError = -2,
+  NoOptionProvided = -1,     
+  NotNeeded = 0,
+  ReportsSubmitted = 1,
+  VotesConflicts = 2, 
+  PendingForTooLong = 3     
+}
+
 var diffConfiguration =
 {
 	name: JsDiff.diffSentences,
@@ -56,6 +66,7 @@ export class Element
 {	
 	id : string;
 	status : ElementStatus;
+	moderationState : ElementModerationState;
 	name : string;
 	position : L.LatLng;
 	streetAddress : string;
@@ -115,14 +126,14 @@ export class Element
 	{
 		// when we get the compact json representation of the element from the server
 		// the elementJson is a simple array with the more important element attribute
-		if (!elementJson.id && elementJson.length == 6)
+		if (!elementJson.id && elementJson.length == 7)
 		{
 			this.id = elementJson[0];
-			this.status = elementJson[1];
+			this.status = elementJson[1];			
 			this.name = elementJson[2];
-			this.position = L.latLng(elementJson[3], elementJson[4]);		
-			this.createOptionValues(elementJson[5]);		
-				
+			this.position = L.latLng(elementJson[3], elementJson[4]);	
+			this.moderationState = elementJson[5];		
+			this.createOptionValues(elementJson[6]);				
 		}
 		else this.updateAttributesFromFullJson(elementJson);
 	}	
@@ -132,13 +143,12 @@ export class Element
 	updateAttributesFromFullJson(elementJson : any)
 	{
 		// if the element was not prefilled with the compact json representation
-		if (!this.id)
-		{
-			this.id = elementJson.id;
-			this.position = L.latLng(elementJson.geo.latitude, elementJson.geo.longitude);
-			this.name = elementJson.name;
-			this.status = elementJson.status;			
-		}
+		// we overide anyway all attributes (it can have changed !)
+		this.id = elementJson.id;
+		this.position = L.latLng(elementJson.geo.latitude, elementJson.geo.longitude);
+		this.name = elementJson.name;
+		this.status = elementJson.status;
+		this.moderationState = elementJson.moderationState;
 
 		// update createOptionValue vene if element already exist
 		this.createOptionValues(elementJson.optionValues);
@@ -579,6 +589,7 @@ export class Element
 
 	isPending() { return this.status == ElementStatus.PendingAdd || this.status == ElementStatus.PendingModification; }
 	isDeleted() { return this.status <= ElementStatus.AdminRefused }
+	needsModeration() { return this.moderationState != ElementModerationState.NotNeeded }
 
 	getFormatedAddress()
 	{

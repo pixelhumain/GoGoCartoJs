@@ -53,9 +53,10 @@
 				</div> 
 
 				{% set pendingIsActive = config.isFeatureAvailable('pending') %}
-				{% set favoriteIsActive = config.isFeatureAvailable('pending') %}
+				{% set favoriteIsActive = config.isFeatureAvailable('favorite') %}
+				{% set moderationIsActive = config.isFeatureAvailable('moderation') %}
 
-				{% if pendingIsActive or favoriteIsActive %}
+				{% if pendingIsActive or favoriteIsActive or moderationIsActive %}
 					<li class="subcategory-item expanded unexpandable">
 						<div class="name-wrapper">		
 							<span class="name">Afficher uniquement</span>
@@ -72,7 +73,6 @@
 					    <span class="icon gogo-icon-attention"></span>
 				    	<span class="option-name">
 				    		<span class="validation-process-info">En cours de validation</span>
-				    		<!-- <span class="icon gogo-icon-eye gogo-h-primary tooltipped" id="show-only-pending" data-position="right" </span> -->
 				    	</span> 
 
 					    {# --- CHECKBOX ---- #}
@@ -80,6 +80,24 @@
 								<div class="checkbox-container">
 						      <input type="checkbox" class="subcategorie-option-checkbox pending-checkbox show-unique-checkbox" id="pending-checkbox" data-type='pending' data="pending" />
 						      <label for="pending-checkbox" ></label>
+					    	</div>
+					    </div>
+						</li>
+					{% endif %}
+
+					{% if moderationIsActive %}
+						<li class="subcategorie-option-item row tooltipped" id="filter-moderation" 
+								data-position="right" data-delay="700" data-tooltip="Afficher uniquement les élément à modérer">
+					    <span class="icon gogo-icon-moderation"></span>
+				    	<span class="option-name">
+				    		<span class="validation-process-info">A modérer</span>
+				    	</span> 
+
+					    {# --- CHECKBOX ---- #}
+							<div class="checkbox-wrapper">
+								<div class="checkbox-container">
+						      <input type="checkbox" class="subcategorie-option-checkbox moderation-checkbox show-unique-checkbox" id="moderation-checkbox" data-type='moderation' data="moderation" />
+						      <label for="moderation-checkbox" ></label>
 					    	</div>
 					    </div>
 						</li>
