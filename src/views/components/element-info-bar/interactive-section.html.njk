@@ -30,7 +30,7 @@
         <span class="text">{{ moderationStates[element.moderationState] }}</span>
         {% if config.isFeatureAvailable('directModeration') %}
           {% if element.moderationState == ElementModerationState.ReportsSubmitted %} 
-            <span class="mark-moderated btn action-btn waves-effect waves-light">Marquer comme résolu</span>
+            <span class="mark-as-moderated-btn btn action-btn waves-effect waves-light">Marquer comme résolu</span>
           {% endif %}
         {% endif %}
       </span>        

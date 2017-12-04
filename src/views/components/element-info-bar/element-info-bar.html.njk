@@ -3,44 +3,55 @@
 {#  ELEMENT INFO  #}
 {# -------------- #}
 <li id="element-info-{{ element.id }}" 
-    class="element-item" 
-    data-element-id="{{ element.id }}">
+  class="element-item" 
+  data-element-id="{{ element.id }}">
 
-  {% set pendingClass = 'pending' if (element.isPending() or element.isDeleted()) and config.isFeatureAvailable('pending') else '' %}
-  {% set isHistoryAvailable = config.isFeatureAvailable('elementHistory') %}
+{% set pendingClass = 'pending' if (element.isPending() or element.isDeleted()) and config.isFeatureAvailable('pending') else '' %}
+{% set isHistoryAvailable = config.isFeatureAvailable('elementHistory') %}
 
-  {# HEADER #}
-  <div class="collapsible-header bgdSoftColorAs {{pendingClass}}" option-id={{mainOptionValueToDisplay.colorOptionId}}>    
-     {% include here ~ 'element-info-bar-header.html.njk'  %}  
-  </div>
+{# HEADER #}
+<div class="collapsible-header bgdSoftColorAs {{pendingClass}}" option-id={{mainOptionValueToDisplay.colorOptionId}}>    
+   {% include here ~ 'header.html.njk' %}  
+</div>
 
-  {# INTERACTIVE SECTION #}
-  {% include here ~ 'element-info-bar-interactive-section.html.njk'  %}  
+{# INTERACTIVE SECTION #}
+{% include here ~ 'interactive-section.html.njk' %}  
 
-  {# MENU #}
-  {% include here ~ 'element-info-bar-menu.html.njk'  %}  
+{# MENU #}
+{% include here ~ 'menu.html.njk' %}
 
-  {# Tabs selector #}
-  {% if isHistoryAvailable %}
-    <ul class="tabs info-bar-tabs tabs-fixed-width moreDetails">
-      <li class="tab "><a class="active" href="#body-main-tab-content">Fiche</a></li>
-      <li class="tab "><a href="#body-admin-tab-content">Historique</a></li>
-    </ul>
-  {% endif %}
+{# Tabs selector #}
+{% if isHistoryAvailable %}
+  <ul class="tabs info-bar-tabs tabs-fixed-width moreDetails">
+    <li class="tab "><a class="active" href="#body-main-tab-content">Fiche</a></li>
+    <li class="tab "><a href="#body-admin-tab-content">Historique</a></li>
+  </ul>
+{% endif %}
 
-  {# BODY #}
-  <div class="collapsible-body moreDetails custom-scroll-bar">
-    
+{# BODY #}
+<div class="collapsible-body moreDetails custom-scroll-bar">
+  <div class="collapsible-body-main-content"> 
     <div id="body-main-tab-content">
-      {% include here ~ 'element-info-bar-body.html.njk'  %}  
+      
+      {# Votes and reports #}
+      {% if config.isFeatureAvailable('directModeration') %}
+        {% import here ~ "admin/votes-reports.html.njk" as VotesReportsRenderer %}
+        {{ VotesReportsRenderer.render('Votes', element.votes, smallWidth) }}
+        {{ VotesReportsRenderer.render('Erreurs signalées', element.reports, smallWidth) }}      
+      {% endif %}
+
+      {# Element description #}
+      {% include here ~ 'body.html.njk' %}  
     </div>
 
+    {# History #}
     {% if isHistoryAvailable %}
       <div id="body-admin-tab-content">
-        {% include here ~ 'element-info-bar-admin.html.njk'  %}  
+        {% include here ~ "admin/contributions.html.njk" %}
       </div>   
     {% endif %} 
   </div> 
+</div>
 
 </li>
 

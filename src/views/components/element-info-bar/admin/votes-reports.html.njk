@@ -1,0 +1,14 @@
+{% macro render(label, array, smallWidth) %}
+
+  {% if array|length > 0%}
+    <h3>{{ label }}</h3>   
+    <div class="row"> 
+      {% import "components/element-info-bar/admin/vote-report-item.html.njk" as VoteReportItemRenderer %} 
+      {% for item in array %}                
+        {{ VoteReportItemRenderer.render(item, true, smallWidth) }}
+        <div class="info-bar-divider"></div>
+      {% endfor %} 
+    </div>
+  {% endif %}
+
+{% endmacro %}

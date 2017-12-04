@@ -9,7 +9,7 @@
  */
 import { AppModule, AppStates, AppModes } from "../app.module";
 import { BiopenMarker } from "../components/map/biopen-marker.component";
-import { OptionValue, CategoryValue, Option, Category } from "./classes";
+import { OptionValue, CategoryValue, Option, Category, Contribution, VoteReport } from "./classes";
 import { capitalize } from "../commons/commons";
 
 import { App } from "../gogocarto";
@@ -67,6 +67,9 @@ export class Element
 	id : string;
 	status : ElementStatus;
 	moderationState : ElementModerationState;
+	reports : VoteReport[];
+	contributions : Contribution[];
+	votes : VoteReport[];
 	name : string;
 	position : L.LatLng;
 	streetAddress : string;
@@ -166,6 +169,14 @@ export class Element
 		this.descriptionMore = capitalize(elementJson.descriptionMore) || '';
 		this.checkForMergeDescriptions();
 
+		// this.reports = this.createObjectArrayFromJson(VoteReport, elementJson.reports);
+		// this.contributions = this.createObjectArrayFromJson(Contribution, elementJson.contributions);
+		// this.votes = this.createObjectArrayFromJson(VoteReport, elementJson.votes);
+
+		this.reports = elementJson.reports;
+		this.contributions = elementJson.contributions;
+		this.votes = elementJson.votes;
+
 		this.commitment = elementJson.commitment || '';
 		this.telephone = this.getFormatedTel(elementJson.telephone);	
 		this.website = elementJson.website;
@@ -232,6 +243,17 @@ export class Element
 			this.createOptionsTree();
 			this.update(true);
 		}		
+	}
+
+	private createObjectArrayFromJson(klass, elementsJson)
+	{
+		elementsJson = elementsJson || [];
+		let result = [];
+		for(let elementJson of elementsJson)
+		{
+			result.push(new klass(elementJson));
+		}
+		return result;
 	}
 
 	getOptionValueByCategoryId($categoryId)
@@ -635,7 +657,8 @@ export class Element
 			ElementModerationState: ElementModerationState,
 			isIframe : App.isIframe,
 			isMapMode : App.mode == AppModes.Map,
-			config : App.config
+			config : App.config,
+			smallWidth : App.mode == AppModes.Map && App.infoBarComponent.isDisplayedAside()
 		});
 
 		
@@ -765,7 +788,6 @@ export class Element
 		}
 		return false;	
 	};
-
 
 
 	// --------------------------------------------

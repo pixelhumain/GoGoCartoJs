@@ -1,0 +1,28 @@
+{% set here = here ~ 'admin/' %}
+
+{% set itemValues = {
+  '0': "L'élément n'existe plus",
+  '1': 'Les informations sont incorrectes',
+  '2': "L'élément ne respecte pas la charte"
+  }
+%} 
+
+{% set labelClass = 'label-danger' %}
+
+<ul class="collapsible contributions" data-collapsible="accordion">
+  {% for item in element.contributions %}
+    {% if item.type ==  3 %}           
+        <li><div class="collapsible-header">
+          {% import here ~ "vote-report-item.html.njk" as VoteReportRenderer %}
+          {{ VoteReportRenderer.render(item, true, smallWidth) }}
+        </div></li>         
+    {% else %}
+      {#<div >#}
+      <li>
+        {% include here ~ "contribution-item.html.njk" %}
+      </li>
+    {% endif %}
+  {% endfor %}   
+</ul>
+
+

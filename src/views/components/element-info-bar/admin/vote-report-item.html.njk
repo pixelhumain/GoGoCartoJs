@@ -1,0 +1,50 @@
+{% macro render(item, lastElement, smallWidth) %}
+
+{% set userRoles = {
+  '0': "Anonyme",
+  '1': 'Anonyme avec mail',
+  '2': "Utilisateur loggué",
+  '3': "Admin"
+  }
+%} 
+
+{% set reportValues = {
+  '0': "L'élément n'existe plus",
+  '1': 'Les informations sont incorrectes',
+  '2': "L'élément ne respecte pas la charte"
+  }
+%} 
+
+{% set voteValues = {
+  '-2': 'Ne respecte pas la charte',
+  '-1': "N'existe pas",
+  '0': 'Existe mais infos mauvaises',
+  '1': 'Existe',
+  '2': 'Existe et valide info'
+  }
+%} 
+
+{# item.type : Report => 3, Vote => 2 #}
+
+{% set itemValues = reportValues if item.type == 3 else voteValues %}
+
+<div class="vote-report-item {{ '' if lastElement else 'item-container' }}">
+  <div style="margin-bottom:5px">
+    {% set labelClass = 'label-success' if item.type == 2 and item.value >= 0 else 'label-danger' %}
+    <span class="label {{ labelClass }}">{{ itemValues[item.value] }}</span> 
+    <div style="float:right">{{ item.createdAt }}</div> 
+    {% if smallWidth|default(false) %}
+      </br>
+      <span style="display:block;padding-top: 5px;">
+    {% else %}
+      <span style="margin:0 5px">
+    {% endif %}    
+      Par : <u>{{ item.userMail if item.userMail else 'Anonyme'}}</u>
+      <span class="label label-default" style="margin-left:5px">{{ userRoles[item.userRole] }}</span> 
+    </span> 
+  </div> 
+
+  <div class="vote-report-comment">{{ item.comment|capitalize }}</div>
+</div>
+
+{% endmacro %}

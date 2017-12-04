@@ -18,6 +18,7 @@ import { App } from "../gogocarto";
 
 import { capitalize, slugify } from "../commons/commons";
 import { openDeleteModal, openReportModal } from './reporting-deleting.component';
+import { createListenersForMarkAsResolved } from './moderation.component';
 
 export function updateFavoriteIcon(object, element : Element)
 {
@@ -50,6 +51,8 @@ export function showFullTextMenu(object, bool : boolean)
 export function createListenersForElementMenu(object)
 {
 	object.find('.tooltipped').tooltip();
+
+	createListenersForMarkAsResolved();
 
 	// ----------------------
 	//       DELETE

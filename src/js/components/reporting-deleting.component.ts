@@ -129,10 +129,21 @@ export function initializeReportingAndDeleting()
 
 				if (success)
 				{
+					let element = App.elementById(elementId);
+
 					$('#popup-delete').closeModal();
 					let elementInfo = getCurrentElementInfoBarShown();
-					elementInfo.find('.result-message').html(responseMessage).show();
 					App.infoBarComponent.show();
+
+					element.update(true);
+	        element.isFullyLoaded = false;
+
+	        // reload Element, and add flash message
+	        App.infoBarComponent.showElement(element.id, () => {
+	          addFlashMessage(responseMessage);
+	        });
+
+	        addFlashMessage(responseMessage);
 				}
 				else
 				{
@@ -145,5 +156,13 @@ export function initializeReportingAndDeleting()
 				$('#popup-delete #select-error').text(errorMessage).show();
 			});	
 	});
+}
+
+function addFlashMessage(message)
+{
+  let elementInfo = getCurrentElementInfoBarShown();
+  elementInfo.find(".moderation-section").find('.basic-message').hide(); 
+  elementInfo.find('.result-message').html(message).show();
+  App.infoBarComponent.show();
 }
 

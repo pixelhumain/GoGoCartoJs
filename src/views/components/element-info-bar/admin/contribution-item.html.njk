@@ -1,0 +1,76 @@
+{% set contributionType = {
+  '0': "Ajout",
+  '1': 'Modification',
+  '2': "Vote",
+  '3': "Signalement",
+  '4': "Import"
+  }
+%} 
+
+{% set elementStatus = {
+  '' : 'En attente',
+  '-5': "modified pending",
+  '-4': 'Supprimé', 
+  '-3': 'Refusé (votes) ', 
+  '-2': 'Réfusé (admin)', 
+  '-1': 'En attente (modifs)', 
+   '0': 'En attente (ajout)',
+   '1': 'Validé (admin)',
+   '2': 'Validé (votes)',
+   '3': 'Ajouté par admin',
+   '4': 'Modifié par admin'
+  }
+%} 
+
+{% set userRoles = {
+  '0': "Anonyme",
+  '1': 'Anonyme avec mail',
+  '2': "Utilisateur loggué",
+  '3': "Admin"
+  }
+%} 
+
+{# ---- HEADER --- #}
+<div class="collapsible-header">    
+  {% if item.userRole == 3 %}
+    <div> 
+        {% set title = contributionType[item.type] if (item.type == 4) else elementStatus[item.status] %}
+        <b>{{ title | upper }}</b> 
+        par <u>{{ item.user }}</u> 
+        <span class="label label-default">{{ userRoles[item.userRole] }}</span> 
+        <span class="vote-report-comment">{{ item.resolvedMessage}}<span>
+        <div style="float:right">{{ item.updatedAt }}</div>
+    </div>
+  {% else %}    
+    <div> 
+        <b>{{ contributionType[item.type] | upper }}</b> 
+        {% set labelClass = 'label-success' if item.status > 0 else 'label-danger' %}
+        {% set labelClass = 'label-warning' if item.status == 0 else labelClass %}
+        <span class="label {{ labelClass }}">{{ elementStatus[item.status] }}</span>
+        {% if item.resolvedMessage %}<span class="vote-report-comment" style="padding:0 10px"> {{ item.resolvedMessage}}</span>{% endif %}
+        {% if item.resolvedBy %}<span>(<u>{{item.resolvedBy }}</u>)</span>{% endif %}               
+        
+        <div style="float:right">{{ item.updatedAt }}</div>
+    </div>
+
+    <div> 
+      Proposé par <u>{{ item.user }}</u> 
+      <span class="label label-default">{{ userRoles[item.userRole] }}</span>    
+      le {{ item.createdAt}}  
+    </div>
+  {% endif %}
+</div>
+
+{# ---- BODY --- #}
+{# Not displaying contributions votes on client side, so the API is smaller #}
+{#{% if item.votes|length > 0 %}
+  <div class="collapsible-body">
+    <b style="line-height: 3.5rem;">Votes</b>
+    {% for vote in item.votes %}
+        {% if vote.item %}
+          {% import here ~ "vote-report-item.html.njk" as VoteReportRenderer %}
+          {{ VoteReportRenderer.render(vote, loop.last, smallWidth) }}
+        {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}#}

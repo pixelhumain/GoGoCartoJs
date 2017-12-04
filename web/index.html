@@ -71,11 +71,13 @@
                         favorite: { inIframe: false },
                         export:   { inIframe: false },
                         pending:  { inIframe: false, roles: ['anonymous', 'user', 'admin'] },
+                        moderation: { inIframe: false, roles: ['admin'], url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/resolve-reports'},
+                        elementHistory: { inIframe: false, roles: ['admin'] },
                         directModeration:  { roles: ['admin'] },
                     },
                     security:
                     {
-                        userRole: 'anonymous',
+                        userRole: 'admin',
                         userEmail: "test@gt.gt",
                         loginAction: function() { console.log("needToLog"); },
                     },
