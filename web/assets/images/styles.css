@@ -191,3 +191,6 @@
 .gogo-icon-ellipsis:before {
   content: "\30";
 }
+.gogo-icon-moderation:before {
+  content: "\79";
+}
