@@ -90,7 +90,6 @@ export class CategoryOptionTreeNode
 			if (this.needToStopPropagation(originDepth)) { 
 				// we stop prograpagation on Categories, but we need to undo the previous action on parent Option
 				// so we call update state to check the state parent option need to be
-				console.log("stop propagation on", this.name);
 				if (this.getOwner()) this.getOwner().updateState(null, false);
 				return;
 			}
@@ -108,7 +107,6 @@ export class CategoryOptionTreeNode
 				check = true;
 			}			
 
-			if (this.id == 10438) console.log("toogle viande", check);
 			this.setChecked(check);
 			this.setDisabled(!check);
 
@@ -149,9 +147,7 @@ export class CategoryOptionTreeNode
 
 	updateState(originDepth = null, propage = true)
 	{
-		if (this.isMainOption()) return;
-
-		if (this.id == 10438) console.log("update state viande");		
+		if (this.isMainOption()) return;	
 
 		if (this.children.length == 0) 
 			this.setDisabled(!this.isChecked);
