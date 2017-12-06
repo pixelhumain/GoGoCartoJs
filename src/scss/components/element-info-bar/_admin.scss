@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-12-04 15:52:58
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-12-06 15:52:36
+* @Last Modified time: 2017-12-06 17:49:44
 */
 .label {
     display: inline;
@@ -48,6 +48,10 @@
     .contribution-body {
         color: inherit;
     }
+}
+
+.info-bar-tabs .tabs .tab a {
+    cursor: pointer;
 }
 
 .item-container
