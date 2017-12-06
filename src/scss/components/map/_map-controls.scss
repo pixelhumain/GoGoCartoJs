@@ -116,6 +116,8 @@ a.leaflet-control-zoom-out {
     @media screen and (max-width: 900px) { display:none; }
 }
 
+#map-default-view-btn { top : 196px; }
+
 .leaflet-control-layers-toggle
 {
     display:none;

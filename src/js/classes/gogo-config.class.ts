@@ -89,6 +89,7 @@ export class GoGoConfig
       directions: new GoGoFeature(),
       export:     new GoGoFeature(),
       layers:     new GoGoFeature(),
+      mapdefaultview:  new GoGoFeature(),
       pending:    new GoGoFeature(),
       moderation: new GoGoFeature(),
       search:     new GoGoFeature(),

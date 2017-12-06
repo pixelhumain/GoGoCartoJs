@@ -67,6 +67,12 @@
           <i class="gogo-icon-share-alt"></i>
         </div> 
       {% endif %}
+
+      {% if config.isFeatureActivated('mapdefaultview') %}
+        <div id="map-default-view-btn" class="layers-button leaflet-bar" data-tooltip="Retourner à la vue par défault" data-position="left" data-delay="300">
+          <i class="gogo-icon-map"></i>
+        </div> 
+      {% endif %}
       
     </div>       
 

@@ -41,10 +41,17 @@ export class AppComponent
 			$('#modal-iframe').openModal(); 
 		});
 
+		$('#map-default-view-btn').click( () =>
+		{
+			App.geocoder.geocodeAddress('', (result) => { 
+        App.mapComponent.fitBounds(App.geocoder.getBounds(), true); 
+      }); 
+		});
+
 		// update iframe code when params change
 		$('#modal-iframe .iframe-param').change( () => { this.updateIframeCode(); });
 
-		$('#change-layers, #export-iframe-btn').tooltip();
+		$('.layers-button').tooltip();
 
 		let res;
 		window.onresize = () =>
