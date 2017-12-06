@@ -37,8 +37,8 @@ export class ViewPort
 			console.log("ViewPort fromString erreur", string);
 			return null;
 		}
-		this.lat = parseFloat(decode[0]);
-		this.lng = parseFloat(decode[1]);
+		this.lat = parseFloat(decode[0]) % 360;
+		this.lng = parseFloat(decode[1]) % 360;
 		this.zoom = parseInt(decode[2].slice(0,-1));
 
 		//console.log("ViewPort fromString Done", this);
