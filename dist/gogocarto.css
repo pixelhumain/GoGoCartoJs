@@ -3807,7 +3807,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
 * @Author: Sebastian Castro
 * @Date:   2017-12-04 15:52:58
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-12-06 15:52:36
+* @Last Modified time: 2017-12-06 17:49:44
 */ }
   .gogocarto-container .starRepresentationChoice-helper {
     display: none;
@@ -5051,40 +5051,42 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       line-height: 1rem;
       padding-top: 3px;
       margin-right: 10px; }
-  .gogocarto-container .layers-button {
+  .gogocarto-container #map-features-buttons {
     position: absolute;
-    z-index: 500;
     top: 100px;
-    background-color: white;
-    color: #3d3d3d;
+    z-index: 500;
     right: 20px;
-    width: 33px;
-    height: 33px;
-    text-align: center; }
-    .gogocarto-container .layers-button#close-layers-panel {
-      z-index: 10000;
-      background-color: transparent;
-      color: #888888; }
-      .gogocarto-container .layers-button#close-layers-panel:hover {
+    width: 33px; }
+    .gogocarto-container #map-features-buttons .feature-button {
+      position: relative;
+      background-color: white;
+      color: #3d3d3d;
+      width: 33px;
+      height: 33px;
+      margin-bottom: 13px;
+      text-align: center; }
+      .gogocarto-container #map-features-buttons .feature-button:hover {
+        cursor: pointer;
+        background-color: #f4f4f4; }
+      .gogocarto-container #map-features-buttons .feature-button i {
+        font-size: 18px;
+        line-height: 35px; }
+      .gogocarto-container #map-features-buttons .feature-button#close-layers-panel {
+        z-index: 10000;
         background-color: transparent;
-        color: #616161; }
-      .gogocarto-container .layers-button#close-layers-panel i {
-        font-size: 16px;
-        line-height: 44px;
-        margin-left: 2px; }
-    .gogocarto-container .layers-button:hover {
-      cursor: pointer;
-      background-color: #f4f4f4; }
-    .gogocarto-container .layers-button i {
-      font-size: 18px;
-      line-height: 35px; }
-  .gogocarto-container #export-iframe-btn {
-    top: 148px; }
-    @media screen and (max-width: 900px) {
-      .gogocarto-container #export-iframe-btn {
-        display: none; } }
-  .gogocarto-container #map-default-view-btn {
-    top: 196px; }
+        color: #888888; }
+        .gogocarto-container #map-features-buttons .feature-button#close-layers-panel:hover {
+          background-color: transparent;
+          color: #616161; }
+        .gogocarto-container #map-features-buttons .feature-button#close-layers-panel i {
+          font-size: 16px;
+          line-height: 44px;
+          margin-left: 2px; }
+      @media screen and (max-width: 900px) {
+        .gogocarto-container #map-features-buttons .feature-button#export-iframe-btn {
+          display: none; } }
+      .gogocarto-container #map-features-buttons .feature-button#map-default-view-btn i {
+        font-size: 14px; }
   .gogocarto-container .leaflet-control-layers-toggle {
     display: none; }
   .gogocarto-container .leaflet-control-layers {
@@ -5543,6 +5545,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       border-bottom: 1px solid grey; }
     .gogocarto-container .element-item .contributions .contribution-body {
       color: inherit; }
+  .gogocarto-container .info-bar-tabs .tabs .tab a {
+    cursor: pointer; }
   .gogocarto-container .item-container {
     border-bottom: 1px dashed grey;
     padding-bottom: 5px;
