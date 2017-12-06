@@ -7,7 +7,7 @@
  * @license    MIT License
  * @Last Modified time: 2016-08-31
  */
-export function createCookie(name, value, days = 100) 
+export function createCookie(name, value, days = 1) 
 {
 	let date = new Date();
 	date.setTime(date.getTime()+(days*24*60*60*1000));
