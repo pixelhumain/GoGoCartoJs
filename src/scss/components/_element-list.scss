@@ -125,3 +125,18 @@
 	
 }
 
+#directory-content-list
+{
+	.menu-element, .info-bar-tabs
+	{
+		position: relative;
+		display:none;
+	}
+
+	.element-item.active
+	{
+		.menu-element { display: block;}
+		.info-bar-tabs { display: flex; }
+	}
+}
+

@@ -9,10 +9,10 @@
 
 {% set labelClass = 'label-danger' %}
 
-<ul class="collapsible contributions" data-collapsible="accordion">
+<ul class="contributions">
   {% for item in element.contributions %}
     {% if item.type ==  3 %}           
-        <li><div class="collapsible-header">
+        <li><div class="contribution-header">
           {% import here ~ "vote-report-item.html.njk" as VoteReportRenderer %}
           {{ VoteReportRenderer.render(item, true, smallWidth) }}
         </div></li>         

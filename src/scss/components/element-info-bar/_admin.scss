@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-12-04 15:52:58
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-12-04 21:31:29
+* @Last Modified time: 2017-12-06 15:52:36
 */
 .label {
     display: inline;
@@ -30,12 +30,12 @@
     color: #444;
 }
 
-#element-info-bar .contributions.collapsible 
+.element-item .contributions
 {
     border: none;
     box-shadow: none;
 
-    .collapsible-header {
+    .contribution-header {
         color: inherit;
         background-color: transparent;
         border: none;
@@ -45,7 +45,7 @@
         border-bottom: 1px solid grey;
     }
 
-    .collapsible-body {
+    .contribution-body {
         color: inherit;
     }
 }
@@ -64,7 +64,7 @@
 
 .vote-report-comment { font-style: italic }
 
-#body-admin-tab-content { 
+.body-admin-tab-content { 
     padding-right: 10px; 
     font-size: .9em;
     .vote-report-item { padding: 0 !important }

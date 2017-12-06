@@ -83,16 +83,3 @@
 	}
 }
 
-#directory-content-list
-{
-	.menu-element 
-	{
-		position: relative;
-		display:none;
-	}
-
-	.element-item.active
-	{
-		.menu-element { display: block;}
-	}
-}

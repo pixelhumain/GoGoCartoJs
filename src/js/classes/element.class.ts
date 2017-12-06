@@ -630,6 +630,7 @@ export class Element
 			console.log("Send Ajax to retrieve full element");
 			return;
 		}
+
 		this.update();	
 		this.updateDistance();
 

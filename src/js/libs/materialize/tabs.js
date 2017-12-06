@@ -32,11 +32,13 @@
         $index = 0;
       }
 
-      $content = $($active[0].hash);
+      $content = getContentFromLink($active[0]);
 
       // append indicator then set indicator width to tab width
       $this.append('<div class="indicator"></div>');
+
       var $indicator = $this.find('.indicator');
+      
       if ($this.is(":visible")) {
         $indicator.css({"right": Math.max($tabs_width - (($index + 1) * $tab_width),0)});
         $indicator.css({"left": $index * $tab_width});
@@ -55,7 +57,7 @@
 
       // Hide the remaining content
       $links.not($active).each(function () {
-        $(this.hash).hide();
+        getContentFromLink(this).hide();
       });
 
 
@@ -75,7 +77,7 @@
 
         // Update the variables with the new link and content
         $active = $(this);
-        $content = $(this.hash);
+        $content = getContentFromLink(this);
         $links = $this.find('li.tab a');
 
         // Make the tab active.
@@ -126,4 +128,17 @@
   $(document).ready(function(){
     $('ul.tabs').tabs();
   });
+
+  function getContentFromLink(link)
+  {
+    var hash = link.hash;
+    if (!link.hash && $(link).data('href')) 
+    {
+      var result = $(link).parents('ul.tabs').siblings('.tabs-content').find($(link).data('href'));
+      return result;
+    }
+    else {
+      return $(link.hash);
+    }
+  }
 }( jQuery ));

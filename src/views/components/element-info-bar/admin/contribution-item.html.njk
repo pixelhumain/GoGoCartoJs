@@ -31,7 +31,7 @@
 %} 
 
 {# ---- HEADER --- #}
-<div class="collapsible-header">    
+<div class="contribution-header">    
   {% if item.userRole == 3 %}
     <div> 
         {% set title = contributionType[item.type] if (item.type == 4) else elementStatus[item.status] %}
@@ -64,7 +64,7 @@
 {# ---- BODY --- #}
 {# Not displaying contributions votes on client side, so the API is smaller #}
 {#{% if item.votes|length > 0 %}
-  <div class="collapsible-body">
+  <div class="contribution-body">
     <b style="line-height: 3.5rem;">Votes</b>
     {% for vote in item.votes %}
         {% if vote.item %}

@@ -144,8 +144,10 @@ export class ElementListComponent
 			createListenersForElementMenu(domMenu);
 
 			// check the visibility of an item after it has been expanded
-			elementDom.find('.collapsible-header').click(function() {
+			elementDom.find('.collapsible-header').click(function() 
+			{
 				setTimeout( () => { 
+					$('.info-bar-tabs').tabs();
 					// if all elementDom expanded is not visible					
 					let elementDistanceToTop = elementDom.offset().top - listContainerDom.offset().top;
 
@@ -162,7 +164,6 @@ export class ElementListComponent
 			});
 			updateFavoriteIcon(domMenu, element)		
 		}
-
 
 		createListenersForVoting();
 
