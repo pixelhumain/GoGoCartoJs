@@ -169,6 +169,7 @@ export class FilterModule
 		let filters = parseStringIntoArrayNumber(filtersString);
 
 		//console.log('filters', filters);		
+		if (!App.loadFullTaxonomy && mainOptionSlug != 'all') $('.main-categories').hide();	
 
 		if (filters.length > 0)
 		{
@@ -179,8 +180,6 @@ export class FilterModule
 				if (App.loadFullTaxonomy) App.categoryModule.mainCategory.toggle(!addingMode, false);
 				else
 				{
-					// if no loadFullTaxonomy, by default the main-categrories side menu is not displayed
-					$('.main-categories').show();
 					for(let option of App.categoryModule.mainCategory.options) 
 					{
 						option.toggleVisibility(!addingMode);
