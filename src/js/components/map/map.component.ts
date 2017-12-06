@@ -101,9 +101,8 @@ export class MapComponent
 		}
 
 		// Get defaultBaseLayer from Cookie if possible
-		// let baseLayerId = Cookies.readCookie('defaultBaseLayer');
-		// let defaultBaseLayer = baseLayers.hasOwnProperty(baseLayerId) ? baseLayers[baseLayerId] : baseLayers[App.config.map.defaultTileLayer];
-		let defaultBaseLayer = baseLayers[App.config.map.defaultTileLayer];
+		let baseLayerId = Cookies.readCookie('defaultBaseLayer');
+		let defaultBaseLayer = baseLayers.hasOwnProperty(baseLayerId) ? baseLayers[baseLayerId] : baseLayers[App.config.map.defaultTileLayer];
 
 		this.map_ = L.map('directory-content-map', {
 		    zoomControl: false,
@@ -183,7 +182,7 @@ export class MapComponent
 			// listen for base layer selection, to store value in cookie
 			$('#directory-content-map .leaflet-control-layers-selector').change( function(e) 
 			{		
-				Cookies.createCookie('defaultBaseLayer', $(this).siblings('span').text());
+				Cookies.createCookie('defaultBaseLayer', $(this).siblings('span').text(), 100);
 			});
 		});
 
