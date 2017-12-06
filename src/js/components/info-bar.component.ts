@@ -42,7 +42,7 @@ export class InfoBarComponent
 	{
 		let element = App.elementModule.getElementById(elementId);		
 
-		console.log("showElement", element);
+		// console.log("showElement", element);
 
 		// if element already visible
 		if (this.elementVisible)
@@ -86,7 +86,7 @@ export class InfoBarComponent
 			createListenersForElementMenu(domMenu);	
 			createListenersForVoting();
 
-			$('.info-bar-tabs').tabs();			
+			setTimeout( () => { $('.info-bar-tabs').tabs(); }, 100);			
 
 			updateFavoriteIcon(domMenu, element);			
 
