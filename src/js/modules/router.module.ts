@@ -97,12 +97,13 @@ export class RouterModule
 		if (splited.length > 1) this.filtersSerializedParam = splited[1];
 
 		let routeHash = splited[0];
+
 		// handle wrong hash
-		if (!routeHash || routeHash.length > 1 && routeHash[1] != '/') routeHash = '/carte';
+		if (!routeHash || routeHash == '#/' || routeHash == '#') routeHash = '/carte';
 		routie.navigate(routeHash);
 
 		// let the hash being changed with a timeOut
-		setTimeout(() => routie.reload(), 0);
+		setTimeout(() => routie.reload(), 10);
 	}
 
 	generate(routeName : string, options? : any, absoluteUrl? : boolean)
