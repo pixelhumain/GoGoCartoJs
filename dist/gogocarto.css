@@ -1334,6 +1334,58 @@ small {
     .flow-text {
       font-size: 1.2rem; } }
 
+.tabs {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  position: relative;
+  height: 2.7rem;
+  background-color: #3D3D3D;
+  margin: 0 auto;
+  width: calc(100% - 1px);
+  white-space: nowrap; }
+  .tabs .tab {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    display: block;
+    float: left;
+    text-align: center;
+    line-height: 3rem;
+    height: 2.7rem;
+    padding: 0 20px;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    width: 15%; }
+    .tabs .tab a {
+      color: white;
+      display: block;
+      width: 100%;
+      height: 100%;
+      -webkit-transition: color 0.28s ease;
+      -moz-transition: color 0.28s ease;
+      -o-transition: color 0.28s ease;
+      -ms-transition: color 0.28s ease;
+      transition: color 0.28s ease; }
+      .tabs .tab a:hover {
+        color: white; }
+    .tabs .tab.disabled a {
+      color: white;
+      cursor: default; }
+  .tabs .indicator {
+    position: absolute;
+    top: 0;
+    height: 3px;
+    background-color: white;
+    will-change: left, right; }
+
+.tabs .tab {
+  padding: 0; }
+
 .material-tooltip {
   padding: 10px 8px;
   font-size: 1rem;
@@ -3709,19 +3761,13 @@ select {
 * @Author: Sebastian Castro
 * @Date:   2017-02-28 13:25:52
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-09-21 14:16:53
+* @Last Modified time: 2017-12-04 10:42:14
 */
   /*
 * @Author: Sebastian Castro
-* @Date:   2017-03-02 09:08:21
+* @Date:   2017-12-04 10:41:19
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-07-31 16:34:21
-*/
-  /*
-* @Author: Sebastian Castro
-* @Date:   2017-04-16 16:21:51
-* @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-07-22 10:55:45
+* @Last Modified time: 2017-12-04 10:44:42
 */
   /*
 * @Author: Sebastian Castro
@@ -3753,15 +3799,15 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
 } */
   /*
 * @Author: Sebastian Castro
-* @Date:   2017-05-05 12:23:12
+* @Date:   2017-05-11 11:26:03
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-11-28 20:35:38
+* @Last Modified time: 2017-12-04 12:57:54
 */
   /*
 * @Author: Sebastian Castro
-* @Date:   2017-05-11 11:26:03
+* @Date:   2017-12-04 15:52:58
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-07-28 10:59:56
+* @Last Modified time: 2017-12-06 15:52:36
 */ }
   .gogocarto-container .starRepresentationChoice-helper {
     display: none;
@@ -4166,6 +4212,24 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       padding: 0 !important;
       width: 100%;
       height: 100%; } }
+  .gogocarto-container #filter-moderation {
+    color: #c53f36; }
+    .gogocarto-container #filter-moderation:hover {
+      background-color: white; }
+    .gogocarto-container #filter-moderation .moderation-checkbox:not(:checked) + label:before {
+      background-color: transparent;
+      border-color: #c53f36; }
+    .gogocarto-container #filter-moderation .moderation-checkbox + label:before {
+      color: #c53f36; }
+  .gogocarto-container #filter-pending {
+    color: #565656; }
+    .gogocarto-container #filter-pending:hover {
+      background-color: white; }
+    .gogocarto-container #filter-pending .pending-checkbox:not(:checked) + label:before {
+      background-color: transparent;
+      border-color: #565656; }
+    .gogocarto-container #filter-pending .pending-checkbox + label:before {
+      color: #565656; }
   .gogocarto-container #filter-favorite {
     color: #cc8901; }
     .gogocarto-container #filter-favorite .gogo-icon-star-full {
@@ -4182,20 +4246,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       border-color: #cc8901; }
     .gogocarto-container #filter-favorite .favorite-checkbox + label:before {
       color: #cc8901; }
-  .gogocarto-container #filter-pending {
-    color: #565656; }
-    .gogocarto-container #filter-pending #show-only-pending {
-      float: right;
-      margin-right: 3.3rem; }
-      .gogocarto-container #filter-pending #show-only-pending:hover {
-        cursor: pointer; }
-    .gogocarto-container #filter-pending:hover {
-      background-color: white; }
-    .gogocarto-container #filter-pending .pending-checkbox:not(:checked) + label:before {
-      background-color: transparent;
-      border-color: #565656; }
-    .gogocarto-container #filter-pending .pending-checkbox + label:before {
-      color: #565656; }
   .gogocarto-container .sub-categories-content.no-top-divider > ul > .main-option-subcategories-container > .category-wrapper > .subcategory-item {
     border-top: none !important;
     margin-top: 0 !important; }
@@ -4284,7 +4334,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       margin-bottom: 1px; }
     .gogocarto-container .subcategorie-option-item .icon {
       font-size: 1.4rem; }
-    .gogocarto-container .subcategorie-option-item .subcategorie-option-checkbox + label:before, .gogocarto-container .subcategorie-option-item #filter-favorite .favorite-checkbox + label:before, .gogocarto-container #filter-favorite .subcategorie-option-item .favorite-checkbox + label:before, .gogocarto-container .subcategorie-option-item #filter-pending .pending-checkbox + label:before, .gogocarto-container #filter-pending .subcategorie-option-item .pending-checkbox + label:before {
+    .gogocarto-container .subcategorie-option-item .subcategorie-option-checkbox + label:before {
       width: 13px;
       height: 13px;
       left: 2px;
@@ -4295,7 +4345,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       -moz-border-radius: 50%;
       border-radius: 50%;
       margin-top: 2px; }
-    .gogocarto-container .subcategorie-option-item .subcategorie-option-checkbox:checked + label:before, .gogocarto-container .subcategorie-option-item #filter-favorite .favorite-checkbox:checked + label:before, .gogocarto-container #filter-favorite .subcategorie-option-item .favorite-checkbox:checked + label:before, .gogocarto-container .subcategorie-option-item #filter-pending .pending-checkbox:checked + label:before, .gogocarto-container #filter-pending .subcategorie-option-item .pending-checkbox:checked + label:before {
+    .gogocarto-container .subcategorie-option-item .subcategorie-option-checkbox:checked + label:before {
       top: 2px;
       left: 1px;
       width: 7px;
@@ -4361,11 +4411,11 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         font-size: 1.3rem;
         padding-top: 1px;
         margin-right: .6rem; }
-      .gogocarto-container .category-wrapper.depth-2 .subcategorie-option-item .subcategorie-option-checkbox + label:before, .gogocarto-container .category-wrapper.depth-2 .subcategorie-option-item #filter-favorite .favorite-checkbox + label:before, .gogocarto-container #filter-favorite .category-wrapper.depth-2 .subcategorie-option-item .favorite-checkbox + label:before, .gogocarto-container .category-wrapper.depth-2 .subcategorie-option-item #filter-pending .pending-checkbox + label:before, .gogocarto-container #filter-pending .category-wrapper.depth-2 .subcategorie-option-item .pending-checkbox + label:before {
+      .gogocarto-container .category-wrapper.depth-2 .subcategorie-option-item .subcategorie-option-checkbox + label:before {
         width: 10px;
         height: 10px;
         left: 3px; }
-      .gogocarto-container .category-wrapper.depth-2 .subcategorie-option-item .subcategorie-option-checkbox:checked + label:before, .gogocarto-container .category-wrapper.depth-2 .subcategorie-option-item #filter-favorite .favorite-checkbox:checked + label:before, .gogocarto-container #filter-favorite .category-wrapper.depth-2 .subcategorie-option-item .favorite-checkbox:checked + label:before, .gogocarto-container .category-wrapper.depth-2 .subcategorie-option-item #filter-pending .pending-checkbox:checked + label:before, .gogocarto-container #filter-pending .category-wrapper.depth-2 .subcategorie-option-item .pending-checkbox:checked + label:before {
+      .gogocarto-container .category-wrapper.depth-2 .subcategorie-option-item .subcategorie-option-checkbox:checked + label:before {
         width: 6px;
         height: 10px;
         left: 2px; }
@@ -5033,6 +5083,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     @media screen and (max-width: 900px) {
       .gogocarto-container #export-iframe-btn {
         display: none; } }
+  .gogocarto-container #map-default-view-btn {
+    top: 196px; }
   .gogocarto-container .leaflet-control-layers-toggle {
     display: none; }
   .gogocarto-container .leaflet-control-layers {
@@ -5169,6 +5221,13 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       -ms-flex-order: 1000000;
       -webkit-order: 1000000;
       order: 1000000; }
+  .gogocarto-container #directory-content-list .menu-element, .gogocarto-container #directory-content-list .info-bar-tabs {
+    position: relative;
+    display: none; }
+  .gogocarto-container #directory-content-list .element-item.active .menu-element {
+    display: block; }
+  .gogocarto-container #directory-content-list .element-item.active .info-bar-tabs {
+    display: flex; }
   .gogocarto-container #element-info-bar.display-aside .menu-element {
     height: auto; }
   .gogocarto-container .menu-element {
@@ -5218,11 +5277,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         padding: 2px;
         padding-bottom: 3px;
         border: none; }
-  .gogocarto-container #directory-content-list .menu-element {
-    position: relative;
-    display: none; }
-  .gogocarto-container #directory-content-list .element-item.active .menu-element {
-    display: block; }
   .gogocarto-container .element-item {
     list-style-type: none;
     display: -webkit-box;
@@ -5410,37 +5464,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     color: rgba(0, 0, 0, 0.87) !important; }
   .gogocarto-container #element-info .collapsible-header span.added {
     color: #3ab33a; }
-  .gogocarto-container .vote-section .gogo-icon-attention {
-    color: white;
-    font-size: 20px;
-    padding-top: 3px;
-    position: absolute; }
-  .gogocarto-container .vote-section .text {
-    margin-left: 2.2rem;
-    color: white; }
-  .gogocarto-container .vote-section .btn-vote-more-info {
-    line-height: 1.2rem;
-    position: absolute;
-    top: 14px;
-    right: 110px;
-    padding: 0;
-    font-size: .85rem;
-    color: white; }
-  .gogocarto-container .vote-section .btn-vote {
-    position: absolute;
-    right: 1rem;
-    bottom: 7px;
-    margin: 0;
-    background-color: #dedede;
-    color: #272626;
-    font-size: .85rem; }
-  .gogocarto-container .validation-process-info:hover {
-    cursor: help;
-    border-bottom: 1px dashed;
-    border-color: inherit;
-    text-decoration: none; }
-  .gogocarto-container #element-info-bar.small-width .btn-vote-more-info {
-    display: none; }
   .gogocarto-container .interactive-section {
     padding: 0 1rem 0 .8rem;
     position: relative;
@@ -5458,6 +5481,82 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     display: none; }
   .gogocarto-container #directory-content-list .element-item.active .interactive-section {
     display: block; }
+  .gogocarto-container .vote-section .gogo-icon-attention, .gogocarto-container .vote-section .gogo-icon-moderation, .gogocarto-container .moderation-section .gogo-icon-attention, .gogocarto-container .moderation-section .gogo-icon-moderation {
+    color: white;
+    font-size: 20px;
+    padding-top: 3px;
+    position: absolute; }
+  .gogocarto-container .vote-section .text, .gogocarto-container .moderation-section .text {
+    margin-left: 2.2rem;
+    color: white; }
+  .gogocarto-container .vote-section .btn-vote-more-info, .gogocarto-container .moderation-section .btn-vote-more-info {
+    line-height: 1.2rem;
+    position: absolute;
+    top: 14px;
+    right: 110px;
+    padding: 0;
+    font-size: .85rem;
+    color: white; }
+  .gogocarto-container .vote-section .action-btn, .gogocarto-container .moderation-section .action-btn {
+    position: absolute;
+    right: 1rem;
+    bottom: 7px;
+    margin: 0;
+    background-color: #dedede;
+    color: #272626;
+    font-size: .85rem; }
+  .gogocarto-container .validation-process-info:hover {
+    cursor: help;
+    border-bottom: 1px dashed;
+    border-color: inherit;
+    text-decoration: none; }
+  .gogocarto-container #element-info-bar.small-width .btn-vote-more-info {
+    display: none; }
+  .gogocarto-container .label {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em; }
+  .gogocarto-container .label-danger {
+    background-color: #d9534f; }
+  .gogocarto-container .label-success {
+    background-color: #00a65a; }
+  .gogocarto-container .label-default {
+    background-color: #d2d6de;
+    color: #444; }
+  .gogocarto-container .element-item .contributions {
+    border: none;
+    box-shadow: none; }
+    .gogocarto-container .element-item .contributions .contribution-header {
+      color: inherit;
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+      line-height: 2rem;
+      padding: 15px 0;
+      border-bottom: 1px solid grey; }
+    .gogocarto-container .element-item .contributions .contribution-body {
+      color: inherit; }
+  .gogocarto-container .item-container {
+    border-bottom: 1px dashed grey;
+    padding-bottom: 5px;
+    margin-bottom: 5px; }
+  .gogocarto-container .vote-report-item {
+    line-height: 1.5rem !important;
+    padding: 10px; }
+  .gogocarto-container .vote-report-comment {
+    font-style: italic; }
+  .gogocarto-container .body-admin-tab-content {
+    padding-right: 10px;
+    font-size: .9em; }
+    .gogocarto-container .body-admin-tab-content .vote-report-item {
+      padding: 0 !important; }
   .gogocarto-container #element-info-bar {
     height: 0px;
     z-index: 600;
@@ -5489,6 +5588,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           color: white !important; }
       .gogocarto-container #element-info-bar.display-aside #element-info .moreDetails {
         display: block !important; }
+        .gogocarto-container #element-info-bar.display-aside #element-info .moreDetails.tabs {
+          display: flex !important; }
       .gogocarto-container #element-info-bar.display-aside #element-info .hideOnLargeScreen {
         display: none !important; }
     .gogocarto-container #element-info-bar .element-item .element-main-icon {
@@ -5849,4 +5950,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
 }
 .gogo-icon-ellipsis:before {
   content: "\30";
+}
+.gogo-icon-moderation:before {
+  content: "\79";
 }
