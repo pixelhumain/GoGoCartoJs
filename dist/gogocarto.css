@@ -3807,7 +3807,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
 * @Author: Sebastian Castro
 * @Date:   2017-12-04 15:52:58
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-12-06 17:49:44
+* @Last Modified time: 2017-12-07 07:51:48
 */ }
   .gogocarto-container .starRepresentationChoice-helper {
     display: none;
@@ -5545,7 +5545,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       border-bottom: 1px solid grey; }
     .gogocarto-container .element-item .contributions .contribution-body {
       color: inherit; }
-  .gogocarto-container .info-bar-tabs .tabs .tab a {
+  .gogocarto-container .info-bar-tabs.tabs .tab a {
     cursor: pointer; }
   .gogocarto-container .item-container {
     border-bottom: 1px dashed grey;

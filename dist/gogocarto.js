@@ -28967,7 +28967,9 @@ output += "<!-- Pop up message alerte-->\n<div id=\"popup-report-error\" class=\
 output += runtime.suppressValue(env.getFilter("capitalize").call(context, runtime.memberLookup((runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"text")),"elementDefinite")), env.opts.autoescape);
 output += " n'existe plus</label>\n\n\t\t    <input class=\"option-radio-btn \"value=\"1\" name=\"report-error\" type=\"radio\" id=\"report2\"/>\n\t\t    <label class=\"option-radio-label\" for=\"report2\">Les informations ne sont pas correctes</label>\n\n\t\t    <input class=\"option-radio-btn \"value=\"2\" name=\"report-error\" type=\"radio\" id=\"report3\"/>\n\t\t    <label class=\"option-radio-label\" for=\"report3\">";
 output += runtime.suppressValue(env.getFilter("capitalize").call(context, runtime.memberLookup((runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"text")),"elementDefinite")), env.opts.autoescape);
-output += " ne respecte pas la charte, il n'a rien à faire ici</label>\n\n\t\t    <p id=\"mail-error\" class=\"error\" style=\"margin-bottom: -15px;\">Veuillez renseigner une adresse mail valide</p>\n\t\t    <div class=\"input-field\" >\n\t\t\t\t\t\t<input class=\"input-mail validate\" type=\"email\" placeholder=\"Votre adresse mail\" style=\"margin-bottom: 0\">\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"input-field\">\n\t\t\t\t\t\t<input class=\"input-comment\" type=\"text\" placeholder=\"Commentaire optionnel pour la modération\"/>\n\t\t\t\t</div>\n\t\t\t\n\t\t\t<div class=\"footer\">\n\t\t\t\t<button type=\"button\"\n\t\t\t\t\t\tonclick=\"$('#popup-report-error').closeModal()\"  \n\t\t\t\t\t\tclass=\"waves-effect waves-teal btn-flat\">\n\t\t\t\t\tAnnuler\n\t\t\t\t</button>\n\t\t\t\t\n\t\t\t\t<button type=\"button\" \n\t\t\t\t\t\tid=\"submit-report\"\t\t\n\t\t\t\t\t\tclass=\"btn waves-effect waves-light\">\n\t\t\t\t\t\tEnvoyer\n\t\t\t\t</button>\n\t\t\t</div>\n\n\t\t</form>\t    \n\n  </div>\n   \n</div>";
+output += " ne respecte pas la charte, il n'a rien à faire ici</label>\n\n\t\t    <input class=\"option-radio-btn \"value=\"4\" name=\"report-error\" type=\"radio\" id=\"report4\"/>\n\t\t    <label class=\"option-radio-label\" for=\"report4\">";
+output += runtime.suppressValue(env.getFilter("capitalize").call(context, runtime.memberLookup((runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"text")),"elementDefinite")), env.opts.autoescape);
+output += " est référencé plusieurs fois sur la carte (doublon)</label>\n\n\t\t    <p id=\"mail-error\" class=\"error\" style=\"margin-bottom: -15px;\">Veuillez renseigner une adresse mail valide</p>\n\t\t    <div class=\"input-field\" >\n\t\t\t\t\t\t<input class=\"input-mail validate\" type=\"email\" placeholder=\"Votre adresse mail\" style=\"margin-bottom: 0\">\n\t\t\t\t</div>\n\n\t\t\t\t<div class=\"input-field\">\n\t\t\t\t\t\t<input class=\"input-comment\" type=\"text\" placeholder=\"Commentaire optionnel pour la modération\"/>\n\t\t\t\t</div>\n\t\t\t\n\t\t\t<div class=\"footer\">\n\t\t\t\t<button type=\"button\"\n\t\t\t\t\t\tonclick=\"$('#popup-report-error').closeModal()\"  \n\t\t\t\t\t\tclass=\"waves-effect waves-teal btn-flat\">\n\t\t\t\t\tAnnuler\n\t\t\t\t</button>\n\t\t\t\t\n\t\t\t\t<button type=\"button\" \n\t\t\t\t\t\tid=\"submit-report\"\t\t\n\t\t\t\t\t\tclass=\"btn waves-effect waves-light\">\n\t\t\t\t\t\tEnvoyer\n\t\t\t\t</button>\n\t\t\t</div>\n\n\t\t</form>\t    \n\n  </div>\n   \n</div>";
 if(parentTemplate) {
 parentTemplate.rootRenderFunc(env, context, frame, runtime, cb);
 } else {
@@ -30522,7 +30524,7 @@ output += "\n      </span>        \n    </div>\n  ";
 }
 output += "\n\n  ";
 var t_1;
-t_1 = {"-2": "Erreur de géolocalisation","-1": "Aucune catégorie renseignée","0": "Pas de modération nécessaire","1": "Erreurs signalées","2": "Votes non consensuels","3": "En attente depuis trop longtemps"};
+t_1 = {"-2": "Erreur de géolocalisation","-1": "Aucune catégorie renseignée","0": "Pas de modération nécessaire","1": "Erreurs signalées","2": "Votes non consensuels","3": "En attente depuis trop longtemps","4": "Doublon potentiel"};
 frame.set("moderationStates", t_1, true);
 if(frame.topLevel) {
 context.setVariable("moderationStates", t_1);
@@ -30531,11 +30533,11 @@ if(frame.topLevel) {
 context.addExport("moderationStates", t_1);
 }
 output += " \n\n  ";
-if((lineno = 25, colno = 29, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "element")),"needsModeration"), "element[\"needsModeration\"]", context, [])) && (lineno = 25, colno = 61, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"isFeatureActivated"), "config[\"isFeatureActivated\"]", context, ["moderation"]))) {
+if((lineno = 26, colno = 29, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "element")),"needsModeration"), "element[\"needsModeration\"]", context, [])) && (lineno = 26, colno = 61, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"isFeatureActivated"), "config[\"isFeatureActivated\"]", context, ["moderation"]))) {
 output += "\n    <div class=\"moderation-section\">\n      <span class=\"basic-message\">\n        <span class=\"gogo-icon-moderation\"></span>\n        <span class=\"text\">";
 output += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "moderationStates")),runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "element")),"moderationState")), env.opts.autoescape);
 output += "</span>\n        ";
-if((lineno = 30, colno = 37, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"isFeatureAvailable"), "config[\"isFeatureAvailable\"]", context, ["directModeration"]))) {
+if((lineno = 31, colno = 37, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"isFeatureAvailable"), "config[\"isFeatureAvailable\"]", context, ["directModeration"]))) {
 output += "\n          ";
 if(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "element")),"moderationState") == runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "ElementModerationState")),"ReportsSubmitted")) {
 output += " \n            <span class=\"mark-as-moderated-btn btn action-btn waves-effect waves-light\">Marquer comme résolu</span>\n          ";
@@ -30927,7 +30929,7 @@ context.addExport("userRoles", t_3);
 }
 t_2 += " \n\n";
 var t_4;
-t_4 = {"0": "L'élément n'existe plus","1": "Les informations sont incorrectes","2": "L'élément ne respecte pas la charte"};
+t_4 = {"0": "L'élément n'existe plus","1": "Les informations sont incorrectes","2": "L'élément ne respecte pas la charte","4": "L'élément est référencé plusieurs fois"};
 frame.set("reportValues", t_4, true);
 if(frame.topLevel) {
 context.setVariable("reportValues", t_4);
