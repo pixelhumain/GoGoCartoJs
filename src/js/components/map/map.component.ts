@@ -97,7 +97,7 @@ export class MapComponent
 		let baseLayers = {};
 		for(let tileLayer of configTileLayers)
 		{
-			baseLayers[tileLayer.name] = L.tileLayer(tileLayer.url)
+			baseLayers[tileLayer.name] = L.tileLayer(tileLayer.url, {attribution: tileLayer.attribution});
 		}
 
 		// Get defaultBaseLayer from Cookie if possible
@@ -134,7 +134,6 @@ export class MapComponent
 		this.addMarkerClusterGroup();		
 
 		L.control.zoom({position:'topright'}).addTo(this.map_);		
-
 		L.control.layers(baseLayers, {}, {position:'topright', collapsed: false}).addTo(this.map_);		
 
 		$('#directory-content-map #change-layers').click( (e) =>
