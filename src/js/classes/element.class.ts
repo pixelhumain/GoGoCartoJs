@@ -126,17 +126,18 @@ export class Element
 	searchScore : number = null;
 
 	constructor(elementJson : any)
-	{
+	{	
+
 		// when we get the compact json representation of the element from the server
 		// the elementJson is a simple array with the more important element attribute
-		if (!elementJson.id && elementJson.length == 7)
+		if (!elementJson.id && $.isArray(elementJson) && elementJson.length >= 5)
 		{
-			this.id = elementJson[0];
-			this.status = elementJson[1];			
-			this.name = elementJson[2];
-			this.position = L.latLng(elementJson[3], elementJson[4]);	
-			this.moderationState = elementJson[5];		
-			this.createOptionValues(elementJson[6]);				
+			this.id = elementJson[0];			
+			this.name = elementJson[1];
+			this.position = L.latLng(elementJson[2], elementJson[3]);				
+			this.createOptionValues(elementJson[4]);		
+			this.status = elementJson.length >= 6 ? elementJson[5] : 1;	
+			this.moderationState = elementJson.length >= 7 ? elementJson[6] : 0;					
 		}
 		else this.updateAttributesFromFullJson(elementJson);
 	}	
@@ -150,8 +151,8 @@ export class Element
 		this.id = elementJson.id;
 		this.position = L.latLng(elementJson.geo.latitude, elementJson.geo.longitude);
 		this.name = elementJson.name;
-		this.status = elementJson.status;
-		this.moderationState = elementJson.moderationState;
+		this.status = elementJson.status || 1;
+		this.moderationState = elementJson.moderationState || 0;
 
 		// update createOptionValue vene if element already exist
 		this.createOptionValues(elementJson.optionValues);
@@ -221,10 +222,11 @@ export class Element
 			this.optionValuesByCatgeory = [];
 		}
 
-		let newOption : OptionValue;
-		for (let optionValueJson of optionsValuesJson)
+		let optionValueJson, newOption : OptionValue;
+		for (let key = 0; key < optionsValuesJson.length; ++key) 
 		{
-			newOption = new OptionValue(optionValueJson);
+			optionValueJson =  optionsValuesJson[key];
+			newOption = new OptionValue(optionValueJson, key);
 
 			if (newOption.option)
 			{
@@ -415,6 +417,8 @@ export class Element
 
   private getDiffOptionValues(optionValues, newOptionValues)
   {
+    optionValues = optionValues.map( (obj) => new OptionValue(obj));
+    newOptionValues = newOptionValues.map( (obj) => new OptionValue(obj));
     let diffOptionsValues = [];
     let newOVIds = newOptionValues.map((obj) => obj.optionId);
     let oldOVIds = optionValues.map((obj) => obj.optionId);

@@ -64,7 +64,10 @@ export class AjaxModule
 			stringifiedBounds += bound.toBBoxString() + ";";
 		}
 
-		let dataRequest : any = { bounds : stringifiedBounds, mainOptionId : App.currMainId, fullRepresentation : getFullRepresentation };
+		let dataRequest : any = { bounds : stringifiedBounds, 
+															mainOptionId : App.currMainId, 
+															fullRepresentation : getFullRepresentation, 
+															ontology : getFullRepresentation ? 'gogofull' : 'gogocompact' };
 
 		let route = App.config.data.elementInBoundsApiUrl;
 		
@@ -73,7 +76,7 @@ export class AjaxModule
 
 	private sendAjaxElementRequest($request : Request, $expectedFilledBounds = null)
 	{
-		if (this.allElementsReceived) { console.log("All elements already received"); return; }
+		if (this.allElementsReceived) { /*console.log("All elements already received");*/ return; }
 
 		//console.log("Ajax send elements request ", $request);
 
@@ -136,18 +139,19 @@ export class AjaxModule
 	getElementById(elementId, callbackSuccess?, callbackFailure?)
 	{
 		let start = new Date().getTime();
-		let route = App.config.data.elementApiUrl;
+		let route = App.config.data.elementApiUrl + elementId;
 
 		$.ajax({
 			url: route,
 			method: "get",
-			data: { elementId: elementId },
+			data: { id: elementId, fullRepresentation: true },
 			success: response => 
 			{	        
 				if (response)
 				{
 					let end = new Date().getTime();
 					// console.log("receive elementById in " + (end-start) + " ms", response);			
+					if (response.data) response = response.data[0];			
 
 					if (callbackSuccess) callbackSuccess(response); 
 					//this.onNewElement.emit(response);							

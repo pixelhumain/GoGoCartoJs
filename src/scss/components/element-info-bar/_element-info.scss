@@ -77,15 +77,17 @@
 
 			.inline-option-values  
 			{ 
-			    font-weight: bold;
-			    font-style: italic;
+		    font-weight: bold;
+		    font-style: italic;
 
-			    .option-value.disabled { color: #9C9C9C; font-weight: normal; }
+		    .option-value.disabled { color: #9C9C9C; font-weight: normal; }
 			}
 			.description
 			{
-			    margin-bottom: .7rem;
-			    text-align: justify;
+		    margin-bottom: .7rem;
+		    text-align: justify;
+
+        p { margin: 0}
 			}
 		}		
 	}	
