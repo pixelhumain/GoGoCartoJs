@@ -57,8 +57,7 @@ export class GoGoConfig
   readonly data =
   {
       taxonomy: '',
-      elementApiUrl: '',
-      elementInBoundsApiUrl: '',
+      elementsApiUrl: '',
       showPending: true,
   };
   readonly menu =

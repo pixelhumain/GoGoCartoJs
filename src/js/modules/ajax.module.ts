@@ -18,16 +18,12 @@ declare let Routing;
 
 export class Request
 {
-	constructor(public route : string, public data : any)
-	{
-	};
+	constructor(public route : string, public data : any) {};
 }
 
 export class DataAroundRequest
 {
-	constructor(public originLat : number, public originLng : number, public distance :number, public maxResults : number, public mainOptionId : number)
-	{
-	};
+	constructor(public originLat : number, public originLng : number, public distance :number, public maxResults : number, public mainOptionId : number) {};
 }
 
 export class AjaxModule
@@ -47,38 +43,102 @@ export class AjaxModule
 
 	constructor() { }  
 
+	sendRequest(route : string, method : string, data : any, callbackSuccess?, callbackFailure?)
+	{
+		//console.log("SendAjaxRequest to " + route, data);
+
+		$.ajax({
+			url: route,
+			method: method,
+			data: data,
+			success: response => 
+			{	        
+				//console.log("Ajax response", response);
+				if (response)
+				{					
+					if (callbackSuccess) callbackSuccess(response); 						
+				}				       
+			},
+			error: response =>
+			{
+				if (callbackFailure) callbackFailure(response.data); 		
+			}
+		});
+	}
+
+	getElementById(elementId, callbackSuccess?, callbackFailure?)
+	{
+		let start = new Date().getTime();
+		let route = App.config.data.elementsApiUrl + '/' + elementId;
+
+		$.ajax({
+			url: route,
+			method: "get",
+			data: { },
+			success: response => 
+			{	        
+				if (response)
+				{
+					let end = new Date().getTime();
+					// console.log("receive elementById in " + (end-start) + " ms", response);		
+					
+					let elementJson;	
+					if (response.data) elementJson = Array.isArray(response.data) ? response.data[0] : response.data;			
+					else elementJson = response;
+
+					if (callbackSuccess) callbackSuccess(elementJson); 
+					//this.onNewElement.emit(response);							
+				}	
+				else if (callbackFailure) callbackFailure(response); 				       
+			},
+			error: response =>
+			{
+				if (callbackFailure) callbackFailure(response); 		
+			}
+		});
+	};
+
 	getElementsInBounds($bounds : L.LatLngBounds[], getFullRepresentation : boolean = false, expectedFilledBounds : L.LatLngBounds)
 	{
 		// if invalid location we abort
-		if (!$bounds || $bounds.length == 0 || !$bounds[0]) 
-		{
-			//console.log("Ajax invalid request", $bounds);
-			return;
-		}
-		//console.log($bounds);
+		if (!$bounds || $bounds.length == 0 || !$bounds[0]) { return; }
 
-		let stringifiedBounds = "";
+		let result = this.convertBoundsIntoParams($bounds);
 
-		for (let bound of $bounds) 
-		{
-			stringifiedBounds += bound.toBBoxString() + ";";
-		}
-
-		let dataRequest : any = { bounds : stringifiedBounds, 
+		let dataRequest : any = { bounds : result.boundsString, 
+															boundsJson : result.boundsJson,
 															mainOptionId : App.currMainId, 
 															fullRepresentation : getFullRepresentation, 
 															ontology : getFullRepresentation ? 'gogofull' : 'gogocompact' };
+		
 
-		let route = App.config.data.elementInBoundsApiUrl;
+		let route = App.config.data.elementsApiUrl;
 		
 		this.sendAjaxElementRequest(new Request(route, dataRequest), expectedFilledBounds);
+	}	
+
+	private convertBoundsIntoParams($bounds : L.LatLngBounds[]) 
+	{
+		let stringifiedBounds = "";
+		let digits = 5;
+		let boundsLessDigits = [];
+		for (let bound of $bounds) 
+		{
+			let southWest = L.latLng(L.Util.formatNum(bound.getSouthWest().lat, digits), L.Util.formatNum(bound.getSouthWest().lng, digits))
+			let nortEast = L.latLng(L.Util.formatNum(bound.getNorthEast().lat, digits), L.Util.formatNum(bound.getNorthEast().lng, digits))
+			bound = L.latLngBounds(southWest, nortEast);
+			boundsLessDigits.push(bound);
+			stringifiedBounds += bound.toBBoxString() + ";";
+		}
+
+		return {boundsString: stringifiedBounds, boundsJson: JSON.stringify(boundsLessDigits)};
 	}
 
 	private sendAjaxElementRequest($request : Request, $expectedFilledBounds = null)
 	{
 		if (this.allElementsReceived) { /*console.log("All elements already received");*/ return; }
 
-		//console.log("Ajax send elements request ", $request);
+		// console.log("Ajax send elements request ", $request);
 
 		if (this.isRetrievingElements)
 		{		
@@ -103,7 +163,7 @@ export class AjaxModule
 			},
 			success: response =>
 			{	
-				//console.log(response);
+				console.log(response);
 
 				if (response.data !== null)
 				{
@@ -135,56 +195,4 @@ export class AjaxModule
 			},
 		});
 	};
-
-	getElementById(elementId, callbackSuccess?, callbackFailure?)
-	{
-		let start = new Date().getTime();
-		let route = App.config.data.elementApiUrl + elementId;
-
-		$.ajax({
-			url: route,
-			method: "get",
-			data: { id: elementId, fullRepresentation: true },
-			success: response => 
-			{	        
-				if (response)
-				{
-					let end = new Date().getTime();
-					// console.log("receive elementById in " + (end-start) + " ms", response);			
-					if (response.data) response = response.data[0];			
-
-					if (callbackSuccess) callbackSuccess(response); 
-					//this.onNewElement.emit(response);							
-				}	
-				else if (callbackFailure) callbackFailure(response); 				       
-			},
-			error: response =>
-			{
-				if (callbackFailure) callbackFailure(response); 		
-			}
-		});
-	};
-
-	sendRequest(route : string, method : string, data : any, callbackSuccess?, callbackFailure?)
-	{
-		//console.log("SendAjaxRequest to " + route, data);
-
-		$.ajax({
-			url: route,
-			method: method,
-			data: data,
-			success: response => 
-			{	        
-				//console.log("Ajax response", response);
-				if (response)
-				{					
-					if (callbackSuccess) callbackSuccess(response); 						
-				}				       
-			},
-			error: response =>
-			{
-				if (callbackFailure) callbackFailure(response.data); 		
-			}
-		});
-	}
 }
