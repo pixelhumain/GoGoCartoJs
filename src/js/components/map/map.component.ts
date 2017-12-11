@@ -246,7 +246,7 @@ export class MapComponent
 	// fit map view to bounds
 	fitBounds(bounds : L.LatLngBounds, animate : boolean = true)
 	{
-		//console.log("fitbounds", bounds);
+		// console.log("fitbounds", bounds);
 		if (!this.isInitialized)
 		{
 			this.waitingBounds = bounds;
@@ -259,7 +259,7 @@ export class MapComponent
 
 	fitDefaultBounds()
 	{
-		this.fitBounds(App.boundsModule.maxBounds);
+		this.fitBounds(App.boundsModule.defaultBounds);
 	}
 
 	panToLocation(location : L.LatLng, zoom?, animate : boolean = true)

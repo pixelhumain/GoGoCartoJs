@@ -20,11 +20,13 @@ export class BoundsModule
 
 	// we don't download elements outside of maxBounds
 	maxBounds : L.LatLngBounds;
+	defaultBounds : L.LatLngBounds;
 	defaultCenter : L.LatLng;
 
 	constructor(config : GoGoConfig)
 	{
 		this.maxBounds = config.map.maxBounds;
+		this.defaultBounds = config.map.defaultBounds;
 		this.defaultCenter = config.map.defaultCenter;
 	}
 

@@ -72,7 +72,7 @@ export class GeocoderModule
 		{
 			console.log("default location");
 			this.lastResults = [];
-			this.lastResultBounds = App.boundsModule.maxBounds;
+			this.lastResultBounds = App.boundsModule.defaultBounds;
 
 			this.onGeocodeResult.emit();
 
