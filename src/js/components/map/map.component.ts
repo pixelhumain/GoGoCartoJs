@@ -114,7 +114,7 @@ export class MapComponent
 		    showCoverageOnHover: false,
 		    zoomToBoundsOnClick: true,
 		    spiderfyOnHover: false,
-		    spiderfyMaxCount: 10,
+		    spiderfyMaxCount: Infinity,
 		    spiderfyDistanceMultiplier: 1.1,
 		    chunkedLoading: true,
 		    animate: false,
