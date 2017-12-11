@@ -5352,6 +5352,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         .gogocarto-container .element-item .collapsible-header .collapsible-header-more .description {
           margin-bottom: .7rem;
           text-align: justify; }
+          .gogocarto-container .element-item .collapsible-header .collapsible-header-more .description p {
+            margin: 0; }
     .gogocarto-container .element-item .collapsible-body {
       background-color: #F7F7F7;
       padding: 0;
