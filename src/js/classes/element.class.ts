@@ -147,7 +147,7 @@ export class Element
 		this.id = elementJson.id;
 		this.position = L.latLng(elementJson.geo.latitude, elementJson.geo.longitude);
 		this.name = elementJson.name;
-		this.status = elementJson.status || 1;
+		this.status = elementJson.status == undefined ? 1 : elementJson.status;
 		this.moderationState = elementJson.moderationState || 0;
 
 		// update createOptionValue vene if element already exist
