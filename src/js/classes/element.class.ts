@@ -716,13 +716,13 @@ export class Element
 	{
 		switch(dayKey)
 		{
-			case 'Monday': return 'lundi';
-			case 'Tuesday': return 'mardi';
-			case 'Wednesday': return 'mercredi';
-			case 'Thursday': return 'jeudi';
-			case 'Friday': return 'vendredi';
-			case 'Saturday': return 'samedi';
-			case 'Sunday': return 'dimanche';
+			case 'Mo': return 'lundi';
+			case 'Tu': return 'mardi';
+			case 'We': return 'mercredi';
+			case 'Th': return 'jeudi';
+			case 'Fr': return 'vendredi';
+			case 'Sa': return 'samedi';
+			case 'Su': return 'dimanche';
 		}
 
 		return '';
@@ -736,26 +736,7 @@ export class Element
 			return null;
 		}
 		let result = '';
-		if (dailySlot.slot1start !== null)
-		{
-			result+= this.formateDate(dailySlot.slot1start);
-			result+= ' - ';
-			result+= this.formateDate(dailySlot.slot1end);
-		}
-		if (dailySlot.slot2start !== null)
-		{
-			result+= ' et ';
-			result+= this.formateDate(dailySlot.slot2start);
-			result+= ' - ';
-			result+= this.formateDate(dailySlot.slot2end);
-		}
-		return result;
-	};
-
-	formateDate(date) 
-	{		
-		if (!date) return;
-		return date.date.split(':00.000000')[0].split('1970-01-01 ')[1];
+		return dailySlot.replace(/-/g, ' - ').replace(/,/g, ' et ');
 	};
 
 	isCurrentStarChoiceRepresentant() 
