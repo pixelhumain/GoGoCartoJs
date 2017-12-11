@@ -27,7 +27,7 @@ export class OptionValue
 			this.index = $key;
 			this.description = '';
 		}
-		else if ($optionValueJson.length >= 2)
+		else if (Array.isArray($optionValueJson) && $optionValueJson.length >= 2)
 		{
 			// console.log("array")
 			this.optionId = $optionValueJson[0];
