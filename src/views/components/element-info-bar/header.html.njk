@@ -17,7 +17,7 @@
 
     {# Name #}
     {{ element.getProperty('name')|safe }}
-    {% if element.isDeleted() %}</br><u>(En cours de suppression)</u>{% endif %}
+    {% if element.isDeleted() %}</br><u>(Cet élément a été refusé ou supprimé)</u>{% endif %}
 
     {% if showDistance and element.distance != null %}
       <span class="distance gogo-neutral">~ {{ element.distance if isMapMode else element.distanceFromBoundsCenter }} km</span>
