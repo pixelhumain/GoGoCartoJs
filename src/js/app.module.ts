@@ -683,9 +683,6 @@ export class AppModule
 
 	handleElementsChanged(result : ElementsChanged)
 	{
-		// console.log("handleElementsChanged toDisplay : ",result.elementsToDisplay.length);
-		// console.log("handleElementsChanged new : ",result.newElements.length);
-		// console.log("handleElementsChanged remove : ",result.elementsToRemove.length);
 		let start = new Date().getTime();
 
 		if (this.mode_ == AppModes.List)
@@ -698,7 +695,7 @@ export class AppModule
 
 			this.mapComponent.markerClustererGroup.restoreUnclusters(true);
 
-			//console.log("Display = " + result.elementsToDisplay.length + " / remove = " + result.elementsToRemove.length + " / add = " + result.newElements.length);
+			// console.log("Display = " + result.elementsToDisplay.length + " / remove = " + result.elementsToRemove.length + " / add = " + result.newElements.length);
 
 			// In some cases, markerCluster works faster clearing alls markers and adding them again
 			if (result.elementsToRemove.length + result.newElements.length > result.elementsToDisplay.length)
@@ -713,7 +710,7 @@ export class AppModule
 			}			
 
 			this.mapComponent.markerClustererGroup.checkForUnclestering(this.map().getBounds());
-		}			
+		}	
 
 		let end = new Date().getTime();
 		//console.log("ElementsChanged in " + (end-start) + " ms");	

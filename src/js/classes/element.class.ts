@@ -106,10 +106,6 @@ export class Element
 	// for elements module algorithms
 	isDisplayed :boolean = false;
 
-	isVisible_ : boolean = false;
-	isInElementList : boolean= false;
-	isInMapBounds : boolean = false;
-
 	//TODO
 	biopenMarker_ : BiopenMarker = null;
 	htmlRepresentation_ = '';
@@ -271,23 +267,6 @@ export class Element
 		this.biopenMarker_ = new BiopenMarker(this.id, this.position);
 		this.isInitialized_ = true;	
 	}
-
-	show() 
-	{		
-		if (!this.isInitialized_) this.initialize();	
-		//this.update();
-		//this.biopenMarker_.update();
-		this.biopenMarker_.show();
-		this.isVisible_ = true;		
-	};
-
-	hide() 
-	{		
-		if (this.biopenMarker_ && App.mode == AppModes.Map) this.biopenMarker_.hide();
-		this.isVisible_ = false;
-		// unbound events (click etc...)?
-		//if (constellationMode) $('#directory-content-list #element-info-'+this.id).hide();
-	};
 
 	update($force : boolean = false)
 	{
@@ -608,11 +587,6 @@ export class Element
 		this.distanceFromBoundsCenter = this.distanceFromBoundsCenter ? Math.round(1.2*this.distanceFromBoundsCenter) : null;
 	}
 
-	updateIsInMapBounds()
-	{
-		this.isInMapBounds = App.mapComponent.isMapBounds() && App.map().getBounds().contains(this.position);
-	}
-
 	isPending() { return this.status == ElementStatus.PendingAdd || this.status == ElementStatus.PendingModification; }
 	isDeleted() { return this.status <= ElementStatus.AdminRefused }
 	needsModeration() { return this.moderationState != ElementModerationState.NotNeeded }
@@ -803,11 +777,6 @@ export class Element
 		// initialize = initialize || false;
 		// if (initialize) this.initialize();
 		return this.biopenMarker_;
-	};
-
-	get isVisible() 
-	{		
-		return this.isVisible_;
 	};
 
 	get isInitialized() 

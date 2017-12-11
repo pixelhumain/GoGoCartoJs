@@ -163,7 +163,7 @@ export class AjaxModule
 			},
 			success: response =>
 			{	
-				console.log(response);
+				// console.log(response);
 
 				if (response.data !== null)
 				{
