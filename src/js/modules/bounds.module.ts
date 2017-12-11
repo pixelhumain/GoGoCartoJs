@@ -18,13 +18,13 @@ export class BoundsModule
 	fullRepresentationRetrievingComplete : boolean[] = [];
 	compactRepresentationRetrievingComplete : boolean[] = [];
 
-	// the bounds including all our map (here France)
+	// we don't download elements outside of maxBounds
 	maxBounds : L.LatLngBounds;
 	defaultCenter : L.LatLng;
 
 	constructor(config : GoGoConfig)
 	{
-		this.maxBounds = config.map.defaultBounds;
+		this.maxBounds = config.map.maxBounds;
 		this.defaultCenter = config.map.defaultCenter;
 	}
 
@@ -85,7 +85,7 @@ export class BoundsModule
 		if(getFullRepresentation) this.fullRepresentationFilledBound[mainOptionId] = expectedBound;
 		else this.compactRepresentationFilledBound[mainOptionId] = expectedBound;
 
-		if (expectedBound.contains(this.maxBounds)) 
+		if (this.maxBounds && expectedBound.contains(this.maxBounds)) 
 		{
 			if(getFullRepresentation) this.fullRepresentationRetrievingComplete[mainOptionId] = true;
 			else this.compactRepresentationRetrievingComplete[mainOptionId] = true;

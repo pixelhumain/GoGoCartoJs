@@ -39,6 +39,8 @@ export class ElementsModule
 	favoriteIds_ : number[] = [];
 	isShowingHalfHidden : boolean = false;
 
+	firstElementsHaveBeendisplayed : boolean = false;
+
 	constructor()
 	{
 		let cookies = Cookies.readCookie('FavoriteIds');
@@ -145,14 +147,7 @@ export class ElementsModule
 		return this.searchResultElements_;
 	}
 
-	showElement(element : Element)
-	{
-		element.show();
-		//if (!element.isDisplayed) App.mapComponent.addMarker(element.marker.getLeafletMarker());
-		this.currVisibleElements().push(element);
-	}
-
-	addFavorite (favoriteId : number, modifyCookies = true)
+	addFavorite(favoriteId : number, modifyCookies = true)
 	{
 		let element = this.getElementById(favoriteId);
 		if (element !== null) element.isFavorite = true;
@@ -165,7 +160,7 @@ export class ElementsModule
 		}
 	};
 
-	removeFavorite (favoriteId : number, modifyCookies = true)
+	removeFavorite(favoriteId : number, modifyCookies = true)
 	{
 		let element = this.getElementById(favoriteId);
 		if (element !== null) element.isFavorite = false;
@@ -187,7 +182,6 @@ export class ElementsModule
 		let l = visibleElements.length;
 		while(l--)
 		{
-			visibleElements[l].hide();
 			visibleElements[l].isDisplayed = false;
 		}
 		let markers = visibleElements.map( (e) => e.marker.getLeafletMarker());
@@ -226,6 +220,7 @@ export class ElementsModule
 
 		let elements : Element[] = [];
 
+		// Getting the element array to work on
 		if ( (App.state == AppStates.ShowElementAlone || App.state == AppStates.ShowDirections ) && App.mode == AppModes.Map) 
 			elements = [App.DEAModule.getElement()];		
 		else if (App.dataType == AppDataType.All)
@@ -240,24 +235,21 @@ export class ElementsModule
 		}		
 		
 		if (!elements) return;
-		//console.log("UPDATE ELEMENTS ", elements);
+		// console.log("UPDATE ELEMENTS ", elements.length);
 
 		let i : number, element : Element;
-		let bounds;
 
 	 	let newElements : Element[] = [];
 	 	let elementsToRemove : Element[] = [];
-	 	let elementsChanged = false;
-
-		let filterModule = App.filterModule;	
-
-		i = elements.length;
 
 		//console.log("updateElementsToDisplay. Nbre element à traiter : " + i, checkInAllElements);
 		
+		i = elements.length;
+		let filterModule = App.filterModule;	
+		let currBounds = App.boundsModule.extendedBounds;
 		let start = new Date().getTime();
 
-		while(i-- /*&& this.visibleElements_.length < App.getMaxElements()*/)
+		while(i--)
 		{
 			element = elements[i];
 
@@ -265,7 +257,7 @@ export class ElementsModule
 
 			let elementInBounds = false;
 			if (App.mode == AppModes.List && App.dataType != AppDataType.All) elementInBounds = true;
-			else elementInBounds = App.boundsModule.extendedBounds.contains(element.position);
+			else elementInBounds = currBounds.contains(element.position);
 
 			if ( elementInBounds && filterModule.checkIfElementPassFilters(element))
 			{
@@ -274,7 +266,6 @@ export class ElementsModule
 					element.isDisplayed = true;
 					this.currVisibleElements().push(element);
 					newElements.push(element);
-					elementsChanged = true;
 				}
 			}
 			else
@@ -283,7 +274,6 @@ export class ElementsModule
 				{
 					element.isDisplayed = false;
 					elementsToRemove.push(element);
-					elementsChanged = true;
 					let index = this.currVisibleElements().indexOf(element);
 					if (index > -1) this.currVisibleElements().splice(index, 1);
 				}
@@ -292,15 +282,23 @@ export class ElementsModule
 
 		let end = new Date().getTime();
 		let time = end - start;
+
 		//window.console.log("UpdateElementsToDisplay en " + time + " ms");
-	
 		this.onElementsChanged.emit({
 			elementsToDisplay: this.currVisibleElements(), 
 			newElements : newElements, 
 			elementsToRemove : elementsToRemove
-		});	
+		});
 
 		this.updateElementsIcons(filterHasChanged);		
+
+		// strange bug, at initialization, some markers isolated markers are not displayed
+		// refreshing the elementModule solve this...
+		if (!this.firstElementsHaveBeendisplayed && this.currVisibleElements().length > 0)		
+		{
+			this.firstElementsHaveBeendisplayed = true;
+			setTimeout( () => { this.updateElementsToDisplay(true) }, 100);
+		}		
 	};
 
 	currVisibleElements() 
