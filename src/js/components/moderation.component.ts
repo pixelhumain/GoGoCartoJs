@@ -17,12 +17,12 @@ export function createListenersForMarkAsResolved()
     else
     {
       let element = App.elementModule.getElementById(getCurrentElementIdShown());
-
-      console.log("send mark as resolved ", element.id);
-
+      let comment = $(this).siblings('.moderation-input-comment').val();
+     
       let route = App.config.features.moderation.url;
-      let data = { elementId: element.id };
-
+      let data = { elementId: element.id, comment: comment };
+      console.log("send mark as resolved ", data);
+      
       App.ajaxModule.sendRequest(route, 'post', data, (response) =>
       {        
         let responseMessage = response.message;

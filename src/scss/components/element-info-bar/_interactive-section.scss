@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-05-11 11:26:03
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-12-04 12:57:54
+* @Last Modified time: 2017-12-13 08:58:06
 */
 .interactive-section
 {
@@ -10,6 +10,8 @@
 	@media #{$medium-and-up} { padding: 0 1rem 0 1.6rem; }
 	position: relative;
 	line-height: 3rem;
+
+  & > div { position: relative; }
 
 	.result-message
 	{
@@ -60,13 +62,31 @@
 	.action-btn
 	{ 
 		position: absolute; 
-		right: 1rem;
-		bottom: 7px;
+		right: 0;
+		top: 8px;
 		margin: 0;
     background-color: #dedede;
     color: #272626;
     font-size: .85rem;
 	}
+
+  .moderation-input-comment {
+    color:white;
+    border-color: #cccccc !important;
+    height: 2.2rem;
+    &::-webkit-input-placeholder { 
+    color: #cccccc;
+    }
+    &::-moz-placeholder { 
+      color: #cccccc;
+    }
+    &:-ms-input-placeholder { 
+      color: #cccccc;
+    }
+    &:-moz-placeholder { 
+      color: #cccccc;
+    }
+  }
 }
 
 .validation-process-info
