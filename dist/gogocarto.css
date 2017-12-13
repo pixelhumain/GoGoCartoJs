@@ -3801,13 +3801,13 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
 * @Author: Sebastian Castro
 * @Date:   2017-05-11 11:26:03
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-12-04 12:57:54
+* @Last Modified time: 2017-12-13 08:58:06
 */
   /*
 * @Author: Sebastian Castro
 * @Date:   2017-12-04 15:52:58
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-12-07 07:51:48
+* @Last Modified time: 2017-12-13 12:38:21
 */ }
   .gogocarto-container .starRepresentationChoice-helper {
     display: none;
@@ -5475,6 +5475,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     @media only screen and (min-width: 601px) {
       .gogocarto-container .interactive-section {
         padding: 0 1rem 0 1.6rem; } }
+    .gogocarto-container .interactive-section > div {
+      position: relative; }
     .gogocarto-container .interactive-section .result-message {
       text-align: center;
       font-weight: bold;
@@ -5503,12 +5505,24 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     color: white; }
   .gogocarto-container .vote-section .action-btn, .gogocarto-container .moderation-section .action-btn {
     position: absolute;
-    right: 1rem;
-    bottom: 7px;
+    right: 0;
+    top: 8px;
     margin: 0;
     background-color: #dedede;
     color: #272626;
     font-size: .85rem; }
+  .gogocarto-container .vote-section .moderation-input-comment, .gogocarto-container .moderation-section .moderation-input-comment {
+    color: white;
+    border-color: #cccccc !important;
+    height: 2.2rem; }
+    .gogocarto-container .vote-section .moderation-input-comment::-webkit-input-placeholder, .gogocarto-container .moderation-section .moderation-input-comment::-webkit-input-placeholder {
+      color: #cccccc; }
+    .gogocarto-container .vote-section .moderation-input-comment::-moz-placeholder, .gogocarto-container .moderation-section .moderation-input-comment::-moz-placeholder {
+      color: #cccccc; }
+    .gogocarto-container .vote-section .moderation-input-comment:-ms-input-placeholder, .gogocarto-container .moderation-section .moderation-input-comment:-ms-input-placeholder {
+      color: #cccccc; }
+    .gogocarto-container .vote-section .moderation-input-comment:-moz-placeholder, .gogocarto-container .moderation-section .moderation-input-comment:-moz-placeholder {
+      color: #cccccc; }
   .gogocarto-container .validation-process-info:hover {
     cursor: help;
     border-bottom: 1px dashed;
@@ -5556,9 +5570,15 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
   .gogocarto-container .vote-report-item {
     line-height: 1.5rem !important;
     padding: 10px; }
+  .gogocarto-container .pending-contribution {
+    margin-bottom: -.9rem;
+    line-height: 1.5rem !important;
+    margin-top: .8rem;
+    padding: 10px; }
   .gogocarto-container .vote-report-comment {
     font-style: italic; }
   .gogocarto-container .body-admin-tab-content {
+    display: none;
     padding-right: 10px;
     font-size: .9em; }
     .gogocarto-container .body-admin-tab-content .vote-report-item {
