@@ -42,16 +42,18 @@
         <div style="float:right">{{ item.updatedAt }}</div>
     </div>
   {% else %}    
-    <div> 
-        <b>{{ contributionType[item.type] | upper }}</b> 
-        {% set labelClass = 'label-success' if item.status > 0 else 'label-danger' %}
-        {% set labelClass = 'label-warning' if item.status == 0 else labelClass %}
-        <span class="label {{ labelClass }}">{{ elementStatus[item.status] }}</span>
-        {% if item.resolvedMessage %}<span class="vote-report-comment" style="padding:0 10px"> {{ item.resolvedMessage}}</span>{% endif %}
-        {% if item.resolvedBy %}<span>(<u>{{item.resolvedBy }}</u>)</span>{% endif %}               
-        
-        <div style="float:right">{{ item.updatedAt }}</div>
-    </div>
+    {% if item.status %} {# pending contribution have status to null #}
+      <div> 
+          <b>{{ contributionType[item.type] | upper }}</b> 
+          {% set labelClass = 'label-success' if item.status > 0 else 'label-danger' %}
+          {% set labelClass = 'label-warning' if item.status == 0 else labelClass %}
+          <span class="label {{ labelClass }}">{{ elementStatus[item.status] }}</span>
+          {% if item.resolvedMessage %}<span class="vote-report-comment" style="padding:0 10px"> {{ item.resolvedMessage}}</span>{% endif %}
+          {% if item.resolvedBy %}<span>(<u>{{item.resolvedBy }}</u>)</span>{% endif %}               
+          
+          <div style="float:right">{{ item.updatedAt }}</div>
+      </div>
+    {% endif %}
 
     <div> 
       Proposé par <u>{{ item.user }}</u> 

@@ -35,6 +35,7 @@
       
       {# Votes and reports #}
       {% if config.isFeatureAvailable('directModeration') %}
+        {% include here ~ "admin/pending-contribution.html.njk" %}
         {% import here ~ "admin/votes-reports.html.njk" as VotesReportsRenderer %}
         {{ VotesReportsRenderer.render('Votes', element.votes, smallWidth) }}
         {{ VotesReportsRenderer.render('Erreurs signalées', element.reports, smallWidth) }}      

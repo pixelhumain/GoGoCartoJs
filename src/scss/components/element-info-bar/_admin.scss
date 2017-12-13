@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-12-04 15:52:58
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-12-07 07:51:48
+* @Last Modified time: 2017-12-13 12:38:21
 */
 .label {
     display: inline;
@@ -66,9 +66,18 @@
   padding: 10px;
 }
 
+.pending-contribution
+{
+    margin-bottom: -.9rem;
+    line-height: 1.5rem !important;
+    margin-top: .8rem;
+    padding: 10px;
+}
+
 .vote-report-comment { font-style: italic }
 
 .body-admin-tab-content { 
+    display:none; // hidden by default
     padding-right: 10px; 
     font-size: .9em;
     .vote-report-item { padding: 0 !important }

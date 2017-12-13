@@ -69,6 +69,7 @@ export class Element
 	moderationState : ElementModerationState;
 	reports : VoteReport[];
 	contributions : Contribution[];
+	pendingContribution : Contribution;
 	votes : VoteReport[];
 	name : string;
 	position : L.LatLng;
@@ -172,6 +173,7 @@ export class Element
 
 		this.reports = elementJson.reports;
 		this.contributions = elementJson.contributions;
+		this.pendingContribution = elementJson.pendingContribution;
 		this.votes = elementJson.votes;
 
 		this.commitment = elementJson.commitment || '';
