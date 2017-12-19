@@ -114,12 +114,22 @@ a.leaflet-control-zoom-out {
             i { font-size: 16px;line-height: 44px; margin-left: 2px; }
         }  
 
+        &#change-layers {
+            @media screen and (max-width: 850px) { display:none; }
+        }
         &#export-iframe-btn
         {
-            @media screen and (max-width: 900px) { display:none; }
+            @media screen and (max-width: 850px) { display:none; }
         }
 
-        &#map-default-view-btn i { font-size: 14px; }   
+        &#map-default-view-btn  { 
+            i { font-size: 14px; }
+            @media screen and (max-width: 850px) { display:none; }
+        } 
+
+        &#geolocalize-btn { 
+            @media screen and (min-width: 850px) { display:none; }
+        }    
     }
 }
 

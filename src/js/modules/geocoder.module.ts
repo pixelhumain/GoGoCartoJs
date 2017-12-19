@@ -58,13 +58,13 @@ export class GeocoderModule
 
 	constructor()
 	{
-		//this.geocoder = GeocoderJS.createGeocoder({ 'provider': 'openstreetmap', 'countrycodes' : 'fr'});
-		this.geocoder = GeocoderJS.createGeocoder({'provider': 'google', 'useSSL':true });
+		this.geocoder = GeocoderJS.createGeocoder({ 'provider': 'openstreetmap'});
+		//this.geocoder = GeocoderJS.createGeocoder({'provider': 'google', 'useSSL':true });
 	}
 
 	geocodeAddress( address, callbackComplete?, callbackFail? ) 
 	{
-		//console.log("geocode address : ", address);
+		// console.log("geocode address : ", address);
 		this.lastAddressRequest = address;
 
 		// if no address, we show france

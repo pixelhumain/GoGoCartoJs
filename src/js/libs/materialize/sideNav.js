@@ -9,21 +9,23 @@
       };
       options = $.extend(defaults, options);
 
+      console.log("sideNive init", options);
+
       $(this).each(function(){
-        var $this = $(this);
-        var menu_id = $("#"+ $this.attr('data-activates'));
+        // var $this = $(this);
+        var menu_id = $(this); //$("#"+ $this.attr('data-activates'));
 
         // Set to width
-        if (options.menuWidth != 240) {
-          menu_id.css('width', options.menuWidth);
-        }
+        // if (options.menuWidth != 240) {
+        //   menu_id.css('width', options.menuWidth);
+        // }
 
         // Add Touch Area
         var dragTarget = $('<div class="drag-target"></div>');
         $('body').append(dragTarget);
 
         if (options.edge == 'left') {
-          menu_id.css('left', -1 * (options.menuWidth + 10));
+          // menu_id.css('left', -1 * (options.menuWidth + 10));
           dragTarget.css({'left': 0}); // Add Touch Area
         }
         else {
@@ -34,43 +36,44 @@
         }
 
         // If fixed sidenav, bring menu out
-        if (menu_id.hasClass('fixed')) {
-            if (window.innerWidth > 992) {
-              menu_id.css('left', 0);
-            }
-          }
+        // if (menu_id.hasClass('fixed')) {
+        //   if (window.innerWidth > 992) {
+        //     menu_id.css('left', 0);
+        //   }
+        // }
 
         // Window resize to reset on large screens fixed
-        if (menu_id.hasClass('fixed')) {
-          $(window).resize( function() {
-            if (window.innerWidth > 992) {
-              // Close menu if window is resized bigger than 992 and user has fixed sidenav
-              if ($('#sidenav-overlay').css('opacity') !== 0 && menuOut) {
-                removeMenu(true);
-              }
-              else {
-                menu_id.removeAttr('style');
-                menu_id.css('width', options.menuWidth);
-              }
-            }
-            else if (menuOut === false){
-              if (options.edge === 'left')
-                menu_id.css('left', -1 * (options.menuWidth + 10));
-              else
-                menu_id.css('right', -1 * (options.menuWidth + 10));
-            }
+        // if (menu_id.hasClass('fixed')) {
+        //   $(window).resize( function() {
+        //     if (window.innerWidth > 992) {
+        //       // Close menu if window is resized bigger than 992 and user has fixed sidenav
+        //       if ($('#sidenav-overlay').css('opacity') !== 0 && menuOut) {
+        //         removeMenu(true);
+        //       }
+        //       else {
+        //         menu_id.removeAttr('style');
+        //         menu_id.css('width', options.menuWidth);
+        //       }
+        //     }
+        //     else if (menuOut === false){
+        //       if (options.edge === 'left')
+        //         menu_id.css('left', -1 * (options.menuWidth + 10));
+        //       else
+        //         menu_id.css('right', -1 * (options.menuWidth + 10));
+        //     }
 
-          });
-        }
+        //   });
+        // }
 
         // if closeOnClick, then add close event for all a tags in side sideNav
-        if (options.closeOnClick === true) {
-          menu_id.on("click.itemclick", "a:not(.collapsible-header)", function(){
-            removeMenu();
-          });
-        }
+        // if (options.closeOnClick === true) {
+        //   menu_id.on("click.itemclick", "a:not(.collapsible-header)", function(){
+        //     removeMenu();
+        //   });
+        // }
 
         function removeMenu(restoreNav) {
+          console.log("remove menu");
           panning = false;
           menuOut = false;
 
@@ -93,6 +96,7 @@
                   if (restoreNav === true) {
                     // Restore Fixed sidenav
                     menu_id.removeAttr('style');
+                    menu_id.hide();
                     menu_id.css('width', options.menuWidth);
                   }
                 }
@@ -111,6 +115,7 @@
                   if (restoreNav === true) {
                     // Restore Fixed sidenav
                     menu_id.removeAttr('style');
+                    menu_id.hide();
                     menu_id.css('width', options.menuWidth);
                   }
                 }
@@ -124,9 +129,9 @@
         var panning = false;
         var menuOut = false;
 
-        dragTarget.on('click', function(){
-          removeMenu();
-        });
+        // dragTarget.on('click', function(){
+        //   removeMenu();
+        // });
 
         dragTarget.hammer({
           prevent_default: false
@@ -164,6 +169,7 @@
               else if (x >= (options.menuWidth / 2)) { menuOut = true; }
 
               menu_id.css('left', (x - options.menuWidth));
+              menu_id.show();
             }
             else {
               // Left Direction
@@ -183,8 +189,6 @@
             }
 
 
-
-
             // Percentage overlay
             var overlayPerc;
             if (options.edge === 'left') {
@@ -202,93 +206,92 @@
           if (e.gesture.pointerType == "touch") {
             var velocityX = e.gesture.velocityX;
             panning = false;
-            if (options.edge === 'left') {
+            // if (options.edge === 'left') {
+
               // If velocityX <= 0.3 then the user is flinging the menu closed so ignore menuOut
               if ((menuOut && velocityX <= 0.3) || velocityX < -0.5) {
-                menu_id.velocity({left: 0}, {duration: 300, queue: false, easing: 'easeOutQuad'});
-                $('#sidenav-overlay').velocity({opacity: 1 }, {duration: 50, queue: false, easing: 'easeOutQuad'});
-                dragTarget.css({width: '50%', right: 0, left: ''});
+                menu_id.velocity({left: 0}, {duration: 300, queue: false, easing: 'easeOutQuad', complete: function () {
+                  $(this).trigger('open');
+                }});                
               }
               else if (!menuOut || velocityX > 0.3) {
                 // Enable Scrolling
                 $('body').css('overflow', '');
                 // Slide menu closed
-                menu_id.velocity({left: -1 * (options.menuWidth + 10)}, {duration: 200, queue: false, easing: 'easeOutQuad'});
-                $('#sidenav-overlay').velocity({opacity: 0 }, {duration: 200, queue: false, easing: 'easeOutQuad',
-                  complete: function () {
-                    $(this).remove();
-                  }});
-                dragTarget.css({width: '10px', right: '', left: 0});
+                menu_id.velocity({left: -1 * (options.menuWidth + 10)}, {duration: 200, queue: false, easing: 'easeOutQuad', complete: function () {
+                  $(this).trigger('hide');
+                }});                
               }
-            }
-            else {
-              if ((menuOut && velocityX >= -0.3) || velocityX > 0.5) {
-                menu_id.velocity({right: 0}, {duration: 300, queue: false, easing: 'easeOutQuad'});
-                $('#sidenav-overlay').velocity({opacity: 1 }, {duration: 50, queue: false, easing: 'easeOutQuad'});
-                dragTarget.css({width: '50%', right: '', left: 0});
-              }
-              else if (!menuOut || velocityX < -0.3) {
-                // Enable Scrolling
-                $('body').css('overflow', '');
-                // Slide menu closed
-                menu_id.velocity({right: -1 * (options.menuWidth + 10)}, {duration: 200, queue: false, easing: 'easeOutQuad'});
-                $('#sidenav-overlay').velocity({opacity: 0 }, {duration: 200, queue: false, easing: 'easeOutQuad',
-                  complete: function () {
-                    $(this).remove();
-                  }});
-                dragTarget.css({width: '10px', right: 0, left: ''});
-              }
-            }
+              
+            // }
+            // else {
+            //   if ((menuOut && velocityX >= -0.3) || velocityX > 0.5) {
+            //     menu_id.velocity({right: 0}, {duration: 300, queue: false, easing: 'easeOutQuad'});
+            //     $('#sidenav-overlay').velocity({opacity: 1 }, {duration: 50, queue: false, easing: 'easeOutQuad'});
+            //     dragTarget.css({width: '15px', right: '', left: 0});
+            //   }
+            //   else if (!menuOut || velocityX < -0.3) {
+            //     // Enable Scrolling
+            //     $('body').css('overflow', '');
+            //     // Slide menu closed
+            //     menu_id.velocity({right: -1 * (options.menuWidth + 10)}, {duration: 200, queue: false, easing: 'easeOutQuad'});
+            //     $('#sidenav-overlay').velocity({opacity: 0 }, {duration: 200, queue: false, easing: 'easeOutQuad',
+            //       complete: function () {
+            //         $(this).remove();
+            //       }});
+            //     dragTarget.css({width: '10px', right: 0, left: ''});
+            //   }
+            // }
 
           }
         });
 
-          $this.click(function() {
-            if (menuOut === true) {
-              menuOut = false;
-              panning = false;
-              removeMenu();
-            }
-            else {
+        // $this.click(function() {
+        //   if (menuOut === true) {
+        //     menuOut = false;
+        //     panning = false;
+        //     removeMenu();
+        //   }
+        //   else {
 
-              // Disable Scrolling
-              $('body').css('overflow', 'hidden');
-              // Push current drag target on top of DOM tree
-              $('body').append(dragTarget);
-              
-              if (options.edge === 'left') {
-                dragTarget.css({width: '50%', right: 0, left: ''});
-                menu_id.velocity({left: 0}, {duration: 300, queue: false, easing: 'easeOutQuad'});
-              }
-              else {
-                dragTarget.css({width: '50%', right: '', left: 0});
-                menu_id.velocity({right: 0}, {duration: 300, queue: false, easing: 'easeOutQuad'});
-                menu_id.css('left','');
-              }
+        //     // Disable Scrolling
+        //     $('body').css('overflow', 'hidden');
+        //     // Push current drag target on top of DOM tree
+        //     $('body').append(dragTarget);
+            
+        //     if (options.edge === 'left') {
+        //       dragTarget.css({width: '15px', right: 0, left: ''});
+        //       menu_id.velocity({left: 0}, {duration: 300, queue: false, easing: 'easeOutQuad'});
+        //     }
+        //     else {
+        //       dragTarget.css({width: '15px', right: '', left: 0});
+        //       menu_id.velocity({right: 0}, {duration: 300, queue: false, easing: 'easeOutQuad'});
+        //       menu_id.css('left','');
+        //     }
 
-              var overlay = $('<div id="sidenav-overlay"></div>');
-              overlay.css('opacity', 0)
-              .click(function(){
-                menuOut = false;
-                panning = false;
-                removeMenu();
-                overlay.velocity({opacity: 0}, {duration: 300, queue: false, easing: 'easeOutQuad',
-                  complete: function() {
-                    $(this).remove();
-                  } });
+        //     var overlay = $('<div id="sidenav-overlay"></div>');
+        //     overlay.css('opacity', 0)
+        //     .click(function(){
+        //       menuOut = false;
+        //       panning = false;
+        //       removeMenu();
+        //       overlay.velocity({opacity: 0}, {duration: 300, queue: false, easing: 'easeOutQuad',
+        //         complete: function() {
+        //           $(this).remove();
+        //         } });
 
-              });
-              $('body').append(overlay);
-              overlay.velocity({opacity: 1}, {duration: 300, queue: false, easing: 'easeOutQuad',
-                complete: function () {
-                  menuOut = true;
-                  panning = false;
-                }
-              });
-            }
+        //     });
+        //     $('body').append(overlay);
+        //     overlay.velocity({opacity: 1}, {duration: 300, queue: false, easing: 'easeOutQuad',
+        //       complete: function () {
+        //         menuOut = true;
+        //         panning = false;
+        //       }
+        //     });
+        //   }
 
-            return false;
-          });
+        //   return false;
+        // });
       });
 
 

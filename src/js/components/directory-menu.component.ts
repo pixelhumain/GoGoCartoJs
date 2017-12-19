@@ -22,7 +22,38 @@ export class DirectoryMenuComponent
 	}
 
 	initialize()
-	{	
+	{		
+		// Actions to do on directory open
+		$('#directory-menu').on('open', () => 
+		{
+			this.updateMainOptionBackground();
+
+			// Mobile sideNav swip touch
+			$('#sidenav-overlay').velocity({opacity: 1 }, {duration: 50, queue: false, easing: 'easeOutQuad'});
+      $('.drag-target').css({width: '15px', right: 0, left: ''});
+
+      App.component.updateMapSize();
+			App.component.updateComponentsSize();			
+		});
+
+		// Actions to do on directory hide
+		$('#directory-menu').on('hide', function() 
+		{
+			$('#directory-menu').hide();
+
+			// Mobile sideNav swip touch
+			$('#sidenav-overlay').velocity({opacity: 0 }, {duration: 200, queue: false, easing: 'easeOutQuad',
+        complete: function () { $(this).remove(); }});
+      $('.drag-target').css({width: '10px', right: '', left: 0});      
+			
+			$('.show-directory-menu-button').show();	
+			$(this).find('.tooltipped').tooltip('remove');
+			$('.btn-close-menu.large-screen').hideTooltip();
+
+			App.component.updateMapSize(); 
+			App.component.updateComponentsSize(); 
+		});
+
 		$('.btn-close-menu.large-screen').tooltip();
 		$('.filter-menu .tooltipped').tooltip();
 

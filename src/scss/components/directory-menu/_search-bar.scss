@@ -20,7 +20,6 @@
 #search-bar-icon
 {
   left: 1.2rem;
-  @media (max-width : 850px) { left: 4.5rem; }
 }
 
 #search-geolocalize
@@ -73,9 +72,7 @@
 	text-align: center;
 	margin: 0;
 	padding-bottom: 0;
-  padding-left: 4rem;
-
-  @media (min-width : 850px) { padding-left: .7rem; }      
+  padding-left: .7rem;  
 }
 
 #search-distance-component

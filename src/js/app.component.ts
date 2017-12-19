@@ -18,6 +18,7 @@ declare let $, window : any;
 export class AppComponent
 {
 	inforBarAnimationTimer;
+	sideNavInitialized = false;
 
 	private slideOptions = { duration: 500, easing: "easeOutQuart", queue: false, complete: function() {}};
 
@@ -46,6 +47,11 @@ export class AppComponent
 			App.geocoder.geocodeAddress('', (result) => { 
         App.mapComponent.fitBounds(App.geocoder.getBounds(), true); 
       }); 
+		});
+
+		$('#geolocalize-btn').click( () =>
+		{
+			App.searchBarComponent.geolocateUser();
 		});
 
 		// update iframe code when params change
@@ -100,15 +106,13 @@ export class AppComponent
 	{	
 		if (!$('#directory-menu').is(':visible'))
 		{			
-			$('.show-directory-menu-button').hide();
+			if (this.pagewidth() > 850) $('.show-directory-menu-button').hide();
 			$('#directory-menu').css('left','-' + App.directoryMenuComponent.width());	
 			$('#directory-content').animate({'margin-left': App.directoryMenuComponent.width()}, 350,'swing');
 			$('#map-gogo-controls').animate({'padding-left': '10px'}, 350,'swing');
-			$('#directory-menu').show().animate({'left':'0'},350,'swing', () =>
-			{ 							
-				this.updateMapSize();
-				this.updateComponentsSize();
-				App.directoryMenuComponent.updateMainOptionBackground();
+			$('#directory-menu').show().animate({'left':'0'},350,'swing', function()
+			{ 				
+				$(this).trigger('open');			
 			});					
 		}
 
@@ -117,17 +121,12 @@ export class AppComponent
 
 	hideDirectoryMenu()
 	{
-		$('.btn-close-menu.large-screen').hideTooltip();
-
-		$('#directory-content').animate({'margin-left':'0'}, 200,'swing');		
 		$('.show-directory-menu-button').show();
+		$('#directory-content').animate({'margin-left':'0'}, 200,'swing');		
 		$('#map-gogo-controls').animate({'padding-left': '0px'}, 350,'swing');
 		$('#directory-menu').animate({'left': '-' + $('#directory-menu').width() + 'px'},250,'swing',function()
 		{ 
-			$(this).hide();
-			App.component.updateMapSize(); 
-			App.component.updateComponentsSize(); 
-			$(this).find('.tooltipped').tooltip('remove');	
+			$(this).trigger('hide');			
 		});
 	}	
 
@@ -145,6 +144,18 @@ export class AppComponent
 		$('#directory-menu').css('width', menuwidth);
 		if (menuwidth == '310px') $('#directory-menu').addClass('small-width');
 		else $('#directory-menu').removeClass('small-width');
+
+		// initialize sidenav open/hide by swip touch
+		if (!this.sideNavInitialized && this.pagewidth() <= 850) 
+		{
+			$('#directory-menu').sideNav({
+	      menuWidth: $('#directory-menu').width(),
+	      edge: 'left',
+	      closeOnClick: false, 
+	      draggable: true, 
+	    });
+	    this.sideNavInitialized = true;
+		}		
 
 		let infoBarHasChangeDisplayMode = false;
 		// show element info bar aside or at the bottom depending of direcoty-content width
@@ -189,7 +200,7 @@ export class AppComponent
 			$('#element-info-bar').stop(true).css('width', 'auto');
 		}
 
-		if ($('#directory-menu').is(':visible'))
+		if ($('#directory-menu').is(':visible') && this.pagewidth() > 850)
 		{
 			setTimeout(function() { 
 				$('#directory-content').css('margin-left', App.directoryMenuComponent.width());
