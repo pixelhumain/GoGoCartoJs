@@ -4,103 +4,27 @@
   <section id="directory-menu" class="gogo-bg-neutral-dark" style="display:none"> 
      {% include 'components/directory-menu/directory-menu.html.njk' %} 
   </section>
+
+  {# drag zone for openning menu in mobile devices #}
+  <div class="directory-menu-drag-target"></div>
+  {# overlay to partially mask the directory-content when openning menu in small screens #}
+  <div id="directory-menu-overlay"></div>
+
    
   {# The directory, map or list displaying, and element information bar #} 
   <section id="directory-content">
     
-    {% if config.isFeatureActivated('report') %}
-      {% include 'modals/report-error-for-element.html.njk' %} 
-    {% endif %} 
-
-    {% if config.isFeatureActivated('delete') %}
-      {% include 'modals/delete-element.html.njk' %}  
-
-    {% endif %}  
-    {% if config.isFeatureActivated('directions') %}
-      {% include 'modals/pick-address-for-directions.html.njk'  %}  
-
-    {% endif %}  
-    {% if config.isFeatureActivated('share') %} 
-      {% include 'modals/share-element-url.html.njk'  %}  
-
-    {% endif %} 
-    {% if config.isFeatureActivated('export') %}
-      {% include 'modals/export-iframe.html.njk' %} 
-    {% endif %} 
-
-    {% if config.isFeatureActivated('vote') %}
-      {% include 'modals/vote-for-pending-element.html.njk'  %}
-      {% include 'modals/contribution-information.html.njk'  %}      
-    {% endif %}
-
-    {% if config.security.hideMailsByShowingSendMailButton %}
-      {% include 'modals/send-mail-to-element.html.njk'  %}    
-    {% endif %}
+    {% include 'modals/modals.html.njk' %} 
 
     {% import 'components/spinner-loader.html.njk' as spinnerLoader%}
     {{ spinnerLoader.create('directory-spinner-loader') }}    
     
     <div id="directory-content-map" style="display:none"> 
-
-      <div id="directory-loading" style="display:none">
-        Chargement...
-      </div> 
-
-      <div id="map-gogo-controls">
-        <div class="show-directory-menu-button gogo-bg-primary gogo-map-control" data-activates="directory-menu" style="display:none">  
-          <span class="text">Menu</span>
-          <i class="gogo-icon-angle-right"></i>
-        </div> 
-        
-        <div class="show-as-list-button gogo-map-control gogo-primary"><i class="gogo-icon-list"></i></div>  
-      </div>
-      
-      <div id="map-features-buttons">
-        {% if config.isFeatureActivated('layers') %}
-          <div id="change-layers" class="feature-button leaflet-bar" data-tooltip="Changer le fond de carte" data-position="left" data-delay="300">
-            <i class="gogo-icon-layers"></i>
-          </div> 
-          <div id="close-layers-panel" class="feature-button" style="display:none"><i class="gogo-icon-close"></i></div>
-        {% endif %}
-        
-        {% if config.isFeatureActivated('export') %}
-          <div id="export-iframe-btn" class="feature-button leaflet-bar" data-tooltip="Exporter une iframe" data-position="left" data-delay="300">
-            <i class="gogo-icon-share-alt"></i>
-          </div> 
-        {% endif %}
-
-        {% if config.isFeatureActivated('mapdefaultview') %}
-          <div id="map-default-view-btn" class="feature-button leaflet-bar" data-tooltip="Retourner à la vue par défault" data-position="left" data-delay="300">
-            <i class="gogo-icon-map"></i>
-          </div> 
-        {% endif %}
-
-        <div id="geolocalize-btn" class="feature-button leaflet-bar" data-tooltip="Geolocaliser votre position" data-position="left" data-delay="300">
-            <i class="gogo-icon-locate"></i>
-        </div>
-      </div>
-      
+      {% include 'components/map.html.njk' %}       
     </div>       
 
     <div id="directory-content-list" class="gogo-bg-background" style="display:none">
-      <div class="element-list-title-bar gogo-list-title gogo-bg-list-title-background">
-        Résultats
-        <span class="element-list-title-number-results"></span>
-        <span class="element-list-title-text"></span> 
-
-        <div class="show-directory-menu-button gogo-bg-primary gogo-map-control" data-activates="directory-menu" style="display:none">  
-          <span class="text">Menu</span>
-          <i class="gogo-icon-angle-right"></i>
-        </div> 
-              
-        <span class="show-as-map-button gogo-neutral-dark gogo-h-primary"> <span class="icon btn-back gogo-icon-material-design-icons-1"></span></span>
-        <div class='shadow-bottom' id="list-title-shadow-bottom"></div>
-         
-      </div>
-      <ul class="collapsible popout custom-scroll-bar" data-collapsible="accordion">
-        <div class="spinner-loader"><center>{{ spinnerLoader.create('directory-list-spinner-loader') }}</center></div>
-      </ul>
-      
+      {% include 'components/list.html.njk' %}       
     </div>
 
     {# section conntaining information one a specific element #}
@@ -110,10 +34,7 @@
       {# container to receive the element-info-bar template, dynamically created #}
       <div id="element-info"></div>
 
-    </section>
-
-    {# overlay to partially mask the directory-content when openning menu in small screens #}
-    <div id="overlay"></div>
+    </section>    
   </section>  
 
 </div>
