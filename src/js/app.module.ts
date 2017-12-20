@@ -27,6 +27,7 @@ import { ElementListComponent } from "./components/element-list.component";
 import { InfoBarComponent } from "./components/info-bar.component";
 import { SearchBarComponent } from "./components/search-bar.component";
 import { DirectoryMenuComponent } from "./components/directory-menu.component";
+import { FiltersComponent } from "./components/filters.component";
 import { MapComponent, ViewPort } from "./components/map/map.component";
 import { BiopenMarker } from "./components/map/biopen-marker.component";
 import { HistoryModule, HistoryState } from './modules/history.module';
@@ -89,6 +90,7 @@ export class AppModule
 	historyModule = new HistoryModule();
 	categoryModule = new CategoriesModule();
 	directoryMenuComponent = new DirectoryMenuComponent();
+	filtersComponent = new FiltersComponent();
 	boundsModule : BoundsModule;
 	routerModule = new RouterModule();
 	templateModule = new TemplateModule();
@@ -180,7 +182,7 @@ export class AppModule
 		}
 		else
 		{
-			this.directoryMenuComponent.setMainOption('all');
+			this.filtersComponent.setMainOption('all');
 		}		
 
 		if (historystate.dataType == AppDataType.All && historystate.viewport && historystate.state != AppStates.ShowElementAlone)
@@ -803,7 +805,7 @@ export class AppModule
 	isUserLogged() { return this.loginModule.isUserLogged(); }
 	get constellation() { return null; }
 
-	get currMainId() { return this.directoryMenuComponent.currentActiveMainOptionId; }
+	get currMainId() { return this.filtersComponent.currentActiveMainOptionId; }
 
 	get isClicking() { return this.isClicking_; };
 	get isShowingInfoBarComponent() : boolean { return this.isShowingInfoBarComponent_; };

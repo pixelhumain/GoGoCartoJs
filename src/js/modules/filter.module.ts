@@ -147,7 +147,7 @@ export class FilterModule
 			let mainOption = App.categoryModule.getMainOptionBySlug(mainOptionSlug);
 			mainOptionId = mainOption ? mainOption.id : 'all';
 		} 
-		App.directoryMenuComponent.setMainOption(mainOptionId);		
+		App.filtersComponent.setMainOption(mainOptionId);		
 
 		let filtersString : string;
 		let addingMode : boolean;

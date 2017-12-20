@@ -18,7 +18,6 @@ declare let $, window : any;
 export class AppComponent
 {
 	inforBarAnimationTimer;
-	sideNavInitialized = false;
 
 	private slideOptions = { duration: 500, easing: "easeOutQuart", queue: false, complete: function() {}};
 
@@ -63,24 +62,13 @@ export class AppComponent
 		window.onresize = () =>
 		{
 		   if (res) { clearTimeout(res); }
-		   res = setTimeout( () => { console.log("On resize update component size");this.updateComponentsSize(); },200);
-		   // this.updateComponentsSize();
+		   res = setTimeout( () => { 
+		   	console.log("On resize update component size");
+		   	this.updateComponentsSize(); 
+		   	App.directoryMenuComponent.updateSize();
+		   },200);
 		};	
 
-		// on resize end
-		$(window).bind('resize', (e) =>
-		{
-		    window.resizeEvt;
-		    $(window).resize(() =>
-		    {
-		        clearTimeout(window.resizeEvt);
-		        window.resizeEvt = setTimeout(() =>
-		        {
-		            this.updateDirectoryMenuSize();
-		        }, 250);
-		    });
-		});
-		
 		//Menu CARTE	
 		$('.show-directory-menu-button').click((e) => { this.showDirectoryMenu(); e.preventDefault();e.stopPropagation();});
 		$('#map-overlay').click(() => this.hideDirectoryMenu());
@@ -98,7 +86,7 @@ export class AppComponent
 			App.setMode(AppModes.Map);
 		});
 
-		if ($('.gogocarto-container').width() <= 850) this.hideDirectoryMenu();
+		if (this.isMobileScreen()) this.hideDirectoryMenu();
 		else this.showDirectoryMenu();
 	}
 
@@ -106,28 +94,23 @@ export class AppComponent
 	{	
 		if (!$('#directory-menu').is(':visible'))
 		{			
-			if (this.pagewidth() > 850) $('.show-directory-menu-button').hide();
-			$('#directory-menu').css('left','-' + App.directoryMenuComponent.width());	
-			$('#directory-content').animate({'margin-left': App.directoryMenuComponent.width()}, 350,'swing');
-			$('#map-gogo-controls').animate({'padding-left': '10px'}, 350,'swing');
-			$('#directory-menu').show().animate({'left':'0'},350,'swing', function()
-			{ 				
-				$(this).trigger('open');			
-			});					
-		}
+			App.directoryMenuComponent.show();
 
-		this.updateDirectoryMenuSize()
+			if (!this.isMobileScreen())
+			{
+				$('#directory-content').animate({'margin-left': App.directoryMenuComponent.width}, 350,'swing');
+				$('#map-gogo-controls').animate({'padding-left': '10px'}, 350,'swing');
+				$('.show-directory-menu-button').hide();		
+			}				
+		}		
 	}
 
 	hideDirectoryMenu()
 	{
 		$('.show-directory-menu-button').show();
-		$('#directory-content').animate({'margin-left':'0'}, 200,'swing');		
-		$('#map-gogo-controls').animate({'padding-left': '0px'}, 350,'swing');
-		$('#directory-menu').animate({'left': '-' + $('#directory-menu').width() + 'px'},250,'swing',function()
-		{ 
-			$(this).trigger('hide');			
-		});
+		$('#directory-content').animate({'margin-left':'0'}, 100,'swing');		
+		$('#map-gogo-controls').animate({'padding-left': '0px'}, 100,'swing');
+		App.directoryMenuComponent.hide();
 	}	
 
 	hideBandeauHelper()
@@ -135,27 +118,14 @@ export class AppComponent
 		$('#bandeau_helper').slideUp(this.slideOptions);
 	}
 
+	isMobileScreen() { return this.width() < 850; }
+
 	mapWidth() { return $('#directory-content').width(); }
-	pagewidth() { return $('.gogocarto-container').width(); }
+	width() { return $('.gogocarto-container').width(); }
 
 	updateComponentsSize()
 	{	
-		let menuwidth = this.pagewidth() > 850 ? this.pagewidth() > 1450 ? '340px' : '310px' : '100%';
-		$('#directory-menu').css('width', menuwidth);
-		if (menuwidth == '310px') $('#directory-menu').addClass('small-width');
-		else $('#directory-menu').removeClass('small-width');
-
-		// initialize sidenav open/hide by swip touch
-		if (!this.sideNavInitialized && this.pagewidth() <= 850) 
-		{
-			$('#directory-menu').sideNav({
-	      menuWidth: $('#directory-menu').width(),
-	      edge: 'left',
-	      closeOnClick: false, 
-	      draggable: true, 
-	    });
-	    this.sideNavInitialized = true;
-		}		
+		App.directoryMenuComponent.updateSize();
 
 		let infoBarHasChangeDisplayMode = false;
 		// show element info bar aside or at the bottom depending of direcoty-content width
@@ -200,10 +170,10 @@ export class AppComponent
 			$('#element-info-bar').stop(true).css('width', 'auto');
 		}
 
-		if ($('#directory-menu').is(':visible') && this.pagewidth() > 850)
+		if ($('#directory-menu').is(':visible') && !this.isMobileScreen())
 		{
 			setTimeout(function() { 
-				$('#directory-content').css('margin-left', App.directoryMenuComponent.width());
+				$('#directory-content').css('margin-left', App.directoryMenuComponent.width);
 			},0);		
 		}
 		else $('#directory-content').css('margin-left', 0);
@@ -231,20 +201,6 @@ export class AppComponent
 	{		
 		if (!App.infoBarComponent.isDisplayedAside()) $('#directory-content-map').stop(true).css('margin-right', '0');
 		if (App.mapComponent) setTimeout(function() { App.mapComponent.resize(); },0);
-	}
-
-	// fixs menu overflow scrollable depending on screen height
-	updateDirectoryMenuSize()
-	{
-		let filterMenu = $('#directory-menu-main-container .filter-menu');
-		let menuContainer = $('#directory-menu-main-container .directory-menu-content');
-
-		filterMenu.css('height', '100%');
-
-		if (filterMenu.height() < menuContainer.height()) 
-		{
-			filterMenu.css('height', 'auto');
-		} 
 	}
 
 	updateIframeCode()

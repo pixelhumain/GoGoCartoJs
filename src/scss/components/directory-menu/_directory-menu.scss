@@ -3,9 +3,6 @@
 @import 'filter-menu/filter-menu';
 @import 'directory-menu-directions';
 
-@media (min-width: 850px) {
-  .drag-target { display:none !important; }
-}
 
 #directory-menu
 {
@@ -135,6 +132,35 @@
 
     @media (min-width : 850px) { display:none; }
   }  
+}
+
+@media (min-width: 850px) {
+  .directory-menu-drag-target { display:none !important; }
+}
+
+#directory-menu-overlay {  
+  display:none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 120vh;
+  background-color: rgba(0,0,0,.5);
+  z-index: 997;
+
+  will-change: opacity;
+
+  @media (min-width: 850px) { display:none !important; }
+}
+
+// Touch interaction
+.directory-menu-drag-target {
+  height: 100%;
+  width: 10px;
+  position: fixed;
+  top: 0;
+  z-index: 999;
 }
 
 

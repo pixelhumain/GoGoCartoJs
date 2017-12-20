@@ -43,14 +43,7 @@
 }
 
 
-// Touch interaction
-.drag-target {
-  height: 100%;
-  width: 10px;
-  position: fixed;
-  top: 0;
-  z-index: 999;
-}
+
 
 
 // Hidden side-nav for all sizes
@@ -87,7 +80,6 @@
   }
 }
 
-
 .side-nav .collapsible-body li.active,
 .side-nav.fixed .collapsible-body li.active {
   background-color: $primary-color;
@@ -97,15 +89,3 @@
 }
 
 
-#sidenav-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-
-  height: 120vh;
-  background-color: rgba(0,0,0,.5);
-  z-index: 997;
-
-  will-change: opacity;
-}

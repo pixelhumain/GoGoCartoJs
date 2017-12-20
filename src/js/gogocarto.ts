@@ -114,9 +114,10 @@ export class GoGoCartoModule
 			else 	console.warn("[GoGoCarto] Cannot find Dom 'head' or 'html' to add styles");
 		}
 
-		setTimeout( () => {
+		setTimeout( () => {			
 			App.elementModule.initialize();
 			App.directoryMenuComponent.initialize();
+			App.filtersComponent.initialize();
 			App.boundsModule.initialize();	   
 			App.elementListComponent.initialize();
 			App.routerModule.loadInitialState();

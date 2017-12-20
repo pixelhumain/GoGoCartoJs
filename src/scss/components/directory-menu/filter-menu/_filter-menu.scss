@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-02-28 13:25:52
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-12-04 10:42:14
+* @Last Modified time: 2017-12-20 09:07:46
 */
 @import 'uniques-filters';
 @import 'subcategorie-item';
@@ -14,6 +14,7 @@
 	.filter-menu 
 	{ 
 		width: 100%;
+    height: auto;
     position: relative;
     @include flexbox();
     @include flex-flow(row nowrap); 
@@ -143,7 +144,7 @@
 				margin: 0;
 				border: 0;
 				box-shadow: none;		
-				padding-bottom: .8rem;
+				padding-bottom: 2rem;
 				overflow-y: auto;
 				overflow-x: hidden;
 				@extend .custom-scroll-bar-light;

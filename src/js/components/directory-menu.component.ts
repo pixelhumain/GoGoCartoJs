@@ -14,266 +14,141 @@ import { Category, Option } from "../modules/categories.module";
 import { App } from "../gogocarto";
 
 export class DirectoryMenuComponent
-{	
-	currentActiveMainOptionId = null;
+{		
+	openMenu : boolean = false;
+	width : number;
+	dom;
 
-	constructor()
-	{
-	}
+	isPanning : boolean = false;
+	dragTarget;
+	overlay;
+
+	ANIM_50 = {duration: 50, queue: false, easing: 'easeOutQuad'};
+	ANIM_200 = {duration: 200, queue: false, easing: 'easeOutQuad'};
+	ANIM_300 = {duration: 300, queue: false, easing: 'easeOutQuad'};
+  ANIM_400 = {duration: 300, queue: false, easing: 'easeOutQuad'};
+
+	constructor() { }
 
 	initialize()
-	{		
-		// Actions to do on directory open
-		$('#directory-menu').on('open', () => 
-		{
-			this.updateMainOptionBackground();
+	{				
+		this.dom = $('#directory-menu');
+    this.dragTarget =  $('.directory-menu-drag-target');
+    this.overlay = $('#directory-menu-overlay');
 
-			// Mobile sideNav swip touch
-			$('#sidenav-overlay').velocity({opacity: 1 }, {duration: 50, queue: false, easing: 'easeOutQuad'});
-      $('.drag-target').css({width: '15px', right: 0, left: ''});
+    this.dragTarget.css({'left': 0});    
+
+    this.dragTarget.click(() => { this.hide(); });
+    this.overlay.click(() => { this.hide(); });	
+
+		$('.btn-close-menu.large-screen').tooltip();
+
+    if (App.component.isMobileScreen()) this.initTouchMenu();
+	}	
+
+	show() 
+	{    
+    this.dom.show().velocity({left: 0}, this.ANIM_300); 
+    this.overlay.show().velocity({opacity: 1}, this.ANIM_300);
+
+    setTimeout( () => {
+    	App.filtersComponent.updateMainOptionBackground();	
+
+    	let dragTargetWidth = App.component.width() - this.width + 20;
+      this.dragTarget.css({width: dragTargetWidth + 'px', right: 0, left: ''});
 
       App.component.updateMapSize();
-			App.component.updateComponentsSize();			
-		});
+			App.component.updateComponentsSize();
 
-		// Actions to do on directory hide
-		$('#directory-menu').on('hide', function() 
-		{
-			$('#directory-menu').hide();
+    }, 300);      			
+  }
 
-			// Mobile sideNav swip touch
-			$('#sidenav-overlay').velocity({opacity: 0 }, {duration: 200, queue: false, easing: 'easeOutQuad',
-        complete: function () { $(this).remove(); }});
-      $('.drag-target').css({width: '10px', right: '', left: 0});      
+	hide() 
+  {
+    this.overlay.velocity({opacity: 0}, this.ANIM_400);
+    this.dragTarget.css({width: '10px', right: '', left: '0'});
+    this.dom.velocity({left: -1 * (this.width + 20)}, this.ANIM_400);
+
+    setTimeout( () => {
+    	this.overlay.hide();
+    	this.dom.hide();   
 			
 			$('.show-directory-menu-button').show();	
-			$(this).find('.tooltipped').tooltip('remove');
+			this.dom.find('.tooltipped').tooltip('remove');
 			$('.btn-close-menu.large-screen').hideTooltip();
 
 			App.component.updateMapSize(); 
 			App.component.updateComponentsSize(); 
-		});
+    }, 400);
+  }
 
-		$('.btn-close-menu.large-screen').tooltip();
-		$('.filter-menu .tooltipped').tooltip();
+  initTouchMenu()
+  {
+  	this.dragTarget.hammer({
+      prevent_default: false
+    }).bind('pan', (e) => 
+    {
+      if (e.gesture.pointerType == "touch") 
+      {
+        var direction = e.gesture.direction;
+        var x = e.gesture.center.x;
+        var y = e.gesture.center.y;
+        var velocityX = e.gesture.velocityX;  
 
-		// -------------------------------
-		// --------- FAVORITE-------------
-		// -------------------------------
-		$('#filter-favorite').click(function(e : Event)
-		{			
-			let favoriteCheckbox = $('#favorite-checkbox');
+        // Keep within boundaries
+        if (x > this.width) { x = this.width; }
+        else if (x < 0) { x = 0; }
 
-			let checkValue = !favoriteCheckbox.is(':checked');
+        if (x < (this.width / 2)) { this.openMenu = false; }
+        else { this.openMenu = true; }
 
-			App.filterModule.showOnlyFavorite(checkValue);
+        this.dom.css('left', (x - this.width)).show();
 
-			if (checkValue) {
-				App.filterModule.showOnlyPending(false);
-				$('#pending-checkbox').prop('checked',false);
-				App.filterModule.showOnlyModeration(false);
-				$('#moderation-checkbox').prop('checked',false);
-			}
-			
-			App.elementModule.updateElementsToDisplay(true);
-
-			favoriteCheckbox.prop('checked',checkValue);
-
-			e.stopPropagation();
-			e.stopImmediatePropagation();
-			e.preventDefault();
-		});
-
-		// -------------------------------
-		// --------- PENDING-------------
-		// -------------------------------
-		$('#filter-pending').click(function(e : Event)
-		{			
-			let pendingCheckbox = $('#pending-checkbox');
-
-			let checkValue = !pendingCheckbox.is(':checked');
-
-			App.filterModule.showOnlyPending(checkValue);
-			
-			if (checkValue) {
-				App.filterModule.showOnlyFavorite(false);
-				$('#favorite-checkbox').prop('checked',false);
-				App.filterModule.showOnlyModeration(false);
-				$('#moderation-checkbox').prop('checked',false);
+        // Percentage overlay
+        var overlayPerc;
+        overlayPerc = x / this.width;
+        this.overlay.show().velocity({opacity: overlayPerc }, this.ANIM_50);
 			}
 
-			App.elementModule.updateElementsToDisplay(true);
+    }).bind('panend', (e) => {
+      if (e.gesture.pointerType == "touch") 
+      {
+        var velocityX = e.gesture.velocityX;
 
-			pendingCheckbox.prop('checked',checkValue);
+        // If velocityX <= 0.3 then the user is flinging the menu closed so ignore this.openMenu
+        if ((this.openMenu && velocityX <= 0.3) || velocityX < -0.5) { this.show(); }
+        else if (!this.openMenu || velocityX > 0.3) { this.hide();}
+      }
+     });
+  }
+	
+	updateSize() 
+	{
+		// fixs menu overflow scrollable depending on screen height
+		// let filterMenu = $('#directory-menu-main-container .filter-menu');
+		// let menuContainer = $('#directory-menu-main-container .directory-menu-content');
 
-			e.stopPropagation();
-			e.stopImmediatePropagation();
-			e.preventDefault();
-		});
+		// filterMenu.css('height', '100%');
 
-		// -------------------------------
-		// --------- MODERAITON-------------
-		// -------------------------------
-		$('#filter-moderation').click(function(e : Event)
-		{			
-			let moderationCheckbox = $('#moderation-checkbox');
+		// if (filterMenu.height() < menuContainer.height()) 
+		// {
+		// 	filterMenu.css('height', 'auto');
+		// } 
 
-			let checkValue = !moderationCheckbox.is(':checked');
-
-			App.filterModule.showOnlyModeration(checkValue);
-			
-			if (checkValue) {
-				App.filterModule.showOnlyFavorite(false);
-				$('#favorite-checkbox').prop('checked',false);
-				App.filterModule.showOnlyPending(false);
-				$('#pending-checkbox').prop('checked',false);
-			}
-
-			App.elementModule.updateElementsToDisplay(true);
-
-			moderationCheckbox.prop('checked',checkValue);
-
-			e.stopPropagation();
-			e.stopImmediatePropagation();
-			e.preventDefault();
-		});
-
-
-		// -------------------------------
-		// ------ MAIN OPTIONS -----------
-		// -------------------------------
-		var that = this;
-
-		$('.main-categories .main-icon').click( function(e)
-		{
-			let optionId = $(this).attr('data-option-id');
-			that.setMainOption(optionId);
-		});
-
-		// follow main active option background when user scroll through main options
-		$('.main-categories').on('scroll', () =>
-		{
-			$('#active-main-option-background').css('top', $('#main-option-gogo-icon-' + this.currentActiveMainOptionId).position().top);
-		});
-
+    // update menu width
+		let menuwidth, pageWidth = App.component.width();
 		
-
-		// ----------------------------------
-		// ------ CATEGORIES ----------------
-		// ----------------------------------
-		$('.subcategory-item .name-wrapper').click(function()
-		{		
-			let categoryId = $(this).attr('data-category-id');
-			App.categoryModule.getCategoryById(categoryId).toggleChildrenDetail();
-		});	
-
-		$('.subcategory-item .checkbox-wrapper').click(function(e)
-		{		
-			e.stopPropagation();
-			e.stopImmediatePropagation();
-			e.preventDefault();
-
-			let categoryId = $(this).attr('data-category-id');
-			App.categoryModule.getCategoryById(categoryId).toggle();
-			
-		});			
-
-		// Add surbrillance in main-categories sidebar filters menu whenn hovering a main category
-		$('#main-option-all .gogo-icon-name-wrapper').hover( 
-			function(e : Event) {
-				let optionId = $(this).attr('data-option-id');
-				let sidebarIcon = $('#main-option-gogo-icon-' + optionId);
-				if (!sidebarIcon.hasClass('hover')) sidebarIcon.addClass('hover');
-			},
-			function(e : Event) {
-				let optionId = $(this).attr('data-option-id');
-				let sidebarIcon = $('#main-option-gogo-icon-' + optionId);
-				sidebarIcon.removeClass('hover');
-			}
-		);
-		// -------------------------------
-		// ------ SUB OPTIONS ------------
-		// -------------------------------
-		$('.subcategorie-option-item:not(#filter-favorite):not(#filter-pending):not(#filter-moderation) .gogo-icon-name-wrapper').click(function(e : Event)
-		{
-			let optionId = $(this).attr('data-option-id');
-			let option = App.categoryModule.getOptionById(optionId);
-
-			if (option.isMainOption()) App.directoryMenuComponent.setMainOption(option.id);
-			else if (option.isCollapsible()) option.toggleChildrenDetail()
-			else option.toggle();
-		});
-
-		$('.subcategorie-option-item:not(#filter-favorite):not(#filter-pending):not(#filter-moderation) .checkbox-wrapper').click(function(e)
-		{		
-			e.stopPropagation();
-			e.stopImmediatePropagation();
-			e.preventDefault();
-
-			let optionId = $(this).attr('data-option-id');
-			App.categoryModule.getOptionById(optionId).toggle();
-		});
-
-	}
-
-	setMainOption(optionId)
-	{
-		if (this.currentActiveMainOptionId == optionId) return;
-
-		if (this.currentActiveMainOptionId != null) App.elementModule.clearCurrentsElement();
-
-		let oldId = this.currentActiveMainOptionId;
-		this.currentActiveMainOptionId = optionId;
-
-		if (optionId == 'all')
-		{
-			$('#menu-subcategories-title').text("Tous les " + App.config.text.elementPlural);
-			$('#open-hours-filter').hide();
+		if (pageWidth > 850) {
+			menuwidth =  pageWidth > 1450 ? 340 : 310;
+		} else {
+			menuwidth =  Math.min(Math.min(Math.max(pageWidth - 60, 310), 360), pageWidth);
 		}
-		else
-		{
-			let mainOption = App.categoryModule.getMainOptionById(optionId);				
-
-			$('#menu-subcategories-title').text(mainOption.name);
-			if (mainOption.showOpenHours) $('#open-hours-filter').show();
-			else $('#open-hours-filter').hide();
-		}
-
-		this.updateMainOptionBackground();
-
-		App.infoBarComponent.hide();
-
-		//console.log("setMainOptionId " + optionId + " / oldOption : " + oldId);
-		if (oldId != null) App.historyModule.updateCurrState();
-
-		setTimeout( () => {
-			App.elementListComponent.reInitializeElementToDisplayLength();
 		
-			App.boundsModule.updateFilledBoundsAccordingToNewMainOptionId();
-			App.checkForNewElementsToRetrieve();
-			App.elementModule.updateElementsToDisplay(true,true);
-		}, 400);		
-	}
-
-	// the main option selected got a specific background, who can vertically translate
-	updateMainOptionBackground()
-	{
-		let optionId = this.currentActiveMainOptionId;		
-
-		$('.main-option-subcategories-container:not(#main-option-' + optionId + ')').hide();
-		$('#main-option-' + optionId).fadeIn(400);
-
-		$('.main-categories .main-icon').removeClass('active');
-		$('#main-option-gogo-icon-' + optionId).addClass('active');
-
-		if(!$('#main-option-gogo-icon-' + optionId).position()) { console.log("directory not loaded");return; }
-
-		$('#active-main-option-background').animate({top: $('#main-option-gogo-icon-' + optionId).position().top}, 400, 'easeOutQuart');
-	}
-
-	width() : string
-	{
-		return $('#directory-menu').width() + 'px';
+		this.dom.css('width', menuwidth + 'px');
+		this.width = menuwidth;
+		
+		if (menuwidth < 340) this.dom.addClass('small-width');
+		else this.dom.removeClass('small-width');	
 	}
 }
 

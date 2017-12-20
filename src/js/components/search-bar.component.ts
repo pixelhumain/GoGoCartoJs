@@ -214,7 +214,7 @@ export class SearchBarComponent
 			let result = App.elementModule.addJsonElements(searchResult.data, true, true); 
       App.elementModule.setSearchResultElement(result.elementsConverted); 
       App.setDataType(AppDataType.SearchResults, $backFromHistory); 
-      App.directoryMenuComponent.setMainOption('all'); 
+      App.filtersComponent.setMainOption('all'); 
  
       this.clearLoader();       
       this.showSearchResultLabel(searchResult.data.length);   
