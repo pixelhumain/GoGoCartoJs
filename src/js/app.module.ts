@@ -29,6 +29,7 @@ import { InfoBarComponent } from "./components/info-bar.component";
 import { SearchBarComponent } from "./components/search-bar.component";
 import { DirectoryMenuComponent } from "./components/directory-menu.component";
 import { FiltersComponent } from "./components/filters.component";
+import { GoGoControlComponent } from "./components/gogo-controls.component";
 import { MapComponent, ViewPort } from "./components/map/map.component";
 import { BiopenMarker } from "./components/map/biopen-marker.component";
 import { HistoryModule, HistoryState } from './modules/history.module';
@@ -97,6 +98,7 @@ export class AppModule
 	routerModule = new RouterModule();
 	templateModule = new TemplateModule();
 	loginModule : LoginModule;
+	gogoControlComponent = new GoGoControlComponent();
 	//starRepresentationChoiceModule_ = constellationMode ? new StarRepresentationChoiceModule() : null;
 	
 	// curr state of the app
@@ -267,26 +269,22 @@ export class AppModule
 	*/
 	setMode($mode : AppModes, $backFromHistory : boolean = false, $updateTitleAndState = true)
 	{
+		this.elementModule.clearCurrentsElement();
+		this.elementListComponent.clear();
+
 		if ($mode == AppModes.Map)
 		{
 			$('#directory-content-map').show();
 			$('#directory-content-list').hide();				
 
-			this.mapComponent.init();
-
-			$('#gogo-controls-mobile').velocity({top: 15, right: 0}, {duration: 350, queue: false, easing: 'easeOutQuad'}); 
-			$('#gogo-controls-mobile').addClass('map').removeClass('list');
+			this.mapComponent.init();		
 
 			if (this.mapComponent_.isMapLoaded) this.boundsModule.extendBounds(0, this.mapComponent.getBounds());
 		}
 		else
 		{
 			$('#directory-content-map').hide();
-			$('#directory-content-list').show();	
-
-			let top = $('#directory-content').height() - $('#gogo-controls-mobile').height() - 5;
-			$('#gogo-controls-mobile').velocity({top: top, right: 15}, {duration: 350, queue: false, easing: 'easeOutQuad'}); 
-			$('#gogo-controls-mobile').addClass('list').removeClass('map');
+			$('#directory-content-list').show();				
 
 			console.log("list mode",App.geocoder.getLocation());			
 
@@ -317,9 +315,10 @@ export class AppModule
 			{
 				App.elementModule.updateElementsToDisplay(true,false);
 				this.elementListComponent.setTitle(' de <i>' + capitalize(unslugify(this.searchBarComponent.getCurrSearchText())) + '</i>');
-			}
-			
+			}			
 		}
+
+		this.gogoControlComponent.handleModeChanged($mode);
 
 		// if previous mode wasn't null 
 		let oldMode = this.mode_;
@@ -328,7 +327,7 @@ export class AppModule
 		// update history if we need to
 		if (oldMode != null && !$backFromHistory) this.historyModule.pushNewState();
 
-		this.elementModule.clearCurrentsElement();
+		
 		setTimeout( () => this.elementModule.updateElementsToDisplay(true) , 300);
 
 		if ($updateTitleAndState)

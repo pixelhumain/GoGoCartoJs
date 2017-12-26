@@ -134,7 +134,7 @@ export class InfoBarComponent
 		// to show menu actions details in full text
 		showFullTextMenu(this.domMenu(), this.isDisplayedAside());
 
-		App.searchBarComponent.hideMobileSearchBar();
+		App.searchBarComponent.hideMobileSearchBar();		
 		
 		if (!this.isDisplayedAside())
 		{
@@ -268,12 +268,15 @@ export class InfoBarComponent
 		  $('#element-info-bar .collapsible-body').css('height', height);	
 
 		  this.showBodyMainTab();
+
+		  App.gogoControlComponent.hide();
 		}	
 	};
 
 	hideDetails()
 	{
 		//App.setTimeoutInfoBarComponent();
+		App.gogoControlComponent.show();
 
 		if ($('#element-info-bar .moreDetails').is(':visible'))
 		{

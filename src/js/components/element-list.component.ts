@@ -44,7 +44,7 @@ export class ElementListComponent
 	{
 		// detect when user reach bottom of list
 		var that = this;
-		$('#directory-content-list ul').on('scroll', function(e) 
+		$('#directory-content-list .elements-container').on('scroll', function(e) 
 		{
 			if($(this).scrollTop() > 0)
 				$("#list-title-shadow-bottom").show();
@@ -87,7 +87,7 @@ export class ElementListComponent
 	reInitializeElementToDisplayLength()
 	{
 		this.clear();
-		$('#directory-content-list ul').animate({scrollTop: '0'}, 0);
+		$('#directory-content-list .elements-container').animate({scrollTop: '0'}, 0);
 		this.stepsCount = 1;
 	}
 
@@ -133,9 +133,10 @@ export class ElementListComponent
 		{
 			element = elementsToDisplay[i];
 
-			let listContainerDom = $('#directory-content-list ul.collapsible');
+			let listContentDom = $('#directory-content-list ul.collapsible');
+			let listContainerDom = $('#directory-content-list .elements-container');
 
-			listContainerDom.append(element.getHtmlRepresentation());
+			listContentDom.append(element.getHtmlRepresentation());
 			
 			let elementDom = $('#element-info-'+element.id);
 			let domMenu = elementDom.find('.menu-element');			
@@ -146,12 +147,11 @@ export class ElementListComponent
 			// check the visibility of an item after it has been expanded
 			elementDom.find('.collapsible-header').click(function() 
 			{
-				setTimeout( () => { 
-					$('.info-bar-tabs').tabs();
+				setTimeout( () => { 					
 					// if all elementDom expanded is not visible					
 					let elementDistanceToTop = elementDom.offset().top - listContainerDom.offset().top;
 
-					if ( (elementDom.offset().top - directoryListContentDom.offset().top + elementDom.height()) > (directoryListContentDom.outerHeight() + 150))
+					if ( (elementDom.offset().top - listContainerDom.offset().top + elementDom.height()) > (listContainerDom.outerHeight() + 150))
 					{
 						listContainerDom.animate({scrollTop: listContainerDom.scrollTop() + elementDom.offset().top - listContainerDom.offset().top}, 550);
 					}					
@@ -160,6 +160,8 @@ export class ElementListComponent
 					{
 						listContainerDom.animate({scrollTop: listContainerDom.scrollTop() + elementDistanceToTop}, 300);
 					}
+
+					setTimeout( () => $('.info-bar-tabs').tabs(), 0);
 				}, 300);
 			});
 			updateFavoriteIcon(domMenu, element)		
@@ -169,7 +171,7 @@ export class ElementListComponent
 
 		if ($animate)
 		{
-			$('#directory-content-list ul').animate({scrollTop: '0'}, 500);
+			$('#directory-content-list .elements-container').animate({scrollTop: '0'}, 500);
 		}		
 
 		$('#directory-content-list ul').collapsible({
