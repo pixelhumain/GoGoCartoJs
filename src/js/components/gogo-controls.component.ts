@@ -29,7 +29,7 @@ export class GoGoControlComponent
     }
   } 
 
-  hide() { $('#gogo-controls-mobile').fadeOut(250); }
+  hide(delay : number = 250) { $('#gogo-controls-mobile').fadeOut(delay); }
 
-  show() { $('#gogo-controls-mobile').fadeIn(400); }  
+  show(delay : number = 400) { $('#gogo-controls-mobile').fadeIn(delay); }  
 }

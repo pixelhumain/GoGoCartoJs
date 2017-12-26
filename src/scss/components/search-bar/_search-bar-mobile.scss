@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-12-26 08:55:41
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-12-26 12:25:01
+* @Last Modified time: 2017-12-26 14:35:47
 */
 
 // search bar is moved on top of map for mobiles
@@ -36,10 +36,10 @@
     height: 56px;
     width: 56px;
 
-    &.search-bar-icon { left: 3px; }
+    &.search-bar-icon { left: -2px; }
 
     &.search-geolocalize {
-      right: 5px;
+      right: 0px;
       font-size: 24px !important;
     }
   }  
@@ -57,7 +57,7 @@
 
   .search-options { 
     display: block !important;
-    padding: 10px 1.5rem 12px 1.5rem;
+    padding: 10px 15px 12px 15px;
   }
 }
 

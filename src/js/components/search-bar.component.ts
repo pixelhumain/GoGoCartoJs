@@ -143,12 +143,12 @@ export class SearchBarComponent
 
 	showMobileSearchBar() { 
 		$('#directory-content-map .search-bar-with-options-container').show(); 
-		App.gogoControlComponent.hide();
+		App.gogoControlComponent.hide(0);
 	}
 
 	hideMobileSearchBar() { 
-		$('#directory-content-map .search-bar-with-options-container').hide(); 
-		App.gogoControlComponent.show();
+		$('#directory-content-map .search-bar-with-options-container').hide();
+		App.gogoControlComponent.show(0);
 	}
 
 	showSearchOptions()
