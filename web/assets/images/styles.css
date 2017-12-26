@@ -2,11 +2,11 @@
 
 @font-face {
   font-family: "gogocarto";
-  src:url("fonts/gogocarto.eot?version=1.1");
-  src:url("fonts/gogocarto.eot?#iefix?version=1.1") format("embedded-opentype"),
-    url("fonts/gogocarto.woff?version=1.1") format("woff"),
-    url("fonts/gogocarto.ttf?version=1.1") format("truetype"),
-    url("fonts/gogocarto.svg#gogocarto?version=1.1") format("svg");
+  src:url("fonts/gogocarto.eot");
+  src:url("fonts/gogocarto.eot?#iefix") format("embedded-opentype"),
+    url("fonts/gogocarto.woff") format("woff"),
+    url("fonts/gogocarto.ttf") format("truetype"),
+    url("fonts/gogocarto.svg#gogocarto") format("svg");
   font-weight: normal;
   font-style: normal;
 
@@ -193,4 +193,31 @@
 }
 .gogo-icon-moderation:before {
   content: "\79";
+}
+.gogo-icon-menu-1:before {
+  content: "\32";
+}
+.gogo-icon-list-1:before {
+  content: "\33";
+}
+.gogo-icon-panels:before {
+  content: "\34";
+}
+.gogo-icon-filters:before {
+  content: "\35";
+}
+.gogo-icon-list-2:before {
+  content: "\36";
+}
+.gogo-icon-filters-1:before {
+  content: "\37";
+}
+.gogo-icon-filters-2:before {
+  content: "\38";
+}
+.gogo-icon-table:before {
+  content: "\39";
+}
+.gogo-icon-list-3:before {
+  content: "\21";
 }

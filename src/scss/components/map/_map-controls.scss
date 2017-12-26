@@ -11,18 +11,23 @@ a.leaflet-control-zoom-out {
 }
 
 .leaflet-control-zoom.leaflet-bar.leaflet-control {
-    margin-right: 20px;
+    margin-right: 22px;
     margin-top: 20px;
+    border:none;
+    @include box-shadow-1(0 2px 6px rgba(0,0,0,0.3));
+    @media #{$small-only} { 
+        display:none;
+    }
 }
 
 #map-gogo-controls
 {
-    position: absolute;
-    z-index: 500;
-    left: 15px;
-    top: 15px;
+    display:none;
     
     @media #{$medium-and-up} {
+        display: block;
+        position: absolute;
+        z-index: 500;
         left: 20px;
         top: 20px;
     }
@@ -41,8 +46,6 @@ a.leaflet-control-zoom-out {
 .show-as-list-button 
 {
     background-color: #ffffff;
-
-    &:after{ content:"Liste"}
 
     @media #{$medium-and-up} 
     {
@@ -81,57 +84,75 @@ a.leaflet-control-zoom-out {
 #map-features-buttons
 {
     position: absolute;
-    top: 100px;
+    top: 20px;
     z-index: 500;
     right: 20px;
-    width: 33px;
+    width: 50px;
+    @media #{$medium-and-up}  { width: 33px; top: 100px; }
+}
 
-    .feature-button
+.feature-button
+{
+    position: relative;
+    background-color: white;
+    color: #3d3d3d;        
+    
+    margin-bottom: 13px;
+    text-align: center;
+
+    width: 50px;
+    border-radius: 50%;
+    height: 50px;
+    border: none;
+    @include box-shadow-1(0 2px 6px rgba(0,0,0,0.3));
+
+    @media #{$medium-and-up} 
     {
-        position: relative;
-        background-color: white;
-        color: #3d3d3d;        
         width: 33px;
         height: 33px;
-        margin-bottom: 13px;
-        text-align: center;
-        
-        &:hover{ cursor : pointer; background-color: #f4f4f4;}
-
-        i {
-            font-size: 18px;        
-            line-height: 35px;       
-        }
-
-        &#close-layers-panel 
-        { 
-            z-index: 10000; 
-            background-color: transparent;
-            color: #888888;
-
-            &:hover { background-color: transparent; color: #616161; }
-
-            i { font-size: 16px;line-height: 44px; margin-left: 2px; }
-        }  
-
-        &#change-layers {
-            @media screen and (max-width: 850px) { display:none; }
-        }
-        &#export-iframe-btn
-        {
-            @media screen and (max-width: 850px) { display:none; }
-        }
-
-        &#map-default-view-btn  { 
-            i { font-size: 14px; }
-            @media screen and (max-width: 850px) { display:none; }
-        } 
-
-        &#geolocalize-btn { 
-            @media screen and (min-width: 850px) { display:none; }
-        }    
+        border-radius: 4px;
     }
+    
+    &:hover{ cursor : pointer; background-color: #f4f4f4;}
+
+    i {
+        font-size: 22px;
+        line-height: 55px;   
+
+        &.gogo-icon-list { font-size: 18px; } 
+         
+        @media #{$medium-and-up}  { font-size: 18px; line-height: 39px; }      
+    }
+
+    &#close-layers-panel 
+    { 
+        z-index: 10000; 
+        background-color: transparent;
+        color: #888888;
+
+        &:hover { background-color: transparent; color: #616161; }
+
+        i { font-size: 16px;line-height: 44px; margin-left: 2px; }
+    }  
+
+    &#change-layers {
+        @media screen and (max-width: 600px) { display:none; }
+    }
+    &#export-iframe-btn
+    {
+        @media screen and (max-width: 600px) { display:none; }
+    }
+
+    &#map-default-view-btn  { 
+        i { font-size: 14px; }
+        @media screen and (max-width: 600px) { display:none; }
+    } 
+
+    &#geolocalize-btn { 
+        @media screen and (min-width: 600px) { display:none; }
+    }  
 }
+
 
 
 .leaflet-control-layers-toggle

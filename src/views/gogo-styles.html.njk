@@ -2,7 +2,7 @@
   .gogo-{{ name }} { color: {{ value }}; }
   .gogo-h-{{ name }}:hover { color: {{ value }} !important; }
   .gogo-h-{{ name }}.hover { color: {{ value }} !important; }
-  .gogo-bg-{{ name }} { background-color: {{ value }}; }
+  .gogo-bg-{{ name }} { background-color: {{ value }} !important; }
   .gogo-h-bg-{{ name }}:hover { background-color: {{ value }} !important; }
   .gogo-border-{{ name }} { border-color: {{ value }}; }
   .gogo-h-border-{{ name }}:hover { border-color: {{ value }} !important; }
@@ -69,13 +69,20 @@
 
   .interactive-section { background-color: {{ interactiveColor }}; }
 
-  #search-bar::selection {
+  .search-bar::selection {
       background: {{ searchBar }}; 
       color: white;
   }
-  #search-bar::-moz-selection {
+  .search-bar::-moz-selection {
       background: {{ searchBar }}; 
       color: white;
+  }
+
+  #directory-content-map .search-options label.search-option-radio-label { color: {{ neutralDark }}; }
+  #directory-content-map .search-options label.search-option-radio-label:before{ border-color: {{ neutral }}; }
+  #directory-content-map .search-options label.search-option-radio-label:after { 
+    border-color: {{ neutral }}; 
+    background-color: {{ neutral }}; 
   }
   
   #main-option-all .gogo-icon-name-wrapper:hover:after { color: {{ primary }}; }
@@ -120,7 +127,8 @@
   .btn:focus { background-color: {{ primary }}; }  
 
   .backdrop { background-color: {{ neutralDarkTransparent }}; } // tooltip
-      
+
+  .feature-button.primary { color: white; background-color: {{ primary }}; }
 
   {# TAXONOMY #}
 	.bgdSoftColorAs { background-color: #484848 }

@@ -15,6 +15,7 @@ declare var $;
 import { AppComponent } from './app.component';
 import { GeocoderModule, GeocodeResult } from "./modules/geocoder.module";
 import { FilterModule } from "./modules/filter.module";
+import { FilterRoutingModule } from "./modules/filter-routing.module";
 import { ElementsModule, ElementsChanged } from "./modules/elements.module";
 import { DisplayElementAloneModule } from "./modules/display-element-alone.module";
 import { AjaxModule } from "./modules/ajax.module";
@@ -79,13 +80,14 @@ export class AppModule
 	component = new AppComponent();
 	geocoderModule_ = new GeocoderModule();
 	filterModule_ = new FilterModule();
+	filterRoutingModule = new FilterRoutingModule();
 	elementsModule_ = new ElementsModule();
 	displayElementAloneModule_ = new DisplayElementAloneModule();
 	directionsModule_ : DirectionsModule = new DirectionsModule();
 	ajaxModule_ = new AjaxModule();
 	infoBarComponent_ = new InfoBarComponent();
 	mapComponent_  = new MapComponent();
-	searchBarComponent = new SearchBarComponent('#search-bar');
+	searchBarComponent = new SearchBarComponent();
 	elementListComponent = new ElementListComponent();
 	historyModule = new HistoryModule();
 	categoryModule = new CategoriesModule();
@@ -172,13 +174,13 @@ export class AppModule
 				console.log("no viewport nor address provided, using cookies values");
 				historystate.viewport = new ViewPort().fromString(Cookies.readCookie('viewport'));
 				historystate.address = Cookies.readCookie('address');
-				if (historystate.address) $('#search-bar').val(historystate.address);
+				if (historystate.address) $('.search-bar').val(historystate.address);
 			}		
 		}		
 
 		if (historystate.filters)
 		{
-			this.filterModule.loadFiltersFromString(historystate.filters);
+			this.filterRoutingModule.loadFiltersFromString(historystate.filters);
 		}
 		else
 		{
@@ -272,12 +274,19 @@ export class AppModule
 
 			this.mapComponent.init();
 
+			$('#gogo-controls-mobile').velocity({top: 15, right: 0}, {duration: 350, queue: false, easing: 'easeOutQuad'}); 
+			$('#gogo-controls-mobile').addClass('map').removeClass('list');
+
 			if (this.mapComponent_.isMapLoaded) this.boundsModule.extendBounds(0, this.mapComponent.getBounds());
 		}
 		else
 		{
 			$('#directory-content-map').hide();
 			$('#directory-content-list').show();	
+
+			let top = $('#directory-content').height() - $('#gogo-controls-mobile').height() - 5;
+			$('#gogo-controls-mobile').velocity({top: top, right: 15}, {duration: 350, queue: false, easing: 'easeOutQuad'}); 
+			$('#gogo-controls-mobile').addClass('list').removeClass('map');
 
 			console.log("list mode",App.geocoder.getLocation());			
 
@@ -320,7 +329,7 @@ export class AppModule
 		if (oldMode != null && !$backFromHistory) this.historyModule.pushNewState();
 
 		this.elementModule.clearCurrentsElement();
-		this.elementModule.updateElementsToDisplay(true);
+		setTimeout( () => this.elementModule.updateElementsToDisplay(true) , 300);
 
 		if ($updateTitleAndState)
 		{
@@ -616,6 +625,7 @@ export class AppModule
 			this.setState(AppStates.ShowElement, { id : App.infoBarComponent.getCurrElementId() });		
 		
 		this.mapComponent.hideControlLayers();
+		this.searchBarComponent.hideMobileSearchBar();
 	};
 
 	handleGeocodeResult()

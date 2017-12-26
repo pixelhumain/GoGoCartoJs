@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-02-28 13:25:52
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-12-20 09:07:46
+* @Last Modified time: 2017-12-22 14:07:57
 */
 @import 'uniques-filters';
 @import 'subcategorie-item';
@@ -19,7 +19,7 @@
     @include flexbox();
     @include flex-flow(row nowrap); 
     @include flex(1 auto);
-    @media #{$small-only} { height: 100% }
+    // @media #{$small-only} { height: 100% }
   }
 
 	.main-categories

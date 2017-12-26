@@ -292,9 +292,9 @@ export class ElementsModule
 
 		this.updateElementsIcons(filterHasChanged);		
 
-		// strange bug, at initialization, some markers isolated markers are not displayed
+		// strange bug, at initialization, some isolated markers are not displayed
 		// refreshing the elementModule solve this...
-		if (!this.firstElementsHaveBeendisplayed && this.currVisibleElements().length > 0)		
+		if (!this.firstElementsHaveBeendisplayed && this.currVisibleElements() && this.currVisibleElements().length > 0)		
 		{
 			this.firstElementsHaveBeendisplayed = true;
 			setTimeout( () => { this.updateElementsToDisplay(true) }, 100);

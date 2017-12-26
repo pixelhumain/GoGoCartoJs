@@ -92,7 +92,7 @@ export class HistoryModule
 		historyState.address = App.geocoder.getLocationSlug();
 		historyState.viewport = App.mapComponent.viewport;
 		historyState.id = App.infoBarComponent.getCurrElementId() || $options.id;
-		historyState.filters = App.filterModule.getFiltersToString();
+		historyState.filters = App.filterRoutingModule.getFiltersToString();
 		historyState.text = App.searchBarComponent.getCurrSearchText();
 		// if ($pushState) console.log("NEW Sate", historyState.filters);
 		// else console.log("UPDATE State", historyState.filters);

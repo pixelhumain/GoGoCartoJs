@@ -24,6 +24,11 @@
   @import "components/map/map";
   @import "components/map/map-controls";
 
+  @import "components/gogo-controls";
+
+  @import 'components/search-bar/search-bar';
+  @import 'components/search-bar/search-bar-mobile';
+
   @import "components/element-list";
 
   @import "components/element-info-bar/info-bar";

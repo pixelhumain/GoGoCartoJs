@@ -9,72 +9,51 @@
  */
 import { AppModule, AppStates, AppDataType, AppModes } from "../app.module";
 import { GeocoderModule, GeocodeResult } from "../modules/geocoder.module";
-declare var google, $;
+declare var $;
 import { App } from "../gogocarto";
 import { ViewPort } from "./map/map.component";
-import { Option } from "../modules/categories.module";
 
-import { Event } from "../utils/event";
-
-class CategorySearchResult
-{
-	option : Option;
-	matchScore : number;
-	searchTextLeft : string;
-}
 
 export class SearchBarComponent
 {
-	domId;
-
 	placeholders = {
 		default: "",
 		place: "",
 		element: ""
 	}
 
-	domElement() { return $(`${this.domId}`); }
+	searchInput() { return $('.search-bar'); }
 
 	private currSearchText : string = '';
 
-	constructor(domId : string)
-	{	
-		this.domId = domId;		
-	}
+	constructor() {}
 
 	initialize()
-	{
-		// handle all validation by user (enter press, icon click...)
-		this.domElement().keyup((e) =>
+	{		
+		this.searchInput().keyup((e) =>
 		{    
-			if(e.keyCode == 13) // press enter
-			{ 			 
-				this.handleSearchAction();
-			}
+			if(e.keyCode == 13) { this.handleSearchAction(); } // press enter
 		});
 
-		this.domElement().parents().find('#search-bar-icon').click(() => this.handleSearchAction());	
+		$('.search-bar-icon').click(() => this.handleSearchAction());	
 
-		$('#search-btn').click(() => this.handleSearchAction());
+		$('.search-btn').click(() => this.handleSearchAction());
+		$('.search-cancel-btn').click(() => this.clearLoader());
 
-		$('#search-cancel-btn').click(() => this.clearLoader());	
+		$('#btn-close-search-result').click(() => this.clearSearchResult());	
 
-		$('#btn-close-search-result').click( () => this.clearSearchResult());	
+		$('.search-geolocalize').tooltip();
+		$('.search-geolocalize').click(() => this.geolocateUser());
 
-		$('#search-geolocalize').tooltip();
-		$('#search-geolocalize').click( () => this.geolocateUser());
-
-		$('#search-type-select').material_select();
-
-		this.domElement().on('focus', () => { this.showSearchOptions(); });
-
-		this.domElement().on('keyup', () => this.showSearchOptions());
+		this.searchInput().on('click', (e) => { e.preventDefault();e.stopPropagation(); });
+		this.searchInput().on('focus', () => { this.showSearchOptions(); });
+		this.searchInput().on('keyup', () => this.showSearchOptions());
 
 		this.placeholders = {
 			default: "Recherchez un lieu, " + App.config.text.elementIndefinite + "...",
 			place: "Entrez une adresse, un CP, une ville...",
 			element: "Entrez le nom d'" + App.config.text.elementIndefinite
-		}
+		}		
 
 		this.updateSearchPlaceholder();
 
@@ -83,28 +62,13 @@ export class SearchBarComponent
 		$('#directory-content, .directory-menu-content, header').click( () => this.hideSearchOptions() );
 	}
 
-	handleGeocodeResult()
-	{
-		this.setValue(App.geocoder.getLocationAddress());
-		this.clearLoader();
-	}
-
-	private clearLoader()
-	{
-		$('#search-btn').show();
-		$('#search-cancel-btn').hide();
-	}
-
+	// handle all validation by user (input key enter pressed, icon click...)
 	private handleSearchAction()
 	{
-		$('#search-cancel-btn').show();
-		$('#search-btn').hide();
+		$('.search-cancel-btn').show();
+		$('.search-btn').hide();
 
-		// if directory menu take full width
-		if ($('#directory-menu').width() == $('.gogocarto-container').width())
-			App.component.hideDirectoryMenu();
-
-		let searchText = this.domElement().val();
+		let searchText = this.searchInput().val();
 
 		switch (this.searchType()) 
     { 
@@ -113,17 +77,24 @@ export class SearchBarComponent
           (result) => { 
             this.clearSearchResult(false); 
             this.hideSearchOptions(); 
+            this.hideMobileSearchBar()
             App.mapComponent.fitBounds(App.geocoder.getBounds(), true); 
           }); 
         break; 
       case "element": 
-        let value = this.domElement().val(); 
+        let value = this.searchInput().val(); 
         if (value) 
           this.searchElements(searchText); 
         else 
           this.clearSearchResult(); 
         break; 
     } 
+	}
+
+	handleGeocodeResult()
+	{
+		this.setValue(App.geocoder.getLocationAddress());
+		this.clearLoader();
 	}	
 
 	geolocateUser()
@@ -135,69 +106,6 @@ export class SearchBarComponent
 			this.hideSearchOptions();			
 			this.clearLoader();
 		});
-	}
-
-	searchInsideCategory($text : string) : CategorySearchResult[]
-	{
-		if (!$text) return null;
-
-		let regexpr = this.getSearchRegExprFromString($text);
-
-		let results = [];
-		let searchOptionsResult = App.categoryModule.options.forEach( (option) => 
-		{
-			let result = this.getOptionMatchResult(option, $text, regexpr);
-			if (result) results.push(result);			
-		});
-
-		if (results.length == 0) { console.log("no matching");return null;}
-		
-		results.sort( (a,b) => b.matchScore - a.matchScore);
-		return results;		
-	}
-
-	private getSearchRegExprFromString($text) : string
-	{
-		$text = this.stripBeginAndEndSpaces($text);
-		let keywords = this.explodeWords($text);		
-		let regexpr = "";
-		keywords.forEach( (value, index) => regexpr += (index == 0 ? "" : "|") + value);
-		return regexpr;
-	}
-
-	private getOptionMatchResult($option, $text, $regexpr) : CategorySearchResult
-	{
-		let matchs = $option.name.match(new RegExp($regexpr, 'gi'));
-		let matchsShort = $option.nameShort.match(new RegExp($regexpr, 'gi'));
-
-		if (matchs == null && matchsShort == null) return null;
-
-		let matchScore = matchs ? matchs.join().length / $option.name.length : 0;
-		let matchShortScore = matchsShort ? matchsShort.join().length / $option.nameShort.length : 0;
-		matchs = matchScore > matchShortScore ? matchs : matchsShort;
-		matchScore = matchScore > matchShortScore ? matchScore : matchShortScore;
-
-		let textLeft = this.getRemainingStringAfterMatch($text, matchs);
-		
-		return {'option':$option, 'matchScore': matchScore, 'searchTextLeft':textLeft};
-	}
-
-	private getRemainingStringAfterMatch($text, $matchs) : string
-	{
-		let textLeft = $text;
-		textLeft = this.removeWords(textLeft, $matchs);
-		textLeft = this.stripBeginAndEndSpaces(textLeft);
-		return textLeft;
-	}	
-
-	private stripBeginAndEndSpaces($text : string) { return $text.replace(/^\s+/, '').replace(/\s+$/, ''); }
-
-	private explodeWords($text : string) { return $text.split(/[\s,]+/); }
-
-	private removeWords($text : string, $words : string[]) : string
-	{
-		for(let word of $words) $text = $text.replace(new RegExp(word, 'ig'), "");
-		return $text;
 	}	
 
 	searchElements($text : string, $backFromHistory = false)
@@ -233,6 +141,16 @@ export class SearchBarComponent
 		});
 	}
 
+	showMobileSearchBar() { 
+		$('#directory-content-map .search-bar-with-options-container').show(); 
+		$('#gogo-controls-mobile').hide();
+	}
+
+	hideMobileSearchBar() { 
+		$('#directory-content-map .search-bar-with-options-container').hide(); 
+		$('#gogo-controls-mobile').show();
+	}
+
 	showSearchOptions()
 	{
 		$('.search-options').slideDown(350);
@@ -240,6 +158,14 @@ export class SearchBarComponent
 			$('#directory-menu-main-container .directory-menu-header').addClass("expanded");
 
 		this.updateSearchPlaceholder();
+	}
+
+	hideSearchOptions()
+	{		
+		$('#directory-menu-main-container .directory-menu-header').removeClass("expanded");
+		this.searchInput().blur();
+		this.updateSearchPlaceholder();
+		$('#directory-menu-main-container .search-options').slideUp(250);
 	}
 
 	updateSearchPlaceholder()
@@ -255,20 +181,12 @@ export class SearchBarComponent
 			}
 		}			
 
-		this.domElement().attr("placeholder", placeholder);
-	}
-
-	hideSearchOptions()
-	{		
-		$('#directory-menu-main-container .directory-menu-header').removeClass("expanded");
-		this.domElement().blur();
-		this.updateSearchPlaceholder();
-		$('.search-options').slideUp(250);
-	}
+		this.searchInput().attr("placeholder", placeholder);
+	}	
 
 	showSearchResultLabel($number : number)
 	{
-		$('#search-result-number').text($number);
+		$('.search-result-number').text($number);
 		$('.search-results').show();
 		$('.search-options').hide();
 	}
@@ -293,7 +211,7 @@ export class SearchBarComponent
 
 	setValue($value : string)
 	{
-		this.domElement().val($value);
+		this.searchInput().val($value);
 	}  
 
 	getCurrSearchText() { return this.currSearchText; }
@@ -303,9 +221,15 @@ export class SearchBarComponent
 		return $('#directory-menu-main-container .directory-menu-header').hasClass("expanded");
 	}
 
-	searchType() : string
+	private searchType() : string
 	{
 		return $('.search-option-radio-btn:checked').attr('data-name');
+	}
+
+	private clearLoader()
+	{
+		$('.search-btn').show();
+		$('.search-cancel-btn').hide();
 	}
     
 }

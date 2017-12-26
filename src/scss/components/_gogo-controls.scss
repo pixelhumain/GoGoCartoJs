@@ -1,0 +1,31 @@
+/*
+* @Author: Sebastian Castro
+* @Date:   2017-12-26 11:22:02
+* @Last Modified by:   Sebastian Castro
+* @Last Modified time: 2017-12-26 12:38:55
+*/
+#gogo-controls-mobile
+{
+  position: absolute;
+  z-index: 900;
+  left: 15px;
+  top: 15px;
+  right: 0px;
+
+  @media #{$medium-and-up} { display: none !important; }
+
+  .feature-button {
+      display: inline-block;
+      margin-right: 15px;
+
+      &.gogo-bg-primary { color: white; }
+
+      &.show-as-list-button, &.show-as-map-button { float: right; display: none; }
+  }
+
+  @media #{$medium-and-up} { display:none; }
+
+  &.list { .show-as-map-button { display:block; } }
+
+  &.map { .show-as-list-button { display:block; } }
+}

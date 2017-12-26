@@ -70,19 +70,24 @@ export class AppComponent
 		};	
 
 		//Menu CARTE	
-		$('.show-directory-menu-button').click((e) => { this.showDirectoryMenu(); e.preventDefault();e.stopPropagation();});
+		$('.show-directory-menu-button, #mobile-filters-icon').click((e) => { this.showDirectoryMenu(); e.preventDefault();e.stopPropagation();});
 		$('#map-overlay').click(() => this.hideDirectoryMenu());
 		$('#directory-menu .btn-close-menu').click(() => this.hideDirectoryMenu());
 
-		$('#directory-content-map .show-as-list-button').click((e : Event) => {		
+		$('.show-as-list-button').click((e : Event) => {	
 			App.setTimeoutClicking();
 			App.setMode(AppModes.List);
-
 			e.preventDefault();
 			e.stopPropagation();
 		});
 
-		$('#directory-content-list .show-as-map-button').click(() => {		
+		$('#mobile-search-icon').click((e) => { 
+			App.searchBarComponent.showMobileSearchBar();
+			e.preventDefault();
+			e.stopPropagation();
+		});
+
+		$('.show-as-map-button').click(() => {		
 			App.setMode(AppModes.Map);
 		});
 
@@ -126,6 +131,11 @@ export class AppComponent
 	updateComponentsSize()
 	{	
 		App.directoryMenuComponent.updateSize();
+
+		if (this.mapWidth() <= 600)
+			$('.search-bar-with-options-container').prependTo('.search-bar-control');
+		else
+			$('.search-bar-with-options-container').prependTo('.directory-menu-header').show();
 
 		let infoBarHasChangeDisplayMode = false;
 		// show element info bar aside or at the bottom depending of direcoty-content width

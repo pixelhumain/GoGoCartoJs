@@ -2,14 +2,11 @@
 
   <div class="directory-menu-header">
 
-		{% include 'components/directory-menu/search-bar.html.njk'  %} 			
+  	<div class="menu-title">Filtrez par catégorie</div>
 
-		<div class="btn-close-menu large-screen tooltipped" data-tooltip="Fermer le menu" data-position="right" data-delay="300"><span class="arrow-left"></span></div>	
+		{% include 'components/directory-menu/search-bar.html.njk' %}	
 
-		<div class="search-results subheader" style="display:none">
-		    <span class="search-result-label">Résultats : <span id="search-result-number"></span> {{ config.text.element }}(s) trouvé-e(s)</span>
-		    <span class="icon gogo-icon-close btn-close" id="btn-close-search-result"></span>
-		</div>
+		<div class="btn-close-menu large-screen tooltipped" data-tooltip="Fermer le menu" data-position="right" data-delay="300"><span class="arrow-left"></span></div>			
 
 		<div class="directions-header subheader">
 		    <h3>Calcul d'itinéraire</h3>
@@ -27,7 +24,5 @@
 	  {% include 'components/directory-menu/filters-menu.html.njk' %}
 
 	</div>
-
-	<div class="btn-close-menu small-screen gogo-bg-neutral z-depth-2">Filtrer</div>
 
 </div>

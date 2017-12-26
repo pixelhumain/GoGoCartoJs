@@ -1,45 +1,51 @@
-<div class="input-field" id="search-bar-container" > 
-
-	<a class="gogo-icon-search gogo-h-primary search-icon" id="search-bar-icon"></a>
-
-    <a class="gogo-icon-locate gogo-h-primary search-icon tooltipped" id="search-geolocalize"
-        data-position="right" data-delay="0" data-tooltip="Geolocaliser votre position"></a>
-
-    <input class="validate" 
-    	   type="text" 
-    	   id="search-bar" 
-    	   name="adresse" 
-    	   onClick="this.setSelectionRange(0, this.value.length)" 
-    	   {% if config.address %}
-    	   value="{{ config.address | replace({'-': ' '}) | capitalize }}" 
-    	   {% endif %}
-    />    
+<div class="search-bar-with-options-container">
     
-</div>
+    {# Search Input #}
+    <div class="input-field search-bar-container"> 
+    	<a class="gogo-icon-search gogo-h-primary search-icon search-bar-icon"></a>
 
-<div class="search-options" style="display:none">
-    <input class="search-option-radio-btn" data-name="place" name="search-type-option" type="radio" id="search-option-place" checked/>
-    <label class="search-option-radio-label" for="search-option-place">Un lieu</label>
-    <input class="search-option-radio-btn" data-name="element" name="search-type-option" type="radio" id="search-option-element"/>
-    <label class="search-option-radio-label" for="search-option-element">{{ config.text.elementIndefinite | capitalize }}</label>
-    
-    <button id="search-btn" class="search-btn btn waves-effects">chercher</button>
-    <button id="search-cancel-btn" class="search-btn btn waves-effects" style="display:none">
-        annuler
-        {% import 'components/spinner-loader.html.njk' as spinnerLoader %}
-        {{ spinnerLoader.create('search-spinner-loader') }}
-    </button>
-</div>
+        <a class="gogo-icon-locate gogo-h-primary search-icon tooltipped search-geolocalize"
+            data-position="right" data-delay="0" data-tooltip="Geolocaliser votre position"></a>
 
-{% if config.range %}
-<div id="search-distance-component">
-    <div class="range-field" id="search-distance-container">
-      <input type="range" id="search-distance-input" min="30" max="150" value="{{ config.range }}" />
+        <input class="validate search-bar"
+        	   type="text" 
+        	   name="adresse" 
+        	   onClick="this.setSelectionRange(0, this.value.length)" 
+        	   {% if config.address %}
+        	   value="{{ config.address | replace({'-': ' '}) | capitalize }}" 
+        	   {% endif %}
+        />            
     </div>
-   
-    <div id='search-distance-value-container'>
-        <span id='search-distance-value'>{{ config.range }} km</span> 
+
+    {# Search Options #}
+    <div class="search-options" style="display:none">
+        <input class="search-option-radio-btn" name="search-type-option" data-name="place" type="radio" id="search-option-place" checked/>
+        <label class="search-option-radio-label" for="search-option-place">Un lieu</label>
+        <input class="search-option-radio-btn" name="search-type-option" data-name="element" type="radio" id="search-option-element"/>
+        <label class="search-option-radio-label" for="search-option-element">{{ config.text.elementIndefinite | capitalize }}</label>
+        
+        <button class="search-action-btn search-btn btn waves-effects">chercher</button>
+        <button class="search-action-btn search-cancel-btn btn waves-effects" style="display:none">
+            annuler
+            {% import 'components/spinner-loader.html.njk' as spinnerLoader %}
+            {{ spinnerLoader.create('search-spinner-loader') }}
+        </button>
     </div>
-    
+
+    <div class="search-results subheader" style="display:none">
+        <span class="search-result-label">Résultats : <span class="search-result-number"></span> {{ config.text.element }}(s) trouvé-e(s)</span>
+        <span class="icon gogo-icon-close btn-close" id="btn-close-search-result"></span>
+    </div>
 </div>
-{% endif %}
+
+{#{% if config.range %}
+    <div id="search-distance-component">
+        <div class="range-field" id="search-distance-container">
+          <input type="range" id="search-distance-input" min="30" max="150" value="{{ config.range }}" />
+        </div>
+       
+        <div id='search-distance-value-container'>
+            <span id='search-distance-value'>{{ config.range }} km</span> 
+        </div>    
+    </div>
+{% endif %}#}

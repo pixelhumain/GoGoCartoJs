@@ -14,7 +14,7 @@
   {# The directory, map or list displaying, and element information bar #} 
   <section id="directory-content">
     
-    {% include 'modals/modals.html.njk' %} 
+    {% include 'modals.html.njk' %} 
 
     {% import 'components/spinner-loader.html.njk' as spinnerLoader%}
     {{ spinnerLoader.create('directory-spinner-loader') }}    
@@ -25,6 +25,13 @@
 
     <div id="directory-content-list" class="gogo-bg-background" style="display:none">
       {% include 'components/list.html.njk' %}       
+    </div>
+
+    <div id="gogo-controls-mobile">
+      <div id="mobile-search-icon" class="feature-button gogo-bg-primary leaflet-bar"><i class="gogo-icon-search"></i></div>
+      <div id="mobile-filters-icon" class="feature-button leaflet-bar"><i class="gogo-icon-filters-1"></i></div>
+      <div class="show-as-list-button feature-button leaflet-bar"><i class="gogo-icon-list"></i></div>
+      <div class="show-as-map-button feature-button leaflet-bar"><i class="gogo-icon-map"></i></div>
     </div>
 
     {# section conntaining information one a specific element #}
