@@ -28,6 +28,8 @@
 
   @import 'components/search-bar/search-bar';
   @import 'components/search-bar/search-bar-mobile';
+  @import 'components/search-bar/search-overlay-mobile';
+  @import 'components/search-bar/search-result-header';
 
   @import "components/element-list";
 
@@ -53,7 +55,7 @@
     @include flex(1 auto);      
     @include flexbox();
     @include flex-flow(column nowrap);
-  }
+  }  
 
   h1
   {
@@ -64,6 +66,8 @@
     @media screen and (min-width: 600px) { font-size: 3.5rem; }
   }
 }
+
+
 
 
 

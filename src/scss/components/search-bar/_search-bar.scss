@@ -117,16 +117,6 @@
 	}
 }
 
-#directory-menu-main-container .search-results
-{
-  position: relative;
-  padding: 0 0 .7rem 1rem;
-
-  .btn-close { top: -3px !important; }
-
-  .search-result-label { color: white; }
-}
-
 // only when search bar is inside directory menu, we change the search button color
 #directory-menu-main-container .search-action-btn
 {

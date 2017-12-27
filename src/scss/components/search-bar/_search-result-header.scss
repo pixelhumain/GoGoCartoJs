@@ -1,0 +1,47 @@
+/*
+* @Author: Sebastian Castro
+* @Date:   2017-12-27 11:15:18
+* @Last Modified by:   Sebastian Castro
+* @Last Modified time: 2017-12-27 16:20:05
+*/
+.search-results 
+{
+  background-color: rgba(0, 0, 0, 0.4);
+  position: relative;
+  line-height: 3rem;
+  top: 0;
+  z-index: 800;
+  width: 100%;
+  padding: 0;
+  padding-left: 10px;
+
+  @media #{$medium-and-up} {
+    position: relative; 
+    padding-left: 20px;   
+  }
+
+  @include transition(background-color .5s);
+
+  .btn-close
+  {
+    position: absolute;
+    margin: 0;
+    right: 0;
+    top: 3px;
+    padding: 0 1rem;
+    z-index: 50;
+    color: white;
+
+    @media #{$medium-and-up} { right: 12px; }
+
+    &:hover
+    {
+      color: white;
+      cursor: pointer;
+    }
+  }
+
+  .search-result-label { color: white; font-weight: bold; }
+
+  .search-result-value { font-style: italic; }
+}

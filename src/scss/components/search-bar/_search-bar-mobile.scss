@@ -2,23 +2,20 @@
 * @Author: Sebastian Castro
 * @Date:   2017-12-26 08:55:41
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-12-26 14:35:47
+* @Last Modified time: 2017-12-27 16:30:01
 */
 
 // search bar is moved on top of map for mobiles
-#directory-content-map 
+
+.search-bar-with-options-container.mobile
 {
-  .search-bar-with-options-container 
-  {
-    display:none; 
-    z-index: 5000;
-    position: relative;
-    background-color: white;
-    margin: 15px;    
-    border-radius: 5px;
-    margin-top: 10px;
-    @include box-shadow-1(0 2px 6px rgba(0,0,0,0.3));
-  }
+  display:none; 
+  z-index: 10;
+  position: relative;
+  background-color: white;
+  margin: 15px;    
+  border-radius: 3px;
+  @include box-shadow-1(0 2px 6px rgba(0,0,0,0.3));
 
   .search-bar-container { 
     height: 52px;
@@ -42,11 +39,7 @@
       right: 0px;
       font-size: 24px !important;
     }
-  }  
-
-  .search-results {
-    
-  }
+  }    
 
   .search-bar-icon { left: 3px; }
 
@@ -59,8 +52,8 @@
     display: block !important;
     padding: 10px 15px 12px 15px;
   }
-}
 
-// the control are not taking full width, we hack them to do so
-.leaflet-left { right: 0 }
-.search-bar-control { width: 100%; margin: 0; }
+  #search-spinner-loader .spinner-layer {
+    border-color: white !important;
+  }
+}

@@ -134,21 +134,9 @@ export class MapComponent
 		this.addMarkerClusterGroup();		
 
 		L.control.zoom({position:'topright'}).addTo(this.map_);		
-		L.control.layers(baseLayers, {}, {position:'topright', collapsed: false}).addTo(this.map_);		
+		L.control.layers(baseLayers, {}, {position:'topright', collapsed: false}).addTo(this.map_);
 
-		var SearchBarControl = L.Control.extend({
-			options: {
-			  position: "topleft"
-			},
-			onAdd: function(map) {
-			  this._div = L.DomUtil.create('div', 'search-bar-control');
-			  L.DomEvent.disableClickPropagation(this._div);
-				return this._div;
-			}
-		});
-
-		new SearchBarControl().addTo(this.map_);
-
+		$('.feature-button').tooltip();
 		$('#directory-content-map #change-layers').click( (e) =>
 		{
 			$('#directory-content-map #change-layers').hideTooltip();

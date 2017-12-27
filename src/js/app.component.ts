@@ -71,7 +71,6 @@ export class AppComponent
 
 		//Menu CARTE	
 		$('.show-directory-menu-button, #mobile-filters-icon').click((e) => { this.showDirectoryMenu(); e.preventDefault();e.stopPropagation();});
-		$('#map-overlay').click(() => this.hideDirectoryMenu());
 		$('#directory-menu .btn-close-menu').click(() => this.hideDirectoryMenu());
 
 		$('.show-as-list-button').click((e : Event) => {	
@@ -132,11 +131,13 @@ export class AppComponent
 	{	
 		App.directoryMenuComponent.updateSize();
 
-		if (this.mapWidth() <= 600)
-			$('.search-bar-with-options-container').prependTo('.search-bar-control');
+		if (this.width() <= 600)
+			$('.search-bar-with-options-container').hide().appendTo('#search-overlay-mobile').addClass('mobile');
 		else
-			$('.search-bar-with-options-container').prependTo('.directory-menu-header').show();
+			$('.search-bar-with-options-container').removeClass('mobile').prependTo('.directory-menu-header').show();
 
+		App.gogoControlComponent.updatePosition();
+		
 		let infoBarHasChangeDisplayMode = false;
 		// show element info bar aside or at the bottom depending of direcoty-content width
 		if (this.mapWidth() > 900)

@@ -1,0 +1,27 @@
+/*
+* @Author: Sebastian Castro
+* @Date:   2017-12-27 07:39:41
+* @Last Modified by:   Sebastian Castro
+* @Last Modified time: 2017-12-27 07:54:59
+*/
+#search-overlay-mobile 
+{
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;  
+  z-index: 1000;
+
+  .overlay 
+  {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; 
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}

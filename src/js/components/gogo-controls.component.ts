@@ -14,11 +14,14 @@ import { App } from "../gogocarto";
 
 export class GoGoControlComponent
 {    
-  handleModeChanged($mode : AppModes)
+  updatePosition()
   {
-    if ($mode == AppModes.Map)
+    if (!App.mode) return;
+
+    if (App.mode == AppModes.Map)
     {
-      $('#gogo-controls-mobile').velocity({top: 15}, {duration: 350, queue: false, easing: 'easeOutQuad'}); 
+      let top = 15 + $('.search-results:visible').height();
+      $('#gogo-controls-mobile').velocity({top: top}, {duration: 350, queue: false, easing: 'easeOutQuad'}); 
       $('#gogo-controls-mobile').addClass('map').removeClass('list');
     }
     else

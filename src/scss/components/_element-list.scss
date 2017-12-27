@@ -1,8 +1,8 @@
 #directory-content-list
 {
 	display:none;
-	position: absolute;
 	z-index: 650;
+	@include flex(1 auto);
 	width: 100%;
 	overflow: auto;
 	border-left: none;
@@ -50,6 +50,7 @@
 	.element-list-title-bar
 	{
 		display:block;
+		@media #{$small-only} { display: none !important; }
 		position: relative;
 		width: 100%;
 		line-height: 3rem;
@@ -66,7 +67,8 @@
 		position: relative;
 		padding-bottom: 100px;
 
-		height: calc(100% - 3rem);
+		height: 100%;
+		@media #{$medium-and-up} { height: calc(100% - 3rem); }
 		width: 100%;
 		overflow-y: auto;
 		margin :0;
@@ -106,14 +108,11 @@
 		background-color: white;
 	}
 
-	.collapsible.popout > li
+	.collapsible.popout
 	{ 
 		margin: 0;
-	}
-
-	.collapsible.popout > li.active
-	{ 
-		margin: 1rem 0; 
+		& > li { margin: 0 }
+		& > li.active { margin: 1rem 0; }
 	}
 
 	.spinner-loader

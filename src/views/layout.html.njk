@@ -17,8 +17,10 @@
     {% include 'modals.html.njk' %} 
 
     {% import 'components/spinner-loader.html.njk' as spinnerLoader%}
-    {{ spinnerLoader.create('directory-spinner-loader') }}    
-    
+    {{ spinnerLoader.create('directory-spinner-loader') }}  
+
+     {% include 'components/search-results-header.html.njk' %}
+
     <div id="directory-content-map" style="display:none"> 
       {% include 'components/map.html.njk' %}       
     </div>       
@@ -27,7 +29,13 @@
       {% include 'components/list.html.njk' %}       
     </div>
 
-    {% include 'components/gogo-controls.html.njk' %}       
+    {% include 'components/gogo-controls.html.njk' %}
+
+    {# For mobile, search bar in displayed on top of other components in this overlay
+    instead of inside the directory menu #}
+    <div id="search-overlay-mobile">
+      <div class="overlay"></div>
+    </div>       
 
     {# section conntaining information one a specific element #}
     <section id="element-info-bar" class="custom-scroll-bar inside-normal-mode" style="display:none">  

@@ -19,17 +19,25 @@
 	{
 		padding: .5rem 0 .8rem 0;
 
+		.menu-element-item {			
+			@media #{$small-only} { margin: 0 6px; }
+			margin: 0 10px;
+			@media (min-width: 1400px) { margin: 0 .8rem;	 }
+		}
+
 		.menu-element-item-text
 		{
 			display: inline;
 			text-transform: uppercase;
-			font-size: 0.85rem;
+			font-size: 0.8rem;
 			line-height: 3rem;
     	margin-left: .5rem;
 
+    	@media #{$small-only} { font-size: 10px; }
+    	@media (min-width: 1400px) { font-size: 0.8rem; }
+
 			&.favorite { color : rgb(255, 171, 0); }
 		}
-
 	}
 
 	.menu-element-item

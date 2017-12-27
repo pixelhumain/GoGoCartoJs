@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-12-26 11:22:02
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-12-26 14:19:22
+* @Last Modified time: 2017-12-26 14:42:30
 */
 #gogo-controls-mobile
 {
@@ -28,7 +28,7 @@
   &.list { 
     .show-as-map-button { display:block; } 
     .feature-button {
-      @include box-shadow-1(1px 2px 8px 1px rgba(0, 0, 0, 0.52));
+      @include box-shadow-1(1px 2px 8px 1px rgba(0, 0, 0, 0.4));
     }
   }
 

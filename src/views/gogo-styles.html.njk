@@ -78,9 +78,9 @@
       color: white;
   }
 
-  #directory-content-map .search-options label.search-option-radio-label { color: {{ neutralDark }}; }
-  #directory-content-map .search-options label.search-option-radio-label:before{ border-color: {{ neutral }}; }
-  #directory-content-map .search-options label.search-option-radio-label:after { 
+  .search-bar-with-options-container.mobile .search-options label.search-option-radio-label { color: {{ neutralDark }}; }
+  .search-bar-with-options-container.mobile .search-options label.search-option-radio-label:before{ border-color: {{ neutral }}; }
+  .search-bar-with-options-container.mobile .search-options label.search-option-radio-label:after { 
     border-color: {{ neutral }}; 
     background-color: {{ neutral }}; 
   }
@@ -130,7 +130,7 @@
 
   .feature-button.primary { color: white; background-color: {{ primary }}; }
   .feature-button.soft-primary { color: {{ primary }}; }
-  .feature-button.neutral { color: white; background-color: {{ neutral }}; }
+  .feature-button.neutral { color: white; background-color: {{ neutral }} !important; }
 
   {# TAXONOMY #}
 	.bgdSoftColorAs { background-color: #484848 }

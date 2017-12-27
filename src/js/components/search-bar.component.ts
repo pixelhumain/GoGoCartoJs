@@ -60,6 +60,8 @@ export class SearchBarComponent
 		$('.search-option-radio-btn').change( () => this.updateSearchPlaceholder() );
 
 		$('#directory-content, .directory-menu-content, header').click( () => this.hideSearchOptions() );
+
+		$('#search-overlay-mobile .overlay').click( () => this.hideMobileSearchBar() );
 	}
 
 	// handle all validation by user (input key enter pressed, icon click...)
@@ -126,7 +128,9 @@ export class SearchBarComponent
  
       this.clearLoader();       
       this.showSearchResultLabel(searchResult.data.length);   
- 
+ 			App.gogoControlComponent.updatePosition();
+ 			this.hideMobileSearchBar();
+
       if (searchResult.data.length > 0) 
       { 
         App.setMode(AppModes.List); 
@@ -142,12 +146,15 @@ export class SearchBarComponent
 	}
 
 	showMobileSearchBar() { 
-		$('#directory-content-map .search-bar-with-options-container').show(); 
+		$('#search-overlay-mobile').fadeIn(250);
+		$('.search-bar-with-options-container').show(); 
 		App.gogoControlComponent.hide(0);
 	}
 
 	hideMobileSearchBar() { 
-		$('#directory-content-map .search-bar-with-options-container').hide();
+		console.log("hide mobile search bar");
+		$('#search-overlay-mobile').fadeOut(150);
+		$('.search-bar-with-options-container.mobile').hide();
 		App.gogoControlComponent.show(0);
 	}
 
@@ -170,7 +177,8 @@ export class SearchBarComponent
 
 	updateSearchPlaceholder()
 	{
-		let placeholder = ''
+		let placeholder = '';
+		console.log("placeholder", )
 		if (!this.isSearchOptionVisible()) placeholder = this.placeholders.default;
 		else
 		{
@@ -187,25 +195,27 @@ export class SearchBarComponent
 	showSearchResultLabel($number : number)
 	{
 		$('.search-result-number').text($number);
+		$('.search-result-value').text(this.currSearchText);
 		$('.search-results').show();
 		$('.search-options').hide();
 	}
 
-	hideSearchResultLabel()
+	hideSearchResult()
 	{
-		$('.search-results').slideUp(350);
+		$('.search-results').hide();
+		App.gogoControlComponent.updatePosition();
 	}
 
 	clearSearchResult(resetValue = true)
 	{
 		App.setDataType(AppDataType.All);		
-		this.hideSearchResultLabel();		
+		this.hideSearchResult();		
 		this.clearLoader();	
 		this.currSearchText = '';
 		if (resetValue) {
 			this.setValue("");
 			App.elementListComponent.setTitle("");
-		}
+		}		
 		setTimeout( () => { this.hideSearchOptions(); }, 200);
 	}
 
@@ -218,7 +228,7 @@ export class SearchBarComponent
 
 	isSearchOptionVisible() : boolean
 	{
-		return $('#directory-menu-main-container .directory-menu-header').hasClass("expanded");
+		return $('.search-options:visible').length;
 	}
 
 	private searchType() : string

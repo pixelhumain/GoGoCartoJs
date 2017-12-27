@@ -56,8 +56,8 @@ export enum AppStates
 
 export enum AppModes
 {
-	Map,
-	List
+	Map = 1,
+	List = 2
 }
 
 export enum AppDataType 
@@ -318,8 +318,6 @@ export class AppModule
 			}			
 		}
 
-		this.gogoControlComponent.handleModeChanged($mode);
-
 		// if previous mode wasn't null 
 		let oldMode = this.mode_;
 		this.mode_ = $mode;
@@ -327,6 +325,7 @@ export class AppModule
 		// update history if we need to
 		if (oldMode != null && !$backFromHistory) this.historyModule.pushNewState();
 
+		this.gogoControlComponent.updatePosition();
 		
 		setTimeout( () => this.elementModule.updateElementsToDisplay(true) , 300);
 
@@ -624,7 +623,6 @@ export class AppModule
 			this.setState(AppStates.ShowElement, { id : App.infoBarComponent.getCurrElementId() });		
 		
 		this.mapComponent.hideControlLayers();
-		this.searchBarComponent.hideMobileSearchBar();
 	};
 
 	handleGeocodeResult()
