@@ -19,8 +19,6 @@ import { ElementStatus } from "../classes/element.class";
 
 import { App } from "../gogocarto";
 
-import { capitalize, slugify } from "../commons/commons";
-
 export function initializeVoting()
 {	
 	//console.log("initialize vote");	

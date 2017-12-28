@@ -8,7 +8,7 @@
  * @Last Modified time: 2016-12-13
  */
 
-import { Event } from "../utils/event";
+import { Event } from "../classes/event";
 import { AppModule, AppStates } from "../app.module";
 import { Element } from "../classes/element.class";
 

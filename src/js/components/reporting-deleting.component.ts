@@ -19,7 +19,7 @@ import { ElementStatus } from "../classes/element.class";
 
 import { App } from "../gogocarto";
 
-import { capitalize, slugify } from "../commons/commons";
+import { capitalize } from "../utils/string-helpers";
 
 export function openReportModal()
 {

@@ -185,7 +185,6 @@ export class SearchBarComponent
 	updateSearchPlaceholder()
 	{
 		let placeholder = '';
-		console.log("placeholder", )
 		if (!this.isSearchOptionVisible()) placeholder = this.placeholders.default;
 		else
 		{

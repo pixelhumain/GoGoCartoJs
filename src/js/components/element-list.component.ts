@@ -10,11 +10,10 @@
 import { AppModule, AppStates, AppDataType } from "../app.module";
 import { App } from "../gogocarto";
 import { ElementsChanged } from "../modules/elements.module";
-import { slugify, capitalize, unslugify } from "../commons/commons";
 
 import { createListenersForElementMenu, updateFavoriteIcon } from "./element-menu.component";
 import { Element } from "../classes/element.class";
-import { Event } from "../utils/event";
+import { Event } from "../classes/event";
 
 import { createListenersForVoting } from "../components/vote.component";
 
@@ -70,7 +69,7 @@ export class ElementListComponent
 
 	setTitle($value : string)
 	{
-		console.log("set title", $value);
+		// console.log("set title", $value);
 		$('.element-list-title-text').html($value);
 	}
 

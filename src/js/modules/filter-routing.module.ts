@@ -9,7 +9,7 @@
  */
 
 import { App } from "../gogocarto";
-import { parseArrayNumberIntoString, parseStringIntoArrayNumber } from "../commons/commons";
+import { parseArrayNumberIntoString, parseStringIntoArrayNumber } from "../utils/parser-string-number";
 
 declare var $ : any;
 

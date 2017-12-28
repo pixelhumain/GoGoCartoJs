@@ -13,7 +13,7 @@ import { App } from "../gogocarto";
 declare var $;	
 
 import * as Cookies from "../utils/cookies";
-import { Event } from "../utils/event";
+import { Event } from "../classes/event";
 import { Element, ElementStatus } from "../classes/element.class";
 import { BiopenMarker } from "../components/map/biopen-marker.component";
 
@@ -320,13 +320,6 @@ export class ElementsModule
 	{
 		return this.everyElements_['all'];
 	}
-
-	// clearMarkers()
-	// {
-	// 	console.log("clearMarkers");
-	// 	this.hideAllMarkers();
-	// 	this.clearCurrVisibleElements();
-	// };
 
 	getMarkers () 
 	{

@@ -3,8 +3,8 @@ import { App } from "../gogocarto";
 declare var L, $;
 
 import { AppModule } from "../app.module";
-import { slugify, capitalize, unslugify } from "../commons/commons";
-import { Event } from "../utils/event";
+import { slugify } from "../utils/string-helpers";
+import { Event } from "../classes/event";
 import { ViewPort } from "../components/map/map.component";
 
 /** results type returned by geocoderJS */

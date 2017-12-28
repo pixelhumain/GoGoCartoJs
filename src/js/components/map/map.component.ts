@@ -1,8 +1,7 @@
 
 import { AppModule, AppStates } from "../../app.module";
-import { Event } from "../../utils/event";
+import { Event } from "../../classes/event";
 import { Element } from "../../classes/element.class";
-import { capitalize, slugify } from "../../commons/commons";
 import { GeocodeResult, RawBounds } from "../../modules/geocoder.module";
 import * as Cookies from "../../utils/cookies";
 

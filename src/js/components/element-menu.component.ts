@@ -16,7 +16,7 @@ import { AppModule, AppStates, AppModes } from "../app.module";
 import { Element } from "../classes/element.class";
 import { App } from "../gogocarto";
 
-import { capitalize, slugify } from "../commons/commons";
+import { capitalize, slugify } from "../utils/string-helpers";
 import { openDeleteModal, openReportModal } from './reporting-deleting.component';
 import { createListenersForMarkAsResolved } from './moderation.component';
 

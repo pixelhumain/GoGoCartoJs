@@ -10,7 +10,7 @@
 import { AppModule, AppStates, AppModes } from "../app.module";
 import { BiopenMarker } from "../components/map/biopen-marker.component";
 import { OptionValue, CategoryValue, Option, Category, Contribution, VoteReport } from "./classes";
-import { capitalize } from "../commons/commons";
+import { capitalize } from "../utils/string-helpers";
 
 import { App } from "../gogocarto";
 declare var $, JsDiff : any;

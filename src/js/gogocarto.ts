@@ -7,7 +7,7 @@ import { HistoryState } from "./modules/history.module";
 import { initializeElementMenu } from "./components/element-menu.component";
 import { initializeVoting } from "./components/vote.component";
 import { initializeReportingAndDeleting } from "./components/reporting-deleting.component";
-import { getQueryParams } from "./commons/commons";
+import { getQueryParams } from "./utils/params";
 import { Roles } from "./modules/login.module";
 
 export var App : AppModule;

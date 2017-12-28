@@ -34,7 +34,7 @@ import { MapComponent, ViewPort } from "./components/map/map.component";
 import { BiopenMarker } from "./components/map/biopen-marker.component";
 import { HistoryModule, HistoryState } from './modules/history.module';
 import { BoundsModule } from './modules/bounds.module';
-import { getQueryParams, capitalize, unslugify } from "./commons/commons";
+import { capitalize, unslugify } from "./utils/string-helpers";
 import { Element } from "./classes/element.class";
 import { GoGoConfig } from "./classes/gogo-config.class";
 import * as Cookies from "./utils/cookies";
@@ -314,7 +314,7 @@ export class AppModule
 			else if (App.dataType == AppDataType.SearchResults)
 			{
 				App.elementModule.updateElementsToDisplay(true,false);
-				this.elementListComponent.setTitle(' de <i>' + capitalize(unslugify(this.searchBarComponent.getCurrSearchText())) + '</i>');
+				App.elementListComponent.setTitle('');
 			}			
 		}
 
