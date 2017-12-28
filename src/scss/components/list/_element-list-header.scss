@@ -1,0 +1,67 @@
+/*
+* @Author: Sebastian Castro
+* @Date:   2017-12-28 08:54:01
+* @Last Modified by:   Sebastian Castro
+* @Last Modified time: 2017-12-28 09:03:28
+*/
+#directory-content-list .element-list-header
+{
+  display:block;
+  @media #{$small-only} { display: none !important; }
+  position: relative;
+  width: 100%;
+  line-height: 4rem;
+  text-align: right;
+  padding: 0 1rem;
+  @media (min-width: 900px) { padding-left: 3rem; padding-right: calc(3rem + 20px); }
+  @media (min-width: 1500px) {padding-left: 10rem; padding-right: calc(10rem + 20px); } 
+
+  #list-title-shadow-bottom { display:none }
+
+  .show-as-map-button
+  {
+    float:left;
+    z-index: 200;
+    // padding-left: 1rem;
+    // left: 0;
+    height: 100%;
+    @media #{$medium-and-up} { left: .5rem; }
+    @media #{$large-only} { left: 9rem !important; }  
+    text-decoration: underline;
+    &:hover { cursor: pointer; }
+
+    .btn-back { color: inherit !important;   height: 2rem;}
+
+    @media #{$medium-and-up}
+    {
+      left: 2rem;
+      &:after
+      {
+        content : "Retour à la carte";
+      }
+    }   
+  }
+
+  .show-directory-menu-button
+  {
+    @media #{$small-only} { display: none !important; }
+    
+    @media #{$medium-and-up} {
+      display: block;
+      float:left;
+      position: relative;
+      margin-right: 2rem;
+      margin-left: -1rem;
+      width: auto;
+      top: .8rem;
+    }
+    @media(min-width: 1500px) { 
+      position:absolute; 
+      top: 12px; 
+      left: 15px; 
+      margin-left: 0;
+      bottom: initial; 
+      width: auto;
+    }
+  }
+}

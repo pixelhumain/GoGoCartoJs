@@ -6,61 +6,7 @@
 	width: 100%;
 	overflow: auto;
 	border-left: none;
-	height: 100%;
-
-	.show-as-map-button
-	{
-		float:left;
-		z-index: 200;
-		// padding-left: 1rem;
-    // left: 0;
-    height: 100%;
-		@media #{$medium-and-up} { left: .5rem; }
-		@media #{$large-only} { left: 9rem !important; }	
-		text-decoration: underline;
-		&:hover { cursor: pointer; }
-
-		.btn-back { color: inherit !important;   height: 2rem;}
-
-		@media (min-width: 850px)
-		{
-			left: 2rem;
-			&:after
-			{
-				content : "Retour à la carte";
-			}
-		}		
-	}
-
-	.show-directory-menu-button
-	{
-		@media (max-width: 600px) { display: none !important; }
-		
-    @media (min-width: 600px) {
-    	display: block;
-    	float:left;
-    	position: relative;
-    	margin-right: 2rem;
-    	width: auto;
-    	top: 4px;
-    }
-		@media(min-width: 1500px) { position:absolute; top: 5px; left: 5px; bottom: initial; width: auto;}
-	}
-
-	.element-list-title-bar
-	{
-		display:block;
-		@media #{$small-only} { display: none !important; }
-		position: relative;
-		width: 100%;
-		line-height: 3rem;
-	  text-align: right;
-    padding: 0 1rem;
-    @media (min-width: 900px) { padding-left: 3rem; padding-right: calc(3rem + 20px); }
-		@media (min-width: 1500px) {padding-left: 10rem; padding-right: calc(10rem + 20px); }	
-
-		#list-title-shadow-bottom { display:none }
-	}	
+	height: 100%;		
 
 	.elements-container
 	{
@@ -68,7 +14,7 @@
 		padding-bottom: 100px;
 
 		height: 100%;
-		@media #{$medium-and-up} { height: calc(100% - 3rem); }
+		@media #{$medium-and-up} { height: calc(100% - 4rem); }
 		width: 100%;
 		overflow-y: auto;
 		margin :0;
@@ -96,9 +42,6 @@
 
 	.element-item
 	{
-		//.menu-element { display: none; } 
-		// .element-main-icon {display:none}
-		// .star-names-icons {display:block}
 		display: block;
 		.gogo-icon-close {display:none}
 		.distance{ 
@@ -112,13 +55,13 @@
 			.postalCode { font-size: .95rem; }
 			.city { }
 		}
-	}
 
-	.collapsible-header
-	{
-		border-bottom: 1px solid #abaaaa;
-		background-color: white;
-	}
+		.collapsible-header
+		{
+			border-bottom: 1px solid #abaaaa;
+			background-color: white;
+		}
+	}	
 
 	.collapsible.popout
 	{ 
