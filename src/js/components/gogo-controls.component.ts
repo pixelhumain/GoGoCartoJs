@@ -21,13 +21,13 @@ export class GoGoControlComponent
     if (App.mode == AppModes.Map)
     {
       let top = 15 + $('.search-results:visible').height();
-      $('#gogo-controls-mobile').velocity({top: top}, {duration: 350, queue: false, easing: 'easeOutQuad'}); 
+      $('#gogo-controls-mobile').velocity({top: top, right: 0}, {duration: 250, queue: false, easing: 'easeOutQuad'}); 
       $('#gogo-controls-mobile').addClass('map').removeClass('list');
     }
     else
     {
       let top = $('#directory-content').height() - $('#gogo-controls-mobile').height() - 5;
-      $('#gogo-controls-mobile').velocity({top: top}, {duration: 350, queue: false, easing: 'easeOutQuad'}); 
+      $('#gogo-controls-mobile').velocity({top: top, right: 15}, {duration: 250, queue: false, easing: 'easeOutQuad'}); 
       $('#gogo-controls-mobile').addClass('list').removeClass('map');
     }
   } 
