@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-12-27 11:15:18
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-12-27 16:20:05
+* @Last Modified time: 2017-12-28 09:18:39
 */
 .search-results 
 {
@@ -17,7 +17,7 @@
 
   @media #{$medium-and-up} {
     position: relative; 
-    padding-left: 20px;   
+    padding-left: 28px;   
   }
 
   @include transition(background-color .5s);
