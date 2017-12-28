@@ -158,6 +158,13 @@ export class SearchBarComponent
 		App.gogoControlComponent.show(0);
 	}
 
+	update() {
+		if (App.component.width() <= 600)
+			$('.search-bar-with-options-container').hide().appendTo('#search-overlay-mobile').addClass('mobile');
+		else
+			$('.search-bar-with-options-container').removeClass('mobile').prependTo('.directory-menu-header').show();
+	}
+
 	showSearchOptions()
 	{
 		$('.search-options').slideDown(350);

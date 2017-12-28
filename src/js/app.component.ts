@@ -131,12 +131,11 @@ export class AppComponent
 	{	
 		App.directoryMenuComponent.updateSize();
 
-		if (this.width() <= 600)
-			$('.search-bar-with-options-container').hide().appendTo('#search-overlay-mobile').addClass('mobile');
-		else
-			$('.search-bar-with-options-container').removeClass('mobile').prependTo('.directory-menu-header').show();
+		App.searchBarComponent.update();
 
 		App.gogoControlComponent.updatePosition();
+
+		App.infoBarComponent.refresh();
 		
 		let infoBarHasChangeDisplayMode = false;
 		// show element info bar aside or at the bottom depending of direcoty-content width
