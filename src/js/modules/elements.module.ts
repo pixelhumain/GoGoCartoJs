@@ -73,7 +73,7 @@ export class ElementsModule
 	  }
 	};
 
-	addJsonElements (elementList, checkIfAlreadyExist = true, isFullRepresentation : boolean) 
+	addJsonElements (elementList, checkIfAlreadyExist = true, isFullRepresentation : boolean = true) 
 	{
 		let element : Element, elementJson;
 		let newElements : Element[] = [];

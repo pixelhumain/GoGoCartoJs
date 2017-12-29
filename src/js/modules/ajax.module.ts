@@ -170,6 +170,8 @@ export class AjaxModule
 					let end = new Date().getTime();					
 					// console.log("receive " + response.data.length + " elements in " + (end-start) + " ms. fullRepresentation", response.fullRepresentation);				
 
+					response.fullRepresentation = response.ontology == "gogocompact" ? false : true;
+					
 					if ($expectedFilledBounds)
 					{
 						App.boundsModule.updateFilledBoundsWithBoundsReceived($expectedFilledBounds, $request.data.mainOptionId,  $request.data.fullRepresentation);
