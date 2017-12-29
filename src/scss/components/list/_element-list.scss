@@ -14,7 +14,7 @@
 		padding-bottom: 100px;
 
 		height: 100%;
-		@media #{$medium-and-up} { height: calc(100% - 4rem); }
+		@media #{$medium-and-up} { height: calc(100% - 3.5rem); }
 		width: 100%;
 		overflow-y: auto;
 		margin :0;
