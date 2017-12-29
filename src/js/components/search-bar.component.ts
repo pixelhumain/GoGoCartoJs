@@ -40,7 +40,7 @@ export class SearchBarComponent
 		$('.search-btn').click(() => this.handleSearchAction());
 		$('.search-cancel-btn').click(() => this.clearLoader());
 
-		$('#btn-close-search-result').click(() => this.clearSearchResult());	
+		$('#btn-close-search-result').click(() => this.clearElementSearchResult());	
 
 		$('.search-geolocalize').tooltip();
 		$('.search-geolocalize').click(() => this.geolocateUser());
@@ -212,6 +212,12 @@ export class SearchBarComponent
 		App.gogoControlComponent.updatePosition();
 	}
 
+	clearElementSearchResult() 
+	{
+		this.clearSearchResult();
+		App.setMode(AppModes.Map);
+	}
+
 	clearSearchResult(resetValue = true)
 	{
 		App.setDataType(AppDataType.All);		
@@ -222,9 +228,7 @@ export class SearchBarComponent
 			this.setValue("");
 			App.elementListComponent.setTitle("");
 		}		
-		setTimeout( () => { this.hideSearchOptions(); }, 200);
-
-		App.setMode(AppModes.Map);
+		setTimeout( () => { this.hideSearchOptions(); }, 200);		
 	}
 
 	setValue($value : string)
