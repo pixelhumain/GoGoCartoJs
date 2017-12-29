@@ -194,30 +194,6 @@
 .gogo-icon-moderation:before {
   content: "\79";
 }
-.gogo-icon-menu-1:before {
-  content: "\32";
-}
-.gogo-icon-list-1:before {
-  content: "\33";
-}
-.gogo-icon-panels:before {
-  content: "\34";
-}
-.gogo-icon-filters:before {
-  content: "\35";
-}
-.gogo-icon-list-2:before {
-  content: "\36";
-}
 .gogo-icon-filters-1:before {
   content: "\37";
-}
-.gogo-icon-filters-2:before {
-  content: "\38";
-}
-.gogo-icon-table:before {
-  content: "\39";
-}
-.gogo-icon-list-3:before {
-  content: "\21";
 }
