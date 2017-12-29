@@ -58,7 +58,7 @@ export class GeocoderModule
 
 	constructor()
 	{
-		this.geocoder = GeocoderJS.createGeocoder({ 'provider': 'openstreetmap'});
+		this.geocoder = GeocoderJS.createGeocoder({ 'provider': 'openstreetmap', 'useSSL':true});
 		//this.geocoder = GeocoderJS.createGeocoder({'provider': 'google', 'useSSL':true });
 	}
 
