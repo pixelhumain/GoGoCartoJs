@@ -223,6 +223,8 @@ export class SearchBarComponent
 			App.elementListComponent.setTitle("");
 		}		
 		setTimeout( () => { this.hideSearchOptions(); }, 200);
+
+		App.setMode(AppModes.Map);
 	}
 
 	setValue($value : string)
