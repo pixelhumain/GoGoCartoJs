@@ -8,10 +8,10 @@
  * @Last Modified time: 2016-08-31
  */
 import { AppModule, AppStates, AppDataType, AppModes } from "../app.module";
-import { GeocoderModule, GeocodeResult } from "../modules/geocoder.module";
+import { GeocodeResult } from "../modules/geocoder.module";
 declare var $;
 import { App } from "../gogocarto";
-import { ViewPort } from "./map/map.component";
+import { ViewPort } from "../classes/classes";
 
 
 export class SearchBarComponent
@@ -121,8 +121,8 @@ export class SearchBarComponent
 		App.ajaxModule.sendRequest(route, 'get', data,
 		(searchResult) => 
 		{
-			let result = App.elementModule.addJsonElements(searchResult.data, true, true); 
-      App.elementModule.setSearchResultElement(result.elementsConverted); 
+			let result = App.elementsModule.addJsonElements(searchResult.data, true, true); 
+      App.elementsModule.setSearchResultElement(result.elementsConverted); 
       App.setDataType(AppDataType.SearchResults, $backFromHistory); 
       App.filtersComponent.setMainOption('all'); 
  
@@ -152,7 +152,7 @@ export class SearchBarComponent
 	}
 
 	hideMobileSearchBar() { 
-		console.log("hide mobile search bar");
+		// console.log("hide mobile search bar");
 		$('#search-overlay-mobile').fadeOut(150);
 		$('.search-bar-with-options-container.mobile').hide();
 		App.gogoControlComponent.show(0);

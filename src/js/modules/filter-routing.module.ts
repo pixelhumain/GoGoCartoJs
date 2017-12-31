@@ -93,7 +93,7 @@ export class FilterRoutingModule
 				else App.categoryModule.getMainOptionBySlug(mainOptionSlug).recursivelyUpdateStates();
 			}
 
-			App.elementModule.updateElementsToDisplay(true);
+			App.elementsModule.updateElementsToDisplay(true);
 			//App.historyModule.updateCurrState();
 		}
 	}

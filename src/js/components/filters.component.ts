@@ -41,7 +41,7 @@ export class FiltersComponent
         $('#moderation-checkbox').prop('checked',false);
       }
       
-      App.elementModule.updateElementsToDisplay(true);
+      App.elementsModule.updateElementsToDisplay(true);
 
       favoriteCheckbox.prop('checked',checkValue);
 
@@ -68,7 +68,7 @@ export class FiltersComponent
         $('#moderation-checkbox').prop('checked',false);
       }
 
-      App.elementModule.updateElementsToDisplay(true);
+      App.elementsModule.updateElementsToDisplay(true);
 
       pendingCheckbox.prop('checked',checkValue);
 
@@ -95,7 +95,7 @@ export class FiltersComponent
         $('#pending-checkbox').prop('checked',false);
       }
 
-      App.elementModule.updateElementsToDisplay(true);
+      App.elementsModule.updateElementsToDisplay(true);
 
       moderationCheckbox.prop('checked',checkValue);
 
@@ -185,7 +185,7 @@ export class FiltersComponent
   {
     if (this.currentActiveMainOptionId == optionId) return;
 
-    if (this.currentActiveMainOptionId != null) App.elementModule.clearCurrentsElement();
+    if (this.currentActiveMainOptionId != null) App.elementsModule.clearCurrentsElement();
 
     let oldId = this.currentActiveMainOptionId;
     this.currentActiveMainOptionId = optionId;
@@ -216,7 +216,7 @@ export class FiltersComponent
     
       App.boundsModule.updateFilledBoundsAccordingToNewMainOptionId();
       App.checkForNewElementsToRetrieve();
-      App.elementModule.updateElementsToDisplay(true,true);
+      App.elementsModule.updateElementsToDisplay(true,true);
     }, 400);    
   }
 

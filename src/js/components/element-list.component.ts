@@ -13,7 +13,7 @@ import { ElementsChanged } from "../modules/elements.module";
 
 import { createListenersForElementMenu, updateFavoriteIcon } from "./element-menu.component";
 import { Element } from "../classes/element.class";
-import { Event } from "../classes/event";
+import { Event } from "../classes/event.class";
 
 import { createListenersForVoting } from "../components/vote.component";
 
@@ -72,6 +72,10 @@ export class ElementListComponent
 		// console.log("set title", $value);
 		$('.element-list-title-text').html($value);
 	}
+
+	show() { $('#directory-content-list').show(); }
+	
+	hide() { $('#directory-content-list').hide(); }
 
 	clear()
 	{

@@ -4,8 +4,7 @@ declare var L, $;
 
 import { AppModule } from "../app.module";
 import { slugify } from "../utils/string-helpers";
-import { Event } from "../classes/event";
-import { ViewPort } from "../components/map/map.component";
+import { ViewPort, Event } from "../classes/classes";
 
 /** results type returned by geocoderJS */
 export interface GeocodeResult

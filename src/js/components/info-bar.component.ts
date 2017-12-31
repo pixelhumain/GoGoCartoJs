@@ -11,7 +11,7 @@ import { AppModule, AppStates } from "../app.module";
 import { Element } from "../classes/element.class";
 import { App } from "../gogocarto";
 
-import { Event } from "../classes/event";
+import { Event } from "../classes/event.class";
 import { createListenersForElementMenu, updateFavoriteIcon, showFullTextMenu } from "./element-menu.component";
 
 import { createListenersForVoting } from "../components/vote.component";
@@ -40,7 +40,7 @@ export class InfoBarComponent
 	// App.infoBarComponent.showElement;
 	showElement(elementId, callback = null) 
 	{
-		let element = App.elementModule.getElementById(elementId);		
+		let element = App.elementsModule.getElementById(elementId);		
 
 		// console.log("showElement", element);
 
@@ -197,36 +197,36 @@ export class InfoBarComponent
 		}, 100);
 	}
 
-	hide()
+	hide(humanAction : boolean = true)
 	{
-		if ($('#element-info-bar').is(':visible'))
-		{
-			if (!this.isDisplayedAside())
-			{			
-				this.hideDetails();
-				$('#element-info-bar').animate({'height': '0'}, 350, 'swing', () => 
-				{
-					App.component.updateMapSize();
-					$('#element-info-bar').hide();
-				});
-			}
-			else
+		if (!this.isVisible) return; 
+
+		if (!this.isDisplayedAside())
+		{			
+			this.hideDetails();
+			$('#element-info-bar').animate({'height': '0'}, 350, 'swing', () => 
 			{
-				$('#directory-content-map').css('margin-right','0px');
-				$('#bandeau_helper').css('margin-right','0px');
-
-				if ($('#element-info-bar').is(':visible'))
-				{		
-					$('#element-info-bar').animate({'right':'-500px'},350,'swing',function()
-					{ 
-						$(this).hide();  
-		  			App.component.updateMapSize();
-					});
-				}		
-			}
-
-			this.onHide.emit(true);
+				App.component.updateMapSize();
+				$('#element-info-bar').hide();
+			});
 		}
+		else
+		{
+			$('#directory-content-map').css('margin-right','0px');
+			$('#bandeau_helper').css('margin-right','0px');
+
+			if ($('#element-info-bar').is(':visible'))
+			{		
+				$('#element-info-bar').animate({'right':'-500px'},350,'swing',function()
+				{ 
+					$(this).hide();  
+	  			App.component.updateMapSize();
+				});
+			}		
+		}
+
+		if (humanAction) this.onHide.emit(true);
+		
 
 		setTimeout( () => $('#element-info').html(''), 350);
 
@@ -238,8 +238,6 @@ export class InfoBarComponent
 
 	toggleDetails()
 	{	
-		//App.setTimeoutInfoBarComponent();
-
 		if ( $('#element-info-bar .moreDetails').is(':visible') )
 		{
 			this.hideDetails();
@@ -262,7 +260,6 @@ export class InfoBarComponent
 		  let height =  $('.gogocarto-container').height();
 			height -= elementInfoBar.find('.collapsible-header').outerHeight(true);			
 			height -= elementInfoBar.find('.interactive-section').outerHeight(true);	
-			height -= elementInfoBar.find('.starRepresentationChoice-helper:visible').outerHeight(true);
 			height -= elementInfoBar.find(".menu-element").outerHeight(true);
 
 		  $('#element-info-bar .collapsible-body').css('height', height);	
@@ -275,7 +272,6 @@ export class InfoBarComponent
 
 	hideDetails()
 	{
-		//App.setTimeoutInfoBarComponent();
 		App.gogoControlComponent.show();
 
 		if ($('#element-info-bar .moreDetails').is(':visible'))
@@ -300,11 +296,9 @@ export class InfoBarComponent
 	  	let elementInfoBar = $("#element-info-bar");
 	  	let height = elementInfoBar.outerHeight(true);
 			height -= elementInfoBar.find('.collapsible-header').outerHeight(true);
-			height -= elementInfoBar.find('.starRepresentationChoice-helper:visible').outerHeight(true);
 			height -= elementInfoBar.find('.interactive-section:visible').outerHeight(true);
 			height -= elementInfoBar.find('.info-bar-tabs:visible').outerHeight(true);
 			height -= elementInfoBar.find(".menu-element").outerHeight(true);
-			//height += 2;
 
 	  	$('#element-info-bar .collapsible-body').css('height', height);
 		}

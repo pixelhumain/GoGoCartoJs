@@ -121,11 +121,11 @@ export class CategoryOptionTreeNode
 			{
 				if (this.getOwner()) this.getOwner().updateState(this.depth);
 				
-				//if (App.mode == AppModes.Map) App.elementModule.updateElementsIcons(true);
+				//if (App.mode == AppModes.Map) App.elementsModule.updateElementsIcons(true);
 				
 				// delay the update so  it's not freezing the UI
 				setTimeout( () => {
-					App.elementModule.updateElementsToDisplay(check, true);
+					App.elementsModule.updateElementsToDisplay(check, true);
 					App.historyModule.updateCurrState();
 				},200);
 				

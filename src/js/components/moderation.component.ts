@@ -16,7 +16,7 @@ export function createListenersForMarkAsResolved()
     }
     else
     {
-      let element = App.elementModule.getElementById(getCurrentElementIdShown());
+      let element = App.elementsModule.getElementById(getCurrentElementIdShown());
       let comment = $(this).siblings('.moderation-input-comment').val();
      
       let route = App.config.features.moderation.url;

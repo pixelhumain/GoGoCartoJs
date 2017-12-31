@@ -544,36 +544,6 @@ export class Element
 		}
 	}
 
-	updateProductsRepresentation() 
-	{		
-		// if (App.state !== AppStates.Constellation) return;
-
-		// let starNames = App.constellation.getStarNamesRepresentedByElementId(this.id);
-		// if (this.isProducteurOrAmap())
-		// {
-		// 	for(let i = 0; i < this.products.length;i++)
-		// 	{
-		// 		productName = this.products[i].nameFormate;			
-
-		// 		if ($.inArray(productName, starNames) == -1)
-		// 		{
-		// 			this.products[i].disabled = true;				
-		// 			if (productName == this.mainProduct) this.mainProductIsDisabled = true;				
-		// 		}	
-		// 		else
-		// 		{
-		// 			this.products[i].disabled = false;				
-		// 			if (productName == this.mainProduct) this.mainProductIsDisabled = false;		
-		// 		}		
-		// 	}
-		// }
-		// else
-		// {
-		// 	if (starNames.length === 0) this.mainProductIsDisabled = true;	
-		// 	else this.mainProductIsDisabled = false;	
-		// }
-	};
-
 	updateDistance()
 	{
 		this.distance = null;
@@ -739,16 +709,6 @@ export class Element
 		}
 		let result = '';
 		return dailySlot.replace(/-/g, ' - ').replace(/,/g, ' et ');
-	};
-
-	isCurrentStarChoiceRepresentant() 
-	{		
-		if ( this.starChoiceForRepresentation !== '')
-		{
-			let elementStarId = App.constellation.getStarFromName(this.starChoiceForRepresentation).getElementId();
-			return (this.id == elementStarId);
-		}
-		return false;	
 	};
 
 

@@ -1,6 +1,5 @@
 import { AppModule, AppStates, AppDataType, AppModes } from "../app.module";
-import { HistoryState } from './history.module';
-import { ViewPort } from '../components/map/map.component'; 
+import { HistoryState, ViewPort } from '../classes/classes'; 
 
 import { App } from "../gogocarto";
 

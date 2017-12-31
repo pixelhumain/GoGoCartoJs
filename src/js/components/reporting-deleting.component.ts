@@ -23,7 +23,7 @@ import { capitalize } from "../utils/string-helpers";
 
 export function openReportModal()
 {
-	let element = App.elementModule.getElementById(getCurrentElementIdShown());
+	let element = App.elementsModule.getElementById(getCurrentElementIdShown());
 	//window.console.log(element.name);
 	$('#popup-report-error .elementName').text(capitalize(element.name));
 
@@ -50,7 +50,7 @@ export function openDeleteModal()
 {
 	$('#popup-delete').openModal();
 
-	let element = App.elementModule.getElementById(getCurrentElementIdShown());
+	let element = App.elementsModule.getElementById(getCurrentElementIdShown());
 	//window.console.log(element.name);
 	$('#popup-delete .elementName').text(capitalize(element.name));
 

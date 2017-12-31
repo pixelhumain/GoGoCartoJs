@@ -13,7 +13,7 @@ import { App } from "../gogocarto";
 declare var $;	
 
 import * as Cookies from "../utils/cookies";
-import { Event } from "../classes/event";
+import { Event } from "../classes/event.class";
 import { Element, ElementStatus } from "../classes/element.class";
 import { BiopenMarker } from "../components/map/biopen-marker.component";
 
@@ -36,7 +36,7 @@ export class ElementsModule
 
 	searchResultElements_ : Element[] = [];
 
-	favoriteIds_ : number[] = [];
+	favoriteIds_ = [];
 	isShowingHalfHidden : boolean = false;
 
 	firstElementsHaveBeendisplayed : boolean = false;
@@ -147,7 +147,7 @@ export class ElementsModule
 		return this.searchResultElements_;
 	}
 
-	addFavorite(favoriteId : number, modifyCookies = true)
+	addFavorite(favoriteId : string, modifyCookies = true)
 	{
 		let element = this.getElementById(favoriteId);
 		if (element !== null) element.isFavorite = true;
@@ -160,7 +160,7 @@ export class ElementsModule
 		}
 	};
 
-	removeFavorite(favoriteId : number, modifyCookies = true)
+	removeFavorite(favoriteId : string, modifyCookies = true)
 	{
 		let element = this.getElementById(favoriteId);
 		if (element !== null) element.isFavorite = false;
@@ -321,7 +321,7 @@ export class ElementsModule
 		return this.everyElements_['all'];
 	}
 
-	getMarkers () 
+	getMarkers() 
 	{
 		let markers = [];
 		let l = this.visibleElements_.length;
@@ -332,7 +332,7 @@ export class ElementsModule
 		return markers;
 	};
 
-	hidePartiallyAllMarkers () 
+	hidePartiallyAllMarkers() 
 	{
 		this.isShowingHalfHidden = true;
 		let l = this.currVisibleElements().length;		
@@ -342,16 +342,7 @@ export class ElementsModule
 		}		
 	};
 
-	// hideAllMarkers () 
-	// {
-	// 	let l = this.currVisibleElements().length;
-	// 	while(l--)
-	// 	{
-	// 		this.currVisibleElements()[l].hide();
-	// 	}
-	// };
-
-	showNormalHiddenAllMarkers () 
+	showNormalHiddenAllMarkers() 
 	{
 		this.isShowingHalfHidden = false;
 		$('.marker-cluster').removeClass('halfHidden');
@@ -363,7 +354,7 @@ export class ElementsModule
 		}
 	};
 
-	getElementById (elementId) : Element
+	getElementById(elementId) : Element
 	{
 		//return this.everyElements_[elementId];
 		for (let i = 0; i < this.allElements().length; i++) {

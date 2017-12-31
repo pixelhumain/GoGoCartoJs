@@ -34,7 +34,7 @@ export class DisplayElementAloneModule
 		let element = App.elementById(elementId);	
 		this.elementShownAlone_ = element;			
 
-		App.elementModule.clearCurrentsElement();
+		App.elementsModule.clearCurrentsElement();
 
 		App.infoBarComponent.showElement(element.id);	
 
@@ -48,11 +48,11 @@ export class DisplayElementAloneModule
 		}			
 	};
 
-	end () 
+	end() 
 	{
 		if (this.elementShownAlone_ === null) return;
 
-		App.elementModule.updateElementsToDisplay(true);
+		App.elementsModule.updateElementsToDisplay(true);
 		
 		this.elementShownAlone_.isShownAlone = false;	
 

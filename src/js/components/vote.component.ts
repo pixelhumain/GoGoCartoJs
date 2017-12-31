@@ -106,7 +106,7 @@ export function createListenersForVoting()
 		}
 		else
 		{
-			let element = App.elementModule.getElementById(getCurrentElementIdShown());
+			let element = App.elementsModule.getElementById(getCurrentElementIdShown());
 
 			// dynamically create vote template
 			$('#vote-modal-content').html(App.templateModule.render('vote-modal-content', { 

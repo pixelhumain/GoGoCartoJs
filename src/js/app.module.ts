@@ -12,7 +12,13 @@
 declare let window;
 declare var $;
 
-import { AppComponent } from './app.component';
+// MANAGERS
+import { ModeManager, AppModes } from "./managers/mode.manager";
+export { AppModes } from "./managers/mode.manager";
+import { StateManager, AppStates } from "./managers/state.manager";
+export { AppStates } from "./managers/state.manager";
+
+// MODULES
 import { GeocoderModule, GeocodeResult } from "./modules/geocoder.module";
 import { FilterModule } from "./modules/filter.module";
 import { FilterRoutingModule } from "./modules/filter-routing.module";
@@ -24,47 +30,31 @@ import { DirectionsModule } from "./modules/directions.module";
 import { RouterModule } from "./modules/router.module";
 import { LoginModule } from "./modules/login.module";
 import { TemplateModule } from "./modules/template.module";
+import { HistoryModule } from './modules/history.module';
+import { BoundsModule } from './modules/bounds.module';
+
+// COMPONENTS
+import { AppComponent } from './app.component';
 import { ElementListComponent } from "./components/element-list.component";
 import { InfoBarComponent } from "./components/info-bar.component";
 import { SearchBarComponent } from "./components/search-bar.component";
 import { DirectoryMenuComponent } from "./components/directory-menu.component";
 import { FiltersComponent } from "./components/filters.component";
 import { GoGoControlComponent } from "./components/gogo-controls.component";
-import { MapComponent, ViewPort } from "./components/map/map.component";
+import { MapComponent } from "./components/map/map.component";
 import { BiopenMarker } from "./components/map/biopen-marker.component";
-import { HistoryModule, HistoryState } from './modules/history.module';
-import { BoundsModule } from './modules/bounds.module';
+
 import { capitalize, unslugify } from "./utils/string-helpers";
-import { Element } from "./classes/element.class";
+import { Element, HistoryState, ViewPort } from "./classes/classes";
 import { GoGoConfig } from "./classes/gogo-config.class";
 import * as Cookies from "./utils/cookies";
 
 import { App } from "./gogocarto";
 
-/*
-* App states names
-*/
-export enum AppStates 
-{
-	Normal,
-	ShowElement,
-	ShowElementAlone,
-	ShowDirections,
-	StarRepresentationChoice,
-	Constellation
-}
-
-export enum AppModes
-{
-	Map = 1,
-	List = 2
-}
-
 export enum AppDataType 
 {
 	All,
-	SearchResults,
-	Constellation 
+	SearchResults
 }
 
 /*
@@ -78,49 +68,38 @@ export class AppModule
 	readonly isIframe : boolean = false;
 	readonly loadFullTaxonomy : boolean = true;
 
+	modeManager = new ModeManager();
+	stateManager = new StateManager();
+
 	component = new AppComponent();
-	geocoderModule_ = new GeocoderModule();
-	filterModule_ = new FilterModule();
+	geocoder = new GeocoderModule();
+	filterModule = new FilterModule();
 	filterRoutingModule = new FilterRoutingModule();
-	elementsModule_ = new ElementsModule();
-	displayElementAloneModule_ = new DisplayElementAloneModule();
-	directionsModule_ : DirectionsModule = new DirectionsModule();
-	ajaxModule_ = new AjaxModule();
-	infoBarComponent_ = new InfoBarComponent();
-	mapComponent_  = new MapComponent();
+	elementsModule = new ElementsModule();
+	displayElementAloneModule = new DisplayElementAloneModule();
+	directionsModule : DirectionsModule = new DirectionsModule();
+	ajaxModule = new AjaxModule();
+	boundsModule : BoundsModule;
+	routerModule = new RouterModule();
+	templateModule = new TemplateModule();
+	loginModule : LoginModule;
+
+	infoBarComponent = new InfoBarComponent();
+	mapComponent  = new MapComponent();
 	searchBarComponent = new SearchBarComponent();
 	elementListComponent = new ElementListComponent();
 	historyModule = new HistoryModule();
 	categoryModule = new CategoriesModule();
 	directoryMenuComponent = new DirectoryMenuComponent();
-	filtersComponent = new FiltersComponent();
-	boundsModule : BoundsModule;
-	routerModule = new RouterModule();
-	templateModule = new TemplateModule();
-	loginModule : LoginModule;
-	gogoControlComponent = new GoGoControlComponent();
-	//starRepresentationChoiceModule_ = constellationMode ? new StarRepresentationChoiceModule() : null;
+	filtersComponent = new FiltersComponent();	
+	gogoControlComponent = new GoGoControlComponent();	
 	
-	// curr state of the app
-	private state_ : AppStates = null;	
-	private mode_ : AppModes = null;
 	private dataType_ : AppDataType = AppDataType.All;
-
-	// somes states need a element id, we store it in this property
-	private stateElementId : number = null;
 
 	// when click on marker it also triger click on map
 	// when click on marker we put isClicking to true during
 	// few milliseconds so the map don't do anything is click event
-	isClicking_ = false;
-
-	// prevent updatedirectory-content-list while the action is just
-	// showing element details
-	isShowingInfoBarComponent_ = false;
-
-	// Put a limit of markers showed on map (markers not clustered)
-	// Because if too many markers are shown, browser slow down
-	maxElementsToShowOnMap_ = 1000;	
+	private isClicking_ = false;
 
 	constructor($config : any, $isIframe = false, $loadFullTaxonomy = true)
 	{
@@ -130,30 +109,25 @@ export class AppModule
 		
 		this.loginModule = new LoginModule(this.config.security.userRole, this.config.security.userEmail);
 
-  	this.infoBarComponent_.onHide.do( ()=> { this.handleInfoBarHide(); });
-	
-		this.mapComponent_.onMapReady.do( () => { this.initializeMapFeatures(); });
+  	this.infoBarComponent.onHide.do( ()=> { this.handleInfoBarHide(); });
 
-		this.ajaxModule_.onNewElements.do( (result) => { this.handleNewElementsReceivedFromServer(result); });
+		this.ajaxModule.onNewElements.do( (result) => { this.handleNewElementsReceivedFromServer(result); });
 	
-		this.elementsModule_.onElementsChanged.do( (elementsChanged)=> { this.handleElementsChanged(elementsChanged); });
+		this.elementsModule.onElementsChanged.do( (elementsChanged)=> { this.handleElementsChanged(elementsChanged); });
 	
-		this.geocoderModule_.onGeocodeResult.do( () => { this.handleGeocodeResult(); this.searchBarComponent.handleGeocodeResult(); });
-		this.geocoderModule_.onGeolocalizationResult.do( (viewPort : ViewPort) => { this.handleGeolocalizationResult(viewPort); });
+		this.geocoder.onGeocodeResult.do( () => { this.handleGeocodeResult(); this.searchBarComponent.handleGeocodeResult(); });
+		this.geocoder.onGeolocalizationResult.do( (viewPort : ViewPort) => { this.handleGeolocalizationResult(viewPort); });
 
-		this.mapComponent_.onIdle.do( () => { this.handleMapIdle();  });
-		this.mapComponent_.onClick.do( () => { this.handleMapClick(); });		
+		this.mapComponent.onIdle.do( () => { this.handleMapIdle();  });
+		this.mapComponent.onClick.do( () => { this.handleMapClick(); });		
 
 		this.boundsModule = new BoundsModule(this.config);
 
 		Cookies.createCookie('firstVisit', 'done');
 	}
 
-	initializeMapFeatures() {	};
-
 	/*
-	* Load initial state or
-	  with state poped by window history manager
+	* Load initial state or state popped by window history manager
 	*/
 	loadHistoryState(historystate : HistoryState, $backFromHistory = false)
 	{
@@ -222,7 +196,7 @@ export class AppModule
 			}
 			else
 			{
-				this.geocoderModule_.geocodeAddress(
+				this.geocoder.geocodeAddress(
 					historystate.address, 
 					(results) => 
 					{ 
@@ -238,7 +212,7 @@ export class AppModule
 						if (!historystate.viewport) 
 						{
 							// geocode default location
-							this.geocoderModule_.geocodeAddress('');
+							this.geocoder.geocodeAddress('');
 						}
 					}	
 				);
@@ -262,272 +236,15 @@ export class AppModule
 		{
 			this.setState(historystate.state, null, $backFromHistory);		
 		}		
-	};	
-
-	/*
-	* Change App mode
-	*/
-	setMode($mode : AppModes, $backFromHistory : boolean = false, $updateTitleAndState = true)
-	{
-		this.elementModule.clearCurrentsElement();
-		this.elementListComponent.clear();
-
-		if ($mode == AppModes.Map)
-		{
-			$('#directory-content-map').show();
-			$('#directory-content-list').hide();				
-
-			this.mapComponent.init();		
-
-			if (this.mapComponent_.isMapLoaded) this.boundsModule.extendBounds(0, this.mapComponent.getBounds());
-		}
-		else
-		{
-			$('#directory-content-map').hide();
-			$('#directory-content-list').show();				
-
-			console.log("list mode",App.geocoder.getLocation());			
-
-			if (App.dataType == AppDataType.All)
-			{
-				let centerLocation : L.LatLng;
-				let address = App.geocoder.lastAddressRequest;
-
-				if (App.mapComponent.isInitialized) {
-					centerLocation = App.mapComponent.getCenter();
-			  	App.elementListComponent.setTitle(' autour du centre de la carte');
-				}
-			  else if (App.geocoder.getLocation()) {			  	
-			  	centerLocation = App.geocoder.getLocation();
-					App.elementListComponent.setTitle(' autour de <i>' + capitalize(unslugify(address)) + '</i>');
-			  }
-				else {
-					centerLocation = App.boundsModule.defaultCenter;
-					App.elementListComponent.setTitle('');
-				}
-
-				console.log("passing list mode, location = ", centerLocation);					
-
-				this.boundsModule.createBoundsFromLocation(centerLocation);
-				this.checkForNewElementsToRetrieve(true);
-			}
-			else if (App.dataType == AppDataType.SearchResults)
-			{
-				App.elementModule.updateElementsToDisplay(true,false);
-				App.elementListComponent.setTitle('');
-			}			
-		}
-
-		// if previous mode wasn't null 
-		let oldMode = this.mode_;
-		this.mode_ = $mode;
-
-		// update history if we need to
-		if (oldMode != null && !$backFromHistory) this.historyModule.pushNewState();
-
-		this.gogoControlComponent.updatePosition();
-		
-		setTimeout( () => this.elementModule.updateElementsToDisplay(true) , 300);
-
-		if ($updateTitleAndState)
-		{
-			this.updateDocumentTitle();			
-
-			// after clearing, we set the current state again
-			if ($mode == AppModes.Map) this.setState(this.state, {id : this.stateElementId});	
-		}
-	}
-
-	/*
-	* Change App state
-	*/
-	setState($newState : AppStates, options : any = {}, $backFromHistory : boolean = false) 
-	{ 	
-		//console.log("AppModule set State : " + AppStates[$newState]  +  ', options = ',options);
-		
-		let element;
-
-		let oldStateName = this.state_;
-		this.state_ = $newState;			
-
-		if (oldStateName == AppStates.ShowDirections && this.directionsModule_) 
-			this.directionsModule_.clear();
-
-		if (oldStateName == AppStates.ShowElementAlone)	
-		{
-			this.elementModule.clearCurrentsElement();
-			this.displayElementAloneModule_.end();	
-		}	
-
-		this.stateElementId = options ? options.id : null;
-		
-		switch ($newState)
-		{
-			case AppStates.Normal:			
-				// if (this.state_ == AppStates.Constellation) 
-				// {
-				// 	clearDirectoryMenu();
-				// 	this.starRepresentationChoiceModule_.end();
-				// }	
-				if ($backFromHistory) this.infoBarComponent.hide();			
-							
-				break;
-
-			case AppStates.ShowElement:
-				if (!options.id) return;
-				element = this.elementById(options.id);
-
-				if (this.mode == AppModes.List)
-				{
-					if (!this.mapComponent.isInitialized)
-					{
-						this.mapComponent.onMapReady.do(() => 
-						{
-							this.mapComponent.panToLocation(element.position, 14, false);
-							this.infoBarComponent.showElement(options.id);
-						});
-					}
-					else
-					{
-						this.mapComponent.panToLocation(element.position, 14, false);						
-						this.infoBarComponent.showElement(options.id);
-					}						
-
-					this.setMode(AppModes.Map, false, false);
-				} 
-				else
-				{
-					this.infoBarComponent.showElement(options.id);
-				}
-
-				break;	
-
-			case AppStates.ShowElementAlone:
-				if (!options.id) return;
-
-				this.infoBarComponent.show();
-				element = this.elementById(options.id);
-				if (element)
-				{
-					this.DEAModule.begin(element.id, true);					
-				}
-				else
-				{
-					this.ajaxModule_.getElementById(options.id,
-						(elementJson) => {
-							this.elementModule.addJsonElements([elementJson], true, true);
-							this.DEAModule.begin(elementJson.id, true);
-							this.updateDocumentTitle(options);
-							this.historyModule.pushNewState(options); 
-						},
-						(error) => 
-						{ 
-							alert("Cet élément n'existe pas ou a été supprimé !"); 
-							this.setState(AppStates.Normal);
-						}
-					);						
-				}			
-										
-				break;
-
-			case AppStates.ShowDirections:
-				if (!options.id) return;			
-				
-				element = this.elementById(options.id);
-				let origin;
-
-				// if (this.state_ == AppStates.Constellation)
-				// {
-				// 	origin = this.constellation.getOrigin();
-				// }
-				// else
-				// {
-					origin = this.geocoder.getLocation();
-				//}
-
-				// local function
-				let calculateRoute = function (origin : L.LatLng, element : Element)
-				{
-					App.directionsModule.calculateRoute(origin, element); 
-					App.DEAModule.begin(element.id, false);		
-				};
-
-				// if no element, we get it from ajax 
-				if (!element)
-				{
-					this.ajaxModule_.getElementById(options.id, (elementJson) => 
-					{
-						this.elementModule.addJsonElements([elementJson], true, true);
-						element = this.elementById(elementJson.id);
-						this.updateDocumentTitle(options);
-            
-						origin = this.geocoder.getLocation();
-						// we geolocalized origin in loadHistory function
-						// maybe the geocoding is not already done so we wait a little bit for it
-						if (!origin)
-						{
-							setTimeout(() => {
-								origin = this.geocoder.getLocation();
-								if (!origin)
-									setTimeout(() => {
-										origin = this.geocoder.getLocation();
-										calculateRoute(origin, element);		
-									}, 1000);
-								else
-									calculateRoute(origin, element);		
-							}, 500);
-						}
-						else
-							calculateRoute(origin, element);											
-					},
-					(error) => { /*TODO*/ alert("No element with this id"); }
-					);										
-				}	
-				else
-				{
-					if (this.mode == AppModes.List)
-					{
-						if (!this.mapComponent.isInitialized)
-						{
-							this.mapComponent.onMapReady.do(() => 
-							{
-								calculateRoute(origin, element);
-								this.mapComponent.onMapReady.off(() => { calculateRoute(origin, element); });
-							});
-						}
-						else
-						{
-							calculateRoute(origin, element);
-						}						
-
-						this.setMode(AppModes.Map, false, false);
-					} 
-					else
-					{
-						calculateRoute(origin, element);
-					}	
-				}					
-
-				break;			
-		}
-
-		if (!$backFromHistory && App.dataType == AppDataType.All &&
-			 ( oldStateName !== $newState 
-				|| $newState == AppStates.ShowElement
-				|| $newState == AppStates.ShowElementAlone
-				|| $newState == AppStates.ShowDirections) )
-			this.historyModule.pushNewState(options);
-
-		this.updateDocumentTitle(options);
-	};	
+	};		
 
 	setDataType($dataType : AppDataType, $backFromHistory : boolean = false)
 	{
 		//console.log("setDataType", AppDataType[$dataType]);
 		this.dataType_ = $dataType;
-		this.elementModule.clearCurrentsElement();	
+		this.elementsModule.clearCurrentsElement();	
 		this.elementListComponent.clear();
-		this.elementModule.updateElementsToDisplay(true);		
+		this.elementsModule.updateElementsToDisplay(true);		
 		this.checkForNewElementsToRetrieve();	
 		if (!$backFromHistory) this.historyModule.pushNewState();
 		this.updateDocumentTitle();
@@ -542,23 +259,11 @@ export class AppModule
 		if (marker.isHalfHidden()) this.setState(AppStates.Normal);	
 
 		this.setState(AppStates.ShowElement, { id: marker.getId() });		
-
-		// if (App.state == AppStates.StarRepresentationChoice)
-		// {
-		// 	//App.SRCModule().selectElementById(this.id_);
-		// }
 	}
 
 	handleMapIdle()
-	{
-		//console.log("App handle map idle, mapLoaded : " , this.mapComponent.isMapLoaded);
-
-		// showing InfoBarComponent make the map resized and so idle is triggered, 
-		// but we're not interessed in this idling
-		//if (this.isShowingInfoBarComponent) return;
-		
+	{		
 		if (this.mode != AppModes.Map)     return;
-		//if (this.state  != AppStates.Normal)     return;
 
 		// we need map to be loaded to get the radius of the viewport
 		// and get the elements inside
@@ -574,25 +279,25 @@ export class AppModule
 
 		let updateInAllElementList = true;
 
-		let zoom = this.mapComponent_.getZoom();
-		let old_zoom = this.mapComponent_.getOldZoom();
+		let zoom = this.mapComponent.getZoom();
+		let old_zoom = this.mapComponent.getOldZoom();
 
 		if (zoom != old_zoom && old_zoom != -1)  
 		{
 			if (zoom > old_zoom) updateInAllElementList = false;	   		
 		}
 
-		this.elementModule.updateElementsToDisplay(updateInAllElementList);
-		//this.elementModule.updateElementsIcons(false);
+		this.elementsModule.updateElementsToDisplay(updateInAllElementList);
+		//this.elementsModule.updateElementsIcons(false);
 
 		if (this.state == AppStates.Normal || this.state == AppStates.ShowElement) this.checkForNewElementsToRetrieve();
 
-		if (this.dataType == AppDataType.All) this.historyModule.updateCurrState();
+		if (this.dataType_ == AppDataType.All) this.historyModule.updateCurrState();
 	};
 
 	checkForNewElementsToRetrieve($getFullRepresentation = false)
 	{
-		if (this.dataType != AppDataType.All) return;
+		if (this.dataType_ != AppDataType.All) return;
 
 		// console.log("checkForNewelementToRetrieve, fullRepresentation", $getFullRepresentation);
 		let result = this.boundsModule.calculateFreeBounds($getFullRepresentation);
@@ -613,12 +318,15 @@ export class AppModule
 
 	handleMapClick()
 	{
-		if (this.isClicking) return;
+		if (this.isClicking_) return;
 
 		//console.log("handle Map Click", AppStates[this.state]);
 		
 		if (this.state == AppStates.ShowElement || this.state == AppStates.ShowElementAlone)
-			this.infoBarComponent.hide(); 		
+		{
+			this.infoBarComponent.hide(); 
+			this.setState(AppStates.Normal);		
+		}
 		else if (this.state == AppStates.ShowDirections)
 			this.setState(AppStates.ShowElement, { id : App.infoBarComponent.getCurrElementId() });		
 		
@@ -639,15 +347,14 @@ export class AppModule
 		{
 			if (this.mode == AppModes.Map)
 			{
-				this.infoBarComponent.hide();
 				this.setState(AppStates.Normal);					
 			}
 			else
 			{
 				let location = this.geocoder.getLocation() ? this.geocoder.getLocation() : this.boundsModule.defaultCenter;
 				this.boundsModule.createBoundsFromLocation(location);
-				this.elementModule.clearCurrentsElement();
-				this.elementModule.updateElementsToDisplay(true);
+				this.elementsModule.clearCurrentsElement();
+				this.elementsModule.updateElementsToDisplay(true);
 				let address = App.geocoder.lastAddressRequest;
 				if (this.geocoder.getLocation()) 
 					App.elementListComponent.setTitle(' autour de <i>' + capitalize(unslugify(address))) + '</i>';
@@ -661,15 +368,14 @@ export class AppModule
 	{
 		if (this.mode == AppModes.Map)
 		{
-			this.infoBarComponent.hide();
 			this.setState(AppStates.Normal);
 			App.mapComponent.panToLocation(viewPort.toLocation(), viewPort.zoom, false);			
 		}
 		else
 		{
 			this.boundsModule.createBoundsFromLocation(viewPort.toLocation());
-			this.elementModule.clearCurrentsElement();
-			this.elementModule.updateElementsToDisplay(true);
+			this.elementsModule.clearCurrentsElement();
+			this.elementsModule.updateElementsToDisplay(true);
 			App.elementListComponent.setTitle(' autour de <i>ma position</i>');
 			// save the viewport if we go to map after
 			App.mapComponent.setViewPort(viewPort);
@@ -680,13 +386,13 @@ export class AppModule
 	{		
 		let elementsJson = result.data;		
 		
-		let	elements = this.elementModule.addJsonElements(elementsJson, true, result.fullRepresentation);
+		let	elements = this.elementsModule.addJsonElements(elementsJson, true, result.fullRepresentation);
 		//console.log("new Elements length", newElements.length);
 		
 		// on add markerClusterGroup after first elements received
 		if (elements.newElementsLength > 0 || App.mode == AppModes.List) 
 		{
-			this.elementModule.updateElementsToDisplay(true);	
+			this.elementsModule.updateElementsToDisplay(true);	
 		}
 	}; 
 
@@ -694,7 +400,7 @@ export class AppModule
 	{
 		let start = new Date().getTime();
 
-		if (this.mode_ == AppModes.List)
+		if (this.mode == AppModes.List)
 		{
 			this.elementListComponent.update(result.elementsToDisplay);
 		}
@@ -727,10 +433,7 @@ export class AppModule
 
 	handleInfoBarHide()
 	{
-		if (this.state != AppStates.StarRepresentationChoice && this.mode_ != AppModes.List) 
-		{
-			this.setState(AppStates.Normal);
-		}
+		this.setState(AppStates.Normal);
 	};
 
 	setTimeoutClicking() 
@@ -739,13 +442,6 @@ export class AppModule
 		let that = this;
 		setTimeout(function() { that.isClicking_ = false; }, 100); 
 	};
-
-	setTimeoutInfoBarComponent() 
-	{ 
-		this.isShowingInfoBarComponent_ = true;
-		let that = this;
-		setTimeout(function() { that.isShowingInfoBarComponent_ = false; }, 1300); 
-	}
 
 	updateDocumentTitle(options : any = {})
 	{
@@ -765,13 +461,13 @@ export class AppModule
 		{
 			title = 'Recherche : ' + this.searchBarComponent.getCurrSearchText();	
 		}
-		else if (this.mode_ == AppModes.List)
+		else if (this.mode == AppModes.List)
 		{		
 			title = 'Liste des ' + App.config.text.elementPlural + ' ' + this.getLocationAddressForTitle();		
 		}
 		else
 		{
-			switch (this.state_)
+			switch (this.state)
 			{
 				case AppStates.ShowElement:				
 					title = capitalize(App.config.text.element) + ' - ' + elementName;
@@ -805,32 +501,19 @@ export class AppModule
 
 
 	// Getters shortcuts
-	map() : L.Map { return this.mapComponent_? this.mapComponent_.getMap() : null; };
-	elements() { return this.elementsModule_.currVisibleElements();  };
-	elementById(id) { return this.elementsModule_.getElementById(id);  };
-
+	map() : L.Map { return this.mapComponent? this.mapComponent.getMap() : null; };
+	elements() { return this.elementsModule.currVisibleElements();  };
+	elementById(id) { return this.elementsModule.getElementById(id);  };
 	isUserLogged() { return this.loginModule.isUserLogged(); }
-	get constellation() { return null; }
-
+	get DEAModule() { return this.displayElementAloneModule; }
 	get currMainId() { return this.filtersComponent.currentActiveMainOptionId; }
 
-	get isClicking() { return this.isClicking_; };
-	get isShowingInfoBarComponent() : boolean { return this.isShowingInfoBarComponent_; };
-	get maxElements() { return this.maxElementsToShowOnMap_; };
-
-	// Modules and components
-	get mapComponent() { return this.mapComponent_; };
-	get infoBarComponent() { return this.infoBarComponent_; };
-	get geocoder() { return this.geocoderModule_; };
-	get ajaxModule() { return this.ajaxModule_; };
-	get elementModule() { return this.elementsModule_; };
-	get directionsModule() { return this.directionsModule_; };
-	//get markerModule() { return this.markerModule_; };
-	get filterModule() { return this.filterModule_; };
-	//get SRCModule() { return this.starRepresentationChoiceModule_; };
-	get DEAModule() { return this.displayElementAloneModule_; };
-	//get listElementModule() { return this.listElementModule_; };
-	get state() { return this.state_; };
-	get mode() { return this.mode_; };
-	get dataType() { return this.dataType_; };
+	// private properties getters
+	get state() { return this.stateManager.state; }
+	setState($newState : AppStates, $options : any = {}, $backFromHistory : boolean = false)  { this.stateManager.setState($newState, $options, $backFromHistory)}
+	get mode() { return this.modeManager.mode; }
+	setMode($mode : AppModes, $backFromHistory : boolean = false, $updateTitleAndState = true) { this.modeManager.setMode($mode, $backFromHistory, $updateTitleAndState); }
+	get dataType() { return this.dataType_; }
+	
+	get isClicking() { return this.isClicking_; }
 }

@@ -3,7 +3,6 @@ declare var nunjucks, goGoCarto;
 
 import { AppModule, AppDataType, AppModes, AppStates } from './app.module';
 
-import { HistoryState } from "./modules/history.module";
 import { initializeElementMenu } from "./components/element-menu.component";
 import { initializeVoting } from "./components/vote.component";
 import { initializeReportingAndDeleting } from "./components/reporting-deleting.component";
@@ -115,7 +114,7 @@ export class GoGoCartoModule
 		}
 
 		setTimeout( () => {			
-			App.elementModule.initialize();
+			App.elementsModule.initialize();
 			App.directoryMenuComponent.initialize();
 			App.filtersComponent.initialize();
 			App.boundsModule.initialize();	   

@@ -8,11 +8,10 @@
  * @Last Modified time: 2016-12-13
  */
 
-import { Event } from "../classes/event";
+import { Event } from "../classes/event.class";
 import { slugify, capitalize } from "../utils/string-helpers";
 import { AppModule, AppStates, AppModes, AppDataType } from "../app.module";
-import { Element } from "../classes/element.class";
-import { ViewPort } from "../components/map/map.component";
+import { Element, HistoryState, ViewPort } from "../classes/classes";
 import * as Cookies from "../utils/cookies";
 
 import { App } from "../gogocarto";
@@ -34,34 +33,8 @@ $(document).ready(function()
 	};
 });
 
-export class HistoryState
-{
-	mode: AppModes;
-	state : AppStates;
-	dataType : AppDataType;
-	address : string;
-	viewport : ViewPort;
-	id : number;
-	text : string;
-	filters : string;
-
-	parse($historyState : any) : HistoryState
-	{
-		this.mode = $historyState.mode == 'Map' ? AppModes.Map : AppModes.List;
-		this.state = parseInt(AppStates[$historyState.state]);
-		this.dataType = parseInt(AppDataType[$historyState.dataType]);
-		this.address = $historyState.address;
-		this.viewport = typeof $historyState.viewport === 'string' ? new ViewPort().fromString($historyState.viewport) : $historyState.viewport;
-		this.id = $historyState.id;
-		this.text = $historyState.text;
-		this.filters = $historyState.filters;
-		return this;
-	}
-}
-
 export class HistoryModule
 {
-
 	constructor() { }  
 
 	updateCurrState(options?)
@@ -76,8 +49,7 @@ export class HistoryModule
 		//console.log("Push New State");
 
 		if (history.state === null) this.updateHistory(false, options);
-		else this.updateHistory(true, options);
-		
+		else this.updateHistory(true, options);		
 	};
 
 	private updateHistory($pushState : boolean, $options? : any)

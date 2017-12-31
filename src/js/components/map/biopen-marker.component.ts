@@ -8,7 +8,6 @@
  * @Last Modified time: 2016-12-13
  */
 import { AppModule, AppStates } from "../../app.module";
-import { drawLineBetweenPoints } from "./map-drawing";
 import { Element } from "../../classes/element.class";
 
 import { App } from "../../gogocarto";
@@ -44,8 +43,7 @@ export class BiopenMarker
 		this.leafletMarker_.on('mouseover', (ev) =>
 		{
 			if (this.isAnimating_) { return; }
-			//if (!this.isNearlyHidden_) // for constellation mode !
-				this.showBigSize();
+			this.showBigSize();
 		});
 
 		this.leafletMarker_.on('mouseout', (ev) =>
@@ -54,18 +52,8 @@ export class BiopenMarker
 			this.showNormalSize();
 		});
 
-		// if (App.state == AppStates.Constellation)
-		// {
-		// 	google.maps.event.addListener(this.leafletMarker_, 'visible_changed', () => 
-		// 	{ 
-		// 		this.checkPolylineVisibility_(this); 
-		// 	});
-		// }
+		this.isHalfHidden_ = false;		
 
-		this.isHalfHidden_ = false;			
-
-
-		//this.update();	
 		this.leafletMarker_.setIcon(L.divIcon({className: 'leaflet-marker-container', html: "<span id=\"marker-"+ this.id_ + "\" gogo-icon-marker></span>"}));
 	};	
 
@@ -94,30 +82,7 @@ export class BiopenMarker
 		let disableMarker = false;
 		let showMoreIcon = true;
 
-		// if (App.state == AppStates.Constellation)
-		// {
-		// 	// POLYLINE TYPE
-		// 	let lineType;
-
-		// 	if (element.starChoiceForRepresentation === '')
-		// 	{
-		// 		lineType = AppStates.Normal;				
-		// 	}
-		// 	else
-		// 	{			
-		// 		lineType = element.isCurrentStarChoiceRepresentant() ? AppStates.Normal : 'dashed';
-		// 		// en mode SCR, tout lesmarkers sont disabled sauf le représentant de l'étoile
-		// 		disableMarker = !element.isCurrentStarChoiceRepresentant();
-		// 	}		
-
-		// 	this.updatePolyline({lineType: lineType});
-		// }
-
 		let optionstoDisplay = element.getIconsToDisplay();
-
-		// If usecolor and useIcon, we don't show others icons
-		// if (optionstoDisplay[0])
-		// 	showMoreIcon = !optionstoDisplay[0].useColorForMarker || !optionstoDisplay[0].useIconForMarker;
 
 		let htmlMarker = App.templateModule.render('marker', 
 		{
@@ -151,24 +116,16 @@ export class BiopenMarker
 		this.domMarker().siblings('.marker-name').removeClass(classToRemove);      
 	};
 
-	showBigSize () 
+	showBigSize() 
 	{			
 		this.addClassToLeafletMarker_("BigSize");
 		let domMarker = this.domMarker();
 		domMarker.parent().find('.marker-name').show();
 		domMarker.find('.moreIconContainer').show();
 		domMarker.find('.gogo-icon-plus-circle').hide();
-		
-		if (!this.isHalfHidden_ && this.polyline_)
-		{
-			this.setPolylineOptions({
-				strokeOpacity: 1,
-				strokeWeight: 3
-			});
-		}	
 	};
 
-	showNormalSize ($force : boolean = false) 
+	showNormalSize($force : boolean = false) 
 	{	
 		if (!$force && this.isDisplayedOnElementInfoBar()) return;
 
@@ -177,48 +134,9 @@ export class BiopenMarker
 		domMarker.parent().find('.marker-name').hide();
 		domMarker.find('.moreIconContainer').hide();
 		domMarker.find('.gogo-icon-plus-circle').show();
-		
-		if (!this.isHalfHidden_ && this.polyline_)
-		{
-			this.setPolylineOptions({
-				strokeOpacity: 0.5,
-				strokeWeight: 3
-			});
-		}	
 	};
 
-
-	setPolylineOptions (options)
-	{
-		if (!this.polyline_.isDashed)
-		{
-			this.polyline_.setOptions(options);
-		}
-		else
-		{
-			this.updatePolyline({
-				lineType : 'dashed' , 
-				strokeOpacity: options.strokeOpacity,
-				strokeWeight: options.strokeWeight
-			});
-		}
-	};
-		
-	updatePolyline (options) 
-	{
-		// if (!this.polyline_)
-		// {
-		// 	this.polyline_ = drawLineBetweenPoints(App.constellation.getOrigin(), this.leafletMarker_.getPosition(), this.getElement().type, null, options);
-		// }
-		// else
-		// {		
-		// 	let map = this.polyline_.getMap();
-		// 	this.polyline_.setMap(null);
-		// 	this.polyline_ = drawLineBetweenPoints(App.constellation.getOrigin(), this.leafletMarker_.getPosition(), this.getElement().type, map, options);	
-		// }
-	};
-
-	showHalfHidden ($force : boolean = false) 
+	showHalfHidden($force : boolean = false) 
 	{		
 		if (!$force && this.isDisplayedOnElementInfoBar()) return;
 
@@ -227,10 +145,6 @@ export class BiopenMarker
 		domMarker.css('z-index','1');
 		domMarker.find('.gogo-icon-plus-circle').addClass("halfHidden");
 		domMarker.find('.moreIconContainer').addClass("halfHidden");
-		if (this.polyline_) this.setPolylineOptions({
-				strokeOpacity: 0.1,
-				strokeWeight: 2
-		});
 
 		this.isHalfHidden_ = true;
 	};
@@ -242,11 +156,6 @@ export class BiopenMarker
 		domMarker.css('z-index','10');
 		domMarker.find('.gogo-icon-plus-circle').removeClass("halfHidden");
 		domMarker.find('.moreIconContainer').removeClass("halfHidden");
-		
-		if (this.polyline_) this.setPolylineOptions({
-				strokeOpacity: 0.7,
-				strokeWeight: 3
-		});
 
 		this.isHalfHidden_ = false;
 	};
@@ -257,7 +166,7 @@ export class BiopenMarker
 
 	isHalfHidden() : boolean { return this.isHalfHidden_; }
 
-	getElement () : Element { return App.elementModule.getElementById(this.id_); };
+	getElement () : Element { return App.elementsModule.getElementById(this.id_); };
 
 	checkPolylineVisibility_ (context) 
 	{		
@@ -271,27 +180,6 @@ export class BiopenMarker
 			context.polyline_.setMap(null);	
 			context.polyline_.setVisible(false);
 		}	
-	};
-
-	show () 
-	{	
-		//App.mapComponent.addMarker(this.leafletMarker_);
-		//this.leafletMarker_.addTo(App.map());
-		//if (App.state == AppStates.Constellation) this.polyline_.setMap(App.map());
-	};
-
-	hide () 
-	{			
-		//App.mapComponent.removeMarker(this.leafletMarker_);
-		//this.leafletMarker_.remove();
-		//if (App.state == AppStates.Constellation) this.polyline_.setMap(null);
-	};
-
-	setVisible (bool : boolean) 
-	{	
-		//this.leafletMarker_.setVisible(bool);
-		if (bool) this.show();
-		else this.hide();
 	};
 
 	getPosition () : L.LatLng

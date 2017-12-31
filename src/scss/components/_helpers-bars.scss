@@ -1,33 +1,3 @@
-.starRepresentationChoice-helper
-{
-    display:none;
-    line-height: 3rem;
-    text-align: center;
-    color: #F5F3F3;
-    font-weight: 400;
-
-    .btn-select-as-representant 
-    {
-        margin: 0 1rem .1rem 0 !important;
-    	padding: 0 1.5rem;
-        text-transform: none;
-        height: 2rem;
-    	line-height: 2rem;
-    }
-}
-
-@media #{$large-only} 
-{
-	#element-info-bar
-	{
-		.starRepresentationChoice-helper
-		{
-			position: absolute;
-			width: 100%;
-		}
-	}
-}
-
 #bandeau_helper
 {
     display:none;

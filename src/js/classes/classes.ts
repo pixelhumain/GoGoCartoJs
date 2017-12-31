@@ -5,3 +5,6 @@ export { OptionValue } from "./option-value.class";
 export { CategoryValue } from "./category-value.class";
 export { VoteReport } from "./vote-report.class";
 export { Contribution } from "./contribution.class";
+export { HistoryState } from "./history-state.class";
+export { ViewPort } from "./viewport.class";
+export { Event } from "./event.class";

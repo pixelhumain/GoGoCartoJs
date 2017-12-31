@@ -77,9 +77,9 @@ export function createListenersForElementMenu(object)
 	{
 		$(this).find('.menu-icon').hideTooltip();
 
-		let element = App.elementModule.getElementById(getCurrentElementIdShown());
+		let element = App.elementsModule.getElementById(getCurrentElementIdShown());
 
-		if (App.state !== AppStates.Constellation && !App.geocoder.getLocation())
+		if (!App.geocoder.getLocation())
 		{
 			let modal = $('#modal-pick-address');
 			modal.find(".modal-footer").attr('option-id',element.colorOptionId);			
@@ -108,7 +108,7 @@ export function createListenersForElementMenu(object)
 	// ----------------------
 	object.find('.item-share').click(function()
 	{
-		let element = App.elementModule.getElementById(getCurrentElementIdShown());
+		let element = App.elementsModule.getElementById(getCurrentElementIdShown());
 		
 		let modal = $('#modal-share-element');
 
@@ -131,8 +131,8 @@ export function createListenersForElementMenu(object)
 	// ----------------------
 	object.find('.item-add-favorite').click(function() 
 	{
-		let element = App.elementModule.getElementById(getCurrentElementIdShown());
-		App.elementModule.addFavorite(getCurrentElementIdShown());
+		let element = App.elementsModule.getElementById(getCurrentElementIdShown());
+		App.elementsModule.addFavorite(getCurrentElementIdShown());
 
 		updateFavoriteIcon(object, element);
 
@@ -146,8 +146,8 @@ export function createListenersForElementMenu(object)
 	
 	object.find('.item-remove-favorite').click(function() 
 	{
-		let element = App.elementModule.getElementById(getCurrentElementIdShown());
-		App.elementModule.removeFavorite(getCurrentElementIdShown());
+		let element = App.elementsModule.getElementById(getCurrentElementIdShown());
+		App.elementsModule.removeFavorite(getCurrentElementIdShown());
 		
 		updateFavoriteIcon(object, element);
 
@@ -159,7 +159,7 @@ export function createListenersForElementMenu(object)
 	// ----------------------
 	object.parent().find('.send-mail-btn').click(function()
 	{
-		let element = App.elementModule.getElementById(getCurrentElementIdShown());
+		let element = App.elementsModule.getElementById(getCurrentElementIdShown());
 		$('#popup-send-mail .elementName').text(capitalize(element.name));
 
 		$('#popup-send-mail .input-mail-content').val('');
@@ -270,7 +270,7 @@ function handleSubmitMail()
 	}	
 }
 
-export function getCurrentElementIdShown() : number
+export function getCurrentElementIdShown() : string
 {
 	return getCurrentElementInfoBarShown().attr('data-element-id');
 }
