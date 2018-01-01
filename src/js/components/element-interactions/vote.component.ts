@@ -12,16 +12,16 @@ declare let grecaptcha;
 declare var $ : any;
 declare let Routing : any;
 
-import { AppModule, AppStates, AppModes } from "../app.module";
-import { getCurrentElementIdShown, getCurrentElementInfoBarShown } from "./element-menu.component";
-import { AjaxModule } from "../modules/ajax.module";
-import { ElementStatus } from "../classes/element.class";
+import { AppModule, AppStates, AppModes } from "../../app.module";
+import { getCurrentElementIdShown, getCurrentElementInfoBarShown } from "../element/element-menu.component";
+import { AjaxModule } from "../../modules/ajax.module";
+import { ElementStatus } from "../../classes/element.class";
 
-import { App } from "../gogocarto";
+import { App } from "../../gogocarto";
 
 export function initializeVoting()
 {	
-	//console.log("initialize vote");	
+	$('#modal-vote #select-vote').material_select();
 
 	// open a modal containing description of the validation process
 	$(".validation-process-info").click( (e) => 

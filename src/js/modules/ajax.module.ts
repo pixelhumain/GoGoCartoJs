@@ -21,11 +21,6 @@ export class Request
 	constructor(public route : string, public data : any) {};
 }
 
-export class DataAroundRequest
-{
-	constructor(public originLat : number, public originLng : number, public distance :number, public maxResults : number, public mainOptionId : number) {};
-}
-
 export class AjaxModule
 {
 	onNewElements = new Event<any[]>();
@@ -46,29 +41,17 @@ export class AjaxModule
 	sendRequest(route : string, method : string, data : any, callbackSuccess?, callbackFailure?)
 	{
 		//console.log("SendAjaxRequest to " + route, data);
-
 		$.ajax({
 			url: route,
 			method: method,
 			data: data,
-			success: response => 
-			{	        
-				//console.log("Ajax response", response);
-				if (response)
-				{					
-					if (callbackSuccess) callbackSuccess(response); 						
-				}				       
-			},
-			error: response =>
-			{
-				if (callbackFailure) callbackFailure(response.data); 		
-			}
+			success: response => { if (response && callbackSuccess) callbackSuccess(response); },
+			error: response => { if (callbackFailure) callbackFailure(response.data); }
 		});
 	}
 
 	getElementById(elementId, callbackSuccess?, callbackFailure?)
 	{
-		let start = new Date().getTime();
 		let route = App.config.data.elementsApiUrl + '/' + elementId;
 
 		$.ajax({
@@ -78,23 +61,16 @@ export class AjaxModule
 			success: response => 
 			{	        
 				if (response)
-				{
-					let end = new Date().getTime();
-					// console.log("receive elementById in " + (end-start) + " ms", response);		
-					
+				{					
 					let elementJson;	
 					if (response.data) elementJson = Array.isArray(response.data) ? response.data[0] : response.data;			
 					else elementJson = response;
 
-					if (callbackSuccess) callbackSuccess(elementJson); 
-					//this.onNewElement.emit(response);							
+					if (callbackSuccess) callbackSuccess(elementJson); 					
 				}	
 				else if (callbackFailure) callbackFailure(response); 				       
 			},
-			error: response =>
-			{
-				if (callbackFailure) callbackFailure(response); 		
-			}
+			error: response => { if (callbackFailure) callbackFailure(response); }
 		});
 	};
 
@@ -103,10 +79,10 @@ export class AjaxModule
 		// if invalid location we abort
 		if (!$bounds || $bounds.length == 0 || !$bounds[0]) { return; }
 
-		let result = this.convertBoundsIntoParams($bounds);
+		let boundsResult = this.convertBoundsIntoParams($bounds);
 
-		let dataRequest : any = { bounds : result.boundsString, 
-															boundsJson : result.boundsJson,
+		let dataRequest : any = { bounds : boundsResult.boundsString, 
+															boundsJson : boundsResult.boundsJson,
 															mainOptionId : App.currMainId, 
 															fullRepresentation : getFullRepresentation, 
 															ontology : getFullRepresentation ? 'gogofull' : 'gogocompact' };
@@ -147,11 +123,10 @@ export class AjaxModule
 			this.waitingRequestFullRepresentation = $request.data.fullRepresentation;
 			return;
 		}
+
 		this.isRetrievingElements = true;
-
 		this.currRequest = $request;
-
-		let start = new Date().getTime();			
+		// let start = new Date().getTime();			
 		
 		$.ajax({
 			url: $request.route,
@@ -163,11 +138,9 @@ export class AjaxModule
 			},
 			success: response =>
 			{	
-				// console.log(response);
-
 				if (response.data !== null)
 				{
-					let end = new Date().getTime();					
+					// let end = new Date().getTime();					
 					// console.log("receive " + response.data.length + " elements in " + (end-start) + " ms. fullRepresentation", response.fullRepresentation);				
 
 					response.fullRepresentation = response.ontology == "gogocompact" ? false : true;
@@ -179,9 +152,7 @@ export class AjaxModule
 					this.onNewElements.emit(response);				
 				}
 			  
-			  if (response.allElementsSends) this.allElementsReceived = true;
-
-				//if (response.exceedMaxResult && !this.requestWaitingToBeExecuted) this.sendAjaxElementRequest(this.currRequest);     
+			  if (response.allElementsSends) this.allElementsReceived = true;   
 			},
 			complete: () =>
 			{
@@ -191,7 +162,7 @@ export class AjaxModule
 			  if (this.requestWaitingToBeExecuted)
 			  {
 			  	 //console.log("REQUEST WAITING TO BE EXECUTED, fullRepresentation", this.waitingRequestFullRepresentation);
-			  	 App.checkForNewElementsToRetrieve(this.waitingRequestFullRepresentation);
+			  	 App.elementsManager.checkForNewElementsToRetrieve(this.waitingRequestFullRepresentation);
 			  	 this.requestWaitingToBeExecuted = false;
 			  }
 			},

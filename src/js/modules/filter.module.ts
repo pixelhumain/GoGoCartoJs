@@ -22,25 +22,13 @@ export class FilterModule
 
 	constructor() {	}
 
-	showOnlyFavorite(bool : boolean)
-	{
-		this.showOnlyFavorite_ = bool;
-	};
+	showOnlyFavorite(bool : boolean) { this.showOnlyFavorite_ = bool; }
 
-	showPending(bool : boolean)
-	{
-		this.showPending_ = bool;
-	};
+	showPending(bool : boolean) { this.showPending_ = bool; }
 
-	showOnlyPending(bool : boolean)
-	{
-		this.showOnlyPending_ = bool;
-	};
+	showOnlyPending(bool : boolean) { this.showOnlyPending_ = bool; }
 
-	showOnlyModeration(bool : boolean)
-	{
-		this.showOnlyModeration_ = bool;
-	};
+	showOnlyModeration(bool : boolean) { this.showOnlyModeration_ = bool; }
 
 	checkIfElementPassFilters (element : Element) : boolean
 	{

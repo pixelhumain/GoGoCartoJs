@@ -1,7 +1,7 @@
 declare var $ : any;
-import { App } from "../gogocarto";
-import { getCurrentElementIdShown, getCurrentElementInfoBarShown } from "./element-menu.component";
-import { AjaxModule } from "../modules/ajax.module";
+import { App } from "../../gogocarto";
+import { getCurrentElementIdShown, getCurrentElementInfoBarShown } from "../element/element-menu.component";
+import { AjaxModule } from "../../modules/ajax.module";
 
 export function createListenersForMarkAsResolved()
 {

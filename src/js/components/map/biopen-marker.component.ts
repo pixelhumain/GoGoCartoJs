@@ -15,65 +15,35 @@ declare let $;
 
 export class BiopenMarker
 {
-	id_ : string;
-	isAnimating_ : boolean = false;
-	leafletMarker_ : L.Marker;
-	isHalfHidden_ : boolean = false;
-	inclination_ = "normal";
-	polyline_;
+	private elementId : string;
+	private isAnimating : boolean = false;
+	private leafletMarker : L.Marker;
+	private halfHidden : boolean = false;
+	private inclination = "normal";
 
-	constructor(id_ : string, position_ : L.LatLng) 
+	constructor(elementId : string, position_ : L.LatLng) 
 	{
-		this.id_ = id_;
+		this.elementId = elementId;
 
 		if (!position_)
 		{
 			let element = this.getElement();
-			if (element === null) window.console.log("element null id = "+ this.id_);
+			if (element === null) window.console.log("element null id = "+ this.elementId);
 			else position_ = element.position;
 		} 
 
-		this.leafletMarker_ = L.marker(position_, { 'riseOnHover' : true});	
+		this.leafletMarker = L.marker(position_, { 'riseOnHover' : true});	
 			
-		this.leafletMarker_.on('click', (ev) =>
-		{
-			App.handleMarkerClick(this);	
-  	});
+		this.leafletMarker.on('click', (ev) => { App.mapManager.handleMarkerClick(this); });
 	
-		this.leafletMarker_.on('mouseover', (ev) =>
-		{
-			if (this.isAnimating_) { return; }
-			this.showBigSize();
-		});
+		this.leafletMarker.on('mouseover', (ev) => { if (!this.isAnimating) this.showBigSize(); });
 
-		this.leafletMarker_.on('mouseout', (ev) =>
-		{
-			if (this.isAnimating_) { return; }			
-			this.showNormalSize();
-		});
+		this.leafletMarker.on('mouseout', (ev) => { if (!this.isAnimating) this.showNormalSize(); });
 
-		this.isHalfHidden_ = false;		
+		this.halfHidden = false;		
 
-		this.leafletMarker_.setIcon(L.divIcon({className: 'leaflet-marker-container', html: "<span id=\"marker-"+ this.id_ + "\" gogo-icon-marker></span>"}));
-	};	
-
-	isDisplayedOnElementInfoBar()
-	{
-		return App.infoBarComponent.getCurrElementId() == this.id_;
-	}
-
-	domMarker()
-	{
-		return $('#marker-'+ this.id_);
-	}
-
-	animateDrop() 
-	{
-		this.isAnimating_ = true;
-		this.domMarker().animate({top: '-=25px'}, 300, 'easeInOutCubic');
-		this.domMarker().animate({top: '+=25px'}, 250, 'easeInOutCubic', 
-			() => {this.isAnimating_ = false;} );
-	};
+		this.leafletMarker.setIcon(L.divIcon({className: 'leaflet-marker-container', html: "<span id=\"marker-"+ this.elementId + "\" gogo-icon-marker></span>"}));
+	};		
 
 	update() 
 	{		
@@ -97,20 +67,28 @@ export class BiopenMarker
 
 		// save the class because it has been modified by marker cluster adding or
 		// removing the "rotate" class	
-		let oldClassName = (<any>this.leafletMarker_)._icon ?  (<any>this.leafletMarker_)._icon.className : 'leaflet-marker-container';
+		let oldClassName = (<any>this.leafletMarker)._icon ?  (<any>this.leafletMarker)._icon.className : 'leaflet-marker-container';
 		oldClassName.replace('leaflet-marker-icon', '');
-  	this.leafletMarker_.setIcon(L.divIcon({className: oldClassName, html: htmlMarker}));	
+  	this.leafletMarker.setIcon(L.divIcon({className: oldClassName, html: htmlMarker}));	
 
   	if (this.isDisplayedOnElementInfoBar()) this.showBigSize();
 	};
 
-	private addClassToLeafletMarker_ (classToAdd) 
+	animateDrop() 
+	{
+		this.isAnimating = true;
+		this.domMarker().animate({top: '-=25px'}, 300, 'easeInOutCubic');
+		this.domMarker().animate({top: '+=25px'}, 250, 'easeInOutCubic', 
+			() => {this.isAnimating = false;} );
+	};
+
+	private addClassToLeafletMarker_(classToAdd) 
 	{		
 		this.domMarker().addClass(classToAdd);
 		this.domMarker().siblings('.marker-name').addClass(classToAdd); 
 	};
 
-	private removeClassToLeafletMarker_ (classToRemove) 
+	private removeClassToLeafletMarker_(classToRemove) 
 	{		
 		this.domMarker().removeClass(classToRemove);
 		this.domMarker().siblings('.marker-name').removeClass(classToRemove);      
@@ -146,7 +124,7 @@ export class BiopenMarker
 		domMarker.find('.gogo-icon-plus-circle').addClass("halfHidden");
 		domMarker.find('.moreIconContainer').addClass("halfHidden");
 
-		this.isHalfHidden_ = true;
+		this.halfHidden = true;
 	};
 
 	showNormalHidden () 
@@ -157,34 +135,21 @@ export class BiopenMarker
 		domMarker.find('.gogo-icon-plus-circle').removeClass("halfHidden");
 		domMarker.find('.moreIconContainer').removeClass("halfHidden");
 
-		this.isHalfHidden_ = false;
+		this.halfHidden = false;
 	};
 
-	getId () : string { return this.id_; };
+	isDisplayedOnElementInfoBar() { return App.infoBarComponent.getCurrElementId() == this.elementId; }
 
-	getLeafletMarker () : L.Marker { return this.leafletMarker_; };
+	domMarker() { return $('#marker-'+ this.elementId); }
 
-	isHalfHidden() : boolean { return this.isHalfHidden_; }
+	getId () : string { return this.elementId; };
 
-	getElement () : Element { return App.elementsModule.getElementById(this.id_); };
+	getLeafletMarker () : L.Marker { return this.leafletMarker; };
 
-	checkPolylineVisibility_ (context) 
-	{		
-		if (context.leafletMarker_ === null) return;
-		//window.console.log("checkPolylineVisibility_ " + context.leafletMarker_.getVisible());
-		context.polyline_.setVisible(context.leafletMarker_.getVisible());	
-		context.polyline_.setMap(context.leafletMarker_.getMap());	
+	isHalfHidden() : boolean { return this.halfHidden; }
 
-		if (App.state == AppStates.ShowDirections) 
-		{
-			context.polyline_.setMap(null);	
-			context.polyline_.setVisible(false);
-		}	
-	};
+	getElement () : Element { return App.elementsModule.getElementById(this.elementId); };
 
-	getPosition () : L.LatLng
-	{	
-		return this.leafletMarker_.getLatLng();
-	};
+	getPosition () : L.LatLng { return this.leafletMarker.getLatLng(); };
 }
 

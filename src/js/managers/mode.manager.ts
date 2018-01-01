@@ -36,7 +36,7 @@ export class ModeManager
 
     if ($updateTitleAndState)
     {
-      App.updateDocumentTitle();  
+      App.documentTitleModule.updateDocumentTitle();  
 
       // after clearing, we set the current state again
       if ($mode == AppModes.Map) App.setState(App.state, {id : App.stateManager.stateElementId});  
@@ -79,7 +79,7 @@ export class ModeManager
       }         
 
       App.boundsModule.createBoundsFromLocation(centerLocation);
-      App.checkForNewElementsToRetrieve(true);
+      App.elementsManager.checkForNewElementsToRetrieve(true);
     }
     else if (App.dataType == AppDataType.SearchResults)
     {

@@ -7,14 +7,14 @@
  * @license GNU GPL v3
  * @Last Modified time: 2016-12-13
  */
-import { AppModule, AppStates } from "../app.module";
-import { Element } from "../classes/element.class";
-import { App } from "../gogocarto";
+import { AppModule, AppStates } from "../../app.module";
+import { Element } from "../../classes/element.class";
+import { App } from "../../gogocarto";
 
-import { Event } from "../classes/event.class";
-import { createListenersForElementMenu, updateFavoriteIcon, showFullTextMenu } from "./element-menu.component";
+import { Event } from "../../classes/event.class";
+import { createListenersForElementMenu, updateFavoriteIcon, showFullTextMenu } from "../element/element-menu.component";
 
-import { createListenersForVoting } from "../components/vote.component";
+import { createListenersForVoting } from "../element-interactions/vote.component";
 
 declare var $;
 
@@ -112,7 +112,7 @@ export class InfoBarComponent
 
 		this.onShow.emit(elementId);
 
-		App.updateDocumentTitle();
+		App.documentTitleModule.updateDocumentTitle();
 	};
 
 	domMenu() 

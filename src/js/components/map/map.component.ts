@@ -215,7 +215,7 @@ export class MapComponent
 		}
 		/*if (this.isMapLoaded && animate) App.map().flyToBounds(bounds);
 		else*/ App.map().fitBounds(bounds);
-		setTimeout( () => { App.handleMapIdle(); console.log("force idle"); }, 500);
+		setTimeout( () => { App.mapManager.handleMapIdle(); console.log("force idle"); }, 500);
 	}		
 
 	fitDefaultBounds()

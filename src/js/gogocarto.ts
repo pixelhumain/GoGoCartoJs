@@ -3,9 +3,10 @@ declare var nunjucks, goGoCarto;
 
 import { AppModule, AppDataType, AppModes, AppStates } from './app.module';
 
-import { initializeElementMenu } from "./components/element-menu.component";
-import { initializeVoting } from "./components/vote.component";
-import { initializeReportingAndDeleting } from "./components/reporting-deleting.component";
+import { initializePickAddress } from "./components/element-interactions/pick-address.component";
+import { initializeVoting } from "./components/element-interactions/vote.component";
+import { initializeReportingAndDeleting } from "./components/element-interactions/reporting-deleting.component";
+import { initializeSendingMail } from "./components/element-interactions/send-email.component";
 import { getQueryParams } from "./utils/params";
 import { Roles } from "./modules/login.module";
 
@@ -113,7 +114,9 @@ export class GoGoCartoModule
 			else 	console.warn("[GoGoCarto] Cannot find Dom 'head' or 'html' to add styles");
 		}
 
-		setTimeout( () => {			
+		setTimeout( () => {		
+			App.initialize();
+				
 			App.elementsModule.initialize();
 			App.directoryMenuComponent.initialize();
 			App.filtersComponent.initialize();
@@ -123,9 +126,10 @@ export class GoGoCartoModule
 			App.searchBarComponent.initialize();
 			App.component.initialize();
 			
-			initializeElementMenu();
+			initializePickAddress();
 			initializeVoting();
 			initializeReportingAndDeleting();
+			initializeSendingMail();
 		}, 0);	   
 	}
 }

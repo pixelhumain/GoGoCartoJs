@@ -139,28 +139,24 @@ export class BoundsModule
 			{
 				if (this.extendedBounds.contains(currFilledBound))
 				{
-					// extended contains filledbounds		
-
+					// extended contains filledbounds	
 					freeBound1 = L.latLngBounds( this.extendedBounds.getNorthWest(), currFilledBound.getNorthEast() );
 					freeBound2 = L.latLngBounds( freeBound1.getNorthEast()				 , this.extendedBounds.getSouthEast() );
 					freeBound3 = L.latLngBounds( currFilledBound.getSouthEast()	 , this.extendedBounds.getSouthWest() );
 					freeBound4 = L.latLngBounds( freeBound1.getSouthWest()				 , currFilledBound.getSouthWest() );
 
 					expectedBounds = this.extendedBounds;
-
 					freeBounds.push(freeBound1,freeBound2, freeBound3, freeBound4);					
 				}
 				else
 				{
 					// extended cross over filled
-
 					if (this.extendedBounds.getWest() > currFilledBound.getWest() && this.extendedBounds.getEast() < currFilledBound.getEast())
 					{
 						if (this.extendedBounds.getSouth() < currFilledBound.getSouth())
 						{
 							// extended centered south from filledBounds
-							freeBound1 = L.latLngBounds( this.extendedBounds.getSouthWest(), currFilledBound.getSouthEast() );
-							
+							freeBound1 = L.latLngBounds( this.extendedBounds.getSouthWest(), currFilledBound.getSouthEast() );							
 						}
 						else
 						{

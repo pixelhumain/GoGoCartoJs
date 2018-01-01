@@ -29,7 +29,7 @@ $(document).ready(function()
 	  // transform jsonViewport into ViewPort object (if we don't do so,
 	  // the ViewPort methods will not be accessible)
 	  historystate.viewport = $.extend(new ViewPort(), event.state.viewport);
-	  App.loadHistoryState(event.state, true);
+	  App.historyStateManager.load(event.state, true);
 	};
 });
 

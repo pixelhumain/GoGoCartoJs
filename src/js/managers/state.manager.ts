@@ -59,7 +59,7 @@ export class StateManager
         || $newState == AppStates.ShowDirections) )
       App.historyModule.pushNewState(options);
 
-    App.updateDocumentTitle(options);
+    App.documentTitleModule.updateDocumentTitle(options);
   };
 
   private setNormalState()
@@ -112,7 +112,7 @@ export class StateManager
         (elementJson) => {
           App.elementsModule.addJsonElements([elementJson], true, true);
           App.DEAModule.begin(elementJson.id, true);
-          App.updateDocumentTitle(options);
+          App.documentTitleModule.updateDocumentTitle(options);
           App.historyModule.pushNewState(options); 
         },
         (error) => 
@@ -147,7 +147,7 @@ export class StateManager
       {
         App.elementsModule.addJsonElements([elementJson], true, true);
         element = App.elementById(elementJson.id);
-        App.updateDocumentTitle(options);
+        App.documentTitleModule.updateDocumentTitle(options);
         
         origin = App.geocoder.getLocation();
         // we geolocalized origin in loadHistory function

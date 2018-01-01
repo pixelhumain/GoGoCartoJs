@@ -9,9 +9,9 @@
  */
 declare let $, jQuery : any;
 
-import { AppModule } from "../app.module";
-import { Category, Option } from "../modules/categories.module";
-import { App } from "../gogocarto";
+import { AppModule } from "../../app.module";
+import { Category, Option } from "../../modules/categories.module";
+import { App } from "../../gogocarto";
 
 export class FiltersComponent
 {  
@@ -215,7 +215,7 @@ export class FiltersComponent
       App.elementListComponent.reInitializeElementToDisplayLength();
     
       App.boundsModule.updateFilledBoundsAccordingToNewMainOptionId();
-      App.checkForNewElementsToRetrieve();
+      App.elementsManager.checkForNewElementsToRetrieve();
       App.elementsModule.updateElementsToDisplay(true,true);
     }, 400);    
   }

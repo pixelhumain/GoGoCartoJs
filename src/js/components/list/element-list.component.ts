@@ -7,15 +7,15 @@
  * @license GNU GPL v3
  * @Last Modified time: 2016-12-13
  */
-import { AppModule, AppStates, AppDataType } from "../app.module";
-import { App } from "../gogocarto";
-import { ElementsChanged } from "../modules/elements.module";
+import { AppModule, AppStates, AppDataType } from "../../app.module";
+import { App } from "../../gogocarto";
+import { ElementsChanged } from "../../modules/elements.module";
 
-import { createListenersForElementMenu, updateFavoriteIcon } from "./element-menu.component";
-import { Element } from "../classes/element.class";
-import { Event } from "../classes/event.class";
+import { createListenersForElementMenu, updateFavoriteIcon } from "../element/element-menu.component";
+import { Element } from "../../classes/element.class";
+import { Event } from "../../classes/event.class";
 
-import { createListenersForVoting } from "../components/vote.component";
+import { createListenersForVoting } from "../element-interactions/vote.component";
 
 declare var $;
 
@@ -122,7 +122,7 @@ export class ElementListComponent
 				// expand bounds
 				App.boundsModule.extendBounds(0.5);
 				$('#directory-list-spinner-loader').show();
-				App.checkForNewElementsToRetrieve(true);		
+				App.elementsManager.checkForNewElementsToRetrieve(true);		
 			}			
 		}	
 		else

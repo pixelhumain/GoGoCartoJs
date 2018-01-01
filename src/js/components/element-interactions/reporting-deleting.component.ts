@@ -12,14 +12,14 @@ declare let grecaptcha;
 declare var $ : any;
 declare let Routing : any;
 
-import { AppModule, AppStates, AppModes } from "../app.module";
-import { getCurrentElementIdShown, getCurrentElementInfoBarShown } from "./element-menu.component";
-import { AjaxModule } from "../modules/ajax.module";
-import { ElementStatus } from "../classes/element.class";
+import { AppModule, AppStates, AppModes } from "../../app.module";
+import { getCurrentElementIdShown, getCurrentElementInfoBarShown } from "../element/element-menu.component";
+import { AjaxModule } from "../../modules/ajax.module";
+import { ElementStatus } from "../../classes/element.class";
 
-import { App } from "../gogocarto";
+import { App } from "../../gogocarto";
 
-import { capitalize } from "../utils/string-helpers";
+import { capitalize } from "../../utils/string-helpers";
 
 export function openReportModal()
 {

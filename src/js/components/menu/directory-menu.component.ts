@@ -9,9 +9,9 @@
  */
 declare let $, jQuery : any;
 
-import { AppModule } from "../app.module";
-import { Category, Option } from "../modules/categories.module";
-import { App } from "../gogocarto";
+import { AppModule } from "../../app.module";
+import { Category, Option } from "../../modules/categories.module";
+import { App } from "../../gogocarto";
 
 export class DirectoryMenuComponent
 {		

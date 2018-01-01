@@ -23,7 +23,7 @@ export class RouterModule
 				initialState.filters = this.filtersSerializedParam;
 
 				// timeout to let App variable being accesible
-				setTimeout( () => { App.loadHistoryState(initialState); }, 0);				
+				setTimeout( () => { App.historyStateManager.load(initialState); }, 0);				
 			},
 			'normal /:mode/:addressAndViewport?': (mode, addressAndViewport = '') =>
 			{
@@ -38,7 +38,7 @@ export class RouterModule
 				initialState.filters = this.filtersSerializedParam;
 
 				// timeout to let App variable being accesible
-				setTimeout( () => { App.loadHistoryState(initialState); }, 0);				
+				setTimeout( () => { App.historyStateManager.load(initialState); }, 0);				
 			},
 			'show_element /fiche/:name/:id/:addressAndViewport?': (name, id, addressAndViewport = '') =>
 			{
@@ -54,7 +54,7 @@ export class RouterModule
 				initialState.filters = this.filtersSerializedParam;
 
 				// timeout to let App variable being accesible
-				setTimeout( () => { App.loadHistoryState(initialState); }, 0);	
+				setTimeout( () => { App.historyStateManager.load(initialState); }, 0);	
 			},
 			'show_directions /itineraire/:name/:id/:addressAndViewport?': (name, id, addressAndViewport = '') =>
 			{
@@ -70,7 +70,7 @@ export class RouterModule
 				initialState.filters = this.filtersSerializedParam;
 
 				// timeout to let App variable being accesible
-				setTimeout( () => { App.loadHistoryState(initialState); }, 0);	
+				setTimeout( () => { App.historyStateManager.load(initialState); }, 0);	
 			},
 			'search /:mode/recherche/:text': (mode, text) =>
 			{
@@ -83,7 +83,7 @@ export class RouterModule
 				initialState.filters = this.filtersSerializedParam;
 
 				// timeout to let App variable being accesible
-				setTimeout( () => { App.loadHistoryState(initialState); }, 0);
+				setTimeout( () => { App.historyStateManager.load(initialState); }, 0);
 			}
 		});		
 	}
@@ -127,24 +127,4 @@ export class RouterModule
         return splited;
     }  
   }
-
- //  // obtain the GET parameters from the url ( ?=parameter=value), also inside the hash
- //  parseGETparam(param? : string) 
- //  {
-	// 	var vars = {};
-		
-	// 	window.location.href.replace( window.location.hash.split('?')[0], '' ).replace( 
-	// 		/[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
-	// 		function( m, key, value ) { // callback
-	// 			vars[key] = value !== undefined ? value : '';
-	// 			return vars[key];
-	// 		}
-	// 	);
-
-	// 	if ( param ) {
-	// 		return vars[param] ? vars[param] : null;	
-	// 	}
-	// 	return vars;
-
-	// }
 }

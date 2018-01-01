@@ -37,7 +37,6 @@ export class ElementsModule
 	searchResultElements_ : Element[] = [];
 
 	favoriteIds_ = [];
-	isShowingHalfHidden : boolean = false;
 
 	firstElementsHaveBeendisplayed : boolean = false;
 
@@ -319,40 +318,7 @@ export class ElementsModule
 	allElements()
 	{
 		return this.everyElements_['all'];
-	}
-
-	getMarkers() 
-	{
-		let markers = [];
-		let l = this.visibleElements_.length;
-		while(l--)
-		{
-			markers.push(this.currVisibleElements()[l].marker);
-		}
-		return markers;
-	};
-
-	hidePartiallyAllMarkers() 
-	{
-		this.isShowingHalfHidden = true;
-		let l = this.currVisibleElements().length;		
-		while(l--)
-		{
-			if (this.currVisibleElements()[l].marker) this.currVisibleElements()[l].marker.showHalfHidden();
-		}		
-	};
-
-	showNormalHiddenAllMarkers() 
-	{
-		this.isShowingHalfHidden = false;
-		$('.marker-cluster').removeClass('halfHidden');
-		
-		let l = this.currVisibleElements().length;
-		while(l--)
-		{
-			if (this.currVisibleElements()[l].marker) this.currVisibleElements()[l].marker.showNormalHidden();
-		}
-	};
+	}	
 
 	getElementById(elementId) : Element
 	{

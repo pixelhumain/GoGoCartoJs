@@ -74,7 +74,7 @@ export class AppComponent
 		$('#directory-menu .btn-close-menu').click(() => this.hideDirectoryMenu());
 
 		$('.show-as-list-button').click((e : Event) => {	
-			App.setTimeoutClicking();
+			App.mapManager.setTimeoutClicking();
 			App.setMode(AppModes.List);
 			e.preventDefault();
 			e.stopPropagation();
