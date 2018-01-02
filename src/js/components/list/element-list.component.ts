@@ -9,7 +9,7 @@
  */
 import { AppModule, AppStates, AppDataType } from "../../app.module";
 import { App } from "../../gogocarto";
-import { ElementsChanged } from "../../modules/elements.module";
+import { ElementsChanged } from "../../modules/elements/elements.module";
 
 import { createListenersForElementMenu, updateFavoriteIcon } from "../element/element-menu.component";
 import { Element } from "../../classes/element.class";
@@ -139,7 +139,7 @@ export class ElementListComponent
 			let listContentDom = $('#directory-content-list ul.collapsible');
 			let listContainerDom = $('#directory-content-list .elements-container');
 
-			listContentDom.append(element.getHtmlRepresentation());
+			listContentDom.append(element.component.render());
 			
 			let elementDom = $('#element-info-'+element.id);
 			let domMenu = elementDom.find('.menu-element');			

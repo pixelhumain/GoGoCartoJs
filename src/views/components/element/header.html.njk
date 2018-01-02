@@ -3,9 +3,9 @@
 
   <span class="col s12 name">
 
-  {% set mainIcon = 'gogo-icon-attention' if element.isPending() and config.isFeatureAvailable('pending') else mainOptionValueToDisplay.option.icon %}
+  {% set mainIcon = 'gogo-icon-attention' if element.isPending() and config.isFeatureAvailable('pending') else mainOptionToDisplay.option.icon %}
     {# Icons #}
-    <span class="element-main-icon icon {{ mainIcon }} colorAs {{pendingClass}} hideOnLargeScreen" option-id={{mainOptionValueToDisplay.colorOptionId}}></span>
+    <span class="element-main-icon icon {{ mainIcon }} colorAs {{pendingClass}} hideOnLargeScreen" option-id={{mainOptionToDisplay.colorOptionId}}></span>
     <span class="star-names-icons">
       {% for starName in starNames %} 
           <span class="icon gogo-icon-{{starName}}"></span>

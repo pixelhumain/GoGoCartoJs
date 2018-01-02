@@ -8,18 +8,18 @@
  * @Last Modified time: 2016-12-13
  */
 
-import { AppModule, AppStates, AppModes } from "../app.module";
-import { Category } from "../classes/category.class";
-import { Option } from "../classes/option.class";
+import { AppModule, AppStates, AppModes } from "../../app.module";
+import { Category } from "../../classes/category.class";
+import { Option } from "../../classes/option.class";
 
-export { Category } from "../classes/category.class";
-export { Option } from "../classes/option.class";
+export { Category } from "../../classes/category.class";
+export { Option } from "../../classes/option.class";
 
-import { App } from "../gogocarto";
+import { App } from "../../gogocarto";
 declare let $ : any;
 
 
-export class CategoriesModule
+export class TaxonomyModule
 {
 	categories : Category[] = [];
 	options : Option[] = [];
@@ -36,7 +36,7 @@ export class CategoriesModule
 		this.categories = [];
 	}
 
-	createCategoriesFromJson(mainCatgeoryJson, openHoursCategoryJson)
+	createTaxonomyFromJson(mainCatgeoryJson, openHoursCategoryJson)
 	{
 		this.mainCategory = this.recursivelyCreateCategoryAndOptions(mainCatgeoryJson);
 		openHoursCategoryJson = openHoursCategoryJson || this.defaultOpenHoursCategory;

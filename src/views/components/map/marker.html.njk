@@ -1,16 +1,16 @@
-<div class="marker-name bgdColorAs {{pendingClass}}" option-id={{mainOptionValueToDisplay.colorOptionId}} style="display:none">{{ element.name | capitalize }}</div>
+<div class="marker-name bgdColorAs {{pendingClass}}" option-id={{mainOptionToDisplay.colorOptionId}} style="display:none">{{ element.name | capitalize }}</div>
 
-<div class="marker-wrapper colorAs {{pendingClass}}" option-id="{{mainOptionValueToDisplay.colorOptionId}}" id="marker-{{ element.id }}">
+<div class="marker-wrapper colorAs {{pendingClass}}" option-id="{{mainOptionToDisplay.colorOptionId}}" id="marker-{{ element.id }}">
 
 	<div class="rotate animate gogo-icon-marker"></div>
 	
 	<div class="iconInsideMarker-wrapper rotate">
-		{% set mainIcon = 'gogo-icon-attention' if showPending else mainOptionValueToDisplay.option.icon %}
-		<div class="iconInsideMarker colorAs {{pendingClass}} {{ 'disabled' if not mainOptionValueToDisplay.isFilledByFilters }} {{mainIcon}}" 
-		option-id={{ mainOptionValueToDisplay.optionId if mainOptionValueToDisplay.option.color else mainOptionValueToDisplay.colorOptionId }}>
+		{% set mainIcon = 'gogo-icon-attention' if showPending else mainOptionToDisplay.option.icon %}
+		<div class="iconInsideMarker colorAs {{pendingClass}} {{ 'disabled' if not mainOptionToDisplay.isFilledByFilters }} {{mainIcon}}" 
+		option-id={{ mainOptionToDisplay.optionId if mainOptionToDisplay.option.color else mainOptionToDisplay.colorOptionId }}>
 	</div>
 
-	{% set nbreOthersOptions = otherOptionsValuesToDisplay.length %}	
+	{% set nbreOthersOptions = otherOptionsToDisplay.length %}	
 
 	{% if nbreOthersOptions > 0 and showMoreIcon and not showPending %}
 
@@ -21,7 +21,7 @@
     	<div class="moreIconContainer animate rotate" 
     		  style="width:{{ widthMoreOption }}px">
     	
-			{% for otherOptionValue in otherOptionsValuesToDisplay %}
+			{% for otherOptionValue in otherOptionsToDisplay %}
 
 				{% set disableOption = 'disabled' if not otherOptionValue.isFilledByFilters %}
 

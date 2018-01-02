@@ -1,4 +1,4 @@
-import { Option } from "../modules/categories.module";
+import { Option } from "../modules/taxonomy/taxonomy.module";
 import { App } from "../gogocarto";
 
 class CategorySearchResult

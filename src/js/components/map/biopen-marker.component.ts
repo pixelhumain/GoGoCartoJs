@@ -17,8 +17,11 @@ export class BiopenMarker
 {
 	private elementId : string;
 	private isAnimating : boolean = false;
+	// we use leaflet markers to display marker on map. BiopenMarker is just a extension of leafletMarker
 	private leafletMarker : L.Marker;
+	// we may want to half hidden somes markers in particular states (setting opacity to .5)
 	private halfHidden : boolean = false;
+	// we unclesterize small clusters to show directly the markers. For the markers to be visible, wi inclinate some of them to right of left
 	private inclination = "normal";
 
 	constructor(elementId : string, position_ : L.LatLng) 
@@ -28,20 +31,14 @@ export class BiopenMarker
 		if (!position_)
 		{
 			let element = this.getElement();
-			if (element === null) window.console.log("element null id = "+ this.elementId);
+			if (element === null) console.log("element null id = " + this.elementId);
 			else position_ = element.position;
 		} 
 
-		this.leafletMarker = L.marker(position_, { 'riseOnHover' : true});	
-			
-		this.leafletMarker.on('click', (ev) => { App.mapManager.handleMarkerClick(this); });
-	
+		this.leafletMarker = L.marker(position_, { 'riseOnHover' : true});				
+		this.leafletMarker.on('click', (ev) => { App.mapManager.handleMarkerClick(this); });	
 		this.leafletMarker.on('mouseover', (ev) => { if (!this.isAnimating) this.showBigSize(); });
-
 		this.leafletMarker.on('mouseout', (ev) => { if (!this.isAnimating) this.showNormalSize(); });
-
-		this.halfHidden = false;		
-
 		this.leafletMarker.setIcon(L.divIcon({className: 'leaflet-marker-container', html: "<span id=\"marker-"+ this.elementId + "\" gogo-icon-marker></span>"}));
 	};		
 
@@ -57,8 +54,8 @@ export class BiopenMarker
 		let htmlMarker = App.templateModule.render('marker', 
 		{
 			element : element, 
-			mainOptionValueToDisplay: optionstoDisplay[0],
-			otherOptionsValuesToDisplay: optionstoDisplay.slice(1), 
+			mainOptionToDisplay: optionstoDisplay[0],
+			otherOptionsToDisplay: optionstoDisplay.slice(1), 
 			showMoreIcon : showMoreIcon,
 			disableMarker : disableMarker,
 			pendingClass : element.isPending() && App.config.isFeatureAvailable('pending') ? 'pending' : '',
@@ -78,21 +75,8 @@ export class BiopenMarker
 	{
 		this.isAnimating = true;
 		this.domMarker().animate({top: '-=25px'}, 300, 'easeInOutCubic');
-		this.domMarker().animate({top: '+=25px'}, 250, 'easeInOutCubic', 
-			() => {this.isAnimating = false;} );
-	};
-
-	private addClassToLeafletMarker_(classToAdd) 
-	{		
-		this.domMarker().addClass(classToAdd);
-		this.domMarker().siblings('.marker-name').addClass(classToAdd); 
-	};
-
-	private removeClassToLeafletMarker_(classToRemove) 
-	{		
-		this.domMarker().removeClass(classToRemove);
-		this.domMarker().siblings('.marker-name').removeClass(classToRemove);      
-	};
+		this.domMarker().animate({top: '+=25px'}, 250, 'easeInOutCubic', () => {this.isAnimating = false;} );
+	};	
 
 	showBigSize() 
 	{			
@@ -136,6 +120,18 @@ export class BiopenMarker
 		domMarker.find('.moreIconContainer').removeClass("halfHidden");
 
 		this.halfHidden = false;
+	};
+
+	private addClassToLeafletMarker_(classToAdd) 
+	{		
+		this.domMarker().addClass(classToAdd);
+		this.domMarker().siblings('.marker-name').addClass(classToAdd); 
+	};
+
+	private removeClassToLeafletMarker_(classToRemove) 
+	{		
+		this.domMarker().removeClass(classToRemove);
+		this.domMarker().siblings('.marker-name').removeClass(classToRemove);      
 	};
 
 	isDisplayedOnElementInfoBar() { return App.infoBarComponent.getCurrElementId() == this.elementId; }

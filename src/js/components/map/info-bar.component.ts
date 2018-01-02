@@ -30,7 +30,11 @@ export class InfoBarComponent
 	onShow = new Event<number>();
 	onHide = new Event<boolean>();
 
-	getCurrElementId() : string { return this.elementVisible ? this.elementVisible.id : null}
+	getCurrElementId() : string { return this.elementVisible ? this.elementVisible.id : null; }
+
+	domMenu() { return $('#element-info-bar .menu-element'); }
+
+	width() : string { return $('#element-info-bar').width() + 'px'; }
 
 	isDisplayedAside()
 	{
@@ -57,7 +61,7 @@ export class InfoBarComponent
 			//console.log("Element not fully Loaded");
 			App.ajaxModule.getElementById(elementId,
 			(response) => {
-				element.updateAttributesFromFullJson(response);
+				element.updateWithJson(response);
 				this.showElement(element.id);
 				if (callback) callback();
 			},
@@ -79,7 +83,7 @@ export class InfoBarComponent
 			clearTimeout(this.loaderTimer);
 			$('#info-bar-overlay').fadeOut();
 
-			$('#element-info').html(element.getHtmlRepresentation());		
+			$('#element-info').html(element.component.render());		
 			
 			let domMenu = this.domMenu();
 
@@ -113,12 +117,7 @@ export class InfoBarComponent
 		this.onShow.emit(elementId);
 
 		App.documentTitleModule.updateDocumentTitle();
-	};
-
-	domMenu() 
-	{
-		return $('#element-info-bar .menu-element');
-	}
+	};	
 
 	refresh()
 	{		
@@ -171,11 +170,6 @@ export class InfoBarComponent
 
 		this.isVisible = true;
 	};	
-
-	width() : string 
-	{
-		return $('#element-info-bar').width() + 'px';
-	}
 
 	checkIfMarkerStillVisible()
 	{

@@ -1,5 +1,6 @@
 export { Category } from "./category.class";
-export { Element } from "./element.class";
+export { Element, ElementStatus } from "./element.class";
+export { ElementBase } from "./element-base.class";
 export { Option } from "./option.class";
 export { OptionValue } from "./option-value.class";
 export { CategoryValue } from "./category-value.class";
@@ -8,3 +9,4 @@ export { Contribution } from "./contribution.class";
 export { HistoryState } from "./history-state.class";
 export { ViewPort } from "./viewport.class";
 export { Event } from "./event.class";
+export { PostalAddress } from './postal-address.class';

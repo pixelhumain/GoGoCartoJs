@@ -105,7 +105,7 @@ export class GoGoCartoModule
 		if ($(this.containerSelector).length == 0) console.warn('[GoGoCarto] The container "' + this.containerSelector + '" was not found');
 		else $(this.containerSelector).append(layout);
 
-		App.categoryModule.createCategoriesFromJson(taxonomy, options.openHours);
+		App.categoryModule.createTaxonomyFromJson(taxonomy, options.openHours);
 		if (App.categoryModule.options.length)
 		{
 			let styles = App.templateModule.render('gogo-styles', {'optionList':App.categoryModule.options, 'config':App.config});

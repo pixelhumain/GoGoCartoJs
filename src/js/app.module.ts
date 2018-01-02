@@ -25,10 +25,10 @@ import { MapManager } from "./managers/map.manager";
 import { GeocoderModule, GeocodeResult } from "./modules/geocoder.module";
 import { FilterModule } from "./modules/filter.module";
 import { FilterRoutingModule } from "./modules/filter-routing.module";
-import { ElementsModule } from "./modules/elements.module";
+import { ElementsModule } from "./modules/elements/elements.module";
 import { DisplayElementAloneModule } from "./modules/display-element-alone.module";
 import { AjaxModule } from "./modules/ajax.module";
-import { CategoriesModule } from './modules/categories.module';
+import { TaxonomyModule } from './modules/taxonomy/taxonomy.module';
 import { DirectionsModule } from "./modules/directions.module";
 import { RouterModule } from "./modules/router.module";
 import { LoginModule } from "./modules/login.module";
@@ -36,6 +36,11 @@ import { TemplateModule } from "./modules/template.module";
 import { HistoryModule } from './modules/history.module';
 import { BoundsModule } from './modules/bounds.module';
 import { DocumentTitleModule } from './modules/document-title.module';
+import { ElementJsonLoadedModule } from './modules/elements/element-json-loader.module';
+import { ElementFormaterModule } from './modules/elements/formater.module';
+import { ElementDiffModule } from './modules/elements/diff.module';
+import { ElementIconsModule } from "./modules/elements/icons.module";
+import { ElementOptionValuesModule } from "./modules/elements/option-values.module";
 
 // COMPONENTS
 import { AppComponent } from './app.component';
@@ -46,7 +51,6 @@ import { DirectoryMenuComponent } from "./components/directory-menu/directory-me
 import { FiltersComponent } from "./components/directory-menu/filters.component";
 import { GoGoControlComponent } from "./components/gogo-controls.component";
 import { MapComponent } from "./components/map/map.component";
-import { BiopenMarker } from "./components/map/biopen-marker.component";
 
 import { GoGoConfig } from "./classes/gogo-config.class";
 
@@ -84,6 +88,11 @@ export class AppModule
 	templateModule = new TemplateModule();
 	loginModule : LoginModule;
 	documentTitleModule = new DocumentTitleModule();
+	elementJsonLoader = new ElementJsonLoadedModule();
+	elementFormaterModule = new ElementFormaterModule();
+	elementDiffModule = new ElementDiffModule();
+	elementIconsModule = new ElementIconsModule();
+	elementOptionValuesModule = new ElementOptionValuesModule();
 
 	component = new AppComponent();
 	infoBarComponent = new InfoBarComponent();
@@ -91,7 +100,7 @@ export class AppModule
 	searchBarComponent = new SearchBarComponent();
 	elementListComponent = new ElementListComponent();
 	historyModule = new HistoryModule();
-	categoryModule = new CategoriesModule();
+	categoryModule = new TaxonomyModule();
 	directoryMenuComponent = new DirectoryMenuComponent();
 	filtersComponent = new FiltersComponent();	
 	gogoControlComponent = new GoGoControlComponent();	

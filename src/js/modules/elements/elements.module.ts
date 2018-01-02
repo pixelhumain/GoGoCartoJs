@@ -8,14 +8,13 @@
  * @Last Modified time: 2016-12-13
  */
 
-import { AppModule, AppStates, AppModes, AppDataType } from "../app.module";
-import { App } from "../gogocarto";
+import { AppModule, AppStates, AppModes, AppDataType } from "../../app.module";
+import { App } from "../../gogocarto";
 declare var $;	
 
-import * as Cookies from "../utils/cookies";
-import { Event } from "../classes/event.class";
-import { Element, ElementStatus } from "../classes/element.class";
-import { BiopenMarker } from "../components/map/biopen-marker.component";
+import * as Cookies from "../../utils/cookies";
+import { Event } from "../../classes/event.class";
+import { Element, ElementStatus } from "../../classes/element.class";
 
 export interface ElementsChanged
 { 
@@ -99,7 +98,7 @@ export class ElementsModule
 			{
 				elementJson = elementList[elementToUpdateIds[j].index];
 				element = this.getElementById(elementJson.id);
-				element.updateAttributesFromFullJson(elementJson);
+				element.updateWithJson(elementJson);
 				elementsConverted.push(element);
 			}
 		}

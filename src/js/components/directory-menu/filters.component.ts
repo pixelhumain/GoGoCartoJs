@@ -10,7 +10,7 @@
 declare let $, jQuery : any;
 
 import { AppModule } from "../../app.module";
-import { Category, Option } from "../../modules/categories.module";
+import { Category, Option } from "../../modules/taxonomy/taxonomy.module";
 import { App } from "../../gogocarto";
 
 export class FiltersComponent

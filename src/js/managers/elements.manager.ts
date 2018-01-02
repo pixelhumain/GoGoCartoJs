@@ -1,6 +1,6 @@
 import { App } from "../gogocarto";
 import { AppModes, AppDataType } from "../app.module";
-import { ElementsChanged } from "../modules/elements.module";
+import { ElementsChanged } from "../modules/elements/elements.module";
 
 export class ElementsManager
 {
