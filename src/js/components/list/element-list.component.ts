@@ -21,7 +21,7 @@ declare var $;
 
 export class ElementListComponent
 {
-	//onShow = new Event<number>();
+	elementToDisplayCount : number = 0; 
 
 	// Number of element in one list
 	ELEMENT_LIST_SIZE_STEP : number = 15;
@@ -61,31 +61,23 @@ export class ElementListComponent
 		//console.log("elementList update", $elementsResult);
 		if ($elementsToDisplay.length == 0) this.stepsCount = 1;
 
-		$('#directory-list-spinner-loader').hide();
+		this.hideSpinnerLoader();
 		this.clear();		
 
 		this.draw($elementsToDisplay, false);
 	}
 
-	setTitle($value : string)
-	{
-		// console.log("set title", $value);
-		$('.element-list-title-text').html($value);
-	}
+	setTitle($value : string) { $('.element-list-title-text').html($value); }
 
 	show() { $('#directory-content-list').show(); }
 	
 	hide() { $('#directory-content-list').hide(); }
 
-	clear()
-	{
-		$('#directory-content-list li').remove();
-	}
+	showSpinnerLoader() { $('#directory-list-spinner-loader').show(); }
 
-	currElementsDisplayed() : number
-	{
-		return $('#directory-content-list li').length;
-	}
+	hideSpinnerLoader() { $('#directory-list-spinner-loader').hide(); }
+
+	clear() { $('#directory-content-list li').remove(); }
 
 	reInitializeElementToDisplayLength()
 	{
@@ -99,7 +91,8 @@ export class ElementListComponent
 		let element : Element;
 		let elementsToDisplay : Element[] = $elementList.filter( (el) => el.isFullyLoaded); 
 
-		//console.log('ElementList draw', elementsToDisplay.length);
+		this.elementToDisplayCount = elementsToDisplay.length;
+		// console.log('ElementList draw', elementsToDisplay.length);
 
 		if (App.dataType == AppDataType.All)
 		{
@@ -113,15 +106,17 @@ export class ElementListComponent
 
 		let maxElementsToDisplay = this.ELEMENT_LIST_SIZE_STEP * this.stepsCount;
 		let endIndex = Math.min(maxElementsToDisplay, elementsToDisplay.length);  
+
+		this.updateResultMessage();
 		
 		// if the list is not full, we send ajax request
-		if ( elementsToDisplay.length < maxElementsToDisplay)
+		if (elementsToDisplay.length < maxElementsToDisplay)
 		{
 			if (App.dataType == AppDataType.All)
 			{
 				// expand bounds
 				App.boundsModule.extendBounds(0.5);
-				$('#directory-list-spinner-loader').show();
+				this.showSpinnerLoader();
 				App.elementsManager.checkForNewElementsToRetrieve(true);		
 			}			
 		}	
@@ -172,16 +167,33 @@ export class ElementListComponent
 
 		createListenersForVoting();
 
-		if ($animate)
+		if ($animate) $('#directory-content-list .elements-container').animate({scrollTop: '0'}, 500);
+
+		$('#directory-content-list ul').collapsible({accordion : true});		
+	}
+
+	private updateResultMessage()
+	{
+		$('.no-result-message').hide();
+		
+		if (this.elementToDisplayCount > 0)
+		{			
+			$('.element-list-header .title-text').show();
+   		$('.element-list-title-number-results').text('(' + this.elementToDisplayCount + ')');
+   	}
+   	else
+   		$('.element-list-header .title-text').hide();
+	}
+
+	handleAllElementsRetrieved()
+	{
+		this.hideSpinnerLoader();
+		if (this.elementToDisplayCount == 0)
 		{
-			$('#directory-content-list .elements-container').animate({scrollTop: '0'}, 500);
+			$('.element-list-title-number-results').text('(0)');
+			$('.no-result-message').show();
+			$('.element-list-header .title-text').show();
 		}		
-
-		$('#directory-content-list ul').collapsible({
-      	accordion : true 
-   	});
-
-   	$('.element-list-title-number-results').text('(' + elementsToDisplay.length + ')');
 	}
 
 	private handleBottom()

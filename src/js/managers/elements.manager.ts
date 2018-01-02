@@ -18,8 +18,12 @@ export class ElementsManager
     // console.log("checkForNewelementToRetrieve, fullRepresentation", $getFullRepresentation);
     let result = App.boundsModule.calculateFreeBounds($getFullRepresentation);
     // console.log("checkForNewelementToRetrieve, calculateBounds", result);
-    if (result.status == "allRetrieved") return; // nothing to do, all elements already retrieved
-    else if (result.status == "included") 
+    if (result.status == "allRetrieved") 
+    {
+      App.elementListComponent.handleAllElementsRetrieved();
+      return; // nothing to do, all elements already retrieved
+    }
+    else if (result.status == "included")
     {
       // We simulate the end of an successeful ajax request 
       App.boundsModule.updateFilledBoundsWithBoundsReceived(result.expectedFillBounds, App.currMainId,  $getFullRepresentation);
