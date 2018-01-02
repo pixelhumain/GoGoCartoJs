@@ -54,7 +54,7 @@ export class DirectionsModule
 		//console.log("calculate route", waypoints);
 
 		this.routingControl = L.Routing.control({
-			router: L.Routing.mapbox('pk.eyJ1Ijoic2ViYWxsb3QiLCJhIjoiY2l4MGtneGVjMDF0aDJ6cWNtdWFvc2Y3YSJ9.nIZr6G2t08etMzft_BHHUQ'),
+			router: L.Routing.mapbox('pk.eyJ1IjoiZ29nb2NhcnRvIiwiYSI6ImNqYnhxeHUxZzJ3cG4zMnIyNmZiajF6dmwifQ.2G5IM4roIgpU_fvPBOpssw'),
 			plan: L.Routing.plan(
 				waypoints, 
 				{
