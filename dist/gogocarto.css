@@ -5232,6 +5232,9 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
         /* IE6-9 */ }
+      .gogocarto-container #directory-content-list .elements-container .no-result-message {
+        text-align: center;
+        margin-top: 3rem; }
     .gogocarto-container #directory-content-list .element-item {
       display: block; }
       .gogocarto-container #directory-content-list .element-item .gogo-icon-close {
