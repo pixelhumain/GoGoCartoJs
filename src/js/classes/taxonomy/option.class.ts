@@ -1,13 +1,12 @@
 import { AppModule, AppStates, AppModes } from "../../app.module";
 import { Category } from "./category.class";
-import { CategoryOptionTreeNode, CategoryOptionTreeNodeType } from "./category-option-tree-node.class";
+import { CategoryOptionTreeNode, CategoryOptionTreeNodeType } from "../../components/directory-menu/category-option-tree-node.class";
 
 import { App } from "../../gogocarto";
 declare let $ : any;
 
 export class Option extends CategoryOptionTreeNode
 { 
-	id : number;
 	nameShort: string;
 	index : number;
 	color : string;
@@ -16,10 +15,7 @@ export class Option extends CategoryOptionTreeNode
 	useIconForMarker: boolean;
 	useColorForMarker : boolean;
 	showOpenHours : boolean;	
-	displayOption : number;
-	
-	private myOwnerColorId : number = null;
-
+	displayOption : boolean;
 
 	constructor($optionJson : any)
 	{

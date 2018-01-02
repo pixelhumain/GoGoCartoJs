@@ -1,6 +1,6 @@
 import { AppModule, AppStates, AppModes } from "../../app.module";
 import { Option } from "./option.class";
-import { CategoryOptionTreeNode, CategoryOptionTreeNodeType } from "./category-option-tree-node.class";
+import { CategoryOptionTreeNode, CategoryOptionTreeNodeType } from "../../components/directory-menu/category-option-tree-node.class";
 
 import { App } from "../../gogocarto";
 declare let $ : any;

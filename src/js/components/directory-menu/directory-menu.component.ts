@@ -124,17 +124,6 @@ export class DirectoryMenuComponent
 	
 	updateSize() 
 	{
-		// fixs menu overflow scrollable depending on screen height
-		// let filterMenu = $('#directory-menu-main-container .filter-menu');
-		// let menuContainer = $('#directory-menu-main-container .directory-menu-content');
-
-		// filterMenu.css('height', '100%');
-
-		// if (filterMenu.height() < menuContainer.height()) 
-		// {
-		// 	filterMenu.css('height', 'auto');
-		// } 
-
     // update menu width
 		let menuwidth, pageWidth = App.component.width();
 		

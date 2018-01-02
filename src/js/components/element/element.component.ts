@@ -36,7 +36,7 @@ export class ElementComponent
       optionsToDisplay: optionstoDisplay,
       mainOptionToDisplay: optionstoDisplay[0], 
       otherOptionsToDisplay: optionstoDisplay.slice(1),  
-      allOptionsValues: this.element.getCurrOptionsValues().filter( (oV) => oV.option.displayOption).sort( (a,b) => a.isFilledByFilters ? -1 : 1),      
+      allOptionsValues: this.element.getCurrOptionsValues().filter( (oV) => oV.option.isActive).sort( (a,b) => a.isFilledByFilters ? -1 : 1),      
       mainCategoryValue : mainCategoryValue,
       editUrl : App.config.features.edit.url + this.element.id,
       ElementStatus: ElementStatus,

@@ -1,5 +1,5 @@
 import { AppModule, AppModes } from "../../app.module";
-import { Option } from "./option.class";
+import { Option } from "../../classes/taxonomy/option.class";
 
 import { App } from "../../gogocarto";
 declare let $ : any;
@@ -27,14 +27,14 @@ export class CategoryOptionTreeNode
 	isPristine : boolean = true;
 
 	ownerId : number = null;
-	// l'id de la mainOption, ou "all" pour une mainOption
+	// main option Id, or "all"
 	mainOwnerId : any = null;
 
 	isChecked : boolean = true;
 	isDisabled : boolean = false;	
 	isActive : boolean = true;
 
-	constructor(private TYPE : CategoryOptionTreeNodeType, private DOM_ID : string,private DOM_CHECKBOX_ID : string,private DOM_CHILDREN_CLASS : string) {};
+	constructor(private TYPE : CategoryOptionTreeNodeType, private DOM_ID : string, private DOM_CHECKBOX_ID : string, private DOM_CHILDREN_CLASS : string) {};
 
 	getDom() { return $(this.DOM_ID + this.id); }
 
