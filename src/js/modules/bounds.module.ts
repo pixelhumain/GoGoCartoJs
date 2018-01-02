@@ -87,7 +87,7 @@ export class BoundsModule
 		if(getFullRepresentation) this.fullRepresentationFilledBound[mainOptionId] = expectedBound;
 		else this.compactRepresentationFilledBound[mainOptionId] = expectedBound;
 
-		if (this.maxBounds && expectedBound.contains(this.maxBounds)) 
+		if (this.maxBounds && expectedBound.contains(this.maxBounds))
 		{
 			if(getFullRepresentation) this.fullRepresentationRetrievingComplete[mainOptionId] = true;
 			else this.compactRepresentationRetrievingComplete[mainOptionId] = true;
@@ -105,9 +105,9 @@ export class BoundsModule
 	private currRetrievingComplete($getFullRepresentation : boolean) : boolean
 	{ 
 		if ($getFullRepresentation) 
-			return this.fullRepresentationRetrievingComplete[App.currMainId];
+			return this.fullRepresentationRetrievingComplete[App.currMainId] || this.fullRepresentationRetrievingComplete['all'];
 		else
-			return this.compactRepresentationRetrievingComplete[App.currMainId];
+			return this.compactRepresentationRetrievingComplete[App.currMainId] || this.compactRepresentationRetrievingComplete['all'];
 	}
 
 	calculateFreeBounds($getFullRepresentation = false)
