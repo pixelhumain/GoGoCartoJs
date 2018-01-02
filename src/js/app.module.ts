@@ -23,24 +23,26 @@ import { MapManager } from "./managers/map.manager";
 
 // MODULES
 import { GeocoderModule, GeocodeResult } from "./modules/geocoder.module";
-import { FilterModule } from "./modules/filter.module";
-import { FilterRoutingModule } from "./modules/filter-routing.module";
+import { FilterModule } from "./modules/taxonomy/filter.module";
+import { FilterRoutingModule } from "./modules/taxonomy/filter-routing.module";
 import { ElementsModule } from "./modules/elements/elements.module";
-import { DisplayElementAloneModule } from "./modules/display-element-alone.module";
+import { ElementsJsonModule } from "./modules/elements/elements-json.module";
+import { FavoriteModule } from "./modules/elements/favorite.module";
+import { DisplayElementAloneModule } from "./modules/map/display-element-alone.module";
 import { AjaxModule } from "./modules/ajax.module";
 import { TaxonomyModule } from './modules/taxonomy/taxonomy.module';
-import { DirectionsModule } from "./modules/directions.module";
-import { RouterModule } from "./modules/router.module";
+import { DirectionsModule } from "./modules/map/directions.module";
+import { RouterModule } from "./modules/core/router.module";
 import { LoginModule } from "./modules/login.module";
-import { TemplateModule } from "./modules/template.module";
-import { HistoryModule } from './modules/history.module';
+import { TemplateModule } from "./modules/core/template.module";
+import { HistoryModule } from './modules/core/history.module';
 import { BoundsModule } from './modules/bounds.module';
-import { DocumentTitleModule } from './modules/document-title.module';
-import { ElementJsonLoadedModule } from './modules/elements/element-json-loader.module';
-import { ElementFormaterModule } from './modules/elements/formater.module';
-import { ElementDiffModule } from './modules/elements/diff.module';
-import { ElementIconsModule } from "./modules/elements/icons.module";
-import { ElementOptionValuesModule } from "./modules/elements/option-values.module";
+import { DocumentTitleModule } from './modules/core/document-title.module';
+import { ElementJsonParserModule } from './modules/element/element-json-loader.module';
+import { ElementFormaterModule } from './modules/element/formater.module';
+import { ElementDiffModule } from './modules/element/diff.module';
+import { ElementIconsModule } from "./modules/element/icons.module";
+import { ElementOptionValuesModule } from "./modules/element/option-values.module";
 
 // COMPONENTS
 import { AppComponent } from './app.component';
@@ -52,7 +54,7 @@ import { FiltersComponent } from "./components/directory-menu/filters.component"
 import { GoGoControlComponent } from "./components/gogo-controls.component";
 import { MapComponent } from "./components/map/map.component";
 
-import { GoGoConfig } from "./classes/gogo-config.class";
+import { GoGoConfig } from "./classes/config/gogo-config.class";
 
 import { App } from "./gogocarto";
 import * as Cookies from "./utils/cookies";
@@ -80,27 +82,29 @@ export class AppModule
 	filterModule = new FilterModule();
 	filterRoutingModule = new FilterRoutingModule();
 	elementsModule = new ElementsModule();
+	elementsJsonModule = new ElementsJsonModule();
 	displayElementAloneModule = new DisplayElementAloneModule();
 	directionsModule : DirectionsModule = new DirectionsModule();
 	ajaxModule = new AjaxModule();
 	boundsModule : BoundsModule;
 	routerModule = new RouterModule();
 	templateModule = new TemplateModule();
-	loginModule : LoginModule;
+	loginModule : LoginModule;	
+	historyModule = new HistoryModule();
+	taxonomyModule = new TaxonomyModule();
 	documentTitleModule = new DocumentTitleModule();
-	elementJsonLoader = new ElementJsonLoadedModule();
+	elementJsonParser = new ElementJsonParserModule();
 	elementFormaterModule = new ElementFormaterModule();
 	elementDiffModule = new ElementDiffModule();
 	elementIconsModule = new ElementIconsModule();
 	elementOptionValuesModule = new ElementOptionValuesModule();
+	favoriteModule = new FavoriteModule();
 
 	component = new AppComponent();
 	infoBarComponent = new InfoBarComponent();
 	mapComponent  = new MapComponent();
 	searchBarComponent = new SearchBarComponent();
 	elementListComponent = new ElementListComponent();
-	historyModule = new HistoryModule();
-	categoryModule = new TaxonomyModule();
 	directoryMenuComponent = new DirectoryMenuComponent();
 	filtersComponent = new FiltersComponent();	
 	gogoControlComponent = new GoGoControlComponent();	

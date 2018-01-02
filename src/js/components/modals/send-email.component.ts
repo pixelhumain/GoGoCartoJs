@@ -1,4 +1,4 @@
-import { Element } from "../../classes/element.class";
+import { Element } from "../../classes/classes";
 import { App } from "../../gogocarto";
 import { capitalize } from "../../utils/string-helpers";
 import { getCurrentElementIdShown, getCurrentElementInfoBarShown } from "../element/element-menu.component";

@@ -1,6 +1,6 @@
 import { App } from "../../gogocarto";
 import { AppModule, AppStates, AppModes } from "../../app.module";
-import { Element, ElementStatus, ElementModerationState } from "../../classes/element.class";
+import { Element, ElementStatus, ElementModerationState } from "../../classes/classes";
 declare var $;
 
 export class ElementComponent

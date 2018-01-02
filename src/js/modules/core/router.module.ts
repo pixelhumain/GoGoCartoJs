@@ -1,7 +1,7 @@
-import { AppModule, AppStates, AppDataType, AppModes } from "../app.module";
-import { HistoryState, ViewPort } from '../classes/classes'; 
+import { AppModule, AppStates, AppDataType, AppModes } from "../../app.module";
+import { HistoryState, ViewPort } from '../../classes/classes'; 
 
-import { App } from "../gogocarto";
+import { App } from "../../gogocarto";
 
 declare var routie: any, $;
 

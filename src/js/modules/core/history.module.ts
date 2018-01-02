@@ -8,13 +8,13 @@
  * @Last Modified time: 2016-12-13
  */
 
-import { Event } from "../classes/event.class";
-import { slugify, capitalize } from "../utils/string-helpers";
-import { AppModule, AppStates, AppModes, AppDataType } from "../app.module";
-import { Element, HistoryState, ViewPort } from "../classes/classes";
-import * as Cookies from "../utils/cookies";
+import { Event } from "../../classes/event.class";
+import { slugify, capitalize } from "../../utils/string-helpers";
+import { AppModule, AppStates, AppModes, AppDataType } from "../../app.module";
+import { Element, HistoryState, ViewPort } from "../../classes/classes";
+import * as Cookies from "../../utils/cookies";
 
-import { App } from "../gogocarto";
+import { App } from "../../gogocarto";
 declare let $;
 declare let Routing;
 

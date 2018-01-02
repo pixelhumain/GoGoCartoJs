@@ -9,12 +9,8 @@
  */
 
 import { AppModule, AppStates, AppModes } from "../../app.module";
-import { Category } from "../../classes/category.class";
-import { Option } from "../../classes/option.class";
-
-export { Category } from "../../classes/category.class";
-export { Option } from "../../classes/option.class";
-
+import { Option, Category } from "../../classes/classes";
+export { Option, Category } from "../../classes/classes";
 import { App } from "../../gogocarto";
 declare let $ : any;
 

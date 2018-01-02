@@ -1,5 +1,5 @@
 import { App } from "../gogocarto";
-import { Element } from "../classes/element.class";
+import { Element } from "../classes/classes";
 
 export enum AppDataType 
 {

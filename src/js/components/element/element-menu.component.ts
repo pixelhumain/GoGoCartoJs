@@ -13,7 +13,7 @@ declare var $ : any;
 declare let Routing : any;
 
 import { AppModule, AppStates, AppModes } from "../../app.module";
-import { Element } from "../../classes/element.class";
+import { Element } from "../../classes/classes";
 import { App } from "../../gogocarto";
 
 import { capitalize, slugify } from "../../utils/string-helpers";
@@ -121,7 +121,7 @@ export function createListenersForElementMenu(object)
 	// ----------------------
 	object.find('.item-add-favorite').click(function() 
 	{
-		App.elementsModule.addFavorite(getCurrentElementIdShown());
+		App.favoriteModule.addFavorite(getCurrentElementIdShown());
 
 		updateFavoriteIcon(object, element);
 
@@ -135,7 +135,7 @@ export function createListenersForElementMenu(object)
 	
 	object.find('.item-remove-favorite').click(function() 
 	{		
-		App.elementsModule.removeFavorite(getCurrentElementIdShown());
+		App.favoriteModule.removeFavorite(getCurrentElementIdShown());
 		
 		updateFavoriteIcon(object, element);
 

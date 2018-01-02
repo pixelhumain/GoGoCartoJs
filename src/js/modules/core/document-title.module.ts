@@ -1,6 +1,6 @@
-import { App } from "../gogocarto";
-import { AppDataType, AppStates, AppModes } from "../app.module";
-import { capitalize, unslugify } from "../utils/string-helpers";
+import { App } from "../../gogocarto";
+import { AppDataType, AppStates, AppModes } from "../../app.module";
+import { capitalize, unslugify } from "../../utils/string-helpers";
 
 export class DocumentTitleModule
 {

@@ -121,7 +121,7 @@ export class SearchBarComponent
 		App.ajaxModule.sendRequest(route, 'get', data,
 		(searchResult) => 
 		{
-			let result = App.elementsModule.addJsonElements(searchResult.data, true, true); 
+			let result = App.elementsJsonModule.convertJsonElements(searchResult.data, true, true); 
       App.elementsModule.setSearchResultElement(result.elementsConverted); 
       App.setDataType(AppDataType.SearchResults, $backFromHistory); 
       App.filtersComponent.setMainOption('all'); 

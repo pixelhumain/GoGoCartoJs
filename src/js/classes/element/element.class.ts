@@ -7,15 +7,15 @@
  * @license GNU GPL v3
  * @Last Modified time: 2016-12-13
  */
-import { AppModule, AppStates, AppModes } from "../app.module";
+import { AppModule, AppStates, AppModes } from "../../app.module";
 import { ElementBase, ElementStatus, ElementModerationState } from './element-base.class';
 export { ElementStatus, ElementModerationState } from './element-base.class';
-import { BiopenMarker } from "../components/map/biopen-marker.component";
-import { ElementComponent } from "../components/element/element.component";
-import { OptionValue, CategoryValue, Option, Category, Contribution, VoteReport } from "./classes";
-import { capitalize } from "../utils/string-helpers";
+import { BiopenMarker } from "../../components/map/biopen-marker.component";
+import { ElementComponent } from "../../components/element/element.component";
+import { OptionValue, CategoryValue, Option, Category, Contribution, VoteReport } from "../classes";
+import { capitalize } from "../../utils/string-helpers";
 
-import { App } from "../gogocarto";
+import { App } from "../../gogocarto";
 declare var $;
 
 export class Element extends ElementBase

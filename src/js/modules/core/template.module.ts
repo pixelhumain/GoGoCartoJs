@@ -1,6 +1,6 @@
-import { AppModule } from "../app.module";
+import { AppModule } from "../../app.module";
 
-import { App } from "../gogocarto";
+import { App } from "../../gogocarto";
 declare var nunjucks;
 
 export class TemplateModule

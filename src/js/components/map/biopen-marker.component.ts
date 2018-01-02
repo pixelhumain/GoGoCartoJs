@@ -8,7 +8,7 @@
  * @Last Modified time: 2016-12-13
  */
 import { AppModule, AppStates } from "../../app.module";
-import { Element } from "../../classes/element.class";
+import { Element } from "../../classes/classes";
 
 import { App } from "../../gogocarto";
 declare let $;

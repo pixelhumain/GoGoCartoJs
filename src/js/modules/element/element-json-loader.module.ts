@@ -3,7 +3,7 @@ import { capitalize } from "../../utils/string-helpers";
 import { App } from "../../gogocarto";
 declare var $;
 
-export class ElementJsonLoadedModule
+export class ElementJsonParserModule
 {
   load(elementJson : any, element : Element | ElementBase)
   {

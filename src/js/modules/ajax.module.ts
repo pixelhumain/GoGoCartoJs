@@ -10,7 +10,7 @@
 
 import { Event } from "../classes/event.class";
 import { AppModule, AppStates } from "../app.module";
-import { Element } from "../classes/element.class";
+import { Element } from "../classes/classes";
 
 import { App } from "../gogocarto";
 declare var $ : any;

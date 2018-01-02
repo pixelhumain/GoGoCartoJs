@@ -12,11 +12,10 @@ import { AppModule, AppStates, AppModes, AppDataType } from "../../app.module";
 import { App } from "../../gogocarto";
 declare var $;	
 
-import * as Cookies from "../../utils/cookies";
 import { Event } from "../../classes/event.class";
-import { Element, ElementStatus } from "../../classes/element.class";
+import { Element, ElementStatus } from "../../classes/classes";
 
-export interface ElementsChanged
+export interface ElementsToDisplayChanged
 { 
 	elementsToDisplay : Element[];
 	newElements : Element[];
@@ -25,152 +24,40 @@ export interface ElementsChanged
 
 export class ElementsModule
 {
-	onElementsChanged = new Event<ElementsChanged>();
+	onElementsToDisplayChanged = new Event<ElementsToDisplayChanged>();
 
-	everyElements_ : Element[][] = [];
-	everyElementsId_ : string[] = [];
+	private everyElements_ : Element[][] = [];
+	private everyElementsId_ : string[] = [];
 	
 	// current visible elements
-	visibleElements_ : Element[][] = [];
+	private visibleElements_ : Element[][] = [];
+	private searchResultElements_ : Element[] = [];	
 
-	searchResultElements_ : Element[] = [];
-
-	favoriteIds_ = [];
-
-	firstElementsHaveBeendisplayed : boolean = false;
-
-	constructor()
-	{
-		let cookies = Cookies.readCookie('FavoriteIds');
-		if (cookies !== null)
-		{
-			this.favoriteIds_ = JSON.parse(cookies);		
-		}   
-		else this.favoriteIds_ = [];		
-	}
+	firstElementsHaveBeendisplayed : boolean = false;	
 
 	initialize()
 	{
 		this.everyElements_['all'] = [];
 		this.visibleElements_['all'] = [];
-		for(let option of App.categoryModule.getMainOptions())
+		for(let option of App.taxonomyModule.getMainOptions())
 		{
 			this.everyElements_[option.id] = [];
 			this.visibleElements_[option.id] = [];
 		}	
-	}
+	}	
 
-	checkCookies()
+	addElements(newElements : Element[])
 	{
-		if (App.config.isFeatureActivated('favorite'))
+		for(let element of newElements)
 		{
-			for(let j = 0; j < this.favoriteIds_.length; j++)
-	  	{
-	  		this.addFavorite(this.favoriteIds_[j], false);
-	  	}
-	  }
-	};
-
-	addJsonElements (elementList, checkIfAlreadyExist = true, isFullRepresentation : boolean = true) 
-	{
-		let element : Element, elementJson;
-		let newElements : Element[] = [];
-		let elementsConverted : Element[] = [];
-		let start = new Date().getTime();
-
-		let elementsIdsReceived = elementList.map( (e, index) =>  { return {
-        id: isFullRepresentation ? e.id : e[0], // in compact way, id is the first element of an array
-        index: index
-    }});
-
-    //console.log("AddJsonelement isFullRepresentation", isFullRepresentation); 
-		
-		let newIds = elementsIdsReceived.filter((obj) => {return this.everyElementsId_.indexOf(obj.id) < 0;});
-		let elementToUpdateIds = [];
-		// if (newIds.length != elementList.length)
-		// 	console.log("DES ELEMENTS EXISTAIENT DEJA", elementList.length - newIds.length)
-		if (isFullRepresentation)
-		{			
-			let elementToUpdateIds = elementsIdsReceived.filter((obj) => {return this.everyElementsId_.indexOf(obj.id) >= 0;});
-			//console.log("AddJsonelement elementToUpdate", elementToUpdateIds.length);
-			let j = elementToUpdateIds.length;
-			while(j--)
+			for (let mainId of element.mainOptionOwnerIds)
 			{
-				elementJson = elementList[elementToUpdateIds[j].index];
-				element = this.getElementById(elementJson.id);
-				element.updateWithJson(elementJson);
-				elementsConverted.push(element);
-			}
-		}
-
-		//console.log("AddJsonelement new elements", newIds.length);
-
-		let i = newIds.length;
-
-		while(i--)
-		{
-			elementJson = elementList[newIds[i].index];
-
-			element = new Element(elementJson);
-
-			if (!App.isIframe || element.status != ElementStatus.PendingAdd)
-			{
-				for (let mainId of element.mainOptionOwnerIds)
-				{
-					this.everyElements_[mainId].push(element);
-				}				
-				this.everyElements_['all'].push(element);
-				this.everyElementsId_.push(element.id);
-				newElements.push(element);
-
-				element.initialize();
-			}			
-		}
-
-		elementsConverted = elementsConverted.concat(newElements);
-		this.checkCookies();
-		let end = new Date().getTime();
-		//console.log("AddJsonElements in " + (end-start) + " ms", elementJson);	
-		//console.log("last element", element);
-		return { newElementsLength : newIds.length, elementsUpdatedLength : elementToUpdateIds.length, elementsConverted: elementsConverted};
-	};
-
-	setSearchResultElement(elements : Element[])
-	{
-		this.searchResultElements_ = elements;
-	}
-
-	getSearchElements() : Element[]
-	{
-		return this.searchResultElements_;
-	}
-
-	addFavorite(favoriteId : string, modifyCookies = true)
-	{
-		let element = this.getElementById(favoriteId);
-		if (element !== null) element.isFavorite = true;
-		else return;
-		
-		if (modifyCookies)
-		{
-			this.favoriteIds_.push(favoriteId);
-			Cookies.createCookie('FavoriteIds',JSON.stringify(this.favoriteIds_));		
-		}
-	};
-
-	removeFavorite(favoriteId : string, modifyCookies = true)
-	{
-		let element = this.getElementById(favoriteId);
-		if (element !== null) element.isFavorite = false;
-		
-		if (modifyCookies)
-		{
-			let index = this.favoriteIds_.indexOf(favoriteId);
-			if (index > -1) this.favoriteIds_.splice(index, 1);
-
-			Cookies.createCookie('FavoriteIds',JSON.stringify(this.favoriteIds_));
-		}
-	};
+				this.everyElements_[mainId].push(element);
+			}				
+			this.everyElements_['all'].push(element);
+			this.everyElementsId_.push(element.id);
+		}		
+	}	
 
 	clearCurrentsElement()
 	{
@@ -186,33 +73,10 @@ export class ElementsModule
 		App.mapComponent.removeMarkers(markers);
 
 		this.clearCurrVisibleElements();
-	}
-
-	updateElementsIcons(somethingChanged : boolean = false)
-	{
-		//console.log("UpdateCurrElements somethingChanged", somethingChanged);
-		let start = new Date().getTime();
-
-		let visibleElements = this.currVisibleElements();
-		if (!visibleElements || !visibleElements.length) return;
-		
-		let l = visibleElements.length;
-		let element : Element;
-		while(l--)
-		{
-			element = visibleElements[l];
-			if (somethingChanged) element.needToBeUpdatedWhenShown = true;
-
-			// if domMarker not visible that's mean that marker is in a cluster
-			if (element.marker.domMarker().is(':visible')) element.update();
-		}
-		let end = new Date().getTime();
-		let time = end - start;
-		//window.console.log("updateElementsIcons " + time + " ms");
-	}
+	}	
 
 	// check elements in bounds and who are not filtered
-	updateElementsToDisplay (checkInAllElements = true, filterHasChanged = false) 
+	updateElementsToDisplay(checkInAllElements = true, filterHasChanged = false) 
 	{	
 		if (App.mode == AppModes.Map && !App.mapComponent.isMapLoaded) return;
 
@@ -282,7 +146,7 @@ export class ElementsModule
 		let time = end - start;
 
 		//window.console.log("UpdateElementsToDisplay en " + time + " ms");
-		this.onElementsChanged.emit({
+		this.onElementsToDisplayChanged.emit({
 			elementsToDisplay: this.currVisibleElements(), 
 			newElements : newElements, 
 			elementsToRemove : elementsToRemove
@@ -299,25 +163,43 @@ export class ElementsModule
 		}		
 	};
 
-	currVisibleElements() 
+	updateElementsIcons(somethingChanged : boolean = false)
 	{
-		return this.visibleElements_[App.currMainId];
-	};
+		//console.log("UpdateCurrElements somethingChanged", somethingChanged);
+		let start = new Date().getTime();
 
-	currEveryElements() 
-	{
-		return this.everyElements_[App.currMainId];
-	};
+		let visibleElements = this.currVisibleElements();
+		if (!visibleElements || !visibleElements.length) return;
+		
+		let l = visibleElements.length;
+		let element : Element;
+		while(l--)
+		{
+			element = visibleElements[l];
+			if (somethingChanged) element.needToBeUpdatedWhenShown = true;
 
-	private clearCurrVisibleElements() 
-	{
-		this.visibleElements_[App.currMainId] = [];
-	};
+			// if domMarker not visible that's mean that marker is in a cluster
+			if (element.marker.domMarker().is(':visible')) element.update();
+		}
+		let end = new Date().getTime();
+		let time = end - start;
+		//window.console.log("updateElementsIcons " + time + " ms");
+	}
 
-	allElements()
-	{
-		return this.everyElements_['all'];
-	}	
+	setSearchResultElement(elements : Element[]) { this.searchResultElements_ = elements; }
+	getSearchElements() : Element[] { return this.searchResultElements_; }
+
+	get everyElements()        { return this.everyElements_; }
+	get everyElementsId()      { return this.everyElementsId_; }
+	get visibleElements()      { return this.visibleElements_; }
+	get searchResultElements() { return this.searchResultElements_; }
+
+	currVisibleElements()      { return this.visibleElements_[App.currMainId]; }
+	currEveryElements()        { return this.everyElements_[App.currMainId]; }
+
+	private clearCurrVisibleElements() { this.visibleElements_[App.currMainId] = []; }
+
+	allElements() { return this.everyElements_['all']; }
 
 	getElementById(elementId) : Element
 	{

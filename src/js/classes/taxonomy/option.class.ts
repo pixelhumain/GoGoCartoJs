@@ -1,8 +1,8 @@
-import { AppModule, AppStates, AppModes } from "../app.module";
-import { Category } from "../classes/category.class";
+import { AppModule, AppStates, AppModes } from "../../app.module";
+import { Category } from "./category.class";
 import { CategoryOptionTreeNode, CategoryOptionTreeNodeType } from "./category-option-tree-node.class";
 
-import { App } from "../gogocarto";
+import { App } from "../../gogocarto";
 declare let $ : any;
 
 export class Option extends CategoryOptionTreeNode

@@ -1,6 +1,6 @@
 import { App } from "../gogocarto";
 import { AppDataType, AppModes } from "../app.module";
-import { Element } from "../classes/element.class";
+import { Element } from "../classes/classes";
 
 export enum AppStates 
 {
@@ -110,7 +110,7 @@ export class StateManager
     {
       App.ajaxModule.getElementById(options.id,
         (elementJson) => {
-          App.elementsModule.addJsonElements([elementJson], true, true);
+          App.elementsJsonModule.convertJsonElements([elementJson], true, true);
           App.DEAModule.begin(elementJson.id, true);
           App.documentTitleModule.updateDocumentTitle(options);
           App.historyModule.pushNewState(options); 
@@ -145,7 +145,7 @@ export class StateManager
     {
       App.ajaxModule.getElementById(options.id, (elementJson) => 
       {
-        App.elementsModule.addJsonElements([elementJson], true, true);
+        App.elementsJsonModule.convertJsonElements([elementJson], true, true);
         element = App.elementById(elementJson.id);
         App.documentTitleModule.updateDocumentTitle(options);
         

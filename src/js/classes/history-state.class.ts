@@ -1,5 +1,5 @@
 import { AppModule, AppStates, AppModes, AppDataType } from "../app.module";
-import { ViewPort } from "./viewport.class";
+import { ViewPort } from "./map/viewport.class";
 
 export class HistoryState
 {

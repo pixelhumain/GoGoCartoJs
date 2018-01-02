@@ -1,13 +1,14 @@
 import { App } from "../gogocarto";
 import { AppModes, AppDataType } from "../app.module";
-import { ElementsChanged } from "../modules/elements/elements.module";
+import { ElementsToDisplayChanged } from "../modules/elements/elements.module";
 
 export class ElementsManager
 {
   constructor()
   {
     App.ajaxModule.onNewElements.do( (result) => { this.handleNewElementsReceivedFromServer(result); });  
-    App.elementsModule.onElementsChanged.do( (elementsChanged)=> { this.handleElementsChanged(elementsChanged); });    
+    App.elementsJsonModule.onNewsElementsConverted.do( (newElements)=> { App.elementsModule.addElements(newElements); });  
+    App.elementsModule.onElementsToDisplayChanged.do( (ElementsToDisplayChanged)=> { this.handleElementsToDisplayChanged(ElementsToDisplayChanged); });    
   }
 
   checkForNewElementsToRetrieve($getFullRepresentation = false)
@@ -35,7 +36,7 @@ export class ElementsManager
   {    
     let elementsJson = result.data;    
     
-    let  elements = App.elementsModule.addJsonElements(elementsJson, true, result.fullRepresentation);
+    let elements = App.elementsJsonModule.convertJsonElements(elementsJson, true, result.fullRepresentation);
     //console.log("new Elements length", newElements.length);
     
     // on add markerClusterGroup after first elements received
@@ -45,7 +46,7 @@ export class ElementsManager
     }
   }; 
 
-  handleElementsChanged(result : ElementsChanged)
+  handleElementsToDisplayChanged(result : ElementsToDisplayChanged)
   {
     let start = new Date().getTime();
 
@@ -77,7 +78,7 @@ export class ElementsManager
     }  
 
     let end = new Date().getTime();
-    //console.log("ElementsChanged in " + (end-start) + " ms");  
+    //console.log("ElementsToDisplayChanged in " + (end-start) + " ms");  
   };  
 
 }

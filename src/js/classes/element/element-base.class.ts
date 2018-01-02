@@ -1,6 +1,6 @@
-import { Contribution, VoteReport, OptionValue, PostalAddress } from "./classes";
-import { capitalize } from "../utils/string-helpers";
-import { App } from "../gogocarto";
+import { Contribution, VoteReport, OptionValue, PostalAddress } from "../classes";
+import { capitalize } from "../../utils/string-helpers";
+import { App } from "../../gogocarto";
 
 export enum ElementStatus 
 {
@@ -69,7 +69,7 @@ export class ElementBase
 
   updateWithJson(elementJson : any) 
   {
-    App.elementJsonLoader.load(elementJson, this);    
+    App.elementJsonParser.load(elementJson, this);    
   }  
 
   createOptionsTree()

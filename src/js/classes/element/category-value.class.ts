@@ -1,4 +1,4 @@
-import { Category, Option, OptionValue} from "./classes";
+import { Category, Option, OptionValue} from "../classes";
 
 export class CategoryValue
 {

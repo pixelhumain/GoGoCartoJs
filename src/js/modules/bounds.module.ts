@@ -1,6 +1,6 @@
 import { AppModule, AppStates } from "../app.module";
-import { Element } from "../classes/element.class";
-import { GoGoConfig } from "../classes/gogo-config.class";
+import { Element } from "../classes/classes";
+import { GoGoConfig } from "../classes/config/gogo-config.class";
 import { App } from "../gogocarto";
 
 export class BoundsModule
@@ -32,7 +32,7 @@ export class BoundsModule
 
 	initialize()
 	{
-		for(let mainOptionId of App.categoryModule.getMainOptionsIdsWithAll())
+		for(let mainOptionId of App.taxonomyModule.getMainOptionsIdsWithAll())
 		{
 			this.fullRepresentationFilledBound[mainOptionId] = null;
 			this.compactRepresentationFilledBound[mainOptionId] = null;

@@ -130,7 +130,7 @@ export class FiltersComponent
     $('.subcategory-item .name-wrapper').click(function()
     {    
       let categoryId = $(this).attr('data-category-id');
-      App.categoryModule.getCategoryById(categoryId).toggleChildrenDetail();
+      App.taxonomyModule.getCategoryById(categoryId).toggleChildrenDetail();
     });  
 
     $('.subcategory-item .checkbox-wrapper').click(function(e)
@@ -140,7 +140,7 @@ export class FiltersComponent
       e.preventDefault();
 
       let categoryId = $(this).attr('data-category-id');
-      App.categoryModule.getCategoryById(categoryId).toggle();
+      App.taxonomyModule.getCategoryById(categoryId).toggle();
       
     });      
 
@@ -163,7 +163,7 @@ export class FiltersComponent
     $('.subcategorie-option-item:not(#filter-favorite):not(#filter-pending):not(#filter-moderation) .gogo-icon-name-wrapper').click(function(e : Event)
     {
       let optionId = $(this).attr('data-option-id');
-      let option = App.categoryModule.getOptionById(optionId);
+      let option = App.taxonomyModule.getOptionById(optionId);
 
       if (option.isMainOption()) App.filtersComponent.setMainOption(option.id);
       else if (option.isCollapsible()) option.toggleChildrenDetail()
@@ -177,7 +177,7 @@ export class FiltersComponent
       e.preventDefault();
 
       let optionId = $(this).attr('data-option-id');
-      App.categoryModule.getOptionById(optionId).toggle();
+      App.taxonomyModule.getOptionById(optionId).toggle();
     });
   }
 
@@ -197,7 +197,7 @@ export class FiltersComponent
     }
     else
     {
-      let mainOption = App.categoryModule.getMainOptionById(optionId);        
+      let mainOption = App.taxonomyModule.getMainOptionById(optionId);        
 
       $('#menu-subcategories-title').text(mainOption.name);
       if (mainOption.showOpenHours) $('#open-hours-filter').show();

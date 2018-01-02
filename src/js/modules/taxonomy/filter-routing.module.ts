@@ -8,8 +8,8 @@
  * @Last Modified time: 2016-12-13
  */
 
-import { App } from "../gogocarto";
-import { parseArrayNumberIntoString, parseStringIntoArrayNumber } from "../utils/parser-string-number";
+import { App } from "../../gogocarto";
+import { parseArrayNumberIntoString, parseStringIntoArrayNumber } from "../../utils/parser-string-number";
 
 declare var $ : any;
 
@@ -24,7 +24,7 @@ export class FilterRoutingModule
 		if (mainOptionSlug == 'all') mainOptionId = 'all';
 		else
 		{
-			let mainOption = App.categoryModule.getMainOptionBySlug(mainOptionSlug);
+			let mainOption = App.taxonomyModule.getMainOptionBySlug(mainOptionSlug);
 			mainOptionId = mainOption ? mainOption.id : 'all';
 		} 
 		App.filtersComponent.setMainOption(mainOptionId);		
@@ -57,10 +57,10 @@ export class FilterRoutingModule
 			
 			if (mainOptionSlug == 'all')
 			{
-				if (App.loadFullTaxonomy) App.categoryModule.mainCategory.toggle(!addingMode, false);
+				if (App.loadFullTaxonomy) App.taxonomyModule.mainCategory.toggle(!addingMode, false);
 				else
 				{
-					for(let option of App.categoryModule.mainCategory.options) 
+					for(let option of App.taxonomyModule.mainCategory.options) 
 					{
 						option.toggleVisibility(!addingMode);
 					}
@@ -68,7 +68,7 @@ export class FilterRoutingModule
 			}
 			else
 			{
-				for (let cat of App.categoryModule.getMainOptionBySlug(mainOptionSlug).subcategories)
+				for (let cat of App.taxonomyModule.getMainOptionBySlug(mainOptionSlug).subcategories)
 					for(let option of cat.options) 
 					{
 						if (App.loadFullTaxonomy) option.toggle(!addingMode, false, -10); // seting originDepth to -10 to avoid stoping propagation
@@ -78,7 +78,7 @@ export class FilterRoutingModule
 
 			for(let filterId of filters)
 			{
-				let option = App.categoryModule.getOptionById(filterId);
+				let option = App.taxonomyModule.getOptionById(filterId);
 				if (!option) console.log("Error loadings filters : " + filterId);
 				else 
 				{
@@ -89,8 +89,8 @@ export class FilterRoutingModule
 
 			if (App.loadFullTaxonomy)
 			{
-				if (mainOptionSlug == 'all') App.categoryModule.mainCategory.updateState();
-				else App.categoryModule.getMainOptionBySlug(mainOptionSlug).recursivelyUpdateStates();
+				if (mainOptionSlug == 'all') App.taxonomyModule.mainCategory.updateState();
+				else App.taxonomyModule.getMainOptionBySlug(mainOptionSlug).recursivelyUpdateStates();
 			}
 
 			App.elementsModule.updateElementsToDisplay(true);
@@ -108,12 +108,12 @@ export class FilterRoutingModule
 		if (mainOptionId == 'all')
 		{			
 			mainOptionName = "all";
-			checkArrayToParse = App.categoryModule.mainCategory.checkedOptions.map( (option) => option.id);
-			uncheckArrayToParse = App.categoryModule.mainCategory.disabledOptions.map( (option) => option.id);
+			checkArrayToParse = App.taxonomyModule.mainCategory.checkedOptions.map( (option) => option.id);
+			uncheckArrayToParse = App.taxonomyModule.mainCategory.disabledOptions.map( (option) => option.id);
 		}
 		else
 		{
-			let mainOption = App.categoryModule.getMainOptionById(mainOptionId);
+			let mainOption = App.taxonomyModule.getMainOptionById(mainOptionId);
 			mainOptionName = mainOption.nameShort;
 
 			let allOptions = mainOption.allChildrenOptions;
@@ -123,8 +123,8 @@ export class FilterRoutingModule
 
 			if (mainOption.showOpenHours) 
 			{
-				checkArrayToParse = checkArrayToParse.concat(App.categoryModule.openHoursCategory.checkedOptions.map( (option) => option.id));
-				uncheckArrayToParse = uncheckArrayToParse.concat(App.categoryModule.openHoursCategory.disabledOptions.map( (option) => option.id));
+				checkArrayToParse = checkArrayToParse.concat(App.taxonomyModule.openHoursCategory.checkedOptions.map( (option) => option.id));
+				uncheckArrayToParse = uncheckArrayToParse.concat(App.taxonomyModule.openHoursCategory.disabledOptions.map( (option) => option.id));
 			}
 		}
 

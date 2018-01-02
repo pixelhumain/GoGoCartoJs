@@ -20,7 +20,7 @@ export class SearchModule
 		let regexpr = this.getSearchRegExprFromString($text);
 
 		let results = [];
-		let searchOptionsResult = App.categoryModule.options.forEach( (option) => 
+		let searchOptionsResult = App.taxonomyModule.options.forEach( (option) => 
 		{
 			let result = this.getOptionMatchResult(option, $text, regexpr);
 			if (result) results.push(result);			

@@ -9,10 +9,10 @@
  */
 import { AppModule, AppStates, AppDataType } from "../../app.module";
 import { App } from "../../gogocarto";
-import { ElementsChanged } from "../../modules/elements/elements.module";
+import { ElementsToDisplayChanged } from "../../modules/elements/elements.module";
 
 import { createListenersForElementMenu, updateFavoriteIcon } from "../element/element-menu.component";
-import { Element } from "../../classes/element.class";
+import { Element } from "../../classes/classes";
 import { Event } from "../../classes/event.class";
 
 import { createListenersForVoting } from "../modals/vote.component";

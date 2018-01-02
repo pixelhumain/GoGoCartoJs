@@ -1,4 +1,4 @@
-import { capitalize } from "../utils/string-helpers";
+import { capitalize } from "../../utils/string-helpers";
 
 export class PostalAddress
 {

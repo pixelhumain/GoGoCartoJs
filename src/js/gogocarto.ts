@@ -105,10 +105,10 @@ export class GoGoCartoModule
 		if ($(this.containerSelector).length == 0) console.warn('[GoGoCarto] The container "' + this.containerSelector + '" was not found');
 		else $(this.containerSelector).append(layout);
 
-		App.categoryModule.createTaxonomyFromJson(taxonomy, options.openHours);
-		if (App.categoryModule.options.length)
+		App.taxonomyModule.createTaxonomyFromJson(taxonomy, options.openHours);
+		if (App.taxonomyModule.options.length)
 		{
-			let styles = App.templateModule.render('gogo-styles', {'optionList':App.categoryModule.options, 'config':App.config});
+			let styles = App.templateModule.render('gogo-styles', {'optionList':App.taxonomyModule.options, 'config':App.config});
 			let domToAddStyles = $('head').length ? $('head') : $('html');
 			if (domToAddStyles.length) domToAddStyles.append(styles);
 			else 	console.warn("[GoGoCarto] Cannot find Dom 'head' or 'html' to add styles");

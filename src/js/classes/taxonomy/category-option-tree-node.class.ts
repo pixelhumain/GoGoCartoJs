@@ -1,7 +1,7 @@
-import { AppModule, AppModes } from "../app.module";
+import { AppModule, AppModes } from "../../app.module";
 import { Option } from "./option.class";
 
-import { App } from "../gogocarto";
+import { App } from "../../gogocarto";
 declare let $ : any;
 
 export enum CategoryOptionTreeNodeType
@@ -45,10 +45,10 @@ export class CategoryOptionTreeNode
 	getOwner() : CategoryOptionTreeNode 
 	{ 
 		if (this.TYPE == CategoryOptionTreeNodeType.Option)
-			return App.categoryModule.getCategoryById(this.ownerId); 
+			return App.taxonomyModule.getCategoryById(this.ownerId); 
 
 		if (this.TYPE == CategoryOptionTreeNodeType.Category)
-			return App.categoryModule.getOptionById(this.ownerId); 
+			return App.taxonomyModule.getOptionById(this.ownerId); 
 
 		return null;
 	}
@@ -115,7 +115,7 @@ export class CategoryOptionTreeNode
 				for (let child of this.children) child.toggle(check, false, originDepth || this.depth);
 			}
 
-			if (this.mainOwnerId == 'openhours') App.categoryModule.updateOpenHoursFilter();
+			if (this.mainOwnerId == 'openhours') App.taxonomyModule.updateOpenHoursFilter();
 
 			if(humanAction)
 			{

@@ -1,8 +1,8 @@
-import { Roles } from "../modules/login.module";
-import { App } from "../gogocarto";
-import { TileLayer } from './tile-layer.class';
+import { Roles } from "../../modules/login.module";
+import { App } from "../../gogocarto";
+import { TileLayer } from '../map/tile-layer.class';
 import { GoGoFeature } from './gogo-feature.class';
-import { ElementStatus } from './element.class';
+import { ElementStatus } from '../classes';  
 
 export class GoGoConfig
 {

@@ -1,7 +1,7 @@
-import { AppModule } from "../app.module";
-import { Category, Option, CategoryValue} from "./classes";
+import { AppModule } from "../../app.module";
+import { Category, Option, CategoryValue} from "../classes";
 
-import { App } from "../gogocarto";
+import { App } from "../../gogocarto";
 
 export class OptionValue
 {
@@ -46,7 +46,7 @@ export class OptionValue
 	get option() : Option
 	{
 		if (this.option_) return this.option_;
-		return this.option_ = App.categoryModule.getOptionById(this.optionId);
+		return this.option_ = App.taxonomyModule.getOptionById(this.optionId);
 	}
 
 	setRecursivelyFilledByFilters(bool : boolean)

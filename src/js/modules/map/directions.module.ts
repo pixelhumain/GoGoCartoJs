@@ -1,7 +1,7 @@
 declare let google;
-import { AppModule, AppStates } from "../app.module";
-import { Element } from "../classes/element.class";
-import { App } from "../gogocarto";
+import { AppModule, AppStates } from "../../app.module";
+import { Element } from "../../classes/classes";
+import { App } from "../../gogocarto";
 declare let $, L: any;
 
 declare let window : any;

@@ -7,10 +7,9 @@
  * @license GNU GPL v3
  * @Last Modified time: 2016-12-13
  */
-import { Option} from "../classes/option.class";
-import { Element } from "../classes/element.class";
+import { Option, Element} from "../../classes/classes";
 
-import { App } from "../gogocarto";
+import { App } from "../../gogocarto";
 declare var $ : any;
 
 export class FilterModule
@@ -30,7 +29,7 @@ export class FilterModule
 
 	showOnlyModeration(bool : boolean) { this.showOnlyModeration_ = bool; }
 
-	checkIfElementPassFilters (element : Element) : boolean
+	checkIfElementPassFilters(element : Element) : boolean
 	{
 		if (this.showOnlyFavorite_) return element.isFavorite;
 
@@ -49,8 +48,8 @@ export class FilterModule
 
 		if (App.currMainId == 'all')
 		{
-			let elementOptions = element.getOptionValueByCategoryId( App.categoryModule.mainCategory.id);
-			let checkedOptions = App.categoryModule.mainCategory.checkedOptions;
+			let elementOptions = element.getOptionValueByCategoryId( App.taxonomyModule.mainCategory.id);
+			let checkedOptions = App.taxonomyModule.mainCategory.checkedOptions;
 
 			//console.log("\nelementsOptions", elementOptions.map( (value) => value.option.name));
 			//console.log("checkedOptions", checkedOptions.map( (value) => value.name));
@@ -61,12 +60,12 @@ export class FilterModule
 		}
 		else
 		{
-			let mainOption = App.categoryModule.getCurrMainOption();			
+			let mainOption = App.taxonomyModule.getCurrMainOption();			
 			let isPassingFilters = this.recursivelyCheckedInOption(mainOption, element);
 			
 			if (isPassingFilters && element.openHours)
 			{
-				isPassingFilters = element.openHoursDays.some( (day : any) => App.categoryModule.openHoursFiltersDays.indexOf(day) > -1);
+				isPassingFilters = element.openHoursDays.some( (day : any) => App.taxonomyModule.openHoursFiltersDays.indexOf(day) > -1);
 			}
 			
 			return isPassingFilters;

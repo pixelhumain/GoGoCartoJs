@@ -8,10 +8,10 @@
  * @Last Modified time: 2016-12-13
  */
 
-import { AppModule } from "../app.module";
-import { Element } from "../classes/element.class";
+import { AppModule } from "../../app.module";
+import { Element } from "../../classes/classes";
 
-import { App } from "../gogocarto";
+import { App } from "../../gogocarto";
 
 export class DisplayElementAloneModule
 {
