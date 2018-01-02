@@ -204,11 +204,13 @@ export class SearchBarComponent
 		$('.search-result-value').text(this.currSearchText);
 		$('.search-results').show();
 		$('.search-options').hide();
+		$('#element-info-bar').addClass('with-search-result-header');
 	}
 
 	hideSearchResult()
 	{
 		$('.search-results').hide();
+		$('#element-info-bar').removeClass('with-search-result-header');
 		App.gogoControlComponent.updatePosition();
 	}
 
