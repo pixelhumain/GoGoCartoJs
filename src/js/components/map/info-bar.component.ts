@@ -14,7 +14,7 @@ import { App } from "../../gogocarto";
 import { Event } from "../../classes/event.class";
 import { createListenersForElementMenu, updateFavoriteIcon, showFullTextMenu } from "../element/element-menu.component";
 
-import { createListenersForVoting } from "../element-interactions/vote.component";
+import { createListenersForVoting } from "../modals/vote.component";
 
 declare var $;
 
@@ -141,7 +141,6 @@ export class InfoBarComponent
 			$('#element-info-bar').show();
 
 			let elementInfoBar_newHeight = $('#element-info').outerHeight(true);
-			elementInfoBar_newHeight += $('#element-info-bar .starRepresentationChoice-helper:visible').height();
 
 			this.updateInfoBarSize();
 			$('#element-info-bar').stop(true).animate({'height': elementInfoBar_newHeight}, 350, 'swing', () => 
@@ -213,7 +212,7 @@ export class InfoBarComponent
 		else
 		{
 			$('#directory-content-map').css('margin-right','0px');
-			$('#bandeau_helper').css('margin-right','0px');
+			$('#helper-bar').css('margin-right','0px');
 
 			if ($('#element-info-bar').is(':visible'))
 			{		
@@ -225,8 +224,7 @@ export class InfoBarComponent
 			}		
 		}
 
-		if (humanAction) this.onHide.emit(true);
-		
+		if (humanAction) this.onHide.emit(true);		
 
 		setTimeout( () => $('#element-info').html(''), 350);
 
@@ -242,13 +240,13 @@ export class InfoBarComponent
 		{
 			this.hideDetails();
 			showFullTextMenu(this.domMenu(), false);
-			$('#bandeau_helper').css('z-index',20).animate({'opacity': '1'},500);
+			$('#helper-bar').css('z-index',20).animate({'opacity': '1'},500);
 		}
 		else
 		{
 			if (this.domMenu().width() >= 400) showFullTextMenu(this.domMenu(), true);
 
-			$('#bandeau_helper').animate({'opacity': '0'},500).css('z-index',-1);
+			$('#helper-bar').animate({'opacity': '0'},500).css('z-index',-1);
 
 			$('#element-info-bar .element-item').addClass('active');		
 			$('#element-info-bar .moreDetails').show();	
@@ -279,7 +277,7 @@ export class InfoBarComponent
 			$('#element-info-bar .moreDetails').hide();
 			$('#element-info-bar .element-item').removeClass('active');	
 
-			let elementInfoBar_newHeight = $('#element-info').outerHeight(true) + $('#element-info-bar .starRepresentationChoice-helper:visible').height();
+			let elementInfoBar_newHeight = $('#element-info').outerHeight(true);
 
 			$('#element-info-bar').animate({'height': elementInfoBar_newHeight}, 400, 'swing');
 		}	

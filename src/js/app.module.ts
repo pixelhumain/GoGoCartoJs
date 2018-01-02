@@ -41,10 +41,10 @@ import { DocumentTitleModule } from './modules/document-title.module';
 import { AppComponent } from './app.component';
 import { ElementListComponent } from "./components/list/element-list.component";
 import { InfoBarComponent } from "./components/map/info-bar.component";
-import { SearchBarComponent } from "./components/menu/search-bar.component";
-import { DirectoryMenuComponent } from "./components/menu/directory-menu.component";
-import { FiltersComponent } from "./components/menu/filters.component";
-import { GoGoControlComponent } from "./components/menu/gogo-controls.component";
+import { SearchBarComponent } from "./components/search-bar/search-bar.component";
+import { DirectoryMenuComponent } from "./components/directory-menu/directory-menu.component";
+import { FiltersComponent } from "./components/directory-menu/filters.component";
+import { GoGoControlComponent } from "./components/gogo-controls.component";
 import { MapComponent } from "./components/map/map.component";
 import { BiopenMarker } from "./components/map/biopen-marker.component";
 

@@ -17,10 +17,10 @@ import { Element } from "../../classes/element.class";
 import { App } from "../../gogocarto";
 
 import { capitalize, slugify } from "../../utils/string-helpers";
-import { openDeleteModal, openReportModal } from '../element-interactions/reporting-deleting.component';
-import { openPickAddressModal } from '../element-interactions/pick-address.component';
-import { createListenersForMarkAsResolved } from '../element-interactions/moderation.component';
-import { createListenersForSendEmail } from '../element-interactions/send-email.component';
+import { openDeleteModal, openReportModal } from '../modals/reporting-deleting.component';
+import { openPickAddressModal } from '../modals/pick-address.component';
+import { createListenersForMarkAsResolved } from '../element/moderation.component';
+import { createListenersForSendEmail } from '../modals/send-email.component';
 
 export function updateFavoriteIcon(object, element : Element)
 {

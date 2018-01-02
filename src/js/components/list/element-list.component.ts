@@ -15,7 +15,7 @@ import { createListenersForElementMenu, updateFavoriteIcon } from "../element/el
 import { Element } from "../../classes/element.class";
 import { Event } from "../../classes/event.class";
 
-import { createListenersForVoting } from "../element-interactions/vote.component";
+import { createListenersForVoting } from "../modals/vote.component";
 
 declare var $;
 

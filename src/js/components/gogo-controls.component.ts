@@ -9,8 +9,8 @@
  */
 declare let $, jQuery : any;
 
-import { AppModule, AppModes } from "../../app.module";
-import { App } from "../../gogocarto";
+import { AppModule, AppModes } from "../app.module";
+import { App } from "../gogocarto";
 
 export class GoGoControlComponent
 {    

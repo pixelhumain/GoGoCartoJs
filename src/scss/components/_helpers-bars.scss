@@ -1,11 +1,11 @@
-#bandeau_helper
+#helper-bar
 {
     display:none;
 }
 
 @media #{$medium-and-up}
 {
-    #bandeau_helper
+    #helper-bar
     {
         display:block;
         z-index: 20;    
@@ -19,7 +19,7 @@
 
         @include transition(margin-right .5s);
 
-        #btn-bandeau-helper-close
+        #btn-helper-bar-close
         {
             position: absolute;
             top: 1.2rem;

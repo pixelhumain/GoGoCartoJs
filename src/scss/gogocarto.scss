@@ -14,27 +14,20 @@
 
   @import "components/helpers-bars";
   @import "components/loaders";
+  
   @import "components/directory-menu/directory-menu";
 
   @import 'components/icons';
 
-  @import 'components/map/marker';
-  @import "components/map/cluster";
-  @import "components/map/directions";
   @import "components/map/map";
-  @import "components/map/map-controls";
 
   @import "components/list/element-list";
-  @import "components/list/element-list-header";
 
   @import "components/gogo-controls";
 
   @import 'components/search-bar/search-bar';
-  @import 'components/search-bar/search-bar-mobile';
-  @import 'components/search-bar/search-overlay-mobile';
-  @import 'components/search-bar/search-result-header';  
 
-  @import "components/element-info-bar/info-bar";
+  @import "components/element/element";
 
   @import "components/modals/modals";
 

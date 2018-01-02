@@ -3,10 +3,10 @@ declare var nunjucks, goGoCarto;
 
 import { AppModule, AppDataType, AppModes, AppStates } from './app.module';
 
-import { initializePickAddress } from "./components/element-interactions/pick-address.component";
-import { initializeVoting } from "./components/element-interactions/vote.component";
-import { initializeReportingAndDeleting } from "./components/element-interactions/reporting-deleting.component";
-import { initializeSendingMail } from "./components/element-interactions/send-email.component";
+import { initializePickAddress } from "./components/modals/pick-address.component";
+import { initializeVoting } from "./components/modals/vote.component";
+import { initializeReportingAndDeleting } from "./components/modals/reporting-deleting.component";
+import { initializeSendingMail } from "./components/modals/send-email.component";
 import { getQueryParams } from "./utils/params";
 import { Roles } from "./modules/login.module";
 

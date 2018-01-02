@@ -25,7 +25,7 @@ export class AppComponent
 	{	
 		this.updateComponentsSize();
 
-		$('#btn-bandeau-helper-close').click(() => this.hideBandeauHelper());
+		$('#btn-helper-bar-close').click(() => this.hideBandeauHelper());
 
 		$('.flash-message .btn-close').click( function() { $(this).parent().slideUp('fast', function() { this.updateComponentsSize(); }); });
 
@@ -119,7 +119,7 @@ export class AppComponent
 
 	hideBandeauHelper()
 	{
-		$('#bandeau_helper').slideUp(this.slideOptions);
+		$('#helper-bar').slideUp(this.slideOptions);
 	}
 
 	isMobileScreen() { return this.width() < 850; }
@@ -195,12 +195,12 @@ export class AppComponent
 		if (animate)
 		{
 			$('#directory-content-map').stop(true).animate({'margin-right': width}, 350, 'swing');
-			$('#bandeau_helper').stop(true).animate({'margin-right': width}, 350, 'swing');
+			$('#helper-bar').stop(true).animate({'margin-right': width}, 350, 'swing');
 		}
 		else
 		{
 			$('#directory-content-map').stop(true).css('margin-right', width);
-			$('#bandeau_helper').stop(true).css('margin-right', width);
+			$('#helper-bar').stop(true).css('margin-right', width);
 		}
 		
 		App.component.updateMapSize();

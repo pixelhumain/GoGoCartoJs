@@ -593,7 +593,7 @@ export class Element
 			mainCategoryValue = this.getOptionTree().children[0];
 		//console.log("GetHtmlRepresentation " + this.distance + " km", this.getOptionTree().children[0]);
 
-		let html = App.templateModule.render('element-info-bar', 
+		let html = App.templateModule.render('element', 
 		{
 			element : this, 
 			showDistance: App.geocoder.getLocation() ? true : false,
