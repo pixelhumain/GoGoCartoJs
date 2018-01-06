@@ -3,7 +3,7 @@ GoGoCartoJs
 Create a configurable collaborative maps that rocks !
 
 ![alt text](docs/screenshots/desktop.png "Desktop")
-![alt text](docs/screenshots/mobile.png "Mobile")
+.   .   ![alt text](docs/screenshots/mobile.png "Mobile")
 
 Overview
 --------
