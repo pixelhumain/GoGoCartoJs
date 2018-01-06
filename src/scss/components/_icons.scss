@@ -5,8 +5,9 @@
 
 .icon
 {
-	font-size: 22px;
+	font-size: 1.4rem;
   padding-top: 3px;
+  @media #{$small-only} { padding-top: 2px; }
   float: left;
   margin-right: 1rem;
 }

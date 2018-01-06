@@ -43,7 +43,7 @@
         &:hover{ background-color: #ec787d }
       }
     }
-  }
+  }  
 
   .input-simple-modal
   {
@@ -63,6 +63,15 @@
     }
   }
 }
+
+.page-modal .btn-back
+{ 
+  float: left;
+  font-size: 2rem;
+  line-height: 4rem;
+  padding: 0 2rem;  
+  margin-left: -2rem;
+}  
 
 // vote and report-error modals
 .modal.action-modal

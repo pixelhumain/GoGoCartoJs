@@ -34,6 +34,8 @@
   @import "components/commons/shadow-bottom";
   @import "components/commons/scroll-bar";
 
+   @media #{$small-only} { font-size: 12px; }
+
   #directory-menu
   {
     position:absolute;      

@@ -3,8 +3,10 @@
     <div class="vote-section">
       <span class="basic-message">
         <span class="gogo-icon-attention"></span>
-        <span class="text validation-process-info" onclick='$("#modal-contribution").openModal()'>{{ 'Nouvel ' ~ config.text.element if element.status == ElementStatus.PendingAdd else 'Modifications' }} 
-                           en cours de validation</span>
+        <span class="text pending-text validation-process-info" onclick='$("#modal-contribution").openModal()'>
+          <span class="long-text">{{ 'Nouvel ' ~ config.text.element if element.status == ElementStatus.PendingAdd else 'Modifications' }}</span>
+          en cours de validation
+        </span>
         {% if config.isFeatureActivated('vote') %}
           <span class="btn-vote-more-info validation-process-info" onclick='$("#modal-contribution").openModal()'>EN SAVOIR PLUS</span>
           <span class="vote-button btn action-btn waves-effect waves-light">{{ 'Décider' if config.isFeatureAvailable('directModeration') else 'Voter' }}</span>

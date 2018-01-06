@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-05-11 11:26:03
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-12-13 08:58:06
+* @Last Modified time: 2018-01-06 17:30:46
 */
 .interactive-section
 {
@@ -46,14 +46,30 @@
 		position: absolute;
 	}
 
-	.text { margin-left : 2.2rem; color: white;}	
+  @media #{$small-only} {
+    .gogo-icon-attention { display:none; }
+    .pending-text { margin-left : 0 !important; }    
+  } 
+
+  @media (max-width: 460px) {
+    .long-text { display: none }
+  } 
+
+  @media (max-width: 360px) {
+    .pending-text { opacity: 0 }
+  } 
+
+	.text { 
+    margin-left : 2.2rem; 
+    color: white;
+  }	
 
 	.btn-vote-more-info
 	{
-		line-height: 1.2rem;
+    line-height: 1.2rem;
     position: absolute;
     top: 14px;
-    right: 110px;
+    right: 90px;
     padding: 0;
     font-size: .85rem;
     color: white;

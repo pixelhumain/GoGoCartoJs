@@ -130,7 +130,7 @@ export class DirectoryMenuComponent
 		if (pageWidth > 850) {
 			menuwidth =  pageWidth > 1450 ? 340 : 310;
 		} else {
-			menuwidth =  Math.min(Math.min(Math.max(pageWidth - 60, 310), 360), pageWidth);
+			menuwidth =  Math.min(Math.min(Math.max(pageWidth - 60, 310), 360), pageWidth - 20);
 		}
 		
 		this.dom.css('width', menuwidth + 'px');
