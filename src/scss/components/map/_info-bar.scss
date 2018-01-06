@@ -2,7 +2,7 @@
 {
     height:0px;    
     z-index: 600;
-    position: relative;   
+    position: absolute;   
     
     will-change:height;      
 
@@ -15,11 +15,12 @@
     &.display-bottom
     {
         right: 0 !important;
+        bottom: 0 !important;
+        width: 100%;
     }
 
     &.display-aside
-    {
-        position: absolute;        
+    {       
         top: 0;
         right: 0;   
         height: 100% !important; 

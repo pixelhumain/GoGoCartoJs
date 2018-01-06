@@ -177,7 +177,7 @@ export class AppComponent
 		}
 		else
 		{
-			$('#element-info-bar').stop(true).css('width', 'auto');
+			$('#element-info-bar').stop(true).css('width', '100%');
 		}
 
 		if ($('#directory-menu').is(':visible') && !this.isMobileScreen())
