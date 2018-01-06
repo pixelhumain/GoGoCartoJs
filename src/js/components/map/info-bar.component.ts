@@ -179,7 +179,7 @@ export class InfoBarComponent
 			if (this.elementVisible)
 			{
 				//console.log("map conatins element", App.mapComponent.contains(this.elementVisible.position));
-				if (!App.mapComponent.contains(this.elementVisible.position))
+				if (this.isCurrentMarkerVisibleOnMap())
 				{
 					App.mapComponent.panToLocation(this.elementVisible.position);
 					this.elementVisible.marker.showBigSize();
@@ -188,6 +188,12 @@ export class InfoBarComponent
 				}		
 			}	
 		}, 100);
+	}
+
+	private isCurrentMarkerVisibleOnMap()
+	{
+		return !App.mapComponent.contains(this.elementVisible.position) ||
+		       (!this.isDisplayedAside() && (this.elementVisible.marker.domMarker().offset().top > $('#element-info-bar').offset().top - 50));
 	}
 
 	hide(humanAction : boolean = true)
