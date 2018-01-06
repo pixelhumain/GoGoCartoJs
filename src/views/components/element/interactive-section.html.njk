@@ -22,9 +22,9 @@
     '3':'En attente depuis trop longtemps',
     '4':'Doublon potentiel'
     }
-  %} 
+  %}
 
-  {% if element.needsModeration() and config.isFeatureActivated('moderation') %}
+  {% if element.needsModeration() and config.isFeatureAvailable('moderation') %}
     <div class="moderation-section">
       <span class="basic-message">
         <span class="gogo-icon-moderation"></span>
