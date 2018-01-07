@@ -13,11 +13,11 @@ import { Element } from "../../classes/classes";
 import { App } from "../../gogocarto";
 declare let $, L : any;
 
-export class BiopenMarker
+export class Marker
 {
 	private elementId : string;
 	private isAnimating : boolean = false;
-	// we use leaflet markers to display marker on map. BiopenMarker is just a extension of leafletMarker
+	// we use leaflet markers to display marker on map. Marker is just a extension of leafletMarker
 	private leafletMarker : L.Marker;
 	// we may want to half hidden somes markers in particular states (setting opacity to .5)
 	private halfHidden : boolean = false;
@@ -111,7 +111,7 @@ export class BiopenMarker
 		this.halfHidden = true;
 	};
 
-	showNormalHidden () 
+	showNormalHidden() 
 	{		
 		this.removeClassToLeafletMarker_("halfHidden");
 		let domMarker = this.domMarker();

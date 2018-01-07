@@ -10,7 +10,7 @@
 import { AppModule, AppStates, AppModes } from "../../app.module";
 import { ElementBase, ElementStatus, ElementModerationState } from './element-base.class';
 export { ElementStatus, ElementModerationState } from './element-base.class';
-import { BiopenMarker } from "../../components/map/biopen-marker.component";
+import { Marker } from "../../components/map/marker.component";
 import { ElementComponent } from "../../components/element/element.component";
 import { OptionValue, CategoryValue, Option, Category, Contribution, VoteReport } from "../classes";
 import { capitalize } from "../../utils/string-helpers";
@@ -20,7 +20,7 @@ declare var $;
 
 export class Element extends ElementBase
 {	
-	private biopenMarker_ : BiopenMarker = null;
+	private marker_ : Marker = null;
 	private component_ : ElementComponent = null;	
 
 	colorOptionId : number;
@@ -55,7 +55,7 @@ export class Element extends ElementBase
 	{		
 		App.elementIconsModule.updateIconsToDisplay(this);
 
-		this.biopenMarker_ = new BiopenMarker(this.id, this.position);
+		this.marker_ = new Marker(this.id, this.position);
 		this.isInitialized_ = true;	
 	}
 
@@ -127,7 +127,7 @@ export class Element extends ElementBase
 	isDeleted() { return this.status <= ElementStatus.AdminRefused }
 	needsModeration() { return this.moderationState != ElementModerationState.NotNeeded }	
 
-	get marker() : BiopenMarker { return this.biopenMarker_; }
+	get marker() : Marker { return this.marker_; }
 	get component() { return this.component_ || (this.component_ = new ElementComponent(this)); }	
 	get isInitialized() { return this.isInitialized_; }
 

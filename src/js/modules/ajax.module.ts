@@ -27,6 +27,8 @@ export class AjaxModule
 
 	isRetrievingElements : boolean = false;
 
+	currElementIdRetrieving : number;
+
 	requestWaitingToBeExecuted : boolean = false;
 	waitingRequestFullRepresentation : boolean = null;
 
@@ -52,8 +54,11 @@ export class AjaxModule
 
 	getElementById(elementId, callbackSuccess?, callbackFailure?)
 	{
-		let route = App.config.data.elementsApiUrl + '/' + elementId;
+		if (elementId == this.currElementIdRetrieving) return;
 
+		let route = App.config.data.elementsApiUrl + '/' + elementId;
+		this.currElementIdRetrieving = elementId;
+		
 		$.ajax({
 			url: route,
 			method: "get",

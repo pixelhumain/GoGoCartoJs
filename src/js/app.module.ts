@@ -50,6 +50,7 @@ import { DirectoryMenuComponent } from "./components/directory-menu/directory-me
 import { FiltersComponent } from "./components/directory-menu/filters.component";
 import { GoGoControlComponent } from "./components/gogo-controls.component";
 import { MapComponent } from "./components/map/map.component";
+import { DirectionsComponent } from "./components/map/directions.component";
 
 // OTHERS
 import { GoGoConfig } from "./classes/config/gogo-config.class";
@@ -109,6 +110,7 @@ export class AppModule
 	directoryMenuComponent = new DirectoryMenuComponent();
 	filtersComponent = new FiltersComponent();	
 	gogoControlComponent = new GoGoControlComponent();	
+	directionsComponent = new DirectionsComponent();
 
 	constructor($config : any, $isIframe = false, $loadFullTaxonomy = true)
 	{
@@ -155,5 +157,5 @@ export class AppModule
 
 	get dataType() { return this.dataTypeManager.dataType; }
 
-	setDataType($dataType : AppDataType, $backFromHistory : boolean = false) { this.dataTypeManager.setDataType($dataType, $backFromHistory); }
+	setDataType($dataType : AppDataType, $backFromHistory : boolean = false, $searchResult = null) { this.dataTypeManager.setDataType($dataType, $backFromHistory, $searchResult); }
 }

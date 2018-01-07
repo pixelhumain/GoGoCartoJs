@@ -6,15 +6,15 @@ export class DocumentTitleModule
 {
   updateDocumentTitle(options : any = {})
   {
-    //console.log("updateDocumentTitle", App.infoBarComponent.getCurrElementId());
+    // console.log("updateDocumentTitle", App.stateManager.stateElementId);
 
     let title : string;
     let elementName : string;
 
-    if ( (options && options.id) || App.infoBarComponent.getCurrElementId()) 
-    {
-      
-      let element = App.elementById(App.infoBarComponent.getCurrElementId());
+    if ( (options && options.id) || App.stateManager.stateElementId) 
+    {      
+      let element = App.elementById(App.stateManager.stateElementId);
+      if (!element) return;
       elementName = capitalize(element ? element.name : '');
     }
 

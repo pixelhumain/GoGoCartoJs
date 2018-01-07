@@ -1,7 +1,7 @@
 import { App } from "../gogocarto";
 import { AppModes, AppStates, AppDataType } from "../app.module";
 import { capitalize, unslugify } from "../utils/string-helpers";
-import { BiopenMarker } from "../components/map/biopen-marker.component";
+import { Marker } from "../components/map/marker.component";
 
 declare var $;
 
@@ -31,7 +31,7 @@ export class MapManager
     setTimeout(function() { that.isClicking = false; }, 100); 
   };
 
-  handleMarkerClick(marker : BiopenMarker)
+  handleMarkerClick(marker : Marker)
   {
     if (App.mode != AppModes.Map) return;
 

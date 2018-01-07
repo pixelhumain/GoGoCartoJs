@@ -21,13 +21,13 @@ export class GeocodingManager
     if (App.state == AppStates.ShowDirections)  
     {
       // we restart directions from App new start location
-      App.setState(AppStates.ShowDirections,{id: App.infoBarComponent.getCurrElementId() });
+      App.setState(AppStates.ShowDirections,{id: App.stateManager.stateElementId });
     }    
     else
     {
-      if (App.mode == AppModes.Map)
+      if (App.mode == AppModes.Map && App.state != AppStates.ShowElementAlone)
       {
-        App.setState(AppStates.Normal);          
+        App.setState(AppStates.Normal);      
       }
       else
       {

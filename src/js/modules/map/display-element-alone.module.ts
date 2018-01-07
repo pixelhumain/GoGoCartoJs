@@ -42,9 +42,9 @@ export class DisplayElementAloneModule
 		// if we not do so, the map will not be centered in the element.position	
 		if (panToElementLocation)
 		{		
-				App.mapComponent.resize();
-				App.mapComponent.panToLocation(element.position, 12, false);
-				setTimeout( () => { App.mapComponent.resize();App.mapComponent.panToLocation(element.position, 12, false); }, 500);
+			App.mapComponent.resize();
+			App.mapComponent.panToLocation(element.position, 12, false);
+			setTimeout( () => { App.mapComponent.resize();App.mapComponent.panToLocation(element.position, 12, false); }, 500);
 		}			
 	};
 

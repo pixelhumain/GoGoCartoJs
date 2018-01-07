@@ -46,32 +46,21 @@ export class GoGoCartoModule
 
 	private checkForDistantConfifuration(options : string|any)
 	{
-		if ( typeof options === 'object')
-		{
-			this.checkForDistantTaxonomy(options);
-		}
-		else
-		{
-		 	$.getJSON( options, (data) =>  { this.checkForDistantTaxonomy(data); }); 
-		}		
+		if ( typeof options === 'object') this.checkForDistantTaxonomy(options);
+		else $.getJSON( options, (data) =>  { this.checkForDistantTaxonomy(data); }); 
 	};
 
 	private checkForDistantTaxonomy(options : any)
 	{
-		if (!options.data.taxonomy)
+		let taxonomy = options.data.taxonomy;
+		if (!taxonomy)
 		{
 			console.warn("[GoGoCarto] You must provide a taxonomy (url or Json object)");
 			return;
 		}
 
-		if ( typeof options.data.taxonomy === 'object')
-		{
-			this.init(options.data.taxonomy, options);
-		}
-		else
-		{
-		 	$.getJSON( options.data.taxonomy, (data) =>  { this.init(data, options); }); 
-		}		
+		if ( typeof taxonomy === 'object') this.init(taxonomy, options);
+		else $.getJSON( taxonomy, (data) =>  { this.init(data, options); }); 	
 	};
 
 	private init(taxonomy, options)

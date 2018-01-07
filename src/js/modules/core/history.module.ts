@@ -39,15 +39,12 @@ export class HistoryModule
 
 	updateCurrState(options?)
 	{
-		//console.log("Update Curr State");
-		if (!history.state) { console.log("curr state null");this.pushNewState();return;}
-		this.updateHistory(false, options);
+		if (!history.state) this.pushNewState();
+		else this.updateHistory(false, options);
 	};
 
 	pushNewState(options?)
 	{
-		//console.log("Push New State");
-
 		if (history.state === null) this.updateHistory(false, options);
 		else this.updateHistory(true, options);		
 	};
@@ -63,26 +60,19 @@ export class HistoryModule
 		historyState.dataType = App.dataType;
 		historyState.address = App.geocoder.getLocationSlug();
 		historyState.viewport = App.mapComponent.viewport;
-		historyState.id = App.infoBarComponent.getCurrElementId() || $options.id;
+		historyState.id = App.stateManager.stateElementId || $options.id;
 		historyState.filters = App.filterRoutingModule.getFiltersToString();
 		historyState.text = App.searchBarComponent.getCurrSearchText();
-		// if ($pushState) console.log("NEW Sate", historyState.filters);
-		// else console.log("UPDATE State", historyState.filters);
+
+		// if ($pushState) console.log("NEW Sate", AppStates[historyState.state]);
+		// else console.log("UPDATE State", AppStates[historyState.state]);
 
 		let route = this.generateRoute(historyState);
 
 		if (!route) return;
 
-		if ($pushState)
-		{
-			history.pushState(historyState, '', route);
-			//console.log("Pushing new state", historyState);
-		}
-		else 
-		{
-			//console.log("Replace state", historyState);
-			history.replaceState(historyState, '', route);
-		}
+		if ($pushState) history.pushState(historyState, '', route);
+		else history.replaceState(historyState, '', route);
 
 		Cookies.createCookie('viewport',historyState.viewport);
 		Cookies.createCookie('address',historyState.address);
@@ -122,7 +112,7 @@ export class HistoryModule
 				case AppStates.ShowDirections:
 					if (!historyState.id) return;
 					let element = App.elementById(historyState.id);
-					if (!element) return;		
+					if (!element) return;
 
 					if (App.state == AppStates.ShowDirections)
 					{
@@ -136,7 +126,7 @@ export class HistoryModule
 			}		
 		}
 
-		if (historyState.filters) route += '?cat=' + historyState.filters;
+		if (route && historyState.filters) route += '?cat=' + historyState.filters;
 
 		return route;
 	};

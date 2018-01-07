@@ -19,22 +19,21 @@ export class StateManager
   private stateElementId_ : number = null;
 
   get state() { return this.state_; }
-  get stateElementId() { return this.stateElementId_; }
+  get stateElementId() : number { return this.stateElementId_; }
 
   /*
   * Change App state
   */
   setState($newState : AppStates, options : any = {}, $backFromHistory : boolean = false) 
   {   
-    //console.log("AppModule set State : " + AppStates[$newState]  +  ', options = ',options);
-    
-    let element;
+    console.log("AppModule set State : " + AppStates[$newState]  +  ', options = ',options);
+    let element = (options && options.id) ? App.elementById(options.id) : null;
 
     let oldStateName = this.state_;
     this.state_ = $newState;      
 
-    if (oldStateName == AppStates.ShowDirections && App.directionsModule) 
-      App.directionsModule.clear();
+    if (oldStateName == AppStates.ShowDirections && App.directionsComponent) 
+      App.directionsComponent.clear();
 
     if (oldStateName == AppStates.ShowElementAlone)  
     {
@@ -69,9 +68,6 @@ export class StateManager
 
   private setShowElementState(element, options)
   {
-    if (!options.id) return;
-    element = App.elementById(options.id);
-
     if (App.mode == AppModes.List)
     {
       if (!App.mapComponent.isInitialized)
@@ -79,29 +75,27 @@ export class StateManager
         App.mapComponent.onMapReady.do(() => 
         {
           App.mapComponent.panToLocation(element.position, 14, false);
-          App.infoBarComponent.showElement(options.id);
+          App.infoBarComponent.showElement(element.id);
         });
       }
       else
       {
         App.mapComponent.panToLocation(element.position, 14, false);            
-        App.infoBarComponent.showElement(options.id);
+        App.infoBarComponent.showElement(element.id);
       }            
 
       App.setMode(AppModes.Map, false, false);
     } 
     else // AppMode
     {
-      App.infoBarComponent.showElement(options.id);
+      App.infoBarComponent.showElement(element.id);
     }
   }  
 
   private setShowElementAloneState(element, options)
   {
-    if (!options.id) return;
-
     App.infoBarComponent.show();
-    element = App.elementById(options.id);
+
     if (element)
     {
       App.DEAModule.begin(element.id, true);          
@@ -113,7 +107,7 @@ export class StateManager
           App.elementsJsonModule.convertJsonElements([elementJson], true, true);
           App.DEAModule.begin(elementJson.id, true);
           App.documentTitleModule.updateDocumentTitle(options);
-          App.historyModule.pushNewState(options); 
+          App.historyModule.updateCurrState(options);
         },
         (error) => 
         { 
