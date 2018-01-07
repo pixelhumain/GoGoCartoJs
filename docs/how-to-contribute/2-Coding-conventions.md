@@ -1,6 +1,15 @@
 Coding Coventions
 ===============
 
+File and functions length
+-------------
+
+- Files should be no longer than 120 lines
+- Function should be no longer han 10 lines
+
+This rule is not followed everywhere in the code, but I put effort on applying it now, please do the same :)
+
+
 Naming Convention
 -----------------
 
@@ -46,4 +55,4 @@ var values = ["Volvo", "Saab", "Fiat"];
 
 Continue with
 ---
-[Code Explanation](3-Code-explanation.md)
+[Code Explanation](3-Code-explanations.md)
