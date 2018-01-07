@@ -3,9 +3,6 @@ import { AppModule, AppStates } from "../../app.module";
 import { Element, ViewPort, Event } from "../../classes/classes";
 import { GeocodeResult, RawBounds } from "../../modules/geocoder.module";
 import * as Cookies from "../../utils/cookies";
-
-/// <reference types="leaflet" />
-
 import { App } from "../../gogocarto";
 declare var $, L : any;
 
@@ -165,11 +162,10 @@ export class MapComponent
 		//console.log("Resize, curr viewport :");
 		// Warning !I changed the leaflet.js file library myself
 		// because the options doesn't work properly
-		// I changed it to avoi panning when resizing the map
+		// I changed it to avoid panning when resizing the map
 		// be careful if updating the leaflet library this will
 		// not work anymore
 		if (this.map_) this.map_.invalidateSize(false);
-
 	}
 
 	addMarker(marker : L.Marker)
