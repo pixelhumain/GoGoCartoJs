@@ -6,6 +6,9 @@ Initialization
 You need to provide a configuration object to initialize GoGoCartoJs.
 
 You can give a plain object, or an url to a json distant configuration
+```html
+<div id="gogocarto"></div>
+```
 ```javascript
 myGogocarto = goGoCarto('#gogocarto', {
   data: {
