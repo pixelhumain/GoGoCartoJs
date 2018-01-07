@@ -17,9 +17,9 @@ myGogocarto = goGoCarto('#gogocarto', {
 ```javascript
 myGogocarto = goGoCarto("#gogocarto", "https://gist.github.com/seballot/27c005421d0a7a4c293dd87fe9856bfd");
 ```
-__Look at the [Taxonomy](docs/taxonomy.md) and [Dataset](docs/dataset.md) to know how thoses objects/APIs must look like.__
+__Look at the [Taxonomy](taxonomy.md) and [Dataset](dataset.md) to know how thoses objects/APIs must look like.__
 
-Please visit [Configuration](docs/configuration.md) to know more about all configuration available
+Please visit [Configuration](configuration.md) to know more about all configuration available
 
 Interaction with component
 -------------------------
