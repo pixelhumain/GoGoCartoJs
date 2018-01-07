@@ -1,9 +1,11 @@
 GoGoCartoJs
 ==========
-A javascript component to create terrific cartography !
+A javascript component to create terrific cartography ! GoGoCartoJs is the autonomous frontend part of the [GoGoCarto Project](https://github.com/pixelhumain/GoGoCarto)
 
 ![alt text](docs/screenshots/desktop.png "Desktop")
 .   .   ![alt text](docs/screenshots/mobile.png "Mobile")
+
+
 
 Overview
 --------
