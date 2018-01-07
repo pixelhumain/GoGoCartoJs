@@ -176,24 +176,22 @@ export class InfoBarComponent
 		// after infobar animation, we check if the marker 
 		// is not hidded by the info bar
 		setTimeout( () => {
-			if (this.elementVisible)
+			if (this.elementVisible && this.isCurrentMarkerNotVisibleOnMap() && App.state != AppStates.ShowDirections)
 			{
-				//console.log("map conatins element", App.mapComponent.contains(this.elementVisible.position));
-				if (this.isCurrentMarkerVisibleOnMap())
-				{
-					App.mapComponent.panToLocation(this.elementVisible.position);
-					this.elementVisible.marker.showBigSize();
-					setTimeout( () => { this.elementVisible.marker.showBigSize(); }, 200);
-					setTimeout( () => { this.elementVisible.marker.showBigSize(); }, 1000);
-				}		
+				console.log("info bar marker not visible", AppStates[App.state]);
+				App.mapComponent.panToLocation(this.elementVisible.position);
+				this.elementVisible.marker.showBigSize();
+				setTimeout( () => { this.elementVisible.marker.showBigSize(); }, 200);
+				setTimeout( () => { this.elementVisible.marker.showBigSize(); }, 1000);
 			}	
 		}, 100);
 	}
 
-	private isCurrentMarkerVisibleOnMap()
+	private isCurrentMarkerNotVisibleOnMap()
 	{
-		return !App.mapComponent.contains(this.elementVisible.position) ||
-		       (!this.isDisplayedAside() && (this.elementVisible.marker.domMarker().offset().top > $('#element-info-bar').offset().top - 50));
+		let marker = this.elementVisible.marker.domMarker();
+		return (App.mapComponent.isMapLoaded && !App.mapComponent.contains(this.elementVisible.position)) ||
+		       (!this.isDisplayedAside() && marker && marker.offset() && (marker.offset().top > $('#element-info-bar').offset().top - 50));
 	}
 
 	hide(humanAction : boolean = true)
