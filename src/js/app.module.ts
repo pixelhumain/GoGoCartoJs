@@ -28,7 +28,6 @@ import { FavoriteModule } from "./modules/elements/favorite.module";
 import { DisplayElementAloneModule } from "./modules/map/display-element-alone.module";
 import { AjaxModule } from "./modules/ajax.module";
 import { TaxonomyModule } from './modules/taxonomy/taxonomy.module';
-import { DirectionsModule } from "./modules/map/directions.module";
 import { RouterModule } from "./modules/core/router.module";
 import { LoginModule } from "./modules/login.module";
 import { TemplateModule } from "./modules/core/template.module";
@@ -86,7 +85,6 @@ export class AppModule
 	elementsModule = new ElementsModule();
 	elementsJsonModule = new ElementsJsonModule();
 	displayElementAloneModule = new DisplayElementAloneModule();
-	directionsModule : DirectionsModule = new DirectionsModule();
 	ajaxModule = new AjaxModule();
 	boundsModule : BoundsModule;
 	routerModule = new RouterModule();

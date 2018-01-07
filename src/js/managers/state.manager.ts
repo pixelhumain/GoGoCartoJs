@@ -130,20 +130,41 @@ export class StateManager
         App.elementsJsonModule.convertJsonElements([elementJson], true, true);
         element = App.elementById(elementJson.id);
         App.documentTitleModule.updateDocumentTitle(options);  
-        this.beginDirectionModule(element);                        
+        this.checkIfReadyToStartDirections(element);                        
       },
       (error) => { /*TODO*/ alert("No element with App id"); }
       );               
     }
 
-    this.beginDirectionModule(element)  
+    this.checkIfReadyToStartDirections(element)  
   }
 
-  private beginDirectionModule(element)
+  private checkIfReadyToStartDirections(element)
   {
     let origin = App.geocoder.getLocation();
       
-    if (element && origin)
-      App.directionsModule.begin(origin, element);  
+    if (!element || !origin) return;
+    
+    if (App.mode == AppModes.List)
+    {
+      if (!App.mapComponent.isInitialized)
+      {
+        App.mapComponent.onMapReady.do(() => { this.beginDirectionsCalculation(origin, element); });
+      }           
+
+      App.setMode(AppModes.Map, false, false);
+    } 
+      
+    this.beginDirectionsCalculation(origin, element);
   }
+
+  private beginDirectionsCalculation = function (origin : L.LatLng, element : Element)
+  {
+    if (!App.mapComponent.isInitialized) return;
+
+    App.DEAModule.begin(element.id, false);
+    // wait for the info bar to open, so the map is resized at this final viewport
+    // Then we can calculate route and fitbounds regarding routing result
+    setTimeout( () => { App.directionsComponent.calculateRoute(origin, element); }, 400);     
+  };
 }
