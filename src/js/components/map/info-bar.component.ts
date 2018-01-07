@@ -210,7 +210,6 @@ export class InfoBarComponent
 		else
 		{
 			$('#directory-content-map').css('margin-right','0px');
-			$('#helper-bar').css('margin-right','0px');
 
 			if ($('#element-info-bar').is(':visible'))
 			{		
@@ -238,13 +237,10 @@ export class InfoBarComponent
 		{
 			this.hideDetails();
 			showFullTextMenu(this.domMenu(), false);
-			$('#helper-bar').css('z-index',20).animate({'opacity': '1'},500);
 		}
 		else
 		{
 			if (this.domMenu().width() >= 400) showFullTextMenu(this.domMenu(), true);
-
-			$('#helper-bar').animate({'opacity': '0'},500).css('z-index',-1);
 
 			$('#element-info-bar .element-item').addClass('active');		
 			$('#element-info-bar .moreDetails').show();	

@@ -49,6 +49,7 @@ import { DirectoryMenuComponent } from "./components/directory-menu/directory-me
 import { FiltersComponent } from "./components/directory-menu/filters.component";
 import { GoGoControlComponent } from "./components/gogo-controls.component";
 import { MapComponent } from "./components/map/map.component";
+import { MapControlsComponent } from "./components/map/map-controls.component";
 import { DirectionsComponent } from "./components/map/directions.component";
 
 // OTHERS
@@ -100,7 +101,7 @@ export class AppModule
 	elementOptionValuesModule = new ElementOptionValuesModule();
 	favoriteModule = new FavoriteModule();
 
-	component = new AppComponent();
+	component : AppComponent;
 	infoBarComponent = new InfoBarComponent();
 	mapComponent  = new MapComponent();
 	searchBarComponent = new SearchBarComponent();
@@ -109,6 +110,7 @@ export class AppModule
 	filtersComponent = new FiltersComponent();	
 	gogoControlComponent = new GoGoControlComponent();	
 	directionsComponent = new DirectionsComponent();
+	mapControlsComponent = new MapControlsComponent();
 
 	constructor($config : any, $isIframe = false, $loadFullTaxonomy = true)
 	{
@@ -117,13 +119,14 @@ export class AppModule
 		this.loadFullTaxonomy = $loadFullTaxonomy;
 		
 		this.loginModule = new LoginModule(this.config.security.userRole, this.config.security.userEmail);
-  	this.boundsModule = new BoundsModule(this.config);
+  	this.boundsModule = new BoundsModule(this.config);  	
 
 		Cookies.createCookie('firstVisit', 'done');			
 	}
 
 	initialize()
 	{
+		this.component = new AppComponent();
 		this.elementsManager = new ElementsManager();
 		this.geocodingManager = new GeocodingManager();
 		this.mapManager = new MapManager();	

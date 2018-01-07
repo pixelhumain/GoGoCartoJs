@@ -1,4 +1,3 @@
-
 import { AppModule, AppStates } from "../../app.module";
 import { Element, ViewPort, Event } from "../../classes/classes";
 import { GeocodeResult, RawBounds } from "../../modules/geocoder.module";
@@ -10,7 +9,7 @@ declare var $, L : any;
 * The Map Component who encapsulate the map
 *
 * MapComponent publics methods must be as independant as possible
-* from technology used for the map (google, leaflet ...)
+* from technology used for the map (leaflet ...)
 *
 * Map component is like an interface between the map and the rest of the App
 */
@@ -42,13 +41,9 @@ export class MapComponent
 	
 	hide() { $('#directory-content-map').hide(); }
 
-	init() 
+	initialize() 
 	{	
-		if (this.isInitialized) 
-		{
-			this.resize();
-			return;
-		}
+		if (this.isInitialized) { this.resize(); return; }
 
 		let configTileLayers = App.config.map.tileLayers;
 		let baseLayers = {};
@@ -93,54 +88,21 @@ export class MapComponent
 		L.control.zoom({position:'topright'}).addTo(this.map_);		
 		L.control.layers(baseLayers, {}, {position:'topright', collapsed: false}).addTo(this.map_);
 
-		$('.feature-button').tooltip();
-		$('#directory-content-map #change-layers').click( (e) =>
-		{
-			$('#directory-content-map #change-layers').hideTooltip();
-			this.showControlLayers();
-			e.preventDefault();
-			e.stopPropagation();
-		});
-
-		$('#directory-content-map #close-layers-panel').click( (e) =>
-		{		
-			this.hideControlLayers();
-			e.preventDefault();
-			e.stopPropagation();
-		});	
-
 		this.map_.on('singleclick', (e) => { this.onClick.emit(); });
 		this.map_.on('moveend', (e) => 
 		{ 
-			let visibleMarkersLength = $('.leaflet-marker-icon:visible').length;
-			let ratio;
-			if (this.map_.getZoom() == this.oldZoom)
-			{
-				ratio = 0.5/Math.pow((visibleMarkersLength/100),2);
-				ratio = Math.min(0.5, ratio);
-				ratio = Math.round(ratio*10)/10;
-			}
-			else
-			{
-				ratio = 0;
-			}			
+			let visibleMarkersLength = $('.leaflet-marker-icon:visible').length;		
+			App.boundsModule.extendMapBounds(this.oldZoom, this.map_.getZoom(), visibleMarkersLength);
 
 			this.oldZoom = this.map_.getZoom();
 			this.updateViewPort();
-
-			App.boundsModule.extendBounds(ratio, this.map_.getBounds());
+			
 			this.onIdle.emit(); 
 		});
 		this.map_.on('load', (e) => 
 		{ 
 			this.isMapLoaded = true; 
-			this.onMapLoaded.emit(); 
-
-			// listen for base layer selection, to store value in cookie
-			$('#directory-content-map .leaflet-control-layers-selector').change( function(e) 
-			{		
-				Cookies.createCookie('defaultBaseLayer', $(this).siblings('span').text(), 100);
-			});
+			this.onMapLoaded.emit();			
 		});
 
 		this.resize();		
@@ -281,30 +243,5 @@ export class MapComponent
 		this.viewport = $viewport;
 	}
 
-	hidePartiallyClusters()
-	{
-		$('.marker-cluster').addClass('halfHidden');
-	}
-
-	showNormalHiddenClusters()
-	{
-		$('.marker-cluster').removeClass('halfHidden');
-	}
-
-	showControlLayers()
-	{
-		$('#directory-content-map .leaflet-control-layers').show();
-		$('#directory-content-map #close-layers-panel').show();
-	}
-
-	hideControlLayers()
-	{
-		$('#directory-content-map .leaflet-control-layers').hide();
-		$('#directory-content-map #close-layers-panel').hide();	
-	}
-
-	isMapBounds() 
-  { 
-    return this.getMap() && this.getMap().getBounds(); 
-  } 
+	isMapBounds() { return this.getMap() && this.getMap().getBounds(); }
 }

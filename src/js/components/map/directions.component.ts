@@ -11,7 +11,15 @@ export class DirectionsComponent
 	routingControl : any;	
 	isActive : boolean = false;
 
-  constructor() {}  
+  constructor() {} 
+
+  initialize()
+  {
+  	$('#btn-close-directions').click( () => 
+		{
+			App.setState(AppStates.ShowElement, { id : App.infoBarComponent.getCurrElementId() });
+		});
+  } 
 
 	clear()
 	{

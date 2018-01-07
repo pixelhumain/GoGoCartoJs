@@ -90,6 +90,6 @@ export class MapManager
     else if (App.state == AppStates.ShowDirections)
       App.setState(AppStates.ShowElement, { id : App.infoBarComponent.getCurrElementId() });    
     
-    App.mapComponent.hideControlLayers();
+    App.mapControlsComponent.hideControlLayers();
   };
 }

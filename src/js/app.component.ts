@@ -19,44 +19,14 @@ export class AppComponent
 {
 	inforBarAnimationTimer;
 
-	private slideOptions = { duration: 500, easing: "easeOutQuart", queue: false, complete: function() {}};
+	constructor() {
+		App.directoryMenuComponent.onShow.do( () => { this.handleDirectoryMenuShow() });
+		App.directoryMenuComponent.onHide.do( () => { this.handleDirectoryMenuHide() });
+	}
 
 	initialize()
-	{	
+	{
 		this.updateComponentsSize();
-
-		$('#btn-helper-bar-close').click(() => this.hideBandeauHelper());
-
-		$('.flash-message .btn-close').click( function() { $(this).parent().slideUp('fast', function() { this.updateComponentsSize(); }); });
-
-		$('#btn-close-directions').click( () => 
-		{
-			App.setState(AppStates.ShowElement, { id : App.infoBarComponent.getCurrElementId() });
-		});
-
-		$('#export-iframe-btn').click( () => 
-		{ 
-			$('#export-iframe-btn').hideTooltip();
-			this.updateIframeCode();
-			$('#modal-iframe').openModal(); 
-		});
-
-		$('#map-default-view-btn').click( () =>
-		{
-			App.geocoder.geocodeAddress('', (result) => { 
-        App.mapComponent.fitBounds(App.geocoder.getBounds(), true); 
-      }); 
-		});
-
-		$('#geolocalize-btn').click( () =>
-		{
-			App.searchBarComponent.geolocateUser();
-		});
-
-		// update iframe code when params change
-		$('#modal-iframe .iframe-param').change( () => { this.updateIframeCode(); });
-
-		$('.layers-button').tooltip();
 
 		let res;
 		window.onresize = () =>
@@ -67,43 +37,30 @@ export class AppComponent
 		   	this.updateComponentsSize(); 
 		   	App.directoryMenuComponent.updateSize();
 		   },200);
-		};			
-
-		if (this.isMobileScreen()) this.hideDirectoryMenu();
-		else this.showDirectoryMenu();
+		};		
 	}
 
-	showDirectoryMenu()
-	{	
-		if (!$('#directory-menu').is(':visible'))
-		{			
-			App.directoryMenuComponent.show();
-
-			if (!this.isMobileScreen())
-			{
-				$('#directory-content').animate({'margin-left': App.directoryMenuComponent.width}, 350,'swing');
-				$('#map-gogo-controls').animate({'padding-left': '10px'}, 350,'swing');
-				$('.show-directory-menu-button').hide();		
-			}				
-		}		
+	handleDirectoryMenuShow()
+	{		
+		if (!this.isMobileScreen())
+		{
+			$('#directory-content').velocity({'margin-left': App.directoryMenuComponent.width}, {duration: 300, queue: false, easing: 'swing'});
+			$('#map-gogo-controls').velocity({'padding-left': '10px'}, {duration: 300, queue: false, easing: 'swing'});
+			$('.show-directory-menu-button').hide();
+		}	
 	}
 
-	hideDirectoryMenu()
+	handleDirectoryMenuHide()
 	{
-		$('.show-directory-menu-button').show();
-		$('#directory-content').animate({'margin-left':'0'}, 100,'swing');		
-		$('#map-gogo-controls').animate({'padding-left': '0px'}, 100,'swing');
-		App.directoryMenuComponent.hide();
+		$('.show-directory-menu-button').fadeIn(200);
+		$('#directory-content').velocity({'margin-left':'0'}, {duration: 100, queue: false, easing: 'swing'});		
+		$('#map-gogo-controls').velocity({'padding-left': '0px'}, {duration: 100, queue: false, easing: 'swing'});
 	}	
-
-	hideBandeauHelper()
-	{
-		$('#helper-bar').slideUp(this.slideOptions);
-	}
 
 	isMobileScreen() { return this.width() < 850; }
 
 	mapWidth() { return $('#directory-content').width(); }
+
 	width() { return $('.gogocarto-container').width(); }
 
 	updateComponentsSize()
@@ -171,42 +128,18 @@ export class AppComponent
 	updateDirectoryContentMarginIfInfoBarDisplayedAside(animate : boolean = false, width : string = App.infoBarComponent.width())
 	{		
 		if (!App.infoBarComponent.isVisible) return;
-		if (animate)
-		{
-			$('#directory-content-map').stop(true).animate({'margin-right': width}, 350, 'swing');
-			$('#helper-bar').stop(true).animate({'margin-right': width}, 350, 'swing');
-		}
-		else
-		{
-			$('#directory-content-map').stop(true).css('margin-right', width);
-			$('#helper-bar').stop(true).css('margin-right', width);
-		}
+
+		if (animate) $('#directory-content-map').stop(true).animate({'margin-right': width}, 350, 'swing');
+		else $('#directory-content-map').stop(true).css('margin-right', width);
 		
 		App.component.updateMapSize();
 	}
 	
-	// the leaflet map need to be resized with a specific function
 	updateMapSize()
 	{		
 		if (!App.infoBarComponent.isDisplayedAside()) $('#directory-content-map').stop(true).css('margin-right', '0');
 		if (App.mapComponent) setTimeout(function() { App.mapComponent.resize(); },0);
-	}
-
-	updateIframeCode()
-	{
-		let src = window.location.origin + window.location.pathname;
-		src += window.location.search.length > 0 ? window.location.search + '&' : '?';
-		src += 'iframe=1';
-		if ($('#part-taxonomy-checkbox').is(':checked')) src += '&fullTaxonomy=0';
-		src += window.location.hash;
-
-		let width = $('#iframe-width').val() ? $('#iframe-width').val() : '800';
-		let height = $('#iframe-height').val() ? $('#iframe-height').val() : '600';
-
-		let iframeCode = `<iframe width="${width}" height="${height}" src="${src}" frameborder="0" marginheight="0" marginwidth="0"></iframe>`
-		$('#modal-iframe #iframe-code').val(iframeCode);
-	}
-	
+	}	
 }
 
 

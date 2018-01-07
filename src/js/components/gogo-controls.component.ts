@@ -16,8 +16,8 @@ export class GoGoControlComponent
 {    
   initialize()
   {
-    $('.show-directory-menu-button, #mobile-filters-icon').click((e) => { App.component.showDirectoryMenu(); e.preventDefault();e.stopPropagation();});
-    $('#directory-menu .btn-close-menu').click(() => App.component.hideDirectoryMenu());
+    $('.show-directory-menu-button, #mobile-filters-icon').click((e) => { App.directoryMenuComponent.show(); e.preventDefault();e.stopPropagation();});
+    $('#directory-menu .btn-close-menu').click(() => App.directoryMenuComponent.hide());
 
     $('.show-as-list-button').click((e : Event) => {  
       App.mapManager.setTimeoutClicking();

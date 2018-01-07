@@ -50,6 +50,22 @@ export class BoundsModule
 		//if (this.extendedBounds) L.rectangle(this.extendedBounds, {color: "blue", weight: 3}).addTo(App.map()); 
 	}
 
+	extendMapBounds($oldZoom, $newZoom, $numberMarkerVisible)
+	{		
+		let ratio;
+		if ($newZoom == $oldZoom)
+		{
+			ratio = 0.5/Math.pow(($numberMarkerVisible/100),2);
+			ratio = Math.min(0.5, ratio);
+			ratio = Math.round(ratio*10)/10;
+		}
+		else
+		{
+			ratio = 0;
+		}	
+		App.boundsModule.extendBounds(ratio, App.map().getBounds());
+	}
+
 	extendBounds($ratio : number, $bounds : L.LatLngBounds = this.extendedBounds)
 	{
 		//console.log("extend bounds", $bounds);

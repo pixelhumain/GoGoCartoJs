@@ -48,7 +48,7 @@ export class ModeManager
     App.mapComponent.show();
     App.elementListComponent.hide();        
 
-    App.mapComponent.init();    
+    App.mapComponent.initialize();    
 
     if (App.mapComponent.isMapLoaded) App.boundsModule.extendBounds(0, App.mapComponent.getBounds());
   }

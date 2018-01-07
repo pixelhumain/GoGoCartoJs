@@ -40,9 +40,9 @@ export class GoGoCartoModule
 		return this.app.routerModule.generate('show_element', { id: $elementId, name: $elementName });
 	}
 
-	showDirectoryMenu() { this.app.component.showDirectoryMenu(); }
+	showDirectoryMenu() { this.app.directoryMenuComponent.show(); }
 
-	hideDirectoryMenu() { this.app.component.hideDirectoryMenu(); }
+	hideDirectoryMenu() { this.app.directoryMenuComponent.hide(); }
 
 	private checkForDistantConfifuration(options : string|any)
 	{
@@ -97,21 +97,26 @@ export class GoGoCartoModule
 		}
 
 		setTimeout( () => {		
-			App.initialize();
-				
+			App.initialize();			
+
 			App.elementsModule.initialize();
 			App.directoryMenuComponent.initialize();
 			App.filtersComponent.initialize();
 			App.boundsModule.initialize();	   
 			App.elementListComponent.initialize();
 			App.routerModule.loadInitialState();
-			App.searchBarComponent.initialize();
-			App.component.initialize();
+			App.searchBarComponent.initialize();			
+			App.gogoControlComponent.initialize();
+			App.directionsComponent.initialize();	
+
+			App.component.initialize();		
 			
 			initializePickAddress();
 			initializeVoting();
 			initializeReportingAndDeleting();
 			initializeSendingMail();
+
+
 		}, 0);	   
 	}
 }

@@ -12,6 +12,7 @@ declare let $, jQuery : any;
 import { AppModule } from "../../app.module";
 import { Category, Option } from "../../modules/taxonomy/taxonomy.module";
 import { App } from "../../gogocarto";
+import { Event } from "../../classes/classes";
 
 export class DirectoryMenuComponent
 {		
@@ -23,10 +24,13 @@ export class DirectoryMenuComponent
 	dragTarget;
 	overlay;
 
-	ANIM_50 = {duration: 50, queue: false, easing: 'easeOutQuad'};
-	ANIM_200 = {duration: 200, queue: false, easing: 'easeOutQuad'};
-	ANIM_300 = {duration: 300, queue: false, easing: 'easeOutQuad'};
-  ANIM_400 = {duration: 300, queue: false, easing: 'easeOutQuad'};
+  onShow = new Event<any>();
+  onHide = new Event<any>();
+
+	ANIM_50 = {duration: 50, queue: false, easing: 'easeOutElastic'};
+	ANIM_200 = {duration: 200, queue: false, easing: 'easeOutElastic'};
+	ANIM_300 = {duration: 300, queue: false, easing: 'easeOutElastic'};
+  ANIM_400 = {duration: 300, queue: false, easing: 'easeOutElastic'};
 
 	constructor() { }
 
@@ -43,13 +47,20 @@ export class DirectoryMenuComponent
 
 		$('.btn-close-menu.large-screen').tooltip();
 
-    if (App.component.isMobileScreen()) this.initTouchMenu();
+    if (App.component.isMobileScreen()) {
+      this.initTouchMenu();
+      this.hide();
+    } else {
+      this.show();
+    }
 	}	
 
 	show() 
 	{    
-    this.dom.show().velocity({left: 0}, this.ANIM_300); 
-    this.overlay.show().velocity({opacity: 1}, this.ANIM_300);
+    this.onShow.emit();    
+
+    this.dom.show().velocity({left: 0}, this.ANIM_200); 
+    this.overlay.show().velocity({opacity: 1}, this.ANIM_200);
 
     setTimeout( () => {
     	App.filtersComponent.updateMainOptionBackground();	
@@ -59,15 +70,16 @@ export class DirectoryMenuComponent
 
       App.component.updateMapSize();
 			App.component.updateComponentsSize();
-
-    }, 300);      			
+    }, 300);     			
   }
 
 	hide() 
   {
-    this.overlay.velocity({opacity: 0}, this.ANIM_400);
+    this.onHide.emit();
+
+    this.overlay.velocity({opacity: 0}, this.ANIM_300);
     this.dragTarget.css({width: '10px', right: '', left: '0'});
-    this.dom.velocity({left: -1 * (this.width + 20)}, this.ANIM_400);
+    this.dom.velocity({left: -1 * (this.width + 20)}, this.ANIM_300);
 
     setTimeout( () => {
     	this.overlay.hide();
@@ -79,7 +91,7 @@ export class DirectoryMenuComponent
 
 			App.component.updateMapSize(); 
 			App.component.updateComponentsSize(); 
-    }, 400);
+    }, 400);    
   }
 
   initTouchMenu()
