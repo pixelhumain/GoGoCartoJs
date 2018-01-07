@@ -20,7 +20,7 @@ carto = goGoCarto('#gogocarto', {
   });
 ```
 
-Know more about [Usage](docs/usage.md), [Features](docs/features.md) and [Configuration](docs/confiiguration.md)
+Know more about [Usage](docs/usage.md), [Features](docs/features.md) and [Configuration](docs/configuration.md)
 
 
 Stack
@@ -31,6 +31,6 @@ Typescript, Nunjucks templates, Leaflet, SASS, MaterializeCSS, Gulp
 Want to Contribute ?
 -------------
 
-- [Installation intructions](docs/installation.md)
-- [Coding conventions](docs/coding-conventions.md)
-- [Code Explanations](docs/code-explanations.md)
+- [Installation intructions](docs/how-to-contribute/installation.md)
+- [Coding conventions](docs/how-to-contribute/coding-conventions.md)
+- [Code Explanations](docs/how-to-contribute/code-explanations.md)
