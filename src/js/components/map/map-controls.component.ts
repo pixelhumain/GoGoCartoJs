@@ -6,6 +6,8 @@ import * as Cookies from "../../utils/cookies";
 
 export class MapControlsComponent
 {    
+  listenerLayerChangeHasBeenCreated = false;
+
   initialize()
   {
     $('#export-iframe-btn').click( () => 
@@ -44,12 +46,6 @@ export class MapControlsComponent
       e.stopPropagation();
     });  
 
-    // listen for base layer selection, to store value in cookie
-    $('#directory-content-map .leaflet-control-layers-selector').change( function(e) 
-    {    
-      Cookies.createCookie('defaultBaseLayer', $(this).siblings('span').text(), 100);
-    });
-
     // update iframe code when params change
     $('#modal-iframe .iframe-param').change( () => { this.updateIframeCode(); });
 
@@ -71,10 +67,23 @@ export class MapControlsComponent
     $('#modal-iframe #iframe-code').val(iframeCode);
   }
 
+  private createListenerForLayers()
+  {
+    if (this.listenerLayerChangeHasBeenCreated) return;
+    // listen for base layer selection, to store value in cookie
+    $('#directory-content-map .leaflet-control-layers-selector').change( function(e) 
+    {    
+      Cookies.createCookie('defaultBaseLayer', $(this).siblings('span').text(), 100);
+    });
+
+    this.listenerLayerChangeHasBeenCreated = true;
+  }
+
   showControlLayers()
   {
     $('#directory-content-map .leaflet-control-layers').show();
     $('#directory-content-map #close-layers-panel').show();
+    this.createListenerForLayers();
   }
 
   hideControlLayers()

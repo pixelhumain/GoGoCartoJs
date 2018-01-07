@@ -108,7 +108,8 @@ export class GoGoCartoModule
 			App.searchBarComponent.initialize();			
 			App.gogoControlComponent.initialize();
 			App.directionsComponent.initialize();	
-
+			App.mapControlsComponent.initialize();
+			
 			App.component.initialize();		
 			
 			initializePickAddress();
