@@ -38,4 +38,4 @@ Want to Contribute ?
 3. [Code Explanations](docs/how-to-contribute/3-Code-explanations.md)
 4. [UI Layout](docs/how-to-contribute/4-Ui-layout.md)
 5. [Application state machine](docs/how-to-contribute/5-App-state-mode.md)
-6. [Application main behaviour](docs/how-to-contribute/6-App-main-behaviour.md.md)
+6. [Application main behaviour](docs/how-to-contribute/6-App-main-behaviour.md)
