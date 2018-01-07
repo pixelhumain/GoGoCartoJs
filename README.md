@@ -1,6 +1,6 @@
 GoGoCartoJs
 ==========
-Create a configurable collaborative maps that rocks !
+A javascript component to create terrific cartography !
 
 ![alt text](docs/screenshots/desktop.png "Desktop")
 .   .   ![alt text](docs/screenshots/mobile.png "Mobile")
@@ -8,7 +8,7 @@ Create a configurable collaborative maps that rocks !
 Overview
 --------
 
-GoGoCartoJs is fast, ergonomic and responsive. 
+GoGoCartoJs is fast, ergonomic, responsive and fully configurable. 
 
 It can be instanciated in few lines from a DOM element, a taxonomy (i.e. filters/categories) and a dataset (distant or local). Both taxonomy and data need to be JSON objects.
 
@@ -16,11 +16,11 @@ It can be instanciated in few lines from a DOM element, a taxonomy (i.e. filters
 carto = goGoCarto('#gogocarto', {
   data: {
       taxonomy: "http://test.com/api/taxonomy",
-      elementsApiUrl: 'https://test.com/api/elements'
+      elementsApiUrl: 'https://test.com/api/dataset'
   });
 ```
 
-Know more about all the [Features](docs/features.md) and the full [Configuration](docs/confiiguration.md)
+Know more about [Usage](docs/usage.md) ,[Features](docs/features.md) and the [Full Configuration](docs/confiiguration.md)
 
 
 Stack
