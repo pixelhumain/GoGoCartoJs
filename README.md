@@ -20,7 +20,7 @@ carto = goGoCarto('#gogocarto', {
   });
 ```
 
-Know more about [Usage](docs/usage.md) ,[Features](docs/features.md) and the [Full Configuration](docs/confiiguration.md)
+Know more about [Usage](docs/usage.md), [Features](docs/features.md) and [Configuration](docs/confiiguration.md)
 
 
 Stack
