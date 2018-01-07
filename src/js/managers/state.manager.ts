@@ -26,7 +26,7 @@ export class StateManager
   */
   setState($newState : AppStates, options : any = {}, $backFromHistory : boolean = false) 
   {   
-    console.log("AppModule set State : " + AppStates[$newState]  +  ', options = ',options);
+    // console.log("AppModule set State : " + AppStates[$newState]  +  ', options = ',options);
     let element = (options && options.id) ? App.elementById(options.id) : null;
 
     let oldStateName = this.state_;
