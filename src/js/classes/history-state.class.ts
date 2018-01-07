@@ -1,5 +1,6 @@
 import { AppModule, AppStates, AppModes, AppDataType } from "../app.module";
 import { ViewPort } from "./map/viewport.class";
+declare var L : any;
 
 export class HistoryState
 {

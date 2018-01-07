@@ -1,7 +1,7 @@
 import { Element, ElementBase, ElementStatus, PostalAddress } from "../../classes/classes";
 import { capitalize } from "../../utils/string-helpers";
 import { App } from "../../gogocarto";
-declare var $;
+declare var $, L;
 
 export class ElementJsonParserModule
 {

@@ -13,7 +13,7 @@ import { AppModule, AppStates } from "../app.module";
 import { Element } from "../classes/classes";
 
 import { App } from "../gogocarto";
-declare var $ : any;
+declare var $ : any, L : any;
 declare let Routing;
 
 export class Request

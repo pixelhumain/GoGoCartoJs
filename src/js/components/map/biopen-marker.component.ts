@@ -11,7 +11,7 @@ import { AppModule, AppStates } from "../../app.module";
 import { Element } from "../../classes/classes";
 
 import { App } from "../../gogocarto";
-declare let $;
+declare let $, L : any;
 
 export class BiopenMarker
 {

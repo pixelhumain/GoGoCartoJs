@@ -1,3 +1,5 @@
+declare var L : any;
+
 export class ViewPort
 {
   constructor(public lat : number = 0, 

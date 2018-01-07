@@ -2,6 +2,7 @@ import { AppModule, AppStates } from "../app.module";
 import { Element } from "../classes/classes";
 import { GoGoConfig } from "../classes/config/gogo-config.class";
 import { App } from "../gogocarto";
+declare var L;
 
 export class BoundsModule
 {

@@ -3,6 +3,7 @@ import { App } from "../../gogocarto";
 import { TileLayer } from '../map/tile-layer.class';
 import { GoGoFeature } from './gogo-feature.class';
 import { ElementStatus } from '../classes';  
+declare var L : any;
 
 export class GoGoConfig
 {
