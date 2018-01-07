@@ -90,7 +90,7 @@ export class HistoryModule
 		// in List mode we add viewport only when no address provided
 		if (viewport && (App.mode == AppModes.Map || !address)) addressAndViewport += viewport.toString();
 
-		if (App.dataType == AppDataType.SearchResults)
+		if (App.dataType == AppDataType.SearchResults && App.state == AppStates.Normal)
 		{
 			route = App.routerModule.generate('search', { mode :  mode, text : historyState.text });	
 		}		

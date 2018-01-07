@@ -51,12 +51,15 @@ export class StateManager
       case AppStates.ShowDirections: this.setShowDirectionsState(element, options);break;      
     }
 
-    if (!$backFromHistory && App.dataType == AppDataType.All &&
+    if (!$backFromHistory &&
        ( oldStateName !== $newState 
         || $newState == AppStates.ShowElement
         || $newState == AppStates.ShowElementAlone
         || $newState == AppStates.ShowDirections) )
-      App.historyModule.pushNewState(options);
+    {
+      if (App.dataType == AppDataType.All) App.historyModule.pushNewState(options);
+      else App.historyModule.updateCurrState(options);
+    }     
 
     App.documentTitleModule.updateDocumentTitle(options);
   };
