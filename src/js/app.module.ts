@@ -11,11 +11,8 @@
 
 // MANAGERS
 import { ModeManager, AppModes } from "./managers/mode.manager";
-export { AppModes } from "./managers/mode.manager";
 import { StateManager, AppStates } from "./managers/state.manager";
-export { AppStates } from "./managers/state.manager";
 import { DataTypeManager, AppDataType } from "./managers/data-type.manager";
-export { AppDataType } from "./managers/data-type.manager";
 import { ElementsManager } from "./managers/elements.manager";
 import { HistoryStateManager } from "./managers/history-state.manager";
 import { GeocodingManager } from "./managers/geocoding.manager";
@@ -54,15 +51,19 @@ import { FiltersComponent } from "./components/directory-menu/filters.component"
 import { GoGoControlComponent } from "./components/gogo-controls.component";
 import { MapComponent } from "./components/map/map.component";
 
+// OTHERS
 import { GoGoConfig } from "./classes/config/gogo-config.class";
-
 import { App } from "./gogocarto";
 import * as Cookies from "./utils/cookies";
 
+// EXPORT 
+export { AppDataType } from "./managers/data-type.manager";
+export { AppStates } from "./managers/state.manager";
+export { AppModes } from "./managers/mode.manager";
+
 /*
-* App Module. Main module of the App
-*
-* AppModule creates all others modules, and deals with theirs events
+* App Module. Main module of the App*
+* AppModule creates all others components and modules
 */
 export class AppModule
 {		
@@ -128,19 +129,31 @@ export class AppModule
 		this.mapManager = new MapManager();	
 	}	
 
-	// Getters shortcuts
+	// ---------------------------
+	// Getters & Setters Shortcuts
+	// ---------------------------
+
 	map() : L.Map { return this.mapComponent? this.mapComponent.getMap() : null; };
+
 	elements() { return this.elementsModule.currVisibleElements();  };
+
 	elementById(id) { return this.elementsModule.getElementById(id);  };
+
 	isUserLogged() { return this.loginModule.isUserLogged(); }
+
 	get DEAModule() { return this.displayElementAloneModule; }
+
 	get currMainId() { return this.filtersComponent.currentActiveMainOptionId; }
 
-	// private properties getters
 	get state() { return this.stateManager.state; }
+
 	setState($newState : AppStates, $options : any = {}, $backFromHistory : boolean = false)  { this.stateManager.setState($newState, $options, $backFromHistory)}
+
 	get mode() { return this.modeManager.mode; }
+
 	setMode($mode : AppModes, $backFromHistory : boolean = false, $updateTitleAndState = true) { this.modeManager.setMode($mode, $backFromHistory, $updateTitleAndState); }
+
 	get dataType() { return this.dataTypeManager.dataType; }
+
 	setDataType($dataType : AppDataType, $backFromHistory : boolean = false) { this.dataTypeManager.setDataType($dataType, $backFromHistory); }
 }
