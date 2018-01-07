@@ -34,6 +34,8 @@ is rendered from the main layout.
 The `AppComponent` is a bit special. Its function is to handle the main layout, and mostly resize the size of components
 depending on the ones who are visible.
 
+[See User Interface Layout](ui-layout.md)
+
 
 Modules (src/js/modules)
 ------
