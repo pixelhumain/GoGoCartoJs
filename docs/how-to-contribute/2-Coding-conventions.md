@@ -44,4 +44,6 @@ var x = y + z;
 var values = ["Volvo", "Saab", "Fiat"];
 ```
 
-Continue with [Code Explanation](docs/how-to-contribute/3-Code-explanation.md)
+Continue with
+---
+[Code Explanation](3-Code-explanation.md)

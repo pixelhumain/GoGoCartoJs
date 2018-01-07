@@ -81,4 +81,6 @@ For example a `TileLayer`, a `PostalAddress`
 Thoses classes should not have business logic inside. This is more a descriptive object, with getter, setters
 and methods to initialize or do basic operations
 
-Continue with [UI Layout](docs/how-to-contribute/4-Ui-layout.md)
+Continue with
+--
+[UI Layout](4-Ui-layout.md)

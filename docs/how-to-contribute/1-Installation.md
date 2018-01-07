@@ -16,5 +16,7 @@ Gulp tasks
 - Create new distribution files : `gulp cleanDist && gulp build && gulp dist && gulp production`
 
 
-Continue with [Coding conventions](docs/how-to-contribute/2-Coding-conventions.md)
+Continue with
+----
+[Coding conventions](2-Coding-conventions.md)
 

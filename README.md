@@ -33,7 +33,9 @@ Typescript, Nunjucks templates, Leaflet, SASS, MaterializeCSS, Gulp
 Want to Contribute ?
 -------------
 
-- [Installation intructions](docs/how-to-contribute/1-Installation.md)
-- [Coding conventions](docs/how-to-contribute/2-Coding-conventions.md)
-- [Code Explanations](docs/how-to-contribute/3-Code-explanations.md)
-- [UI Layout](docs/how-to-contribute/4-Ui-layout.md)
+1. [Installation intructions](docs/how-to-contribute/1-Installation.md)
+2. [Coding conventions](docs/how-to-contribute/2-Coding-conventions.md)
+3. [Code Explanations](docs/how-to-contribute/3-Code-explanations.md)
+4. [UI Layout](docs/how-to-contribute/4-Ui-layout.md)
+5. [Application state machine](docs/how-to-contribute/5-App-state-mode.md)
+6. [Application main behaviour](docs/how-to-contribute/6-App-main-behaviour.md.md)
