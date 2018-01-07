@@ -2,7 +2,7 @@ import { App } from "../gogocarto";
 import { AppDataType, AppModes, AppStates } from "../app.module";
 import { HistoryState, ViewPort } from "../classes/classes";
 import * as Cookies from "../utils/cookies";
-declare var $;
+declare var $, L : any;
 
 export class HistoryStateManager
 {

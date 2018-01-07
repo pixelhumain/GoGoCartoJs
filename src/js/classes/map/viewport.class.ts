@@ -1,4 +1,5 @@
-declare var L : any;
+import { App } from "../../gogocarto";
+declare var L;
 
 export class ViewPort
 {
