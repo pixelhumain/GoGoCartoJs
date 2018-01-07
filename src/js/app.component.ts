@@ -67,28 +67,7 @@ export class AppComponent
 		   	this.updateComponentsSize(); 
 		   	App.directoryMenuComponent.updateSize();
 		   },200);
-		};	
-
-		//Menu CARTE	
-		$('.show-directory-menu-button, #mobile-filters-icon').click((e) => { this.showDirectoryMenu(); e.preventDefault();e.stopPropagation();});
-		$('#directory-menu .btn-close-menu').click(() => this.hideDirectoryMenu());
-
-		$('.show-as-list-button').click((e : Event) => {	
-			App.mapManager.setTimeoutClicking();
-			App.setMode(AppModes.List);
-			e.preventDefault();
-			e.stopPropagation();
-		});
-
-		$('#mobile-search-icon').click((e) => { 
-			App.searchBarComponent.showMobileSearchBar();
-			e.preventDefault();
-			e.stopPropagation();
-		});
-
-		$('.show-as-map-button').click(() => {		
-			App.setMode(AppModes.Map);
-		});
+		};			
 
 		if (this.isMobileScreen()) this.hideDirectoryMenu();
 		else this.showDirectoryMenu();

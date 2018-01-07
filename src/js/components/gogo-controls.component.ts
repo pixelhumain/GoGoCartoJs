@@ -14,6 +14,29 @@ import { App } from "../gogocarto";
 
 export class GoGoControlComponent
 {    
+  initialize()
+  {
+    $('.show-directory-menu-button, #mobile-filters-icon').click((e) => { App.component.showDirectoryMenu(); e.preventDefault();e.stopPropagation();});
+    $('#directory-menu .btn-close-menu').click(() => App.component.hideDirectoryMenu());
+
+    $('.show-as-list-button').click((e : Event) => {  
+      App.mapManager.setTimeoutClicking();
+      App.setMode(AppModes.List);
+      e.preventDefault();
+      e.stopPropagation();
+    });
+
+    $('#mobile-search-icon').click((e) => { 
+      App.searchBarComponent.showMobileSearchBar();
+      e.preventDefault();
+      e.stopPropagation();
+    });
+
+    $('.show-as-map-button').click(() => {    
+      App.setMode(AppModes.Map);
+    });
+  }
+
   updatePosition()
   {
     if (!App.mode) return;
