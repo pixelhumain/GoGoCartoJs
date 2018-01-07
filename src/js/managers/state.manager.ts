@@ -124,76 +124,32 @@ export class StateManager
     }      
   }
 
-  private setShowDirectionsState(element, options)
+  private setShowDirectionsState(element : Element, options)
   {
-    if (!options.id) return;      
-        
-    element = App.elementById(options.id);
-    let origin;
-
-    origin = App.geocoder.getLocation();
-
-    // local function
-    let calculateRoute = function (origin : L.LatLng, element : Element)
-    {
-      App.directionsModule.calculateRoute(origin, element); 
-      App.DEAModule.begin(element.id, false);    
-    };
-
+    let origin = App.geocoder.getLocation(); 
     // if no element, we get it from ajax 
     if (!element)
     {
+      if (!options.id) return; 
       App.ajaxModule.getElementById(options.id, (elementJson) => 
-      {
+      { 
         App.elementsJsonModule.convertJsonElements([elementJson], true, true);
         element = App.elementById(elementJson.id);
-        App.documentTitleModule.updateDocumentTitle(options);
-        
-        origin = App.geocoder.getLocation();
-        // we geolocalized origin in loadHistory function
-        // maybe the geocoding is not already done so we wait a little bit for it
-        if (!origin)
-        {
-          setTimeout(() => {
-            origin = App.geocoder.getLocation();
-            if (!origin)
-              setTimeout(() => {
-                origin = App.geocoder.getLocation();
-                calculateRoute(origin, element);    
-              }, 1000);
-            else
-              calculateRoute(origin, element);    
-          }, 500);
-        }
-        else
-          calculateRoute(origin, element);                      
+        App.documentTitleModule.updateDocumentTitle(options);  
+        this.beginDirectionModule(element);                        
       },
       (error) => { /*TODO*/ alert("No element with App id"); }
-      );                    
-    }  
-    else
-    {
-      if (App.mode == AppModes.List)
-      {
-        if (!App.mapComponent.isInitialized)
-        {
-          App.mapComponent.onMapReady.do(() => 
-          {
-            calculateRoute(origin, element);
-            App.mapComponent.onMapReady.off(() => { calculateRoute(origin, element); });
-          });
-        }
-        else
-        {
-          calculateRoute(origin, element);
-        }            
+      );               
+    }
 
-        App.setMode(AppModes.Map, false, false);
-      } 
-      else
-      {
-        calculateRoute(origin, element);
-      }  
-    } 
-  }  
+    this.beginDirectionModule(element)  
+  }
+
+  private beginDirectionModule(element)
+  {
+    let origin = App.geocoder.getLocation();
+      
+    if (element && origin)
+      App.directionsModule.begin(origin, element);  
+  }
 }

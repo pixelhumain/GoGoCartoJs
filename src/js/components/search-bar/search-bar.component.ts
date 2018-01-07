@@ -121,23 +121,12 @@ export class SearchBarComponent
 		App.ajaxModule.sendRequest(route, 'get', data,
 		(searchResult) => 
 		{
-			let result = App.elementsJsonModule.convertJsonElements(searchResult.data, true, true); 
-      App.elementsModule.setSearchResultElement(result.elementsConverted); 
-      App.setDataType(AppDataType.SearchResults, $backFromHistory); 
-      App.filtersComponent.setMainOption('all'); 
+      App.setDataType(AppDataType.SearchResults, $backFromHistory, searchResult);       
  
       this.clearLoader();       
       this.showSearchResultLabel(searchResult.data.length);   
  			App.gogoControlComponent.updatePosition();
- 			this.hideMobileSearchBar();
-
-      if (searchResult.data.length > 0) 
-      { 
-        App.setMode(AppModes.List); 
-        App.mapComponent.fitElementsBounds(result.elementsConverted); 
-      } 
-      else 
-        App.mapComponent.fitDefaultBounds(); 
+ 			this.hideMobileSearchBar(); 			
 		},
 		(error) =>
 		{

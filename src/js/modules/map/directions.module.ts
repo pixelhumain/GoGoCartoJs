@@ -1,124 +1,34 @@
-declare let google;
-import { AppModule, AppStates } from "../../app.module";
-import { Element } from "../../classes/classes";
 import { App } from "../../gogocarto";
-declare let $, L: any;
-
-declare let window : any;
+import { AppModes } from "../../app.module";
+import { Element } from "../../classes/classes";
+declare var L : any;
 
 export class DirectionsModule
 {
-	markerDirectionResult = null;
-
-	routingControl : any;	
-
-  constructor() 
+  begin(origin : L.LatLng, element : Element) 
   {
-  	window.lrmConfig = {
-			// TODO change this demo serviceUrl
-			// 		serviceUrl: '//router.project-osrm.org/viaroute',
-			//    profile: 'mapbox/driving',
-		};
-  }
+    if (!origin || !element) { console.log(`origin ${origin} element ${element}`); return;}
 
-	clear()
-	{
-		if (!this.routingControl) return;
+    if (App.mode == AppModes.List)
+    {
+      if (!App.mapComponent.isInitialized)
+      {
+        App.mapComponent.onMapReady.do(() => { this.beginCalculation(origin, element); });
+      }           
 
-		this.clearRoute();
-		//this.clearDirectionMarker();
-		this.hideItineraryPanel();
+      App.setMode(AppModes.Map, false, false);
+    } 
+      
+    this.beginCalculation(origin, element);
+  } 
 
-		App.DEAModule.end();
+  private beginCalculation = function (origin : L.LatLng, element : Element)
+  {
+    if (!App.mapComponent.isInitialized) return;
 
-		this.routingControl = null;
-	};
-
-	clearRoute()
-	{
-		if (this.routingControl) 
-		{
-			this.routingControl.spliceWaypoints(0,2);		
-			App.map().removeControl(this.routingControl);	
-		}
-	};
-
-	calculateRoute(origin : L.LatLng, element : Element) 
-	{
-		this.clear();
-
-		let waypoints = [
-		    origin,
-		    element.position,
-		];
-		//console.log("calculate route", waypoints);
-
-		this.routingControl = L.Routing.control({
-			router: L.Routing.mapbox('pk.eyJ1IjoiZ29nb2NhcnRvIiwiYSI6ImNqYnhxeHUxZzJ3cG4zMnIyNmZiajF6dmwifQ.2G5IM4roIgpU_fvPBOpssw'),
-			plan: L.Routing.plan(
-				waypoints, 
-				{
-					// deleteing start and end markers
-					createMarker: function(i, wp) { return null; },
-					routeWhileDragging: false,
-					showAlternatives: false
-				}
-			),
-			language: 'fr',
-			routeWhileDragging: false,
-			showAlternatives: false,
-			altLineOptions: {
-				styles: [
-					{color: 'black', opacity: 0.15, weight: 9},
-					{color: 'white', opacity: 0.8, weight: 6},
-					{color: '#00b3fd', opacity: 0.5, weight: 2}
-				]
-			}
-		}).addTo(App.map());
-
-		// show Itinerary panel without itinerary, just to show user
-		// somethingis happenning an display spinner loader
-		this.showItineraryPanel(element);
-
-		this.routingControl.on('routesfound', (ev) => 
-		{
-			this.showItineraryPanel(element);
-		});
-
-		// fit bounds 
-		this.routingControl.on('routeselected', function(e) 
-		{	    
-	    var r = e.route;
-	    var line = L.Routing.line(r);
-	    var bounds = line.getBounds();
-	    App.map().fitBounds(bounds);
-		});
-
-		this.routingControl.on('routingerror', (ev) => 
-		{
-			$('#modal-directions-fail').openModal();
-			this.clear();
-		});			
-	};
-
-	hideItineraryPanel()
-	{
-		$('#directory-menu-main-container').removeClass();
-	}
-
-	showItineraryPanel(element : Element)
-	{
-		$('#directory-menu-main-container').removeClass().addClass("directions");	
-		$('.leaflet-routing-container').prependTo('.directory-menu-content');		
-	}
-
-	clearDirectionMarker()
-	{
-		if (this.markerDirectionResult !== null)
-		{
-			this.markerDirectionResult.setVisible(false);
-			this.markerDirectionResult.setMap(null);
-			this.markerDirectionResult = null;
-		}
-	};
+    App.DEAModule.begin(element.id, false);
+    // wait for the info bar to open, so the map is resized at this final viewport
+    // Then we can calculate route and fitbounds regarding routing result
+    setTimeout( () => { App.directionsComponent.calculateRoute(origin, element); }, 400);     
+  };
 }
