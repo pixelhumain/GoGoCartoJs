@@ -30,15 +30,9 @@ export class GoGoCartoModule
 	* Role is used to render specifically certain template and control
 	* certain functionalities
 	*/
-	setUserRole($role : Roles | string)
-	{
-		this.app.loginModule.setRole($role);
-	}
+	setUserRole($role : Roles | string) { this.app.loginModule.setRole($role); }
 
-	setUserMail($mail : string)
-	{
-		this.app.loginModule.setUserMail($mail);
-	}
+	setUserMail($mail : string) { this.app.loginModule.setUserMail($mail); }
 
 	/** return the given hash to add to url so gogocarto app will open on specific element */
 	getElementRouteHash($elementId, $elementName = 'find')
@@ -46,10 +40,9 @@ export class GoGoCartoModule
 		return this.app.routerModule.generate('show_element', { id: $elementId, name: $elementName });
 	}
 
-	showDirectoryMenu()
-	{
-		this.app.component.showDirectoryMenu();
-	}
+	showDirectoryMenu() { this.app.component.showDirectoryMenu(); }
+
+	hideDirectoryMenu() { this.app.component.hideDirectoryMenu(); }
 
 	private checkForDistantConfifuration(options : string|any)
 	{
