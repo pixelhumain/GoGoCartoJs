@@ -2,12 +2,12 @@
 * @Author: Sebastian Castro
 * @Date:   2017-12-26 08:55:41
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-12-27 16:30:01
+* @Last Modified time: 2018-01-10 15:40:45
 */
 
 // search bar is moved on top of map for mobiles
 
-.search-bar-with-options-container.mobile
+#search-overlay-mobile .search-bar-with-options-container.mobile
 {
   display:none; 
   z-index: 10;
@@ -50,10 +50,17 @@
 
   .search-options { 
     display: block !important;
-    padding: 10px 15px 12px 15px;
+    padding: 0px 15px 12px 15px;
   }
 
   #search-spinner-loader .spinner-layer {
     border-color: white !important;
+  }
+
+  .search-no-result 
+  {
+    color: inherit;
+    font-size: 13px;
+    padding-bottom: 1rem;
   }
 }
