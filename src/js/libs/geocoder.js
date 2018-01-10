@@ -47,8 +47,8 @@ if (function(a) {
             return this.postal_code;
         },
         getCityDistrict: function() {},
-        getCounty: function() {},
-        getCountyCode: function() {},
+        getCountry: function() { return this.country },
+        getCountryCode: function() { return this.country_code },
         getRegion: function() {
             return this.region;
         },
@@ -310,7 +310,7 @@ if (function(a) {
 
           case "country":
             c.country = b.address_components[d].long_name;
-            c.countryCode = b.address_components[d].short_name;
+            c.country_code = b.address_components[d].short_name;
             break;
         }
         return c;
