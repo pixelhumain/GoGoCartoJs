@@ -102,14 +102,14 @@ export class ElementsModule
 		let i : number, element : Element;
 
 	 	let newElements : Element[] = [];
-	 	let elementsToRemove : Element[] = [];
-
-		//console.log("updateElementsToDisplay. Nbre element à traiter : " + i, checkInAllElements);
+	 	let elementsToRemove : Element[] = [];		
 		
 		i = elements.length;
 		let filterModule = App.filterModule;	
 		let currBounds = App.boundsModule.extendedBounds;
 		let start = new Date().getTime();
+
+		//console.log("updateElementsToDisplay. Nbre element à traiter : " + i, checkInAllElements);
 
 		while(i--)
 		{

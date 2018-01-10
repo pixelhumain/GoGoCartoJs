@@ -54,6 +54,8 @@ export class ElementsManager
   {
     let start = new Date().getTime();
 
+    console.log("Display = " + result.elementsToDisplay.length + " / remove = " + result.elementsToRemove.length + " / add = " + result.newElements.length);
+
     if (App.mode == AppModes.List)
     {
       App.elementListComponent.update(result.elementsToDisplay);
@@ -62,9 +64,7 @@ export class ElementsManager
     {
       if (!App.mapComponent.isInitialized) { return;}
 
-      App.mapComponent.markerClustererGroup.restoreUnclusters(true);
-
-      // console.log("Display = " + result.elementsToDisplay.length + " / remove = " + result.elementsToRemove.length + " / add = " + result.newElements.length);
+      App.mapComponent.markerClustererGroup.restoreUnclusters(true);     
 
       // In some cases, markerCluster works faster clearing alls markers and adding them again
       if (result.elementsToRemove.length + result.newElements.length > result.elementsToDisplay.length)
