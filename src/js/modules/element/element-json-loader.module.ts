@@ -65,6 +65,7 @@ export class ElementJsonParserModule
     element.website = elementJson.website;
     element.email = elementJson.email || '';
     element.openHours = elementJson.openHours;
+    App.elementFormaterModule.calculateFormatedOpenHours(element);
     element.openHoursMoreInfos =  elementJson.openHoursMoreInfos; 
     
     element.searchScore = elementJson.searchScore;
