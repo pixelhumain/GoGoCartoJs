@@ -416,12 +416,31 @@ if (function(a) {
         });
     }, a.OpenStreetMapProvider.prototype.mapToGeocoded = function(b) {
         var c = new a.Geocoded();
-        return 0 === b.length ? null : (c.latitude = 1 * b.lat, c.longitude = 1 * b.lon, 
+        if (0 === b.length) return null;
+
+        c.latitude = 1 * b.lat, c.longitude = 1 * b.lon, 
         c.bounds = [ parseFloat(b.boundingbox[0]), parseFloat(b.boundingbox[2]), parseFloat(b.boundingbox[1]), parseFloat(b.boundingbox[3]) ], 
         c.streetNumber = void 0 !== b.address.house_number ? b.address.house_number : void 0, 
-        c.streetName = b.address.road, c.city = b.address.city, c.region = b.address.state, 
-        c.postal_code = b.address.postcode, c.streetNumber ? c.formattedAddress = c.streetNumber + " " + c.streetName + ", " + c.city : c.streetName ? c.formattedAddress = c.streetName + ", " + c.city : c.city ? c.formattedAddress = c.city + " " + c.postal_code : c.county ? c.formattedAddress = c.county + ", " + c.region : c.region ? c.formattedAddress = c.region : c.formattedAddress = c.state, 
-        c);
+        c.streetName = b.address.road, 
+        c.city = b.address.city || b.address.village, 
+        c.country = b.address.country,
+        c.country_code = b.address.country_code,
+        c.region = b.address.state, 
+        c.postal_code = b.address.postcode;
+
+        var result = "";
+        if (c.streetName) {
+          if (c.streetNumber) result += c.streetNumber + " "
+          result += c.streetName + ", ";
+        }
+        
+        if (c.postal_code) result += c.postal_code;
+        if (c.city && c.postal_code) result += " ";
+        if (c.city) result += c.city;
+        
+        c.formattedAddress = result;
+
+        return c;
     };
 }(GeocoderJS), "undefined" == typeof GeocoderJS && "function" == typeof require) {
     var GeocoderJS = require("../GeocoderJS.js");
