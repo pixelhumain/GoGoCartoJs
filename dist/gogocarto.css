@@ -3813,7 +3813,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
 * @Author: Sebastian Castro
 * @Date:   2017-12-26 08:55:41
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-12-27 16:30:01
+* @Last Modified time: 2018-01-10 15:40:45
 */
   /*
 * @Author: Sebastian Castro
@@ -5278,7 +5278,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       box-shadow: 1px 2px 8px 1px rgba(0, 0, 0, 0.4); }
     .gogocarto-container #gogo-controls-mobile.map .show-as-list-button {
       display: block; }
-  .gogocarto-container .search-bar-with-options-container.mobile {
+  .gogocarto-container #search-overlay-mobile .search-bar-with-options-container.mobile {
     display: none;
     z-index: 10;
     position: relative;
@@ -5288,32 +5288,36 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); }
-    .gogocarto-container .search-bar-with-options-container.mobile .search-bar-container {
+    .gogocarto-container #search-overlay-mobile .search-bar-with-options-container.mobile .search-bar-container {
       height: 52px;
       padding: 0; }
-    .gogocarto-container .search-bar-with-options-container.mobile .search-bar {
+    .gogocarto-container #search-overlay-mobile .search-bar-with-options-container.mobile .search-bar {
       height: 100%;
       padding: 0 4rem; }
-    .gogocarto-container .search-bar-with-options-container.mobile .search-icon {
+    .gogocarto-container #search-overlay-mobile .search-bar-with-options-container.mobile .search-icon {
       font-size: 22px;
       line-height: 57px;
       height: 56px;
       width: 56px; }
-      .gogocarto-container .search-bar-with-options-container.mobile .search-icon.search-bar-icon {
+      .gogocarto-container #search-overlay-mobile .search-bar-with-options-container.mobile .search-icon.search-bar-icon {
         left: -2px; }
-      .gogocarto-container .search-bar-with-options-container.mobile .search-icon.search-geolocalize {
+      .gogocarto-container #search-overlay-mobile .search-bar-with-options-container.mobile .search-icon.search-geolocalize {
         right: 0px;
         font-size: 24px !important; }
-    .gogocarto-container .search-bar-with-options-container.mobile .search-bar-icon {
+    .gogocarto-container #search-overlay-mobile .search-bar-with-options-container.mobile .search-bar-icon {
       left: 3px; }
-    .gogocarto-container .search-bar-with-options-container.mobile .search-geolocalize {
+    .gogocarto-container #search-overlay-mobile .search-bar-with-options-container.mobile .search-geolocalize {
       right: 5px;
       font-size: 24px !important; }
-    .gogocarto-container .search-bar-with-options-container.mobile .search-options {
+    .gogocarto-container #search-overlay-mobile .search-bar-with-options-container.mobile .search-options {
       display: block !important;
-      padding: 10px 15px 12px 15px; }
-    .gogocarto-container .search-bar-with-options-container.mobile #search-spinner-loader .spinner-layer {
+      padding: 0px 15px 12px 15px; }
+    .gogocarto-container #search-overlay-mobile .search-bar-with-options-container.mobile #search-spinner-loader .spinner-layer {
       border-color: white !important; }
+    .gogocarto-container #search-overlay-mobile .search-bar-with-options-container.mobile .search-no-result {
+      color: inherit;
+      font-size: 13px;
+      padding-bottom: 1rem; }
   .gogocarto-container #search-overlay-mobile {
     display: none;
     position: absolute;
