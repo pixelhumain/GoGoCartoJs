@@ -47,12 +47,14 @@ export class DirectoryMenuComponent
 
 		$('.btn-close-menu.large-screen').tooltip();
 
-    if (App.component.isMobileScreen()) {
-      this.initTouchMenu();
-      this.hide();
-    } else {
-      this.show();
-    }
+    setTimeout(() => { // wait for the page is loaded
+      if (App.component.isMobileScreen()) {
+        this.initTouchMenu();
+        this.hide();
+      } else {
+        this.show();
+      }
+    }, 300);    
 	}	
 
 	show() 
