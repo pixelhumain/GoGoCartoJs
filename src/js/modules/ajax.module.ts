@@ -73,9 +73,11 @@ export class AjaxModule
 
 					if (callbackSuccess) callbackSuccess(elementJson); 					
 				}	
-				else if (callbackFailure) callbackFailure(response); 				       
+				else if (callbackFailure) callbackFailure(response); 
+				
+				this.currElementIdRetrieving = null;				       
 			},
-			error: response => { if (callbackFailure) callbackFailure(response); }
+			error: response => { if (callbackFailure) callbackFailure(response); this.currElementIdRetrieving = null; }
 		});
 	};
 
