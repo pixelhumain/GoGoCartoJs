@@ -67,8 +67,11 @@ export class BoundsModule
 	}
 
 	extendBounds($ratio : number, $bounds : L.LatLngBounds = this.extendedBounds)
-	{
-		//console.log("extend bounds", $bounds);
+	{		
+		if (this.currRetrievingComplete(true)) {
+			this.extendedBounds = this.maxBounds;
+			return;
+		}
 		if (!$bounds) { console.log("bounds uncorrect", $bounds); return;}
 		this.extendedBounds = $bounds.pad($ratio);
 	}
