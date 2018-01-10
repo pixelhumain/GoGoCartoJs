@@ -53,23 +53,10 @@ export class MapManager
       App.mapComponent.onMapLoaded.do(() => {this.handleMapIdle(); });
       return;
     }
-    else
-    {
-      App.mapComponent.onMapLoaded.off(() => {this.handleMapIdle(); });
-    }
 
-    let updateInAllElementList = true;
-
-    let zoom = App.mapComponent.getZoom();
-    let old_zoom = App.mapComponent.getOldZoom();
-
-    if (zoom != old_zoom && old_zoom != -1)  
-    {
-      if (zoom > old_zoom) updateInAllElementList = false;         
-    }
+    let updateInAllElementList = !App.mapComponent.hasZoomedIn();
 
     App.elementsModule.updateElementsToDisplay(updateInAllElementList);
-    //App.elementsModule.updateElementsIcons(false);
 
     if (App.state == AppStates.Normal || App.state == AppStates.ShowElement) App.elementsManager.checkForNewElementsToRetrieve();
 
@@ -92,4 +79,6 @@ export class MapManager
     
     App.mapControlsComponent.hideControlLayers();
   };
+
+  
 }

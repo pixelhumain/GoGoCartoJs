@@ -92,12 +92,12 @@ export class MapComponent
 		this.map_.on('moveend', (e) => 
 		{ 
 			let visibleMarkersLength = $('.leaflet-marker-icon:visible').length;		
-			App.boundsModule.extendMapBounds(this.oldZoom, this.map_.getZoom(), visibleMarkersLength);
+			App.boundsModule.extendMapBounds(this.oldZoom, this.map_.getZoom(), visibleMarkersLength);			
+			
+			this.onIdle.emit(); 
 
 			this.oldZoom = this.map_.getZoom();
 			this.updateViewPort();
-			
-			this.onIdle.emit(); 
 		});
 		this.map_.on('load', (e) => 
 		{ 
@@ -244,4 +244,11 @@ export class MapComponent
 	}
 
 	isMapBounds() { return this.getMap() && this.getMap().getBounds(); }
+
+	hasZoomedIn()
+  {
+    let zoom = this.getZoom();
+    let old_zoom = this.getOldZoom();
+    return (zoom != old_zoom && old_zoom != -1 && zoom > old_zoom);
+  }
 }
