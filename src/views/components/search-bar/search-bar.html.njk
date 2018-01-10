@@ -29,8 +29,10 @@
             annuler
             {% import 'components/spinner-loader.html.njk' as spinnerLoader %}
             {{ spinnerLoader.create('search-spinner-loader') }}
-        </button>
+        </button>        
     </div>
+
+    <div class='search-no-result' style="display:none">Aucun résultat trouvé</div>
     
 </div>
 

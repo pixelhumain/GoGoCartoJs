@@ -69,6 +69,7 @@ export class SearchBarComponent
 	{
 		$('.search-cancel-btn').show();
 		$('.search-btn').hide();
+		$('.search-no-result').hide();
 
 		let searchText = this.searchInput().val();
 
@@ -81,6 +82,10 @@ export class SearchBarComponent
             this.hideSearchOptions(); 
             this.hideMobileSearchBar()
             App.mapComponent.fitBounds(App.geocoder.getBounds(), true); 
+          },
+          () => {
+          	this.clearLoader();
+          	$('.search-no-result').show();
           }); 
         break; 
       case "element": 
