@@ -67,9 +67,7 @@ export class SearchBarComponent
 	// handle all validation by user (input key enter pressed, icon click...)
 	private handleSearchAction()
 	{
-		$('.search-cancel-btn').show();
-		$('.search-btn').hide();
-		$('.search-no-result').hide();
+		this.beforeSearch();
 
 		let searchText = this.searchInput().val();
 
@@ -80,7 +78,6 @@ export class SearchBarComponent
           (result) => { 
             this.clearSearchResult(false); 
             this.hideSearchOptions(); 
-            this.hideMobileSearchBar()
             App.mapComponent.fitBounds(App.geocoder.getBounds(), true); 
           },
           () => {
@@ -106,6 +103,7 @@ export class SearchBarComponent
 
 	geolocateUser()
 	{
+		this.beforeSearch();
 		App.geocoder.geolocateUser( (result:ViewPort) => 
 		{
 			this.clearSearchResult(true);
@@ -248,6 +246,13 @@ export class SearchBarComponent
 	{
 		$('.search-btn').show();
 		$('.search-cancel-btn').hide();
+	}
+
+	private beforeSearch()
+	{
+		$('.search-no-result').hide();
+		$('.search-cancel-btn').show();
+		$('.search-btn').hide();
 	}
     
 }
