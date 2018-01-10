@@ -67,9 +67,11 @@ export function initializeVoting()
 						element.isFullyLoaded = false;
 
 						// reload Element, and add flash message
-						App.infoBarComponent.showElement(element.id, () => {
-							addFlashMessage(responseMessage);
-						});
+						if (App.mode == AppModes.Map) 
+							App.infoBarComponent.showElement(element.id, () => {
+								addFlashMessage(responseMessage);
+							});
+						else addFlashMessage(responseMessage);
 					}
 					else
 					{
