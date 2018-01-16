@@ -54,7 +54,7 @@ export class ElementsManager
   {
     let start = new Date().getTime();
 
-    console.log("Display = " + result.elementsToDisplay.length + " / remove = " + result.elementsToRemove.length + " / add = " + result.newElements.length);
+    // console.log("Display = " + result.elementsToDisplay.length + " / remove = " + result.elementsToRemove.length + " / add = " + result.newElements.length);
 
     if (App.mode == AppModes.List)
     {
