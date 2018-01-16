@@ -422,7 +422,7 @@ if (function(a) {
         c.bounds = [ parseFloat(b.boundingbox[0]), parseFloat(b.boundingbox[2]), parseFloat(b.boundingbox[1]), parseFloat(b.boundingbox[3]) ], 
         c.streetNumber = void 0 !== b.address.house_number ? b.address.house_number : void 0, 
         c.streetName = b.address.road, 
-        c.city = b.address.city || b.address.village, 
+        c.city = b.address.city || b.address.village || b.address.town, 
         c.country = b.address.country,
         c.country_code = b.address.country_code,
         c.region = b.address.state, 
