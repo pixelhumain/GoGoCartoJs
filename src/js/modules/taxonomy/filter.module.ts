@@ -63,10 +63,10 @@ export class FilterModule
 			let mainOption = App.taxonomyModule.getCurrMainOption();			
 			let isPassingFilters = this.recursivelyCheckedInOption(mainOption, element);
 			
-			if (isPassingFilters && element.openHours)
-			{
-				isPassingFilters = element.openHoursDays.some( (day : any) => App.taxonomyModule.openHoursFiltersDays.indexOf(day) > -1);
-			}
+			// if (isPassingFilters && element.openHours)
+			// {
+			// 	isPassingFilters = element.openHoursDays.some( (day : any) => App.taxonomyModule.openHoursFiltersDays.indexOf(day) > -1);
+			// }
 			
 			return isPassingFilters;
 		}		
