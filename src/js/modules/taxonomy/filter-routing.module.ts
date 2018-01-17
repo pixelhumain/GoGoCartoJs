@@ -121,11 +121,11 @@ export class FilterRoutingModule
 			checkArrayToParse = allOptions.filter( (option) => option.isChecked ).map( (option) => option.id);
 			uncheckArrayToParse = allOptions.filter( (option) => option.isDisabled ).map( (option) => option.id);
 
-			if (mainOption.showOpenHours) 
-			{
-				checkArrayToParse = checkArrayToParse.concat(App.taxonomyModule.openHoursCategory.checkedOptions.map( (option) => option.id));
-				uncheckArrayToParse = uncheckArrayToParse.concat(App.taxonomyModule.openHoursCategory.disabledOptions.map( (option) => option.id));
-			}
+			// if (mainOption.showOpenHours) 
+			// {
+			// 	checkArrayToParse = checkArrayToParse.concat(App.taxonomyModule.openHoursCategory.checkedOptions.map( (option) => option.id));
+			// 	uncheckArrayToParse = uncheckArrayToParse.concat(App.taxonomyModule.openHoursCategory.disabledOptions.map( (option) => option.id));
+			// }
 		}
 
 		let checkedIdsParsed = parseArrayNumberIntoString(checkArrayToParse);
