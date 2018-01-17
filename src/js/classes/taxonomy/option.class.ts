@@ -17,6 +17,8 @@ export class Option extends CategoryOptionTreeNode
 	showOpenHours : boolean;	
 	displayOption : boolean;
 
+	parentOptionIds : number[] = [];
+
 	constructor($optionJson : any)
 	{
 		super(CategoryOptionTreeNodeType.Option, '#option-', '#option-checkbox-', '.subcategories-wrapper');
@@ -36,8 +38,6 @@ export class Option extends CategoryOptionTreeNode
 	}
 
 	addCategory($category : Category) { this.children.push($category);  }
-
-	isMainOption() { return this.getOwner() ? (<Category>this.getOwner()).depth == 0 : false; }
 
 	isCollapsible() : boolean { return this.getDom().hasClass('option-collapsible'); }
 

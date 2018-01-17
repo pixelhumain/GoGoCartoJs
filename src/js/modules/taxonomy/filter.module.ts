@@ -94,7 +94,7 @@ export class FilterModule
 				if (log) console.log("--" + ecart + "Category", category.name);
 
 				let checkedOptions = category.checkedOptions;
-				let elementOptions = element.getOptionValueByCategoryId(category.id).filter((optValue) => !optValue.option.isMainOption());
+				let elementOptions = element.getOptionValueByCategoryId(category.id).filter((optValue) => !optValue.option.isMainOption);
 
 				// if this element don't have any option in this category, don't need to check
 				if (elementOptions.length == 0) return false;

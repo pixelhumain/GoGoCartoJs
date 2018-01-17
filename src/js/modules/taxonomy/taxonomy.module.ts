@@ -34,13 +34,19 @@ export class TaxonomyModule
 
 	createTaxonomyFromJson(mainCatgeoryJson, openHoursCategoryJson)
 	{
-		this.mainCategory = this.recursivelyCreateCategoryAndOptions(mainCatgeoryJson);
-		openHoursCategoryJson = openHoursCategoryJson || this.defaultOpenHoursCategory;
-		this.openHoursCategory = this.recursivelyCreateCategoryAndOptions(openHoursCategoryJson);
+		this.mainCategory = this.recursivelyCreateCategoryAndOptions(mainCatgeoryJson);		
 
-		this.updateOpenHoursFilter();
-		//console.log(this.mainCategory);
-	}
+		for(let option of this.mainCategory.children) option.isMainOption = true;
+
+		this.recursivelyCalculateParentsOptionIds(this.mainCategory);
+
+		// console.log(this.mainCategory);
+	
+		// not using openHours for now
+		// openHoursCategoryJson = openHoursCategoryJson || this.defaultOpenHoursCategory;
+		// this.openHoursCategory = this.recursivelyCreateCategoryAndOptions(openHoursCategoryJson);
+		// this.updateOpenHoursFilter();
+	}	
 
 	private recursivelyCreateCategoryAndOptions(categoryJson : any) : Category
 	{
@@ -52,18 +58,10 @@ export class TaxonomyModule
 			option.ownerId = categoryJson.id;
 			option.depth = category.depth;
 
-			if (category.depth == 0) option.mainOwnerId = "all";
-			else if (category.depth == -1) option.mainOwnerId = "openhours";
-			else option.mainOwnerId = category.mainOwnerId;
-
 			for(let subcategoryJson of optionJson.subcategories)
 			{				
-				if (category.depth <= 0) subcategoryJson.mainOwnerId = option.id;
-				else subcategoryJson.mainOwnerId = option.mainOwnerId;
-
 				let subcategory = this.recursivelyCreateCategoryAndOptions(subcategoryJson);
-				subcategory.ownerId = option.id;				
-
+				subcategory.ownerId = option.id;
 				option.addCategory(subcategory);
 			}
 
@@ -74,6 +72,25 @@ export class TaxonomyModule
 		this.categories.push(category);
 
 		return category;
+	}
+
+	// We want every option to know all those parents Option ids
+	// this method calculate those for all options
+	private recursivelyCalculateParentsOptionIds(category: Category, parentOption : Option = null)
+	{
+		for(let option of category.children)
+		{
+			if (option.isMainOption) option.mainOwnerId = "all";
+			else if (parentOption.isMainOption) option.mainOwnerId = parentOption.id;
+			else option.mainOwnerId = parentOption.mainOwnerId;
+
+			if (parentOption) (<Option>option).parentOptionIds = parentOption.parentOptionIds.concat([parentOption.id]);
+
+			for(let subcategory of option.children)
+			{				
+				this.recursivelyCalculateParentsOptionIds(<Category>subcategory, <Option>option);
+			}			
+		}
 	}
 
 	updateOpenHoursFilter()

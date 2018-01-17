@@ -165,7 +165,7 @@ export class FiltersComponent
       let optionId = $(this).attr('data-option-id');
       let option = App.taxonomyModule.getOptionById(optionId);
 
-      if (option.isMainOption()) App.filtersComponent.setMainOption(option.id);
+      if (option.isMainOption) App.filtersComponent.setMainOption(option.id);
       else if (option.isCollapsible()) option.toggleChildrenDetail()
       else option.toggle();
     });

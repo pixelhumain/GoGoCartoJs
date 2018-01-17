@@ -34,6 +34,8 @@ export class CategoryOptionTreeNode
 	isDisabled : boolean = false;	
 	isActive : boolean = true;
 
+	isMainOption : boolean = false;
+
 	constructor(private TYPE : CategoryOptionTreeNodeType, private DOM_ID : string, private DOM_CHECKBOX_ID : string, private DOM_CHILDREN_CLASS : string) {};
 
 	getDom() { return $(this.DOM_ID + this.id); }
@@ -58,8 +60,6 @@ export class CategoryOptionTreeNode
 	protected checkedChildren() : CategoryOptionTreeNode[] { return this.children.filter( child => child.isChecked); }
 
 	isOption() { return this.TYPE == CategoryOptionTreeNodeType.Option }
-
-	isMainOption() { return false; }
 
 	setChecked(bool : boolean)
 	{
@@ -110,7 +110,7 @@ export class CategoryOptionTreeNode
 			this.setChecked(check);
 			this.setDisabled(!check);
 
-			if (!this.isMainOption()) 
+			if (!this.isMainOption) 
 			{
 				for (let child of this.children) child.toggle(check, false, originDepth || this.depth);
 			}
@@ -140,7 +140,7 @@ export class CategoryOptionTreeNode
 		if (value) this.getDom().show();
 		else { this.getDom().hide();}
 
-		if (this.isMainOption())
+		if (this.isMainOption)
 		{
 			$('#main-option-gogo-icon-' + this.id).toggle(value);
 		}
@@ -152,7 +152,7 @@ export class CategoryOptionTreeNode
 
 	updateState(originDepth = null, propage = true)
 	{
-		if (this.isMainOption()) return;	
+		if (this.isMainOption) return;	
 
 		if (this.children.length == 0) 
 			this.setDisabled(!this.isChecked);
@@ -221,7 +221,7 @@ export class CategoryOptionTreeNode
 		let resultNodes = [];
 		resultNodes = resultNodes.concat(currOption.getSiblingsPristine());
 		let parentOption = currOption.getOwner().getOwner();
-		if (parentOption.isMainOption()) return resultNodes;
+		if (parentOption.isMainOption) return resultNodes;
 		else resultNodes = resultNodes.concat(this.recursivelyGetPristine(parentOption));		
 
 		return resultNodes;
