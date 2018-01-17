@@ -8,7 +8,9 @@
     <i class="gogo-icon-angle-right"></i>
   </div> 
   
-  <div class="show-as-list-button gogo-map-control gogo-primary"><i class="gogo-icon-list"></i></div>   
+  {% if config.isFeatureActivated('listMode') %}
+    <div class="show-as-list-button gogo-map-control gogo-primary"><i class="gogo-icon-list"></i></div>  
+  {% endif %} 
 </div>
 
 <div id="map-features-buttons">

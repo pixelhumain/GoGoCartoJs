@@ -60,29 +60,36 @@ export class GoGoConfig
   };
   readonly features =
   {
-    favorite:   new GoGoFeature(),
-    share:      new GoGoFeature(),
-    directions: new GoGoFeature(),
-    export:     new GoGoFeature(),
-    layers:     new GoGoFeature(),
-    mapdefaultview:  new GoGoFeature(),
-    pending:    new GoGoFeature(),
-    moderation: new GoGoFeature(),
-    search:     new GoGoFeature(),
+    // element menu
+    favorite:       new GoGoFeature(),
+    share:          new GoGoFeature(),
+    directions:     new GoGoFeature(),
 
-    add:        new GoGoFeature(),
-    edit:       new GoGoFeature(), 
-         
+    // element content
+    sendMail:       new GoGoFeature(),
+    elementHistory: new GoGoFeature(),
+
+    // gogo controls
+    listMode: new GoGoFeature(),
+
+    // map controls
+    export:          new GoGoFeature(),
+    layers:          new GoGoFeature(),
+    mapdefaultview:  new GoGoFeature(),
+    
+    pending:    new GoGoFeature(),    
+    searchPlace:      new GoGoFeature(),
+    searchElements:   new GoGoFeature(),
+    searchGeolocate:  new GoGoFeature(),
+
+    // element interaction / moderation
+    edit:       new GoGoFeature(),          
     delete:     new GoGoFeature(),
     report:     new GoGoFeature(),      
     vote:       new GoGoFeature(),
-    sendMail:   new GoGoFeature(),
-
+    moderation: new GoGoFeature(),
     directModeration:        new GoGoFeature(),
     collaborativeModeration: new GoGoFeature(),
-
-    elementHistory: new GoGoFeature()
-      
   };
   readonly security =
   {
@@ -151,7 +158,11 @@ export class GoGoConfig
 
   private recursiveFillProperty(that, object)
   {
+    // we don't want to apply recursively inside objects properties
     let objectsProperties = ['roles', 'defaultCenter', 'defaultBounds', 'tileLayers'];
+
+    // if we provide feature config, we enable it automatically
+    if (that instanceof GoGoFeature) that.active = true;
 
     for(var prop in object) 
     {

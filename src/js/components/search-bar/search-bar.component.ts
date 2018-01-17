@@ -118,7 +118,7 @@ export class SearchBarComponent
 		this.setValue($text);
 		this.currSearchText = $text;
 
-		let route = App.config.features.search.url;
+		let route = App.config.features.searchElements.url;
 		let data =  { text: $text }; 
 
 		if (route) {

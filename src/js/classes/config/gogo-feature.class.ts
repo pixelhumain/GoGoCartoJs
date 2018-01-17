@@ -1,6 +1,6 @@
 export class GoGoFeature
 {
-  active : boolean = true;
+  active : boolean = false;
   url : string = '';
   roles : string[] = ['anonymous', 'anonymous_with_mail', 'user', 'admin'];
   inIframe : boolean = true;

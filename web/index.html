@@ -37,18 +37,39 @@
           },
           features:
           {
-            search:   { url: 'http://localhost/GoGoCarto/web/app_dev.php/api/elements/search' },
-            delete:   { url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/delete', roles: ['admin'], inIframe: false },
-            report:   { url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/report', roles: ['anonymous', 'user'] },
-            vote:   { url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/vote',   roles: ['user', 'admin'], inIframe: false },
-            edit:   { url: 'http://localhost/GoGoCarto/web/app_dev.php/elements/edit/' },
+            listMode: {},
+            searchPlace: { },
+            searchElements:   { 
+                url: 'http://localhost/GoGoCarto/web/app_dev.php/api/elements/search' 
+            },
+            delete:   { 
+                url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/delete', 
+                roles: ['admin'], inIframe: false 
+            },            
+            report:   { 
+                url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/report', 
+                roles: ['anonymous', 'user'] 
+            },
+            vote:     { 
+                url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/vote',   
+                roles: ['user', 'admin'], inIframe: false 
+            },
+            moderation: { 
+                inIframe: false, roles: ['admin'], 
+                url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/resolve-reports'
+            },
+            edit:     { url: 'http://localhost/GoGoCarto/web/app_dev.php/elements/edit/' },
             sendMail: { url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/sendMail' },
             favorite: { inIframe: false },
+            directions: { active: true },
             export:   { inIframe: false },
-            pending:  { inIframe: false, roles: ['anonymous', 'user', 'admin'] },
-            moderation: { inIframe: false, roles: ['admin'], url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/resolve-reports'},
+            pending:  { inIframe: false, roles: ['anonymous', 'user', 'admin'] },            
             elementHistory: { inIframe: false, roles: ['admin'] },
             directModeration:  { roles: ['admin'] },
+            share: { active: true },
+            layers: { active: true },
+            mapdefaultview: { active: true },
+            collaborativeModeration: { active: true },
           },
           security:
           {
