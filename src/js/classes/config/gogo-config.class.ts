@@ -26,8 +26,9 @@ export class GoGoConfig
   };
   readonly data =
   {
-    taxonomy: '',
-    elementsApiUrl: '',
+    taxonomy: undefined,
+    elements: undefined,
+    retrieveElementsByApi: false,
     showPending: true,
   };
   readonly menu =
@@ -121,10 +122,34 @@ export class GoGoConfig
     // Copy all the defined options
     // All the options non specified will be initialized with default values
     this.recursiveFillProperty(this, config);
+    this.data.retrieveElementsByApi = typeof this.data.elements == "string";
     console.log(this);
 	}
+  
+  isFeatureActivated(featureName) : boolean
+  {
+    if (!this.features.hasOwnProperty(featureName)) { console.warn(`[GoGoCartoJs] feature ${featureName} doesn't exist`); return false; }
 
-  recursiveFillProperty(that, object)
+    return this.features[featureName].active && (!App.isIframe || this.features[featureName].inIframe);
+  }
+
+  // is feature is activated and the actual user is granted to use it
+  isFeatureAvailable(featureName) : boolean
+  {
+    if (!this.features.hasOwnProperty(featureName)) { console.warn(`[GoGoCartoJs] feature ${featureName} doesn't exist`); return false; }
+
+    let feature = this.features[featureName];
+
+    let roleProvided = true;
+    if (feature.hasOwnProperty('roles'))
+    {
+      roleProvided = feature.hasRole(App.loginModule.getStringifyRole());
+    }
+
+    return this.isFeatureActivated(featureName) && roleProvided;
+  } 
+
+  private recursiveFillProperty(that, object)
   {
     let objectsProperties = ['roles', 'defaultCenter', 'defaultBounds', 'tileLayers'];
 
@@ -152,26 +177,4 @@ export class GoGoConfig
     }
   }
 
-  isFeatureActivated(featureName) : boolean
-  {
-    if (!this.features.hasOwnProperty(featureName)) { console.warn(`[GoGoCartoJs] feature ${featureName} doesn't exist`); return false; }
-
-    return this.features[featureName].active && (!App.isIframe || this.features[featureName].inIframe);
-  }
-
-  // is feature is activated and the actual user is granted to use it
-  isFeatureAvailable(featureName) : boolean
-  {
-    if (!this.features.hasOwnProperty(featureName)) { console.warn(`[GoGoCartoJs] feature ${featureName} doesn't exist`); return false; }
-
-    let feature = this.features[featureName];
-
-    let roleProvided = true;
-    if (feature.hasOwnProperty('roles'))
-    {
-      roleProvided = feature.hasRole(App.loginModule.getStringifyRole());
-    }
-
-    return this.isFeatureActivated(featureName) && roleProvided;
-  } 
 }

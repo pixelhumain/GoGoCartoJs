@@ -53,9 +53,9 @@ export class GoGoCartoModule
 	private checkForDistantTaxonomy(options : any)
 	{
 		let taxonomy = options.data.taxonomy;
-		if (!taxonomy)
+		if (!taxonomy || !options.data.elements)
 		{
-			console.warn("[GoGoCarto] You must provide a taxonomy (url or Json object)");
+			console.warn("[GoGoCarto] You must provide a taxonomy and elements dataset (both url or Json object)");
 			return;
 		}
 
@@ -117,6 +117,7 @@ export class GoGoCartoModule
 			initializeReportingAndDeleting();
 			initializeSendingMail();
 
+			App.elementsJsonModule.loadLocalElements();		
 
 		}, 0);	   
 	}

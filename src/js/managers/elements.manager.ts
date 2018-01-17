@@ -15,6 +15,14 @@ export class ElementsManager
   {
     if (App.dataType != AppDataType.All) return;
 
+    if (App.config.data.retrieveElementsByApi)
+    {
+      this.retrieveMissingElementsViaApi($getFullRepresentation);
+    }
+  }   
+
+  private retrieveMissingElementsViaApi($getFullRepresentation : boolean)
+  {
     // console.log("checkForNewelementToRetrieve, fullRepresentation", $getFullRepresentation);
     let result = App.boundsModule.calculateFreeBounds($getFullRepresentation);
     // console.log("checkForNewelementToRetrieve, calculateBounds", result);
@@ -31,16 +39,15 @@ export class ElementsManager
       return;
     }    
 
+    // Normal behaviour, getting missing elements via Ajax request
     let freeBounds = result.freeBounds;
     let expectedFilledBounds = result.expectedFillBounds;
     if (freeBounds && freeBounds.length > 0) App.ajaxModule.getElementsInBounds(freeBounds, $getFullRepresentation, expectedFilledBounds); 
-  }      
+  }   
 
   handleNewElementsReceivedFromServer(result)
-  {    
-    let elementsJson = result.data;    
-    
-    let elements = App.elementsJsonModule.convertJsonElements(elementsJson, true, result.fullRepresentation);
+  {        
+    let elements = App.elementsJsonModule.convertJsonElements(result.data, true, result.fullRepresentation);
     //console.log("new Elements length", newElements.length);
     
     // on add markerClusterGroup after first elements received

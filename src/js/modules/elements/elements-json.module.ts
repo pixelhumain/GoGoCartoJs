@@ -67,4 +67,14 @@ export class ElementsJsonModule
       elementsConverted: elementsConverted
     };
   };
+
+  loadLocalElements()
+  {
+    if (!App.config.data.retrieveElementsByApi)
+    {
+      let elements = App.config.data.elements;
+      let elementJsonArray = elements.length ? elements : elements.data;
+      this.convertJsonElements(elementJsonArray, true, true);
+    }
+  }
 }

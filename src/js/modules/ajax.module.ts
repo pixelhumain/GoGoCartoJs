@@ -56,7 +56,7 @@ export class AjaxModule
 	{
 		if (elementId == this.currElementIdRetrieving) return;
 
-		let route = App.config.data.elementsApiUrl + '/' + elementId;
+		let route = App.config.data.elements + '/' + elementId;
 		this.currElementIdRetrieving = elementId;
 		
 		$.ajax({
@@ -95,7 +95,7 @@ export class AjaxModule
 															ontology : getFullRepresentation ? 'gogofull' : 'gogocompact' };
 		
 
-		let route = App.config.data.elementsApiUrl;
+		let route = App.config.data.elements;
 		
 		this.sendAjaxElementRequest(new Request(route, dataRequest), expectedFilledBounds);
 	}	

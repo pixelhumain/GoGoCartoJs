@@ -121,20 +121,26 @@ export class SearchBarComponent
 		let route = App.config.features.search.url;
 		let data =  { text: $text }; 
 
-		App.ajaxModule.sendRequest(route, 'get', data,
-		(searchResult) => 
+		if (route) {
+			App.ajaxModule.sendRequest(route, 'get', data,
+			(searchResult) => 
+			{
+	      App.setDataType(AppDataType.SearchResults, $backFromHistory, searchResult);       
+	 
+	      this.clearLoader();       
+	      this.showSearchResultLabel(searchResult.data.length);   
+	 			App.gogoControlComponent.updatePosition();
+	 			this.hideMobileSearchBar(); 			
+			},
+			(error) =>
+			{
+				//App.geocoder.geocodeAddress('');
+			});
+		}
+		else
 		{
-      App.setDataType(AppDataType.SearchResults, $backFromHistory, searchResult);       
- 
-      this.clearLoader();       
-      this.showSearchResultLabel(searchResult.data.length);   
- 			App.gogoControlComponent.updatePosition();
- 			this.hideMobileSearchBar(); 			
-		},
-		(error) =>
-		{
-			//App.geocoder.geocodeAddress('');
-		});
+			// TODO search through already received elements.
+		}			
 	}
 
 	showMobileSearchBar() { 
