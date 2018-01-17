@@ -14,7 +14,7 @@ export class ViewPort
 
   toString()
   {
-    let digits = this.zoom > 14 ? 4 : 2;
+    let digits = this.zoom > 14 ? 4 : this.zoom > 10 ? 3 : 2;
     return `@${this.lat.toFixed(digits)},${this.lng.toFixed(digits)},${this.zoom}z`;
   }
 
