@@ -48,6 +48,7 @@ export class AppComponent
 			$('#map-gogo-controls').velocity({'padding-left': '10px'}, {duration: 300, queue: false, easing: 'swing'});
 			$('.show-directory-menu-button').hide();
 		}	
+		setTimeout( () => { App.mapComponent.resize() }, 400);
 	}
 
 	handleDirectoryMenuHide()
@@ -55,6 +56,7 @@ export class AppComponent
 		$('.show-directory-menu-button').fadeIn(200);
 		$('#directory-content').velocity({'margin-left':'0'}, {duration: 100, queue: false, easing: 'swing'});		
 		$('#map-gogo-controls').velocity({'padding-left': '0px'}, {duration: 100, queue: false, easing: 'swing'});
+		setTimeout( () => { App.mapComponent.resize() }, 200);
 	}	
 
 	isMobileScreen() { return this.width() < 850; }

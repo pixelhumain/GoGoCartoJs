@@ -94,17 +94,16 @@ export class GoGoCartoModule
 			let domToAddStyles = $('head').length ? $('head') : $('html');
 			if (domToAddStyles.length) domToAddStyles.append(styles);
 			else 	console.warn("[GoGoCarto] Cannot find Dom 'head' or 'html' to add styles");
-		}
+		}		
 
 		setTimeout( () => {		
-			App.initialize();			
+			App.initialize();
 
 			App.elementsModule.initialize();
 			App.directoryMenuComponent.initialize();
 			App.filtersComponent.initialize();
 			App.boundsModule.initialize();	   
-			App.elementListComponent.initialize();
-			App.routerModule.loadInitialState();
+			App.elementListComponent.initialize();			
 			App.searchBarComponent.initialize();			
 			App.gogoControlComponent.initialize();
 			App.directionsComponent.initialize();	
@@ -117,8 +116,9 @@ export class GoGoCartoModule
 			initializeReportingAndDeleting();
 			initializeSendingMail();
 
-			App.elementsJsonModule.loadLocalElements();		
+			App.elementsJsonModule.loadLocalElements();
 
+			App.routerModule.loadInitialState();
 		}, 0);	   
 	}
 }

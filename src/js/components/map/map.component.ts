@@ -94,10 +94,9 @@ export class MapComponent
 			let visibleMarkersLength = $('.leaflet-marker-icon:visible').length;		
 			App.boundsModule.extendMapBounds(this.oldZoom, this.map_.getZoom(), visibleMarkersLength);			
 			
-			this.onIdle.emit(); 
-
-			this.oldZoom = this.map_.getZoom();
 			this.updateViewPort();
+			this.onIdle.emit(); 
+			this.oldZoom = this.map_.getZoom();			
 		});
 		this.map_.on('load', (e) => 
 		{ 
@@ -105,15 +104,14 @@ export class MapComponent
 			this.onMapLoaded.emit();			
 		});
 
-		this.resize();		
-
+		this.resize();
 		this.isInitialized = true;
 
 		// if we began with List Mode, when we initialize map
 		// there is already an address geocoded or a viewport defined
 		if (this.waitingBounds) this.fitBounds(this.waitingBounds, false);
 		else if (this.viewport) setTimeout( () => { this.setViewPort(this.viewport); },200);
-		//console.log("map init done");
+		
 		this.onMapReady.emit();
 	};
 

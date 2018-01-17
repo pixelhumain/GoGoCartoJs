@@ -22,8 +22,7 @@ export class RouterModule
 				initialState.address = 'geolocalize';
 				initialState.filters = this.filtersSerializedParam;
 
-				// timeout to let App variable being accesible
-				setTimeout( () => { App.historyStateManager.load(initialState); }, 0);				
+				this.startState(initialState);			
 			},
 			'normal /:mode/:addressAndViewport?': (mode, addressAndViewport = '') =>
 			{
@@ -37,8 +36,7 @@ export class RouterModule
 				initialState.viewport = new ViewPort().fromString(parsedAddressAndViewport[1]);
 				initialState.filters = this.filtersSerializedParam;
 
-				// timeout to let App variable being accesible
-				setTimeout( () => { App.historyStateManager.load(initialState); }, 0);				
+				this.startState(initialState);
 			},
 			'show_element /fiche/:name/:id/:addressAndViewport?': (name, id, addressAndViewport = '') =>
 			{
@@ -53,8 +51,7 @@ export class RouterModule
 				initialState.id = id;
 				initialState.filters = this.filtersSerializedParam;
 
-				// timeout to let App variable being accesible
-				setTimeout( () => { App.historyStateManager.load(initialState); }, 0);	
+				this.startState(initialState);
 			},
 			'show_directions /itineraire/:name/:id/:addressAndViewport?': (name, id, addressAndViewport = '') =>
 			{
@@ -69,8 +66,7 @@ export class RouterModule
 				initialState.id = id;
 				initialState.filters = this.filtersSerializedParam;
 
-				// timeout to let App variable being accesible
-				setTimeout( () => { App.historyStateManager.load(initialState); }, 0);	
+				this.startState(initialState);	
 			},
 			'search /:mode/recherche/:text': (mode, text) =>
 			{
@@ -82,8 +78,7 @@ export class RouterModule
 				initialState.text = text;
 				initialState.filters = this.filtersSerializedParam;
 
-				// timeout to let App variable being accesible
-				setTimeout( () => { App.historyStateManager.load(initialState); }, 0);
+				this.startState(initialState);
 			}
 		});		
 	}
@@ -126,5 +121,10 @@ export class RouterModule
     {
         return splited;
     }  
+  }
+
+  private startState(state : HistoryState)
+  {
+		App.historyStateManager.load(state);		
   }
 }
