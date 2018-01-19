@@ -24,8 +24,8 @@
     {% endif %}    
 
     <span class="location gogo-neutral">
-      {% if element.postalCode %}<span class="postalCode">{{ element.postalCode }}</span>{% endif %}
-      {% if element.addressLocality %}<span class="city"> {{ element.addressLocality }}</span>{% endif %}
+      {% if element.address.postalCode %}<span class="postalCode">{{ element.address.postalCode }}</span>{% endif %}
+      {% if element.address.addressLocality %}<span class="city"> {{ element.address.addressLocality }}</span>{% endif %}
     </span>
 
   </span>
