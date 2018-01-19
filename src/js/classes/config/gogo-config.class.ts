@@ -89,7 +89,6 @@ export class GoGoConfig
     vote:       new GoGoFeature(),
     moderation: new GoGoFeature(),
     directModeration:        new GoGoFeature(),
-    collaborativeModeration: new GoGoFeature(),
   };
   readonly security =
   {
