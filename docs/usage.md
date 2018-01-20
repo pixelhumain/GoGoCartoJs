@@ -13,7 +13,7 @@ You can give a plain object, or an url to a json distant configuration
 myGogocarto = goGoCarto('#gogocarto', {
   data: {
       taxonomy: "http://test.com/api/taxonomy",
-      elementsApiUrl: "https://test.com/api/elements"
+      elements: "https://test.com/api/elements"
   });
 ```
 
