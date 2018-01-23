@@ -31,6 +31,6 @@ export class Category extends CategoryOptionTreeNode
 	get options() : Option[] { return <Option[]> this.children; }
 
 	get disabledOptions() : Option[] { return <Option[]> this.disabledChildren(); }
-
+	get nonDisabledOptions() : Option[] { return <Option[]> this.nonDisabledChildren(); }
 	get checkedOptions() : Option[] { return <Option[]> this.checkedChildren(); }
 }

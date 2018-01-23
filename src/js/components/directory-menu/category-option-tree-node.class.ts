@@ -55,7 +55,7 @@ export class CategoryOptionTreeNode
 	}
 
 	protected disabledChildren() : CategoryOptionTreeNode[] { return this.children.filter( child => child.isDisabled); }
-
+	protected nonDisabledChildren() : CategoryOptionTreeNode[] { return this.children.filter( child => !child.isDisabled); }
 	protected checkedChildren() : CategoryOptionTreeNode[] { return this.children.filter( child => child.isChecked); }
 
 	isOption() { return this.TYPE == CategoryOptionTreeNodeType.Option }

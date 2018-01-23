@@ -46,7 +46,12 @@ export class FilterModule
 			if(element.isPending()) return false;
 		}		
 
-		if (App.currMainId == 'all')
+		if (!App.config.menu.showOnePanePerMainOption)
+		{
+			let checkedMainOptions = App.taxonomyModule.mainCategory.nonDisabledOptions;
+			return checkedMainOptions.some( (mainOption) => this.recursivelyCheckedInOption(mainOption, element));
+		}
+		else if (App.currMainId == 'all')
 		{
 			let elementOptions = element.getOptionValueByCategoryId( App.taxonomyModule.mainCategory.id);
 			let checkedOptions = App.taxonomyModule.mainCategory.checkedOptions;
@@ -93,7 +98,7 @@ export class FilterModule
 				let elementOptions = element.getOptionValueByCategoryId(category.id).filter((optValue) => !optValue.option.isMainOption);
 
 				// if this element don't have any option in this category, don't need to check
-				if (elementOptions.length == 0) return false;
+				if (elementOptions.length == 0) return true;
 
 				let isSomeOptionInCategoryCheckedOptions = elementOptions.some(optionValue => checkedOptions.indexOf(optionValue.option) > -1); 
 
