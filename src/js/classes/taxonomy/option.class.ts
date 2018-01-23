@@ -23,9 +23,9 @@ export class Option extends CategoryOptionTreeNode
 	{
 		super(CategoryOptionTreeNodeType.Option, '#option-', '#option-checkbox-', '.subcategories-wrapper');
 
-		this.id = $optionJson.id;
 		this.name = $optionJson.name;
 		this.nameShort = $optionJson.nameShort || this.name;
+		this.id = ('id' in $optionJson) ? $optionJson.id : this.nameShort;
 		this.color = $optionJson.color;
 		this.softColor = $optionJson.softColor || this.color;
 		this.icon = $optionJson.icon;
