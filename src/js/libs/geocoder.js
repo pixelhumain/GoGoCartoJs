@@ -417,11 +417,11 @@ if (function(a) {
     }, a.OpenStreetMapProvider.prototype.mapToGeocoded = function(b) {
         var c = new a.Geocoded();
         if (0 === b.length) return null;
-
+        // console.log("Initial Geocode result", b);
         c.latitude = 1 * b.lat, c.longitude = 1 * b.lon, 
         c.bounds = [ parseFloat(b.boundingbox[0]), parseFloat(b.boundingbox[2]), parseFloat(b.boundingbox[1]), parseFloat(b.boundingbox[3]) ], 
         c.streetNumber = void 0 !== b.address.house_number ? b.address.house_number : void 0, 
-        c.streetName = b.address.road, 
+        c.streetName = b.address.road || b.address.pedestrian, 
         c.city = b.address.city || b.address.village || b.address.town, 
         c.country = b.address.country,
         c.country_code = b.address.country_code,
