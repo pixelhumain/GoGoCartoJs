@@ -2,7 +2,8 @@ import { Roles } from "../../modules/login.module";
 import { App } from "../../gogocarto";
 import { TileLayer } from '../map/tile-layer.class';
 import { GoGoFeature } from './gogo-feature.class';
-import { ElementStatus } from '../classes';  
+import { ElementStatus } from '../classes'; 
+import { DEFAULT_FEATURES } from './gogo-default-feature' ;
 declare var L : any;
 
 export class GoGoConfig
@@ -127,6 +128,7 @@ export class GoGoConfig
 
 	constructor(config : any)
 	{
+    if (!config.features) config.features = DEFAULT_FEATURES;
     // Copy all the defined options
     // All the options non specified will be initialized with default values
     this.recursiveFillProperty(this, config);
