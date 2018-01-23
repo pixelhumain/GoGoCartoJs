@@ -9,6 +9,7 @@ var taxonomy = {
       "color":"#98A100",
       "softColor":"#808700",
       "icon":"icon-leaf-1",
+      "showExpanded": true,
       "suboptions":[
         {
           "id":10428,

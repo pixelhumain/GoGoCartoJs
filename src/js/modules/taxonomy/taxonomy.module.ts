@@ -71,7 +71,7 @@ export class TaxonomyModule
 					}
 				else if (optionJson.suboptions)
 				{
-					let subcategory = this.recursivelyCreateCategoryAndOptions({options: optionJson.suboptions});
+					let subcategory = this.recursivelyCreateCategoryAndOptions({options: optionJson.suboptions, showExpanded: optionJson.showExpanded});
 					subcategory.ownerId = option.id;
 					option.addCategory(subcategory);
 				}
