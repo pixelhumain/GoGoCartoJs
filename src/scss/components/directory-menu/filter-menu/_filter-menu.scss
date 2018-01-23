@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-02-28 13:25:52
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2018-01-22 17:13:11
+* @Last Modified time: 2018-01-23 12:29:36
 */
 @import 'uniques-filters';
 @import 'subcategorie-item';
@@ -137,6 +137,8 @@
 			padding-right: 5px;
 			padding-top:0px;
 			background-color: white;
+
+      &.full-height { height: 100%; }
 
 			ul
 			{
