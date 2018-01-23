@@ -33,6 +33,7 @@ export class GoGoConfig
   };
   readonly menu =
   {
+    showOnePanePerMainOption: true,
     showCheckboxForMainOptions: false,
     showCheckboxForSubOptions: true,
   };
@@ -56,7 +57,8 @@ export class GoGoConfig
       new TileLayer('stamenTerrain', 'https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png'),    
       new TileLayer('stamenWaterColor', 'https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.png'),    
       new TileLayer('openriver', 'https://{s}.tile.openstreetmap.fr/openriverboatmap/{z}/{x}/{y}.png'),
-      new TileLayer('thunderforest', 'https://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png') ]
+      new TileLayer('thunderforest', 'https://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png'),
+      new TileLayer('Pas de fond', '') ]
   };
   readonly features =
   {

@@ -21,7 +21,6 @@ export class CategoryOptionTreeNode
 	name : string;
 
 	children : CategoryOptionTreeNode[] = [];
-	depth : number;
 
 	// is the node han't be touched for now, it's on it's first initialized state
 	isPristine : boolean = true;
@@ -83,17 +82,8 @@ export class CategoryOptionTreeNode
 		this.isPristine = false;
 	}
 
-	toggle(value : boolean = null, humanAction : boolean = true, originDepth = null)
+	toggle(value : boolean = null, humanAction : boolean = true)
 	{		
-			// set toggle propagation to detetec independant categories (i.e. categories who actually belong to other category
-			// but who has been displayed outside of this category with curstom depth)
-			if (this.needToStopPropagation(originDepth)) { 
-				// we stop prograpagation on Categories, but we need to undo the previous action on parent Option
-				// so we call update state to check the state parent option need to be
-				if (this.getOwner()) this.getOwner().updateState(null, false);
-				return;
-			}
-
 			let check;
 			if (value != null) check = value;
 			else check = !this.isChecked;
@@ -110,16 +100,16 @@ export class CategoryOptionTreeNode
 			this.setChecked(check);
 			this.setDisabled(!check);
 
-			if (!this.isMainOption) 
+			if (!this.isMainOption || !App.config.menu.showOnePanePerMainOption) 
 			{
-				for (let child of this.children) child.toggle(check, false, originDepth || this.depth);
+				for (let child of this.children) child.toggle(check, false);
 			}
 
 			if (this.mainOwnerId == 'openhours') App.taxonomyModule.updateOpenHoursFilter();
 
 			if(humanAction)
 			{
-				if (this.getOwner()) this.getOwner().updateState(this.depth);
+				if (this.getOwner()) this.getOwner().updateState();
 				
 				//if (App.mode == AppModes.Map) App.elementsModule.updateElementsIcons(true);
 				
@@ -150,9 +140,9 @@ export class CategoryOptionTreeNode
 		if (recursive) for (let child of this.children) child.toggleVisibility(value, true);
 	}
 
-	updateState(originDepth = null, propage = true)
+	updateState(propage = true)
 	{
-		if (this.isMainOption) return;	
+		if (this.isMainOption && App.config.menu.showOnePanePerMainOption) return;	
 
 		if (this.children.length == 0) 
 			this.setDisabled(!this.isChecked);
@@ -174,12 +164,7 @@ export class CategoryOptionTreeNode
 				this.setChecked(false)
 		}		
 
-		if (this.getOwner() && propage) this.getOwner().updateState(originDepth);	
-	}
-
-	private needToStopPropagation(originDepth)
-	{
-		return originDepth && !this.isOption() && this.depth == originDepth && this.isActive;
+		if (this.getOwner() && propage) this.getOwner().updateState();	
 	}
 
 	recursivelyUpdateStates()
@@ -221,8 +206,8 @@ export class CategoryOptionTreeNode
 		let resultNodes = [];
 		resultNodes = resultNodes.concat(currOption.getSiblingsPristine());
 		let parentOption = currOption.getOwner().getOwner();
-		if (parentOption.isMainOption) return resultNodes;
-		else resultNodes = resultNodes.concat(this.recursivelyGetPristine(parentOption));		
+		if (this.isMainOption || App.config.menu.showOnePanePerMainOption && parentOption.isMainOption) return resultNodes;
+		else if (parentOption) resultNodes = resultNodes.concat(this.recursivelyGetPristine(parentOption));		
 
 		return resultNodes;
 	}

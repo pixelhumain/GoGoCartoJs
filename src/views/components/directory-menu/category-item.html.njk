@@ -1,5 +1,5 @@
 {% macro renderItem(category, recursive, isCheckable) %}
-<div class="category-wrapper depth-{{category.depth}}">
+<div class="category-wrapper">
 
 	{# ---- CATEGORY TITLE IF REQUIRED ----- #}
 	{% if category.displayCategoryName %}
@@ -71,7 +71,7 @@
     </li>
 
     {% if recursive %}
-    	<div class="subcategories-wrapper" {% if not option.showExpanded%} style="display:none"{% endif %}>
+    	<div class="subcategories-wrapper {{ "" if option.displayOption else "no-withdrawal"}}" {% if not option.showExpanded%} style="display:none"{% endif %}>
 	    {% for subcategory in option.subcategories %}
 	    		{{ renderItem(subcategory, true, isCheckable) }}
 			{% endfor %} 

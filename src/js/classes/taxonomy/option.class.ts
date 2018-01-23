@@ -8,7 +8,6 @@ declare let $ : any;
 export class Option extends CategoryOptionTreeNode
 { 
 	nameShort: string;
-	index : number;
 	color : string;
 	softColor : string;
 	icon : string;
@@ -16,6 +15,7 @@ export class Option extends CategoryOptionTreeNode
 	useColorForMarker : boolean;
 	showOpenHours : boolean;	
 	displayOption : boolean;
+	showExpanded : boolean;
 
 	parentOptionIds : number[] = [];
 
@@ -25,16 +25,16 @@ export class Option extends CategoryOptionTreeNode
 
 		this.id = $optionJson.id;
 		this.name = $optionJson.name;
-		this.index = $optionJson.index;
-		this.nameShort = $optionJson.nameShort;
+		this.nameShort = $optionJson.nameShort || this.name;
 		this.color = $optionJson.color;
-		this.softColor = $optionJson.softColor;
+		this.softColor = $optionJson.softColor || this.color;
 		this.icon = $optionJson.icon;
-		this.useIconForMarker = $optionJson.useIconForMarker;
-		this.useColorForMarker = $optionJson.useColorForMarker;
-		this.showOpenHours = $optionJson.showOpenHours;
-		this.displayOption = $optionJson.displayOption;
-		this.isActive = $optionJson.displayOption;
+		this.useIconForMarker = ('useIconForMarker' in $optionJson) ? $optionJson.useIconForMarker : !!this.icon;
+		this.useColorForMarker = ('useColorForMarker' in $optionJson) ? $optionJson.useColorForMarker : !!this.color;
+		this.showOpenHours = $optionJson.showOpenHours || false;
+		this.showExpanded = $optionJson.showExpanded || false;
+		this.displayOption = $optionJson.displayOption !== false;
+		this.isActive = this.displayOption;
 	}
 
 	addCategory($category : Category) { this.children.push($category);  }

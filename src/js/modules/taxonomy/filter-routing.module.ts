@@ -71,7 +71,7 @@ export class FilterRoutingModule
 				for (let cat of App.taxonomyModule.getMainOptionBySlug(mainOptionSlug).subcategories)
 					for(let option of cat.options) 
 					{
-						if (App.loadFullTaxonomy) option.toggle(!addingMode, false, -10); // seting originDepth to -10 to avoid stoping propagation
+						if (App.loadFullTaxonomy) option.toggle(!addingMode, false); 
 						else option.toggleVisibility(!addingMode, true);
 					}
 			}
@@ -105,7 +105,7 @@ export class FilterRoutingModule
 		let mainOptionName;
 		let checkArrayToParse, uncheckArrayToParse;
 		
-		if (mainOptionId == 'all')
+		if (mainOptionId == 'all' && App.config.menu.showOnePanePerMainOption)
 		{			
 			mainOptionName = "all";
 			checkArrayToParse = App.taxonomyModule.mainCategory.checkedOptions.map( (option) => option.id);
@@ -113,19 +113,29 @@ export class FilterRoutingModule
 		}
 		else
 		{
-			let mainOption = App.taxonomyModule.getMainOptionById(mainOptionId);
-			mainOptionName = mainOption.nameShort;
+			let allOptions;
 
-			let allOptions = mainOption.allChildrenOptions;
+			if (App.config.menu.showOnePanePerMainOption)
+			{
+				let mainOption = App.taxonomyModule.getMainOptionById(mainOptionId);
+				mainOptionName = mainOption.nameShort;
+				allOptions = mainOption.allChildrenOptions;
+			}
+			else
+			{
+				mainOptionName = "all";
+				allOptions = App.taxonomyModule.options;
+			}				
 
 			checkArrayToParse = allOptions.filter( (option) => option.isChecked ).map( (option) => option.id);
 			uncheckArrayToParse = allOptions.filter( (option) => option.isDisabled ).map( (option) => option.id);
-
+			
 			// if (mainOption.showOpenHours) 
 			// {
 			// 	checkArrayToParse = checkArrayToParse.concat(App.taxonomyModule.openHoursCategory.checkedOptions.map( (option) => option.id));
 			// 	uncheckArrayToParse = uncheckArrayToParse.concat(App.taxonomyModule.openHoursCategory.disabledOptions.map( (option) => option.id));
 			// }
+			
 		}
 
 		let checkedIdsParsed = parseArrayNumberIntoString(checkArrayToParse);

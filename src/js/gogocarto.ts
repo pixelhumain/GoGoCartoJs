@@ -74,9 +74,11 @@ export class GoGoCartoModule
 		// only for debugging
 		this.app = App;		
 
+		App.taxonomyModule.createTaxonomyFromJson(taxonomy, options.openHours);
+
 		let layout = App.templateModule.render('layout', 
 		{ 
-			mainCategory: taxonomy, 
+			mainCategory: App.taxonomyModule.mainCategory, 
 			openHoursCategory: options.openHours, 
 			isAdmin: App.loginModule.isAdmin(), 
 			isIframe: isIframe, 
@@ -87,7 +89,7 @@ export class GoGoCartoModule
 		if ($(this.containerSelector).length == 0) console.warn('[GoGoCarto] The container "' + this.containerSelector + '" was not found');
 		else $(this.containerSelector).append(layout);
 
-		App.taxonomyModule.createTaxonomyFromJson(taxonomy, options.openHours);
+		
 		if (App.taxonomyModule.options.length)
 		{
 			let styles = App.templateModule.render('gogo-styles', {'optionList':App.taxonomyModule.options, 'config':App.config});

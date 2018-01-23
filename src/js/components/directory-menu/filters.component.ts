@@ -145,7 +145,7 @@ export class FiltersComponent
     });      
 
     // Add surbrillance in main-categories sidebar filters menu whenn hovering a main category
-    $('#main-option-all .gogo-icon-name-wrapper').hover( 
+    $('#main-option-all.show-one-pane-per-main-option .gogo-icon-name-wrapper').hover( 
       function(e : Event) {
         let optionId = $(this).attr('data-option-id');
         let sidebarIcon = $('#main-option-gogo-icon-' + optionId);
@@ -165,7 +165,7 @@ export class FiltersComponent
       let optionId = $(this).attr('data-option-id');
       let option = App.taxonomyModule.getOptionById(optionId);
 
-      if (option.isMainOption) App.filtersComponent.setMainOption(option.id);
+      if (option.isMainOption && App.config.menu.showOnePanePerMainOption) App.filtersComponent.setMainOption(option.id);
       else if (option.isCollapsible()) option.toggleChildrenDetail()
       else option.toggle();
     });

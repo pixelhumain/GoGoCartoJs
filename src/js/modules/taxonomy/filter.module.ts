@@ -55,7 +55,6 @@ export class FilterModule
 			//console.log("checkedOptions", checkedOptions.map( (value) => value.name));
 
 			let result = elementOptions.some(optionValue => checkedOptions.indexOf(optionValue.option) > -1);
-			//console.log("return", result);
 			return result ;
 		}
 		else
@@ -74,24 +73,21 @@ export class FilterModule
 
 	private recursivelyCheckedInOption(option : Option, element : Element) : boolean
 	{
-		let ecart = "";
-		for(let i = 0; i < option.depth; i++) ecart+= "--";
-
 		let log = false;
 
-		if (log) console.log(ecart + "Check for option ", option.name);
+		if (log) console.log( "Check for option ", option.name);
 
 		let result;
 		if (option.subcategories.length == 0 || (option.isDisabled && !option.isMainOption) )
 		{
-			if (log) console.log(ecart + "No subcategories ");
+			if (log) console.log( "No subcategories ");
 			result = option.isChecked;
 		}
 		else
 		{
 			result = option.subcategories.every( (category) =>
 			{
-				if (log) console.log("--" + ecart + "Category", category.name);
+				if (log) console.log("--" + "Category", category.name);
 
 				let checkedOptions = category.checkedOptions;
 				let elementOptions = element.getOptionValueByCategoryId(category.id).filter((optValue) => !optValue.option.isMainOption);
@@ -101,17 +97,17 @@ export class FilterModule
 
 				let isSomeOptionInCategoryCheckedOptions = elementOptions.some(optionValue => checkedOptions.indexOf(optionValue.option) > -1); 
 
-				if (log) console.log("--" + ecart + "isSomeOptionInCategoryCheckedOptions", isSomeOptionInCategoryCheckedOptions);
+				if (log) console.log("--" + "isSomeOptionInCategoryCheckedOptions", isSomeOptionInCategoryCheckedOptions);
 				if (isSomeOptionInCategoryCheckedOptions)
 					return true;
 				else
 				{				
-					if (log) console.log("--" + ecart + "So we checked in suboptions", category.name);
+					if (log) console.log("--" + "So we checked in suboptions", category.name);
 					return elementOptions.some( (optionValue) => this.recursivelyCheckedInOption(optionValue.option, element));
 				}
 			});
 		}
-		if (log) console.log(ecart + "Return ", result);
+		if (log) console.log("Return ", result);
 		return result;
 	}
 }

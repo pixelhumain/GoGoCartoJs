@@ -22,7 +22,7 @@ export class TaxonomyModule
 
 	mainCategory : Category;
 	openHoursCategory : Category;
-	defaultOpenHoursCategory : Category = new Category({ name: "Horaires d'ouverture", depth: '-1'});
+	defaultOpenHoursCategory : Category = new Category({ name: "Horaires d'ouverture"});
 
 	openHoursFiltersDays : string[] = [];
 
@@ -52,22 +52,23 @@ export class TaxonomyModule
 	{
 		let category = new Category(categoryJson);
 
-		for(let optionJson of categoryJson.options)
-		{
-			let option = new Option(optionJson);
-			option.ownerId = categoryJson.id;
-			option.depth = category.depth;
+		if (categoryJson.options)
+			for(let optionJson of categoryJson.options)
+			{
+				let option = new Option(optionJson);
+				option.ownerId = categoryJson.id;
 
-			for(let subcategoryJson of optionJson.subcategories)
-			{				
-				let subcategory = this.recursivelyCreateCategoryAndOptions(subcategoryJson);
-				subcategory.ownerId = option.id;
-				option.addCategory(subcategory);
+				if (optionJson.subcategories)
+					for(let subcategoryJson of optionJson.subcategories)
+					{				
+						let subcategory = this.recursivelyCreateCategoryAndOptions(subcategoryJson);
+						subcategory.ownerId = option.id;
+						option.addCategory(subcategory);
+					}
+
+				category.addOption(option);	
+				this.options.push(option);	
 			}
-
-			category.addOption(option);	
-			this.options.push(option);	
-		}
 
 		this.categories.push(category);
 

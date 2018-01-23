@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-02-28 13:25:52
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2018-01-06 16:49:33
+* @Last Modified time: 2018-01-22 17:13:11
 */
 @import 'uniques-filters';
 @import 'subcategorie-item';
@@ -86,7 +86,7 @@
     }
 	}
 
-  #main-option-all .gogo-icon-name-wrapper:hover
+  #main-option-all.show-one-pane-per-main-option .gogo-icon-name-wrapper:hover
   {
     &:after {
       content: "+";
@@ -118,7 +118,7 @@
 		@include flex(1 auto);
 		padding-left: 7px;
     padding-right: 4px;
-    background-color: #eeeeee;    
+    background-color: #eeeeee;  
 
 		.sub-categorie-main-title
 		{

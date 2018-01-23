@@ -1,49 +1,53 @@
 <div class="filter-menu">	
 
 	{# MAIN CATEGORIE SIDE BAR #}
-	<div class="main-categories gogo-bg-neutral-dark custom-scroll-bar-light" {{  '' if fullTaxonomy else 'style="display:none"' }}>
+	{% if config.menu.showOnePanePerMainOption %}		
+		<div class="main-categories gogo-bg-neutral-dark custom-scroll-bar-light" {{  '' if fullTaxonomy else 'style="display:none"' }}>
 
-		<div class="icon main-gogo-icon-background gogo-bg-neutral" id="active-main-option-background"></div>
+			<div class="icon main-gogo-icon-background gogo-bg-neutral" id="active-main-option-background"></div>
 
-		<div class="icon main-icon active gogo-icon-users gogo-neutral gogo-h-neutral-light" id="main-option-gogo-icon-all" data-option-id="all">
-			<div class="main-option-tooltip gogo-bg-neutral-dark">Tous les {{ config.text.elementPlural }}</div>
-		</div> 
+			<div class="icon main-icon active gogo-icon-users gogo-neutral gogo-h-neutral-light" id="main-option-gogo-icon-all" data-option-id="all">
+				<div class="main-option-tooltip gogo-bg-neutral-dark">Tous les {{ config.text.elementPlural }}</div>
+			</div> 
+			
+			{# MAIN OPTIONS ICONS & TOOLTIP #}
+			{% for mainOption in mainCategory.options %}
+				<div class="icon main-icon {{ mainOption.icon }} gogo-neutral gogo-h-neutral-light"  id="main-option-gogo-icon-{{mainOption.id}}" data-option-id="{{ mainOption.id }}">
+					<div class="main-option-tooltip gogo-bg-neutral-dark-transparent">{{ mainOption.name }}</div>
+				</div>
+			{% endfor %}	
 
-		{# MAIN OPTIONS ICONS & TOOLTIP #}
-		{% for mainOption in mainCategory.options %}
-			<div class="icon main-icon {{ mainOption.icon }} gogo-neutral gogo-h-neutral-light"  id="main-option-gogo-icon-{{mainOption.id}}" data-option-id="{{ mainOption.id }}">
-				<div class="main-option-tooltip gogo-bg-neutral-dark-transparent">{{ mainOption.name }}</div>
-			</div>
-		{% endfor %}
+		</div>
+	{% endif %}
 
-	</div>
-
-	<div class="sub-categories">
+	<div class="sub-categories {{ "" if config.menu.showOnePanePerMainOption else "with-left-border" }}">
 
 		<div class="sub-categorie-main-title gogo-neutral-dark" id="menu-subcategories-title"></div>
 
 			<div class="sub-categories-content no-top-divider">
 			<ul>
 				{# ALL CATEGORIES FILTERS #}
-				<div id="main-option-all" class="main-option-subcategories-container" style="display:none">		
+				<div id="main-option-all" class="main-option-subcategories-container {{ "show-one-pane-per-main-option" if config.menu.showOnePanePerMainOption else "" }}" style="display:none">		
 
 					{% import 'components/directory-menu/category-item.html.njk' as categoryRenderer %}
-					{{ categoryRenderer.renderItem(mainCategory, false, config.menu.showCheckboxForMainOptions) }} 
+					{{ categoryRenderer.renderItem(mainCategory, not config.menu.showOnePanePerMainOption, config.menu.showCheckboxForMainOptions) }} 
 
 				</div>
 
 				{# SUBCATEGORIES FILTERS FOR EACH MAIN OPTION #}
-				{% for mainOption in mainCategory.options %}
+				{% if config.menu.showOnePanePerMainOption %}					
+					{% for mainOption in mainCategory.options %}
 
-					<div id="main-option-{{ mainOption.id }}" class="main-option-subcategories-container" style="display:none">		
+						<div id="main-option-{{ mainOption.id }}" class="main-option-subcategories-container" style="display:none">		
 
-						{% for category in mainOption.subcategories %}
-							{{ categoryRenderer.renderItem(category, true, config.menu.showCheckboxForSubOptions) }} 
-						{% endfor %} 
+							{% for category in mainOption.subcategories %}
+								{{ categoryRenderer.renderItem(category, true, config.menu.showCheckboxForSubOptions) }} 
+							{% endfor %} 
 
-					</div>
+						</div>
 
-				{% endfor %}
+					{% endfor %}
+				{% endif %}
 
 				{# OPEN HOURS FILTER #}
 				<div id="open-hours-filter" class="" style="display:none">		
@@ -55,7 +59,7 @@
 				{% set moderationIsActive = config.isFeatureAvailable('moderation') %}
 
 				{% if pendingIsActive or favoriteIsActive or moderationIsActive %}
-					<li class="subcategory-item expanded unexpandable">
+					<li class="subcategory-item expanded unexpandable top-separator">
 						<div class="name-wrapper">		
 							<span class="name">Afficher uniquement</span>
 						</div>
