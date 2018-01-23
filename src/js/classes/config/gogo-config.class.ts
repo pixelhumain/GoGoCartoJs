@@ -34,9 +34,9 @@ export class GoGoConfig
   };
   readonly menu =
   {
-    showOnePanePerMainOption: true,
-    showCheckboxForMainOptions: false,
-    showCheckboxForSubOptions: true,
+    showOnePanePerMainOption: false,
+    showCheckboxForMainFilterPane: true,
+    showCheckboxForSubFilterPane: true,
   };
   readonly map =
   {
