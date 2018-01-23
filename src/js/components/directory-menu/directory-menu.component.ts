@@ -57,9 +57,10 @@ export class DirectoryMenuComponent
 
 	show() 
 	{    
+    this.dom.show();
     this.onShow.emit();    
 
-    this.dom.show().velocity({left: 0}, this.ANIM_200); 
+    this.dom.velocity({left: 0}, this.ANIM_200); 
     this.overlay.show().velocity({opacity: 1}, this.ANIM_200);
 
     setTimeout( () => {

@@ -47,6 +47,7 @@ export class AppComponent
 			$('#directory-content').velocity({'margin-left': App.directoryMenuComponent.width}, {duration: 300, queue: false, easing: 'swing'});
 			$('#map-gogo-controls').velocity({'padding-left': '10px'}, {duration: 300, queue: false, easing: 'swing'});
 			$('.show-directory-menu-button').hide();
+			setTimeout(() => { $('#directory-content').css('margin-left', App.directoryMenuComponent.width); }, 400);
 		}	
 		setTimeout( () => { App.mapComponent.resize() }, 400);
 	}
