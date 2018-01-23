@@ -1,6 +1,6 @@
 var taxonomy = {
-  "id":2157,
   "name":"Catégories Principales",
+  "unexpandable":true,
   "options":[
     {
       "id":10427,
@@ -9,7 +9,38 @@ var taxonomy = {
       "color":"#98A100",
       "softColor":"#808700",
       "icon":"icon-leaf-1",
-      "showOpenHours":true
+      "suboptions":[
+        {
+          "id":10428,
+          "name":"Marché",
+          "color":"#00537E",
+          "softColor":"#22698E",
+          "icon":"icon-marche",
+          "textHelper":"Marché paysans"
+        },
+        {
+          "id":10429,
+          "name":"Epicerie & Supérette",
+          "color":"#7E3200",
+          "softColor":"#864C26",
+          "icon":"icon-epicerie",
+          "textHelper":"qui vendent des trucs bio"
+        },
+        {
+          "id":10430,
+          "name":"Restauration",
+          "color":"#009A9C",
+          "softColor":"#138C8E",
+          "icon":"icon-restaurant",
+          "textHelper":"Traiteurs mais pas restos"
+        },
+      ]
+    },    
+    {
+      "id":10517,
+      "name":"Voyages",
+      "color":"#1E8065",
+      "icon":"icon-case"
     },
     {
       "id":10473,
@@ -50,12 +81,6 @@ var taxonomy = {
       "icon":"icon-vetement-4"
     },
     {
-      "id":10517,
-      "name":"Voyages",
-      "color":"#1E8065",
-      "icon":"icon-case"
-    },
-    {
       "id":10525,
       "name":"Economie & Finance",
       "nameShort":"Economie/Finance",
@@ -63,7 +88,5 @@ var taxonomy = {
       "softColor":"#9D7424",
       "icon":"icon-euro"
     }
-  ],
-  "depth":0,
-  "unexpandable":true
+  ]  
 }

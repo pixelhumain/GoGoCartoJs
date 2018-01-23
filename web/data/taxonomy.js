@@ -1,5 +1,4 @@
 var taxonomy = {
-  "id":2157,
   "name":"Catégories Principales",
   "options":[
     {
@@ -8,7 +7,6 @@ var taxonomy = {
       "nameShort":"Agriculture",
       "subcategories":[
         {
-          "id":2158,
           "name":"Type",
           "options":[
             {
@@ -53,13 +51,11 @@ var taxonomy = {
                     }
                   ],
                   "displayCategoryName":false,
-                  "depth":2
                 }
               ],
               "color":"#AB7202",
               "softColor":"#9D7424",
               "useIconForMarker":false,
-              "useColorForMarker":true
             },
             {
               "id":10432,
@@ -75,7 +71,6 @@ var taxonomy = {
                       "color":"#AB0061",
                       "softColor":"#A4307C",
                       "useIconForMarker":false,
-                      "useColorForMarker":true
                     },
                     {
                       "id":10434,
@@ -83,11 +78,9 @@ var taxonomy = {
                       "color":"#8E36A5",
                       "softColor":"#7D398D",
                       "useIconForMarker":false,
-                      "useColorForMarker":true
                     }
                   ],
                   "displayCategoryName":false,
-                  "depth":1
                 },
                 {
                   "id":2160,
@@ -145,7 +138,6 @@ var taxonomy = {
                           ],
                           "enableDescription":true,
                           "displayCategoryName":false,
-                          "depth":2
                         }
                       ],
                       "icon":"icon-viande"
@@ -207,7 +199,6 @@ var taxonomy = {
                     }
                   ],
                   "enableDescription":true,
-                  "depth":1,
                   "showExpanded":false
                 }
               ],
@@ -218,7 +209,6 @@ var taxonomy = {
               "showExpanded":true
             }
           ],
-          "depth":1,
           "unexpandable":true
         }
       ],
@@ -278,7 +268,6 @@ var taxonomy = {
                     }
                   ],
                   "displayCategoryName":false,
-                  "depth":2
                 }
               ],
               "color":"#ab7100",
@@ -331,18 +320,15 @@ var taxonomy = {
                   ],
                   "enableDescription":true,
                   "displayCategoryName":false,
-                  "depth":2
                 }
               ],
               "color":"#7e3200",
               "softColor":"#864c26",
               "icon":"",
               "useIconForMarker":false,
-              "useColorForMarker":true,
               "showExpanded":true
             }
           ],
-          "depth":1,
           "unexpandable":true
         }
       ],
@@ -447,15 +433,13 @@ var taxonomy = {
                   ],
                   "enableDescription":true,
                   "displayCategoryName":false,
-                  "depth":2
                 }
               ],
               "color":"#009a9c",
               "softColor":"#138c8e",
               "icon":"",
               "textHelper":"Charpentier, production d'énergie...",
-              "useIconForMarker":false,
-              "useColorForMarker":true
+              "useIconForMarker":false
             },
             {
               "id":10465,
@@ -489,15 +473,13 @@ var taxonomy = {
                   ],
                   "enableDescription":true,
                   "displayCategoryName":false,
-                  "depth":2
                 }
               ],
               "color":"#00537e",
               "softColor":"#22698e",
               "icon":"",
               "textHelper":"Architecte, designer...",
-              "useIconForMarker":false,
-              "useColorForMarker":true
+              "useIconForMarker":false
             },
             {
               "id":10469,
@@ -530,17 +512,14 @@ var taxonomy = {
                     }
                   ],
                   "displayCategoryName":false,
-                  "depth":2
                 }
               ],
               "color":"#98a100",
               "softColor":"#8c9221",
               "icon":"",
               "useIconForMarker":false,
-              "useColorForMarker":true
             }
           ],
-          "depth":1,
           "unexpandable":true
         }
       ],
@@ -563,7 +542,6 @@ var taxonomy = {
               "softColor":"#138c8e",
               "icon":"",
               "useIconForMarker":false,
-              "useColorForMarker":true
             },
             {
               "id":10487,
@@ -572,7 +550,6 @@ var taxonomy = {
               "softColor":"#a4307c",
               "icon":"",
               "useIconForMarker":false,
-              "useColorForMarker":true
             },
             {
               "id":10488,
@@ -582,7 +559,6 @@ var taxonomy = {
               "icon":"",
               "textHelper":"1",
               "useIconForMarker":false,
-              "useColorForMarker":true
             },
             {
               "id":10489,
@@ -591,10 +567,8 @@ var taxonomy = {
               "softColor":"#22698e",
               "icon":"",
               "useIconForMarker":false,
-              "useColorForMarker":true
             }
-          ],
-          "depth":1
+          ]
         },
         {
           "id":2170,
@@ -630,8 +604,7 @@ var taxonomy = {
               "color":"",
               "icon":"icon-skate"
             }
-          ],
-          "depth":1
+          ]
         }
       ],
       "color":"#009A9C",
@@ -683,8 +656,7 @@ var taxonomy = {
                       "softColor":"#864c26",
                       "icon":"icon-autre"
                     }
-                  ],
-                  "depth":1
+                  ]
                 }
               ],
               "color":"",
@@ -736,8 +708,7 @@ var taxonomy = {
                       "softColor":"#a4307c",
                       "icon":"icon-expo"
                     }
-                  ],
-                  "depth":1
+                  ]
                 }
               ],
               "color":"",
@@ -747,8 +718,7 @@ var taxonomy = {
               "showExpanded":true
             }
           ],
-          "displayCategoryName":false,
-          "depth":1
+          "displayCategoryName":false
         }
       ],
       "color":"#AB0061",
@@ -830,19 +800,16 @@ var taxonomy = {
                     }
                   ],
                   "enableDescription":true,
-                  "displayCategoryName":false,
-                  "depth":2
+                  "displayCategoryName":false
                 }
               ],
               "color":"#8e36a5",
               "softColor":"#7d398d",
               "icon":"",
               "useIconForMarker":false,
-              "useColorForMarker":true,
               "showExpanded":true
             }
           ],
-          "depth":1,
           "unexpandable":true
         }
       ],
@@ -907,7 +874,6 @@ var taxonomy = {
               "icon":"icon-autre"
             }
           ],
-          "depth":1,
           "unexpandable":true
         }
       ],
@@ -938,7 +904,6 @@ var taxonomy = {
               "icon":"icon-euro"
             }
           ],
-          "depth":1,
           "unexpandable":true
         }
       ],
@@ -947,6 +912,5 @@ var taxonomy = {
       "icon":"icon-euro"
     }
   ],
-  "depth":0,
   "unexpandable":true
 }
