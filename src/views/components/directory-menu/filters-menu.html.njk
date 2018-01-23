@@ -22,9 +22,11 @@
 
 	<div class="sub-categories {{ "" if config.menu.showOnePanePerMainOption else "with-left-border" }}">
 
-		<div class="sub-categorie-main-title gogo-neutral-dark" id="menu-subcategories-title"></div>
+		{% if config.menu.showOnePanePerMainOption %}
+			<div class="sub-categorie-main-title gogo-neutral-dark" id="menu-subcategories-title"></div>
+		{% endif %}
 
-			<div class="sub-categories-content no-top-divider">
+		<div class="sub-categories-content no-top-divider {{ "" if config.menu.showOnePanePerMainOption else "full-height" }}">
 			<ul>
 				{# ALL CATEGORIES FILTERS #}
 				<div id="main-option-all" class="main-option-subcategories-container {{ "show-one-pane-per-main-option" if config.menu.showOnePanePerMainOption else "" }}" style="display:none">		
