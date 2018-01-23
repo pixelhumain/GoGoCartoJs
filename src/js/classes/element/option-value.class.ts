@@ -5,7 +5,7 @@ import { App } from "../../gogocarto";
 
 export class OptionValue
 {
-	optionId : number;
+	optionId : any;
 	index : number;
 	description : string;
 	option_ : Option = null;
@@ -19,7 +19,7 @@ export class OptionValue
 		// console.log("value json", $optionValueJson);
 		
 		// in case of compact json, the options values are stored in simple array
-		if (typeof $optionValueJson == 'number')
+		if (typeof $optionValueJson == 'number' || typeof $optionValueJson == 'string')
 		{
 			// console.log("number")
 			this.optionId = $optionValueJson;

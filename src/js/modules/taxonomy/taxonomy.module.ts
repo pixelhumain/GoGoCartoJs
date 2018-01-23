@@ -26,6 +26,8 @@ export class TaxonomyModule
 
 	openHoursFiltersDays : string[] = [];
 
+	categoriesCreatedCount : number = 0;
+
 	constructor() 
 	{
 		this.options = [];
@@ -50,6 +52,8 @@ export class TaxonomyModule
 
 	private recursivelyCreateCategoryAndOptions(categoryJson : any) : Category
 	{
+		if (!categoryJson.id) categoryJson.id = this.categoriesCreatedCount;
+		this.categoriesCreatedCount++;
 		let category = new Category(categoryJson);
 
 		if (categoryJson.options)
