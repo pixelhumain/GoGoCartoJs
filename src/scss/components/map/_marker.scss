@@ -83,7 +83,7 @@
     border-radius: 50%;
     top: 4px;
     font-size: 18px;
-    line-height: 30px;
+    line-height: 28px;
 }
 :-moz-any(.iconInsideMarker-wrapper) {
     top: 3px;
@@ -96,7 +96,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
 .iconInsideMarker
 {
 	line-height: 26px;
-
     &.disabled {  color: grey !important; }
     &:before { line-height: inherit; }
 }
