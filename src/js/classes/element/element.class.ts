@@ -65,7 +65,6 @@ export class Element extends ElementBase
 		if (this.needToBeUpdatedWhenShown || App.mode == AppModes.List || $force)
 		{
 			App.elementIconsModule.updateIconsToDisplay(this);
-
 			let optionValuesToUpdate = this.getCurrOptionsValues().filter( (optionValue) => optionValue.isFilledByFilters);
 			optionValuesToUpdate.push(this.getCurrMainOptionValue());
 			for(let optionValue of optionValuesToUpdate) App.elementOptionValuesModule.updateOptionValueColor(this, optionValue);
@@ -105,7 +104,8 @@ export class Element extends ElementBase
 
 	getCurrOptionsValues() : OptionValue[]
 	{
-		return this.optionsValues.filter( (optionValue) => optionValue.option.mainOwnerId == App.currMainId);
+		if (App.config.menu.showOnePanePerMainOption) return this.optionsValues.filter( (optionValue) => optionValue.option.mainOwnerId == App.currMainId);
+		return this.optionsValues;
 	}
 
 	getCurrMainOptionValue() : OptionValue

@@ -9,7 +9,7 @@ export class ElementIconsModule
     this.checkForDisabledOptionValues(element);
 
     if (App.currMainId == 'all')
-      element.iconsToDisplay = this.recursivelySearchIconsToDisplay(element.getOptionTree(), false);
+      element.iconsToDisplay = this.recursivelySearchIconsToDisplay(element.getOptionTree(), !App.config.menu.showOnePanePerMainOption);
     else
       element.iconsToDisplay = this.recursivelySearchIconsToDisplay(element.getCurrMainOptionValue());
 
@@ -19,7 +19,7 @@ export class ElementIconsModule
       element.iconsToDisplay.push(element.getCurrMainOptionValue());
     }
     
-    //console.log("Icons to display sorted", this.getIconsToDisplay());
+    // console.log("Icons to display sorted", element.getIconsToDisplay());
   }
 
   private recursivelySearchIconsToDisplay(parentOptionValue : OptionValue, recursive : boolean = true) : OptionValue[]

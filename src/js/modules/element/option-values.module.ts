@@ -134,7 +134,8 @@ export class ElementOptionValuesModule
           category = <Category> option.getOwner();
           if (category)
           {
-            option = <Option> category.getOwner();          
+            option = <Option> category.getOwner();
+            if (!option) break;     
             // console.log("  -> parent option" + option.name + " usecolorForMarker", option.useColorForMarker);
             colorId = option.useColorForMarker ? option.id : null;
           }          

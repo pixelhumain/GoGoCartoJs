@@ -29,11 +29,10 @@
 		<div class="sub-categories-content no-top-divider {{ "" if config.menu.showOnePanePerMainOption else "full-height" }}">
 			<ul>
 				{# ALL CATEGORIES FILTERS #}
-				<div id="main-option-all" class="main-option-subcategories-container {{ "show-one-pane-per-main-option" if config.menu.showOnePanePerMainOption else "" }}" style="display:none">		
-
+				<div id="main-option-all" class="main-option-subcategories-container {{ "show-one-pane-per-main-option" if config.menu.showOnePanePerMainOption else "" }}" 
+						 style="display:none; {{ "" if mainCategory.displayCategoryName else "padding-top: 1rem;" }}">		
 					{% import 'components/directory-menu/category-item.html.njk' as categoryRenderer %}
-					{{ categoryRenderer.renderItem(mainCategory, not config.menu.showOnePanePerMainOption, config.menu.showCheckboxForMainOptions) }} 
-
+					{{ categoryRenderer.renderItem(mainCategory, not config.menu.showOnePanePerMainOption, config.menu.showCheckboxForMainOptions) }}
 				</div>
 
 				{# SUBCATEGORIES FILTERS FOR EACH MAIN OPTION #}
