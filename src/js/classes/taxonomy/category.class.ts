@@ -16,10 +16,10 @@ export class Category extends CategoryOptionTreeNode
 	{
 		super(CategoryOptionTreeNodeType.Category, '#category-', '#subcategorie-checkbox-', '.options-wrapper');
 
-		this.id = $categoryJson.id || 0;
-		this.name = $categoryJson.name || 'Catégorie';
+		this.id = $categoryJson.id;
+		this.name = $categoryJson.name;
 		this.enableDescription = $categoryJson.enableDescription || false;
-		this.displayCategoryName = $categoryJson.displayCategoryName !== false;
+		this.displayCategoryName = $categoryJson.displayCategoryName !== false && !!this.name;
 		this.showExpanded = $categoryJson.showExpanded !== false;
 		this.unexpandable = $categoryJson.unexpandable || false;
 		this.mainOwnerId = $categoryJson.mainOwnerId || null;
