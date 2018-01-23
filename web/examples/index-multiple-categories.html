@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Loading Dev library -->
+    <link rel="stylesheet" href="../assets/gogocarto.css"> 
+    <link rel="stylesheet" href="../assets/images/styles.css">
+    <script src="../../build/libs.js"></script>
+    <script src="../../build/directory.js"></script>
+    <script src="../../build/templates.js"></script>
+
+    <!-- Icons and Fonts -->
+    <link href="https://file.myfontastic.com/p9QtVQwDCkDvVq6VJesnxg/icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+
+    <!-- Load data -->
+    <script src="../data/elements-mobility.js"></script>
+    <script src="../data/taxonomy-multiple-categories.js"></script>
+
+    <!-- Examples related stuff -->
+    <link rel="stylesheet" href="examples.css"> 
+    <meta charset="utf-8">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>     
+  </head>
+
+  <body>
+    <!-- Create container -->
+  	<div id="gogocarto"></div>
+  </body>
+
+  <script>
+    $(document).ready(function()
+    {   
+      carto = goGoCarto('#gogocarto', {
+        data:
+        {
+          taxonomy: taxonomy,
+          elements: elements,
+        }
+      });
+    });
+  </script>  
+</html>
+

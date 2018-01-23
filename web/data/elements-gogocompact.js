@@ -59,7 +59,7 @@ var elements = {
     ],
     [
       "10iu",
-      "Les d\u00e9lices du potager",
+      "Les délices du potager",
       45.84044,
       -0.24121,
       [
