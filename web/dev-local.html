@@ -21,6 +21,7 @@
     <script src="../build/templates.js"></script>
 
     <script src="data/colors.js"></script>
+    <script src="data/taxonomy-full.js"></script>
     <script src="data/elements.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
@@ -31,7 +32,7 @@
         carto = goGoCarto('#gogocarto', {
           data:
           {
-            taxonomy: "http://localhost/GoGoCarto/web/app_dev.php/api/taxonomy",
+            taxonomy: taxonomy,
             elements: 'http://localhost/GoGoCarto/web/app_dev.php/api/elements'
           },
           menu:
