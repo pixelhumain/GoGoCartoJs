@@ -1,6 +1,7 @@
 import { Element } from "../../classes/classes";
 import { App } from "../../gogocarto";
 import { Event } from "../../classes/event.class";
+import { slugify } from "../../utils/string-helpers";
 
 export interface ElementsConverted
 { 
@@ -14,12 +15,16 @@ export class ElementsJsonModule
 {
   onNewsElementsConverted = new Event<Element[]>();
 
-  convertJsonElements(elementList, checkIfAlreadyExist = true, isFullRepresentation : boolean = true) 
+  convertJsonElements(elementList : any[], checkIfAlreadyExist = true, isFullRepresentation : boolean = true) 
   {
     let element : Element, elementJson;
     let newElements : Element[] = [];
     let elementsConverted : Element[] = [];
     let start = new Date().getTime();
+
+    if (isFullRepresentation)
+      for (let elementJson of elementList)
+        if (!elementJson.id) elementJson.id = (slugify(elementJson.name) + elementJson.geo.latitude).replace('.', '');
 
     let elementsIdsReceived = elementList.map( (e, index) =>  { return {
         id: isFullRepresentation ? e.id : e[0], // in compact way, id is the first element of an array
