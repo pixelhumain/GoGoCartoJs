@@ -14,7 +14,7 @@ Demo
 Download
 --------
 
-[Download Latest Release]https://github.com/pixelhumain/GoGoCartoJs/releases
+[Download Latest Release](https://github.com/pixelhumain/GoGoCartoJs/releases)
 
 Overview
 --------
