@@ -16,6 +16,7 @@ export class Option extends CategoryOptionTreeNode
 	showOpenHours : boolean;	
 	displayOption : boolean;
 	showExpanded : boolean;
+  textHelper : string;
 
 	parentOptionIds : number[] = [];
 
@@ -29,6 +30,7 @@ export class Option extends CategoryOptionTreeNode
 		this.color = $optionJson.color;
 		this.softColor = $optionJson.softColor || this.color;
 		this.icon = $optionJson.icon;
+		this.textHelper = $optionJson.textHelper;
 		this.useIconForMarker = ('useIconForMarker' in $optionJson) ? $optionJson.useIconForMarker : !!this.icon;
 		this.useColorForMarker = ('useColorForMarker' in $optionJson) ? $optionJson.useColorForMarker : !!this.color;
 		this.showOpenHours = $optionJson.showOpenHours || false;

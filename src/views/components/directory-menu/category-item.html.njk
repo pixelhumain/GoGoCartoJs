@@ -34,7 +34,7 @@
 
     <li class="subcategorie-option-item row 
     					{{ 'option-collapsible' if isSubcategories}} {{ 'expanded' if option.showExpanded }} 
-    					{{ 'tooltipped' if option.textHelper and not isSubcategories }}"    		
+    					{{ 'tooltipped' if option.textHelper }}"  		
     		id="option-{{ option.id }}"
     		data-position="right" data-delay="700" data-tooltip="{{ option.textHelper | capitalize }}"
     		{% if not option.displayOption %} style="display:none"{% endif %}>
