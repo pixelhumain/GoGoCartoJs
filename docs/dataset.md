@@ -1,7 +1,12 @@
 Dataset
 ==
+You needs to provide data that gogocarto will display on the map. The data must be an array of json objects. See [Element Documentation](dataset-element-configuration.md) to know how each element must look like.
 
-Data to be displayed on the map can be given via a **local object**
+There is three ways of giving the data
+
+With Local Object
+-----
+
 ```html
 <!-- Load data -->
 <script src="../data/elements.js"></script>
@@ -23,7 +28,8 @@ Data to be displayed on the map can be given via a **local object**
 </script>  
 ```
 
-Or from distant **objects / Apis**
+With distant Object, all at a time
+-----------
 ```javascript
 data:
 {
@@ -32,7 +38,7 @@ data:
 }
 ```
 
-Improve performance with bounds queries
+With distant API, and bounds queries
 --------------------
 
 For large dataset, it is strongly recommanded to use an API which will only send the data needed by GoGocarto.
