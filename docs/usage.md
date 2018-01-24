@@ -1,6 +1,16 @@
 Usage
 =====
 
+Import the library
+----------
+
+[Download latest release](https://github.com/pixelhumain/GoGoCartoJs/releases) and import both `gogocarto.css` and `gogocarto.js`. The folders "images" and "fonts" must remains in the same place than the `gogocarto.css` file.
+
+```html
+<link rel="stylesheet" href="path/to/gogocarto.min.css"> 
+<script src="path/to/gogocarto.min.js"></script>
+```
+
 Initialization
 -------------
 You need to provide a configuration object to initialize GoGoCartoJs.
