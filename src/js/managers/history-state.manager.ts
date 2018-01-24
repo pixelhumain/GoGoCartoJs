@@ -25,7 +25,7 @@ export class HistoryStateManager
     else
     {
       // check viewport and address from cookies
-      if (!historystate.viewport && !historystate.address && historystate.state == AppStates.Normal) 
+      if (App.config.map.saveViewportInCookies && !historystate.viewport && !historystate.address && historystate.state == AppStates.Normal) 
       {
         console.log("no viewport nor address provided, using cookies values");
         historystate.viewport = new ViewPort().fromString(Cookies.readCookie('viewport'));

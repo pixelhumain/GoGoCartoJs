@@ -44,6 +44,8 @@ export class GoGoConfig
     defaultBounds : L.latLngBounds(L.latLng(52, 10), L.latLng(40, -5)),
     defaultCenter : L.latLng(46, 0),
     maxBounds : L.latLngBounds(L.latLng(-90, -180), L.latLng(90, 180)),
+    saveViewportInCookies : false,
+    saveTileLayerInCookies : false,
     defaultTileLayer : 'cartodb',
     tileLayers : [
       new TileLayer('mapbox', 'https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2ViYWxsb3QiLCJhIjoiY2l4MGtneGVjMDF0aDJ6cWNtdWFvc2Y3YSJ9.nIZr6G2t08etMzft_BHHUQ'),

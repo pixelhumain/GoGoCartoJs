@@ -74,8 +74,11 @@ export class HistoryModule
 		if ($pushState) history.pushState(historyState, '', route);
 		else history.replaceState(historyState, '', route);
 
-		Cookies.createCookie('viewport',historyState.viewport, 0.04); // remember this only for 1hour
-		Cookies.createCookie('address',historyState.address, 0.04); // remember this only for 1hour
+		if (App.config.map.saveViewportInCookies)
+		{
+			Cookies.createCookie('viewport',historyState.viewport, 0.04); // remember this only for 1hour
+			Cookies.createCookie('address',historyState.address, 0.04); // remember this only for 1hour
+		}
 	};
 
 	private generateRoute(historyState : HistoryState)

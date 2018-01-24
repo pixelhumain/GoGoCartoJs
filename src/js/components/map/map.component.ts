@@ -53,7 +53,7 @@ export class MapComponent
 		}
 
 		// Get defaultBaseLayer from Cookie if possible
-		let baseLayerId = Cookies.readCookie('defaultBaseLayer');
+		let baseLayerId = App.config.map.saveTileLayerInCookies ? Cookies.readCookie('defaultBaseLayer') : null;
 		let defaultBaseLayer = baseLayers.hasOwnProperty(baseLayerId) ? baseLayers[baseLayerId] : baseLayers[App.config.map.defaultTileLayer];
 
 		this.map_ = L.map('directory-content-map', {

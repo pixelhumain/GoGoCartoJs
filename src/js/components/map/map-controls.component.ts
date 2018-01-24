@@ -70,11 +70,15 @@ export class MapControlsComponent
   private createListenerForLayers()
   {
     if (this.listenerLayerChangeHasBeenCreated) return;
-    // listen for base layer selection, to store value in cookie
-    $('#directory-content-map .leaflet-control-layers-selector').change( function(e) 
-    {    
-      Cookies.createCookie('defaultBaseLayer', $(this).siblings('span').text(), 100);
-    });
+    
+    if (App.config.map.saveTileLayerInCookies)
+    {
+      // listen for base layer selection, to store value in cookie
+      $('#directory-content-map .leaflet-control-layers-selector').change( function(e) 
+      {    
+        Cookies.createCookie('defaultBaseLayer', $(this).siblings('span').text(), 100);
+      });
+    }
 
     this.listenerLayerChangeHasBeenCreated = true;
   }
