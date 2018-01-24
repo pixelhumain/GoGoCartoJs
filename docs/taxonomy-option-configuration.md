@@ -64,17 +64,21 @@ Color is used to color the icon and the marker in most of the cases
 SoftColor
 ---------
 The SoftColor is used in the element-section. Oftenly we should use a softer color for this section, otherwise it's painfull for the eyes
+
 ![alt img](images/soft-color.png "Soft Color")
 
 Text Helper
 ----------
 Display a text helper on option hover
+
 ![alt img](images/option-text-helper.png "Text Helper")
 
 Show Expanded
 -------------
 Whether or not the suboptions or subcategories should be visible on the initialized position
+
 ![alt img](images/option-non-expanded.png "Text Helper")
+
 ![alt img](images/option-expanded.png "Text Helper")
 
 Display Option
