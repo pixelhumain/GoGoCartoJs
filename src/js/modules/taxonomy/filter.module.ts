@@ -31,6 +31,8 @@ export class FilterModule
 
 	checkIfElementPassFilters(element : Element) : boolean
 	{
+		if (element.optionsValues.length == 0) return false;
+
 		if (this.showOnlyFavorite_) return element.isFavorite;
 
 		if (this.showOnlyModeration_ && !element.needsModeration()) return false;
