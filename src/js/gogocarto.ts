@@ -116,12 +116,12 @@ export class GoGoCartoModule
 			initializePickAddress();
 			initializeVoting();
 			initializeReportingAndDeleting();
-			initializeSendingMail();
-
-			App.elementsJsonModule.loadLocalElements();
+			initializeSendingMail();			
 
 			App.routerModule.loadInitialState();
-		}, 0);	   
+
+			App.elementsJsonModule.loadLocalElements();
+		}, 0);	 
 	}
 }
 
