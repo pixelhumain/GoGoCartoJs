@@ -6,6 +6,10 @@ A javascript component to create terrific cartography ! GoGoCartoJs is the auton
 .   .   ![alt text](docs/images/mobile.png "Mobile")
 
 
+Demo
+-----
+
+[Try it Now!](https://pixelhumain.github.io/GoGoCartoJs/web)
 
 Overview
 --------
