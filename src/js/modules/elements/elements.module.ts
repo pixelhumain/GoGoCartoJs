@@ -111,33 +111,41 @@ export class ElementsModule
 
 		//console.log("updateElementsToDisplay. Nbre element à traiter : " + i, checkInAllElements);
 
-		while(i--)
+		if (App.mode == AppModes.List && App.ajaxModule.allElementsReceived)
 		{
-			element = elements[i];
-
-			if (!element) break;
-
-			let elementInBounds = false;
-			if (App.mode == AppModes.List && App.dataType != AppDataType.All) elementInBounds = true;
-			else elementInBounds = currBounds.contains(element.position);
-
-			if ( elementInBounds && filterModule.checkIfElementPassFilters(element))
+			this.clearCurrVisibleElements();
+			for(let element of elements) this.currVisibleElements().push(element);
+		}
+		else
+		{
+			while(i--)
 			{
-				if (!element.isDisplayed)
+				element = elements[i];
+
+				if (!element) break;
+
+				let elementInBounds = false;
+				if (App.mode == AppModes.List && App.dataType != AppDataType.All) elementInBounds = true;
+				else elementInBounds = currBounds.contains(element.position);
+
+				if ( elementInBounds && filterModule.checkIfElementPassFilters(element))
 				{
-					element.isDisplayed = true;
-					this.currVisibleElements().push(element);
-					newElements.push(element);
+					if (!element.isDisplayed)
+					{
+						element.isDisplayed = true;
+						this.currVisibleElements().push(element);
+						newElements.push(element);
+					}
 				}
-			}
-			else
-			{
-				if (element.isDisplayed) 
+				else
 				{
-					element.isDisplayed = false;
-					elementsToRemove.push(element);
-					let index = this.currVisibleElements().indexOf(element);
-					if (index > -1) this.currVisibleElements().splice(index, 1);
+					if (element.isDisplayed) 
+					{
+						element.isDisplayed = false;
+						elementsToRemove.push(element);
+						let index = this.currVisibleElements().indexOf(element);
+						if (index > -1) this.currVisibleElements().splice(index, 1);
+					}
 				}
 			}
 		}
@@ -196,6 +204,7 @@ export class ElementsModule
 
 	currVisibleElements()      { return this.visibleElements_[App.currMainId]; }
 	currEveryElements()        { return this.everyElements_[App.currMainId]; }
+	setCurrVisibleElements(elements : Element[]) { this.visibleElements_[App.currMainId] = elements; }
 
 	private clearCurrVisibleElements() { this.visibleElements_[App.currMainId] = []; }
 
