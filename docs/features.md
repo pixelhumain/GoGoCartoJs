@@ -31,7 +31,7 @@ Change Tile Layers
 Export an iframe
 -----
 
-![](images/features/iframe.png)
+![](images/features/export.png)
 
 Reset map to initial viewport
 ------
@@ -72,7 +72,7 @@ Report an error for an element (send via API)
 Delete an element (send via API)
 -----
 
-![](images/features/report.png)
+![](images/features/delete.png)
 
 Send Mail via Button
 -----
