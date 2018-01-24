@@ -7,50 +7,56 @@ Two concept are used in GoGoCarto : **Categories** and **Options**. They are org
 - Options are the main concept
 - An element have many Options. An element don't have category
 
-Let's take an example, from https://presdecheznous.fr/annuaire
+Working withtout categories
+--------------------------
 
-We are interested in organizations involved in Mobility
+Categories are optional, you are not obliged to use them. Let's see a basic option tree, with three options :
 
 ```javascript
-{  
-  "name": "Categories Principales",  
-  
-  "options": [
-    { "name": "Agriculture", ... }, // see option detaails below
-    { "name": "Education",  ... },
-    { "name": "Habitat",  ... },
-    { "name": "Mobilité",  ... },  
-  ],
-  
-  // other optional fields
-  "id": 2157,
-  "index": 1,
-  "displayCategoryName": true,
-  "depth": 0,
-  "showExpanded": true,
-  "unexpandable": true,
-}
-```
-The Mobility Option
-```json
 {
-  "id": 10427,
-  "name": "Mobilité",
-  "icon": "icon-plane",
-  "color": "#AB7100",
-  "useIconForMarker": true,
-  "useColorForMarker": true,
-  
-  "subcategories": [
-    { "name": "Services", ... },
-    { "name": "Vehicules", ... },
-  ],
-  
-  "nameShort": "Agriculture",      
-  "index": 7, 
-  "softColor": "#9D7424",  
-  "textHelper": "",  
-  "displayOption": true,
-  "showExpanded": false,  
+  "options":[
+    {
+      "name":"Agriculture & Alimentation",
+      "color":"#98A100",
+      "icon":"icon-leaf-1"
+    },    
+    {
+      "name":"Voyages",
+      "color":"#1E8065",
+      "icon":"icon-case"
+    },
+    {
+      "name":"Education",
+      "color":"#00537E",
+      "icon":"icon-education-1"
+    }
+  ]  
 }
 ```
+![alt text](images/basic-options.png "Desktop")
+Now we can add suboptions to first option
+
+```json
+"options":[
+    {
+      "name":"Agriculture",
+      "color":"#98A100",
+      "icon":"icon-leaf-1",
+      "showExpanded": true,
+      "suboptions":[
+        { "name":"Marché", "color":"#00537E", "icon":"icon-marche" };
+        { "name":"Epicerie & Supérette", "color":"#7E3200", "icon":"icon-epicerie" },
+      ]
+    },    
+    {
+      "name":"Voyages",
+      "color":"#1E8065",
+      "icon":"icon-case"
+    },
+    {
+      "name":"Education",
+      "color":"#00537E",
+      "icon":"icon-education-1"
+    },
+```
+![alt text](images/basic-options-suboptions.png "Desktop")
