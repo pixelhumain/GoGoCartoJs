@@ -28,8 +28,9 @@ export class ElementJsonParserModule
   private loadFromFullJson(elementJson : any, element : Element | ElementBase)
   {
     // if the element was not prefilled with the compact json representation
-    // we overide anyway all attributes (it can have changed !)
-    element.id = elementJson.id;
+    // we ovewrite anyway all attributes (it can have changed !)
+    element.id = elementJson.id;    
+
     element.position = L.latLng(elementJson.geo.latitude, elementJson.geo.longitude);
     element.name = elementJson.name;
     element.status = elementJson.status == undefined ? 1 : elementJson.status;
@@ -66,7 +67,7 @@ export class ElementJsonParserModule
     element.email = elementJson.email || '';
     element.openHours = elementJson.openHours;
     App.elementFormaterModule.calculateFormatedOpenHours(element);
-    element.openHoursMoreInfos =  elementJson.openHoursMoreInfos; 
+    element.openHoursMoreInfos = elementJson.openHoursMoreInfos || elementJson.openHoursString; 
     
     element.searchScore = elementJson.searchScore;
 
