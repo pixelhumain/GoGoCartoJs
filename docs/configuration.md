@@ -123,7 +123,7 @@ All the features can be configured with the following attributes
 **inIframe** activate or not the feature when gogocarto is loaded in iframe
 
 Here an example of full custom features configuration
-```
+```javascript
 "features": 
 {
   listMode: {},
