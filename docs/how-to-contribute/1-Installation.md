@@ -6,7 +6,8 @@ Simply clone the repository and run
 npm install
 gulp build
 ```
-Then open web/index_example.html in your browser
+Then duplicate the web/dev-local.html file into web/dev.html (non versionned), and go to
+http://localhost/GoGoCartoJs/web/dev.html
 
 Gulp tasks
 ----------
