@@ -23,7 +23,7 @@ export class Category extends CategoryOptionTreeNode
 		this.showExpanded = $categoryJson.showExpanded !== false;
 		this.unexpandable = $categoryJson.unexpandable || false;
 		this.mainOwnerId = $categoryJson.mainOwnerId || null;
-		this.isActive = $categoryJson.displayCategoryName !== false;
+		this.isActive = ('isActive' in $categoryJson) ? $categoryJson.isActive : $categoryJson.displayCategoryName !== false;
 	}
 
 	addOption($option : Option) { this.children.push($option); }

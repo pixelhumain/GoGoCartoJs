@@ -36,7 +36,7 @@ export class Option extends CategoryOptionTreeNode
 		this.showOpenHours = $optionJson.showOpenHours || false;
 		this.showExpanded = $optionJson.showExpanded || false;
 		this.displayOption = $optionJson.displayOption !== false;
-		this.isActive = this.displayOption;
+		this.isActive = ('isActive' in $optionJson) ? $optionJson.isActive : this.displayOption;
 	}
 
 	addCategory($category : Category) { this.children.push($category);  }
