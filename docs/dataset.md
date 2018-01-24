@@ -32,7 +32,7 @@ data:
 }
 ```
 
-Improve performance with viewport queries
+Improve performance with bounds queries
 --------------------
 
 For large dataset, it is strongly recommanded to use an API which will only send the data needed by GoGocarto.
@@ -48,11 +48,11 @@ data:
 }
 ```
 
-Whenever GoGoCarto Needs smoe elements, it will call the given API with the followings params
+Whenever GoGoCarto needs elements, it will call the given API with the followings params
 
 **mainOptionId** : If you are using the `showOnePanePerMainOption` option (see [Configuration documentation](configuration.md)) the Id of the current MainOption is sent. In this case, you would prefer send only the elements which are linked to this main option
 
-**boundsJson** : An array of bounds object. A bounds is a rectangle refined with two point : southWest and northEast corner.
+**boundsJson** : An array of bounds object. A bounds is a rectangle defined with two points : southWest and northEast corners.
 A single bounds looks like
 ```json
 {
