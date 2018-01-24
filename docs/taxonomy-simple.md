@@ -7,7 +7,7 @@ Let's see a basic option tree, with three options :
 {
   "options":[
     {
-      "name":"Agriculture & Alimentation",
+      "name":"Agriculture",
       "color":"#98A100",
       "icon":"icon-leaf-1"
     },    
@@ -38,6 +38,7 @@ Now we can add suboptions to first option
       "suboptions":[
         { "name":"Marché", "color":"#00537E", "icon":"icon-marche" },
         { "name":"Epicerie & Supérette", "color":"#7E3200", "icon":"icon-epicerie" },
+        { "name":"Restauration", "color":"#009A9C", "icon":"icon-restaurant" },
       ]
     },    
     {
