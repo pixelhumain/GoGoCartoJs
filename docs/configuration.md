@@ -26,11 +26,13 @@ Menu
 If your taxonomy is complex, you should better use the option "showOnePanePerMainOption". 
 It will add a vertical side bar with all the main option icons. clicking each main option icon will show a diferent pane 
 for each main option children.
+
 [Check OneFilterPanePerMainOption Demo](https://pixelhumain.github.io/GoGoCartoJs/web/examples/index-full-taxonomy.html#/carte/@45.94,-0.38,10z?cat=all) 
 
 
 Texts
 ------
+Custom texts to label the elements of the dataset.
 ```javascript
 "text": {
   "element": "organisation",
@@ -39,7 +41,6 @@ Texts
   "elementPlural": "organisations"
 },
 ```
-Custom text to label the elements of the dataset.
 
 Map
 ------
@@ -76,28 +77,77 @@ Map
 
 Features
 ------
+Please visit [Features Documentation](features.md) to discover in detail the features.
+
 ```javascript
 "features": {
-  "favorite": 
-  "share": 
-  "directions": 
-  "sendMail": 
-  "elementHistory": 
-  "listMode": 
-  "export": 
-  "layers": 
-  "mapdefaultview": 
+  // buttons added to the element info bar menu
+  "favorite": // save an element as favotite (using cookies)
+  "share": // get the element url inside gogocarto
+  "directions": // calculate routing towards the element position
+  "edit": // Open the given edit page in a new tab 
+  "delete": // Open a popup dialog and send delete request to your server
+  "report":  // Open a report dialog and send a report request to your server
   
-  "pending": 
-  "searchPlace":
-  "searchElements": 
-  "searchGeolocate": 
-  "edit": 
-  "delete": 
-  "report": 
-  "vote": 
-  "moderation":
-  "directModeration": 
+  "sendMail": // view or send a mail to an Element. this security.hideMailsByShowingSendMailButton
+  
+  "listMode": // access to list mode
+  
+  "export": // popup to get the iframe code of the current map
+  "layers": // choose different tile layer for the map
+  "mapdefaultview": // restore viewport to default viewport
+
+  "searchPlace": // Allow search for a place
+  "searchElements": // Allow search for elements (needs an distant API)
+  "searchGeolocate": // Adds geolocate button to geolocalize the user position
+},
+```
+
+If you don't provide any features config, a default set of basic config will be loaded. 
+If you provide a features config, only the features listed in there will be activated. To simply activate a feature, just add it on the list
+```javascript
+"features": {
+  "favorite": {}, // give empty object to activate the feature with default config
+  "listMode": {}
+}
+```
+
+All the features can be configured with the following attributes
+```javascript
+"roles" : string[] = ['anonymous', 'anonymous_with_mail', 'user', 'admin'];
+"url": ""
+"inIframe": default true
+```
+**roles** : an array of the role who can access this feature. you can use your own roles names, for example ['anonymous', 'user', 'admin']. 
+**url** : the follwoing features needs an url to an API to work : edit, report, delete, sendMail, searchElements
+**inIframe** activate or not the feature when gogocarto is loaded in iframe
+
+Here an example of full custom features configuration
+```
+"features": 
+{
+  listMode: {},
+  searchPlace: { },
+  searchGeolocate: {},
+  searchElements:   { 
+      url: 'http://localhost/GoGoCarto/web/app_dev.php/api/elements/search' 
+  },
+  delete:   { 
+      url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/delete', 
+      roles: ['admin'], inIframe: false 
+  },            
+  report:   { 
+      url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/report', 
+      roles: ['anonymous', 'user'] 
+  },
+  edit:     { url: 'http://localhost/GoGoCarto/web/app_dev.php/elements/edit/' },
+  sendMail: { url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/sendMail' },
+  favorite: { inIframe: false },
+  directions: { },
+  export:   { inIframe: false },
+  share: { },
+  layers: { },
+  mapdefaultview: { }
 },
 ```
 
@@ -113,6 +163,8 @@ Security
 **userRole** is used to know is the current user can access different features.
 **userEmail** is used to prefill some interaction modals, like "report error", or "send mail".
 To set dynamically **userRole** and "userEmail", please check [How to interact with Component](usage.md)
+
+**hideMailsByShowingSendMailButton** will prevent from displaying the email of the element. Instead a "sendMail" button is displayed, which will open a popup and send a request to your server for sending an email.
 
 Colors
 ------
