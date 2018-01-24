@@ -27,6 +27,7 @@ export class TaxonomyModule
 	openHoursFiltersDays : string[] = [];
 
 	categoriesCreatedCount : number = 0;
+	optionsCreatedCount : number = 0;
 
 	constructor() 
 	{
@@ -52,37 +53,48 @@ export class TaxonomyModule
 
 	private recursivelyCreateCategoryAndOptions(categoryJson : any) : Category
 	{
+		return this.recursivelyCreateCategory(categoryJson);
+	}
+
+	private recursivelyCreateCategory(categoryJson : any) : Category
+	{
 		if (!categoryJson.id) categoryJson.id = this.categoriesCreatedCount;
 		this.categoriesCreatedCount++;
 		let category = new Category(categoryJson);
 
 		if (categoryJson.options)
-			for(let optionJson of categoryJson.options)
-			{
-				let option = new Option(optionJson);
-				option.ownerId = categoryJson.id;
-
-				if (optionJson.subcategories)
-					for(let subcategoryJson of optionJson.subcategories)
-					{				
-						let subcategory = this.recursivelyCreateCategoryAndOptions(subcategoryJson);
-						subcategory.ownerId = option.id;
-						option.addCategory(subcategory);
-					}
-				else if (optionJson.suboptions)
-				{
-					let subcategory = this.recursivelyCreateCategoryAndOptions({options: optionJson.suboptions, showExpanded: optionJson.showExpanded});
-					subcategory.ownerId = option.id;
-					option.addCategory(subcategory);
-				}
-
-				category.addOption(option);	
-				this.options.push(option);	
-			}
+			for(let optionJson of categoryJson.options) this.recursivelyCreateOption(optionJson, category)
+		else if (categoryJson.subcategories)
+			this.recursivelyCreateOption({subcategories: categoryJson.subcategories, showExpanded: true, displayOption: false}, category)
 
 		this.categories.push(category);
 
 		return category;
+	}
+
+	private recursivelyCreateOption(optionJson : any, parentCatgeory : Category)
+	{
+		if (!optionJson.id) optionJson.id = this.optionsCreatedCount;
+		this.optionsCreatedCount++;
+		let option = new Option(optionJson);
+		option.ownerId = parentCatgeory.id;
+
+		if (optionJson.subcategories)
+			for(let subcategoryJson of optionJson.subcategories)
+			{				
+				let subcategory = this.recursivelyCreateCategoryAndOptions(subcategoryJson);
+				subcategory.ownerId = option.id;
+				option.addCategory(subcategory);
+			}
+		else if (optionJson.suboptions)
+		{
+			let subcategory = this.recursivelyCreateCategoryAndOptions({options: optionJson.suboptions, showExpanded: optionJson.showExpanded});
+			subcategory.ownerId = option.id;
+			option.addCategory(subcategory);
+		}
+
+		parentCatgeory.addOption(option);	
+		this.options.push(option);	
 	}
 
 	// We want every option to know all those parents Option ids
