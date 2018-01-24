@@ -1,11 +1,12 @@
 Advanced Taxonomy
 ============
 
-
-Using Catgegories
+Using Categories
 ---------------
 
 A category is a container for grouping options.
+
+.
 
 ![alt img](images/option-category-simple.jpg "Grouping options")
 
@@ -40,3 +41,63 @@ In this example, we have 2 categories : Services and Véhicules. Each categorie 
 ```
 
 We can see that the options of the first category "Services" are used to choose the color of the marker. The second category is used to choose the icon of the marker.
+
+Full Category Configuration
+----------------------
+
+```javascript
+{
+  "name":"Category Name",
+  "displayCategoryName": default true, // display or not the category in the filters tree
+  "showExpanded" : default true, // show suboption or subcategories in inistial state
+  "unexpandable" : default false, // do not permit the category to be expanded/unexpanded
+  "enableDescription": default false, 
+  "options": [], // Array of sub options
+  "subcategories":[] // Array of sub categories. This filed is ignored when sub options are provided
+}
+```
+
+**enableDescription** : See [Dataset configuration](dataset.md). An Element have many OptionValues which link it to existing options. An OptionValue can have a description, to describe how the element filled the option. When enableDescription is true, we display this description in the element info bar.
+
+Complete Taxonomy
+----------------
+
+A category have multiple options, and an option can have multiple categories.
+But a category can also have subcategories, and an option can have suboptions.
+
+This ensure you to make all the possibles combinations.
+
+The first node of a taxonomy is always a category. So instead of :
+
+```javascript
+{
+  "options":[
+    { "name":"Agriculture", "color":"#98A100", "icon":"icon-leaf-1" },    
+    { "name":"Voyages", "color":"#1E8065", "icon":"icon-case" },
+    { "name":"Education", "color":"#00537E", "icon":"icon-education-1" }
+  ]  
+}
+```
+
+![Basic options](images/basic-options.png)
+
+We could add some configuration to the main Node
+
+```javascript
+{
+  "name": "Main Categories"
+  "enableDescription": true,
+  "unexpanded": true,
+  "options":[
+    { "name":"Agriculture", "color":"#98A100", "icon":"icon-leaf-1" },    
+    { "name":"Voyages", "color":"#1E8065", "icon":"icon-case" },
+    { "name":"Education", "color":"#00537E", "icon":"icon-education-1" }
+  ]  
+}
+```
+
+![With category](images/basic-options-with-category.png)
+
+
+
+
