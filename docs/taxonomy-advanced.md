@@ -7,7 +7,7 @@ Using Catgegories
 
 A category is a container for grouping options.
 
-![alt img](images/option-category-simple.png "Grouping options")
+![alt img](images/option-category-simple.jpg "Grouping options")
 
 In this example, we have 2 categories : Services and Véhicules. Each categorie have sub-options. The taxonomy json is
 
@@ -38,3 +38,5 @@ In this example, we have 2 categories : Services and Véhicules. Each categorie 
   ]
 }
 ```
+
+We can see that the options of the first category "Services" are used to choose the color of the marker. The second category is used to choose the icon of the marker.
