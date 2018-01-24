@@ -42,6 +42,9 @@ In this example, we have 2 categories : Services and Véhicules. Each categorie 
 
 We can see that the options of the first category "Services" are used to choose the color of the marker. The second category is used to choose the icon of the marker.
 
+[View Demo](https://pixelhumain.github.io/GoGoCartoJs/web/examples/index-multiple-categories.html#/carte/@46.59,7.83,6z?cat=all)
+
+
 Full Category Configuration
 ----------------------
 
