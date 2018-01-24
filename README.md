@@ -11,6 +11,11 @@ Demo
 
 [Try it Now!](https://pixelhumain.github.io/GoGoCartoJs/web)
 
+Download
+--------
+
+[Download Latest Release]https://github.com/pixelhumain/GoGoCartoJs/releases
+
 Overview
 --------
 
