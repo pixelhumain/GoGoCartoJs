@@ -231,7 +231,7 @@ export class FiltersComponent
     $('.main-categories .main-icon').removeClass('active');
     $('#main-option-gogo-icon-' + optionId).addClass('active');
 
-    if(!$('#main-option-gogo-icon-' + optionId).position()) { console.log("directory not loaded");return; }
+    if(!$('#main-option-gogo-icon-' + optionId).position()) { return; }
 
     $('#active-main-option-background').animate({top: $('#main-option-gogo-icon-' + optionId).position().top}, 400, 'easeOutQuart');
   }
