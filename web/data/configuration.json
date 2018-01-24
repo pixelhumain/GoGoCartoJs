@@ -1,0 +1,12 @@
+{
+  "data":
+  {
+    "taxonomy": ,
+    "elements": ,
+  },
+  "menu":
+  {
+    "showOnePanePerMainOption": true,
+    "showCheckboxForMainFilterPane": false
+  },
+}

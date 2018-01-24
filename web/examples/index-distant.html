@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Loading library -->
+    <link rel="stylesheet" href="../../dist/gogocarto.min.css"> 
+    <script src="../../dist/gogocarto.min.js"></script>
+
+    <!-- Icons and Fonts -->
+    <link rel="stylesheet" href="../assets/font-awesome/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+
+    <!-- Load data -->
+    <script src="../data/elements.js"></script>
+    <script src="../data/taxonomy-fontawesome.js"></script>
+
+    <!-- Examples related stuff -->
+    <link rel="stylesheet" href="examples.css"> 
+    <meta charset="utf-8">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>     
+  </head>
+
+  <body>
+    <!-- Create container -->
+  	<div id="gogocarto"></div>
+  </body>
+
+  <script>
+    $(document).ready(function()
+    {   
+      carto = goGoCarto('#gogocarto', {
+        data:
+        {
+          taxonomy: "https://pixelhumain.github.io/GoGoCartoJs/web/data/taxonomy.json",
+          elements: "https://pixelhumain.github.io/GoGoCartoJs/web/data/elements.json",
+        }
+      });
+    });
+  </script>  
+</html>
+
