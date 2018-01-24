@@ -1,0 +1,192 @@
+GoGoConfig
+========
+
+GoGoCarto is higly configurable, let's discover all the configurations options
+
+Data
+---
+See [Taxonomy](taxonomy.md) and [Dataset](dataset.md) documentation.
+
+```javascript
+"data": {
+  "taxonomy": "https://pixelhumain.github.io/GoGoCartoJs/web/data/taxonomy.json",
+  "elements": "https://pixelhumain.github.io/GoGoCartoJs/web/data/elements.json",
+  "requestByBounds": false
+},
+```
+Menu
+------
+```javascript
+"menu": {
+  "showOnePanePerMainOption": false,
+  "showCheckboxForMainFilterPane": true, // you can hide the checkboxes for a lighter design
+  "showCheckboxForSubFilterPane": true
+},
+```
+If your taxonomy is complex, you should better use the option "showOnePanePerMainOption". 
+It will add a vertical side bar with all the main option icons. clicking each main option icon will show a diferent pane 
+for each main option children.
+
+[Check OneFilterPanePerMainOption Demo](https://pixelhumain.github.io/GoGoCartoJs/web/examples/index-full-taxonomy.html#/carte/@45.94,-0.38,10z?cat=all) 
+
+
+Texts
+------
+Custom texts to label the elements of the dataset.
+```javascript
+"text": {
+  "element": "organisation",
+  "elementDefinite": "l'organisation",
+  "elementIndefinite": "une organisation",
+  "elementPlural": "organisations"
+},
+```
+
+Map
+------
+```javascript
+"map": {
+  "defaultBounds": {
+    "_southWest": { "lat": 40, "lng": -5 },
+    "_northEast": { "lat": 52, "lng": 10 }
+  },
+  "defaultCenter": { "lat": 46, "lng": 0 },
+  "maxBounds": {
+    "_southWest": { "lat": -90, "lng": -180 }, 
+    "_northEast": { "lat": 90, "lng": 180 }
+  },
+  "saveViewportInCookies": false,
+  "saveTileLayerInCookies": false,
+  "defaultTileLayer": "cartodb",
+  "tileLayers": [
+    {
+      "name": "cartodb",
+      "url": "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
+      "attribution": "© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>"
+    },
+    {
+      "name": "wikimedia",
+      "url": "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png",
+      "attribution": "© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>"
+    },
+  ]
+},
+```
+**DefaultBounds** and **DefautCenter** are used for the initial map state.
+**MaxBounds** is used to prevent loading elements outside of this bounds
+
+Features
+------
+Please visit [Features Documentation](features.md) to discover in detail the features.
+
+```javascript
+"features": {
+  // buttons added to the element info bar menu
+  "favorite": // save an element as favotite (using cookies)
+  "share": // get the element url inside gogocarto
+  "directions": // calculate routing towards the element position
+  "edit": // Open the given edit page in a new tab 
+  "delete": // Open a popup dialog and send delete request to your server
+  "report":  // Open a report dialog and send a report request to your server
+  
+  "sendMail": // view or send a mail to an Element. this security.hideMailsByShowingSendMailButton
+  
+  "listMode": // access to list mode
+  
+  "export": // popup to get the iframe code of the current map
+  "layers": // choose different tile layer for the map
+  "mapdefaultview": // restore viewport to default viewport
+
+  "searchPlace": // Allow search for a place
+  "searchElements": // Allow search for elements (needs an distant API)
+  "searchGeolocate": // Adds geolocate button to geolocalize the user position
+},
+```
+
+If you don't provide any features config, a default set of basic config will be loaded. 
+If you provide a features config, only the features listed in there will be activated. To simply activate a feature, just add it on the list
+```javascript
+"features": {
+  "favorite": {}, // give empty object to activate the feature with default config
+  "listMode": {}
+}
+```
+
+All the features can be configured with the following attributes
+```javascript
+"roles" : string[] = ['anonymous', 'anonymous_with_mail', 'user', 'admin'];
+"url": ""
+"inIframe": default true
+```
+**roles** : an array of the role who can access this feature. you can use your own roles names, for example ['anonymous', 'user', 'admin']. 
+**url** : the follwoing features needs an url to an API to work : edit, report, delete, sendMail, searchElements
+**inIframe** activate or not the feature when gogocarto is loaded in iframe
+
+Here an example of full custom features configuration
+```javascript
+"features": 
+{
+  listMode: {},
+  searchPlace: { },
+  searchGeolocate: {},
+  searchElements:   { 
+      url: 'http://localhost/GoGoCarto/web/app_dev.php/api/elements/search' 
+  },
+  delete:   { 
+      url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/delete', 
+      roles: ['admin'], inIframe: false 
+  },            
+  report:   { 
+      url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/report', 
+      roles: ['anonymous', 'user'] 
+  },
+  edit:     { url: 'http://localhost/GoGoCarto/web/app_dev.php/elements/edit/' },
+  sendMail: { url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/sendMail' },
+  favorite: { inIframe: false },
+  directions: { },
+  export:   { inIframe: false },
+  share: { },
+  layers: { },
+  mapdefaultview: { }
+},
+```
+
+Security
+------
+```javascript
+"security": {
+  "userRole": "user",
+  "userEmail": "test@gt.gt",
+  "hideMailsByShowingSendMailButton": true
+},
+```
+**userRole** is used to know is the current user can access different features.
+**userEmail** is used to prefill some interaction modals, like "report error", or "send mail".
+To set dynamically **userRole** and "userEmail", please check [How to interact with Component](usage.md)
+
+**hideMailsByShowingSendMailButton** will prevent from displaying the email of the element. Instead a "sendMail" button is displayed, which will open a popup and send a request to your server for sending an email.
+
+Colors
+------
+```javascript
+"colors": {
+  "neutralDark": "#354254",
+  "neutralDarkTransparent": "rgba(53, 66, 84, 0.9)",
+  "neutralSoftDark": "#5c6c86",
+  "neutral": "#6b7e9b",
+  "neutralLight": "#f4f4f4",
+  "secondary": "#bdc900",
+  "primary": "#bd2d86",
+  "background": "#f4f4f4",
+  "textColor": "#354254",
+  "disableColor": "#c2c9d4",
+  "listTitle": "#bd2d86", // the title header on top of list view
+  "listTitleBackBtn": "#354254",
+  "listTitleBackground": "#f4f4f4",
+  "mainFont": "Roboto",
+  "titleFont": "Lobster",
+  "taxonomyMainTitleFont": "Lobster"
+}
+```
+If you want to use custom font (such as "Lobster"), don't forget to load this font with an external file !
+
