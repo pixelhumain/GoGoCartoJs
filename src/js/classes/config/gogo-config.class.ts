@@ -29,6 +29,7 @@ export class GoGoConfig
   {
     taxonomy: undefined,
     elements: undefined,
+    requestByBounds: false,
     retrieveElementsByApi: false,
     showPending: true,
   };
