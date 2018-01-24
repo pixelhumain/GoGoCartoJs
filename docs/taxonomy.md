@@ -34,6 +34,7 @@ Categories are optional, you are not obliged to use them. Let's see a basic opti
 }
 ```
 ![alt text](images/basic-options.png "Desktop")
+
 Now we can add suboptions to first option
 
 ```json
@@ -44,7 +45,7 @@ Now we can add suboptions to first option
       "icon":"icon-leaf-1",
       "showExpanded": true,
       "suboptions":[
-        { "name":"Marché", "color":"#00537E", "icon":"icon-marche" };
+        { "name":"Marché", "color":"#00537E", "icon":"icon-marche" },
         { "name":"Epicerie & Supérette", "color":"#7E3200", "icon":"icon-epicerie" },
       ]
     },    
@@ -60,3 +61,5 @@ Now we can add suboptions to first option
     },
 ```
 ![alt text](images/basic-options-suboptions.png "Desktop")
+
+
