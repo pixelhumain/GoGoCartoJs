@@ -32,7 +32,7 @@ export class ElementJsonParserModule
     element.id = elementJson.id;    
 
     element.position = L.latLng(elementJson.geo.latitude, elementJson.geo.longitude);
-    element.name = elementJson.name;
+    element.name = elementJson.name || elementJson.title;
     element.status = elementJson.status == undefined ? 1 : elementJson.status;
     element.moderationState = elementJson.moderationState || 0;
 

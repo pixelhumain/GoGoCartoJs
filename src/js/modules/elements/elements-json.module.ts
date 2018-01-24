@@ -24,7 +24,7 @@ export class ElementsJsonModule
 
     if (isFullRepresentation)
       for (let elementJson of elementList)
-        if (!elementJson.id) elementJson.id = (slugify(elementJson.name) + elementJson.geo.latitude).replace('.', '');
+        if (!elementJson.id) elementJson.id = (slugify(elementJson.title) + elementJson.geo.latitude).replace('.', '');
 
     let elementsIdsReceived = elementList.map( (e, index) =>  { return {
         id: isFullRepresentation ? e.id : e[0], // in compact way, id is the first element of an array
