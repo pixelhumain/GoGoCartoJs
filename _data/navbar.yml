@@ -2,40 +2,40 @@ toc:
   - title: Discover
     subfolderitems:
       - page: Usage
-        url: /docs/usage.html
+        url: docs/usage.html
       - page: Features
-        url: /docs/features.html
+        url: docs/features.html
       - page: Configuration
-        url: /docs/configuration.html
+        url: docs/configuration.html
       - page: Download
         url: https://github.com/pixelhumain/GoGoCartoJs/releases
   - title: Taxonomy
     subfolderitems:
       - page: Overview
-        url: /docs/taxonomy.html
+        url: docs/taxonomy.html
       - page: Simple Way
-        url: /docs/taxonomy-simple.html
+        url: docs/taxonomy-simple.html
       - page: Option Configuration
-        url: /docs/taxonomy-option-configuration.html
+        url: docs/taxonomy-option-configuration.html
       - page: Advanced with Categories
-        url: /docs/taxonomy-advanced.html
+        url: docs/taxonomy-advanced.html
   - title: Dataset
     subfolderitems:
       - page: Loading data
-        url: /docs/dataset.html
+        url: docs/dataset.html
       - page: Element Ontology
-        url: /docs/dataset-element-configuration.html
+        url: docs/dataset-element-configuration.html
   - title: Contribute
     subfolderitems:
       - page: Installation
-        url: /docs/how-to-contribute/1-Installation.html
+        url: docs/how-to-contribute/1-Installation.html
       - page: Coding conventions
-        url: /docs/how-to-contribute/2-Coding-conventions.html
+        url: docs/how-to-contribute/2-Coding-conventions.html
       - page: Code explations
-        url: /docs/how-to-contribute/3-Code-explanations.html
+        url: docs/how-to-contribute/3-Code-explanations.html
       - page: Ui Layout
-        url: /docs/how-to-contribute/4-Ui-layout.html
+        url: docs/how-to-contribute/4-Ui-layout.html
       - page: App state machine
-        url: /docs/how-to-contribute/5-App-state-mode.html
+        url: docs/how-to-contribute/5-App-state-mode.html
       - page: App main behaviour
-        url: /docs/how-to-contribute/6-App-main-behaviour.html
+        url: docs/how-to-contribute/6-App-main-behaviour.html
