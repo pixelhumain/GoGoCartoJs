@@ -25,13 +25,13 @@
     <section class="menu-list">
       <h2>Navigation</h2>
       <ul>
-        <li><a href="/">Overview</a></li>
-        <li><a href="/web/examples.html">Demo</a></li>
+        <li><a href="{{ "/" | relative_url }}">Overview</a></li>
+        <li><a href="{{ "/web/examples.html" | relative_url }}">Demo</a></li>
         {% for item in site.data.navbar.toc %}
           <h3>{{ item.title }}</h3>
             <ul>
               {% for entry in item.subfolderitems %}
-                <li><a href="{{ entry.url }}">{{ entry.page }}</a></li>
+                <li><a href="{{ entry.url | relative_url }}">{{ entry.page }}</a></li>
               {% endfor %}
             </ul>
         {% endfor %}
