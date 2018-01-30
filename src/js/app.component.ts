@@ -74,8 +74,6 @@ export class AppComponent
 
 		App.gogoControlComponent.updatePosition();
 
-		App.infoBarComponent.refresh();
-		
 		let infoBarHasChangeDisplayMode = false;
 		// show element info bar aside or at the bottom depending of direcoty-content width
 		if (this.mapWidth() > 900)
@@ -84,7 +82,6 @@ export class AppComponent
 			{
 				$('#element-info-bar').addClass('display-aside');
 				$('#element-info-bar').removeClass('display-bottom');
-				App.infoBarComponent.refresh();
 				infoBarHasChangeDisplayMode = true;
 			}			
 		}	
@@ -93,8 +90,7 @@ export class AppComponent
 			if (!$('#element-info-bar').hasClass('display-bottom'))
 			{
 				$('#element-info-bar').removeClass('display-aside');
-				$('#element-info-bar').addClass('display-bottom');				
-				App.infoBarComponent.refresh();
+				$('#element-info-bar').addClass('display-bottom');		
 				infoBarHasChangeDisplayMode = true;
 			}
 			$('#directory-content-map').stop(true).css('margin-right', '0');
@@ -118,6 +114,8 @@ export class AppComponent
 		{
 			$('#element-info-bar').stop(true).css('width', '100%');
 		}
+
+		setTimeout( () => { App.infoBarComponent.refresh(); }, 100);
 
 		if ($('#directory-menu').is(':visible') && !this.isMobileScreen())
 		{

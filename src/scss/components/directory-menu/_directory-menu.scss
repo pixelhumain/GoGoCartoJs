@@ -95,7 +95,8 @@
     {     
       @include flexbox();
       @include flex(1 auto);
-      position: relative;        
+      position: relative;  
+      height: 100px; // Fixs strange bug on firefox, director menu bigger than screen      
 
       #directory-menu-spinner-loader
       {

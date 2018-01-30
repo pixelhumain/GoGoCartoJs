@@ -279,7 +279,7 @@ export class InfoBarComponent
 
 	updateInfoBarSize()
 	{
-		if ($('.gogocarto-container').width() < 1200) 
+		if (!this.isDisplayedAside()) 
 		{
 	  	$('#element-info-bar .moreDetails').css('height', 'auto');
 	  } 

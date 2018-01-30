@@ -68,10 +68,9 @@ export class DirectoryMenuComponent
 
     	let dragTargetWidth = App.component.width() - this.width + 20;
       this.dragTarget.css({width: dragTargetWidth + 'px', right: 0, left: ''});
-
       App.component.updateMapSize();
 			App.component.updateComponentsSize();
-    }, 300);     			
+    }, 600);     			
   }
 
 	hide() 
