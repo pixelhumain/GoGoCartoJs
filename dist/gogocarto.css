@@ -4531,7 +4531,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         -webkit-flex: 1 auto;
         -ms-flex: 1 auto;
         flex: 1 auto;
-        position: relative; }
+        position: relative;
+        height: 100px; }
         .gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-content #directory-menu-spinner-loader {
           top: 40%;
           left: 40%;
