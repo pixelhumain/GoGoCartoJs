@@ -46,7 +46,6 @@ export function showFullTextMenu(object, bool : boolean)
 	else
 	{
 		object.removeClass("full-text");
-		object.find('.tooltipped').tooltip();	
 	}
 }
 
