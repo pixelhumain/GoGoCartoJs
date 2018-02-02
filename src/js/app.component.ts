@@ -41,9 +41,7 @@ export class AppComponent
 
 		setTimeout( () => { this.updateComponentsSize(); }, 1000);	
 		setTimeout( () => { this.updateComponentsSize(); }, 2000);
-		setTimeout( () => { this.updateComponentsSize(); }, 3000);		
-		setTimeout( () => { this.updateComponentsSize(); }, 5000);
-		setTimeout( () => { this.updateComponentsSize(); }, 10000);
+		setTimeout( () => { this.updateComponentsSize(); }, 3000);
 	}
 
 	handleDirectoryMenuShow()
