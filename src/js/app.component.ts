@@ -37,7 +37,13 @@ export class AppComponent
 		   	this.updateComponentsSize(); 
 		   	App.directoryMenuComponent.updateSize();
 		   },200);
-		};		
+		};	
+
+		setTimeout( () => { this.updateComponentsSize(); }, 1000);	
+		setTimeout( () => { this.updateComponentsSize(); }, 2000);
+		setTimeout( () => { this.updateComponentsSize(); }, 3000);		
+		setTimeout( () => { this.updateComponentsSize(); }, 5000);
+		setTimeout( () => { this.updateComponentsSize(); }, 10000);
 	}
 
 	handleDirectoryMenuShow()

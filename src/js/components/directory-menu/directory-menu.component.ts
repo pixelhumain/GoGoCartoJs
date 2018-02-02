@@ -52,7 +52,7 @@ export class DirectoryMenuComponent
       this.hide();
     } else {
       this.show();
-    }   
+    }
 	}	
 
 	show() 
@@ -70,7 +70,7 @@ export class DirectoryMenuComponent
       this.dragTarget.css({width: dragTargetWidth + 'px', right: 0, left: ''});
       App.component.updateMapSize();
 			App.component.updateComponentsSize();
-    }, 600);     			
+    }, 400);     			
   }
 
 	hide() 
