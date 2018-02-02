@@ -80,6 +80,7 @@ export class ElementsJsonModule
       let elements = App.config.data.elements;
       let elementJsonArray = elements.length ? elements : elements.data;
       this.convertJsonElements(elementJsonArray, true, true);
+      App.ajaxModule.allElementsReceived = true;
     }
   }
 }
