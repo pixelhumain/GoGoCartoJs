@@ -97,7 +97,6 @@ export class ElementsModule
 		}		
 		
 		if (!elements) return;
-		// console.log("UPDATE ELEMENTS ", elements.length);
 
 		let i : number, element : Element;
 
@@ -109,43 +108,35 @@ export class ElementsModule
 		let currBounds = App.boundsModule.extendedBounds;
 		let start = new Date().getTime();
 
-		//console.log("updateElementsToDisplay. Nbre element à traiter : " + i, checkInAllElements);
+		// console.log("updateElementsToDisplay. Nbre element à traiter : " + i, checkInAllElements);
 
-		if (App.mode == AppModes.List && App.ajaxModule.allElementsReceived)
+		while(i--)
 		{
-			this.clearCurrVisibleElements();
-			for(let element of elements) this.currVisibleElements().push(element);
-		}
-		else
-		{
-			while(i--)
+			element = elements[i];
+
+			if (!element) break;
+
+			let elementInBounds = false;
+			if (this.noNeedToCheckBounds()) elementInBounds = true;
+			else elementInBounds = currBounds.contains(element.position);
+
+			if ( elementInBounds && filterModule.checkIfElementPassFilters(element))
 			{
-				element = elements[i];
-
-				if (!element) break;
-
-				let elementInBounds = false;
-				if (App.mode == AppModes.List && App.dataType != AppDataType.All) elementInBounds = true;
-				else elementInBounds = currBounds.contains(element.position);
-
-				if ( elementInBounds && filterModule.checkIfElementPassFilters(element))
+				if (!element.isDisplayed)
 				{
-					if (!element.isDisplayed)
-					{
-						element.isDisplayed = true;
-						this.currVisibleElements().push(element);
-						newElements.push(element);
-					}
+					element.isDisplayed = true;
+					this.currVisibleElements().push(element);
+					newElements.push(element);
 				}
-				else
+			}
+			else
+			{
+				if (element.isDisplayed) 
 				{
-					if (element.isDisplayed) 
-					{
-						element.isDisplayed = false;
-						elementsToRemove.push(element);
-						let index = this.currVisibleElements().indexOf(element);
-						if (index > -1) this.currVisibleElements().splice(index, 1);
-					}
+					element.isDisplayed = false;
+					elementsToRemove.push(element);
+					let index = this.currVisibleElements().indexOf(element);
+					if (index > -1) this.currVisibleElements().splice(index, 1);
 				}
 			}
 		}
@@ -170,6 +161,12 @@ export class ElementsModule
 			setTimeout( () => { this.updateElementsToDisplay(true) }, 100);
 		}		
 	};
+
+	private noNeedToCheckBounds()
+	{
+		return App.mode == AppModes.List && 
+					(App.dataType != AppDataType.All || App.ajaxModule.allElementsReceived);
+	}
 
 	updateElementsIcons(somethingChanged : boolean = false)
 	{
