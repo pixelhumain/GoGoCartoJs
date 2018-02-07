@@ -203,6 +203,8 @@ export class ElementListComponent
 		{
 			$('.element-list-title-number-results').text('(0)');
 			$('.no-result-message').show();
+			let noResultImg = $('.no-result-message img');
+			noResultImg.attr('src', noResultImg.data('src'));
 			$('.element-list-header .title-text').show();
 		}		
 	}
