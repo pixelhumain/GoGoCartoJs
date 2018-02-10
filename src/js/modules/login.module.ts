@@ -4,49 +4,28 @@ import { App } from "../gogocarto";
 
 declare var routie: any, $;
 
-export enum Roles 
-{
-	Anonymous = 0,
-	User = 1,
-	Admin = 2
-}
-
 export class LoginModule
 {
-	private role_ : Roles;
+	private roles_ : string[];
 	private userMail : string = '';
 
-	constructor($role : Roles | string = Roles.Anonymous, $userEmail : string = '') 
+	constructor($roles : string[] | string, $userEmail : string = '') 
 	{ 
-		this.setRole($role); 
+		this.setRoles($roles); 
 		this.setUserMail($userEmail);
 	}
 
-	isGranted($role : Roles) { return this.role_ >= $role; }
-
-	isAdmin() { return this.isGranted(Roles.Admin); }
-
-	isUserLogged() { return this.isGranted(Roles.User); }
-
-	setRole($role : Roles | string)
+	setRoles($roles : string[] | string)
 	{ 
-		if (typeof $role == 'string')
-		{
-			this.role_ = $role == 'admin' ? Roles.Admin : $role == 'user' ? Roles.User : Roles.Anonymous;
-		}
-		else
-		{
-			this.role_ = $role;
-		}		
+		if (typeof $roles == 'string') this.roles_ = [$roles];	
+		else this.roles_ = $roles;
 	}
 
 	setUserMail(userMail) { this.userMail = userMail; }
 
 	getUserMail() { return this.userMail; }
 
-	getRole() { return this.role_; }
-
-	getStringifyRole() { return Roles[this.role_].toLowerCase(); }
+	getRoles() { return this.roles_; }
 
   loginAction() { App.config.security.loginAction(); }
 }

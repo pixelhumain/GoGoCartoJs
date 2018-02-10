@@ -5,5 +5,9 @@ export class GoGoFeature
   roles : string[] = ['anonymous', 'anonymous_with_mail', 'user', 'admin'];
   inIframe : boolean = true;
 
-  hasRole(role) { return this.roles.indexOf(role) >= 0; }
+  hasRole(roles : string[]) { 
+    return this.roles.some( (role) => {
+      return roles.indexOf(role) > -1;
+    });
+  }
 }

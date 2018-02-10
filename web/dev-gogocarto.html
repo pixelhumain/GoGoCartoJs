@@ -78,7 +78,7 @@
           },
           security:
           {
-            userRole: 'user',
+            userRoles: ['user'],
             userEmail: "test@gt.gt",
             loginAction: function() { console.log("needToLog"); },
           },
@@ -86,6 +86,8 @@
           {
             defaultBounds: [ [52,10], [40,-5] ],
             defaultTileLayer: "cartodb",
+            saveViewportInCookies: true,
+            saveTileLayerInCookies : true,
             tileLayers : [
               {"name":"cartodb","url":"https:\/\/cartodb-basemaps-{s}.global.ssl.fastly.net\/light_all\/{z}\/{x}\/{y}.png", attribution: "hello"},
               {"name":"hydda","url":"https:\/\/{s}.tile.openstreetmap.se\/hydda\/full\/{z}\/{x}\/{y}.png"},

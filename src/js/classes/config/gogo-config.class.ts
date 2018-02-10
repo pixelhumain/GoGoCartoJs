@@ -1,4 +1,3 @@
-import { Roles } from "../../modules/login.module";
 import { App } from "../../gogocarto";
 import { TileLayer } from '../map/tile-layer.class';
 import { GoGoFeature } from './gogo-feature.class';
@@ -98,7 +97,7 @@ export class GoGoConfig
   };
   readonly security =
   {
-    userRole: 'anonymous',
+    userRoles: ['anonymous'],
     userEmail: '',
     loginAction: function() { console.warn("[GoGoCarto] You need login to access this feature"); },
 
@@ -156,7 +155,7 @@ export class GoGoConfig
     let roleProvided = true;
     if (feature.hasOwnProperty('roles'))
     {
-      roleProvided = feature.hasRole(App.loginModule.getStringifyRole());
+      roleProvided = feature.hasRole(App.loginModule.getRoles());
     }
 
     return this.isFeatureActivated(featureName) && roleProvided;

@@ -8,7 +8,6 @@ import { initializeVoting } from "./components/modals/vote.component";
 import { initializeReportingAndDeleting } from "./components/modals/reporting-deleting.component";
 import { initializeSendingMail } from "./components/modals/send-email.component";
 import { getQueryParams } from "./utils/params";
-import { Roles } from "./modules/login.module";
 
 export var App : AppModule;
 
@@ -26,11 +25,11 @@ export class GoGoCartoModule
 	}
 
 	/** 
-	* Set the current user role : Anonymous (0), user (1), admin (2)
+	* Set the current user roles
 	* Role is used to render specifically certain template and control
 	* certain functionalities
 	*/
-	setUserRole($role : Roles | string) { this.app.loginModule.setRole($role); }
+	setUserRole($roles : string[] | string) { this.app.loginModule.setRoles($roles); }
 
 	setUserMail($mail : string) { this.app.loginModule.setUserMail($mail); }
 
@@ -80,7 +79,6 @@ export class GoGoCartoModule
 		{ 
 			mainCategory: App.taxonomyModule.mainCategory, 
 			openHoursCategory: options.openHours, 
-			isAdmin: App.loginModule.isAdmin(), 
 			isIframe: isIframe, 
 			fullTaxonomy: fullTaxonomy,
 			config: App.config

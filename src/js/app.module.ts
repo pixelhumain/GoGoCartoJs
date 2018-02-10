@@ -118,7 +118,7 @@ export class AppModule
 		this.isIframe = $isIframe;
 		this.loadFullTaxonomy = $loadFullTaxonomy;
 		
-		this.loginModule = new LoginModule(this.config.security.userRole, this.config.security.userEmail);
+		this.loginModule = new LoginModule(this.config.security.userRoles, this.config.security.userEmail);
   	this.boundsModule = new BoundsModule(this.config);  	
 
 		Cookies.createCookie('firstVisit', 'done');			
@@ -141,8 +141,6 @@ export class AppModule
 	elements() { return this.elementsModule.currVisibleElements();  };
 
 	elementById(id) { return this.elementsModule.getElementById(id);  };
-
-	isUserLogged() { return this.loginModule.isUserLogged(); }
 
 	get DEAModule() { return this.displayElementAloneModule; }
 
