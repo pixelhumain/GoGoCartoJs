@@ -41,15 +41,12 @@ Once component instanciated, you can interact with him with the current methods
 
 ```javascript
 /** 
-* Set the current user role : 
-*    Anonymous -> 'anonymous' | 0, 
-*    User -> 'user' | 1, 
-*    Admin -> 'admin' | 2
+* Set the current user roles. Array of strings
 * GoGoFeatures are controlled depending on role (see Configuration)
 * Login is not managed by GoGoCartoJs
 */
-myGogocarto.setUserRole('admin');
-myGogocarto.setUserMail('adminb@gogo.fr')
+myGogocarto.setUserRoles(['admin']);
+myGogocarto.setUserEmail('adminb@gogo.fr')
 ```
 ```javascript
 /* Control the menu from an outside button */

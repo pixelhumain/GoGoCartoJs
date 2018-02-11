@@ -155,12 +155,12 @@ Security
 ------
 ```javascript
 "security": {
-  "userRole": "user",
+  "userRoles": ["user"], // other exple : ["ROLE_ADMIN", "ROLE_USER"]
   "userEmail": "test@gt.gt",
   "hideMailsByShowingSendMailButton": true
 },
 ```
-**userRole** is used to know is the current user can access different features.
+**userRoles** is used to know is the current user can access different features.
 **userEmail** is used to prefill some interaction modals, like "report error", or "send mail".
 To set dynamically **userRole** and "userEmail", please check [How to interact with Component](usage.md)
 

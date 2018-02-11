@@ -32,10 +32,10 @@ export function openReportModal()
 	$('#popup-report-error #select-error').hide();
 	$('#popup-report-error #mail-error').hide();
 
-	if (App.loginModule.getUserMail()) 
+	if (App.loginModule.getUserEmail()) 
 	{
 		$('#popup-report-error .input-mail').hide();
-		$('#popup-report-error .input-mail').val(App.loginModule.getUserMail());
+		$('#popup-report-error .input-mail').val(App.loginModule.getUserEmail());
 	}
 	else
 	{

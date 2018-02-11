@@ -20,10 +20,10 @@ export function createListenersForSendEmail(object, element)
     $('#popup-send-mail #content-error').hide();
     $('#popup-send-mail #mail-error').hide();
 
-    if (App.loginModule.getUserMail())
+    if (App.loginModule.getUserEmail())
     {
       $('#popup-send-mail .input-mail').hide();
-      $('#popup-send-mail .input-mail').val(App.loginModule.getUserMail());
+      $('#popup-send-mail .input-mail').val(App.loginModule.getUserEmail());
     }
     else
     {

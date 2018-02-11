@@ -7,12 +7,12 @@ declare var routie: any, $;
 export class LoginModule
 {
 	private roles_ : string[];
-	private userMail : string = '';
+	private userEmail : string = '';
 
 	constructor($roles : string[] | string, $userEmail : string = '') 
 	{ 
 		this.setRoles($roles); 
-		this.setUserMail($userEmail);
+		this.setUserEmail($userEmail);
 	}
 
 	setRoles($roles : string[] | string)
@@ -21,9 +21,9 @@ export class LoginModule
 		else this.roles_ = $roles;
 	}
 
-	setUserMail(userMail) { this.userMail = userMail; }
+	setUserEmail(userMail) { this.userEmail = userMail; }
 
-	getUserMail() { return this.userMail; }
+	getUserEmail() { return this.userEmail; }
 
 	getRoles() { return this.roles_; }
 
