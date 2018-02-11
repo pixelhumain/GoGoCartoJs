@@ -27,9 +27,9 @@ export class HistoryStateManager
       // check viewport and address from cookies
       if (App.config.map.saveViewportInCookies && !historystate.viewport && !historystate.address && historystate.state == AppStates.Normal) 
       {
-        console.log("no viewport nor address provided, using cookies values");
-        historystate.viewport = new ViewPort().fromString(Cookies.readCookie('viewport'));
-        historystate.address = Cookies.readCookie('address');
+        console.log("no viewport nor address provided, using cookies values", Cookies.readCookie('viewport'), Cookies.readCookie('address'));
+        if (Cookies.readCookie('viewport')) historystate.viewport = new ViewPort().fromString(Cookies.readCookie('viewport'));
+        if (Cookies.readCookie('address')) historystate.address = Cookies.readCookie('address');
         if (historystate.address) $('.search-bar').val(historystate.address);
       }    
     }    
