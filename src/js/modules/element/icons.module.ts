@@ -67,7 +67,7 @@ export class ElementIconsModule
         if (suboptionValue.children.length == 0 || noRecursive)
         {
           //console.log("bottom option " + suboptionValue.option.name,suboptionValue.option.isChecked );
-          suboptionValue.isFilledByFilters = suboptionValue.option.isChecked;          
+          suboptionValue.isFilledByFilters = !suboptionValue.option.isDisabled;          
         }
         else
         {
