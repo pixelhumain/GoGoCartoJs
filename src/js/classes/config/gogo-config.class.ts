@@ -43,6 +43,10 @@ export class GoGoConfig
   {
     width: undefined,
   };
+  readonly general =
+  {
+    activateHistoryStateAndRouting: true
+  };
   readonly map =
   {
     // france

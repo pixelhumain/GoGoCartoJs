@@ -51,6 +51,7 @@ export class HistoryModule
 
 	private updateHistory($pushState : boolean, $options? : any)
 	{
+		if (!App.config.general.activateHistoryStateAndRouting) return;
 		if (App.mode == undefined) return;
 
 		$options = $options || {};

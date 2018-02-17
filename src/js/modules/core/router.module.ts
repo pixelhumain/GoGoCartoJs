@@ -98,6 +98,10 @@ export class RouterModule
 
 		// let the hash being changed with a timeOut
 		setTimeout(() => routie.reload(), 10);
+
+		if (!App.config.general.activateHistoryStateAndRouting) {
+			setTimeout(() => window.location.hash = "", 100);
+		}
 	}
 
 	generate(routeName : string, options? : any, absoluteUrl? : boolean)
