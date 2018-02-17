@@ -415,7 +415,7 @@ ul {
 .z-depth-0 {
   box-shadow: none !important; }
 
-.z-depth-1, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible {
+.z-depth-1, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
 
 .z-depth-1-half, .btn:hover, .btn-large:hover, .btn-floating:hover {
@@ -1333,6 +1333,67 @@ small {
   @media only screen and (max-width: 360px) {
     .flow-text {
       font-size: 1.2rem; } }
+
+#toast-container {
+  display: block;
+  position: fixed;
+  z-index: 10000; }
+  @media only screen and (max-width: 600px) {
+    #toast-container {
+      min-width: 100%;
+      bottom: 0%; } }
+  @media only screen and (min-width: 601px) and (max-width: 1200px) {
+    #toast-container {
+      min-width: 30%;
+      right: 5%;
+      bottom: 7%; } }
+  @media only screen and (min-width: 1201px) {
+    #toast-container {
+      min-width: 8%;
+      bottom: 10%;
+      right: 7%; } }
+
+.toast {
+  border-radius: 2px;
+  top: 0;
+  width: auto;
+  clear: both;
+  margin-top: 10px;
+  position: relative;
+  max-width: 100%;
+  height: 48px;
+  line-height: 48px;
+  background-color: #323232;
+  padding: 0 25px;
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: #fff;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: space-between;
+  justify-content: space-between; }
+  .toast .btn, .toast .btn-large, .toast .btn-flat {
+    margin: 0;
+    margin-left: 3rem; }
+  .toast.rounded {
+    border-radius: 24px; }
+  @media only screen and (max-width: 600px) {
+    .toast {
+      width: 100%;
+      border-radius: 0; } }
+  @media only screen and (min-width: 601px) and (max-width: 1200px) {
+    .toast {
+      float: left; } }
+  @media only screen and (min-width: 1201px) {
+    .toast {
+      float: right; } }
 
 .tabs {
   display: -webkit-box;
@@ -3751,6 +3812,7 @@ select {
   -ms-flex: 1 auto;
   flex: 1 auto;
   height: 100%;
+  position: relative;
   /*
 * @Author: Sebastian Castro
 * @Date:   2017-02-28 10:25:51
@@ -4555,11 +4617,11 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       display: none !important; } }
   .gogocarto-container #directory-menu-overlay {
     display: none;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 120vh;
+    bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 997;
     will-change: opacity; }
