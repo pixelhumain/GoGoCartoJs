@@ -66,6 +66,7 @@ export class ElementsManager
     if (App.mode == AppModes.List)
     {
       App.elementListComponent.update(result.elementsToDisplay);
+      if (App.ajaxModule.allElementsReceived) App.elementListComponent.handleAllElementsRetrieved();
     }
     else
     {

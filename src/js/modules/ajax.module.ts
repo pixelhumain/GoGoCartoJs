@@ -155,10 +155,10 @@ export class AjaxModule
 					if ($expectedFilledBounds)
 						App.boundsModule.updateFilledBoundsWithBoundsReceived($expectedFilledBounds, $request.data.mainOptionId,  $request.data.fullRepresentation);
 
+					if (response.allElementsSends || !App.config.data.requestByBounds) this.allElementsReceived = true;
+
 					this.onNewElements.emit(response);				
-				}
-			  
-			  if (response.allElementsSends || !App.config.data.requestByBounds) this.allElementsReceived = true;   
+				}			     
 			},
 			complete: () =>
 			{
