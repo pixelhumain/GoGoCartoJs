@@ -118,7 +118,7 @@ export class ElementsModule
 
 			let elementInBounds = false;
 			if (this.noNeedToCheckBounds()) elementInBounds = true;
-			else elementInBounds = currBounds.contains(element.position);
+			else elementInBounds = currBounds && currBounds.contains(element.position);
 
 			if ( elementInBounds && filterModule.checkIfElementPassFilters(element))
 			{
