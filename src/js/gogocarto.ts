@@ -125,5 +125,5 @@ export class GoGoCartoModule
 	}
 }
 
-// fill the global variable GoGoCarto with an instance of the GoGoCarto library
+// instanciate a GoGoCartoModule
 goGoCarto = function(container, options) { return new GoGoCartoModule(container, options); }

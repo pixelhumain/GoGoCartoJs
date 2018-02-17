@@ -4,8 +4,7 @@ export const DEFAULT_FEATURES = {
   searchGeolocate: {},
   favorite: {},
   share: {},
-  directions: {},
-  export:   {},            
+  directions: {},           
   layers: {},
   mapdefaultview: {}
 };

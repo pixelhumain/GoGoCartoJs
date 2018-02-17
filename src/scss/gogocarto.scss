@@ -11,25 +11,17 @@
   @include flexbox();
   @include flex(1 auto);
   height: 100%;    
+  position: relative;
 
-  @import "components/loaders";
-  
+  @import "components/loaders";  
   @import "components/directory-menu/directory-menu";
-
   @import 'components/icons';
-
   @import "components/map/map";
-
   @import "components/list/element-list";
-
   @import "components/gogo-controls";
-
   @import 'components/search-bar/search-bar';
-
   @import "components/element/element";
-
   @import "components/modals/modals";
-
   @import "components/commons/shadow-bottom";
   @import "components/commons/scroll-bar";
 
