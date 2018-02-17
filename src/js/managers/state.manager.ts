@@ -114,8 +114,14 @@ export class StateManager
         },
         (error) => 
         { 
-          alert("Cet élément n'existe pas ou a été supprimé !"); 
+          let historystate = App.historyStateManager.lastHistoryState;
+          App.component.toastMessage("Erreur pendant le chargement de cet élement");
+          
           App.setState(AppStates.Normal);
+          if (historystate.viewport) App.mapComponent.setViewPort(historystate.viewport);
+          else App.mapComponent.fitDefaultBounds();
+          setTimeout( () => { App.infoBarComponent.hide(); }, 200);
+          setTimeout( () => { App.infoBarComponent.hide(); }, 500);
         }
       );            
     }      

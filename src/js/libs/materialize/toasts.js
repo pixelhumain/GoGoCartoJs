@@ -23,7 +23,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
     newToast.style.opacity = 0;
 
     // Animate toast in
-    Vel(newToast, { "top" : "0px", opacity: 1 }, {duration: 300,
+    $(newToast).velocity({ "top" : "0px", opacity: 1 }, {duration: 300,
       easing: 'easeOutCubic',
       queue: false});
 
@@ -42,7 +42,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
 
       if (timeLeft <= 0) {
         // Animate toast out
-        Vel(newToast, {"opacity": 0, marginTop: '-40px'}, { duration: 375,
+        $(newToast).velocity({"opacity": 0, marginTop: '-40px'}, { duration: 375,
             easing: 'easeOutExpo',
             queue: false,
             complete: function(){
@@ -99,7 +99,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
           if (opacityPercent < 0)
             opacityPercent = 0;
 
-          Vel(toast, {left: deltaX, opacity: opacityPercent }, {duration: 50, queue: false, easing: 'easeOutQuad'});
+          $(toast).velocity({left: deltaX, opacity: opacityPercent }, {duration: 50, queue: false, easing: 'easeOutQuad'});
 
         });
 
@@ -109,7 +109,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
 
           // If toast dragged past activation point
           if (Math.abs(deltaX) > activationDistance) {
-            Vel(toast, {marginTop: '-40px'}, { duration: 375,
+            $(toast).velocity({marginTop: '-40px'}, { duration: 375,
                 easing: 'easeOutExpo',
                 queue: false,
                 complete: function(){
@@ -123,7 +123,7 @@ Materialize.toast = function (message, displayLength, className, completeCallbac
           } else {
             toast.classList.remove('panning');
             // Put toast back into original position
-            Vel(toast, { left: 0, opacity: 1 }, { duration: 300,
+            $(toast).velocity({ left: 0, opacity: 1 }, { duration: 300,
               easing: 'easeOutExpo',
               queue: false
             });

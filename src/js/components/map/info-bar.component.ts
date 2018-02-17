@@ -196,8 +196,6 @@ export class InfoBarComponent
 
 	hide(humanAction : boolean = true)
 	{
-		if (!this.isVisible) return; 
-
 		if (!this.isDisplayedAside())
 		{			
 			this.hideDetails();

@@ -6,13 +6,14 @@ declare var $, L : any;
 
 export class HistoryStateManager
 {
+  lastHistoryState = null;
   /*
   * Load initial state or state popped by window history manager
   */
   load(historystate : HistoryState, $backFromHistory = false)
   {
     if (historystate === null) return;  
-
+    this.lastHistoryState = historystate;
     console.log("loadHistorystate", historystate);  
 
     if (historystate.dataType == AppDataType.SearchResults)
@@ -88,11 +89,11 @@ export class HistoryStateManager
           },
           () => {
             // failure callback
-            App.searchBarComponent.setValue("Erreur de localisation : " + historystate.address);
+            App.searchBarComponent.setValue("");
             if (!historystate.viewport) 
             {
-              // geocode default location
-              App.geocoder.geocodeAddress('');
+              App.mapComponent.fitDefaultBounds();
+              App.component.toastMessage("Erreur, cette adresse n'a pas pu être localisée : " + historystate.address)
             }
           }  
         );

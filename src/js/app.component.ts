@@ -13,7 +13,7 @@ import { App } from "./gogocarto";
 
 
 //declare var $;
-declare let $, window : any;
+declare let $, window : any, Materialize : any;
 
 export class AppComponent
 {
@@ -42,6 +42,11 @@ export class AppComponent
 		setTimeout( () => { this.updateComponentsSize(); }, 1000);	
 		setTimeout( () => { this.updateComponentsSize(); }, 2000);
 		setTimeout( () => { this.updateComponentsSize(); }, 3000);
+	}
+
+	toastMessage($message, $duration = 3000)
+	{
+		Materialize.toast($message, $duration, 'rounded')
 	}
 
 	handleDirectoryMenuShow()
