@@ -14,13 +14,14 @@ export var App : AppModule;
 export class GoGoCartoModule
 {
 	private options;
-	private containerSelector : string = '';
+	// DOM Container, can be a string (selector) or DOM object
+	private container : string | any = '';
 	// only for debugging
 	app: AppModule;
 
-	constructor(containerSelector : string, options = {})
+	constructor(container : string | any, options = {})
 	{
-		this.containerSelector = containerSelector;
+		this.container = container;
 		this.checkForDistantConfifuration(options);
 	}
 
@@ -85,8 +86,8 @@ export class GoGoCartoModule
 			config: App.config
 		});
 		   
-		if ($(this.containerSelector).length == 0) console.warn('[GoGoCarto] The container "' + this.containerSelector + '" was not found');
-		else $(this.containerSelector).append(layout);
+		if ($(this.container).length == 0) console.warn('[GoGoCarto] The container "' + this.container + '" was not found');
+		else $(this.container).append(layout);
 
 		
 		if (App.taxonomyModule.options.length)
