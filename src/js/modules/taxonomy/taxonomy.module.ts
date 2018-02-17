@@ -27,7 +27,6 @@ export class TaxonomyModule
 	openHoursFiltersDays : string[] = [];
 
 	categoriesCreatedCount : number = 0;
-	optionsCreatedCount : number = 0;
 
 	constructor() 
 	{
@@ -74,8 +73,6 @@ export class TaxonomyModule
 
 	private recursivelyCreateOption(optionJson : any, parentCatgeory : Category)
 	{
-		if (!optionJson.id) optionJson.id = this.optionsCreatedCount;
-		this.optionsCreatedCount++;
 		let option = new Option(optionJson);
 		option.ownerId = parentCatgeory.id;
 
