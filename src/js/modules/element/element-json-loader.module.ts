@@ -31,13 +31,13 @@ export class ElementJsonParserModule
     // we ovewrite anyway all attributes (it can have changed !)
     element.id = elementJson.id;    
 
-    element.position = L.latLng(elementJson.geo.latitude, elementJson.geo.longitude);
+    element.position = L.latLng(elementJson.latitude || elementJson.lat || elementJson.geo.latitude, elementJson.longitude || elementJson.long || elementJson.geo.longitude);
     element.name = elementJson.name || elementJson.title;
     element.status = elementJson.status == undefined ? 1 : elementJson.status;
     element.moderationState = elementJson.moderationState || 0;
 
     // update createOptionValue vene if element already exist
-    App.elementOptionValuesModule.createOptionValues(elementJson.optionValues, element);
+    App.elementOptionValuesModule.createOptionValues(elementJson.optionValues || elementJson.tags || elementJson.taxonomy, element);
     
     if(elementJson.modifiedElement) 
     {
