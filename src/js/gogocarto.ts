@@ -15,7 +15,7 @@ export class GoGoCartoModule
 {
 	private options;
 	// DOM Container, can be a string (selector) or DOM object
-	private container : string | any = '';
+	container : string | any = '';
 	// only for debugging
 	app: AppModule;
 
@@ -73,7 +73,7 @@ export class GoGoCartoModule
 		App = new AppModule(options, isIframe, fullTaxonomy);
 
 		// only for debugging
-		this.app = App;		
+		this.app = App;				
 
 		App.taxonomyModule.createTaxonomyFromJson(taxonomy, options.openHours);
 
@@ -121,7 +121,19 @@ export class GoGoCartoModule
 			App.routerModule.loadInitialState();
 
 			App.elementsJsonModule.loadLocalElements();
+
+			this.bindEvents();
 		}, 0);	 
+	}
+
+	private bindEvents() 
+	{
+		this.app.mapManager.onMarkerClick.do( (id) => this.fireEvent('markerClick', {id: id}));
+	}
+
+	private fireEvent($eventName, $data) 
+	{
+		$(this.container).trigger($eventName, $data);
 	}
 }
 

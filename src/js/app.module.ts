@@ -130,7 +130,7 @@ export class AppModule
 		this.elementsManager = new ElementsManager();
 		this.geocodingManager = new GeocodingManager();
 		this.mapManager = new MapManager();	
-	}	
+	}
 
 	// ---------------------------
 	// Getters & Setters Shortcuts

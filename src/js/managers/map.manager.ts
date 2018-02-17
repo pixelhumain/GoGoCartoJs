@@ -2,6 +2,7 @@ import { App } from "../gogocarto";
 import { AppModes, AppStates, AppDataType } from "../app.module";
 import { capitalize, unslugify } from "../utils/string-helpers";
 import { Marker } from "../components/map/marker.component";
+import { Event } from "../classes/classes";
 
 declare var $;
 
@@ -11,6 +12,8 @@ export class MapManager
   // when click on marker we put isClicking to true during
   // few milliseconds so the map don't do anything is click event
   private isClicking = false;
+
+  onMarkerClick = new Event<any>();
 
   constructor()
   {
@@ -36,6 +39,7 @@ export class MapManager
     if (App.mode != AppModes.Map) return;
 
     this.setTimeoutClicking();
+    this.onMarkerClick.emit(marker.getElement().id);
 
     if (marker.isHalfHidden()) App.setState(AppStates.Normal);  
 
