@@ -102,17 +102,19 @@ export class AppComponent
 
 		if ($('#element-info-bar').hasClass('display-aside'))	
 		{			
-			let infoBarwidth = this.mapWidth() > 1100 ? '540px' : '470px';
+			let infoBarWidth;
+			if (App.config.infobar.width) infoBarWidth = App.config.infobar.width;
+			else infoBarWidth = this.mapWidth() > 1100 ? '540px' : '470px';
 
-			if (infoBarwidth == '470px') $('#element-info-bar').addClass('small-width');
+			if (infoBarWidth == '470px') $('#element-info-bar').addClass('small-width');
 			else $('#element-info-bar').removeClass('small-width');
 
 			if (infoBarHasChangeDisplayMode)
-				$('#element-info-bar').css('width', infoBarwidth);
+				$('#element-info-bar').css('width', infoBarWidth);
 			else
-				$('#element-info-bar').animate({'width': infoBarwidth}, 350, "swing");
+				$('#element-info-bar').animate({'width': infoBarWidth}, 350, "swing");
 			
-			this.updateDirectoryContentMarginIfInfoBarDisplayedAside(!infoBarHasChangeDisplayMode, infoBarwidth);
+			this.updateDirectoryContentMarginIfInfoBarDisplayedAside(!infoBarHasChangeDisplayMode, infoBarWidth);
 		}
 		else
 		{

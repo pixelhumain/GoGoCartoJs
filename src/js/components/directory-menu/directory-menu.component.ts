@@ -138,11 +138,18 @@ export class DirectoryMenuComponent
 	{
     // update menu width
 		let menuwidth, pageWidth = App.component.width();
+
+    let menuSmallWidth = App.config.menu.width ? App.config.menu.width : 260;
+    let menuBigWidth = App.config.menu.width ? App.config.menu.width : 290;
+    if (App.config.menu.showOnePanePerMainOption) {
+      menuSmallWidth += 50;
+      menuBigWidth += 50;
+    }
 		
 		if (pageWidth > 850) {
-			menuwidth =  pageWidth > 1450 ? 340 : 310;
+      menuwidth =  pageWidth > 1450 ? menuBigWidth : menuSmallWidth;
 		} else {
-			menuwidth =  Math.min(Math.min(Math.max(pageWidth - 60, 310), 360), pageWidth - 20);
+      menuwidth =  Math.min(Math.min(Math.max(pageWidth - 60, menuSmallWidth), menuBigWidth), pageWidth - 20);
 		}
 		
 		this.dom.css('width', menuwidth + 'px');
