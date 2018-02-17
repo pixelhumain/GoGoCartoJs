@@ -44,16 +44,15 @@ export class InfoBarComponent
 	// App.infoBarComponent.showElement;
 	showElement(elementId, callback = null) 
 	{
-		let element = App.elementsModule.getElementById(elementId);		
-
+		if (!App.config.infobar.activate) {
+			App.stateManager.setState(AppStates.Normal);			
+			return;
+		}
 		// console.log("showElement", element);
 
+		let element = App.elementsModule.getElementById(elementId);		
 		// if element already visible
-		if (this.elementVisible)
-		{
-			this.elementVisible.marker.showNormalSize(true);
-		}
-
+		if (this.elementVisible) this.elementVisible.marker.showNormalSize(true);
 		this.elementVisible = element;	
 
 		if (!element.isFullyLoaded)

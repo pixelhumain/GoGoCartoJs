@@ -42,6 +42,7 @@ export class GoGoConfig
   readonly infobar =
   {
     width: undefined,
+    activate: true,
   };
   readonly general =
   {
