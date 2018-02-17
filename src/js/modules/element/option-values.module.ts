@@ -6,11 +6,10 @@ export class ElementOptionValuesModule
 {
   createOptionValues(optionsValuesJson : any, element : ElementBase)
   {
-    if (element.optionsValues.length > 0) 
-    { 
-      element.optionsValues = [];
-      element.optionValuesByCatgeory = [];
-    }
+    element.optionsValues = [];
+    element.optionValuesByCatgeory = [];
+
+    if(!optionsValuesJson) return;
 
     for (let key = 0; key < optionsValuesJson.length; ++key) 
     {
