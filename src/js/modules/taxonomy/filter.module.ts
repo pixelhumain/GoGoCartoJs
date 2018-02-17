@@ -88,7 +88,7 @@ export class FilterModule
 		if (option.subcategories.length == 0 || (option.isDisabled && !option.isMainOption) )
 		{
 			if (log) console.log( "No subcategories ");
-			result = option.isChecked;
+			result = option.isChecked && element.haveOption(option);
 		}
 		else
 		{

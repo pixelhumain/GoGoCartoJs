@@ -1,4 +1,4 @@
-import { Contribution, VoteReport, OptionValue, PostalAddress } from "../classes";
+import { Contribution, VoteReport, OptionValue, PostalAddress, Option } from "../classes";
 import { capitalize } from "../../utils/string-helpers";
 import { App } from "../../gogocarto";
 
@@ -87,5 +87,10 @@ export class ElementBase
   getOptionValueByCategoryId($categoryId)
   {
     return this.optionValuesByCatgeory[$categoryId] || [];
+  }
+
+  haveOption($option : Option)
+  {
+    return this.optionsValues.map( (ov) => ov.optionId).indexOf($option.id) >= 0;
   }
 }
