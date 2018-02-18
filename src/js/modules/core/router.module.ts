@@ -85,22 +85,30 @@ export class RouterModule
 
 	loadInitialState()
 	{		
-		// check GET parameters inside the hash
-		let splited = window.location.hash.split('?cat=');
-		
-		if (splited.length > 1) this.filtersSerializedParam = splited[1];
+		if (App.config.general.activateHistoryStateAndRouting) 
+		{		
+			// check GET parameters inside the hash
+			let splited = window.location.hash.split('?cat=');
+			
+			if (splited.length > 1) this.filtersSerializedParam = splited[1];
 
-		let routeHash = splited[0];
+			let routeHash = splited[0];
 
-		// handle wrong hash
-		if (!routeHash || routeHash == '#/' || routeHash == '#') routeHash = '/carte';
-		routie.navigate(routeHash);
+			// handle wrong hash
+			if (!routeHash || routeHash == '#/' || routeHash == '#') routeHash = '/carte';
+			routie.navigate(routeHash);
 
-		// let the hash being changed with a timeOut
-		setTimeout(() => routie.reload(), 10);
-
-		if (!App.config.general.activateHistoryStateAndRouting) {
-			setTimeout(() => window.location.hash = "", 100);
+			// let the hash being changed with a timeOut
+			setTimeout(() => routie.reload(), 10);
+		}
+		else 
+		{
+			let initialHash = window.location.hash;
+			// navigate to default route
+			routie.navigate('/carte');
+			setTimeout(() => routie.reload(), 10);
+			// restore initial hash
+			setTimeout(() => window.location.hash = initialHash, 100);
 		}
 	}
 
