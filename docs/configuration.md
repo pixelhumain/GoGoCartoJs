@@ -15,20 +15,48 @@ See [Taxonomy](taxonomy.md) and [Dataset](dataset.md) documentation.
 },
 ```
 Menu
-------
+----
 ```javascript
 "menu": {
+  "width": 450,
   "showOnePanePerMainOption": false,
   "showCheckboxForMainFilterPane": true, // you can hide the checkboxes for a lighter design
   "showCheckboxForSubFilterPane": true
 },
 ```
-If your taxonomy is complex, you should better use the option "showOnePanePerMainOption". 
+You can custom the menu **width** (in pixel)
+
+If your taxonomy is complex, you should better use the option **showOnePanePerMainOption** 
 It will add a vertical side bar with all the main option icons. clicking each main option icon will show a diferent pane 
 for each main option children.
 
 [Check OneFilterPanePerMainOption Demo](https://pixelhumain.github.io/GoGoCartoJs/web/examples/index-full-taxonomy.html#/carte/@45.94,-0.38,10z?cat=all) 
 
+General
+------
+```javascript
+"general": {
+    activateHistoryStateAndRouting: true
+  }
+```
+If **activateHistoryStateAndRouting** is true, every action on GoGoCarto will update the url hash, and an history will be created.
+So anytime you can refresh the page and arrive on the same state, and you can use the browser "back" function to go to previous action
+
+Exple : http://gogocarto.fr#/fiche/Element-example/10m9/@46.662,-1.110,12z?cat=Education
+
+Infobar
+------
+InfoBar is the panel to display element informations, opened on marker click
+```javascript
+"infobar": {
+    width: 520,
+    activate: true,
+  }
+```
+
+Custom **width** in pixel
+
+If **activate** to false, nothing happen on marker click, the info bar is not displayed
 
 Texts
 ------
