@@ -35,11 +35,14 @@
 
   {# Categories litteral #}
   <span class="inline-option-values gogo-neutral col s8 hideOnLargeScreen">
-
     {% for optionValue in allOptionsValues %} 
         {% set isDisabled =   '' if optionValue.isFilledByFilters else 'disabled' %}
         <span class="option-value {{ isDisabled }}">{{ optionValue.option.name|capitalize }} {% if not loop.last %}, {% endif %}</span>            
     {% endfor %}
+
+    {% if not allOptionsValues|length %}
+      <span class="option-value">{{ mainOptionToDisplay.option.name|capitalize }}</span>       
+    {% endif %}
 
   </span>      
 
