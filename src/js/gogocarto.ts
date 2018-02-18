@@ -120,7 +120,8 @@ export class GoGoCartoModule
 
 			App.routerModule.loadInitialState();
 
-			App.elementsJsonModule.loadLocalElements();
+			// wait for initial state to be loaded
+			setTimeout( () => App.elementsJsonModule.loadLocalElements(), 100);
 
 			this.bindEvents();
 		}, 0);	 

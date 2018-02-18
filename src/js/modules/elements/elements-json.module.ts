@@ -17,6 +17,13 @@ export class ElementsJsonModule
 
   convertJsonElements(elementList : any[], checkIfAlreadyExist = true, isFullRepresentation : boolean = true) 
   {
+    if (!elementList) return { 
+      newElementsLength : [], 
+      elementsUpdatedLength : 0, 
+      newElements: [], 
+      elementsConverted: [], 
+    };
+
     let element : Element, elementJson;
     let newElements : Element[] = [];
     let elementsConverted : Element[] = [];
@@ -79,8 +86,12 @@ export class ElementsJsonModule
     {
       let elements = App.config.data.elements;
       let elementJsonArray = elements.length ? elements : elements.data;
-      this.convertJsonElements(elementJsonArray, true, true);
+      let result = this.convertJsonElements(elementJsonArray, true, true);
       App.ajaxModule.allElementsReceived = true;
+      if (!App.config.map.defaultBoundsProvided && !App.historyStateManager.lastHistoryState.viewport) {
+        console.log("fit to elements bounds");
+        App.mapComponent.fitElementsBounds(result.elementsConverted);
+      }
     }
   }
 }

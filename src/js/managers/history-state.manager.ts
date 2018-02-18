@@ -6,7 +6,7 @@ declare var $, L : any;
 
 export class HistoryStateManager
 {
-  lastHistoryState = null;
+  lastHistoryState : HistoryState = null;
   /*
   * Load initial state or state popped by window history manager
   */
@@ -35,14 +35,8 @@ export class HistoryStateManager
       }    
     }    
 
-    if (historystate.filters)
-    {
-      App.filterRoutingModule.loadFiltersFromString(historystate.filters);
-    }
-    else
-    {
-      App.filtersComponent.setMainOption('all');
-    }    
+    if (historystate.filters) App.filterRoutingModule.loadFiltersFromString(historystate.filters);
+    else App.filtersComponent.setMainOption('all'); 
 
     if (historystate.dataType == AppDataType.All && historystate.viewport && historystate.state != AppStates.ShowElementAlone)
     {      
@@ -67,9 +61,8 @@ export class HistoryStateManager
 
     App.setMode(historystate.mode, $backFromHistory, false);
     
-    // if address is provided we geolocalize
-    // if no viewport and state normal we geocode on default location
-    if (historystate.dataType == AppDataType.All && (historystate.address || (!historystate.viewport && historystate.state === AppStates.Normal))) 
+    // if address is provided we geolocalize this address
+    if (historystate.dataType == AppDataType.All && historystate.address) 
     {
       if (historystate.address == "geolocalize")
       {
@@ -81,8 +74,7 @@ export class HistoryStateManager
           historystate.address, 
           (results) => 
           { 
-            // if viewport is given, nothing to do, we already did initialization
-            // with viewport
+            // if viewport is given, nothing to do, we already did initialization with viewport
             if (historystate.viewport && historystate.mode == AppModes.Map) return;
             // fit bounds anyway so the mapcomponent will register App requested bounds for later
             App.mapComponent.fitBounds(App.geocoder.getBounds());
@@ -99,6 +91,11 @@ export class HistoryStateManager
         );
       }      
     }
+
+    if (!historystate.viewport && !historystate.address && App.config.data.retrieveElementsByApi) {
+      console.log("fit default bounds no viewport no address");
+      App.mapComponent.fitDefaultBounds();
+    } 
 
     if (historystate.id) 
     {

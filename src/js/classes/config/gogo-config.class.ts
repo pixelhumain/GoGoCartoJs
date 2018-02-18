@@ -52,6 +52,7 @@ export class GoGoConfig
   {
     // france
     defaultBounds : L.latLngBounds(L.latLng(52, 10), L.latLng(40, -5)),
+    defaultBoundsProvided : false,
     defaultCenter : L.latLng(46, 0),
     maxBounds : L.latLngBounds(L.latLng(-90, -180), L.latLng(90, 180)),
     saveViewportInCookies : false,
@@ -145,6 +146,7 @@ export class GoGoConfig
     // All the options non specified will be initialized with default values
     this.recursiveFillProperty(this, config);
     this.data.retrieveElementsByApi = typeof this.data.elements == "string";
+    if (config.map && config.map.defaultBounds) this.map.defaultBoundsProvided = true;
     console.log(this);
 	}
   
