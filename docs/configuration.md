@@ -36,7 +36,7 @@ General
 ------
 ```javascript
 "general": {
-    activateHistoryStateAndRouting: true
+    "activateHistoryStateAndRouting": true
   }
 ```
 If **activateHistoryStateAndRouting** is true, every action on GoGoCarto will update the url hash, and an history will be created.
@@ -49,8 +49,8 @@ Infobar
 InfoBar is the panel to display element informations, opened on marker click
 ```javascript
 "infobar": {
-    width: 520,
-    activate: true,
+    "width": 520,
+    "activate": true,
   }
 ```
 
