@@ -37,7 +37,7 @@ export function createListenersForSendEmail(object, element)
 
 function handleSubmitMail()
 {  
-  let userMail = $('#popup-send-mail .input-mail').val();
+  let userEmail = $('#popup-send-mail .input-mail').val();
   let mailSubject = $('#popup-send-mail .input-mail-subject').val();
   let mailContent = $('#popup-send-mail .input-mail-content').val();
 
@@ -51,7 +51,7 @@ function handleSubmitMail()
     $('#popup-send-mail #content-error').show();
     errors = true;
   }
-  if (!userMail || $('#popup-send-mail .input-mail').hasClass('invalid'))
+  if (!userEmail || $('#popup-send-mail .input-mail').hasClass('invalid'))
   {
     $('#popup-send-mail #mail-error').show();
     $('#popup-send-mail .input-mail').show();
@@ -63,7 +63,7 @@ function handleSubmitMail()
     let comment = $('#popup-send-mail .input-comment').val();        
 
     let route = App.config.features.sendMail.url;
-    let data = { elementId: elementId, subject: mailSubject, content: mailContent, userMail : userMail };
+    let data = { elementId: elementId, subject: mailSubject, content: mailContent, userEmail : userEmail };
 
     App.ajaxModule.sendRequest(route, 'post', data, (response) =>
     {

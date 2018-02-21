@@ -21,7 +21,7 @@ export class LoginModule
 		else this.roles_ = $roles;
 	}
 
-	setUserEmail(userMail) { this.userEmail = userMail; }
+	setUserEmail(userEmail) { this.userEmail = userEmail; }
 
 	getUserEmail() { return this.userEmail; }
 

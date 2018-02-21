@@ -64,7 +64,7 @@ export function initializeReportingAndDeleting()
 	$('#popup-report-error #submit-report').click(() => 
 	{
 			let reportValue = $('#popup-report-error .option-radio-btn:checked').attr('value');
-			let userMail = $('#popup-report-error .input-mail').val();
+			let userEmail = $('#popup-report-error .input-mail').val();
 
 			$('#popup-report-error #select-error').hide();
 			$('#popup-report-error #mail-error').hide();
@@ -75,7 +75,7 @@ export function initializeReportingAndDeleting()
 				$('#popup-report-error #select-error').show();
 				errors = true;
 			}
-			if (!userMail || $('#popup-report-error .input-mail').hasClass('invalid'))
+			if (!userEmail || $('#popup-report-error .input-mail').hasClass('invalid'))
 			{
 				$('#popup-report-error #mail-error').show();
 				errors = true;
@@ -88,7 +88,7 @@ export function initializeReportingAndDeleting()
 				//console.log("send report " +reportValue + " to element id ", elementId);
 
 				let route = App.config.features.report.url;
-				let data =  { elementId: elementId, value: reportValue, comment: comment, userMail : userMail };
+				let data =  { elementId: elementId, value: reportValue, comment: comment, userEmail : userEmail };
 
 				App.ajaxModule.sendRequest(route, 'post', data, (response) =>
 				{

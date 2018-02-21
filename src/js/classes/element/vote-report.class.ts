@@ -3,7 +3,7 @@ export class VoteReport
 	type : number;
 	value : number;
 	comment : string;
-	userMail : string;
+	userEmail : string;
 	userRole : number;
 	createdAt : string;
 
@@ -12,7 +12,7 @@ export class VoteReport
 		this.type = voteReportJson.type;
 		this.value = voteReportJson.value;
 		this.comment = voteReportJson.comment;
-		this.userMail = voteReportJson.userMail;
+		this.userEmail = voteReportJson.userEmail;
 		this.userRole = voteReportJson.userRole;
 		this.createdAt = voteReportJson.createdAt;	
 	}
