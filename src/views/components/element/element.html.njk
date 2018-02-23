@@ -29,29 +29,36 @@
 {% endif %}
 
 {# BODY #}
-<div class="collapsible-body moreDetails custom-scroll-bar tabs-content">
-  <div class="collapsible-body-main-content"> 
-    <div class="body-main-tab-content">
-      
-      {# Votes and reports #}
-      {% if config.isFeatureAvailable('directModeration') %}
-        {% include here ~ "admin/pending-contribution.html.njk" %}
-        {% import here ~ "admin/votes-reports.html.njk" as VotesReportsRenderer %}
-        {{ VotesReportsRenderer.render('Votes', element.votes, smallWidth) }}
-        {{ VotesReportsRenderer.render('Erreurs signalées', element.reports, smallWidth) }}      
-      {% endif %}
 
-      {# Element description #}
-      {% include here ~ 'body.html.njk' %}  
-    </div>
+<div class="collapsible-body moreDetails tabs-content with-image">
+  
+  <div class="img-container">
+    <img src="https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.italyguides.it%2Fimages%2Fgridfolio%2Ftaormina%2Ftaormina.02.jpg&f=1" class="gogo-img"/>
+  </div>
+  <div class="collapsible-body-main-container custom-scroll-bar">
+    <div class="collapsible-body-main-content"> 
+      <div class="body-main-tab-content">
+        
+        {# Votes and reports #}
+        {% if config.isFeatureAvailable('directModeration') %}
+          {% include here ~ "admin/pending-contribution.html.njk" %}
+          {% import here ~ "admin/votes-reports.html.njk" as VotesReportsRenderer %}
+          {{ VotesReportsRenderer.render('Votes', element.votes, smallWidth) }}
+          {{ VotesReportsRenderer.render('Erreurs signalées', element.reports, smallWidth) }}      
+        {% endif %}
 
-    {# History #}
-    {% if isHistoryAvailable %}
-      <div class="body-admin-tab-content">
-        {% include here ~ "admin/contributions.html.njk" %}
-      </div>   
-    {% endif %} 
-  </div> 
+        {# Element description #}
+        {% include here ~ 'body.html.njk' %}  
+      </div>
+
+      {# History #}
+      {% if isHistoryAvailable %}
+        <div class="body-admin-tab-content">
+          {% include here ~ "admin/contributions.html.njk" %}
+        </div>   
+      {% endif %} 
+    </div> 
+  </div>
 </div>
 
 </li>

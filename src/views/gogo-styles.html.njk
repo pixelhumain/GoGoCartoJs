@@ -65,6 +65,9 @@
   .gogo-load-css .gogo-font-title { font-family: {{ titleFont }}, sans-serif;}
   .gogo-load-css .sub-categorie-main-title { font-family: {{ taxonomyMainTitleFont }}, sans-serif; }
 
+  @media (max-width: 700px) {
+    .gogo-load-css .collapsible-header .expandLabel { color: {{ primary }}; }
+  }
   .gogo-load-css .collapsible-header:hover .expandLabel { color: {{ primary }}; }
 
   .gogo-load-css .interactive-section { background-color: {{ interactiveColor }}; }

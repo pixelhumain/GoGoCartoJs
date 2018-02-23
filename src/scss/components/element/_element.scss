@@ -6,7 +6,7 @@
 {
 	list-style-type: none;	
 	@include flexbox();
-  @include flex-flow(column nowrap); 
+  @include flex-flow(column nowrap);  
 
 	h3
 	{
@@ -47,6 +47,7 @@
 	.collapsible-header
 	{
 		padding: 0; 
+    position: relative;
 		//@media #{$medium-and-up} { padding: .5rem 0 0 0; }
 		i { margin-right: 0; padding-left: 0.3rem; }
 
@@ -98,14 +99,15 @@
 	
 	.collapsible-body
 	{
-		background-color: #F7F7F7;
+		background-color: transpraent;
 		padding: 0;
-		overflow-y: auto;
-		position: relative;
+		position: relative;   
+    
 
 		.collapsible-body-main-content
 		{
-			padding: 0 0rem 1rem .5rem;
+      background-color: #F7F7F7;
+      padding: 0 0rem 1rem .5rem;
 			@media #{$medium-and-up} { padding: 0 0rem 1rem 1rem }	
 		}
 
@@ -202,8 +204,6 @@
 
   			&.disabled { color: #9C9C9C !important; }
 			}
-
-
 		}		
 	}
 }
@@ -218,7 +218,7 @@
 	.collapsible-header
   {	        
       //background-color: $secondary-color;//$submenu-color;
-      border: none;
+      border: none;      
       color: white;
       cursor: default;
       width: 100%;
@@ -269,7 +269,63 @@
 
 #element-info
 {
-	.collapsible-header { span.added { color: #3ab33a;} }
+	.collapsible-header 
+  { 
+    position: relative;
+    z-index: 2;
+    span.added { color: #3ab33a;}     
+  }
+
+  .element-item.active {
+    .expandLabel {
+      position: absolute;
+      color: white;
+      z-index: 2;   
+      right: 0;
+      width: auto;
+      margin-right: 1.7rem;
+      
+      @media #{$small-only} {
+        padding: .3rem 1.2rem;
+        bottom: -1rem;
+      }
+      padding: 8px 25px;
+      bottom: -20px;
+      
+      @extend .z-depth-1;
+
+      &:hover { color: white; }
+    }
+  }
+
+  .element-item:not(.active) .expandLabel {
+    background-color: transparent !important; 
+  }
+
+  .img-container 
+  {
+    position: absolute;
+    top: 0;    
+  }
+
+  .collapsible-body-main-container
+  {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;    
+    overflow-y: auto;
+  }
+
+  .collapsible-body.with-image {
+    .collapsible-body-main-container { padding-top: 200px; }    
+  }
+}
+
+.gogo-img 
+{
+  width: 100%;
+  height: auto;
 }
 
 
