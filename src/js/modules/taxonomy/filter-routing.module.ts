@@ -78,7 +78,7 @@ export class FilterRoutingModule
 
 			for(let filterId of filters)
 			{
-				let option = App.taxonomyModule.getOptionById(filterId);
+				let option = App.taxonomyModule.getOptionByIntId(filterId);
 				if (!option) console.log("Error loadings filters : " + filterId);
 				else 
 				{
@@ -108,8 +108,8 @@ export class FilterRoutingModule
 		if (mainOptionId == 'all' && App.config.menu.showOnePanePerMainOption)
 		{			
 			mainOptionName = "all";
-			checkArrayToParse = App.taxonomyModule.mainCategory.checkedOptions.map( (option) => option.id);
-			uncheckArrayToParse = App.taxonomyModule.mainCategory.disabledOptions.map( (option) => option.id);
+			checkArrayToParse = App.taxonomyModule.mainCategory.checkedOptions.map( (option) => option.intId);
+			uncheckArrayToParse = App.taxonomyModule.mainCategory.disabledOptions.map( (option) => option.intId);
 		}
 		else
 		{
@@ -127,13 +127,13 @@ export class FilterRoutingModule
 				allOptions = App.taxonomyModule.options;
 			}				
 
-			checkArrayToParse = allOptions.filter( (option) => option.isChecked ).map( (option) => option.id);
-			uncheckArrayToParse = allOptions.filter( (option) => option.isDisabled ).map( (option) => option.id);
+			checkArrayToParse = allOptions.filter( (option) => option.isChecked ).map( (option) => option.intId);
+			uncheckArrayToParse = allOptions.filter( (option) => option.isDisabled ).map( (option) => option.intId);
 			
 			// if (mainOption.showOpenHours) 
 			// {
-			// 	checkArrayToParse = checkArrayToParse.concat(App.taxonomyModule.openHoursCategory.checkedOptions.map( (option) => option.id));
-			// 	uncheckArrayToParse = uncheckArrayToParse.concat(App.taxonomyModule.openHoursCategory.disabledOptions.map( (option) => option.id));
+			// 	checkArrayToParse = checkArrayToParse.concat(App.taxonomyModule.openHoursCategory.checkedOptions.map( (option) => option.intId));
+			// 	uncheckArrayToParse = uncheckArrayToParse.concat(App.taxonomyModule.openHoursCategory.disabledOptions.map( (option) => option.intId));
 			// }
 			
 		}
