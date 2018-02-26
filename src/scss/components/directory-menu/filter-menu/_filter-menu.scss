@@ -2,12 +2,31 @@
 * @Author: Sebastian Castro
 * @Date:   2017-02-28 13:25:52
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2018-01-23 12:29:36
+* @Last Modified time: 2018-02-26 11:43:39
 */
 @import 'uniques-filters';
 @import 'subcategorie-item';
 @import 'subcategorie-option-item';
 @import 'subcategory-depth-2';
+
+#directory-menu.small-width
+{
+  font-size: .95rem;
+  .subcategorie-option-item .arrow-after{ margin-left: .5rem; }
+  .icon { margin-right: .9rem; }
+  .main-categories { 
+    width: 3rem; 
+    .icon { font-size: 1.3rem; height: 3.4rem; width: 3rem;}
+    .icon:before { left: .6rem; }
+  }
+  .sub-categories .sub-categories-content { padding-right: 0; }
+
+  .subcategory-item { padding-left: .7rem; }
+  .subcategorie-option-item { padding-left: .6rem; }
+
+  .subcategory-item { font-size: .9rem; }
+}
+
 
 #directory-menu 
 {
