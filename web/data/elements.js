@@ -17,7 +17,7 @@ var elements = {
         "addressCountry":"FR"
       },
       "commitment":"",
-      "description":"Tous produits alimentaires locaux",
+      "description":"<a href='coucou'>Tous produits alimentaires locaux</a>",
       "descriptionMore":null,
       "telephone":"967556221",
       "website":"https://laruchequiditoui.fr/fr/assemblies/8148/collections",
