@@ -36,16 +36,18 @@ export class DisplayElementAloneModule
 
 		App.elementsModule.clearCurrentsElement();
 
-		App.infoBarComponent.showElement(element.id);	
+		setTimeout( () => {
+			App.infoBarComponent.showElement(element.id);	
 
-		// we set a timeout to let the infobar show up
-		// if we not do so, the map will not be centered in the element.position	
-		if (panToElementLocation)
-		{		
-			App.mapComponent.resize();
-			App.mapComponent.panToLocation(element.position, 12, false);
-			setTimeout( () => { App.mapComponent.resize();App.mapComponent.panToLocation(element.position, 12, false); }, 500);
-		}			
+			// we set a timeout to let the infobar show up
+			// if we not do so, the map will not be centered in the element.position	
+			if (panToElementLocation)
+			{		
+				App.mapComponent.resize();
+				App.mapComponent.panToLocation(element.position, 12, false);
+				setTimeout( () => { App.mapComponent.resize();App.mapComponent.panToLocation(element.position, 12, false); }, 500);
+			}			
+		}, 300);		
 	};
 
 	end() 

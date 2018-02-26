@@ -132,6 +132,8 @@ export class InfoBarComponent
 		// to show menu actions details in full text
 		showFullTextMenu(this.domMenu(), this.isDisplayedAside());
 
+		this.hideDetails();
+
 		App.searchBarComponent.hideMobileSearchBar();		
 		
 		if (!this.isDisplayedAside())
@@ -190,12 +192,20 @@ export class InfoBarComponent
 
 	verticalAlignImages()
 	{
-		let imgBannerHeight = $('#element-info-bar .img-overlay').height();
+		let that = this;
 		$('#element-info-bar .img-container .gogo-img').each( function() {
-			let marginTop = (imgBannerHeight - $(this).height()) / 2;
-			console.log("marginTop", marginTop);
-			$(this).css('margin-top', `${marginTop}px`);
+			// if image is loaded (height != 0) align image, else do it when image is loaded
+			if ($(this).height()) that.verticalAlignImage(this);			
+			else $(this).load(function() { that.verticalAlignImage(this); });			
 		});
+	}
+
+	private verticalAlignImage(image)
+	{
+		let imgBannerHeight = $('#element-info-bar .img-overlay').height();
+		let marginTop = (imgBannerHeight - $(image).height()) / 2;
+		console.log("img height",$(image).height());
+		if (marginTop < 0) $(image).css('margin-top', `${marginTop}px`);
 	}
 
 	private isCurrentMarkerNotVisibleOnMap()
