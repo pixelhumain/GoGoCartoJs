@@ -39,9 +39,9 @@ export class AppComponent
 		   },200);
 		};	
 
-		setTimeout( () => { this.updateComponentsSize(); }, 1000);	
-		setTimeout( () => { this.updateComponentsSize(); }, 2000);
-		setTimeout( () => { this.updateComponentsSize(); }, 3000);
+		setTimeout( () => { this.updateComponentsSize(false); }, 1000);	
+		setTimeout( () => { this.updateComponentsSize(false); }, 2000);
+		setTimeout( () => { this.updateComponentsSize(false); }, 5000);
 	}
 
 	toastMessage($message, $duration = 3000)
@@ -75,7 +75,7 @@ export class AppComponent
 
 	width() { return $('.gogocarto-container').width(); }
 
-	updateComponentsSize()
+	updateComponentsSize($refreshInfoBar = true)
 	{	
 		App.directoryMenuComponent.updateSize();
 
@@ -126,7 +126,7 @@ export class AppComponent
 			$('#element-info-bar').stop(true).css('width', '100%');
 		}
 
-		setTimeout( () => { App.infoBarComponent.refresh(); }, 100);
+		if ($refreshInfoBar) setTimeout( () => { App.infoBarComponent.refresh(); }, 100);
 
 		if ($('#directory-menu').is(':visible') && !this.isMobileScreen())
 		{
