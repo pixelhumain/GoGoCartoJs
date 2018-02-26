@@ -17,12 +17,13 @@
 
 	&.full-text
 	{
-		padding: .5rem 0 .8rem 0;
+		padding: .3rem 0 .8rem 0;
+		@media #{$small-only} { padding-top: 0; }
 
 		.menu-element-item {			
-			@media #{$small-only} { margin: 0 6px; }
-			margin: 0 10px;
-			@media (min-width: 1400px) { margin: 0 .8rem;	 }
+			@media #{$small-only} { margin: 0 6px -.9rem 6px }
+			margin: 0 10px -.5rem 10px;
+			@media (min-width: 1400px) { margin: 0 .8rem -.5rem .8rem; }
 		}
 
 		.menu-element-item-text
