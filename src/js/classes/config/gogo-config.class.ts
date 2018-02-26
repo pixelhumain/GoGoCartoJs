@@ -147,6 +147,7 @@ export class GoGoConfig
     this.recursiveFillProperty(this, config);
     this.data.retrieveElementsByApi = typeof this.data.elements == "string";
     if (config.map && config.map.defaultBounds) this.map.defaultBoundsProvided = true;
+    if (!this.features['sendMail'].active) this.security.hideMailsByShowingSendMailButton = false;
     console.log(this);
 	}
   

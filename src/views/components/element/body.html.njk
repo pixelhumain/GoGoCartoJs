@@ -19,7 +19,8 @@
   {% endif %}
 
   {# Mail #}
-  {% if (config.isFeatureAvailable('sendMail') and element.email) or element.isPending() %}
+  {% set email = element.getProperty('email') %}
+  {% if email %}
     <span class="col s12 tel">
     {# if element is pending we need to show the email no matter the security rules #}
     {% if config.security.hideMailsByShowingSendMailButton and not (element.isPending() and config.isFeatureAvailable('pending')) %}
