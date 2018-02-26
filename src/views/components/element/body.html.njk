@@ -26,7 +26,7 @@
     {% if config.security.hideMailsByShowingSendMailButton and not (element.isPending() and config.isFeatureAvailable('pending')) %}
       <button class="btn send-mail-btn">Envoyer un Mail</button>
     {% else %}
-      <a href="mailto:{{ element.email }}">{{ element.getProperty('email')|safe }}</a>            
+      {{ element.getProperty('email')|safe }}           
     {% endif %}
     </span>
   {% endif %}
@@ -47,40 +47,42 @@
   {% import here ~ 'category-value.html.njk' as categoryRenderer %}
   {{ categoryRenderer.renderCategoryValue(mainCategoryValue, 1) }}
 </div>
-<div class="info-bar-divider"></div>
 
 
 {% set commitment = element.getProperty('commitment') %}      
 {% if commitment %}
+  <div class="info-bar-divider"></div>
   <h3>Engagement Citoyen</h3>   
   <div class="section row">
     <span class="col s12 description">{{ commitment|safe }}</span>  
-  </div>
-  <div class="info-bar-divider"></div>
+  </div>  
 {% endif %}
 
 {# Open Hours #}
-<h3>Horaires d'ouverture</h3>   
-<div class="section row sectionOpenHours">  
-  {% set count = 0 %} 
+{% set openHoursMoreInfos = element.getProperty('openHoursMoreInfos') %}     
+{% if element.formatedOpenHours|length or openHoursMoreInfos %}
+  <h3>Horaires d'ouverture</h3>   
+  <div class="info-bar-divider"></div>
+  <div class="section row sectionOpenHours">  
+    {% set count = 0 %} 
 
-  {% for key, horaire in element.formatedOpenHours %} 
-    {% if horaire != null %}
+    {% for key, horaire in element.formatedOpenHours %} 
+      {% if horaire != null %}
 
-      <div class='row'>
-        <span class="col s3 day">{{ key|capitalize }}</span>
-        <span class="col s9 openHours">{{ horaire }} </span>
-      </div>
+        <div class='row'>
+          <span class="col s3 day">{{ key|capitalize }}</span>
+          <span class="col s9 openHours">{{ horaire }} </span>
+        </div>
+        {% set count = count + 1 %} 
+
+      {% endif %}
+    {% endfor %} 
+
+    {% if openHoursMoreInfos %}
+      <div class='col' {% if count != 0 %}style="margin-top:1rem;"{% endif %}>{{ openHoursMoreInfos|safe }}</div> 
       {% set count = count + 1 %} 
-
     {% endif %}
-  {% endfor %}          
 
-  {% set openHoursMoreInfos = element.getProperty('openHoursMoreInfos') %}      
-  {% if openHoursMoreInfos %}
-    <div class='col' {% if count != 0 %}style="margin-top:1rem;"{% endif %}>{{ openHoursMoreInfos|safe }}</div> 
-    {% set count = count + 1 %} 
-  {% endif %}
-
-  {% if count == 0 %}<div class='col'> Non renseignées </div>{% endif %}       
-</div> 
+    {% if count == 0 %}<div class='col'> Non renseignées </div>{% endif %}  
+  </div> 
+{% endif %}

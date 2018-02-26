@@ -11,7 +11,7 @@ export class PostalAddress
   {
     if (typeof $addressJson == "string")
       this.formatedAddress = $addressJson
-    else
+    else if ($addressJson)
     {
       this.streetAddress = capitalize($addressJson.streetAddress || '');
       this.addressLocality = capitalize($addressJson.addressLocality || '');

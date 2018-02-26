@@ -13,6 +13,7 @@ export interface ElementsConverted
 
 export class ElementsJsonModule
 {
+  elementsCreatedCount : number = 0;
   onNewsElementsConverted = new Event<Element[]>();
 
   convertJsonElements(elementList : any[], checkIfAlreadyExist = true, isFullRepresentation : boolean = true) 
@@ -31,7 +32,7 @@ export class ElementsJsonModule
 
     if (isFullRepresentation)
       for (let elementJson of elementList)
-        if (!elementJson.id) elementJson.id = (slugify(elementJson.title) + elementJson.geo.latitude).replace('.', '');
+        if (!elementJson.id) elementJson.id = this.elementsCreatedCount++;
 
     let elementsIdsReceived = elementList.map( (e, index) =>  { return {
         id: isFullRepresentation ? e.id : e[0], // in compact way, id is the first element of an array
