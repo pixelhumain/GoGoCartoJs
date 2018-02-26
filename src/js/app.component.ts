@@ -123,7 +123,8 @@ export class AppComponent
 		}
 		else
 		{
-			$('#element-info-bar').stop(true).css('width', '100%');
+			if ($refreshInfoBar) $('#element-info-bar').stop(true)
+			$('#element-info-bar').css('width', '100%');
 		}
 
 		if ($refreshInfoBar) setTimeout( () => { App.infoBarComponent.refresh(); }, 100);
