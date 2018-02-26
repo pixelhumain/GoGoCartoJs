@@ -5,34 +5,33 @@ export class TaxonomySkosModule
   convertSkosIntoGoGoTaxonomy($skosJson)
   {
     this.concepts = $skosJson['@graph'];
+
     // roots are concepts which don't have broader (no parent)
-    let rootsConcepts = this.concepts.filter( (concept) => !concept.broader);  
+    // let rootsConcepts = this.concepts.filter( (concept) => !concept.broader);  
 
-    console.log("root concepts", rootsConcepts);
-    let mainCategories = [];
+    // let mainCategories = [];
 
-    for(let rootConcept of rootsConcepts)
-    {
-      mainCategories.push({
-        "name": rootConcept["skos:prefLabel"],
-        "showExpanded": mainCategories.length == 0, // only expand first root concept
-        "options" : this.recursivelyCreateSubOptionOf(rootConcept)
-      })
-    }
+    // for(let rootConcept of rootsConcepts)
+    // {
+    //   mainCategories.push({
+    //     "name": rootConcept["skos:prefLabel"],
+    //     "showExpanded": mainCategories.length == 0, // only expand first root concept
+    //     "options" : this.recursivelyCreateSubOptionOf(rootConcept)
+    //   })
+    // }
+
+    // let gogoTaxonomy = {
+    //   "subcategories": mainCategories
+    // };
+
+    let rootConcept = this.concepts.filter( (concept) => concept["@id"] == "http://PWA/SKOS/domaine")[0];
 
     let gogoTaxonomy = {
-      "options":[    
-      {
-        // Hiding the option so we can see directly the sub categories
-        "id": "",
-        "displayOption": false,
-        "showExpanded": true,
-        "subcategories": mainCategories
-      }]
-    };
-            
-
-    // gogoTaxonomy = this.recursivelyCreateSubOptionOf(gogoTaxonomy, rootsConcepts);
+      name: rootConcept["skos:prefLabel"],
+      showExpanded: true,
+      unexpandable: true,
+      options : this.recursivelyCreateSubOptionOf(rootConcept)
+    };            
 
     console.log("TREE", gogoTaxonomy);
 

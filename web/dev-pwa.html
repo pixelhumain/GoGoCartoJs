@@ -32,13 +32,16 @@
         carto = goGoCarto('#gogocarto', {
           data:
           {
-            taxonomy: taxonomy,
+            // taxonomy: taxonomy,
+            taxonomy: 'http://semantic-bus.org/data/api/TaxonomiePWA',
             elements: 'http://semantic-bus.org/data/api/PWA_All'
             // elements: elements,
           },
           menu: { 
             width: 350 ,
-            smallWidthStyle: true
+            smallWidthStyle: true,
+            // showOnePanePerMainOption: true,
+            // showCheckboxForMainFilterPane: false
           }
         });
       });
