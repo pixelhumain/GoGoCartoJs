@@ -8,19 +8,20 @@
         height: 100%;
         width: 100%;  
       }
+      .option-name { text-transform: capitalize; }
     </style>
 
     <link rel="stylesheet" href="assets/gogocarto.css"> 
     <link rel="stylesheet" href="assets/images/styles.css">
 
-    <link href="https://file.myfontastic.com/p9QtVQwDCkDvVq6VJesnxg/icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lobster|Roboto:400,700" rel="stylesheet">
     
     <script src="../build/libs.js"></script>
     <script src="../build/directory.js"></script>
     <script src="../build/templates.js"></script>
 
-    <script src="data/taxonomy-pwa-test.js"></script>
+    <script src="data/taxonomy-pwa.js"></script>
     <script src="data/elements-pwa-test.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
@@ -34,7 +35,11 @@
             taxonomy: taxonomy,
             elements: 'http://semantic-bus.org/data/api/PWA_All'
             // elements: elements,
-          }  
+          },
+          menu: { 
+            width: 350 ,
+            smallWidthStyle: true
+          }
         });
       });
     </script>

@@ -28,6 +28,7 @@ import { FavoriteModule } from "./modules/elements/favorite.module";
 import { DisplayElementAloneModule } from "./modules/map/display-element-alone.module";
 import { AjaxModule } from "./modules/ajax.module";
 import { TaxonomyModule } from './modules/taxonomy/taxonomy.module';
+import { TaxonomySkosModule } from './modules/taxonomy/taxonomy-skos.module';
 import { RouterModule } from "./modules/core/router.module";
 import { LoginModule } from "./modules/login.module";
 import { TemplateModule } from "./modules/core/template.module";
@@ -93,6 +94,7 @@ export class AppModule
 	loginModule : LoginModule;	
 	historyModule = new HistoryModule();
 	taxonomyModule = new TaxonomyModule();
+	taxonomySkosModule = new TaxonomySkosModule();
 	documentTitleModule = new DocumentTitleModule();
 	elementJsonParser = new ElementJsonParserModule();
 	elementFormaterModule = new ElementFormaterModule();

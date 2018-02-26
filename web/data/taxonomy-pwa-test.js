@@ -1,66 +1,70 @@
 var taxonomy = {
-  "name":"Catégories Principales",
-  "unexpandable":true,
-  "options":[
+  "@context": {
+    "broader": {
+      "@id": "skos:broader",
+      "@type": "@id"
+    },
+    "skos": "http://www.w3.org/2004/02/skos/core#"
+  },
+  "@graph": [
     {
-      "id": "nourriture",
-      "name":"Agriculture & Alimentation",
-      "nameShort":"Agricuture",
-      "color":"#98A100",
-      "softColor":"#808700",
-      "icon":"icon-leaf-1"
-    },    
-    {
-      "id": "0dechet",
-      "name":"Voyages",
-      "color":"#1E8065",
-      "icon":"icon-case"
+      "@type": "skos:Concept",
+      "@id": "http://PWA/SKOS/domaine",
+      "skos:prefLabel": "domaines",
+      "markerAndIcons": [
+        {
+          "color": "",
+          "icon": ""
+        }
+      ]
     },
     {
-      "id":"education",
-      "name":"Education & Formation",
-      "nameShort":"Education",
-      "color":"#00537E",
-      "softColor":"#22698E",
-      "icon":"icon-education-1"
+      "@type": "skos:Concept",
+      "@id": "http://PWA/SKOS/0dechet",
+      "broader": "http://PWA/SKOS/domaine",
+      "skos:prefLabel": "fabriquer, réparer, zéro déchets",
+      "markerAndIcons": [
+        {
+          "color": "grey",
+          "icon": "recycle"
+        }
+      ]
     },
     {
-      "id": "habitat",
-      "name":"Habitat",
-      "color":"#7E3200",
-      "softColor":"#864C26",
-      "icon":"icon-home"
+      "@type": "skos:Concept",
+      "@id": "http://PWA/SKOS/ressourcerie",
+      "broader": "http://PWA/SKOS/0dechet",
+      "skos:prefLabel": "ressourceries",
+      "markerAndIcons": [
+        {
+          "color": "grey",
+          "icon": "recycle"
+        }
+      ]
     },
     {
-      "id":10485,
-      "name":"Mobilité",
-      "color":"#009A9C",
-      "softColor":"#138C8E",
-      "icon":"icon-mobilite-2"
+      "@type": "skos:Concept",
+      "@id": "http://PWA/SKOS/récup",
+      "broader": "http://PWA/SKOS/0dechet",
+      "skos:prefLabel": "récup",
+      "markerAndIcons": [
+        {
+          "color": "grey",
+          "icon": "recycle"
+        }
+      ]
     },
     {
-      "id":10495,
-      "name":"Sortie & Culture",
-      "nameShort":"Sorties",
-      "color":"#AB0061",
-      "softColor":"#A4307C",
-      "icon":"icon-coffee"
-    },
-    {
-      "id":10507,
-      "name":"Mode & Beauté",
-      "nameShort":"Mode/Beauté",
-      "color":"#8E36A5",
-      "softColor":"#7D398D",
-      "icon":"icon-vetement-4"
-    },
-    {
-      "id":10525,
-      "name":"Economie & Finance",
-      "nameShort":"Economie/Finance",
-      "color":"#AB7100",
-      "softColor":"#9D7424",
-      "icon":"icon-euro"
+      "@type": "skos:Concept",
+      "@id": "http://PWA/SKOS/biffin",
+      "broader": "http://PWA/SKOS/0dechet",
+      "skos:prefLabel": "biffins",
+      "markerAndIcons": [
+        {
+          "color": "grey",
+          "icon": "recycle"
+        }
+      ]
     }
-  ]  
+  ]
 }

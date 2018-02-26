@@ -155,7 +155,7 @@ export class DirectoryMenuComponent
 		this.dom.css('width', menuwidth + 'px');
 		this.width = menuwidth;
 		
-		if (menuwidth < 340) this.dom.addClass('small-width');
+		if (menuwidth < 340 || App.config.menu.smallWidthStyle) this.dom.addClass('small-width');
 		else this.dom.removeClass('small-width');	
 	}
 }

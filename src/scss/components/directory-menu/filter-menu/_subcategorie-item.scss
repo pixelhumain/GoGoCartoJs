@@ -2,13 +2,18 @@
 * @Author: Sebastian Castro
 * @Date:   2017-03-02 08:57:20
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2018-01-23 09:24:01
+* @Last Modified time: 2018-02-26 17:44:21
 */
 
-.sub-categories-content.no-top-divider > ul > .main-option-subcategories-container>  .category-wrapper > .subcategory-item
+.sub-categories-content.no-top-divider > ul > .main-option-subcategories-container 
 {
-	border-top: none !important;
-	margin-top: 0 !important;  
+	padding-top: 0 !important;
+
+  & > .category-wrapper > .subcategory-item 
+  {
+    border-top: none !important;
+	  margin-top: 0 !important;  
+  }
 }
 
 .subcategory-item

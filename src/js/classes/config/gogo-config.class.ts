@@ -35,6 +35,7 @@ export class GoGoConfig
   readonly menu =
   {
     width: undefined,
+    smallWidthStyle: false,
     showOnePanePerMainOption: false,
     showCheckboxForMainFilterPane: true,
     showCheckboxForSubFilterPane: true,
