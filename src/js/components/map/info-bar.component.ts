@@ -167,6 +167,8 @@ export class InfoBarComponent
 			}, 400);				
 		}	
 
+		this.verticalAlignImages();
+
 		this.isVisible = true;
 	};	
 
@@ -184,6 +186,16 @@ export class InfoBarComponent
 				setTimeout( () => { this.elementVisible.marker.showBigSize(); }, 1000);
 			}	
 		}, 100);
+	}
+
+	verticalAlignImages()
+	{
+		let imgBannerHeight = $('#element-info-bar .img-overlay').height();
+		$('#element-info-bar .img-container .gogo-img').each( function() {
+			let marginTop = (imgBannerHeight - $(this).height()) / 2;
+			console.log("marginTop", marginTop);
+			$(this).css('margin-top', `${marginTop}px`);
+		});
 	}
 
 	private isCurrentMarkerNotVisibleOnMap()
@@ -254,6 +266,7 @@ export class InfoBarComponent
 		  $('#element-info-bar .collapsible-body').css('height', height);	
 
 		  this.showBodyMainTab();
+		  this.verticalAlignImages();
 
 		  App.gogoControlComponent.hide();
 		}	

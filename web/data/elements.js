@@ -24,6 +24,7 @@ var elements = {
       "openHoursMoreInfos":"Distribution chaque jeudi de 18h à 19h",
       "sourceKey":"Colibris",
       "email":"hidden",
+      "image" : "https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.italyguides.it%2Fimages%2Fgridfolio%2Ftaormina%2Ftaormina.02.jpg&f=1",
       "optionValues":[
         10429,
         10427

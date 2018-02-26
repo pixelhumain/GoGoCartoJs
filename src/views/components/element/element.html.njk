@@ -30,13 +30,19 @@
 
 {# BODY #}
 
-<div class="collapsible-body moreDetails tabs-content with-image">
-  
-  <div class="img-container">
-    <img src="https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.italyguides.it%2Fimages%2Fgridfolio%2Ftaormina%2Ftaormina.02.jpg&f=1" class="gogo-img"/>
-  </div>
+<div class="collapsible-body moreDetails tabs-content">
+
+  {% if element.image %}
+    <div class="img-container">
+      <img src="{{ element.image }}" class="gogo-img"/>
+    </div>
+  {% endif %}
   <div class="collapsible-body-main-container custom-scroll-bar">
-    <div class="collapsible-body-main-content"> 
+    {% if element.image %}
+      {# transparent overlay to let the image visible #}
+      <div class="img-overlay"></div>
+    {% endif %}
+    <div class="collapsible-body-main-content">       
       <div class="body-main-tab-content">
         
         {# Votes and reports #}

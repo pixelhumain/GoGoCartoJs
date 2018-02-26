@@ -25,6 +25,7 @@ var elements = [
     "email": "example@gogocarto.fr",
     "telephone": "055452545",
     "website": "https://example.fr",
+    "image" : "https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.italyguides.it%2Fimages%2Fgridfolio%2Ftaormina%2Ftaormina.02.jpg&f=1",
 
     "openHours": {
       "Mo":"09:00-12:00",

@@ -284,6 +284,7 @@
       right: 0;
       width: auto;
       margin-right: 1.7rem;
+      @include transition(all .4s);
       
       @media #{$small-only} {
         padding: .3rem 1.2rem;
@@ -294,7 +295,10 @@
       
       @extend .z-depth-1;
 
-      &:hover { color: white; }
+      &:hover { 
+        color: white;
+        box-shadow: 0 6px 15px 0 rgba(0, 0, 0, 0.2), 0 5px 17px 0 rgba(0, 0, 0, 0.19) 
+      }
     }
   }
 
@@ -317,8 +321,9 @@
     overflow-y: auto;
   }
 
-  .collapsible-body.with-image {
-    .collapsible-body-main-container { padding-top: 200px; }    
+  .img-overlay {
+    height:25%;
+    background-color: transparent;
   }
 }
 

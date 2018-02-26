@@ -68,6 +68,7 @@ export class ElementJsonParserModule
     element.openHours = elementJson.openHours;
     App.elementFormaterModule.calculateFormatedOpenHours(element);
     element.openHoursMoreInfos = elementJson.openHoursMoreInfos || elementJson.openHoursString; 
+    element.image = elementJson.image;
     
     element.searchScore = elementJson.searchScore;
 

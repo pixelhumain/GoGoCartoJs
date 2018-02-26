@@ -102,5 +102,11 @@
 		.menu-element { display: block;}
 		.info-bar-tabs { display: flex; }
 	}
+
+	.img-container {
+		max-height: 18rem;
+    overflow: hidden;
+	}
+	    
 }
 
