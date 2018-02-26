@@ -212,8 +212,10 @@
 
 #element-info-bar.display-bottom
 { 
-	.collapsible-header { background-color: white !important; } 
-  a { color: inherit; &:hover { color: black; } }
+	.collapsible-header { 
+    background-color: white !important; 
+    a { color: inherit; &:hover { color: black; } }
+  }  
 }	
 
 #element-info-bar.display-aside .element-item
@@ -282,7 +284,7 @@
   }
 
   .element-item.active {
-    .expandLabel {
+    .expandLabel.transform-big {
       position: absolute;
       color: white;
       z-index: 2;   
@@ -307,7 +309,7 @@
     }
   }
 
-  .element-item:not(.active) .expandLabel {
+  .element-item:not(.active) .expandLabel, .expandLabel:not(.transform-big) {
     background-color: transparent !important; 
   }
 
