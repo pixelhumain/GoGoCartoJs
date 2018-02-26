@@ -51,7 +51,7 @@ export class FilterModule
 		if (!App.config.menu.showOnePanePerMainOption)
 		{
 			let checkedMainOptions = App.taxonomyModule.mainCategory.nonDisabledOptions;
-			return checkedMainOptions.some( (mainOption) => this.recursivelyCheckedInOption(mainOption, element));
+			return checkedMainOptions.some( (mainOption) => element.haveOption(mainOption) || this.recursivelyCheckedInOption(mainOption, element));
 		}
 		else if (App.currMainId == 'all')
 		{
@@ -100,7 +100,8 @@ export class FilterModule
 				let elementOptions = element.getOptionValueByCategoryId(category.id).filter((optValue) => !optValue.option.isMainOption);
 
 				// if this element don't have any option in this category, don't need to check
-				if (elementOptions.length == 0) return true;
+				if (elementOptions.length == 0 && log) console.log("--" + "Element don't have options in this category");
+				if (elementOptions.length == 0) return false;
 
 				let isSomeOptionInCategoryCheckedOptions = elementOptions.some(optionValue => checkedOptions.indexOf(optionValue.option) > -1); 
 
