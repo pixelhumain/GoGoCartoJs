@@ -20,24 +20,23 @@ export class OptionValue
 		// in case of compact json, the options values are stored in simple array
 		if (typeof $optionValueJson == 'number' || typeof $optionValueJson == 'string')
 		{
-			this.optionId = $optionValueJson;
+			this.optionId = $optionValueJson.toString();
 			this.index = $key;
 			this.description = '';
 		}
 		else if (Array.isArray($optionValueJson) && $optionValueJson.length >= 2)
 		{
 			this.optionId = $optionValueJson[0];
-			this.index = $optionValueJson[1];
+			this.index = $key;
 			this.description = $optionValueJson.length == 3 ?  $optionValueJson[2] : '';
 		}
-		// in fully json representation, there are keys
 		else if (typeof $optionValueJson == 'object')
 		{
 			if ($optionValueJson["@id"]) {
 				this.optionId = $optionValueJson["@id"].split('http://PWA/SKOS/')[1];
 			} else {
-				this.optionId = parseInt($optionValueJson.optionId);
-				this.index = $optionValueJson.index;
+				this.optionId = $optionValueJson.categoryId || $optionValueJson.optionId;
+				this.index = $key;
 				this.description = $optionValueJson.description || '';
 			}			
 		}		

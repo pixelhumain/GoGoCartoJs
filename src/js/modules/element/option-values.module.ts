@@ -40,6 +40,14 @@ export class ElementOptionValuesModule
     return newOption;   
   }
 
+  updateOptionsWithDescription(element : ElementBase, $optionValuesDescription) {
+    element.optionsValues.forEach( (optionValue) => { 
+      let correspondingOptionValuewithDescription = $optionValuesDescription.filter( (object) => object.categoryId == optionValue.optionId)[0];
+      if (!correspondingOptionValuewithDescription) return;
+      optionValue.description = correspondingOptionValuewithDescription.description;
+    });
+  }
+
   createOptionsTree(element : ElementBase)
   {
     let mainCategory = App.taxonomyModule.mainCategory;

@@ -38,8 +38,10 @@ export class ElementJsonParserModule
     element.moderationState = elementJson.moderationState || 0;
 
     // update createOptionValue vene if element already exist
-    App.elementOptionValuesModule.createOptionValues(elementJson.optionValues || elementJson.taxonomy || elementJson.tags, element);
-    
+    App.elementOptionValuesModule.createOptionValues(elementJson.categories || elementJson.taxonomy || elementJson.tags, element);
+    if (elementJson.categoriesDescriptions)
+      App.elementOptionValuesModule.updateOptionsWithDescription(element, elementJson.categoriesDescriptions);
+
     if(elementJson.modifiedElement) 
     {
       element.modifiedElement = new ElementBase(elementJson.modifiedElement);
