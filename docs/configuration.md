@@ -19,6 +19,7 @@ Menu
 ```javascript
 "menu": {
   "width": 450,
+  "smallWidthStyle": false
   "showOnePanePerMainOption": false,
   "showCheckboxForMainFilterPane": true, // you can hide the checkboxes for a lighter design
   "showCheckboxForSubFilterPane": true
@@ -31,6 +32,8 @@ It will add a vertical side bar with all the main option icons. clicking each ma
 for each main option children.
 
 [Check OneFilterPanePerMainOption Demo](https://pixelhumain.github.io/GoGoCartoJs/web/examples/index-full-taxonomy.html#/carte/@45.94,-0.38,10z?cat=all) 
+
+Set **smallWidthStyle** to false to use smaller font size and margins, so the taxonomy fit better into the fixed width
 
 General
 ------

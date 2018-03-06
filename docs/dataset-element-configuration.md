@@ -13,7 +13,7 @@ Here the basic attributes of an element
     "longitude":-0.0339
   },
 
-  "optionValues": [ 10427, 'Market' ],
+  "tags": [ 10427, 'Market' ],
 
   "address": {
     "streetAddress":"5 rue Edmond Proust",
@@ -21,6 +21,8 @@ Here the basic attributes of an element
     "postalCode":"79120",
     "addressCountry":"FR"
   },
+
+  "image": "http://my.image.fr/06",
 
   "description": "Short Description",
   "descriptionMore": "Additionnal Longer Description",
@@ -45,8 +47,8 @@ Title
 -----
 Title of the Element. displayed on marker hover, and on top of the Element info bar.
 
-OptionValues
--------
+Tags
+----
 An array of Ids. The Ids can be number or string. Those Ids must be the same than the one given in the Taxonomy, for an element to be linked with various options
 
 Address
@@ -68,7 +70,11 @@ Or an object
  The postalCode and addresLocality are used in the List mode to display an overview of the location.
  
  The formated address is build as following : "{streetAddress}, {postalCode} {addressLocality}". If you want you can overwrite this giving a "customFormatedAddress"
- 
+
+Image
+-----
+Url to an image that ill be diplayed in theelement info bar
+
 Description
 -----
 Description of the element. Must be short (less than 300 characters) for better display
