@@ -5459,9 +5459,9 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         padding-top: 1.5rem;
         margin-top: 0; }
       .gogo-load-css .gogocarto-container .element-item .info-bar-divider {
-        height: 1px !important;
-        overflow: hidden !important;
-        background-color: #CCCCCC !important; }
+        height: 1px;
+        overflow: hidden;
+        background-color: #CCCCCC; }
       .gogo-load-css .gogocarto-container .element-item .btn, .gogo-load-css .gogocarto-container .element-item .btn-large {
         height: 2rem;
         line-height: 2rem;

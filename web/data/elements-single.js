@@ -9,7 +9,7 @@ var elements = [
       "longitude":-0.0339
     },
 
-    "optionValues": [ 10427, 'Market' ],
+    "optionValues": [ "10427", 'Market' ],
 
     "address": {
       "streetAddress":"5 rue Edmond Proust",
