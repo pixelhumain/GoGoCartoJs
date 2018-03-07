@@ -11,6 +11,7 @@ export class Category extends CategoryOptionTreeNode
 	enableDescription : boolean;
 	displayCategoryName : boolean;
 	unexpandable: boolean;
+	rootCategory: boolean = false;
 
 	constructor($categoryJson : any)
 	{
@@ -24,6 +25,7 @@ export class Category extends CategoryOptionTreeNode
 		this.unexpandable = $categoryJson.unexpandable || false;
 		this.mainOwnerId = $categoryJson.mainOwnerId || null;
 		this.isActive = ('isActive' in $categoryJson) ? $categoryJson.isActive : $categoryJson.displayCategoryName !== false;
+		this.rootCategory = $categoryJson.rootCategory;
 	}
 
 	addOption($option : Option) { this.children.push($option); }

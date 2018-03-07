@@ -17,7 +17,8 @@ export class Option extends CategoryOptionTreeNode
 	displayOption : boolean;
 	showExpanded : boolean;
   textHelper : string;
-
+  disableInInfoBar : boolean = false;
+  
   intId : number; // And Id as number, used for creating the option url
 
 	parentOptionIds : number[] = [];
@@ -40,6 +41,7 @@ export class Option extends CategoryOptionTreeNode
 		this.showExpanded = $optionJson.showExpanded || false;
 		this.displayOption = $optionJson.displayOption !== false;
 		this.isActive = ('isActive' in $optionJson) ? $optionJson.isActive : this.displayOption;
+		if ($optionJson.disableInInfoBar) this.disableInInfoBar = $optionJson.disableInInfoBar;
 
 		if (this.icon == "fa fa-angle-right") this.useIconForMarker = false;
 	}

@@ -42,10 +42,9 @@
 <div class="info-bar-divider"></div>
 
 {# Categories  #}
-<h3>catégories</h3> 
-<div class="section row categories">
+<div class="section row">
   {% import here ~ 'category-value.html.njk' as categoryRenderer %}
-  {{ categoryRenderer.renderCategoryValue(mainCategoryValue, 1) }}
+  {{ categoryRenderer.renderCategoryValue(mainCategoryValue, 2) }}
 </div>
 
 

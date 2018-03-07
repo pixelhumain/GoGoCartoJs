@@ -1,21 +1,29 @@
 {% macro renderCategoryValue(categoryValue, subcategoriesCount) %}
 
-{% set displayThisCategoryValue = categoryValue.children.length > 0 %}
+{% set activeChildrenCount = 0 %}
+{% for optionValue in categoryValue.children %}
+	{% if not optionValue.option_.disableInInfoBar %}
+		{% set activeChildrenCount = activeChildrenCount + 1 %}
+	{% endif %}
+{% endfor %}	
+{% set displayThisCategoryValue = activeChildrenCount > 0 %}
 
+{% set displayThisCategoryValue = categoryValue.category.name and activeChildrenCount > 0 
+																	or categoryValue.category.rootCategory %}
 {% if displayThisCategoryValue %}
 	<div class="category-wrapper">
 	{% if subcategoriesCount > 1 %}
 		<div class="category-name">{{ categoryValue.category.name }}</div>
-		{% endif %}
+	{% endif %}
 {% endif %}
 
 {% for optionValue in categoryValue.children %}
-
+	{% if not optionValue.option_.disableInInfoBar %}
 		{% set displayFirstCategoryInline = not categoryValue.category.enableDescription 
 																		and optionValue.children.length > 0 
 																		and optionValue.children[0].isLastCategoryDepth 
 																		and not optionValue.children[0].category.enableDescription %}
-
+		<!-- <div>{{ optionValue.option.name }} : {{ optionValue.children.length }}, {{ optionValue.children[0].isLastCategoryDepth }}</div> -->
 		{% set colWidth = 's6 m5' if categoryValue.category.enableDescription else 's12' %}
 	  <div class='row'>
 	    <span class="option-value col {{ colWidth }}">
@@ -27,15 +35,15 @@
 				{% endif %}
 				
 	      <span class="option-name {{ optionValue.diff }}" option-id={{ optionValue.option.id }} >
-	      {{ optionValue.option.nameShort if optionValue.option.nameShort else optionValue.option.name|capitalize }}</span> 
+	      {{ optionValue.option.nameShort|capitalize }}</span> 
 
 	      {% if displayFirstCategoryInline %}
 	      	<span class="inline-option">(
 	      		{% for suboptionValue in optionValue.children[0].children %} 
 	      			<span class="{{ suboptionValue.diff }}">{{ suboptionValue.option.name }} {% if not loop.last %}, {% endif %}</span> 
 	      			
-	      	{% endfor %})
-	      </span>
+		      	{% endfor %})
+		      </span>
 	      {% endif %}
 
 	    </span>
@@ -43,6 +51,7 @@
 	    	<span class="col s6 m7 option-description"><span class="{{ optionValue.diff }}">{{ optionValue.description|safe }}</span></span>
 	    {% endif %}
 	  </div>
+  {% endif %}
 
 	{% set subcategoriesCount = optionValue.children.length %}
 	{% if displayFirstCategoryInline %}{% set subcategoriesCount = subcategoriesCount - 1 %}{% endif %}
@@ -54,7 +63,7 @@
 		{% endif %}
 
 	{% endfor %} 
-
+	
 {% endfor %} 
 
 {% if displayThisCategoryValue %}

@@ -6,36 +6,47 @@ export class TaxonomySkosModule
   {
     this.concepts = $skosJson['@graph'];
 
-    // roots are concepts which don't have broader (no parent)
-    // let rootsConcepts = this.concepts.filter( (concept) => !concept.broader);  
+    let rootConcepts = this.concepts.filter( (concept) => !concept.broader);
 
-    // let mainCategories = [];
-
-    // for(let rootConcept of rootsConcepts)
-    // {
-    //   mainCategories.push({
-    //     "name": rootConcept["skos:prefLabel"],
-    //     "showExpanded": mainCategories.length == 0, // only expand first root concept
-    //     "options" : this.recursivelyCreateSubOptionOf(rootConcept)
-    //   })
-    // }
-
-    // let gogoTaxonomy = {
-    //   "subcategories": mainCategories
-    // };
-
-    let rootConcept = this.concepts.filter( (concept) => concept["@id"] == "http://PWA/SKOS/domaine")[0];
+    let categories = [];
+    for(let rootConcept of rootConcepts)
+    {
+      categories.push(this.rootSkosToGoGoCategory(rootConcept, rootConcepts.length == 1));
+    }  
 
     let gogoTaxonomy = {
-      name: rootConcept["skos:prefLabel"],
-      showExpanded: true,
-      unexpandable: true,
-      options : this.recursivelyCreateSubOptionOf(rootConcept)
-    };            
+      "options":[    
+        {
+          "name":"Racine",
+          "rootOption": true,
+          "disableInInfoBar": true,
+          "displayOption": false,
+          "showExpanded": true,
+          "subcategories": categories,
+        }
+      ]
+    };     
 
-    console.log("TREE", gogoTaxonomy);
+    console.log("Taxonomy Tree", gogoTaxonomy);
 
     return gogoTaxonomy;
+  }
+
+  private rootSkosToGoGoCategory($skosJson, $unexpandable)
+  {
+    return {
+      name: $skosJson["prefLabel"],
+      showExpanded: true,
+      rootCategory: true,
+      unexpandable: $unexpandable,
+      options : [{
+        name: $skosJson["prefLabel"],
+        displayOption: false,
+        disableInInfoBar: true,
+        showExpanded: true,
+        suboptions: this.recursivelyCreateSubOptionOf($skosJson)
+      }]
+    }
   }
 
   private getSubConceptOf(conceptId)
@@ -59,15 +70,19 @@ export class TaxonomySkosModule
 
   private skosToGoGoOption($skosJson) {
     let result : any = {
-      id: $skosJson["@id"].split("http://PWA/SKOS/")[1],
-      name: $skosJson["skos:prefLabel"],
+      id: this.getEscapedIdFromHttpId($skosJson["@id"]),
+      name: $skosJson["prefLabel"],
     }
 
-    if ($skosJson.markerAndIcons && $skosJson.markerAndIcons.length > 0) {
-      if ($skosJson.markerAndIcons[0].color) result.color = $skosJson.markerAndIcons[0].color;
-      if ($skosJson.markerAndIcons[0].icon)  result.icon  = `fa fa-${$skosJson.markerAndIcons[0].icon}`;
-    }
+    if ($skosJson.color) result.color = $skosJson.color;
+    if ($skosJson.icon)  result.icon  = $skosJson.icon;
     
     return result;
+  }
+
+  private getEscapedIdFromHttpId($id : string) : string
+  {
+    let splitedId = $id.split('/');
+    return splitedId[splitedId.length - 1];
   }
 }
