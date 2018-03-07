@@ -7,7 +7,6 @@ export class ElementOptionValuesModule
   createOptionValues(optionsValuesJson : any, element : ElementBase)
   {
     element.optionsValues = [];
-    element.optionValuesByCatgeory = [];
 
     if(!optionsValuesJson) return;
 
@@ -29,12 +28,6 @@ export class ElementOptionValuesModule
         element.mainOptionOwnerIds.push(newOption.optionId);
 
       element.optionsValues.push(newOption);
-
-      // put options value in specific easy accessible array for better performance
-      if (!element.optionValuesByCatgeory[newOption.option.ownerId]) 
-        element.optionValuesByCatgeory[newOption.option.ownerId] = [];
-      
-      element.optionValuesByCatgeory[newOption.option.ownerId].push(newOption);
     }   
 
     return newOption;   
@@ -82,7 +75,7 @@ export class ElementOptionValuesModule
 
   private getElementOptionValueCorrespondingToOptionId(element : ElementBase, $optionId : number) : OptionValue
   {
-    let index = element.optionsValues.map((value) => value.optionId).indexOf($optionId);
+    let index = element.optionsValues.map((value) => value.optionId).indexOf($optionId.toString());
     if (index == -1) return null;
     return element.optionsValues[index];
   }
@@ -95,7 +88,7 @@ export class ElementOptionValuesModule
     let optionValuesIds = element.optionsValues.map( (el) => el.optionId);
     for(let optionValue of element.optionsValues)
       for (let parentOptionId of optionValue.option.parentOptionIds)      
-        if (optionValuesIds.indexOf(parentOptionId) == -1)
+        if (optionValuesIds.indexOf(parentOptionId.toString()) == -1)
         {
           let newOption = this.createOptionValueForElement(parentOptionId, 0, element);
           // console.log("Missing option", newOption.option.nameShort, element.name);

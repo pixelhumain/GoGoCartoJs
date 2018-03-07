@@ -48,7 +48,6 @@ export class ElementBase
   modifiedElement : ElementBase = null;
 
   optionsValues : OptionValue[] = [];
-  optionValuesByCatgeory : OptionValue[][] = [];
 
   mainOptionOwnerIds : number[] = [];
 
@@ -87,7 +86,12 @@ export class ElementBase
 
   getOptionValueByCategoryId($categoryId)
   {
-    return this.optionValuesByCatgeory[$categoryId] || [];
+    return this.optionsValues.filter((oV) => oV.categoryOwner.id);
+  }
+
+  getOptionValuesNames()
+  {
+    return this.optionsValues.map( (ov) => ov.option.nameShort);
   }
 
   haveOption($option : Option)

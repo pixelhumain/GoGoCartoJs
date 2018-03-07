@@ -33,12 +33,12 @@ export class ElementJsonParserModule
 
     element.position = L.latLng(elementJson.latitude || elementJson.lat || elementJson.geo && elementJson.geo.latitude, 
                                 elementJson.longitude || elementJson.lng || elementJson.long || elementJson.geo && elementJson.geo.longitude);
-    element.name = elementJson.name || elementJson.title || elementJson.Name;
+    element.name = elementJson.name || elementJson.title;
     element.status = elementJson.status == undefined ? 1 : elementJson.status;
     element.moderationState = elementJson.moderationState || 0;
 
     // update createOptionValue vene if element already exist
-    App.elementOptionValuesModule.createOptionValues(elementJson.categories || elementJson.taxonomy || elementJson.tags, element);
+    App.elementOptionValuesModule.createOptionValues(elementJson.categories || elementJson.taxonomy2 || elementJson.tags || elementJson.optionValues, element);
     if (elementJson.categoriesDescriptions)
       App.elementOptionValuesModule.updateOptionsWithDescription(element, elementJson.categoriesDescriptions);
 
@@ -49,7 +49,7 @@ export class ElementJsonParserModule
       App.elementOptionValuesModule.createOptionValues(diffOptionValues, element.modifiedElement);   
     }
     
-    element.description = elementJson.description || elementJson.abstract || '';
+    element.description = elementJson.description || elementJson.abstract || elementJson.label["@value"];
     element.description = capitalize(element.description || '') ;
     element.descriptionMore = elementJson.descriptionMore;
     element.descriptionMore = capitalize(element.descriptionMore || ''); 

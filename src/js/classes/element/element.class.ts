@@ -23,7 +23,7 @@ export class Element extends ElementBase
 	private marker_ : Marker = null;
 	private component_ : ElementComponent = null;	
 
-	colorOptionId : number;
+	colorOptionId : any;
 
 	private isInitialized_ : boolean = false;
 

@@ -51,15 +51,18 @@ export class FilterModule
 		if (!App.config.menu.showOnePanePerMainOption)
 		{
 			let checkedMainOptions = App.taxonomyModule.mainCategory.nonDisabledOptions;
-			return checkedMainOptions.some( (mainOption) => element.haveOption(mainOption) || this.recursivelyCheckedInOption(mainOption, element));
+			if (checkedMainOptions.length == 1)
+				return this.recursivelyCheckedInOption(checkedMainOptions[0], element);
+			else
+				return checkedMainOptions.some( (mainOption) => element.haveOption(mainOption) || this.recursivelyCheckedInOption(mainOption, element));
 		}
 		else if (App.currMainId == 'all')
 		{
 			let elementOptions = element.getOptionValueByCategoryId( App.taxonomyModule.mainCategory.id);
 			let checkedOptions = App.taxonomyModule.mainCategory.checkedOptions;
 
-			//console.log("\nelementsOptions", elementOptions.map( (value) => value.option.name));
-			//console.log("checkedOptions", checkedOptions.map( (value) => value.name));
+			// console.log("\nelementsOptions", elementOptions.map( (value) => value.option.name));
+			// console.log("checkedOptions", checkedOptions.map( (value) => value.name));
 
 			let result = elementOptions.some(optionValue => checkedOptions.indexOf(optionValue.option) > -1);
 			return result ;
