@@ -9,7 +9,7 @@ export class ElementJsonParserModule
   {
     // when we get the compact json representation of the element from the server
     // the elementJson is a simple array with the more important element attribute
-    if (!elementJson.id && $.isArray(elementJson) && elementJson.length >= 5)
+    if ($.isArray(elementJson) && elementJson.length >= 5)
       this.loadFromCompactJson(elementJson, element);
     else 
       this.loadFromFullJson(elementJson, element);
@@ -38,7 +38,7 @@ export class ElementJsonParserModule
     element.moderationState = elementJson.moderationState || 0;
 
     // update createOptionValue vene if element already exist
-    App.elementOptionValuesModule.createOptionValues(elementJson.categories || elementJson.taxonomy2 || elementJson.tags || elementJson.optionValues, element);
+    App.elementOptionValuesModule.createOptionValues(elementJson.categories || elementJson.taxonomy || elementJson.tags || elementJson.optionValues, element);
     if (elementJson.categoriesDescriptions)
       App.elementOptionValuesModule.updateOptionsWithDescription(element, elementJson.categoriesDescriptions);
 
@@ -49,7 +49,7 @@ export class ElementJsonParserModule
       App.elementOptionValuesModule.createOptionValues(diffOptionValues, element.modifiedElement);   
     }
     
-    element.description = elementJson.description || elementJson.abstract || elementJson.label["@value"];
+    element.description = elementJson.description || elementJson.abstract || elementJson.label && elementJson.label["@value"];
     element.description = capitalize(element.description || '') ;
     element.descriptionMore = elementJson.descriptionMore;
     element.descriptionMore = capitalize(element.descriptionMore || ''); 
