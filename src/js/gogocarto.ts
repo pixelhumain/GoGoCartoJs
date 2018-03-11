@@ -46,9 +46,16 @@ export class GoGoCartoModule
 	hideDirectoryMenu() { this.app.directoryMenuComponent.hide(); }
 
 	private checkForDistantConfifuration(options : string|any)
-	{
+	{		
 		if ( typeof options === 'object') this.checkForDistantTaxonomy(options);
-		else $.getJSON( options, (data) =>  { this.checkForDistantTaxonomy(data); }); 
+		else
+			$.ajax({
+			  url: options,
+			  success: (data) =>  { 
+			  	if ( typeof data === 'string') data = JSON.parse(data);
+			  	this.checkForDistantTaxonomy(data); 
+			  }
+			});
 	};
 
 	private checkForDistantTaxonomy(options : any)

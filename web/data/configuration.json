@@ -1,12 +1,11 @@
 {
   "data":
   {
-    "taxonomy": ,
-    "elements": ,
+    "taxonomy": "https://semantic-bus.org/data/api/TaxonomiePWA",
+    "elements": "https://semantic-bus.org/data/api/PWA_All"
   },
-  "menu":
-  {
-    "showOnePanePerMainOption": true,
-    "showCheckboxForMainFilterPane": false
-  },
+  "menu": { 
+    "width": 350,
+    "smallWidthStyle": true
+  }
 }

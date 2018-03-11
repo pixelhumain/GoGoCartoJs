@@ -11,9 +11,9 @@
       .option-name { text-transform: capitalize; }
     </style>
 
-   <!-- Loading library -->
+    <!-- Loading library -->
     <link rel="stylesheet" href="../../dist/gogocarto.min.css"> 
-    <script src="../../dist/gogocarto.min.js"></script> 
+    <script src="../../dist/gogocarto.min.js"></script>
 
     <link rel="stylesheet" href="../assets/font-awesome/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lobster|Roboto:400,700" rel="stylesheet">
@@ -29,21 +29,7 @@
     <script>
       $(document).ready(function()
       {  
-        carto = goGoCarto('#gogocarto', {
-          data:
-          {
-            // taxonomy: taxonomy,
-            taxonomy: 'http://semantic-bus.org/data/api/TaxonomiePWA',
-            elements: 'http://semantic-bus.org/data/api/PWA_All'
-            // elements: elements,
-          },
-          menu: { 
-            width: 350,
-            smallWidthStyle: true,
-            // showOnePanePerMainOption: true,
-            // showCheckboxForMainFilterPane: false
-          }
-        });
+        carto = goGoCarto('#gogocarto', "https://pixelhumain.github.io/GoGoCartoJs/web/data/configuration.json");
       });
     </script>
     
