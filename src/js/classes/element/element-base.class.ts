@@ -86,7 +86,7 @@ export class ElementBase
 
   getOptionValueByCategoryId($categoryId)
   {
-    return this.optionsValues.filter((oV) => oV.categoryOwner.id);
+    return this.optionsValues.filter((oV) => oV.categoryOwner.id == $categoryId);
   }
 
   getOptionValuesNames()
