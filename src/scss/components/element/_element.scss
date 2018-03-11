@@ -190,12 +190,11 @@
 		    color: #5d5d5d;
 
 				&.disabled { color: #9C9C9C; }				
-			}
+			}      
 			
 			.option-value
 			{ 
-				line-height: 2.5rem; 
-				padding-left: .6rem;
+				line-height: 2.5rem; 				
   			padding-right: 0;
 
   			.icon 
@@ -207,6 +206,7 @@
 
   			&.disabled { color: #9C9C9C !important; }
 			}
+      .category-wrapper .option-value { padding-left: .6rem; }
 		}		
 	}
 }

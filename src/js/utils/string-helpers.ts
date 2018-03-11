@@ -15,8 +15,15 @@ export function unslugify(text : string) : string
   return text.toString().replace(/\-+/g, ' ');
 }
 
-export function capitalize(text)
+export function capitalize(text : string) : string
 {
   if (!text) return "";
   return text.length > 1 ? text.substr(0,1).toUpperCase()+text.substr(1,text.length) : text;
+}
+
+export function parseUriId($uriId : string) : string
+{
+  if (!$uriId) return "";
+  let splited = $uriId.toString().split('/');
+  return splited[splited.length - 1];
 }

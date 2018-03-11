@@ -1,6 +1,6 @@
 import { AppModule } from "../../app.module";
 import { Category, Option, CategoryValue} from "../classes";
-
+import { parseUriId, slugify } from "../../utils/string-helpers";
 import { App } from "../../gogocarto";
 
 export class OptionValue
@@ -33,7 +33,7 @@ export class OptionValue
 		else if (typeof $optionValueJson == 'object')
 		{
 			if ($optionValueJson["@id"]) {
-				this.optionId = $optionValueJson["@id"].split('http://PWA/SKOS/')[1];
+				this.optionId = parseUriId($optionValueJson["@id"]);
 			} else {
 				this.optionId = $optionValueJson.categoryId || $optionValueJson.optionId;
 				this.index = $key;

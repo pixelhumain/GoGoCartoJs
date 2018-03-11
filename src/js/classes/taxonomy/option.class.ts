@@ -42,8 +42,6 @@ export class Option extends CategoryOptionTreeNode
 		this.displayOption = $optionJson.displayOption !== false;
 		this.isActive = ('isActive' in $optionJson) ? $optionJson.isActive : this.displayOption;
 		if ($optionJson.disableInInfoBar) this.disableInInfoBar = $optionJson.disableInInfoBar;
-
-		if (this.icon == "fa fa-angle-right") this.useIconForMarker = false;
 	}
 
 	addCategory($category : Category) { this.children.push($category);  }

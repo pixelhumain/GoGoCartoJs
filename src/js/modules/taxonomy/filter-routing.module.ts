@@ -89,8 +89,11 @@ export class FilterRoutingModule
 
 			if (App.loadFullTaxonomy)
 			{
-				if (mainOptionSlug == 'all') App.taxonomyModule.mainCategory.updateState();
-				else App.taxonomyModule.getMainOptionBySlug(mainOptionSlug).recursivelyUpdateStates();
+				if (App.config.menu.showOnePanePerMainOption)
+					if (mainOptionSlug == 'all') App.taxonomyModule.mainCategory.updateState();
+					else App.taxonomyModule.getMainOptionBySlug(mainOptionSlug).recursivelyUpdateStates();
+				else
+					App.taxonomyModule.mainCategory.recursivelyUpdateStates();
 			}
 
 			App.elementsModule.updateElementsToDisplay(true);

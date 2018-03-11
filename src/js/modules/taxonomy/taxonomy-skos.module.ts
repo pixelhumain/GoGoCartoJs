@@ -1,3 +1,5 @@
+import { parseUriId } from "../../utils/string-helpers";
+
 export class TaxonomySkosModule
 {
   concepts = [];
@@ -5,10 +7,9 @@ export class TaxonomySkosModule
   convertSkosIntoGoGoTaxonomy($skosJson)
   {
     this.concepts = $skosJson['@graph'];
-
     let rootConcepts = this.concepts.filter( (concept) => !concept.broader);
-
     let categories = [];
+
     for(let rootConcept of rootConcepts)
     {
       categories.push(this.rootSkosToGoGoCategory(rootConcept, rootConcepts.length == 1));
@@ -68,21 +69,10 @@ export class TaxonomySkosModule
     return options;
   }
 
-  private skosToGoGoOption($skosJson) {
-    let result : any = {
-      id: this.getEscapedIdFromHttpId($skosJson["@id"]),
-      name: $skosJson["prefLabel"],
-    }
-
-    if ($skosJson.color) result.color = $skosJson.color;
-    if ($skosJson.icon)  result.icon  = $skosJson.icon;
-    
-    return result;
-  }
-
-  private getEscapedIdFromHttpId($id : string) : string
+  private skosToGoGoOption($skosJson) 
   {
-    let splitedId = $id.split('/');
-    return splitedId[splitedId.length - 1];
+    $skosJson.id = parseUriId($skosJson["@id"]);
+    $skosJson.name = $skosJson["prefLabel"];    
+    return $skosJson;
   }
 }
