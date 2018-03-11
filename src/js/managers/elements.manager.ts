@@ -33,7 +33,7 @@ export class ElementsManager
     }
     else if (result.status == "included")
     {
-      // We simulate the end of an successeful ajax request 
+      // We simulate the end of a successeful ajax request 
       App.boundsModule.updateFilledBoundsWithBoundsReceived(result.expectedFillBounds, App.currMainId,  $getFullRepresentation);
       this.handleNewElementsReceivedFromServer({'data': [], 'fullRepresentation': $getFullRepresentation});
       return;
