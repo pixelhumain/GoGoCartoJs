@@ -35,18 +35,19 @@ export class TaxonomySkosModule
 
   private rootSkosToGoGoCategory($skosJson, $unexpandable)
   {
+    $skosJson.id = $skosJson["@id"];
+    $skosJson.name = $skosJson["prefLabel"];
+    $skosJson.displayOption = false;
+    $skosJson.disableInInfoBar = true;
+    $skosJson.showExpanded = true;
+    $skosJson.suboptions = this.recursivelyCreateSubOptionOf($skosJson);
+
     return {
       name: $skosJson["prefLabel"],
       showExpanded: true,
       rootCategory: true,
       unexpandable: $unexpandable,
-      options : [{
-        name: $skosJson["prefLabel"],
-        displayOption: false,
-        disableInInfoBar: true,
-        showExpanded: true,
-        suboptions: this.recursivelyCreateSubOptionOf($skosJson)
-      }]
+      options : [$skosJson]
     }
   }
 
