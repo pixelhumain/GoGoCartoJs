@@ -3498,7 +3498,7 @@ th {
 * @Author: Sebastian Castro
 * @Date:   2017-03-02 08:57:20
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2018-02-26 18:31:07
+* @Last Modified time: 2018-03-11 15:45:23
 */
     /*
 * @Author: Sebastian Castro
@@ -3853,17 +3853,22 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     .gogo-load-css .gogocarto-container .sub-categories-content.no-top-divider > ul > .main-option-subcategories-container > .category-wrapper > .subcategory-item {
       border-top: none !important;
       margin-top: 0 !important; }
+    .gogo-load-css .gogocarto-container .category-wrapper {
+      margin-top: .5rem; }
+      .gogo-load-css .gogocarto-container .category-wrapper .category-wrapper {
+        margin-top: 0; }
     .gogo-load-css .gogocarto-container .subcategory-item {
       position: relative;
       line-height: 3rem;
-      padding-top: .5rem;
+      padding-top: 0;
       padding-left: 1rem;
       font-weight: bold;
       font-size: .95rem;
       text-transform: uppercase; }
       .gogo-load-css .gogocarto-container .subcategory-item.top-separator {
         border-top: 2px dashed #eeeeee;
-        margin-top: 1rem; }
+        margin-top: 1rem;
+        padding-top: .5rem; }
       .gogo-load-css .gogocarto-container .subcategory-item .name-wrapper {
         margin-right: 3rem;
         height: 3rem;
@@ -3886,7 +3891,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         width: 3rem;
         position: absolute;
         right: 0;
-        top: .5rem;
+        top: 2px;
         bottom: 0; }
         .gogo-load-css .gogocarto-container .subcategory-item .checkbox-wrapper:hover {
           cursor: pointer; }
@@ -5555,6 +5560,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           padding-top: 1.5rem; }
         .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .strong {
           text-decoration: underline; }
+        .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper:not(:first-child) {
+          margin-top: .5rem; }
         .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .category-wrapper {
           margin-left: 1.2rem;
           padding-left: .5rem;
@@ -5564,10 +5571,11 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
             text-decoration: none !important; }
         .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .category-name {
           text-transform: uppercase;
-          padding-left: .8rem;
+          padding-left: .75rem;
           font-weight: 600;
           font-size: .85rem;
-          padding-bottom: .5rem; }
+          padding-top: .5rem;
+          padding-bottom: .8rem; }
         .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .option-name.main-option {
           font-weight: bold; }
         .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .inline-option {
@@ -5583,7 +5591,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
             color: #9C9C9C; }
         .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .option-value {
           line-height: 2.5rem;
-          padding-left: .6rem;
           padding-right: 0; }
           .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .option-value .icon {
             font-size: 20px; }
@@ -5593,6 +5600,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
               color: #BFBFBF !important; }
           .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .option-value.disabled {
             color: #9C9C9C !important; }
+        .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .category-wrapper .option-value {
+          padding-left: .6rem; }
     .gogo-load-css .gogocarto-container #element-info-bar.display-bottom .collapsible-header {
       background-color: white !important; }
       .gogo-load-css .gogocarto-container #element-info-bar.display-bottom .collapsible-header a {
