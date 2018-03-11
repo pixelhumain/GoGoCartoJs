@@ -149,6 +149,8 @@
 		{
 			.strong { text-decoration: underline }	
 
+      &:not(:first-child) { margin-top: .5rem; }
+
 			// a category inside an other, so we add margin
 			.category-wrapper 
 			{

@@ -30,7 +30,7 @@
 			<ul>
 				{# ALL CATEGORIES FILTERS #}
 				<div id="main-option-all" class="main-option-subcategories-container {{ "show-one-pane-per-main-option" if config.menu.showOnePanePerMainOption else "" }}" 
-						 style="display:none; {{ "" if mainCategory.displayCategoryName else "padding-top: 1rem;" }}">		
+						 style="display:none;">		
 					{% import 'components/directory-menu/category-item.html.njk' as categoryRenderer %}
 					{{ categoryRenderer.renderItem(mainCategory, not config.menu.showOnePanePerMainOption, config.menu.showCheckboxForMainFilterPane) }}
 				</div>
