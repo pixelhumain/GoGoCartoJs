@@ -45,7 +45,7 @@ export class ElementJsonParserModule
     if(elementJson.modifiedElement) 
     {
       element.modifiedElement = new ElementBase(elementJson.modifiedElement);
-      let diffOptionValues = App.elementDiffModule.getDiffOptionValues(elementJson.optionValues, elementJson.modifiedElement.optionValues);
+      let diffOptionValues = App.elementDiffModule.getDiffOptionValues(elementJson.categories, elementJson.modifiedElement.categories);
       App.elementOptionValuesModule.createOptionValues(diffOptionValues, element.modifiedElement);   
     }
     
