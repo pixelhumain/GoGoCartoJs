@@ -56,7 +56,10 @@ export class AjaxModule
 	{
 		if (elementId == this.currElementIdRetrieving) return;
 
-		let route = App.config.data.elements + '/' + elementId;
+		let route = "";
+		if (App.config.data.elementByIdUrl) route = App.config.data.elementByIdUrl + elementId;
+		else route = App.config.data.elements + '/' + elementId;
+		
 		this.currElementIdRetrieving = elementId;
 		
 		$.ajax({
