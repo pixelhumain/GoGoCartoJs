@@ -34,7 +34,8 @@ export class ElementBase
   position : L.LatLng;
   address : PostalAddress;
   description : string;
-  descriptionMore: string;
+  longDescription: string;
+  longDescriptionMore: string;
   commitment : string;  
   telephone : string;
   website : string;

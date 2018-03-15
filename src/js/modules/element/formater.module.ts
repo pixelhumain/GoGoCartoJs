@@ -6,7 +6,7 @@ var capitalizeConfiguration =
 {
   name: true,
   description: true,
-  descriptionMore: true,
+  longDescription: true,
   address: false,
   telephone: false,
   website: false,

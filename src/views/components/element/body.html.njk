@@ -1,8 +1,15 @@
-{% set descriptionMore = element.getProperty('descriptionMore') %}
-{% if descriptionMore %}
+{% set longDescription = element.getProperty('longDescription') %}
+{% if longDescription %}
     <!-- <h3>Précisions</h3>    -->
-    <div class="section row sectionDescriptionMore" style="padding-bottom:0">
-      <span class="col s12 description">{{ descriptionMore|safe }}</span>  
+    <div class="section row sectionlongDescription" style="padding-bottom:0">
+      <div class="col s12 description long-descrition">
+        <span>{{ longDescription|safe }}</span>
+        {% if element.longDescriptionMore %}
+          <span style="display:none" class="description-more">{{ element.longDescriptionMore|safe }}</span>  
+          <a class="show-more-description">Afficher plus</a>
+        {% endif %}
+      </div>  
+      
     </div>
   {% endif %}
 {# Contact infos #}

@@ -27,3 +27,18 @@ export function parseUriId($uriId : string) : string
   let splited = $uriId.toString().split('/');
   return splited[splited.length - 1];
 }
+
+export function splitLongText(text : string, length : number, size : number = 50) 
+{
+  // if the text is just a bit longer than the length, we cut it more so the text2 is not so short
+  if (text.length < length + size) {
+    length = length - size;
+  }
+  let startOffset = length - size;
+  let offset = text.slice(startOffset, length).split(/\.|!|\?/g)[0].length;
+  if (offset == size) offset = text.slice(startOffset, length).split(' ')[0].length;
+  offset += startOffset + 1;
+  let text1 = text.slice(0, offset);
+  let text2 = text.slice(offset);
+  return { first: text1, second: text2 };
+}

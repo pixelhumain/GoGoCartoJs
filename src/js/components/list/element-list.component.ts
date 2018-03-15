@@ -11,7 +11,7 @@ import { AppModule, AppStates, AppDataType } from "../../app.module";
 import { App } from "../../gogocarto";
 import { ElementsToDisplayChanged } from "../../modules/elements/elements.module";
 
-import { createListenersForElementMenu, updateFavoriteIcon } from "../element/element-menu.component";
+import { createListenersForElementMenu, updateFavoriteIcon, createListenersForLongDescription } from "../element/element-menu.component";
 import { Element } from "../../classes/classes";
 import { Event } from "../../classes/event.class";
 
@@ -151,6 +151,7 @@ export class ElementListComponent
 					setTimeout( () => {
 						let domMenu = elementDom.find('.menu-element');	
 						createListenersForElementMenu(domMenu);
+						createListenersForLongDescription(elementDom);
 						updateFavoriteIcon(domMenu, element);
 						$(this).addClass('initialized');
 					}, 0);

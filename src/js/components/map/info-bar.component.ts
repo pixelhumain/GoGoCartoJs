@@ -12,7 +12,7 @@ import { Element } from "../../classes/classes";
 import { App } from "../../gogocarto";
 
 import { Event } from "../../classes/event.class";
-import { createListenersForElementMenu, updateFavoriteIcon, showFullTextMenu } from "../element/element-menu.component";
+import { createListenersForElementMenu, updateFavoriteIcon, showFullTextMenu, createListenersForLongDescription } from "../element/element-menu.component";
 
 import { createListenersForVoting } from "../modals/vote.component";
 
@@ -87,6 +87,7 @@ export class InfoBarComponent
 			let domMenu = this.domMenu();
 
 			createListenersForElementMenu(domMenu);	
+			createListenersForLongDescription($('#element-info-bar'));
 			createListenersForVoting();
 
 			setTimeout( () => { $('.info-bar-tabs').tabs(); }, 100);			
@@ -99,7 +100,7 @@ export class InfoBarComponent
 				return false;
 			});
 			
-			$('#element-info .collapsible-header').click(() => {this.toggleDetails(); });
+			$('#element-info .collapsible-header').click(() => { this.toggleDetails(); });			
 		}						
 		
 		this.show();		

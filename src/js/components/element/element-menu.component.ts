@@ -49,6 +49,16 @@ export function showFullTextMenu(object, bool : boolean)
 	}
 }
 
+export function createListenersForLongDescription(object)
+{
+	object.find('.show-more-description').click( function() { 
+		let descriptionMore = $(this).siblings('.description-more');
+		let textButton = descriptionMore.is(":visible") ? "Afficher plus" : "Afficher moins";
+		descriptionMore.toggle();		
+		$(this).text(textButton);
+	});
+}
+
 export function createListenersForElementMenu(object)
 {
 	object.find('.tooltipped').tooltip();

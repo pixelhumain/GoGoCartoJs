@@ -1,5 +1,5 @@
 import { Element, ElementBase, ElementStatus, PostalAddress } from "../../classes/classes";
-import { capitalize, slugify } from "../../utils/string-helpers";
+import { capitalize, slugify, splitLongText } from "../../utils/string-helpers";
 import { App } from "../../gogocarto";
 declare var $, L;
 
@@ -51,9 +51,10 @@ export class ElementJsonParserModule
     
     element.description = elementJson.description || elementJson.abstract || elementJson.label && elementJson.label["@value"];
     element.description = capitalize(element.description || '') ;
-    element.descriptionMore = elementJson.descriptionMore;
-    element.descriptionMore = capitalize(element.descriptionMore || ''); 
+    element.longDescription = elementJson.descriptionMore;
+    element.longDescription = capitalize(element.longDescription || ''); 
     this.checkForMergeDescriptions(element);
+    this.checkForSplitDescription(element);
 
     element.address = new PostalAddress(elementJson.address);
 
@@ -91,16 +92,37 @@ export class ElementJsonParserModule
     return result;
   } 
 
-  // if the description and descriptionMore are small, we can merge them into one single description
+  // if the description and longDescription are small, we can merge them into one single description
   private checkForMergeDescriptions(element)
   {
     if ( element.status != ElementStatus.PendingModification &&
          element.status != ElementStatus.ModifiedElement &&
-         element.descriptionMore.length > 0 && 
-         (element.description.length + element.descriptionMore.length) < 300)
+         element.longDescription.length > 0 && 
+         (element.description.length + element.longDescription.length) < 300)
     {
-      element.description = element.description + '<br /> ' + element.descriptionMore;
-      element.descriptionMore = '';
+      if (element.description.length > 0) element.description = element.description + '<br /> ';
+      element.description += element.longDescription;
+      element.longDescription = '';
+    }
+  }
+
+  private checkForSplitDescription(element : ElementBase)
+  {
+    if ( element.status != ElementStatus.PendingModification &&
+         element.status != ElementStatus.ModifiedElement)
+    {
+      if (element.description.length > 300) {        
+        let result = splitLongText(element.description, 300, 80);
+        element.description = result.first + " (Suite au dessous...)";
+        if (element.longDescription) result.second += "</br>" + element.longDescription;
+        element.longDescription = result.second;
+      }
+
+      if (element.longDescription.length > 600) {
+        let result = splitLongText(element.longDescription, 500, 100);
+        element.longDescriptionMore = result.first;
+        element.longDescription = result.second;      
+      }        
     }
   }
 }

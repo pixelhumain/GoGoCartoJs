@@ -124,6 +124,13 @@
 		.section{ padding-top: .9rem;  }
     
 		.description{ text-align: justify;line-height: 1.5;padding-right: 1.5rem; }
+    .show-more-description { 
+      display: inline;
+      text-decoration: underline;
+      &:hover { 
+        cursor: pointer;
+      }
+    }
 
 		.send-mail-btn
 		{
@@ -140,7 +147,7 @@
 
 		.sectionInfos, .sectionOpenHours { line-height: 2rem; } 
 
-    .sectionDescriptionMore {
+    .sectionlongDescription {
       padding-bottom: 0;
       padding-top: 1.5rem;
     }
@@ -319,6 +326,7 @@
   .img-container 
   {
     position: absolute;
+    width: 100%;
     top: 0;    
   }
 
