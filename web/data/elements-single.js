@@ -19,9 +19,8 @@ var elements = [
       "customFormatedAddress": "Immeuble 4B, 5 Edmond Proust à Chenay, France"
     },
 
-    "description": "Short Description",
-    "descriptionMore": "Additionnal Longer Description",
-
+    "description": "Short Description Je souhaiterai proposer aux citoyens, une initiation à la gravure sur brique de lait. Pour permettre à cet atelier d'être en adéquation avec Alternatiba, le thème serait la création d'une monnaie locale, où chacun pourrait graver ce qu'il aimerait voir apparaitre sur cette monnaie. Une exposition et vente sera proposée à l'intérieur du camion Je souhaiterai proposer aux citoyens, une initiation à la gravure sur brique de lait. Pour permettre à cet atelier d'être en adéquation avec Alternatiba, le thème serait la création d'une monnaie locale, où chacun pourrait graver ce qu'il aimerait voir apparaitre sur cette monnaie. Une exposition et vente sera proposée à l'intérieur du camion Je souhaiterai proposer aux citoyens, une initiation à la gravure sur brique de lait. Pour permettre à cet atelier d'être en adéquation avec Alternatiba, le thème serait la création d'une monnaie locale, où chacun pourrait graver ce qu'il aimerait voir apparaitre sur cette monnaie. Une exposition et vente sera proposée à l'intérieur du camion",
+    "descriptionMore": "Un rassemblement était organisé à 13 heures à Paris sous les fenêtres de la ministre de la Santé Agnès Buzyn aux Invalides. Le cortège est ensuite parti de Montparnasse vers 14 heures. Notre reporter Mona Hammoud est sur place. Des représentants de forces politiques étaient présents pour exprimer leur solidarité avec les retraités. La conseillère de Paris, Danielle Simonnet et les députés Adrien Quatennens et Clémentine Autain (La France insoumise) étaient dans le cortège.",
     "email": "example@gogocarto.fr",
     "telephone": "055452545",
     "website": "https://example.fr",
