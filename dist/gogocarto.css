@@ -5546,6 +5546,11 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           text-align: justify;
           line-height: 1.5;
           padding-right: 1.5rem; }
+        .gogo-load-css .gogocarto-container .element-item .collapsible-body .show-more-description {
+          display: inline;
+          text-decoration: underline; }
+          .gogo-load-css .gogocarto-container .element-item .collapsible-body .show-more-description:hover {
+            cursor: pointer; }
         .gogo-load-css .gogocarto-container .element-item .collapsible-body .send-mail-btn {
           font-size: .8rem;
           margin: .4rem 0 .5rem 0;
@@ -5555,7 +5560,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           margin-bottom: 1rem; }
         .gogo-load-css .gogocarto-container .element-item .collapsible-body .sectionInfos, .gogo-load-css .gogocarto-container .element-item .collapsible-body .sectionOpenHours {
           line-height: 2rem; }
-        .gogo-load-css .gogocarto-container .element-item .collapsible-body .sectionDescriptionMore {
+        .gogo-load-css .gogocarto-container .element-item .collapsible-body .sectionlongDescription {
           padding-bottom: 0;
           padding-top: 1.5rem; }
         .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .strong {
@@ -5677,6 +5682,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       background-color: transparent !important; }
     .gogo-load-css .gogocarto-container #element-info .img-container {
       position: absolute;
+      width: 100%;
       top: 0; }
     .gogo-load-css .gogocarto-container #element-info .collapsible-body-main-container {
       height: 100%;
