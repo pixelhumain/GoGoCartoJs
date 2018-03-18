@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-03-02 08:57:20
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2018-03-11 15:45:23
+* @Last Modified time: 2018-03-18 15:58:56
 */
 
 .sub-categories-content.no-top-divider > ul > .main-option-subcategories-container 
@@ -20,7 +20,7 @@
 {
   margin-top: .5rem;
 
-  .category-wrapper { margin-top: 0; }
+  .category-wrapper { margin-top: 0 !important; }
 }
 
 .subcategory-item

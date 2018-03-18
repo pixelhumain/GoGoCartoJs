@@ -3498,7 +3498,7 @@ th {
 * @Author: Sebastian Castro
 * @Date:   2017-03-02 08:57:20
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2018-03-11 15:45:23
+* @Last Modified time: 2018-03-18 15:58:56
 */
     /*
 * @Author: Sebastian Castro
@@ -3856,7 +3856,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     .gogo-load-css .gogocarto-container .category-wrapper {
       margin-top: .5rem; }
       .gogo-load-css .gogocarto-container .category-wrapper .category-wrapper {
-        margin-top: 0; }
+        margin-top: 0 !important; }
     .gogo-load-css .gogocarto-container .subcategory-item {
       position: relative;
       line-height: 3rem;
@@ -5456,7 +5456,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       -webkit-flex-flow: column nowrap;
       flex-flow: column nowrap; }
       .gogo-load-css .gogocarto-container .element-item h3 {
-        font-size: .9rem;
+        font-size: .85rem;
         text-transform: uppercase;
         font-weight: 600;
         padding-left: 0.75rem;
@@ -5579,7 +5579,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           padding-left: .75rem;
           font-weight: 600;
           font-size: .85rem;
-          padding-top: .5rem;
+          padding-top: 0rem;
           padding-bottom: .8rem; }
         .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .option-name.main-option {
           font-weight: bold; }
