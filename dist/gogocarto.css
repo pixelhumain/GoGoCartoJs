@@ -6048,3 +6048,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
 .gogo-icon-filters-1:before {
   content: "\37";
 }
+.gogo-icon-vote:before {
+  content: "\76";
+}

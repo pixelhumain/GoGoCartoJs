@@ -197,3 +197,6 @@
 .gogo-icon-filters-1:before {
   content: "\37";
 }
+.gogo-icon-vote:before {
+  content: "\76";
+}
