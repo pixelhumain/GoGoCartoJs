@@ -45,7 +45,7 @@ export class TaxonomySkosModule
     return {
       name: $skosJson["prefLabel"],
       showExpanded: true,
-      rootCategory: true,
+      isRootCategory: true,
       unexpandable: $unexpandable,
       options : [$skosJson]
     }

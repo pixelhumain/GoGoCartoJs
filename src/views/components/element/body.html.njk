@@ -51,7 +51,9 @@
 {# Categories  #}
 <div class="section row">
   {% import here ~ 'category-value.html.njk' as categoryRenderer %}
-  {{ categoryRenderer.renderCategoryValue(mainCategoryValue, 2) }}
+  {% for mainCategoryValue in rootCategoriesValues %}
+    {{ categoryRenderer.renderCategoryValue(mainCategoryValue) }}
+  {% endfor %}
 </div>
 
 

@@ -22,12 +22,12 @@ export class ElementComponent
 
     let optionstoDisplay = this.element.getIconsToDisplay();
 
-    let mainCategoryValue;
+    let rootCategoriesValues;
     if (this.element.status == ElementStatus.PendingModification && this.element.modifiedElement)  
-      mainCategoryValue = this.element.modifiedElement.getOptionTree().children[0];
+      rootCategoriesValues = this.element.modifiedElement.getRootCategoriesValues();
     else
-      mainCategoryValue = this.element.getOptionTree().children[0];
-
+      rootCategoriesValues = this.element.getRootCategoriesValues();
+    console.log(rootCategoriesValues);
     let html = App.templateModule.render('element', 
     {
       element : this.element, 
@@ -37,7 +37,7 @@ export class ElementComponent
       mainOptionToDisplay: optionstoDisplay[0], 
       otherOptionsToDisplay: optionstoDisplay.slice(1),  
       allOptionsValues: this.element.getCurrOptionsValues().filter( (oV) => oV.option.isActive).sort( (a,b) => a.isFilledByFilters ? -1 : 1),      
-      mainCategoryValue : mainCategoryValue,
+      rootCategoriesValues : rootCategoriesValues,
       editUrl : App.config.features.edit.url + this.element.id,
       ElementStatus: ElementStatus,
       ElementModerationState: ElementModerationState,

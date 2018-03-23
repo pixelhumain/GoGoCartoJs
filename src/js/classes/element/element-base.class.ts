@@ -1,4 +1,4 @@
-import { Contribution, VoteReport, OptionValue, PostalAddress, Option } from "../classes";
+import { Contribution, VoteReport, OptionValue, PostalAddress, Option, CategoryValue } from "../classes";
 import { capitalize } from "../../utils/string-helpers";
 import { App } from "../../gogocarto";
 
@@ -83,6 +83,13 @@ export class ElementBase
     if (this.optionTree) return this.optionTree;
     this.createOptionsTree();
     return this.optionTree;
+  }
+
+  getRootCategoriesValues() : CategoryValue[]
+  {
+    let optionTree = this.getOptionTree();
+    if (optionTree.children[0].category.isRootCategory) return optionTree.children;
+    return optionTree.children[0].children[0].children;
   }
 
   getOptionValueByCategoryId($categoryId)

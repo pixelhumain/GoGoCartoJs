@@ -152,9 +152,17 @@
       padding-top: 1.5rem;
     }
 
+    .category-name 
+    { 
+      padding-top: .6rem;
+      padding-bottom: 1rem;
+    }
+
 		.category-wrapper
 		{
-			.strong { text-decoration: underline }	
+			margin-top: 0 !important;
+
+      .strong { text-decoration: underline }	
 
       &:not(:first-child) { margin-top: .5rem; }
 
@@ -168,17 +176,7 @@
 
 	    	// underline juste first option in option Tree
 	    	.strong { text-decoration: none !important }	
-			}
-
-			.category-name 
-			{ 
-				text-transform: uppercase;
-		    padding-left: .75rem;
-        font-weight: 600;
-        font-size: .85rem;
-        padding-top: 0rem;
-        padding-bottom: .8rem;
-			}
+			}			
 
 			.option-name 
 			{

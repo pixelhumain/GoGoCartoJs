@@ -37,9 +37,11 @@ export class TaxonomyModule
 
 	createTaxonomyFromJson(mainCatgeoryJson, openHoursCategoryJson)
 	{
-		if (mainCatgeoryJson['@graph']) mainCatgeoryJson = App.taxonomySkosModule.convertSkosIntoGoGoTaxonomy(mainCatgeoryJson);
+		let isSkosTaxonomy = mainCatgeoryJson['@graph'];
+		if (isSkosTaxonomy) mainCatgeoryJson = App.taxonomySkosModule.convertSkosIntoGoGoTaxonomy(mainCatgeoryJson);
 
-		this.mainCategory = this.recursivelyCreateCategoryAndOptions(mainCatgeoryJson);		
+		this.mainCategory = this.recursivelyCreateCategoryAndOptions(mainCatgeoryJson);	
+		if (!isSkosTaxonomy) this.mainCategory.isRootCategory = true;	
 
 		for(let option of this.mainCategory.children) option.isMainOption = true;
 

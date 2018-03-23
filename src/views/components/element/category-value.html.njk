@@ -1,4 +1,4 @@
-{% macro renderCategoryValue(categoryValue, subcategoriesCount) %}
+{% macro renderCategoryValue(categoryValue) %}
 
 {% set activeChildrenCount = 0 %}
 {% for optionValue in categoryValue.children %}
@@ -6,24 +6,20 @@
 		{% set activeChildrenCount = activeChildrenCount + 1 %}
 	{% endif %}
 {% endfor %}	
-{% set displayThisCategoryValue = activeChildrenCount > 0 %}
 
-{% set displayThisCategoryValue = categoryValue.category.name and activeChildrenCount > 0 
-																	or categoryValue.category.rootCategory %}
-{% if displayThisCategoryValue %}
-	<div class="category-wrapper">
-	{% if subcategoriesCount > 1 %}
-		<div class="category-name">{{ categoryValue.category.name }}</div>
-	{% endif %}
+{% set wrapOptionsIntoCategoryContainer = activeChildrenCount > 0 %}
+
+{% if wrapOptionsIntoCategoryContainer %}
+	<div class="category-wrapper">	
+{% endif %}
+
+{% if categoryValue.category.isRootCategory %}
+	<h3 class="category-name">{{ categoryValue.category.name }}</h3>
 {% endif %}
 
 {% for optionValue in categoryValue.children %}
+
 	{% if not optionValue.option_.disableInInfoBar %}
-		{% set displayFirstCategoryInline = not categoryValue.category.enableDescription 
-																		and optionValue.children.length > 0 
-																		and optionValue.children[0].isLastCategoryDepth 
-																		and not optionValue.children[0].category.enableDescription %}
-		<!-- <div>{{ optionValue.option.name }} : {{ optionValue.children.length }}, {{ optionValue.children[0].isLastCategoryDepth }}</div> -->
 		{% set colWidth = 's6 m5' if categoryValue.category.enableDescription else 's12' %}
 	  <div class='row'>
 	    <span class="option-value col {{ colWidth }}">
@@ -37,15 +33,6 @@
 	      <span class="option-name {{ optionValue.diff }}" option-id={{ optionValue.option.id }} >
 	      {{ optionValue.option.nameShort|capitalize }}</span> 
 
-	      {% if displayFirstCategoryInline %}
-	      	<span class="inline-option">(
-	      		{% for suboptionValue in optionValue.children[0].children %} 
-	      			<span class="{{ suboptionValue.diff }}">{{ suboptionValue.option.name }} {% if not loop.last %}, {% endif %}</span> 
-	      			
-		      	{% endfor %})
-		      </span>
-	      {% endif %}
-
 	    </span>
 	    {% if categoryValue.category.enableDescription %}
 	    	<span class="col s6 m7 option-description"><span class="{{ optionValue.diff }}">{{ optionValue.description|safe }}</span></span>
@@ -53,20 +40,14 @@
 	  </div>
   {% endif %}
 
-	{% set subcategoriesCount = optionValue.children.length %}
-	{% if displayFirstCategoryInline %}{% set subcategoriesCount = subcategoriesCount - 1 %}{% endif %}
-
+  {# Render children #}
 	{% for subcategory in optionValue.children %}
-
-		{% if not (loop.first and displayFirstCategoryInline) %}
-			{{ renderCategoryValue(subcategory, subcategoriesCount) }}
-		{% endif %}
-
+		{{ renderCategoryValue(subcategory) }}
 	{% endfor %} 
 	
 {% endfor %} 
 
-{% if displayThisCategoryValue %}
+{% if wrapOptionsIntoCategoryContainer %}
 	<!-- div end for category-wrapper -->
 	</div>
 {% endif %}
