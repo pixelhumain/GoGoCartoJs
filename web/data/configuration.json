@@ -2,10 +2,16 @@
   "data":
   {
     "taxonomy": "https://semantic-bus.org/data/api/TaxonomiePWA",
-    "elements": "https://semantic-bus.org/data/api/PWA_All"
+    "elements": "http://semantic-bus.org/data/api/PWA_Bounds",
+    "requestByBounds": true,
   },
-  "menu": { 
+  "menu": 
+  { 
     "width": 350,
     "smallWidthStyle": true
+  },
+  "map":
+  {
+    "saveTileLayerInCookies" : true,
   }
 }

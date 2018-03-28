@@ -91,13 +91,34 @@ export class AjaxModule
 
 		let boundsResult = this.convertBoundsIntoParams($bounds);
 
-		let dataRequest : any = { bounds : boundsResult.boundsString, 
-															boundsJson : boundsResult.boundsJson,
+		let bnds = boundsResult.boundsJson;
+		let dataRequest : any = { 
+															bounds01: bnds[0].getSouthWest().lat,
+															bounds02: bnds[0].getSouthWest().lng,
+															bounds03: bnds[0].getNorthEast().lat,
+															bounds04: bnds[0].getNorthEast().lng,
+
+															bounds11: bnds[1].getSouthWest().lat,
+															bounds12: bnds[1].getSouthWest().lng,
+															bounds13: bnds[1].getNorthEast().lat,
+															bounds14: bnds[1].getNorthEast().lng,
+
+															bounds21: bnds[2].getSouthWest().lat,
+															bounds22: bnds[2].getSouthWest().lng,
+															bounds23: bnds[2].getNorthEast().lat,
+															bounds24: bnds[2].getNorthEast().lng,
+
+															bounds31: bnds[3].getSouthWest().lat,
+															bounds32: bnds[3].getSouthWest().lng,
+															bounds33: bnds[3].getNorthEast().lat,
+															bounds34: bnds[3].getNorthEast().lng,
+
+															bounds : boundsResult.boundsString, 
+															boundsJson : JSON.stringify(boundsResult.boundsJson),
 															mainOptionId : App.currMainId, 
 															fullRepresentation : getFullRepresentation, 
-															ontology : getFullRepresentation ? 'gogofull' : 'gogocompact' };
-		
-
+															ontology : getFullRepresentation ? 'gogofull' : 'gogocompact',
+														};
 		let route = App.config.data.elements;
 		
 		this.sendAjaxElementRequest(new Request(route, dataRequest), expectedFilledBounds);
@@ -108,7 +129,7 @@ export class AjaxModule
 		let stringifiedBounds = "";
 		let digits = 5;
 		let boundsLessDigits = [];
-		for (let bound of $bounds) 
+		for (let bound of $bounds)
 		{
 			let southWest = L.latLng(L.Util.formatNum(bound.getSouthWest().lat, digits), L.Util.formatNum(bound.getSouthWest().lng, digits))
 			let nortEast = L.latLng(L.Util.formatNum(bound.getNorthEast().lat, digits), L.Util.formatNum(bound.getNorthEast().lng, digits))
@@ -117,7 +138,14 @@ export class AjaxModule
 			stringifiedBounds += bound.toBBoxString() + ";";
 		}
 
-		return {boundsString: stringifiedBounds, boundsJson: JSON.stringify(boundsLessDigits)};
+		// some API endpoint needs a fixed number of bounds equals to 4
+		if ($bounds.length < 4)
+		{
+			let emptyBound = L.latLngBounds(L.latLng(0,0), L.latLng(0,0));
+			for (var i = $bounds.length; i < 4; i++) boundsLessDigits.push(emptyBound);			
+		}
+
+		return {boundsString: stringifiedBounds, boundsJson: boundsLessDigits};
 	}
 
 	private sendAjaxElementRequest($request : Request, $expectedFilledBounds = null)
