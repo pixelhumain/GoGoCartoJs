@@ -54,7 +54,8 @@ export class GoGoCartoModule
 			  success: (data) =>  { 
 			  	if ( typeof data === 'string') data = JSON.parse(data);
 			  	this.checkForDistantTaxonomy(data); 
-			  }
+			  },
+			  error: () => { console.error("Error while getting the configuration at url ", options)}
 			});
 	};
 
