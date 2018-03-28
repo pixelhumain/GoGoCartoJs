@@ -3,7 +3,7 @@
   {
     "taxonomy": "https://semantic-bus.org/data/api/TaxonomiePWA",
     "elements": "http://semantic-bus.org/data/api/PWA_Bounds",
-    "requestByBounds": true,
+    "requestByBounds": true
   },
   "menu": 
   { 
