@@ -18,41 +18,45 @@
    '1': 'Validé (admin)',
    '2': 'Validé (votes)',
    '3': 'Ajouté par admin',
-   '4': 'Modifié par admin'
+   '4': 'Modifié par admin',
+   '5': 'Modifié par propriétaire',
+   '6': 'Modifié avec lien direct'
   }
 %} 
 
 {% set userRoles = {
   '0': "Anonyme",
-  '1': 'Anonyme avec mail',
+  '1': 'Anonyme avec email',
   '2': "Utilisateur loggué",
-  '3': "Admin"
+  '3': "Admin",
+  '4': 'Anonyme avec lien'
   }
 %} 
 
 {# ---- HEADER --- #}
-<div class="contribution-header">    
-  {% if item.userRole == 3 %}
-    <div> 
+<div class="contribution-header row">    
+  {% set labelClass = 'label-success' if item.status > 0 else 'label-danger' %}
+  {% set labelClass = 'label-warning' if item.status == 0 else labelClass %}
+
+  {% if item.userRole == 3 or item.status > 2 %}
+    <div class="contribution-status"> 
         {% set title = contributionType[item.type] if (item.type == 4) else elementStatus[item.status] %}
-        <b>{{ title | upper }}</b> 
+        <span class="label {{ labelClass }}">{{ title }}</span>
         par <u>{{ item.user }}</u> 
         <span class="label label-default">{{ userRoles[item.userRole] }}</span> 
-        <span class="vote-report-comment">{{ item.resolvedMessage}}<span>
-        <div style="float:right">{{ item.updatedAt }}</div>
+        <span class="vote-report-comment">{{ item.resolvedMessage}}<span>        
     </div>
+    <div class="contribution-updated-at">{{ item.updatedAt }}</div>
   {% else %}    
     {% if item.status %} {# pending contribution have status to null #}
       <div> 
-          <b>{{ contributionType[item.type] | upper }}</b> 
-          {% set labelClass = 'label-success' if item.status > 0 else 'label-danger' %}
-          {% set labelClass = 'label-warning' if item.status == 0 else labelClass %}
+          <b>{{ contributionType[item.type] | upper }}</b>          
           <span class="label {{ labelClass }}">{{ elementStatus[item.status] }}</span>
           {% if item.resolvedMessage %}<span class="vote-report-comment" style="padding:0 10px"> {{ item.resolvedMessage}}</span>{% endif %}
-          {% if item.resolvedBy %}<span>(<u>{{item.resolvedBy }}</u>)</span>{% endif %}               
+          {% if item.resolvedBy %}<span>(<u>{{item.resolvedBy }}</u>)</span>{% endif %}   
           
-          <div style="float:right">{{ item.updatedAt }}</div>
       </div>
+      <div class="contribution-updated-at">{{ item.updatedAt }}</div>
     {% endif %}
 
     <div> 
