@@ -2,8 +2,9 @@
   "data":
   {
     "taxonomy": "https://semantic-bus.org/data/api/TaxonomiePWA",
-    "elements": "https://semantic-bus.org/data/api/PWA_Bounds",
-    "requestByBounds": true
+    "elementsCompactApiUrl": "http://semantic-bus.org/data/api/PWA_Bounds_Compact",
+    "elementByIdUrl": "http://semantic-bus.org/data/api/PWA_One?id={ID}",
+    "requestByBounds": true,
   },
   "menu": 
   { 
