@@ -42,13 +42,15 @@
 	{% set nbreMiniIcon = displayStamps.length + 1 %}
 
 	<div class="mini-icon-stamp-container animate rotate" style="width: {{ 20 * nbreMiniIcon }}px">
-		{% if element.isFavorite %}
+		{% if config.isFeatureAvailable('favorite') and element.isFavorite %}
 			<span class="mini-icon-stamp gogo-icon-star-full"></span>
 		{% endif %}
 
-		{% for stamp in displayStamps %}
-			<span class="mini-icon-stamp {{ stamp.icon }}"></span>
-		{% endfor %}
+		{% if config.isFeatureAvailable('stamp') %}
+			{% for stamp in displayStamps %}
+				<span class="mini-icon-stamp {{ stamp.icon }}"></span>
+			{% endfor %}
+		{% endif %}
 	</div>
 
 </div>

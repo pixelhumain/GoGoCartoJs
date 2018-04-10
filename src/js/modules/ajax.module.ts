@@ -93,6 +93,7 @@ export class AjaxModule
 															mainOptionId : App.currMainId, 
 															fullRepresentation : getFullRepresentation, 
 															ontology : getFullRepresentation ? 'gogofull' : 'gogocompact',
+															stampsIds : App.request.stampsIds
 														};		
 		let route;
 		if (getFullRepresentation) route = App.config.data.elements;

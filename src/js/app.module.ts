@@ -73,6 +73,7 @@ export class AppModule
 	readonly config : GoGoConfig;
 	readonly isIframe : boolean = false;
 	readonly loadFullTaxonomy : boolean = true;
+	readonly request : any = {};
 
 	modeManager = new ModeManager();
 	stateManager = new StateManager();
@@ -116,11 +117,12 @@ export class AppModule
 	directionsComponent = new DirectionsComponent();
 	mapControlsComponent = new MapControlsComponent();
 
-	constructor($config : any, $isIframe = false, $loadFullTaxonomy = true)
+	constructor($config : any, $isIframe = false, $loadFullTaxonomy = true, $request = {})
 	{
 		this.config = new GoGoConfig($config);
 		this.isIframe = $isIframe;
 		this.loadFullTaxonomy = $loadFullTaxonomy;
+		this.request = $request;
 		
 		this.loginModule = new LoginModule(this.config.security.userRoles, this.config.security.userEmail);
   	this.boundsModule = new BoundsModule(this.config);  	

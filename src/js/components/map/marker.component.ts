@@ -60,6 +60,7 @@ export class Marker
 			disableMarker : disableMarker,
 			pendingClass : element.isPending() && App.config.isFeatureAvailable('pending') ? 'pending' : '',
 			showPending : element.isPending() && App.config.isFeatureAvailable('pending'),
+			config : App.config
 		});
 
 		// save the class because it has been modified by marker cluster adding or

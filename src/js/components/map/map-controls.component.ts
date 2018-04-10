@@ -58,6 +58,14 @@ export class MapControlsComponent
     src += window.location.search.length > 0 ? window.location.search + '&' : '?';
     src += 'iframe=1';
     if ($('#part-taxonomy-checkbox').is(':checked')) src += '&fullTaxonomy=0';
+    
+    var stampsIds = [];
+    $('#modal-iframe .iframe-param.stamp-param').each(function() 
+    {
+      if ($(this).is(':checked')) { stampsIds.push($(this).data('id')); }
+    });
+    if (stampsIds.length > 0) src += '&stampsIds=' + stampsIds.join(',');
+    
     src += window.location.hash;
 
     let width = $('#iframe-width').val() ? $('#iframe-width').val() : '800';

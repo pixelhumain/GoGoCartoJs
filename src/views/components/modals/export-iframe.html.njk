@@ -6,14 +6,22 @@
 	    <p class="subtitle">L'iframe sera initialisée dans la position actuelle de la carte. Déplacez la carte dans la position voulue avant d'ouvrir cette fenêtre !</p>	 
 
 	    <label for="iframe-width">Largeur</label>
-	    <input type="number" class="iframe-input iframe-param" id="iframe-width" placeholder="800"/>      
+	    <input type="number" class="iframe-input iframe-param" id="iframe-width" value="800"/>      
 
       <label for="iframe-height">Hauteur</label>
-      <input type="number" class="iframe-input iframe-param" id="iframe-height" placeholder="600"/>
+      <input type="number" class="iframe-input iframe-param" id="iframe-height" value="600"/>
       
+      <div class="checkboxes-container">
+        {% if config.isFeatureAvailable('stamp') %}
+          {% for stamp in allowedStamps %}
+            <input type="checkbox" class="iframe-param stamp-param" id="iframe-stamp-{{stamp.id}}" data-id="{{stamp.id}}" />
+            <label for="iframe-stamp-{{stamp.id}}">Afficher uniquement les acteurs avec l'étiquette <strong>{{ stamp.name }}</strong></label>
+          {% endfor %}
+        {% endif %}
 
-      <input type="checkbox" class="iframe-param" id="part-taxonomy-checkbox" />
-      <label for="part-taxonomy-checkbox">Afficher uniquement les catégories actuellement sélectionnées</label>
+        <input type="checkbox" class="iframe-param" id="part-taxonomy-checkbox" />
+        <label for="part-taxonomy-checkbox">Afficher uniquement les catégories actuellement sélectionnées</label>
+      </div>
 
 			<div class="input-field">
 				<input class="validate" 

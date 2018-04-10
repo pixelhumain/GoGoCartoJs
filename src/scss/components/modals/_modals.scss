@@ -121,7 +121,12 @@
     margin-bottom: 1.5rem;
   }
 
-  label { font-size: .8rem }
+  label { 
+    font-size: .8rem ;
+    &:not(:last-child) { margin-bottom: 15px; }
+    strong { font-weight: bold; }
+    width: 100%;
+  }
 
   .iframe-input
   {

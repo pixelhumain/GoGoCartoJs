@@ -78,7 +78,7 @@ export class GoGoCartoModule
 		let isIframe : boolean = urlParams.iframe ? urlParams.iframe == 1 : false;
 		let fullTaxonomy : boolean = urlParams.fullTaxonomy ? urlParams.fullTaxonomy == 1 : true;
 
-		App = new AppModule(options, isIframe, fullTaxonomy);
+		App = new AppModule(options, isIframe, fullTaxonomy, urlParams);
 
 		// only for debugging
 		this.app = App;				
@@ -91,7 +91,8 @@ export class GoGoCartoModule
 			openHoursCategory: options.openHours, 
 			isIframe: isIframe, 
 			fullTaxonomy: fullTaxonomy,
-			config: App.config
+			config: App.config,
+			allowedStamps: App.stampModule.allowedStamps
 		});
 		   
 		if ($(this.container).length == 0) console.warn('[GoGoCarto] The container "' + this.container + '" was not found');
