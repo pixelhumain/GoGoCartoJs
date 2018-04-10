@@ -10,11 +10,12 @@ export class StampModule
 
   constructor($config)
   {
-    for (let stamp of $config.features.stamp.options.allowedStamps)
-    {
-      stamp.icon = stamp.icon || this.getDefaultIcon();
-      this.allowedStamps.push(new Stamp(stamp));
-    }
+    if ($config.features.stamp.options.allowedStamps)
+      for (let stamp of $config.features.stamp.options.allowedStamps)
+      {
+        stamp.icon = stamp.icon || this.getDefaultIcon();
+        this.allowedStamps.push(new Stamp(stamp));
+      }
   }
 
   checkForAddingStamps(elementsArray : Element[])  
