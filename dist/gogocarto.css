@@ -3562,7 +3562,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
 * @Author: Sebastian Castro
 * @Date:   2017-12-04 15:52:58
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-12-13 12:38:21
+* @Last Modified time: 2018-04-05 09:21:21
 */ }
     .gogo-load-css .gogocarto-container #directory-spinner-loader, .gogo-load-css .gogocarto-container #info-bar-spinner-loader {
       position: absolute;
@@ -4404,6 +4404,25 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         background-position: 8px;
         background-repeat: no-repeat;
         width: 50px; }
+      .gogo-load-css .gogocarto-container .marker-wrapper .mini-icon-stamp-container {
+        position: absolute;
+        top: -8px;
+        z-index: 3;
+        font-size: 14px;
+        right: 19px;
+        color: #d9dad9; }
+        .gogo-load-css .gogocarto-container .marker-wrapper .mini-icon-stamp-container .mini-icon-stamp {
+          float: right; }
+          .gogo-load-css .gogocarto-container .marker-wrapper .mini-icon-stamp-container .mini-icon-stamp:before {
+            border-radius: 50%;
+            padding: 1px;
+            padding-bottom: 2px;
+            background-color: #cc8901;
+            border: 1px solid; }
+          .gogo-load-css .gogocarto-container .marker-wrapper .mini-icon-stamp-container .mini-icon-stamp.gogo-icon-stamp-2 {
+            font-size: 12px; }
+            .gogo-load-css .gogocarto-container .marker-wrapper .mini-icon-stamp-container .mini-icon-stamp.gogo-icon-stamp-2:before {
+              padding: 2px 1px 2px 2px; }
     .gogo-load-css .gogocarto-container .iconInsideMarker-wrapper {
       position: relative;
       left: 7px;
@@ -4433,13 +4452,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       .gogo-load-css .gogocarto-container .gogo-icon-plus-circle:before {
         border-radius: 50%;
         background-color: #F1F1F1; }
-    .gogo-load-css .gogocarto-container .marker-wrapper .gogo-icon-star-full {
-      position: absolute;
-      top: -10px;
-      z-index: 3;
-      font-size: 14px;
-      right: -8px;
-      color: #d9dad9; }
     .gogo-load-css .gogocarto-container .gogo-icon-star-full:before {
       border-radius: 50%;
       padding: 1px;
@@ -4492,9 +4504,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     .gogo-load-css .gogocarto-container .leaflet-marker-container.rotateLeft .gogo-icon-plus-circle {
       top: -7px;
       right: -7px; }
-    .gogo-load-css .gogocarto-container .leaflet-marker-container.rotateLeft .gogo-icon-star-full {
-      top: -10px;
-      right: -7px; }
     .gogo-load-css .gogocarto-container .leaflet-marker-container.rotateLeft .moreIconContainer {
       left: 30px; }
     .gogo-load-css .gogocarto-container .leaflet-marker-container.rotateLeft .marker-name {
@@ -4519,9 +4528,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       top: 1px; }
     .gogo-load-css .gogocarto-container .leaflet-marker-container.rotateRight .gogo-icon-plus-circle {
       top: -7px;
-      right: -8px; }
-    .gogo-load-css .gogocarto-container .leaflet-marker-container.rotateRight .gogo-icon-star-full {
-      top: -9px;
       right: -8px; }
     .gogo-load-css .gogocarto-container .leaflet-marker-container.rotateRight .moreIconContainer {
       left: 30px; }
@@ -4548,9 +4554,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     .gogo-load-css .gogocarto-container .leaflet-marker-container.rotateSoftLeft .gogo-icon-plus-circle {
       top: -7px;
       right: -7px; }
-    .gogo-load-css .gogocarto-container .leaflet-marker-container.rotateSoftLeft .gogo-icon-star-full {
-      top: -10px;
-      right: -7px; }
     .gogo-load-css .gogocarto-container .leaflet-marker-container.rotateSoftLeft .moreIconContainer {
       left: 30px; }
     .gogo-load-css .gogocarto-container .leaflet-marker-container.rotateSoftLeft .marker-name {
@@ -4575,9 +4578,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       top: 3px; }
     .gogo-load-css .gogocarto-container .leaflet-marker-container.rotateSoftRight .gogo-icon-plus-circle {
       top: -7px;
-      right: -8px; }
-    .gogo-load-css .gogocarto-container .leaflet-marker-container.rotateSoftRight .gogo-icon-star-full {
-      top: -9px;
       right: -8px; }
     .gogo-load-css .gogocarto-container .leaflet-marker-container.rotateSoftRight .moreIconContainer {
       left: 30px; }
@@ -5304,14 +5304,14 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         .gogo-load-css .gogocarto-container .menu-element .menu-element-item .menu-icon {
           font-size: 20px;
           float: left; }
-          .gogo-load-css .gogocarto-container .menu-element .menu-element-item .menu-icon.gogo-icon-favorite {
+          .gogo-load-css .gogocarto-container .menu-element .menu-element-item .menu-icon.small-icon {
             font-size: 18px; }
           .gogo-load-css .gogocarto-container .menu-element .menu-element-item .menu-icon:before {
             line-height: 2.8rem; }
           @media only screen and (min-width: 601px) {
             .gogo-load-css .gogocarto-container .menu-element .menu-element-item .menu-icon {
               font-size: 22px; }
-              .gogo-load-css .gogocarto-container .menu-element .menu-element-item .menu-icon.gogo-icon-favorite {
+              .gogo-load-css .gogocarto-container .menu-element .menu-element-item .menu-icon.small-icon {
                 font-size: 20px; }
               .gogo-load-css .gogocarto-container .menu-element .menu-element-item .menu-icon:before {
                 line-height: 3rem; } }
@@ -5319,6 +5319,9 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           padding: 2px;
           padding-bottom: 3px;
           border: none; }
+        .gogo-load-css .gogocarto-container .menu-element .menu-element-item.item-stamp.filled {
+          color: #ffab00;
+          font-weight: bold; }
     .gogo-load-css .gogocarto-container .interactive-section {
       padding: 0 1rem 0 .8rem;
       position: relative;
@@ -5421,6 +5424,10 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         line-height: 2rem;
         padding: 15px 0;
         border-bottom: 1px solid grey; }
+        .gogo-load-css .gogocarto-container .element-item .contributions .contribution-header .contribution-status {
+          float: left; }
+        .gogo-load-css .gogocarto-container .element-item .contributions .contribution-header .contribution-updated-at {
+          float: right; }
       .gogo-load-css .gogocarto-container .element-item .contributions .contribution-body {
         color: inherit; }
     .gogo-load-css .gogocarto-container .info-bar-tabs.tabs .tab a {
@@ -5762,7 +5769,12 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       font-style: italic;
       margin-bottom: 1.5rem; }
     .gogo-load-css .gogocarto-container #modal-iframe label {
-      font-size: .8rem; }
+      font-size: .8rem;
+      width: 100%; }
+      .gogo-load-css .gogocarto-container #modal-iframe label:not(:last-child) {
+        margin-bottom: 15px; }
+      .gogo-load-css .gogocarto-container #modal-iframe label strong {
+        font-weight: bold; }
     .gogo-load-css .gogocarto-container #modal-iframe .iframe-input {
       width: 80px;
       border: 1px solid #969696;
@@ -5851,11 +5863,11 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
 
 @font-face {
   font-family: "gogocarto";
-  src:url("fonts/gogocarto.eot?version=1.7");
-  src:url("fonts/gogocarto.eot?version=1.7#iefix") format("embedded-opentype"),
-    url("fonts/gogocarto.woff?version=1.7") format("woff"),
-    url("fonts/gogocarto.ttf?version=1.7") format("truetype"),
-    url("fonts/gogocarto.svg?version=1.7#gogocarto") format("svg");
+  src:url("fonts/gogocarto.eot");
+  src:url("fonts/gogocarto.eot?#iefix") format("embedded-opentype"),
+    url("fonts/gogocarto.woff") format("woff"),
+    url("fonts/gogocarto.ttf") format("truetype"),
+    url("fonts/gogocarto.svg#gogocarto") format("svg");
   font-weight: normal;
   font-style: normal;
 
@@ -6048,4 +6060,16 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
 }
 .gogo-icon-vote:before {
   content: "\76";
+}
+.gogo-icon-marker-simple-1:before {
+  content: "\31";
+}
+.gogo-icon-marker-simple:before {
+  content: "\32";
+}
+.gogo-icon-stamp-1:before {
+  content: "\36";
+}
+.gogo-icon-stamp-2:before {
+  content: "\38";
 }
