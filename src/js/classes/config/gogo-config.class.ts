@@ -28,6 +28,7 @@ export class GoGoConfig
   {
     taxonomy: undefined,
     elements: undefined,
+    elementsCompactApiUrl: undefined,
     elementByIdUrl: undefined,
     requestByBounds: false,
     retrieveElementsByApi: false,

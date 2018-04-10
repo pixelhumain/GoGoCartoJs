@@ -54,16 +54,11 @@ export class AjaxModule
 
 	getElementById(elementId, callbackSuccess?, callbackFailure?)
 	{
-		if (elementId == this.currElementIdRetrieving) return;
-
-		let route = "";
-		if (App.config.data.elementByIdUrl) route = App.config.data.elementByIdUrl + elementId;
-		else route = App.config.data.elements + '/' + elementId;
-		
+		if (elementId == this.currElementIdRetrieving) return;		
 		this.currElementIdRetrieving = elementId;
 		
 		$.ajax({
-			url: route,
+			url: this.getSingleElementApiUrl(elementId),
 			method: "get",
 			data: { },
 			success: response => 
@@ -93,33 +88,15 @@ export class AjaxModule
 
 		let bnds = boundsResult.boundsJson;
 		let dataRequest : any = { 
-															bounds01: bnds[0].getSouthWest().lat,
-															bounds02: bnds[0].getSouthWest().lng,
-															bounds03: bnds[0].getNorthEast().lat,
-															bounds04: bnds[0].getNorthEast().lng,
-
-															bounds11: bnds[1].getSouthWest().lat,
-															bounds12: bnds[1].getSouthWest().lng,
-															bounds13: bnds[1].getNorthEast().lat,
-															bounds14: bnds[1].getNorthEast().lng,
-
-															bounds21: bnds[2].getSouthWest().lat,
-															bounds22: bnds[2].getSouthWest().lng,
-															bounds23: bnds[2].getNorthEast().lat,
-															bounds24: bnds[2].getNorthEast().lng,
-
-															bounds31: bnds[3].getSouthWest().lat,
-															bounds32: bnds[3].getSouthWest().lng,
-															bounds33: bnds[3].getNorthEast().lat,
-															bounds34: bnds[3].getNorthEast().lng,
-
 															bounds : boundsResult.boundsString, 
 															boundsJson : JSON.stringify(boundsResult.boundsJson),
 															mainOptionId : App.currMainId, 
 															fullRepresentation : getFullRepresentation, 
 															ontology : getFullRepresentation ? 'gogofull' : 'gogocompact',
-														};
-		let route = App.config.data.elements;
+														};		
+		let route;
+		if (getFullRepresentation) route = App.config.data.elements;
+		else route = App.config.data.elementsCompactApiUrl || App.config.data.elements;
 		
 		this.sendAjaxElementRequest(new Request(route, dataRequest), expectedFilledBounds);
 	}	
@@ -146,6 +123,23 @@ export class AjaxModule
 		}
 
 		return {boundsString: stringifiedBounds, boundsJson: boundsLessDigits};
+	}
+
+	private getSingleElementApiUrl($elementId : any) : string
+	{
+		let route = "";
+		if (App.config.data.elementByIdUrl) 
+		{
+			route = App.config.data.elementByIdUrl;
+			if (route.indexOf('{ID}') > 0) route = route.replace('{ID}', $elementId.toString());
+			else 
+			{
+				if (route.slice(-1) != '/') route += '/';
+				route += $elementId;
+			}
+		}
+		else route = App.config.data.elements + '/' + $elementId;
+		return route;
 	}
 
 	private sendAjaxElementRequest($request : Request, $expectedFilledBounds = null)

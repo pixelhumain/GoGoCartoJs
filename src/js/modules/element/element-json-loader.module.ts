@@ -22,14 +22,14 @@ export class ElementJsonParserModule
     element.position = L.latLng(elementJson[2], elementJson[3]);     
     App.elementOptionValuesModule.createOptionValues(elementJson[4], element);   
     element.status = elementJson.length >= 6 ? elementJson[5] : 1;  
-    element.moderationState = elementJson.length >= 7 ? elementJson[6] : 0;         
+    element.moderationState = elementJson.length >= 7 ? elementJson[6] : 0;   
   }
 
   private loadFromFullJson(elementJson : any, element : Element | ElementBase)
   {
     // if the element was not prefilled with the compact json representation
     // we ovewrite anyway all attributes (it can have changed !)
-    element.id = elementJson.id;
+    element.id = elementJson.id || elementJson['@id'];
 
     element.position = L.latLng(elementJson.latitude || elementJson.lat || elementJson.geo && elementJson.geo.latitude, 
                                 elementJson.longitude || elementJson.lng || elementJson.long || elementJson.geo && elementJson.geo.longitude);
