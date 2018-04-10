@@ -1,4 +1,4 @@
-<div class="marker-name bgdColorAs {{pendingClass}}" option-id="{{mainOptionToDisplay.colorOptionId}}" style="display:none">{{ element.name | capitalize }}</div>
+<div class="marker-name bgdColorAs {{pendingClass}}" option-id="{{mainOptionToDisplay.colorOptionId}}" style="display:none">{{ element.name }}</div>
 
 <div class="marker-wrapper colorAs {{pendingClass}}" option-id="{{mainOptionToDisplay.colorOptionId}}" id="marker-{{ element.id }}">
 
@@ -10,7 +10,7 @@
 		option-id="{{ mainOptionToDisplay.optionId if mainOptionToDisplay.option.color else mainOptionToDisplay.colorOptionId }}">
 	</div>
 
-	{% set nbreOthersOptions = otherOptionsToDisplay.length %}	
+	{% set nbreOthersOptions = otherOptionsToDisplay.length %}
 
 	{% if nbreOthersOptions > 0 and showMoreIcon and not showPending %}
 
@@ -37,9 +37,18 @@
 		</div>
 
 	{% endif %}
+	
+	{% set displayStamps = element.displayStamps() %}
+	{% set nbreMiniIcon = displayStamps.length + 1 %}
 
-	{% if element.isFavorite %}
-		<div class="gogo-icon-star-full animate rotate"></div>
-	{% endif %}
+	<div class="mini-icon-stamp-container animate rotate" style="width: {{ 20 * nbreMiniIcon }}px">
+		{% if element.isFavorite %}
+			<span class="mini-icon-stamp gogo-icon-star-full"></span>
+		{% endif %}
+
+		{% for stamp in displayStamps %}
+			<span class="mini-icon-stamp {{ stamp.icon }}"></span>
+		{% endfor %}
+	</div>
 
 </div>

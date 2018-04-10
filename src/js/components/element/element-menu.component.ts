@@ -21,6 +21,7 @@ import { openDeleteModal, openReportModal } from '../modals/reporting-deleting.c
 import { openPickAddressModal } from '../modals/pick-address.component';
 import { createListenersForMarkAsResolved } from '../element/moderation.component';
 import { createListenersForSendEmail } from '../modals/send-email.component';
+import { StampComponent } from './stamp.component';
 
 export function updateFavoriteIcon(object, element : Element)
 {
@@ -67,6 +68,9 @@ export function createListenersForElementMenu(object)
 
 	createListenersForMarkAsResolved();
 	createListenersForSendEmail(object.parent(), element);
+
+	// STAMPS
+	object.find('.item-stamp').each(function() { new StampComponent(this); });
 
 	// ----------------------
 	//       DELETE

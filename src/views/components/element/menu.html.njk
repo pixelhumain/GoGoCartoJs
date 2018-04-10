@@ -2,15 +2,25 @@
   
   {% if config.isFeatureAvailable('favorite') %} 
     <div class="menu-element-item item-add-favorite">
-      <span class="menu-icon gogo-icon-star-empty gogo-icon-favorite tooltipped" 
+      <span class="menu-icon gogo-icon-star-empty small-icon tooltipped" 
       data-position="top" data-delay="0" data-tooltip="Enregistrer comme favoris"></span>
       <span class="menu-element-item-text">Enregistrer</span>
     </div>
     <div class="menu-element-item item-remove-favorite" style="display:none">
-      <span class="menu-icon gogo-icon-star-full gogo-icon-favorite tooltipped"
+      <span class="menu-icon gogo-icon-star-full small-icon tooltipped"
       data-position="top" data-delay="0" data-tooltip="Retirer des favoris"></span>
       <span class="menu-element-item-text favorite">Enregistré</span>
     </div>
+  {% endif %}
+
+  {% if config.isFeatureAvailable('stamp') %}
+    {% for stamp in allowedStamps %}
+      <div class="menu-element-item item-stamp" data-stamp-id="{{ stamp.id }}" data-element-id="{{ element.id }}">
+        <span class="menu-icon {{ stamp.icon }} small-icon tooltipped" 
+        data-position="top" data-delay="0" data-tooltip="Etiquetter {{ stamp.name }}"></span>
+        <span class="menu-element-item-text">{{ stamp.name }}</span>
+      </div>
+    {% endfor %}
   {% endif %}
 
   {% if not isMapMode %}

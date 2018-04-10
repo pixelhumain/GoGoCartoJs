@@ -58,26 +58,17 @@
 		.menu-icon
 		{
 			font-size: 20px;	
-			float: left;			
+			float: left;		
 
-			&.gogo-icon-favorite { font-size: 18px; }
-
-			
-			&:before
-			{
-				line-height: 2.8rem;
-			}
+			&.small-icon { font-size: 18px; }			
+			&:before { line-height: 2.8rem; }
 
 			@media #{$medium-and-up} 
 			{
 				font-size: 22px;
 
-				&.gogo-icon-favorite { font-size: 20px; }
-
-				&:before
-				{
-					line-height: 3rem;
-				}
+				&.small-icon { font-size: 20px; }
+				&:before { line-height: 3rem; }
 			}
 		}
 
@@ -87,6 +78,11 @@
 			padding-bottom: 3px;
 			border: none;
 		}	
+
+		&.item-stamp.filled {
+			color : rgb(255, 171, 0);
+			font-weight: bold;
+		}
 
 		
 	}

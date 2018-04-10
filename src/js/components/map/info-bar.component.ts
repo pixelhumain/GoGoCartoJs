@@ -41,16 +41,24 @@ export class InfoBarComponent
 		return $('#element-info-bar').hasClass('display-aside');
 	}
 
+	reload()
+	{
+		if (!this.isVisible) return;
+		this.elementVisible.isFullyLoaded = false;
+		this.showElement(this.elementVisible.id);
+	}
+
 	// App.infoBarComponent.showElement;
 	showElement(elementId, callback = null) 
 	{
 		if (!App.config.infobar.activate) {
 			App.stateManager.setState(AppStates.Normal);			
 			return;
-		}
-		// console.log("showElement", element);
+		}		
 
 		let element = App.elementsModule.getElementById(elementId);		
+		// console.log("showElement", element);
+		
 		// if element already visible
 		if (this.elementVisible) this.elementVisible.marker.showNormalSize(true);
 		this.elementVisible = element;	

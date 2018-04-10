@@ -34,7 +34,6 @@ export class ElementsJsonModule
     
     let newElementsJson = elementList.filter((obj) => App.elementsModule.everyElementsId.indexOf(obj.id) < 0 );
     let elementsToUpdateJson = [];
-
     if (isFullRepresentation)
     {      
       elementsToUpdateJson = elementList.filter((obj) => App.elementsModule.everyElementsId.indexOf(obj.id) >= 0 );
@@ -57,8 +56,7 @@ export class ElementsJsonModule
       newElements.push(element);
     }
 
-    elementsConverted = elementsConverted.concat(newElements);
-    App.favoriteModule.checkCookies();
+    elementsConverted = elementsConverted.concat(newElements);    
 
     let end = new Date().getTime();
     //console.log("AddJsonElements in " + (end-start) + " ms", elementJson);  
@@ -93,7 +91,6 @@ export class ElementsJsonModule
   {
     elementList.forEach( (e, index) =>  {
       let id = isFullRepresentation ? e.id || e["@id"] : e[0]; // in compact way, id is the first element of an array
-
       if (!id) id = this.elementsCreatedCount++;
       else id = parseUriId(id);
       e.id = id;      

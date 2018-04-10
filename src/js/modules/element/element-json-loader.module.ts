@@ -42,6 +42,8 @@ export class ElementJsonParserModule
     if (elementJson.categoriesDescriptions)
       App.elementOptionValuesModule.updateOptionsWithDescription(element, elementJson.categoriesDescriptions);
 
+    element.stamps = elementJson.stamps || [];
+
     if(elementJson.modifiedElement) 
     {
       element.modifiedElement = new ElementBase(elementJson.modifiedElement);

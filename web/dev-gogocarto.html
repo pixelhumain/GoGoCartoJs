@@ -15,7 +15,7 @@
 
     <link href="https://file.myfontastic.com/p9QtVQwDCkDvVq6VJesnxg/icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lobster|Roboto:400,700" rel="stylesheet">
-    
+
     <script src="../build/libs.js"></script>
     <script src="../build/directory.js"></script>
     <script src="../build/templates.js"></script>
@@ -60,6 +60,14 @@
                 url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/vote',   
                 roles: ['user', 'admin'], inIframe: false 
             },
+            stamp:     { 
+                url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/stamp',   
+                options: { allowedStamps: [
+                    {id: 1, name: "Zéro Waste", elementIds: ["10cE", "10bY", "10c0"]},
+                    {id: 2, name: "Label bio", elementIds: ["10cE", "10bY", "10c0"]}
+                  ] 
+                } 
+            },
             moderation: { 
                 inIframe: false, roles: ['admin'], 
                 url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/resolve-reports'
@@ -78,7 +86,7 @@
           },
           security:
           {
-            userRoles: ['user'],
+            userRoles: ['admin'],
             userEmail: "test@gt.gt",
             loginAction: function() { console.log("needToLog"); },
           },

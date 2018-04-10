@@ -66,6 +66,36 @@
         background-repeat: no-repeat;
         width: 50px;
     }
+
+    .mini-icon-stamp-container
+    {
+        position: absolute;
+        top: -8px;
+        z-index: 3;
+        font-size: 14px;
+        right: 19px;
+        color: #d9dad9;        
+
+        .mini-icon-stamp 
+        { 
+            float: right; 
+
+            &:before
+            {
+                border-radius: 50%;
+                padding: 1px;
+                padding-bottom: 2px;
+                background-color: $favorite-color;
+                border: 1px solid;
+            }
+
+            &.gogo-icon-stamp-2
+            {
+                font-size: 12px;
+                &:before { padding: 2px 1px 2px 2px; }
+            }
+        }
+    }
 }
 
 
@@ -114,17 +144,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
 		border-radius: 50%;
     	background-color: #F1F1F1;
 	}
-}
-
-// l'icone pour dire qu'il y a plusieurs produits dans ce fourisseur
-.marker-wrapper .gogo-icon-star-full
-{
-    position: absolute;
-    top: -10px;
-    z-index: 3;
-    font-size: 14px;
-    right: -8px;
-    color: #d9dad9;
 }
 
 .gogo-icon-star-full:before
@@ -188,7 +207,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
             top: 9px;
         }
         .gogo-icon-plus-circle { top: -7px; right: -7px; }
-        .gogo-icon-star-full{ top: -10px; right: -7px; }
         .moreIconContainer { left: 30px; }
         .marker-name { bottom: 47px; left: -50px;}
     }
@@ -205,7 +223,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
             top: 1px;
         }
         .gogo-icon-plus-circle { top: -7px; right: -8px; }
-        .gogo-icon-star-full{ top: -9px; right: -8px; }
         .moreIconContainer { left: 30px }
         .marker-name { bottom: 47px; left: -10px;}
     }
@@ -223,7 +240,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
             top: 7px;
         }
         .gogo-icon-plus-circle { top: -7px; right: -7px; }
-        .gogo-icon-star-full{ top: -10px; right: -7px; }
         .moreIconContainer { left: 30px; }
         .marker-name { bottom: 51px; left: -44px;}
     }
@@ -240,7 +256,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
             top: 3px;
         }
         .gogo-icon-plus-circle { top: -7px; right: -8px; }
-        .gogo-icon-star-full{ top: -9px; right: -8px; }
         .moreIconContainer { left: 30px }
         .marker-name { bottom: 56px; left: -10px;}
     }

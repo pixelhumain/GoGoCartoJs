@@ -40,6 +40,7 @@ import { ElementFormaterModule } from './modules/element/formater.module';
 import { ElementDiffModule } from './modules/element/diff.module';
 import { ElementIconsModule } from "./modules/element/icons.module";
 import { ElementOptionValuesModule } from "./modules/element/option-values.module";
+import { StampModule } from "./modules/elements/stamp.module";
 
 // COMPONENTS
 import { AppComponent } from './app.component';
@@ -102,6 +103,7 @@ export class AppModule
 	elementIconsModule = new ElementIconsModule();
 	elementOptionValuesModule = new ElementOptionValuesModule();
 	favoriteModule = new FavoriteModule();
+	stampModule : StampModule;
 
 	component : AppComponent;
 	infoBarComponent = new InfoBarComponent();
@@ -122,6 +124,7 @@ export class AppModule
 		
 		this.loginModule = new LoginModule(this.config.security.userRoles, this.config.security.userEmail);
   	this.boundsModule = new BoundsModule(this.config);  	
+  	this.stampModule = new StampModule(this.config);
 
 		Cookies.createCookie('firstVisit', 'done');			
 	}

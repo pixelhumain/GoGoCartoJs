@@ -56,7 +56,10 @@ export class ElementsModule
 			}				
 			this.everyElements_['all'].push(element);
 			this.everyElementsId_.push(element.id);
-		}		
+		}	
+
+		App.favoriteModule.checkCookies();	
+		App.stampModule.checkForAddingStamps(newElements);
 	}	
 
 	clearCurrentsElement()
@@ -209,7 +212,6 @@ export class ElementsModule
 
 	getElementById(elementId) : Element
 	{
-		//return this.everyElements_[elementId];
 		for (let i = 0; i < this.allElements().length; i++) {
 			if (this.allElements()[i].id == elementId) return this.allElements()[i];
 		}

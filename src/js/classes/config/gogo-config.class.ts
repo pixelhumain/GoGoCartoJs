@@ -107,6 +107,7 @@ export class GoGoConfig
     report:     new GoGoFeature(),      
     vote:       new GoGoFeature(),
     moderation: new GoGoFeature(),
+    stamp:      new GoGoFeature(),
     directModeration:        new GoGoFeature(),
   };
   readonly security =
@@ -180,7 +181,7 @@ export class GoGoConfig
   private recursiveFillProperty(that, object)
   {
     // we don't want to apply recursively inside objects properties
-    let objectsProperties = ['roles', 'defaultCenter', 'defaultBounds', 'tileLayers'];
+    let objectsProperties = ['roles', 'defaultCenter', 'defaultBounds', 'tileLayers', 'options'];
 
     // if we provide feature config, we enable it automatically
     if (that instanceof GoGoFeature) that.active = true;

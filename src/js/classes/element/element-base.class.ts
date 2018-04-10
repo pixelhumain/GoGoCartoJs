@@ -49,6 +49,7 @@ export class ElementBase
   modifiedElement : ElementBase = null;
 
   optionsValues : OptionValue[] = [];
+  stamps : any[] = [];
 
   mainOptionOwnerIds : number[] = [];
 

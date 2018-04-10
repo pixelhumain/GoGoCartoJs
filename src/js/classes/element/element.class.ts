@@ -12,7 +12,7 @@ import { ElementBase, ElementStatus, ElementModerationState } from './element-ba
 export { ElementStatus, ElementModerationState } from './element-base.class';
 import { Marker } from "../../components/map/marker.component";
 import { ElementComponent } from "../../components/element/element.component";
-import { OptionValue, CategoryValue, Option, Category, Contribution, VoteReport } from "../classes";
+import { OptionValue, CategoryValue, Option, Category, Contribution, VoteReport, Stamp } from "../classes";
 import { capitalize } from "../../utils/string-helpers";
 
 import { App } from "../../gogocarto";
@@ -122,6 +122,11 @@ export class Element extends ElementBase
 	{
 		return this.getCurrOptionsValues().filter( (optionValue) => optionValue.option.ownerId == categoryId).map( (optionValue) => optionValue.optionId);
 	}	
+
+	displayStamps() : Stamp[]
+	{
+		return App.stampModule.getAllowedStampForElement(this);
+	}
 
 	isPending() { return this.status == ElementStatus.PendingAdd || this.status == ElementStatus.PendingModification; }
 	isDeleted() { return this.status <= ElementStatus.AdminRefused }

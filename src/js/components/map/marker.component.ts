@@ -31,7 +31,7 @@ export class Marker
 		if (!position_)
 		{
 			let element = this.getElement();
-			if (element === null) console.log("element null id = " + this.elementId);
+			if (element === null) console.log("element non geolocalized id = " + this.elementId);
 			else position_ = element.position;
 		} 
 
@@ -75,7 +75,7 @@ export class Marker
 	{
 		this.isAnimating = true;
 		this.domMarker().animate({top: '-=25px'}, 300, 'easeInOutCubic');
-		this.domMarker().animate({top: '+=25px'}, 250, 'easeInOutCubic', () => {this.isAnimating = false;} );
+		this.domMarker().animate({top: '+=25px'}, 250, 'easeInOutCubic', () => {this.isAnimating = false; this.domMarker().css('top', 'auto')} );
 	};	
 
 	showBigSize() 

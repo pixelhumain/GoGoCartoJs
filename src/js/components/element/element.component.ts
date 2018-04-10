@@ -27,7 +27,7 @@ export class ElementComponent
       rootCategoriesValues = this.element.modifiedElement.getRootCategoriesValues();
     else
       rootCategoriesValues = this.element.getRootCategoriesValues();
-    console.log(rootCategoriesValues);
+    
     let html = App.templateModule.render('element', 
     {
       element : this.element, 
@@ -44,7 +44,8 @@ export class ElementComponent
       isIframe : App.isIframe,
       isMapMode : App.mode == AppModes.Map,
       config : App.config,
-      smallWidth : App.mode == AppModes.Map && App.infoBarComponent.isDisplayedAside()
+      smallWidth : App.mode == AppModes.Map && App.infoBarComponent.isDisplayedAside(),
+      allowedStamps : App.stampModule.allowedStamps
     });
           
     return html;
