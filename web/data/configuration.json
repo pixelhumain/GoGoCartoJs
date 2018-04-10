@@ -4,7 +4,7 @@
     "taxonomy": "https://semantic-bus.org/data/api/TaxonomiePWA",
     "elementsCompactApiUrl": "http://semantic-bus.org/data/api/PWA_Bounds_Compact",
     "elementByIdUrl": "http://semantic-bus.org/data/api/PWA_One?id={ID}",
-    "requestByBounds": true,
+    "requestByBounds": true
   },
   "menu": 
   { 
