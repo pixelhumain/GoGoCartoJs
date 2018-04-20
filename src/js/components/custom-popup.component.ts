@@ -21,7 +21,7 @@ export class CustomPopupComponent
   {
     this.options = App.config.features.customPopup.options;
     console.log("cookie", this.getCookieId(), Cookies.readCookie(this.getCookieId()))
-    if (!this.options.showOnlyOnce || !Cookies.readCookie(this.getCookieId())) this.show();
+    if ((!this.options.showOnlyOnce || !Cookies.readCookie(this.getCookieId())) && this.options.text.length > 0) this.show();
     $('#gogo-custom-popup #btn-close-custom-popup').click( () => this.hide());
   }
 
