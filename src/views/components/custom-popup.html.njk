@@ -1,0 +1,8 @@
+{% if config.isFeatureActivated('customPopup') %}
+  <div id="gogo-custom-popup" class="gogo-bg-neutral-dark" style="display:none;">
+    <p>
+      {{ config.features.customPopup.options.text|safe }}
+      <span class="icon gogo-icon-close gogo-h-primary" id="btn-close-custom-popup"></span>
+    </p>    
+  </div>
+{% endif %}

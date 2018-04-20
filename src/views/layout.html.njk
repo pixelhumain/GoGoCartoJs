@@ -19,7 +19,7 @@
       {% import 'components/spinner-loader.html.njk' as spinnerLoader%}
       {{ spinnerLoader.create('directory-spinner-loader') }}  
 
-       {% include 'components/search-bar/search-results-header.html.njk' %}
+      {% include 'components/search-bar/search-results-header.html.njk' %}
 
       <div id="directory-content-map" style="display:none"> 
         {% include 'components/map/map.html.njk' %}       
@@ -33,6 +33,8 @@
       </div>
 
       {% include 'components/gogo-controls.html.njk' %}
+
+      {% include 'components/custom-popup.html.njk' %}
 
       {# For mobile, search bar in displayed on top of other components in this overlay
       instead of inside the directory menu #}

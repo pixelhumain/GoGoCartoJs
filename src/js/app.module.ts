@@ -53,6 +53,7 @@ import { GoGoControlComponent } from "./components/gogo-controls.component";
 import { MapComponent } from "./components/map/map.component";
 import { MapControlsComponent } from "./components/map/map-controls.component";
 import { DirectionsComponent } from "./components/map/directions.component";
+import { CustomPopupComponent } from "./components/custom-popup.component";
 
 // OTHERS
 import { GoGoConfig } from "./classes/config/gogo-config.class";
@@ -116,6 +117,7 @@ export class AppModule
 	gogoControlComponent = new GoGoControlComponent();	
 	directionsComponent = new DirectionsComponent();
 	mapControlsComponent = new MapControlsComponent();
+	customPopupComponent = new CustomPopupComponent();
 
 	constructor($config : any, $isIframe = false, $loadFullTaxonomy = true, $request = {})
 	{

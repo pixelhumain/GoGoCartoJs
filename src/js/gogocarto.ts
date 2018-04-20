@@ -119,6 +119,7 @@ export class GoGoCartoModule
 			App.gogoControlComponent.initialize();
 			App.directionsComponent.initialize();	
 			App.mapControlsComponent.initialize();
+			App.customPopupComponent.initialize();
 			
 			App.component.initialize();		
 			

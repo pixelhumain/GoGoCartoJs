@@ -109,6 +109,9 @@ export class GoGoConfig
     moderation: new GoGoFeature(),
     stamp:      new GoGoFeature(),
     directModeration:        new GoGoFeature(),
+
+    // others
+    customPopup: new GoGoFeature(),
   };
   readonly security =
   {
