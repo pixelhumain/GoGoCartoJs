@@ -19,6 +19,7 @@ export class CustomPopupComponent
 
   initialize()
   {
+    if (!App.config.isFeatureAvailable('customPopup')) return;
     this.options = App.config.features.customPopup.options;
     console.log("cookie", this.getCookieId(), Cookies.readCookie(this.getCookieId()))
     if ((!this.options.showOnlyOnce || !Cookies.readCookie(this.getCookieId())) && this.options.text.length > 0) this.show();
