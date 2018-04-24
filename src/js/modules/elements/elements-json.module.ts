@@ -91,9 +91,9 @@ export class ElementsJsonModule
   {
     elementList.forEach( (e, index) =>  {
       let id = isFullRepresentation ? e.id || e["@id"] : e[0]; // in compact way, id is the first element of an array
-      if (!id) id = this.elementsCreatedCount++;
+      if (!id || typeof id != "string") id = "generated" + this.elementsCreatedCount++;
       else id = parseUriId(id);
-      e.id = id;      
+      e.id = id;
     });
   }
 }

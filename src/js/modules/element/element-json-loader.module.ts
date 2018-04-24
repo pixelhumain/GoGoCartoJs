@@ -17,7 +17,7 @@ export class ElementJsonParserModule
 
   private loadFromCompactJson(elementJson : any, element : Element | ElementBase)
   {
-    element.id = elementJson[0];      
+    element.id = elementJson.id; // the element has been modified before to fixs bad ids     
     element.name = elementJson[1];
     element.position = L.latLng(elementJson[2], elementJson[3]);     
     App.elementOptionValuesModule.createOptionValues(elementJson[4], element);   
