@@ -90,7 +90,7 @@ export class AjaxModule
 		let dataRequest : any = { 
 															bounds : boundsResult.boundsString, 
 															boundsJson : JSON.stringify(boundsResult.boundsJson),
-															mainOptionId : App.currMainId, 
+															categories : App.currMainId != "all" ? [App.currMainId] : null,
 															fullRepresentation : getFullRepresentation, 
 															ontology : getFullRepresentation ? 'gogofull' : 'gogocompact',
 															stampsIds : App.request.stampsIds
