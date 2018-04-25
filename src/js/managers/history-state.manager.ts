@@ -92,7 +92,7 @@ export class HistoryStateManager
       }      
     }
 
-    if (!historystate.viewport && !historystate.address && App.config.data.retrieveElementsByApi) {
+    if (!historystate.viewport && !historystate.address && App.config.data.retrieveElementsByApi && historystate.state != AppStates.ShowElementAlone) {
       console.log("fit default bounds no viewport no address");
       App.mapComponent.fitDefaultBounds();
     } 
