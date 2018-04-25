@@ -28,6 +28,7 @@ export class AjaxModule
 	isRetrievingElements : boolean = false;
 
 	currElementIdRetrieving : number;
+	currBoundsRetrieving : L.LatLngBounds[];
 
 	requestWaitingToBeExecuted : boolean = false;
 	waitingRequestFullRepresentation : boolean = null;
@@ -81,6 +82,9 @@ export class AjaxModule
 
 	getElementsInBounds($bounds : L.LatLngBounds[], getFullRepresentation : boolean = false, expectedFilledBounds : L.LatLngBounds)
 	{
+		if (this.currBoundsRetrieving && $bounds[0].equals(this.currBoundsRetrieving[0])) return;		
+		this.currBoundsRetrieving = $bounds;
+
 		// if invalid location we abort
 		if (!$bounds || $bounds.length == 0 || !$bounds[0]) { return; }
 
