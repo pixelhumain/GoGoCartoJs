@@ -182,7 +182,7 @@ export class MapComponent
 	panToLocation(location : L.LatLng, zoom?, animate : boolean = true)
 	{
 		zoom = zoom || this.getZoom() || 12;
-		console.log("panTolocation", location);
+		// console.log("panTolocation", location);
 
 		/*if (this.isMapLoaded && animate) this.map_.flyTo(location, zoom);
 		else*/ this.map_.setView(location, zoom);

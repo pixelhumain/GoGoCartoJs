@@ -417,7 +417,7 @@ if (function(a) {
     }, a.OpenStreetMapProvider.prototype.mapToGeocoded = function(b) {
         var c = new a.Geocoded();
         if (0 === b.length) return null;
-        console.log("Initial Geocode result", b);
+        // console.log("Initial Geocode result", b);
         c.latitude = 1 * b.lat, c.longitude = 1 * b.lon, 
         c.bounds = [ parseFloat(b.boundingbox[0]), parseFloat(b.boundingbox[2]), parseFloat(b.boundingbox[1]), parseFloat(b.boundingbox[3]) ], 
         c.streetNumber = void 0 !== b.address.house_number ? b.address.house_number : void 0, 
