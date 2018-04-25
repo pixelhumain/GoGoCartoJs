@@ -212,3 +212,6 @@
 .gogo-icon-stamp-2:before {
   content: "\38";
 }
+.gogo-icon-communs:before {
+  content: "\34";
+}
