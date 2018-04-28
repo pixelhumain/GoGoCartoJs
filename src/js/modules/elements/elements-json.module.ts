@@ -30,7 +30,7 @@ export class ElementsJsonModule
     let elementsConverted : Element[] = [];
     let start = new Date().getTime();
     
-    this.cheksIdsAndCreateOnesIfNeeded(elementList, isFullRepresentation);
+    this.cheksIdsAndCreateOnesIfNeeded(elementList);
     
     let newElementsJson = elementList.filter((obj) => App.elementsModule.everyElementsId.indexOf(obj.id) < 0 );
     let elementsToUpdateJson = [];
@@ -87,10 +87,10 @@ export class ElementsJsonModule
   }
 
   // Fixing missing Ids, or convert URI ids as standard Ids
-  cheksIdsAndCreateOnesIfNeeded(elementList, isFullRepresentation)
+  cheksIdsAndCreateOnesIfNeeded(elementList)
   {
     elementList.forEach( (e, index) =>  {
-      let id = isFullRepresentation ? e.id || e["@id"] : e[0]; // in compact way, id is the first element of an array
+      let id = e[0] || e.id || e["@id"]; // in compact way, id is the first element of an array
       if (!id || typeof id != "string") id = "generated" + this.elementsCreatedCount++;
       else id = parseUriId(id);
       e.id = id;
