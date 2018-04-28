@@ -40,13 +40,12 @@ export class ElementDiffModule
     return display.innerHTML;
   }
 
-  getDiffOptionValues(optionValues, newOptionValues)
+  getDiffOptionValues(optionValues : OptionValue[], newOptionValues : OptionValue[])
   {
-    optionValues = optionValues.map( (obj) => new OptionValue(obj));
-    newOptionValues = newOptionValues.map( (obj) => new OptionValue(obj));
     let diffOptionsValues = [];
     let newOVIds = newOptionValues.map((obj) => obj.optionId);
     let oldOVIds = optionValues.map((obj) => obj.optionId);
+
     for(let ov of optionValues)
     {
       if (newOVIds.indexOf(ov.optionId) == -1)
@@ -88,6 +87,7 @@ export class ElementDiffModule
       }
       diffOptionsValues.push(newOv);
     }
+
     return diffOptionsValues;
   }
 }

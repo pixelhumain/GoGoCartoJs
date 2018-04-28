@@ -37,18 +37,21 @@ export class ElementJsonParserModule
     element.status = elementJson.status == undefined ? 1 : elementJson.status;
     element.moderationState = elementJson.moderationState || 0;
 
-    // update createOptionValue vene if element already exist
-    App.elementOptionValuesModule.createOptionValues(elementJson.categories || elementJson.taxonomy || elementJson.tags || elementJson.optionValues, element);
-    if (elementJson.categoriesDescriptions)
-      App.elementOptionValuesModule.updateOptionsWithDescription(element, elementJson.categoriesDescriptions);
+    this.createOptionsValues(elementJson, element);
 
-    element.stamps = elementJson.stamps || [];
+    element.stamps = elementJson.stamps || [];    
 
-    if(elementJson.modifiedElement) 
+    if(elementJson.modifiedElement && element.status != -5) 
     {
-      element.modifiedElement = new ElementBase(elementJson.modifiedElement);
-      let diffOptionValues = App.elementDiffModule.getDiffOptionValues(elementJson.categories, elementJson.modifiedElement.categories);
-      App.elementOptionValuesModule.createOptionValues(diffOptionValues, element.modifiedElement);   
+      let modifiedElement = new ElementBase(elementJson.modifiedElement);
+      
+      this.createOptionsValues(elementJson.modifiedElement, modifiedElement);
+      
+      // calcul and store diff optionsValues in modified element
+      let diffOptionValues = App.elementDiffModule.getDiffOptionValues(element.optionsValues, modifiedElement.optionsValues);
+      modifiedElement.optionsValues = diffOptionValues;
+
+      element.modifiedElement = modifiedElement;
     }
     
     element.description = elementJson.description || elementJson.abstract || elementJson.label && elementJson.label["@value"];
@@ -81,6 +84,13 @@ export class ElementJsonParserModule
     element.searchScore = elementJson.searchScore;
 
     element.isFullyLoaded = true
+  }
+
+  private createOptionsValues(elementJson : any, element : Element | ElementBase)
+  {
+    App.elementOptionValuesModule.createOptionValues(elementJson.categories || elementJson.taxonomy || elementJson.tags || elementJson.optionValues, element);
+    if (elementJson.categoriesDescriptions)
+      App.elementOptionValuesModule.updateOptionsWithDescription(element, elementJson.categoriesDescriptions);
   }
 
   private createObjectArrayFromJson(klass, elementsJson)

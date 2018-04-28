@@ -8,6 +8,7 @@ export class OptionValue
 	optionId : any;
 	index : number;
 	description : string;
+	diff : string; // use to compare with modified optionValue. Values cna be "removed", "added", or "equals"
 	option_ : Option = null;
 	isFilledByFilters : boolean = true;
 
@@ -39,7 +40,8 @@ export class OptionValue
 				this.index = $key;
 				this.description = $optionValueJson.description || '';
 			}			
-		}		
+		}	
+		this.diff = $optionValueJson.diff;	
 	}
 
 	get option() : Option
