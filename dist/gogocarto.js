@@ -29648,15 +29648,15 @@ t_2 += "' ></span>\n\t\t\t\t\t";
 ;
 }
 t_2 += "\n\n\t\t\t\t\t";
-t_2 += "\n\t\t\t\t\t<span class=\"option-name\">";
+t_2 += "\n\t\t\t\t\t<span class=\"option-name\">\n\t\t\t\t\t\t";
 t_2 += runtime.suppressValue((runtime.memberLookup((t_6),"nameShort")?runtime.memberLookup((t_6),"nameShort"):runtime.memberLookup((t_6),"name")), env.opts.autoescape);
-t_2 += "</span> \n\n\t\t\t\t\t";
-t_2 += "\n\t\t\t\t\t";
+t_2 += "\n\t\t\t\t\t\t";
+t_2 += "\n\t\t\t\t\t\t";
 if(runtime.contextOrFrameLookup(context, frame, "isSubcategories")) {
 t_2 += "<div class=\"arrow-after\"></div>";
 ;
 }
-t_2 += "\n\t\t\t\t\t\n\t\t\t\t</div>\t\t\t\t\n\n\t\t\t\t";
+t_2 += "\n\t\t\t\t\t</span> \t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t</div>\t\t\t\t\n\n\t\t\t\t";
 if(l_isCheckable) {
 t_2 += "\n\t\t\t\t\t";
 t_2 += "\n\t\t\t\t\t<div class=\"checkbox-wrapper\" data-option-id='";
@@ -29699,7 +29699,7 @@ frame.set("loop.first", t_9 === 0);
 frame.set("loop.last", t_9 === t_10 - 1);
 frame.set("loop.length", t_10);
 t_2 += "\n\t    \t\t";
-t_2 += runtime.suppressValue((lineno = 75, colno = 18, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "renderItem"), "renderItem", context, [t_12,true,l_isCheckable])), env.opts.autoescape);
+t_2 += runtime.suppressValue((lineno = 76, colno = 18, runtime.callWrap(runtime.contextOrFrameLookup(context, frame, "renderItem"), "renderItem", context, [t_12,true,l_isCheckable])), env.opts.autoescape);
 t_2 += "\n\t\t\t";
 ;
 }
@@ -29822,7 +29822,7 @@ output += "\n\t";
 if(runtime.memberLookup((runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"menu")),"showOnePanePerMainOption")) {
 output += "\t\t\n\t\t<div class=\"main-categories gogo-bg-neutral-dark custom-scroll-bar-light\" ";
 output += runtime.suppressValue((runtime.contextOrFrameLookup(context, frame, "fullTaxonomy")?"":"style=\"display:none\""), env.opts.autoescape);
-output += ">\n\n\t\t\t<div class=\"icon main-gogo-icon-background gogo-bg-neutral\" id=\"active-main-option-background\"></div>\n\n\t\t\t<div class=\"icon main-icon active gogo-icon-users gogo-neutral gogo-h-neutral-light\" id=\"main-option-gogo-icon-all\" data-option-id=\"all\">\n\t\t\t\t<div class=\"main-option-tooltip gogo-bg-neutral-dark-transparent\">Tous les ";
+output += ">\n\n\t\t\t<div class=\"icon main-gogo-icon-background gogo-bg-neutral\" id=\"active-main-option-background\"></div>\n\n\t\t\t<div class=\"icon main-icon active\" id=\"main-option-gogo-icon-all\" data-option-id=\"all\">\n\t\t\t\t<div class=\"main-icon-text\">Tous</div>\n\t\t\t\t<div class=\"main-option-tooltip gogo-bg-neutral-dark-transparent\">Tous les ";
 output += runtime.suppressValue(runtime.memberLookup((runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"text")),"elementPlural"), env.opts.autoescape);
 output += "</div>\n\t\t\t</div> \n\t\t\t\n\t\t\t";
 output += "\n\t\t\t";
@@ -29874,7 +29874,7 @@ t_5.getExported(function(t_7,t_5) {
 if(t_7) { cb(t_7); return; }
 context.setVariable("categoryRenderer", t_5);
 output += "\n\t\t\t\t\t";
-output += runtime.suppressValue((lineno = 34, colno = 33, runtime.callWrap(runtime.memberLookup((t_5),"renderItem"), "categoryRenderer[\"renderItem\"]", context, [runtime.contextOrFrameLookup(context, frame, "mainCategory"),!runtime.memberLookup((runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"menu")),"showOnePanePerMainOption"),runtime.memberLookup((runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"menu")),"showCheckboxForMainFilterPane")])), env.opts.autoescape);
+output += runtime.suppressValue((lineno = 35, colno = 33, runtime.callWrap(runtime.memberLookup((t_5),"renderItem"), "categoryRenderer[\"renderItem\"]", context, [runtime.contextOrFrameLookup(context, frame, "mainCategory"),!runtime.memberLookup((runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"menu")),"showOnePanePerMainOption"),runtime.memberLookup((runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"menu")),"showCheckboxForMainFilterPane")])), env.opts.autoescape);
 output += "\n\t\t\t\t</div>\n\n\t\t\t\t";
 output += "\n\t\t\t\t";
 if(runtime.memberLookup((runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"menu")),"showOnePanePerMainOption")) {
@@ -29909,7 +29909,7 @@ frame.set("loop.first", t_12 === 0);
 frame.set("loop.last", t_12 === t_13 - 1);
 frame.set("loop.length", t_13);
 output += "\n\t\t\t\t\t\t\t\t";
-output += runtime.suppressValue((lineno = 44, colno = 36, runtime.callWrap(runtime.memberLookup((t_5),"renderItem"), "categoryRenderer[\"renderItem\"]", context, [t_15,true,runtime.memberLookup((runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"menu")),"showCheckboxForSubFilterPane")])), env.opts.autoescape);
+output += runtime.suppressValue((lineno = 45, colno = 36, runtime.callWrap(runtime.memberLookup((t_5),"renderItem"), "categoryRenderer[\"renderItem\"]", context, [t_15,true,runtime.memberLookup((runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"menu")),"showCheckboxForSubFilterPane")])), env.opts.autoescape);
 output += " \n\t\t\t\t\t\t\t";
 ;
 }
@@ -29925,10 +29925,10 @@ output += "\n\t\t\t\t";
 }
 output += "\n\n\t\t\t\t";
 output += "\n\t\t\t\t<div id=\"open-hours-filter\" class=\"\" style=\"display:none\">\t\t\n\t\t\t\t\t";
-output += runtime.suppressValue((lineno = 54, colno = 33, runtime.callWrap(runtime.memberLookup((t_5),"renderItem"), "categoryRenderer[\"renderItem\"]", context, [runtime.contextOrFrameLookup(context, frame, "openHoursCategory"),false,runtime.memberLookup((runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"menu")),"showCheckboxForSubFilterPane")])), env.opts.autoescape);
+output += runtime.suppressValue((lineno = 55, colno = 33, runtime.callWrap(runtime.memberLookup((t_5),"renderItem"), "categoryRenderer[\"renderItem\"]", context, [runtime.contextOrFrameLookup(context, frame, "openHoursCategory"),false,runtime.memberLookup((runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"menu")),"showCheckboxForSubFilterPane")])), env.opts.autoescape);
 output += " \n\t\t\t\t</div> \n\n\t\t\t\t";
 var t_16;
-t_16 = (lineno = 57, colno = 52, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"isFeatureAvailable"), "config[\"isFeatureAvailable\"]", context, ["pending"]));
+t_16 = (lineno = 58, colno = 52, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"isFeatureAvailable"), "config[\"isFeatureAvailable\"]", context, ["pending"]));
 frame.set("pendingIsActive", t_16, true);
 if(frame.topLevel) {
 context.setVariable("pendingIsActive", t_16);
@@ -29938,7 +29938,7 @@ context.addExport("pendingIsActive", t_16);
 }
 output += "\n\t\t\t\t";
 var t_17;
-t_17 = (lineno = 58, colno = 53, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"isFeatureAvailable"), "config[\"isFeatureAvailable\"]", context, ["favorite"]));
+t_17 = (lineno = 59, colno = 53, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"isFeatureAvailable"), "config[\"isFeatureAvailable\"]", context, ["favorite"]));
 frame.set("favoriteIsActive", t_17, true);
 if(frame.topLevel) {
 context.setVariable("favoriteIsActive", t_17);
@@ -29948,7 +29948,7 @@ context.addExport("favoriteIsActive", t_17);
 }
 output += "\n\t\t\t\t";
 var t_18;
-t_18 = (lineno = 59, colno = 55, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"isFeatureAvailable"), "config[\"isFeatureAvailable\"]", context, ["moderation"]));
+t_18 = (lineno = 60, colno = 55, runtime.callWrap(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "config")),"isFeatureAvailable"), "config[\"isFeatureAvailable\"]", context, ["moderation"]));
 frame.set("moderationIsActive", t_18, true);
 if(frame.topLevel) {
 context.setVariable("moderationIsActive", t_18);
