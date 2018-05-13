@@ -50,10 +50,11 @@
 					{% endif %}
 
 					{# --- NAME ---- #}
-					<span class="option-name">{{  option.nameShort if option.nameShort else option.name }}</span> 
-
-					{# --- ARROW COLAPSIBLE ---- #}
-					{% if isSubcategories %}<div class="arrow-after"></div>{% endif %}
+					<span class="option-name">
+						{{  option.nameShort if option.nameShort else option.name }}
+						{# --- ARROW COLAPSIBLE ---- #}
+						{% if isSubcategories %}<div class="arrow-after"></div>{% endif %}
+					</span> 					
 					
 				</div>				
 
