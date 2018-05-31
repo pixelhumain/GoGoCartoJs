@@ -25,6 +25,14 @@
                "showOnlyOnce": false,
                "id": 4
         }
-     }
+     },
+    "listMode": {},
+    "searchPlace": { },
+    "searchGeolocate": {},
+    "favorite": {},
+    "share": {},
+    "directions": {},           
+    "layers": {},
+    "mapdefaultview": {}
   }
 }
