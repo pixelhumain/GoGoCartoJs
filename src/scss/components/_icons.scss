@@ -17,6 +17,13 @@
 	color: #DFDFDF;
 }
 
+#directory-menu .main-categories .icon.main-icon.fa 
+{
+  font-size: 1.2rem;
+
+  &:before { position: relative; left: 0; top: 0; }
+}
+
 .icon.fa 
 {
   padding-top: .5rem;
@@ -38,6 +45,6 @@
   padding-top: .7rem;
   width: 1.5rem;
   text-align: center;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 
