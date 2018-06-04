@@ -32,7 +32,7 @@
         <span class="gogo-icon-moderation"></span>
         <span class="text">{{ moderationStates[element.moderationState] }}</span>
         {% if config.isFeatureAvailable('directModeration') %}
-          {% if element.moderationState == ElementModerationState.ReportsSubmitted %} 
+          {% if element.moderationState in [ElementModerationState.ReportsSubmitted, ElementModerationState.PossibleDuplicate]  %} 
             <span class="mark-as-moderated-btn btn action-btn waves-effect waves-light">Marquer comme résolu</span>
             <input type="text" class="moderation-input-comment" placeholder="Commentaire pour la modération"/>
           {% endif %}

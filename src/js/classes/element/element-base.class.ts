@@ -21,7 +21,8 @@ export enum ElementModerationState
   NotNeeded = 0,
   ReportsSubmitted = 1,
   VotesConflicts = 2, 
-  PendingForTooLong = 3     
+  PendingForTooLong = 3,
+  PossibleDuplicate = 4  
 }
 
 export class ElementBase
