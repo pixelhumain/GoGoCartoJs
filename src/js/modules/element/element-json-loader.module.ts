@@ -130,10 +130,10 @@ export class ElementJsonParserModule
         element.longDescription = result.second;
       }
 
-      if (element.longDescription.length > 600) {
-        let result = splitLongText(element.longDescription, 500, 100);
-        element.longDescriptionMore = result.first;
-        element.longDescription = result.second;      
+      if (element.longDescription.length > 500) {
+        let result = splitLongText(element.longDescription, 400, 100);
+        element.longDescription = result.first; 
+        element.longDescriptionMore = result.second;             
       }        
     }
   }

@@ -15,5 +15,24 @@
   "map":
   {
     "saveTileLayerInCookies" : true
+  },
+  "features":
+  {
+    "customPopup": {  
+       "inIframe": true, 
+       "options": { 
+               "text": "Cette carte est un <strong>prototype</strong>, la carte réelle sortira courant septembre 2018. Merci de diffuser ce site avec modération ;) <a href='#'>Lien vers un pad</a>",
+               "showOnlyOnce": false,
+               "id": 4
+        }
+     },
+    "listMode": {},
+    "searchPlace": { },
+    "searchGeolocate": {},
+    "favorite": {},
+    "share": {},
+    "directions": {},           
+    "layers": {},
+    "mapdefaultview": {}
   }
 }
