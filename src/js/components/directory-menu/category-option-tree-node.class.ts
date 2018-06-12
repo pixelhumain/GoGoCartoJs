@@ -17,7 +17,7 @@ export enum CategoryOptionTreeNodeType
 */
 export class CategoryOptionTreeNode 
 {
-	id : number;
+	id : any;
 	name : string;
 
 	children : CategoryOptionTreeNode[] = [];

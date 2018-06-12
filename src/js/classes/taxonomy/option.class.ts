@@ -29,7 +29,7 @@ export class Option extends CategoryOptionTreeNode
 
 		this.name = $optionJson.name;
 		this.nameShort = $optionJson.nameShort || this.name;
-		this.id = ('id' in $optionJson) ? $optionJson.id : this.nameShort;
+		this.id = ('id' in $optionJson) ? '' + $optionJson.id : this.nameShort;
 		this.intId = typeof $optionJson.id == 'number' ? $optionJson.id : $optionJson.intId;
 		this.color = $optionJson.color;
 		this.softColor = $optionJson.softColor || this.color;

@@ -1,4 +1,4 @@
-import { Element, ElementBase, ElementStatus, PostalAddress } from "../../classes/classes";
+import { Element, ElementBase, ElementStatus, PostalAddress, ElementUrl } from "../../classes/classes";
 import { capitalize, slugify, splitLongText } from "../../utils/string-helpers";
 import { App } from "../../gogocarto";
 declare var $, L;
@@ -54,7 +54,7 @@ export class ElementJsonParserModule
       element.modifiedElement = modifiedElement;
     }
     
-    element.description = elementJson.description || elementJson.abstract || elementJson.label && elementJson.label["@value"];
+    element.description = elementJson.description || elementJson.abstract;
     element.description = capitalize(element.description || '') ;
     element.longDescription = elementJson.descriptionMore;
     element.longDescription = capitalize(element.longDescription || ''); 
@@ -73,16 +73,25 @@ export class ElementJsonParserModule
     element.votes = elementJson.votes;
 
     element.commitment = elementJson.commitment || '';
-    element.telephone = App.elementFormaterModule.getFormatedTel(elementJson.telephone);  
-    element.website = elementJson.website || elementJson.site;
+    element.telephone = App.elementFormaterModule.getFormatedTel(elementJson.telephone);    
     element.email = elementJson.email || elementJson.contact || '';
     element.openHours = elementJson.openHours;
     App.elementFormaterModule.calculateFormatedOpenHours(element);
     element.openHoursMoreInfos = elementJson.openHoursMoreInfos || elementJson.openHoursString; 
     element.image = elementJson.image;
+    if (!element.image && elementJson.images && elementJson.images.length > 0) element.image = elementJson.images[0];
     
-    element.searchScore = elementJson.searchScore;
+    // urls
+    element.website = elementJson.website || elementJson.site;
+    let urlsJson = elementJson.urls || elementJson.url;
+    let urls : ElementUrl[] = [];
+    if      (typeof urlsJson == 'string') urls = [new ElementUrl(urlsJson)]; 
+    else if (Array.isArray(urlsJson))     for(let url of urlsJson) urls.push(new ElementUrl(url))   
+    else if (typeof urlsJson == 'object') for (let key in urlsJson) urls.push(new ElementUrl({type:key, value:urlsJson[key]}));
+    
+    element.urls = urls;
 
+    element.searchScore = elementJson.searchScore;
     element.isFullyLoaded = true
   }
 
@@ -131,7 +140,7 @@ export class ElementJsonParserModule
       }
 
       if (element.longDescription.length > 500) {
-        let result = splitLongText(element.longDescription, 400, 100);
+        let result = splitLongText(element.longDescription, 500, 100);
         element.longDescription = result.first; 
         element.longDescriptionMore = result.second;             
       }        

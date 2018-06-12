@@ -11,3 +11,4 @@ export { ViewPort } from "./map/viewport.class";
 export { Event } from "./event.class";
 export { PostalAddress } from './element/postal-address.class';
 export { Stamp } from './element/stamp.class';
+export { ElementUrl } from './element/element-url.class';

@@ -1,4 +1,4 @@
-import { Contribution, VoteReport, OptionValue, PostalAddress, Option, CategoryValue } from "../classes";
+import { Contribution, VoteReport, OptionValue, PostalAddress, Option, CategoryValue, ElementUrl } from "../classes";
 import { capitalize } from "../../utils/string-helpers";
 import { App } from "../../gogocarto";
 
@@ -46,6 +46,7 @@ export class ElementBase
   openHoursDays : string[] = [];
   openHoursMoreInfos : any;
   image : string;
+  urls : ElementUrl[];
   
   modifiedElement : ElementBase = null;
 
@@ -90,6 +91,7 @@ export class ElementBase
   getRootCategoriesValues() : CategoryValue[]
   {
     let optionTree = this.getOptionTree();
+    if (optionTree.children.length == 0) return [];
     if (optionTree.children[0].category.isRootCategory) return optionTree.children;
     return optionTree.children[0].children[0].children;
   }

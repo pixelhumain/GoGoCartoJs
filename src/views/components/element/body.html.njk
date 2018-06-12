@@ -45,6 +45,16 @@
     </span>
   {% endif %}
 
+  {% set urls = element.getProperty('urls') %}
+  {% if urls %}
+    {% for url in urls %}
+      <div class="col s12">
+        {#{% if url.type %}<span class="label">{{ url.type }}</span>{% endif %}#}
+        <a href="{{ url.value }}" target="_blank">{{  url.value|safe }}</a>
+      </div>
+    {% endfor %}
+  {% endif %}
+
 </div>
 <div class="info-bar-divider"></div>
 
