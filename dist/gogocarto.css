@@ -4368,6 +4368,12 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           padding-top: 2px; } }
     .gogo-load-css .gogocarto-container .icon.disabled {
       color: #DFDFDF; }
+    .gogo-load-css .gogocarto-container #directory-menu .main-categories .icon.main-icon.fa {
+      font-size: 1.2rem; }
+      .gogo-load-css .gogocarto-container #directory-menu .main-categories .icon.main-icon.fa:before {
+        position: relative;
+        left: 0;
+        top: 0; }
     .gogo-load-css .gogocarto-container .icon.fa {
       padding-top: .5rem;
       font-size: 1.3rem; }
@@ -4379,7 +4385,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       padding-top: .7rem;
       width: 1.5rem;
       text-align: center;
-      font-size: 1.3rem; }
+      font-size: 1.2rem; }
     .gogo-load-css .gogocarto-container .leaflet-marker-container {
       width: 0px !important;
       height: 0px !important;
@@ -5911,13 +5917,14 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
 
 @font-face {
   font-family: "gogocarto";
-  src:url("fonts/gogocarto.eot?version=1.7.9");
-  src:url("fonts/gogocarto.eot?version=1.7.9#iefix") format("embedded-opentype"),
-    url("fonts/gogocarto.woff?version=1.7.9") format("woff"),
-    url("fonts/gogocarto.ttf?version=1.7.9") format("truetype"),
-    url("fonts/gogocarto.svg?version=1.7.9#gogocarto") format("svg");
+  src:url("fonts/gogocarto.eot");
+  src:url("fonts/gogocarto.eot?#iefix") format("embedded-opentype"),
+    url("fonts/gogocarto.woff") format("woff"),
+    url("fonts/gogocarto.ttf") format("truetype"),
+    url("fonts/gogocarto.svg#gogocarto") format("svg");
   font-weight: normal;
   font-style: normal;
+
 }
 
 [data-icon]:before {
@@ -6122,4 +6129,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
 }
 .gogo-icon-communs:before {
   content: "\34";
+}
+.gogo-icon-printemps:before {
+  content: "\33";
 }
