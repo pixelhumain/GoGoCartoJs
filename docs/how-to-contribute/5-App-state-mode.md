@@ -6,7 +6,7 @@ Concept
 
 Almost any action made on the application is saved in the browser history. You can directly see that by watching the change of the URL while you are navigating
 
-For exemple :
+For example :
 - `index.html#/carte/@46.79,3.67,7z`
 - `index.html#/liste/paris`
 - `index.html#/liste/paris?cat=Habitat@+olb10455old`
@@ -26,9 +26,9 @@ The main properties to describe the current application state  (what we call an 
 
 In the code
 ------------
-There is a class called `HistoryState` and an `HistoryModule` to create and record of the current `HistoryState`
+There is an `HistoryState` class and an `HistoryModule` class to create and record the current `HistoryState`
 
-The `RouterModule` load the initial url and parse it to determine the proper `HistoryState`
+The `RouterModule` loads the initial URL and parses it to determine the proper `HistoryState`
 
 Mode, State and DataType are managed by a dedicated Manager (`src/js/managers/data-type.manager.ts` for example)
 

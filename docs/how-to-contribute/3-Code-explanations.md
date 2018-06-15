@@ -2,13 +2,13 @@ How does it Work?
 ================
 
 Instanciating a map with `goGoCarto('#gogocarto', myConfig)` will create a `GoGoCartoModule` which 
-1. Load the configuration
-2. Render the main template (layout) and insert it into the specified DOM
-3. Instanciate `AppModule`
-4. Initialize some modules and components
+1. Loads the configuration
+2. Renders the main template (layout) and inserts it into the specified DOM
+3. Instanciates `AppModule`
+4. Initializes some modules and components
 (see src/js/gogocarto.ts)
 
-`AppModule` is a kind of "Ring to rule them all". Every components, modules and managers belongs to `AppModule`.
+`AppModule` is a kind of "One ring to rule them all". Every components, modules and managers belongs to `AppModule`.
 AppModule is accessible everywhere in the code calling the `App` variable.
 For example, in the `MapComponent`, If I want to get the `BoundsModule`, I can do
 ```javascript
@@ -31,8 +31,7 @@ Some components, like `Marker` & `Element`, render their view on the fly.
 But most part of the components are more "static", meaning their are instanciated once, and the view 
 is rendered from the main layout.
 
-The `AppComponent` is a bit special. Its function is to handle the main layout, and mostly resize the size of components
-depending on the ones who are visible.
+The `AppComponent` is a bit special. Its purpose is to handle the main layout, and mostly resizes the visible components.
 
 (See UI layout on next page)
 
@@ -65,20 +64,20 @@ for map click, and then performs the transverse actions, like `App.infoBarCompon
 
 *Managers should listen to components or modules events. This is the preferred way.*
 
-But sometimes, to go faster, a component or a module call directly a Manager. 
-This is particulary the case for changing State, Mode or DataType (see below)
-For example, the `GoGoControlComponent` have a `ShowAsListButton`. When this button is clicked, the `GoGoControlComponent`
-will itself call `App.stateManager.setMode(AppModes.List);`
+But sometimes, to go faster, a component or a module can call directly a Manager.
+This is the case for changing State, Mode or DataType (see below).
+For example, the `GoGoControlComponent` has a `ShowAsListButton`. When this button is clicked, the `GoGoControlComponent`
+will call `App.stateManager.setMode(AppModes.List);`
 
 Also, when actions are very simple, a component can call an other one. 
-For example the `GoGoControlComponent` have a `ShowDirectoryMenuButton`. When this button is clicked, the `GoGoControlComponent`
-will itself call `App.directoryMenuComponent.show()`
+For example the `GoGoControlComponent` has a `ShowDirectoryMenuButton`. When this button is clicked, the `GoGoControlComponent`
+will call `App.directoryMenuComponent.show()`
 
 Classes (src/js/classes)
 --------
 This folder contains all the classes who describe an Object, but without being a UI Component. 
 For example a `TileLayer`, a `PostalAddress`
-Thoses classes should not have business logic inside. This is more a descriptive object, with getter, setters
+Thoses classes should not have business logic inside. This is more a descriptive object, with getters, setters
 and methods to initialize or do basic operations
 
 Continue with
