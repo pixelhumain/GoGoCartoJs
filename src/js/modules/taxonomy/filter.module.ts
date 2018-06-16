@@ -7,7 +7,7 @@
  * @license GNU GPL v3
  * @Last Modified time: 2016-12-13
  */
-import { Option, Element} from "../../classes/classes";
+import { Option, Element, ElementModerationState} from "../../classes/classes";
 
 import { App } from "../../gogocarto";
 declare var $ : any;
@@ -35,7 +35,7 @@ export class FilterModule
 
 		if (this.showOnlyFavorite_) return element.isFavorite;
 
-		if (this.showOnlyModeration_ && !element.needsModeration()) return false;
+		if (this.showOnlyModeration_ && (!element.needsModeration() || element.moderationState == ElementModerationState.PossibleDuplicate)) return false;
 
 		if (App.config.isFeatureAvailable('pending'))
 		{
