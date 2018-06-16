@@ -3504,7 +3504,7 @@ th {
 * @Author: Sebastian Castro
 * @Date:   2017-03-02 08:57:20
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2018-05-13 15:49:43
+* @Last Modified time: 2018-06-13 12:15:44
 */
     /*
 * @Author: Sebastian Castro
@@ -3930,7 +3930,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       .gogo-load-css .gogocarto-container .subcategorie-option-item .gogo-icon-name-wrapper {
         margin-right: 3rem; }
         .gogo-load-css .gogocarto-container .subcategorie-option-item .gogo-icon-name-wrapper .option-name {
-          position: absolute; }
+          position: absolute;
+          width: 100%; }
         .gogo-load-css .gogocarto-container .subcategorie-option-item .gogo-icon-name-wrapper:hover .arrow-after {
           border: solid 6px;
           margin-bottom: 1px; }
