@@ -10,6 +10,7 @@
 
 import { App } from "../../gogocarto";
 import { parseArrayNumberIntoString, parseStringIntoArrayNumber } from "../../utils/parser-string-number";
+import { slugify } from '../../utils/string-helpers';
 
 declare var $ : any;
 
@@ -47,7 +48,6 @@ export class FilterRoutingModule
 		}
 
 		let filters = parseStringIntoArrayNumber(filtersString);
-
 		//console.log('filters', filters);		
 		if (!App.loadFullTaxonomy && mainOptionSlug != 'all') $('.main-categories').hide();	
 
@@ -121,7 +121,7 @@ export class FilterRoutingModule
 			if (App.config.menu.showOnePanePerMainOption)
 			{
 				let mainOption = App.taxonomyModule.getMainOptionById(mainOptionId);
-				mainOptionName = mainOption.nameShort;
+				mainOptionName = slugify(mainOption.nameShort);
 				allOptions = mainOption.allChildrenOptions;
 			}
 			else

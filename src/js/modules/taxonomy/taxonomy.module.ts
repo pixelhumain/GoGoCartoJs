@@ -11,6 +11,7 @@
 import { AppModule, AppStates, AppModes } from "../../app.module";
 import { Option, Category } from "../../classes/classes";
 export { Option, Category } from "../../classes/classes";
+import { slugify } from '../../utils/string-helpers';
 import { App } from "../../gogocarto";
 declare let $ : any;
 
@@ -154,7 +155,7 @@ export class TaxonomyModule
 
 	getMainOptionBySlug($slug) : Option
 	{
-		return this.getMainOptions().filter( (option : Option) => option.nameShort == $slug).shift();
+		return this.getMainOptions().filter( (option : Option) => slugify(option.nameShort) == $slug).shift();
 	}
 
 	getMainOptionById ($id) : Option
