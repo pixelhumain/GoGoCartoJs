@@ -45,7 +45,7 @@ export class ElementBase
   formatedOpenHours;
   openHoursDays : string[] = [];
   openHoursMoreInfos : any;
-  image : string;
+  images : string[];
   urls : ElementUrl[];
   
   modifiedElement : ElementBase = null;

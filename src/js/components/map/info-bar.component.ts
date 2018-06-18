@@ -92,6 +92,45 @@ export class InfoBarComponent
 
 			$('#element-info').html(element.component.render());		
 			
+			let images;
+
+			if((images = $('.img-container img')).length > 1)
+			{
+				let imageOverlay = $('.img-overlay'),
+					indexLastImage = images.length - 1,
+					indexCurrentImage = 0,
+					currentImage = images.eq(indexCurrentImage);
+
+				// Hide all images
+				images.css('display', 'none');
+				// Display the current imahe
+				currentImage.css('display', 'block');
+
+				imageOverlay.append('<span id="img-button-prev" class="img-button">&lt;</span><span style="width:100%;"></span><span id="img-button-next" class="img-button">&gt;</span>');
+
+				$('#img-button-next').click(function(){ // image suivante
+			    indexCurrentImage++; // on incrémente le compteur
+			    if(indexCurrentImage>indexLastImage)
+			    {
+						indexCurrentImage = 0;
+			    }
+			    images.css('display', 'none'); // on cache les images
+			    currentImage = images.eq(indexCurrentImage); // on définit la nouvelle image
+			    currentImage.css('display', 'block'); // puis on l'affiche
+				});
+
+				$('#img-button-prev').click(function(){ // image précédente
+			    indexCurrentImage--; // on décrémente le compteur, puis on réalise la même chose que pour la fonction "suivante"
+			    if(indexCurrentImage<0)
+			    {
+						indexCurrentImage = indexLastImage;
+			    }
+			    images.css('display', 'none');
+			    currentImage = images.eq(indexCurrentImage);
+			    currentImage.css('display', 'block');
+				});
+			}
+
 			let domMenu = this.domMenu();
 
 			createListenersForElementMenu(domMenu);	
