@@ -96,38 +96,50 @@ export class InfoBarComponent
 
 			if((images = $('.img-container img')).length > 1)
 			{
-				let imageOverlay = $('.img-overlay'),
-					indexLastImage = images.length - 1,
+				let indexLastImage = images.length - 1,
 					indexCurrentImage = 0,
-					currentImage = images.eq(indexCurrentImage);
+					displayImage = function (imageIndex)
+					{
+						// Get the image of the given index
+						let currentImage = images.eq(imageIndex);
+						// Hide all images
+						images.css('display', 'none');
+						// Display the image of the given index
+						currentImage.css('display', 'block');
+					};
 
-				// Hide all images
-				images.css('display', 'none');
-				// Display the current imahe
-				currentImage.css('display', 'block');
+				displayImage(indexCurrentImage);
 
-				imageOverlay.append('<span id="img-button-prev" class="img-button">&lt;</span><span style="width:100%;"></span><span id="img-button-next" class="img-button">&gt;</span>');
+				// Add a previous and next button for navigating through the images to the overlay, for being able to click on them
+				$('.img-overlay').append('<span id="img-button-prev" class="img-button">&lt;</span><span id="img-link"></span><span id="img-button-next" class="img-button">&gt;</span>');
 
-				$('#img-button-next').click(function(){ // image suivante
-			    indexCurrentImage++; // on incrémente le compteur
-			    if(indexCurrentImage>indexLastImage)
-			    {
-						indexCurrentImage = 0;
-			    }
-			    images.css('display', 'none'); // on cache les images
-			    currentImage = images.eq(indexCurrentImage); // on définit la nouvelle image
-			    currentImage.css('display', 'block'); // puis on l'affiche
+				// When the user clicks the image, opens a new window with the image
+				$('#img-link').click(function()
+				{
+					let currentImage = images.eq(indexCurrentImage);
+					window.open(currentImage[0].src);
 				});
 
-				$('#img-button-prev').click(function(){ // image précédente
-			    indexCurrentImage--; // on décrémente le compteur, puis on réalise la même chose que pour la fonction "suivante"
+				$('#img-button-next').click(function() {
+			    indexCurrentImage++;
+			    // Check that the index is not greater than the last image index
+			    if(indexCurrentImage>indexLastImage)
+			    {
+						// Otherwise we put the first image index
+						indexCurrentImage = 0;
+			    }
+			    displayImage(indexCurrentImage);
+				});
+
+				$('#img-button-prev').click(function() {
+			    indexCurrentImage--;
+			    // Check that the index is not negative
 			    if(indexCurrentImage<0)
 			    {
+						// Otherwise we put the last image index
 						indexCurrentImage = indexLastImage;
 			    }
-			    images.css('display', 'none');
-			    currentImage = images.eq(indexCurrentImage);
-			    currentImage.css('display', 'block');
+			    displayImage(indexCurrentImage);
 				});
 			}
 
