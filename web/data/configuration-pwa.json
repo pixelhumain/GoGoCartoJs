@@ -3,7 +3,7 @@
   {
     "taxonomy": "https://semantic-bus.org/data/api/TaxonomiePWA",
     "elements": "https://semantic-bus.org/data/api/PWA_Bounds",
-    "elementsCompactApiUrl": "https://semantic-bus.org/data/api/PWA_Bounds_Compact",
+    "elementsCompactApiUrl": "https://semantic-bus.org/data/api/PWA_Bounds_Compact_Raw",
     "elementByIdUrl": "https://semantic-bus.org/data/api/PWA_One?id={ID}",
     "requestByBounds": true
   },
@@ -21,7 +21,7 @@
     "customPopup": {  
        "inIframe": true, 
        "options": { 
-               "text": "Cette carte est un <strong>prototype</strong>, la carte réelle sortira courant septembre 2018. Merci de diffuser ce site avec modération ;) <a href='#'>Lien vers un pad</a>",
+               "text": "Cette carte est un <strong>prototype</strong>, la carte réelle sortira courant septembre 2018. Merci de diffuser ce site avec modération ;)",
                "showOnlyOnce": false,
                "id": 4
         }
