@@ -7,6 +7,14 @@ export class ElementJsonParserModule
 {
   load(elementJson : any, element : Element | ElementBase)
   {
+    // patch to handle compactJson stored inside a "compactJson" property (use with Semantic Bus)
+    if (elementJson.compactJson) 
+    {
+      let id = elementJson.id;
+      elementJson = elementJson.compactJson;
+      elementJson.id = id;
+    }
+
     // when we get the compact json representation of the element from the server
     // the elementJson is a simple array with the more important element attribute
     if ($.isArray(elementJson) && elementJson.length >= 5)
@@ -22,7 +30,7 @@ export class ElementJsonParserModule
     element.position = L.latLng(elementJson[2], elementJson[3]);     
     App.elementOptionValuesModule.createOptionValues(elementJson[4], element);   
     element.status = elementJson.length >= 6 ? elementJson[5] : 1;  
-    element.moderationState = elementJson.length >= 7 ? elementJson[6] : 0;   
+    element.moderationState = elementJson.length >= 7 ? elementJson[6] : 0;
   }
 
   private loadFromFullJson(elementJson : any, element : Element | ElementBase)

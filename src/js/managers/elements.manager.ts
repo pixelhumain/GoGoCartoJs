@@ -47,9 +47,9 @@ export class ElementsManager
 
   handleNewElementsReceivedFromServer(result)
   {        
-    let elementsJson = result.data || result["@graph"]; 
+    let elementsJson = result.data || result["@graph"] || result; 
     let elements = App.elementsJsonModule.convertJsonElements(elementsJson, true, result.fullRepresentation);
-    //console.log("new Elements length", newElements.length);
+    // console.log("new Elements length", elements);
     
     // on add markerClusterGroup after first elements received
     if (elements.newElementsLength > 0 || App.mode == AppModes.List) 

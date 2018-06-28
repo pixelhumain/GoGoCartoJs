@@ -90,7 +90,7 @@ export class ElementsJsonModule
   cheksIdsAndCreateOnesIfNeeded(elementList)
   {
     elementList.forEach( (e, index) =>  {
-      let id = e[0] || e.id || e["@id"]; // in compact way, id is the first element of an array
+      let id = e[0] || e.id || e["@id"] || e.compactJson[0]; // in compact way, id is the first element of an array
       if (!id || typeof id != "string") id = "generated" + this.elementsCreatedCount++;
       else id = parseUriId(id);
       e.id = id;
