@@ -5725,6 +5725,9 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       position: absolute;
       width: 100%;
       top: 0; }
+    .gogo-load-css .gogocarto-container #element-info .tags-container {
+      margin-top: 13px;
+      margin-bottom: 8px; }
     .gogo-load-css .gogocarto-container #element-info .collapsible-body-main-container {
       height: 100%;
       width: 100%;
@@ -5737,6 +5740,11 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     .gogo-load-css .gogocarto-container .gogo-img {
       width: 100%;
       height: auto; }
+    .gogo-load-css .gogocarto-container .gogo-tag {
+      margin-right: 8px;
+      border-radius: 5px;
+      background-color: gainsboro;
+      padding: 4px 10px; }
     .gogo-load-css .gogocarto-container #modal-pick-address.modal, .gogo-load-css .gogocarto-container #modal-directions-fail.modal {
       position: absolute; }
       .gogo-load-css .gogocarto-container #modal-pick-address.modal .modal-footer, .gogo-load-css .gogocarto-container #modal-directions-fail.modal .modal-footer {
