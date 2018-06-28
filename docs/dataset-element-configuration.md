@@ -13,7 +13,7 @@ Here the basic attributes of an element
     "longitude":-0.0339
   },
 
-  "tags": [ 10427, 'Market' ],
+  "taxonomy": [ 10427, 'Market' ],
 
   "address": {
     "streetAddress":"5 rue Edmond Proust",
@@ -47,7 +47,7 @@ Title
 -----
 Title of the Element. displayed on marker hover, and on top of the Element info bar.
 
-Tags
+Taxonomy
 ----
 An array of Ids. The Ids can be number or string. Those Ids must be the same than the one given in the Taxonomy, for an element to be linked with various options
 

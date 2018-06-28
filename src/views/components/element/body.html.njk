@@ -64,6 +64,13 @@
   {% for mainCategoryValue in rootCategoriesValues %}
     {{ categoryRenderer.renderCategoryValue(mainCategoryValue) }}
   {% endfor %}
+
+  {% set tags = element.getProperty('tags') %}
+  {% if tags %}
+    <div class="col s12 tags-container">
+      {% for tag in tags %}<span class="gogo-tag">{{ tag }}</span>{% endfor %}
+    </div>
+  {% endif %}
 </div>
 
 

@@ -213,7 +213,7 @@
 
   			&.disabled { color: #9C9C9C !important; }
 			}
-      .category-wrapper .option-value { padding-left: .6rem; }
+      .category-wrapper .option-value { padding-left: .6rem; }      
 		}		
 	}
 }
@@ -328,6 +328,12 @@
     top: 0;    
   }
 
+  .tags-container 
+  {
+    margin-top: 13px;
+    margin-bottom: 8px;
+  }
+
   .collapsible-body-main-container
   {
     height: 100%;
@@ -349,7 +355,13 @@
   height: auto;
 }
 
-
+.gogo-tag 
+{
+  margin-right: 8px;
+  border-radius: 5px;
+  background-color: gainsboro;
+  padding: 4px 10px;
+}
 
 
 

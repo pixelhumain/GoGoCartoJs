@@ -10,6 +10,7 @@ var elements = [
     },
 
     "categories": [ 10427 ],
+    "tags" : ["Open Source", "Réutilisable", "Awesome!"],
 
     "address": {
       "streetAddress":"5 rue Edmond Proust",

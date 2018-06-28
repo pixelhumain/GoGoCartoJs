@@ -90,6 +90,7 @@ export class ElementJsonParserModule
     else if (typeof urlsJson == 'object') for (let key in urlsJson) urls.push(new ElementUrl({type:key, value:urlsJson[key]}));
     
     element.urls = urls;
+    element.tags = elementJson.tags;
 
     element.searchScore = elementJson.searchScore;
     element.isFullyLoaded = true
@@ -97,7 +98,7 @@ export class ElementJsonParserModule
 
   private createOptionsValues(elementJson : any, element : Element | ElementBase)
   {
-    App.elementOptionValuesModule.createOptionValues(elementJson.categories || elementJson.taxonomy || elementJson.tags || elementJson.optionValues, element);
+    App.elementOptionValuesModule.createOptionValues(elementJson.categories || elementJson.taxonomy || elementJson.optionValues, element);
     if (elementJson.categoriesDescriptions)
       App.elementOptionValuesModule.updateOptionsWithDescription(element, elementJson.categoriesDescriptions);
   }
