@@ -10,10 +10,10 @@ List Mode
 ![](images/features/list.png)
 ![](images/features/list-mobile.png)
 
-Search
+Searches
 ------
 
-Three search : search a place, search an elements, and geolocate
+Searches can be done for a place, for an element, or using geolocation
 
 ![](images/features/search.png)
 

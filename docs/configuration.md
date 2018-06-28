@@ -14,6 +14,7 @@ See [Taxonomy](taxonomy.md) and [Dataset](dataset.md) documentation.
   "requestByBounds": false
 },
 ```
+
 Menu
 ----
 ```javascript
@@ -43,9 +44,9 @@ General
   }
 ```
 If **activateHistoryStateAndRouting** is true, every action on GoGoCarto will update the url hash, and an history will be created.
-So anytime you can refresh the page and arrive on the same state, and you can use the browser "back" function to go to previous action
+It means you can refresh the page anytime and you will keep the same state. You can use the browser "back" function to go to the previous action
 
-Exple : http://gogocarto.fr#/fiche/Element-example/10m9/@46.662,-1.110,12z?cat=Education
+Example : http://gogocarto.fr#/fiche/Element-example/10m9/@46.662,-1.110,12z?cat=Education
 
 Infobar
 ------
@@ -59,7 +60,7 @@ InfoBar is the panel to display element informations, opened on marker click
 
 Custom **width** in pixel
 
-If **activate** to false, nothing happen on marker click, the info bar is not displayed
+If **activate** is set to false, nothing happens on marker click, the info bar is not displayed
 
 Texts
 ------
@@ -129,13 +130,13 @@ Please visit [Features Documentation](features.md) to discover in detail the fea
   "mapdefaultview": // restore viewport to default viewport
 
   "searchPlace": // Allow search for a place
-  "searchElements": // Allow search for elements (needs an distant API)
-  "searchGeolocate": // Adds geolocate button to geolocalize the user position
+  "searchElements": // Allow search for elements (needs a distant API)
+  "searchGeolocate": // Add geolocation button to geolocate the user position
 },
 ```
 
 If you don't provide any features config, a default set of basic config will be loaded. 
-If you provide a features config, only the features listed in there will be activated. To simply activate a feature, just add it on the list
+If you provide a features config, only the features listed in it will be available. To simply activate a feature, just add it on the list
 ```javascript
 "features": {
   "favorite": {}, // give empty object to activate the feature with default config
@@ -150,7 +151,7 @@ All the features can be configured with the following attributes
 "inIframe": default true
 ```
 **roles** : an array of the role who can access this feature. you can use your own roles names, for example ['anonymous', 'user', 'admin']. 
-**url** : the follwoing features needs an url to an API to work : edit, report, delete, sendMail, searchElements
+**url** : the following features need an URL to an API to work : edit, report, delete, sendMail, searchElements
 **inIframe** activate or not the feature when gogocarto is loaded in iframe
 
 Here an example of full custom features configuration
@@ -186,14 +187,14 @@ Security
 ------
 ```javascript
 "security": {
-  "userRoles": ["user"], // other exple : ["ROLE_ADMIN", "ROLE_USER"]
+  "userRoles": ["user"], // other examples : ["ROLE_ADMIN", "ROLE_USER"]
   "userEmail": "test@gt.gt",
   "hideMailsByShowingSendMailButton": true
 },
 ```
-**userRoles** is used to know is the current user can access different features.
+**userRoles** is used to know if the current user has access to different features.
 **userEmail** is used to prefill some interaction modals, like "report error", or "send mail".
-To set dynamically **userRole** and "userEmail", please check [How to interact with Component](usage.md)
+To set dynamically **userRole** and **userEmail**, please check [How to interact with Component](usage.md)
 
 **hideMailsByShowingSendMailButton** will prevent from displaying the email of the element. Instead a "sendMail" button is displayed, which will open a popup and send a request to your server for sending an email.
 

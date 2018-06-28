@@ -145,7 +145,8 @@ export class SearchBarComponent
 
 	showMobileSearchBar() { 
 		$('#search-overlay-mobile').fadeIn(250);
-		$('.search-bar-with-options-container').show(); 
+		$('.search-bar-with-options-container').show();
+		$('.search-bar').focus();
 		App.gogoControlComponent.hide(0);
 	}
 
@@ -158,7 +159,11 @@ export class SearchBarComponent
 
 	update() {
 		if (App.component.width() <= 600)
-			$('.search-bar-with-options-container').hide().appendTo('#search-overlay-mobile').addClass('mobile');
+		{
+			let mobileSearchBar = $('.search-bar-with-options-container');
+			if(mobileSearchBar.parent('#search-overlay-mobile').length!=1)
+				$('.search-bar-with-options-container').appendTo('#search-overlay-mobile').addClass('mobile');
+		}
 		else
 			$('.search-bar-with-options-container').removeClass('mobile').prependTo('.directory-menu-header').show();
 	}
