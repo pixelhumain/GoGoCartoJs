@@ -22,10 +22,6 @@ export class TaxonomyModule
 	options : Option[] = [];
 
 	mainCategory : Category;
-	openHoursCategory : Category;
-	defaultOpenHoursCategory : Category = new Category({ name: "Horaires d'ouverture"});
-
-	openHoursFiltersDays : string[] = [];
 
 	categoriesCreatedCount : number = 1;
 	optionsCreatedCount : number = 1;
@@ -36,7 +32,7 @@ export class TaxonomyModule
 		this.categories = [];
 	}
 
-	createTaxonomyFromJson(mainCatgeoryJson, openHoursCategoryJson)
+	createTaxonomyFromJson(mainCatgeoryJson)
 	{
 		let isSkosTaxonomy = mainCatgeoryJson['@graph'];
 		if (isSkosTaxonomy) mainCatgeoryJson = App.taxonomySkosModule.convertSkosIntoGoGoTaxonomy(mainCatgeoryJson);
@@ -47,13 +43,6 @@ export class TaxonomyModule
 		for(let option of this.mainCategory.children) option.isMainOption = true;
 
 		this.recursivelyCalculateParentsOptionIds(this.mainCategory);
-
-		// console.log(this.mainCategory);
-	
-		// not using openHours for now
-		// openHoursCategoryJson = openHoursCategoryJson || this.defaultOpenHoursCategory;
-		// this.openHoursCategory = this.recursivelyCreateCategoryAndOptions(openHoursCategoryJson);
-		// this.updateOpenHoursFilter();
 	}	
 
 	private recursivelyCreateCategoryAndOptions(categoryJson : any) : Category
@@ -118,17 +107,6 @@ export class TaxonomyModule
 				this.recursivelyCalculateParentsOptionIds(<Category>subcategory, <Option>option);
 			}			
 		}
-	}
-
-	updateOpenHoursFilter()
-	{
-		this.openHoursFiltersDays = [];
-		let option : any;
-		for(option of this.openHoursCategory.children)
-		{
-			if (option.isChecked) this.openHoursFiltersDays.push( option.name.toLowerCase());
-		}
-		//console.log("updateOpenHoursfilters", this.openHoursFiltersDays);
 	}
 
 	getMainOptions() : Option[]

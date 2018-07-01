@@ -51,11 +51,6 @@
 					{% endfor %}
 				{% endif %}
 
-				{# OPEN HOURS FILTER #}
-				<div id="open-hours-filter" class="" style="display:none">		
-					{{ categoryRenderer.renderItem(openHoursCategory, false, config.menu.showCheckboxForSubFilterPane) }} 
-				</div> 
-
 				{% set pendingIsActive = config.isFeatureAvailable('pending') %}
 				{% set favoriteIsActive = config.isFeatureAvailable('favorite') %}
 				{% set moderationIsActive = config.isFeatureAvailable('moderation') %}

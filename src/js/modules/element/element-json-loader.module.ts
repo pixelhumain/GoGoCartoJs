@@ -136,6 +136,8 @@ export class ElementJsonParserModule
     }
   }
 
+  // we don't want to display a very large description in the header, instead we split the description
+  // into smaller one that will be displayed on body
   private checkForSplitDescription(element : ElementBase)
   {
     if ( element.status != ElementStatus.PendingModification &&

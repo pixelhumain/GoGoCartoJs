@@ -7,21 +7,25 @@
     {# Icon #}
     <span class="element-main-icon icon {{ mainIcon }} colorAs {{pendingClass}} hideOnLargeScreen" option-id={{mainOptionToDisplay.colorOptionId}}></span>
        
-    {# Distance and Close Button #}
+    {# Close Button #}
     <span class="icon gogo-icon-close gogo-h-primary" id="btn-close-bandeau-detail"></span>            
 
     {# Name #}
     {{ element.getProperty('name')|safe }}
     {% if element.isDeleted() %}</br><u>(Cet élément a été refusé ou supprimé)</u>{% endif %}
 
+    {# Distance #}
     {% if showDistance and element.distance != null %}
       <span class="distance gogo-neutral">~ {{ element.distance if isMapMode else element.distanceFromBoundsCenter }} km</span>
     {% endif %}    
 
-    <span class="location gogo-neutral">
-      {% if element.address.postalCode %}<span class="postalCode">{{ element.address.postalCode }}</span>{% endif %}
-      {% if element.address.addressLocality %}<span class="city"> {{ element.address.addressLocality }}</span>{% endif %}
-    </span>
+    {# Short address (for list mode) #}
+    {% if element.address %}
+      <span class="location gogo-neutral">
+        {% if element.address.postalCode %}<span class="postalCode">{{ element.address.postalCode }}</span>{% endif %}
+        {% if element.address.addressLocality %}<span class="city"> {{ element.address.addressLocality }}</span>{% endif %}
+      </span>
+    {% endif %}
 
   </span>
   

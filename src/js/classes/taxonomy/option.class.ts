@@ -13,7 +13,6 @@ export class Option extends CategoryOptionTreeNode
 	icon : string;
 	useIconForMarker: boolean;
 	useColorForMarker : boolean;
-	showOpenHours : boolean;	
 	displayOption : boolean;
 	showExpanded : boolean;
   textHelper : string;
@@ -37,7 +36,6 @@ export class Option extends CategoryOptionTreeNode
 		this.textHelper = $optionJson.textHelper;
 		this.useIconForMarker = ('useIconForMarker' in $optionJson) ? $optionJson.useIconForMarker : !!this.icon;
 		this.useColorForMarker = ('useColorForMarker' in $optionJson) ? $optionJson.useColorForMarker : !!this.color;
-		this.showOpenHours = $optionJson.showOpenHours || false;
 		this.showExpanded = $optionJson.showExpanded || false;
 		this.displayOption = $optionJson.displayOption !== false;
 		this.isActive = ('isActive' in $optionJson) ? $optionJson.isActive : this.displayOption;

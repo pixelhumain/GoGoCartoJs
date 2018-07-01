@@ -84,42 +84,37 @@ export class CategoryOptionTreeNode
 
 	toggle(value : boolean = null, humanAction : boolean = true)
 	{		
-			let check;
-			if (value != null) check = value;
-			else check = !this.isChecked;
+		let check;
+		if (value != null) check = value;
+		else check = !this.isChecked;
 
-			if (this.isOption() && this.isPristine && humanAction)
-			{
-				this.recursivelyGetPristine(this).forEach( (node) => {
-					node.toggle(false, false);
-				});
-				// force check to true, becasue in pristine mode input is unchecked but option class is checked and not disabled
-				check = true;
-			}			
+		if (this.isOption() && this.isPristine && humanAction)
+		{
+			this.recursivelyGetPristine(this).forEach( (node) => {
+				node.toggle(false, false);
+			});
+			// force check to true, becasue in pristine mode input is unchecked but option class is checked and not disabled
+			check = true;
+		}			
 
-			this.setChecked(check);
-			this.setDisabled(!check);
+		this.setChecked(check);
+		this.setDisabled(!check);
 
-			if (!this.isMainOption || !App.config.menu.showOnePanePerMainOption) 
-			{
-				for (let child of this.children) child.toggle(check, false);
-			}
+		if (!this.isMainOption || !App.config.menu.showOnePanePerMainOption) 
+		{
+			for (let child of this.children) child.toggle(check, false);
+		}
 
-			if (this.mainOwnerId == 'openhours') App.taxonomyModule.updateOpenHoursFilter();
-
-			if(humanAction)
-			{
-				if (this.getOwner()) this.getOwner().updateState();
-				
-				//if (App.mode == AppModes.Map) App.elementsModule.updateElementsIcons(true);
-				
-				// delay the update so  it's not freezing the UI
-				setTimeout( () => {
-					App.elementsModule.updateElementsToDisplay(check, true);
-					App.historyModule.updateCurrState();
-				},200);
-				
-			}
+		if(humanAction)
+		{
+			if (this.getOwner()) this.getOwner().updateState();
+			
+			// delay the update so it's not freezing the UI
+			setTimeout( () => {
+				App.elementsModule.updateElementsToDisplay(check, true);
+				App.historyModule.updateCurrState();
+			},200);				
+		}
 	}
 
 	toggleVisibility(value : boolean, recursive : boolean = false)

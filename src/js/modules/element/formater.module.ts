@@ -26,20 +26,15 @@ export class ElementFormaterModule
   calculateFormatedOpenHours(element : ElementBase)
   {         
     element.formatedOpenHours = {};
-    element.openHoursDays = [];
     let new_key, new_key_translated, newDailySlot;
     for(let key in element.openHours)
     {
       new_key_translated = this.translateDayKey(key);        
       newDailySlot = this.formateDailyTimeSlot(element.openHours[key]);
       
-      if (newDailySlot)
-      {
-        element.formatedOpenHours[new_key_translated] = newDailySlot;
-        element.openHoursDays.push(new_key_translated);
-      }
+      if (newDailySlot) element.formatedOpenHours[new_key_translated] = newDailySlot;
     }
-  };
+  }
 
   getProperty(element : ElementBase, propertyName)
   {
@@ -76,12 +71,7 @@ export class ElementFormaterModule
 
   private formateDailyTimeSlot(dailySlot) 
   {    
-    if (dailySlot === null)
-    {    
-      //return 'fermé';
-      return null;
-    }
-    let result = '';
+    if (dailySlot === null) return null;
     return dailySlot.replace(/-/g, ' - ').replace(/,/g, ' et ');
   };   
 

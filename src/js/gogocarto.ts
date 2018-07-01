@@ -83,12 +83,11 @@ export class GoGoCartoModule
 		// only for debugging
 		this.app = App;				
 
-		App.taxonomyModule.createTaxonomyFromJson(taxonomy, options.openHours);
+		App.taxonomyModule.createTaxonomyFromJson(taxonomy);
 
 		let layout = App.templateModule.render('layout', 
 		{ 
 			mainCategory: App.taxonomyModule.mainCategory, 
-			openHoursCategory: options.openHours, 
 			isIframe: isIframe, 
 			fullTaxonomy: fullTaxonomy,
 			config: App.config,

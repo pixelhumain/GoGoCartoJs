@@ -193,15 +193,12 @@ export class FiltersComponent
     if (optionId == 'all')
     {
       $('#menu-subcategories-title').text("Tous les " + App.config.text.elementPlural);
-      $('#open-hours-filter').hide();
     }
     else
     {
       let mainOption = App.taxonomyModule.getMainOptionById(optionId);        
 
       $('#menu-subcategories-title').text(mainOption.name);
-      if (mainOption.showOpenHours) $('#open-hours-filter').show();
-      else $('#open-hours-filter').hide();
     }
 
     this.updateMainOptionBackground();

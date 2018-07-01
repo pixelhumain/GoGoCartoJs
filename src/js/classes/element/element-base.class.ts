@@ -28,22 +28,24 @@ export enum ElementModerationState
 export class ElementBase
 {
   id : string;
-  status : ElementStatus;
-  moderationState : ElementModerationState;
- 
   name : string;
   position : L.LatLng;
+
+  status : ElementStatus;
+  moderationState : ElementModerationState;
+   
   address : PostalAddress;
   description : string;
   longDescription: string;
   longDescriptionMore: string;
+  openHours : any;
+
   commitment : string;  
   telephone : string;
   website : string;
   email : string;
-  openHours : any;
+  
   formatedOpenHours;
-  openHoursDays : string[] = [];
   openHoursMoreInfos : any;
   image : string;
   urls : ElementUrl[];
