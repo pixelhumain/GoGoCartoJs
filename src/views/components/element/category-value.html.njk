@@ -2,7 +2,7 @@
 
 {% set activeChildrenCount = 0 %}
 {% for optionValue in categoryValue.children %}
-	{% if not optionValue.option_.disableInInfoBar %}
+	{% if optionValue.option.displayInInfoBar %}
 		{% set activeChildrenCount = activeChildrenCount + 1 %}
 	{% endif %}
 {% endfor %}	
@@ -13,25 +13,24 @@
 	<div class="category-wrapper">	
 {% endif %}
 
-{% if categoryValue.category.isRootCategory %}
+{% if categoryValue.category.isRootCategory or categoryValue.category.displayInInfoBar %}
 	<h3 class="category-name">{{ categoryValue.category.name }}</h3>
 {% endif %}
 
 {% for optionValue in categoryValue.children %}
 
-	{% if not optionValue.option_.disableInInfoBar %}
+	{% if optionValue.option.displayInInfoBar %}
 		{% set colWidth = 's6 m5' if categoryValue.category.enableDescription else 's12' %}
 	  <div class='row'>
 	    <span class="option-value col {{ colWidth }}">
 
 	    	{% set iconClass = optionValue.option.icon if optionValue.option.icon else 'gogo-icon-angle-right' %}	
 	    	{% set iconColorId = optionValue.option.id if optionValue.option.icon else '' %}	
-				{% if iconClass %}    
-					<span class="icon {{ iconClass }} colorAs" option-id={{ iconColorId }} ></span>
-				{% endif %}
 				
-	      <span class="option-name {{ optionValue.diff }}" option-id={{ optionValue.option.id }} >
-	      {{ optionValue.option.nameShort|capitalize }}</span> 
+				<span class="icon {{ iconClass }} colorAs" option-id={{ iconColorId }}></span>
+				
+	      <span class="option-name {{ optionValue.diff }}" option-id={{ optionValue.option.id }}>
+	      {{ optionValue.option.name }}</span> 
 
 	    </span>
 	    {% if categoryValue.category.enableDescription %}
@@ -41,15 +40,16 @@
   {% endif %}
 
   {# Render children #}
-	{% for subcategory in optionValue.children %}
-		{{ renderCategoryValue(subcategory) }}
-	{% endfor %} 
+  {% if optionValue.option.displayChildrenInInfoBar %}
+		{% for subcategory in optionValue.children %}
+			{{ renderCategoryValue(subcategory) }}
+		{% endfor %} 
+	{% endif %}
 	
 {% endfor %} 
 
-{% if wrapOptionsIntoCategoryContainer %}
-	<!-- div end for category-wrapper -->
-	</div>
+{% if wrapOptionsIntoCategoryContainer %}	
+	</div> <!-- div end for category-wrapper -->
 {% endif %}
 
 {% endmacro %}

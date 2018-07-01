@@ -49,13 +49,13 @@ export class Marker
 		let disableMarker = false;
 		let showMoreIcon = true;
 
-		let optionstoDisplay = element.getIconsToDisplay();
+		let optionsToDisplay = element.getIconsToDisplay();
 
 		let htmlMarker = App.templateModule.render('marker', 
 		{
 			element : element, 
-			mainOptionToDisplay: optionstoDisplay[0],
-			otherOptionsToDisplay: optionstoDisplay.slice(1), 
+			mainOptionToDisplay: optionsToDisplay[0],
+			otherOptionsToDisplay: optionsToDisplay.slice(1), 
 			showMoreIcon : showMoreIcon,
 			disableMarker : disableMarker,
 			pendingClass : element.isPending() && App.config.isFeatureAvailable('pending') ? 'pending' : '',

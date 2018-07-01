@@ -2,14 +2,12 @@
 <div class="category-wrapper">
 
 	{# ---- CATEGORY TITLE IF REQUIRED ----- #}
-	{% if category.displayCategoryName %}
+	{% if category.displayInMenu %}
 	<li class="subcategory-item {{  'expanded' if category.showExpanded else '' }} {{ 'unexpandable' if category.unexpandable }}" id="category-{{category.id}}">
 
-		{# --- ICON & NAME--- #}
+		{# --- NAME--- #}
 		<div class="name-wrapper {{ 'tooltipped' if not category.unexpandable }}" data-category-id='{{ category.id }}' data-position="right" data-delay="400" data-tooltip="Afficher/Masquer le détail" >		
-			<span class="name">
-				{{ category.name|capitalize }}		
-			</span>
+			<span class="name">{{ category.nameShort }}</span>
 			{% if not category.unexpandable %}<div class="arrow-after"></div>	{% endif %}
 		</div>
 
@@ -27,60 +25,57 @@
 
 	{# ---- CATEGORY LIST OPTIONS ----- #}
 	<div class="options-wrapper" {% if not category.showExpanded %} style="display:none"{% endif %}>
+		{% for option in category.options %} 
 
-	{% for option in category.options %} 
+			{% set isSubcategories = recursive and option.subcategories|length and option.displayChildrenInMenu %}
 
-		{% set isSubcategories = recursive and option.subcategories|length %}
+	    <li class="subcategorie-option-item row 
+	    					{{ 'option-collapsible' if isSubcategories}} {{ 'expanded' if option.showExpanded }} 
+	    					{{ 'unexpandable' if option.unexpandable }}
+	    					{{ 'tooltipped' if option.textHelper }}"  		
+	    		id="option-{{ option.id }}"
+	    		data-position="right" data-delay="700" data-tooltip="{{ option.textHelper | capitalize }}"
+	    		{% if not option.displayInMenu %} style="display:none"{% endif %}>
+	    	
+	    		{# --- ICON & NAME--- #}
+	    		<div class="gogo-icon-name-wrapper" data-option-id='{{ option.id }}'>
 
-    <li class="subcategorie-option-item row 
-    					{{ 'option-collapsible' if isSubcategories}} {{ 'expanded' if option.showExpanded }} 
-    					{{ 'tooltipped' if option.textHelper }}"  		
-    		id="option-{{ option.id }}"
-    		data-position="right" data-delay="700" data-tooltip="{{ option.textHelper | capitalize }}"
-    		{% if not option.displayOption %} style="display:none"{% endif %}>
-    	
-    		{# --- ICON & NAME--- #}
-    		<div class="gogo-icon-name-wrapper {#{{'tooltipped' if isSubcategories}}"#}" data-option-id='{{ option.id }}' 
-    					{#{% if isSubcategories %}data-position="right" data-delay="400" data-tooltip="Afficher/Masquer le détail"{% endif %}#}>
+						{# --- ICON ---- #}
+						{% set iconClass = option.icon if option.icon else ( 'gogo-icon-marker' if option.useColorForMarker else '') %}	
+						{% if iconClass %}    
+							<span class="icon {{ iconClass }} colorAs" option-id='{{ option.id }}' ></span>
+						{% endif %}
 
-					{# --- ICON ---- #}
-					{% set iconClass = option.icon if option.icon else ( 'gogo-icon-marker' if option.useColorForMarker else '') %}	
-					{% if iconClass %}    
-						<span class="icon {{ iconClass }} colorAs" option-id='{{ option.id }}' ></span>
-					{% endif %}
+						{# --- NAME ---- #}
+						<span class="option-name">
+							{{ option.nameShort if option.nameShort else option.name }}
+							{# --- ARROW COLAPSIBLE ---- #}
+							{% if isSubcategories and not option.unexpandable %}<div class="arrow-after"></div>{% endif %}
+						</span> 					
+						
+					</div>				
 
-					{# --- NAME ---- #}
-					<span class="option-name">
-						{{  option.nameShort if option.nameShort else option.name }}
-						{# --- ARROW COLAPSIBLE ---- #}
-						{% if isSubcategories %}<div class="arrow-after"></div>{% endif %}
-					</span> 					
-					
-				</div>				
-
-				{% if isCheckable %}
-					{# --- CHECKBOX ---- #}
-					<div class="checkbox-wrapper" data-option-id='{{ option.id }}' >
-						<div class="checkbox-container">
-						  <input type="checkbox" class="subcategorie-option-checkbox {{ 'tooltipped' if isSubcategories }}" 
-						  id="option-checkbox-{{ option.id }}" {% if isSubcategories %} data-position="right" data-delay="400" data-tooltip="Cocher/Décocher tout"{% endif %}/>
-						  <label class="gogo-h-primary" for="option-checkbox-{{ option.id }}"></label>
+					{% if isCheckable %}
+						{# --- CHECKBOX ---- #}
+						<div class="checkbox-wrapper" data-option-id='{{ option.id }}' >
+							<div class="checkbox-container">
+							  <input type="checkbox" class="subcategorie-option-checkbox {{ 'tooltipped' if isSubcategories }}" 
+							  id="option-checkbox-{{ option.id }}" {% if isSubcategories %} data-position="right" data-delay="400" data-tooltip="Cocher/Décocher tout"{% endif %}/>
+							  <label class="gogo-h-primary" for="option-checkbox-{{ option.id }}"></label>
+							</div>
 						</div>
-					</div>
-				{% endif %}
+					{% endif %}
+	    </li>
 
-    </li>
+	    {% if isSubcategories %}
+	    	<div class="subcategories-wrapper {{ "" if option.displayInMenu else "no-withdrawal"}}" {% if not option.showExpanded%} style="display:none"{% endif %}>
+		    {% for subcategory in option.subcategories %}
+		    		{{ renderItem(subcategory, true, isCheckable) }}
+				{% endfor %} 
+				</div>
+			{% endif %}
 
-    {% if recursive %}
-    	<div class="subcategories-wrapper {{ "" if option.displayOption else "no-withdrawal"}}" {% if not option.showExpanded%} style="display:none"{% endif %}>
-	    {% for subcategory in option.subcategories %}
-	    		{{ renderItem(subcategory, true, isCheckable) }}
-			{% endfor %} 
-			</div>
-		{% endif %}
-
-	 {% endfor %}
-
+		 {% endfor %} {# for option in category.options #}
 	 </div>
 
  </div>

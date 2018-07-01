@@ -4,7 +4,7 @@
 
 {% set activeChildrenCount = 0 %}
 {% for optionValue in categoryValue.children %}
-	{% if not optionValue.option_.disableInInfoBar %}
+	{% if optionValue.option.displayInInfoBar %}
 		{% set activeChildrenCount = activeChildrenCount + 1 %}
 	{% endif %}
 {% endfor %}	
@@ -20,7 +20,7 @@
 {% endif %}
 
 {% for optionValue in categoryValue.children %}
-	{% if not optionValue.option_.disableInInfoBar %}
+	{% if optionValue.option.displayInInfoBar %}
 		{% set displayFirstCategoryInline = not categoryValue.category.enableDescription 
 																		and optionValue.children.length > 0 
 																		and optionValue.children[0].isLastCategoryDepth 
@@ -37,7 +37,7 @@
 				{% endif %}
 				
 	      <span class="option-name {{ optionValue.diff }}" option-id={{ optionValue.option.id }} >
-	      {{ optionValue.option.nameShort|capitalize }}</span> 
+	      {{ optionValue.option.nameShort }}</span> 
 
 	      {% if displayFirstCategoryInline %}
 	      	<span class="inline-option">(

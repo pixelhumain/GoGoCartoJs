@@ -1,16 +1,15 @@
 import { AppModule, AppStates, AppModes } from "../../app.module";
 import { Option } from "./option.class";
 import { CategoryOptionTreeNode, CategoryOptionTreeNodeType } from "../../components/directory-menu/category-option-tree-node.class";
-
+import { capitalize } from "../../utils/string-helpers";
 import { App } from "../../gogocarto";
 declare let $ : any;
 
 export class Category extends CategoryOptionTreeNode
-{ 	
-	showExpanded : boolean;
+{ 
 	enableDescription : boolean;
-	displayCategoryName : boolean;
-	unexpandable: boolean;
+	displaySuboptionsInline : boolean;
+
 	isRootCategory: boolean = false;
 
 	constructor($categoryJson : any)
@@ -18,14 +17,21 @@ export class Category extends CategoryOptionTreeNode
 		super(CategoryOptionTreeNodeType.Category, '#category-', '#subcategorie-checkbox-', '.options-wrapper');
 
 		this.id = $categoryJson.id;
-		this.name = $categoryJson.name;
-		this.enableDescription = $categoryJson.enableDescription || false;
-		this.displayCategoryName = $categoryJson.displayCategoryName !== false && !!this.name;
+		this.name = capitalize($categoryJson.name || "");
+		this.nameShort = capitalize($categoryJson.nameShort || this.name);
+
+		this.isRootCategory = $categoryJson.isRootCategory;
+
+		this.displayInMenu = ($categoryJson.displayInMenu !== false) && this.name != "";
+		this.displayInInfoBar = ($categoryJson.displayInInfoBar || this.isRootCategory) && this.name != "";
+
 		this.showExpanded = $categoryJson.showExpanded !== false;
 		this.unexpandable = $categoryJson.unexpandable || false;
+		
+		this.enableDescription = $categoryJson.enableDescription || false;	
+		this.displaySuboptionsInline = $categoryJson.displaySuboptionsInline || false;	
+
 		this.mainOwnerId = $categoryJson.mainOwnerId || null;
-		this.isActive = ('isActive' in $categoryJson) ? $categoryJson.isActive : $categoryJson.displayCategoryName !== false;
-		this.isRootCategory = $categoryJson.isRootCategory;
 	}
 
 	addOption($option : Option) { this.children.push($option); }

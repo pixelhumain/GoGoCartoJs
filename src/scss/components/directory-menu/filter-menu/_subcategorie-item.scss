@@ -2,13 +2,11 @@
 * @Author: Sebastian Castro
 * @Date:   2017-03-02 08:57:20
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2018-03-18 15:58:56
+* @Last Modified time: 2018-07-01 18:56:48
 */
 
 .sub-categories-content.no-top-divider > ul > .main-option-subcategories-container 
 {
-	// padding-top: 0 !important;
-
   & > .category-wrapper > .subcategory-item 
   {
     border-top: none !important;
@@ -52,16 +50,9 @@
 	    margin-left: 1rem;
 	    margin-bottom: 2px;
 	    border: solid 5px;
-	    // border-color: transparent transparent #272626 transparent;
-	    //@include transition(all .2s);
 	  }
 
-	  &:hover
-	  {	  	
-	  	cursor: pointer;
-	  	// color: $primary-color;
-	  	// .arrow-after { border-color:  transparent transparent $primary-color transparent; }
-	  }
+	  &:hover { cursor: pointer; }
   }
 
   &:not(.expanded) 
@@ -70,13 +61,7 @@
 
   	.name-wrapper
 		{
-    	.arrow-after
-    	{
-    		margin-bottom: -2px !important;
-	    	//border-color: #272626 transparent transparent transparent;
-    	}    	
-
-	    //&:hover .arrow-after{ border-color: $primary-color transparent transparent transparent !important;}
+    	.arrow-after { margin-bottom: -2px !important; }   	
 	  }
   }
 
@@ -97,11 +82,7 @@
     top: 2px;
     bottom: 0;
 
-    &:hover
-    {
-    	cursor: pointer;
-    	//.checkbox-container .subcategorie-checkbox + label:after { color: $primary-color; background-color:$primary-color; }
-    }
+    &:hover { cursor: pointer; }
 
 		.checkbox-container
 		{
@@ -116,8 +97,6 @@
 					top: 9px !important;
 			    width: 17px;
 			    height: 17px;
-			    // color : #717171;
-			    // background-color: #717171;
 			    border: 2px solid ;	
 			    @include transition(all .3s);	    
 				}
@@ -136,25 +115,5 @@
 				}
 			}
 		}
-	}
-
-	// &.disabled 
- //  {
- //  	.icon { color: $option-disabled-color; }
-
- //  	color: #828282;
-
- //  	.subcategorie-checkbox + label:after
- //  	{
- //  		color: #9a9a9a !important;
- //  	}
-
- //  	.arrow-after { border-color: #828282 transparent transparent transparent ;}
- //  }
-
-  
-
+	} 
 }
-
-	
-

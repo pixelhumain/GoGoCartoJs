@@ -20,8 +20,8 @@ export class TaxonomySkosModule
         {
           "name":"Racine",
           "rootOption": true,
-          "disableInInfoBar": true,
-          "displayOption": false,
+          "displayInInfoBar": false,
+          "displayInMenu": false,
           "showExpanded": true,
           "subcategories": categories,
         }
@@ -29,7 +29,6 @@ export class TaxonomySkosModule
     };     
 
     console.log("Taxonomy Tree", gogoTaxonomy);
-
     return gogoTaxonomy;
   }
 
@@ -37,8 +36,8 @@ export class TaxonomySkosModule
   {
     $skosJson.id = $skosJson["@id"];
     $skosJson.name = $skosJson["prefLabel"];
-    $skosJson.displayOption = false;
-    $skosJson.disableInInfoBar = true;
+    $skosJson.displayInMenu = false;
+    $skosJson.displayInInfoBar = false;
     $skosJson.showExpanded = true;
     $skosJson.suboptions = this.recursivelyCreateSubOptionOf($skosJson);
 

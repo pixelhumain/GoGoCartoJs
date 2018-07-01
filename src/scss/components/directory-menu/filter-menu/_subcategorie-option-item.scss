@@ -2,8 +2,9 @@
 * @Author: Sebastian Castro
 * @Date:   2017-03-02 08:57:20
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2018-06-13 12:15:44
+* @Last Modified time: 2018-07-01 18:57:48
 */
+
 .subcategorie-option-item
 {
 	position: relative;
@@ -84,15 +85,6 @@
 		    @include transform-origin(100% 100%);
 		  }
 		}
-
-		+ label:hover
-		{
-			&:before
-			{
-				//color: $primary-color;
-				//border-color:black;
-			}
-		}
 	}
 
 	.checkbox-wrapper
@@ -124,30 +116,5 @@
       background: none;
       background-color: transparent;
     }	
-
-    &:not(.option-collapsible)
-    {
-    	//.subcategorie-option-checkbox + label:before { color: $primary-color; }
-    }
 	}	
-
-	// &.disabled 
- //  {
- //  	.icon { color: $option-disabled-color; }
-
- //  	color: #828282;
-
- //  	.subcategorie-option-checkbox + label:before
- //  	{
- //  		border-color: $option-disabled-color;
- //  	}
- //  	.arrow-after { border-color: #828282 transparent transparent transparent ;}
- //  }
-
-	
-
-}
-
-
-
-	
+}	

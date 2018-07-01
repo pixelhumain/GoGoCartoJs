@@ -26,7 +26,7 @@ export class ElementJsonParserModule
   private loadFromCompactJson(elementJson : any, element : Element | ElementBase)
   {
     element.id = elementJson.id; // the element has been modified before to fixs bad ids     
-    element.name = elementJson[1];
+    element.name = capitalize(elementJson[1]);
     element.position = L.latLng(elementJson[2], elementJson[3]);     
     App.elementOptionValuesModule.createOptionValues(elementJson[4], element);   
     element.status = elementJson.length >= 6 ? elementJson[5] : 1;  
@@ -41,7 +41,8 @@ export class ElementJsonParserModule
 
     element.position = L.latLng(elementJson.latitude || elementJson.lat || elementJson.geo && elementJson.geo.latitude, 
                                 elementJson.longitude || elementJson.lng || elementJson.long || elementJson.geo && elementJson.geo.longitude);
-    element.name = elementJson.name || elementJson.title;
+    element.name = capitalize(elementJson.name || elementJson.title);
+    
     element.status = elementJson.status == undefined ? 1 : elementJson.status;
     element.moderationState = elementJson.moderationState || 0;
 

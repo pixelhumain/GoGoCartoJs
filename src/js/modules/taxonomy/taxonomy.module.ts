@@ -59,7 +59,7 @@ export class TaxonomyModule
 		if (categoryJson.options)
 			for(let optionJson of categoryJson.options) this.recursivelyCreateOption(optionJson, category)
 		else if (categoryJson.subcategories)
-			this.recursivelyCreateOption({subcategories: categoryJson.subcategories, showExpanded: true, displayOption: false}, category)
+			this.recursivelyCreateOption({subcategories: categoryJson.subcategories, showExpanded: true, displayInMenu: false, displayInInfoBar: false}, category)
 
 		this.categories.push(category);
 

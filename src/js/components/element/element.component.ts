@@ -20,7 +20,7 @@ export class ElementComponent
     this.element.update();  
     this.element.updateDistance();
 
-    let optionstoDisplay = this.element.getIconsToDisplay();
+    let optionsToDisplay = this.element.getIconsToDisplay();
 
     let rootCategoriesValues;
     if (this.element.status == ElementStatus.PendingModification && this.element.modifiedElement)  
@@ -33,10 +33,10 @@ export class ElementComponent
       element : this.element, 
       showDistance: App.geocoder.getLocation() ? true : false,
       listingMode: App.mode == AppModes.List, 
-      optionsToDisplay: optionstoDisplay,
-      mainOptionToDisplay: optionstoDisplay[0], 
-      otherOptionsToDisplay: optionstoDisplay.slice(1),  
-      allOptionsValues: this.element.getCurrOptionsValues().filter( (oV) => oV.option.isActive).sort( (a,b) => a.isFilledByFilters ? -1 : 1),      
+      optionsToDisplay: optionsToDisplay,
+      mainOptionToDisplay: optionsToDisplay[0], 
+      otherOptionsToDisplay: optionsToDisplay.slice(1),  
+      currOptionsValues: this.element.getCurrOptionsValues().filter( (oV) => oV.option.displayInInfoBar).sort( (a,b) => a.isFilledByFilters ? -1 : 1),      
       rootCategoriesValues : rootCategoriesValues,
       editUrl : App.config.features.edit.url + this.element.id,
       ElementStatus: ElementStatus,

@@ -19,6 +19,13 @@ export class CategoryOptionTreeNode
 {
 	id : any;
 	name : string;
+	nameShort: string;
+
+	displayInMenu : boolean;
+	displayInInfoBar : boolean;
+
+	showExpanded : boolean;
+	unexpandable : boolean;
 
 	children : CategoryOptionTreeNode[] = [];
 
@@ -30,8 +37,7 @@ export class CategoryOptionTreeNode
 	mainOwnerId : any = null;
 
 	isChecked : boolean = true;
-	isDisabled : boolean = false;	
-	isActive : boolean = true;
+	isDisabled : boolean = false;		
 
 	isMainOption : boolean = false;
 
