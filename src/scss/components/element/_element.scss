@@ -331,7 +331,6 @@
   .tags-container 
   {
     margin-top: 13px;
-    margin-bottom: 8px;
   }
 
   .collapsible-body-main-container
@@ -361,6 +360,9 @@
   border-radius: 5px;
   background-color: gainsboro;
   padding: 4px 10px;
+  display: inline-block;
+  margin-bottom: 8px;
+  text-transform: capitalize;
 }
 
 
