@@ -41,7 +41,7 @@
   <span class="inline-option-values gogo-neutral col s8 hideOnLargeScreen">
     {% for optionValue in currOptionsValues %} 
         {% set isDisabled =   '' if optionValue.isFilledByFilters else 'disabled' %}
-        <span class="option-value {{ isDisabled }}">{{ optionValue.option.name }} {% if not loop.last %}, {% endif %}</span>            
+        <span class="option-value {{ isDisabled }}">{{ optionValue.option.name }}</span>            
     {% endfor %}
 
     {% if not currOptionsValues|length %}

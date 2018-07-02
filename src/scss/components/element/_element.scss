@@ -87,7 +87,11 @@
 		    font-weight: bold;
 		    font-style: italic;
 
-		    .option-value.disabled { color: #9C9C9C; font-weight: normal; }
+		    .option-value 
+        {
+          &:not(:last-child) { &:after { content: ","; } }
+          &.disabled { color: #9C9C9C; font-weight: normal; }
+        }
 			}
 			.description
 			{

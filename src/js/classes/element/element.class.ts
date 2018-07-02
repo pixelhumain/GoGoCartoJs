@@ -108,6 +108,14 @@ export class Element extends ElementBase
 		return this.optionsValues;
 	}
 
+	getCurrDeepestOptionsValues() : OptionValue[]
+	{
+		let currOptionValues = this.getCurrOptionsValues();
+    let idsToRemove = []
+    for (let ov of currOptionValues) idsToRemove = idsToRemove.concat(ov.option_.parentOptionIds);
+    return currOptionValues.filter( (oV) => idsToRemove.indexOf(oV.option_.id) == -1);
+	}
+
 	getCurrMainOptionValue() : OptionValue
 	{
 		return this.optionsValues.filter( (optionValue) => optionValue.option.id == App.currMainId).shift();
