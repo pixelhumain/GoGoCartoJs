@@ -204,6 +204,15 @@
 				line-height: 2.5rem; 				
   			padding-right: 0;
 
+        &.inline 
+        {
+          display: inline-block;
+          font-style: italic;
+          &:not(:last-child) { &:after { content: ","; } }
+          
+          .icon { display: none; }
+        }
+
   			.icon 
   			{ 
   				font-size: 20px; 

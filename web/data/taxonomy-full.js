@@ -205,7 +205,7 @@ var taxonomy = {
               "textHelper":"producteur, artisan, paniers",
               "useIconForMarker":false,
               "useColorForMarker":false,
-              "displayOption":false,
+              "displayInMenu":false,
               "showExpanded":true
             }
           ],
@@ -662,7 +662,7 @@ var taxonomy = {
               "color":"",
               "icon":"",
               "textHelper":"bar,restaurant, parcs...",
-              "displayOption":false,
+              "displayInMenu":false,
               "showExpanded":true
             },
             {
@@ -714,7 +714,7 @@ var taxonomy = {
               "color":"",
               "icon":"",
               "textHelper":"cinéma, journal, expo...",
-              "displayOption":false,
+              "displayInMenu":false,
               "showExpanded":true
             }
           ],

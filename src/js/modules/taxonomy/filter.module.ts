@@ -93,12 +93,13 @@ export class FilterModule
 			{
 				if (log) console.log("--" + "Category", category.name);
 
+				if (!category.useForFiltering) return true;
 				let checkedOptions = category.checkedOptions;
 				let elementOptions = element.getOptionValueByCategoryId(category.id).filter((optValue) => !optValue.option.isMainOption);
 
 				// if this element don't have any option in this category, don't need to check
 				if (elementOptions.length == 0 && log) console.log("--" + "Element don't have options in this category");
-				if (elementOptions.length == 0) return false;
+				if (elementOptions.length == 0) return !category.isMandatory;
 
 				let isSomeOptionInCategoryCheckedOptions = elementOptions.some(optionValue => checkedOptions.indexOf(optionValue.option) > -1); 
 

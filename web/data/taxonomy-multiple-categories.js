@@ -4,7 +4,7 @@ var taxonomy = {
       // Hiding the option so we can see directly the sub categories
       "id":10485,
       "name":"Mobilité",
-      "displayOption": false,
+      "displayInMenu": false,
       "showExpanded": true,
       "color":"#009A9C",
       "softColor":"#138C8E",
@@ -12,7 +12,7 @@ var taxonomy = {
       "subcategories":[
         {
           // Category "Services", used for coloring the marker, but not for picking the icon
-          "name":"Services",
+          "name":"Services",          
           "options":[
             {
               "id":10486,
@@ -41,8 +41,9 @@ var taxonomy = {
           ]
         },
         {
-          // Category "Services", used for icons
+          // Category "Vehicules", used for icons
           "name":"Véhicules",
+          "isMandatory": false,
           "options":[
             {
               "id":10490,
