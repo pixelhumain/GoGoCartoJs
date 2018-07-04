@@ -534,7 +534,7 @@ var taxonomy = {
         {
           "id":2169,
           "name":"Services",
-          "displayInInfoBar": true,
+          "displayInInfoBar": false,
           "displayInMenu": true,
           "options":[
             {

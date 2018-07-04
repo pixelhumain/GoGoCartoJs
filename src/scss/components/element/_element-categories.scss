@@ -13,6 +13,8 @@
 
   .category-wrapper + .category-name  { padding-top: 1.2rem; }
 
+  .row + .category-wrapper { .category-name { padding-top: .9rem; } }
+
   .category-wrapper
   {
     margin-top: 0 !important;
@@ -28,7 +30,7 @@
       padding-left: .5rem;
       border-left: 1px dotted #c3c3c3;
 
-      h3.category-name { font-size: 85%; padding-bottom: .8rem; }
+      h3.category-name { font-size: 85%; padding-bottom: .7rem; }
 
       // underline just first option in option Tree
       .strong { text-decoration: none !important }  
