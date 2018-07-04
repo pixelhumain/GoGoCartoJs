@@ -525,15 +525,17 @@ var taxonomy = {
       ],
       "color":"#7E3200",
       "softColor":"#864C26",
-      "icon":"icon-home"
+      "icon":"fa fa-home"
     },
     {
       "id":10485,
-      "name":"Mobilité",
+      "name":"Mobilité",     
       "subcategories":[
         {
           "id":2169,
           "name":"Services",
+          "displayInInfoBar": true,
+          "displayInMenu": true,
           "options":[
             {
               "id":10486,
@@ -573,6 +575,9 @@ var taxonomy = {
         {
           "id":2170,
           "name":"Véhicules",
+          "displayInInfoBar": true,
+          "displayInMenu": true,
+          "displaySuboptionsInline": true,
           "options":[
             {
               "id":10490,
@@ -609,7 +614,7 @@ var taxonomy = {
       ],
       "color":"#009A9C",
       "softColor":"#138C8E",
-      "icon":"icon-mobilite-2"
+      "icon":"fa fa-paper-plane"
     },
     {
       "id":10495,
@@ -723,7 +728,7 @@ var taxonomy = {
       ],
       "color":"#AB0061",
       "softColor":"#A4307C",
-      "icon":"icon-coffee"
+      "icon":"fa fa-coffee"
     },
     {
       "id":10507,

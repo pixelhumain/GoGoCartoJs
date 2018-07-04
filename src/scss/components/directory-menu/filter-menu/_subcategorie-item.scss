@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-03-02 08:57:20
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2018-07-01 18:56:48
+* @Last Modified time: 2018-07-04 17:11:15
 */
 
 .sub-categories-content.no-top-divider > ul > .main-option-subcategories-container 
@@ -16,9 +16,7 @@
 
 .category-wrapper 
 {
-  margin-top: .5rem;
-
-  .category-wrapper { margin-top: 0 !important; }
+  margin-top: .5rem;  
 }
 
 .subcategory-item
@@ -26,9 +24,9 @@
 	position: relative;
   line-height: 3rem;
   padding-top: 0;
-  padding-left: 1rem;
+  padding-left: .8rem;
   font-weight: bold;
-  font-size: .95rem;
+  font-size: 90%;      
   text-transform: uppercase;
 
   &.top-separator
@@ -48,8 +46,9 @@
 		{
 			display: inline-block;
 	    margin-left: 1rem;
-	    margin-bottom: 2px;
+	    margin-bottom: 1px;
 	    border: solid 5px;
+      border-radius: 4px;
 	  }
 
 	  &:hover { cursor: pointer; }
@@ -57,11 +56,9 @@
 
   &:not(.expanded) 
   { 
-  	margin-bottom: -.7rem; 
-
   	.name-wrapper
 		{
-    	.arrow-after { margin-bottom: -2px !important; }   	
+    	.arrow-after { margin-bottom: -3px !important; }   	
 	  }
   }
 

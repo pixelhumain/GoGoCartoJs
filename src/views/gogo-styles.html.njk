@@ -92,10 +92,10 @@
   .gogo-load-css #main-option-all.show-one-pane-per-main-option .gogo-icon-name-wrapper:hover:after { color: {{ primary }}; }
   
   .gogo-load-css .subcategorie-option-item:hover          .subcategorie-option-checkbox + label:before { color: {{ primary }}; border-color: {{ primary }} }  
-  .gogo-load-css .subcategorie-option-item:not(.expanded) .gogo-icon-name-wrapper       .arrow-after { border-color: {{ neutralSoftDark }} transparent transparent transparent; }
-  .gogo-load-css .subcategorie-option-item:not(.expanded) .gogo-icon-name-wrapper:hover .arrow-after { border-color: {{ primary }} transparent transparent transparent !important; }
-  .gogo-load-css .subcategorie-option-item.expanded       .gogo-icon-name-wrapper       .arrow-after { border-color:  transparent transparent {{ neutralSoftDark }} transparent; }
-  .gogo-load-css .subcategorie-option-item.expanded       .gogo-icon-name-wrapper:hover .arrow-after { border-color:  transparent transparent {{ primary }} transparent !important; }
+  .gogo-load-css .subcategorie-option-item:not(.expanded) .gogo-icon-name-wrapper       .arrow-after { border-color: {{ neutral }} transparent transparent transparent; opacity: 0.6; }
+  .gogo-load-css .subcategorie-option-item:not(.expanded) .gogo-icon-name-wrapper:hover .arrow-after { border-color: {{ primary }} transparent transparent transparent !important; opacity: 1; }
+  .gogo-load-css .subcategorie-option-item.expanded       .gogo-icon-name-wrapper       .arrow-after { border-color:  transparent transparent {{ neutral }} transparent; opacity: 0.6; }
+  .gogo-load-css .subcategorie-option-item.expanded       .gogo-icon-name-wrapper:hover .arrow-after { border-color:  transparent transparent {{ primary }} transparent !important; opacity: 1; }
   
   .gogo-load-css .subcategorie-option-item.disabled:not(:hover) { color: {{ disableColor }}; }
   .gogo-load-css .subcategorie-option-item.disabled .subcategorie-option-checkbox + label:before { border-color: {{ disableColor }}; }
@@ -106,16 +106,16 @@
   .gogo-load-css .subcategorie-option-item.expanded.disabled .gogo-icon-name-wrapper:hover .arrow-after { border-color:  transparent transparent {{ primary }} transparent !important; }
 
   .gogo-load-css .subcategory-item                .name-wrapper:hover { color: {{ primary }}; }
-  .gogo-load-css .subcategory-item:not(.expanded) .name-wrapper       .arrow-after { border-color: {{ neutralSoftDark }} transparent transparent  transparent; }
-  .gogo-load-css .subcategory-item:not(.expanded) .name-wrapper:hover .arrow-after { border-color: {{ primary }} transparent transparent  transparent !important; }
-  .gogo-load-css .subcategory-item.expanded       .name-wrapper       .arrow-after { border-color:  transparent transparent {{ neutralSoftDark }} transparent; }
-  .gogo-load-css .subcategory-item.expanded       .name-wrapper:hover .arrow-after { border-color:  transparent transparent {{ primary }} transparent !important; }
+  .gogo-load-css .subcategory-item:not(.expanded) .name-wrapper       .arrow-after { border-color: {{ neutral }} transparent transparent  transparent; opacity: 0.6; }
+  .gogo-load-css .subcategory-item:not(.expanded) .name-wrapper:hover .arrow-after { border-color: {{ primary }} transparent transparent  transparent !important; opacity: 1; }
+  .gogo-load-css .subcategory-item.expanded       .name-wrapper       .arrow-after { border-color:  transparent transparent {{ neutral }} transparent; opacity: 0.6;}
+  .gogo-load-css .subcategory-item.expanded       .name-wrapper:hover .arrow-after { border-color:  transparent transparent {{ primary }} transparent !important; opacity: 1; }
 
   .gogo-load-css .subcategory-item.disabled { color: {{ disableColor }}; }
   .gogo-load-css .subcategory-item.disabled .subcategorie-checkbox + label:after { border-color: {{ disableColor }} !important; }
   .gogo-load-css .subcategory-item.disabled .icon { color: {{ disableColor }}; }
-  .gogo-load-css .subcategory-item.disabled .name-wrapper .arrow-after { border-color: {{ disableColor }} transparent transparent transparent ;}
-  .gogo-load-css .subcategory-item.disabled.expanded .name-wrapper .arrow-after { border-color:  transparent transparent {{ disableColor }} transparent ;}
+  .gogo-load-css .subcategory-item.disabled .name-wrapper .arrow-after { border-color: {{ disableColor }} transparent transparent transparent !important; }
+  .gogo-load-css .subcategory-item.disabled.expanded .name-wrapper .arrow-after { border-color:  transparent transparent {{ disableColor }} transparent !important;}
 
   .gogo-load-css .subcategory-item .checkbox-wrapper .checkbox-container .subcategorie-checkbox + label:after { color: {{ neutralSoftDark }}; background-color: {{ neutralSoftDark }} }
 

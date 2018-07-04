@@ -11,7 +11,7 @@ export class Category extends CategoryOptionTreeNode
 	displaySuboptionsInline : boolean;
 	useForFiltering : boolean; // if true, the element will be hidden when not fullfilling at least one checked option of this category
 	isMandatory : boolean; 	// if the element have no option in this category, it will not be displayed
-	isRootCategory: boolean = false;
+	isRootCategory: boolean;
 
 	constructor($categoryJson : any)
 	{
@@ -21,9 +21,9 @@ export class Category extends CategoryOptionTreeNode
 		this.name = capitalize($categoryJson.name || "");
 		this.nameShort = capitalize($categoryJson.nameShort || this.name);
 
-		this.isRootCategory = $categoryJson.isRootCategory;
+		this.isRootCategory = $categoryJson.isRootCategory || false;
 
-		this.displayInMenu = ($categoryJson.displayInMenu !== false) && this.name != "";
+		this.displayInMenu = ($categoryJson.displayInMenu || this.isRootCategory) && this.name != "";
 		this.displayInInfoBar = ($categoryJson.displayInInfoBar || this.isRootCategory) && this.name != "";
 
 		this.showExpanded = $categoryJson.showExpanded !== false;

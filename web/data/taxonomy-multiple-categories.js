@@ -5,6 +5,7 @@ var taxonomy = {
       "id":10485,
       "name":"Mobilité",
       "displayInMenu": false,
+      "displayInInfoBar": false,
       "showExpanded": true,
       "color":"#009A9C",
       "softColor":"#138C8E",
@@ -12,7 +13,8 @@ var taxonomy = {
       "subcategories":[
         {
           // Category "Services", used for coloring the marker, but not for picking the icon
-          "name":"Services",          
+          "name":"Services",
+          "displayInInfoBar": true,         
           "options":[
             {
               "id":10486,
@@ -43,6 +45,7 @@ var taxonomy = {
         {
           // Category "Vehicules", used for icons
           "name":"Véhicules",
+          "displayInInfoBar": true,     
           "isMandatory": false,
           "options":[
             {

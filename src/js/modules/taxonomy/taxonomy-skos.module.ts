@@ -12,7 +12,7 @@ export class TaxonomySkosModule
 
     for(let rootConcept of rootConcepts)
     {
-      categories.push(this.rootSkosToGoGoCategory(rootConcept, rootConcepts.length == 1));
+      categories.push(this.rootSkosToGoGoCategory(rootConcept));
     }  
 
     let gogoTaxonomy = {
@@ -32,7 +32,7 @@ export class TaxonomySkosModule
     return gogoTaxonomy;
   }
 
-  private rootSkosToGoGoCategory($skosJson, $unexpandable)
+  private rootSkosToGoGoCategory($skosJson)
   {
     $skosJson.id = $skosJson["@id"];
     $skosJson.name = $skosJson["prefLabel"];
@@ -45,7 +45,7 @@ export class TaxonomySkosModule
       name: $skosJson["prefLabel"],
       showExpanded: true,
       isRootCategory: true,
-      unexpandable: $unexpandable,
+      unexpandable: true,
       options : [$skosJson]
     }
   }

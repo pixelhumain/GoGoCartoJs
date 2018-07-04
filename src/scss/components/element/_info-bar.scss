@@ -1,0 +1,81 @@
+@import "info-bar-expand-label";
+
+#element-info-bar
+{
+  .collapsible-header 
+  { 
+    position: relative;
+    z-index: 2;
+    span.added { color: #3ab33a;}     
+  }
+
+  .collapsible-body
+  {
+    .img-container 
+    {
+      position: absolute;
+      width: 100%;
+      top: 0;    
+    }    
+
+    .collapsible-body-main-container
+    {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;    
+      overflow-y: auto;
+    }
+
+    .img-overlay {
+      height:25%;
+      background-color: transparent;
+    }
+  }    
+}
+
+#element-info-bar.display-bottom .element-item
+{ 
+  .collapsible-header 
+  { 
+    background-color: white !important; 
+    a { color: inherit; &:hover { color: black; } }
+  }  
+} 
+
+#element-info-bar.display-aside .element-item
+{
+  .collapsible-header
+  {         
+      //background-color: $secondary-color;//$submenu-color;
+      border: none;      
+      color: white;
+      cursor: default;
+      width: 100%;
+
+      a { color: white; &:hover { color: #e6e6e6 } }
+
+      .collapsible-header-title
+      {
+          position: relative;
+          line-height: 2.5rem;
+          font-weight: normal;
+
+          .distance { font-size: 1.3rem; color: inherit; }
+          .gogo-icon-close { font-size: 1.5rem; margin-top: -.8rem; }
+      }
+
+      .collapsible-header-more { margin-bottom: 1rem; }
+
+      .name { font-size: 1.8rem; text-align: left; }
+      .name, .description { width: 100% !important; }
+      .description { margin-bottom : 0; }
+  }
+
+  .collapsible-body
+  {
+    height: 100%;
+    overflow-y: auto;
+  }
+} 
+

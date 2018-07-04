@@ -2,22 +2,26 @@
 * @Author: Sebastian Castro
 * @Date:   2017-03-12 11:20:02
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2018-02-26 17:31:48
+* @Last Modified time: 2018-07-04 17:09:40
 */
 .category-wrapper .subcategories-wrapper:not(.no-withdrawal) 
 {   
-	margin-left: 1.5rem;
+	margin-left: 1.3rem;
   border-left: 1px dotted #c3c3c3;
 
   margin-bottom: 15px;
   margin-top: 0;
 
+  .category-wrapper { margin-top: 0}
+  
   .subcategory-item
   {
-  	font-size: 13px;
+  	font-size: 85%;
   	line-height: 2.5rem;
   	margin-top: 0;
   	padding-top: 0;
+    padding-left: .9rem;
+    margin-bottom: 0rem;
 
 		.subcategorie-checkbox
 		{
@@ -28,22 +32,24 @@
 
     .name-wrapper { height: 2.5rem; }
 
+    .checkbox-wrapper { top: 7px; right: -1px; }
     .checkbox-wrapper .checkbox-container{ top: -4px; }
   }
 
   .subcategorie-option-item 
   {
-  	font-size: 14px;
-    line-height: 2.5rem;
-    height: 2.5rem;
+  	font-size: 95%;
+    line-height: 2.4rem;
+    height: 2.4rem;
+    padding-left: 1rem;
 
     .icon { 
-      font-size: 1.3rem; 
+      font-size: 1.2rem; 
       padding-top: 1px; 
-      margin-right: .6rem; 
+      margin-right: .8rem; 
 
       &.fa {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         padding-top: .7rem;
       }
 

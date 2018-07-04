@@ -9,7 +9,7 @@ var elements = [
       "longitude":-0.0339
     },
 
-    "categories": [ 10490, 10486 ],
+    "taxonomy": [ 10490, 10486, 10491, 10492 ],
     "tags" : ["Open Source", "Réutilisable", "Awesome!"],
 
     "address": {

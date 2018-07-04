@@ -1,0 +1,57 @@
+.element-item .collapsible-header
+{
+  padding: 0; 
+  position: relative;
+
+  i { margin-right: 0; padding-left: 0.3rem; }
+
+  a { text-decoration: underline; }
+
+  .collapsible-header-title 
+  {     
+    position: relative;
+    padding: 0;
+    @media #{$medium-and-up} { padding: 1rem; padding-bottom: .5rem; }
+    margin-bottom: 0rem; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 2rem;
+    padding: .5rem 0;
+    font-weight: bold;
+
+    .distance 
+    { 
+        float: right; 
+        margin-left: 1rem;
+    } 
+    
+    .location { display: none; } 
+  }
+
+  .collapsible-header-more 
+  { 
+    line-height: 1.5rem; 
+    padding: 0;
+    @media #{$medium-and-up} { padding: 0 1rem; }
+    margin-bottom: .5rem;
+
+    .inline-option-values  
+    { 
+      font-weight: bold;
+      font-style: italic;
+
+      .option-value 
+      {
+        &:not(:last-child) { &:after { content: ","; } }
+        &.disabled { color: #9C9C9C; font-weight: normal; }
+      }
+    }
+    .description
+    {
+      margin-bottom: .7rem;
+      text-align: justify;
+
+      p { margin: 0}
+    }
+  }   
+} 

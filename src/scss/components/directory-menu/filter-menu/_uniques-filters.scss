@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-12-04 10:41:19
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2017-12-04 10:44:42
+* @Last Modified time: 2018-07-04 16:46:26
 */
 $pending-color: #565656;
 $moderation-color: #c53f36;
@@ -57,11 +57,13 @@ $moderation-color: #c53f36;
   {
     color: white;
     font-size: 18px;
+    
     &:before
     {
       padding: 2px;
       padding-bottom: 3px;
       border: none;
+      color:$favorite-color; background-color: transparent
     }
   }
 

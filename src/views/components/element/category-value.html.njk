@@ -13,11 +13,11 @@
 	<div class="category-wrapper">	
 {% endif %}
 
-{% if categoryValue.category.isRootCategory or categoryValue.category.displayInInfoBar %}
+{% if categoryValue.category.displayInInfoBar %}
 	<h3 class="category-name">{{ categoryValue.category.name }}</h3>
 {% endif %}
 
-<div class='row'>
+{% if categoryValue.category.displaySuboptionsInline %}<div class="row">{% endif %}
 {% for optionValue in categoryValue.children %}
 
 	{% if optionValue.option.displayInInfoBar %}
@@ -29,7 +29,8 @@
 	  	{% set optionClass = 's12' %}
 	  {% endif %}
 	  
-	    <span class="option-value col {{ optionClass }}">
+	  <div class={{ '' if categoryValue.category.displaySuboptionsInline else 'row'}}>
+	    <span class="option-value col {{ optionClass }} {{ 'last' if loop.last else ''}} {{ 'first' if loop.first else ''}}">
 
 	    	{% set iconClass = optionValue.option.icon if optionValue.option.icon else 'gogo-icon-angle-right' %}	
 	    	{% set iconColorId = optionValue.option.id if optionValue.option.icon else '' %}	
@@ -43,7 +44,7 @@
 	    {% if categoryValue.category.enableDescription %}
 	    	<span class="col s6 m7 option-description"><span class="{{ optionValue.diff }}">{{ optionValue.description|safe }}</span></span>
 	    {% endif %}
-	  
+	  </div>
   {% endif %}
 
   {# Render children #}
@@ -54,7 +55,7 @@
 	{% endif %}
 	
 {% endfor %} 
-</div>
+{% if categoryValue.category.displaySuboptionsInline %}</div>{% endif %}
 
 {% if wrapOptionsIntoCategoryContainer %}	
 	</div> <!-- div end for category-wrapper -->

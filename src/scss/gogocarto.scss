@@ -36,7 +36,8 @@
     @import "components/commons/scroll-bar";
     @import "components/custom-popup";
 
-     @media #{$small-only} { font-size: 12px; }
+    font-size: .95rem;
+    @media #{$small-only} { font-size: 12px; }
 
     #directory-menu
     {

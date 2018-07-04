@@ -2,7 +2,7 @@
 * @Author: Sebastian Castro
 * @Date:   2017-02-28 13:25:52
 * @Last Modified by:   Sebastian Castro
-* @Last Modified time: 2018-05-13 15:54:27
+* @Last Modified time: 2018-07-04 17:07:30
 */
 @import 'uniques-filters';
 @import 'subcategorie-item';
@@ -13,18 +13,33 @@
 {
   font-size: .95rem;
   .subcategorie-option-item .arrow-after{ margin-left: .5rem; }
-  .icon { margin-right: .9rem; }
+  .icon { 
+    margin-right: .6rem;   
+  }
+
+  .category-wrapper .subcategories-wrapper:not(.no-withdrawal) 
+  {
+    margin-left: 1rem;
+  }
+
   .main-categories { 
     width: 3rem; 
-    .icon { font-size: 1.3rem; height: 3.4rem; width: 3rem;}
+    .icon { height: 3.4rem; width: 3rem;}
     .icon:before { left: .6rem; }
   }
   .sub-categories .sub-categories-content { padding-right: 0; }
+  .sub-categories:not(.with-left-border) .sub-categories-content { padding-left: .2rem; }
 
-  .subcategory-item { padding-left: .7rem; }
-  .subcategorie-option-item { padding-left: .6rem; }
-
-  .subcategory-item { font-size: .9rem; }
+  .subcategory-item { 
+    padding-left: .6rem; 
+    font-size: .9rem;
+  }
+  .subcategorie-option-item { padding-left: .5rem; }  
+  
+  .category-wrapper .category-wrapper {
+    .subcategory-item { padding-left: .7rem; }
+    .subcategorie-option-item { padding-left: .6rem; }  
+  }
 }
 
 
