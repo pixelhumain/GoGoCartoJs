@@ -127,7 +127,7 @@ export class FiltersComponent
     // ----------------------------------
     // ------ CATEGORIES ----------------
     // ----------------------------------
-    $('.subcategory-item .name-wrapper').click(function()
+    $('.subcategory-item .name-wrapper:not(.uncheckable)').click(function()
     {    
       let categoryId = $(this).attr('data-category-id');
       App.taxonomyModule.getCategoryById(categoryId).toggleChildrenDetail();
@@ -166,6 +166,7 @@ export class FiltersComponent
       let option = App.taxonomyModule.getOptionById(optionId);
 
       if (option.isMainOption && App.config.menu.showOnePanePerMainOption) App.filtersComponent.setMainOption(option.id);
+      else if ($(this).hasClass('uncheckable')) return;
       else if (option.isCollapsible()) option.toggleChildrenDetail()
       else option.toggle();
     });

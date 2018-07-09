@@ -3,7 +3,7 @@ import { Category } from "./category.class";
 import { CategoryOptionTreeNode, CategoryOptionTreeNodeType } from "../../components/directory-menu/category-option-tree-node.class";
 
 import { App } from "../../gogocarto";
-import { capitalize } from "../../utils/string-helpers";
+import { capitalize, slugify } from "../../utils/string-helpers";
 declare let $ : any;
 
 export class Option extends CategoryOptionTreeNode
@@ -28,7 +28,7 @@ export class Option extends CategoryOptionTreeNode
 
 		this.name = capitalize($optionJson.name);
 		this.nameShort = capitalize($optionJson.nameShort || this.name);
-		this.id = ('id' in $optionJson) ? '' + $optionJson.id : this.nameShort;
+		this.id = ('id' in $optionJson) ? '' + $optionJson.id : slugify(this.nameShort);
 		this.intId = typeof $optionJson.id == 'number' ? $optionJson.id : $optionJson.intId;		
 
 		this.displayInMenu = $optionJson.displayInMenu !== false;

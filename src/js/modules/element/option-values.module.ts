@@ -43,7 +43,7 @@ export class ElementOptionValuesModule
 
   createOptionsTree(element : ElementBase)
   {
-    let mainCategory = App.taxonomyModule.mainCategory;
+    let mainCategory = App.taxonomyModule.taxonomy;
     element.optionTree = this.recusivelyCreateOptionTree(element, mainCategory, new OptionValue({}));
   }
 
@@ -52,8 +52,9 @@ export class ElementOptionValuesModule
     let categoryValue = new CategoryValue(category);
 
     for(let option of category.options)
-    {
+    {      
       let childOptionValue = this.getElementOptionValueCorrespondingToOptionId(element, option.id);
+      
       if (childOptionValue)
       {
         categoryValue.addOptionValue(childOptionValue);

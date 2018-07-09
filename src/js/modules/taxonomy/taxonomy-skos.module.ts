@@ -19,7 +19,6 @@ export class TaxonomySkosModule
       "options":[    
         {
           "name":"Racine",
-          "rootOption": true,
           "displayInInfoBar": false,
           "displayInMenu": false,
           "showExpanded": true,

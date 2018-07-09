@@ -1,9 +1,10 @@
-	{% macro renderItem(category, recursive, isCheckable) %}
+{% macro renderItem(category, recursive, isCheckable) %}
+{% set isCheckable = isCheckable and category.useForFiltering %}
 <div class="category-wrapper">
 
 	{# ---- CATEGORY TITLE IF REQUIRED ----- #}
 	{% if category.displayInMenu %}
-	<li class="subcategory-item {{  'expanded' if category.showExpanded else '' }} {{ 'unexpandable' if category.unexpandable }}" id="category-{{category.id}}">
+	<li class="subcategory-item {{  'expanded' if category.showExpanded else '' }} {{ 'unexpandable' if category.unexpandable }} {{ 'uncheckable' if not isCheckable }}" id="category-{{category.id}}">
 
 		{# --- NAME--- #}
 		<div class="name-wrapper {{ 'tooltipped' if not category.unexpandable }}" data-category-id='{{ category.id }}' data-position="right" data-delay="400" data-tooltip="Afficher/Masquer le détail" >		
@@ -32,13 +33,13 @@
 	    <li class="subcategorie-option-item row 
 	    					{{ 'option-collapsible' if isSubcategories}} {{ 'expanded' if option.showExpanded }} 
 	    					{{ 'unexpandable' if option.unexpandable }}
-	    					{{ 'tooltipped' if option.textHelper }}"  		
+	    					{{ 'tooltipped' if option.textHelper }}"	    					  		
 	    		id="option-{{ option.id }}"
 	    		data-position="right" data-delay="700" data-tooltip="{{ option.textHelper | capitalize }}"
 	    		{% if not option.displayInMenu %} style="display:none"{% endif %}>
 	    	
 	    		{# --- ICON & NAME--- #}
-	    		<div class="gogo-icon-name-wrapper" data-option-id='{{ option.id }}'>
+	    		<div class="gogo-icon-name-wrapper {{ 'uncheckable' if not isCheckable }}" data-option-id='{{ option.id }}'>
 
 						{# --- ICON ---- #}
 						{% set iconClass = option.icon if option.icon else ( 'gogo-icon-marker' if option.useColorForMarker else '') %}	
@@ -79,4 +80,4 @@
 	 </div>
 
  </div>
- {% endmacro %}
+{% endmacro %}

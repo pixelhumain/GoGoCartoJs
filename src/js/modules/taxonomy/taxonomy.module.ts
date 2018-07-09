@@ -21,7 +21,10 @@ export class TaxonomyModule
 	categories : Category[] = [];
 	options : Option[] = [];
 
-	mainCategory : Category;
+	// the full hierachic taxonomy
+	taxonomy : Category;
+	
+	rootCategories : Category[];
 
 	categoriesCreatedCount : number = 1;
 	optionsCreatedCount : number = 1;
@@ -32,18 +35,43 @@ export class TaxonomyModule
 		this.categories = [];
 	}
 
-	createTaxonomyFromJson(mainCatgeoryJson)
+	createTaxonomyFromJson(taxonomyJson)
 	{
-		let isSkosTaxonomy = mainCatgeoryJson['@graph'];
-		if (isSkosTaxonomy) mainCatgeoryJson = App.taxonomySkosModule.convertSkosIntoGoGoTaxonomy(mainCatgeoryJson);
+		let isSkosTaxonomy = taxonomyJson['@graph'];
+		if (isSkosTaxonomy) taxonomyJson = App.taxonomySkosModule.convertSkosIntoGoGoTaxonomy(taxonomyJson);
+		
+		// If multiple root categories, we encapsulate them into a single fake category & root option
+		if (Array.isArray(taxonomyJson)) {
+			for (let json of taxonomyJson) json.isRootCategory = true;
+			taxonomyJson = {
+	      "options":[    
+	        {
+	          "name":"RootFakeOption",
+	          "displayInInfoBar": false,
+	          "displayInMenu": false,
+	          "showExpanded": true,
+	          "subcategories": taxonomyJson,
+	        }
+	      ]
+	    };	    
+		}
+		else if (!isSkosTaxonomy) taxonomyJson.isRootCategory = true;
 
-		if (!isSkosTaxonomy) mainCatgeoryJson.isRootCategory = true;
-		this.mainCategory = this.recursivelyCreateCategoryAndOptions(mainCatgeoryJson);				
-
+		this.taxonomy = this.recursivelyCreateCategoryAndOptions(taxonomyJson);
+		this.rootCategories = this.findRootCategories();
 		for(let option of this.mainCategory.children) option.isMainOption = true;
-
-		this.recursivelyCalculateParentsOptionIds(this.mainCategory);
+		
+		if (this.rootCategories.length > 1)
+			for(let rootCategory of this.rootCategories) this.recursivelyCalculateParentsOptionIds(rootCategory, this.taxonomy.options[0]);
+		else
+			this.recursivelyCalculateParentsOptionIds(this.mainCategory);
 	}	
+
+	private findRootCategories() : Category[]
+	{
+		if (this.taxonomy.displayInMenu) return [this.taxonomy];
+		return this.taxonomy.options[0].subcategories;
+	}
 
 	private recursivelyCreateCategoryAndOptions(categoryJson : any) : Category
 	{
@@ -96,7 +124,7 @@ export class TaxonomyModule
 	{
 		for(let option of category.children)
 		{
-			if (option.isMainOption) option.mainOwnerId = "all";
+			if (option.isMainOption || parentOption === null) option.mainOwnerId = "all";
 			else if (parentOption.isMainOption) option.mainOwnerId = parentOption.id;
 			else option.mainOwnerId = parentOption.mainOwnerId;
 
@@ -123,7 +151,7 @@ export class TaxonomyModule
 
 	getMainOptionsIds() : number[]
 	{
-		return this.mainCategory.options.map( (option) => option.id);
+		return this.getMainOptions().map( (option) => option.id);
 	}
 
 	getCurrMainOption() : Option
@@ -138,7 +166,7 @@ export class TaxonomyModule
 
 	getMainOptionById ($id) : Option
 	{
-		return this.mainCategory.options.filter( (option : Option) => option.id == $id).shift();
+		return this.getMainOptions().filter( (option : Option) => option.id == $id).shift();
 	};
 
 	getCategoryById ($id) : Category
@@ -160,4 +188,12 @@ export class TaxonomyModule
 	{
 		return this.options.filter( (option : Option) => option.mainOwnerId == App.currMainId);
 	}
+
+	getRootCategories() : Category[]
+	{
+		return this.categories.filter( (category : Category) => category.isRootCategory);
+	}
+
+	// the main category : i.e. the first root category (could have many root categories) 
+	get mainCategory() { return this.rootCategories[0]; }
 }

@@ -1,10 +1,11 @@
 #element-info-bar .element-item
 {
   .expandLabel { font-weight: bold; } 
-
+  
   &.active 
   {
     .expandLabel:before { content: "Moins d'infos" }
+
     .expandLabel.transform-big {
       position: absolute;
       color: white;
@@ -19,7 +20,7 @@
         bottom: -1rem;
       }
       padding: 8px 25px;
-      bottom: -20px;
+      bottom: -15px;
       
       @extend .z-depth-1;
 

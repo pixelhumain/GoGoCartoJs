@@ -50,7 +50,7 @@ export class FilterModule
 
 		if (!App.config.menu.showOnePanePerMainOption)
 		{
-			let checkedMainOptions = App.taxonomyModule.mainCategory.nonDisabledOptions;
+			let checkedMainOptions = App.taxonomyModule.taxonomy.nonDisabledOptions;
 			if (checkedMainOptions.length == 1)
 				return this.recursivelyCheckedInOption(checkedMainOptions[0], element);
 			else
@@ -58,8 +58,8 @@ export class FilterModule
 		}
 		else if (App.currMainId == 'all')
 		{
-			let elementOptions = element.getOptionValueByCategoryId( App.taxonomyModule.mainCategory.id);
-			let checkedOptions = App.taxonomyModule.mainCategory.checkedOptions;
+			let elementOptions = element.getOptionValueByCategoryId( App.taxonomyModule.taxonomy.id);
+			let checkedOptions = App.taxonomyModule.taxonomy.checkedOptions;
 
 			// console.log("\nelementsOptions", elementOptions.map( (value) => value.option.name));
 			// console.log("checkedOptions", checkedOptions.map( (value) => value.name));
@@ -95,7 +95,8 @@ export class FilterModule
 
 				if (!category.useForFiltering) return true;
 				let checkedOptions = category.checkedOptions;
-				let elementOptions = element.getOptionValueByCategoryId(category.id).filter((optValue) => !optValue.option.isMainOption);
+				let elementOptions = element.getOptionValueByCategoryId(category.id);
+				if (App.config.menu.showOnePanePerMainOption) elementOptions = elementOptions.filter((optValue) => optValue.optionId != App.currMainId);
 
 				// if this element don't have any option in this category, don't need to check
 				if (elementOptions.length == 0 && log) console.log("--" + "Element don't have options in this category");

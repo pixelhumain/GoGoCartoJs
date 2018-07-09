@@ -23,9 +23,9 @@ export class ElementIconsModule
   }
 
   private recursivelySearchIconsToDisplay(parentOptionValue : OptionValue, recursive : boolean = true) : OptionValue[]
-  {
+  {    
     if (!parentOptionValue) return [];
-
+    
     let resultOptions : OptionValue[] = [];    
 
     for(let categoryValue of parentOptionValue.children)
@@ -34,7 +34,7 @@ export class ElementIconsModule
       {
         let result = [];
         
-        if (recursive)
+        if (recursive || optionValue.optionId == "RootFakeOption")
         {
           result = this.recursivelySearchIconsToDisplay(optionValue) || [];
           resultOptions = resultOptions.concat(result);
@@ -46,6 +46,7 @@ export class ElementIconsModule
         }
       }
     }
+    
     return resultOptions;
   }
 

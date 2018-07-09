@@ -87,6 +87,7 @@ export class GoGoCartoModule
 
 		let layout = App.templateModule.render('layout', 
 		{ 
+			rootCategories: App.taxonomyModule.rootCategories, 
 			mainCategory: App.taxonomyModule.mainCategory, 
 			isIframe: isIframe, 
 			fullTaxonomy: fullTaxonomy,

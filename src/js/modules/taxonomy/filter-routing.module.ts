@@ -57,10 +57,10 @@ export class FilterRoutingModule
 			
 			if (mainOptionSlug == 'all')
 			{
-				if (App.loadFullTaxonomy) App.taxonomyModule.mainCategory.toggle(!addingMode, false);
+				if (App.loadFullTaxonomy) App.taxonomyModule.taxonomy.toggle(!addingMode, false);
 				else
 				{
-					for(let option of App.taxonomyModule.mainCategory.options) 
+					for(let option of App.taxonomyModule.taxonomy.options) 
 					{
 						option.toggleVisibility(!addingMode);
 					}
@@ -90,10 +90,10 @@ export class FilterRoutingModule
 			if (App.loadFullTaxonomy)
 			{
 				if (App.config.menu.showOnePanePerMainOption)
-					if (mainOptionSlug == 'all') App.taxonomyModule.mainCategory.updateState();
+					if (mainOptionSlug == 'all') App.taxonomyModule.taxonomy.updateState();
 					else App.taxonomyModule.getMainOptionBySlug(mainOptionSlug).recursivelyUpdateStates();
 				else
-					App.taxonomyModule.mainCategory.recursivelyUpdateStates();
+					App.taxonomyModule.taxonomy.recursivelyUpdateStates();
 			}
 
 			App.elementsModule.updateElementsToDisplay(true);
@@ -111,8 +111,8 @@ export class FilterRoutingModule
 		if (mainOptionId == 'all' && App.config.menu.showOnePanePerMainOption)
 		{			
 			mainOptionName = "all";
-			checkArrayToParse = App.taxonomyModule.mainCategory.checkedOptions.map( (option) => option.intId);
-			uncheckArrayToParse = App.taxonomyModule.mainCategory.disabledOptions.map( (option) => option.intId);
+			checkArrayToParse = App.taxonomyModule.taxonomy.checkedOptions.map( (option) => option.intId);
+			uncheckArrayToParse = App.taxonomyModule.taxonomy.disabledOptions.map( (option) => option.intId);
 		}
 		else
 		{

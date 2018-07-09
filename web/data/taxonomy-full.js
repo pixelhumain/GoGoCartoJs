@@ -85,6 +85,7 @@ var taxonomy = {
                 {
                   "id":2160,
                   "name":"Produits",
+                  "displayInMenu":true,
                   "options":[
                     {
                       "id":10435,
@@ -530,6 +531,8 @@ var taxonomy = {
     {
       "id":10485,
       "name":"Mobilité",     
+      "displayChildrenInMenu": true,
+      "displayChildrenInInfoBar": true,
       "subcategories":[
         {
           "id":2169,
@@ -577,6 +580,7 @@ var taxonomy = {
           "name":"Véhicules",
           "displayInInfoBar": true,
           "displayInMenu": true,
+          "useForFiltering": false,
           "displaySuboptionsInline": true,
           "options":[
             {
