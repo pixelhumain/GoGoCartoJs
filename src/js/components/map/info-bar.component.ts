@@ -113,11 +113,34 @@ export class InfoBarComponent
 				// Add a previous and next button for navigating through the images to the overlay, for being able to click on them
 				$('.img-overlay').append('<span id="img-button-prev" class="img-button">&lt;</span><span id="img-link"></span><span id="img-button-next" class="img-button">&gt;</span>');
 
-				// When the user clicks the image, opens a new window with the image
+				// ----------------------
+				//   REAL SIZE PHOTO
+				// ----------------------
 				$('#img-link').click(function()
 				{
-					let currentImage = images.eq(indexCurrentImage);
-					window.open(currentImage[0].src);
+					// When the user clicks the image, opens a new window with the image
+					let modal = $('#modal-real-size-photo');
+
+					modal.find(".modal-footer").attr('option-id',element.colorOptionId);
+
+					let currentImage = images.eq(indexCurrentImage),
+						modalImg = modal.find('img');
+
+					if(modalImg.length===0)
+					{
+						modal.find(".modal-content").append('<img src=' + currentImage[0].src + '>');
+					}
+					else
+					{
+						modalImg.attr('src', currentImage[0].src);
+					}
+
+					modal.openModal({
+				      dismissible: true,
+				      opacity: 0.5,
+				      in_duration: 300,
+				      out_duration: 200
+					});
 				});
 
 				$('#img-button-next').click(function() {
