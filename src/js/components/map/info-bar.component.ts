@@ -92,6 +92,80 @@ export class InfoBarComponent
 
 			$('#element-info').html(element.component.render());		
 			
+			let images;
+
+			if((images = $('.img-container img')).length > 1)
+			{
+				let indexLastImage = images.length - 1,
+					indexCurrentImage = 0,
+					displayImage = function (imageIndex)
+					{
+						// Get the image of the given index
+						let currentImage = images.eq(imageIndex);
+						// Hide all images
+						images.css('display', 'none');
+						// Display the image of the given index
+						currentImage.css('display', 'block');
+					};
+
+				displayImage(indexCurrentImage);
+
+				// Add a previous and next button for navigating through the images to the overlay, for being able to click on them
+				$('.img-overlay').append('<span id="img-button-prev" class="img-button">&lt;</span><span id="img-link"></span><span id="img-button-next" class="img-button">&gt;</span>');
+
+				// ----------------------
+				//   REAL SIZE PHOTO
+				// ----------------------
+				$('#img-link').click(function()
+				{
+					// When the user clicks the image, opens a new window with the image
+					let modal = $('#modal-real-size-photo');
+
+					modal.find(".modal-footer").attr('option-id',element.colorOptionId);
+
+					let currentImage = images.eq(indexCurrentImage),
+						modalImg = modal.find('img');
+
+					if(modalImg.length===0)
+					{
+						modal.find(".modal-content").append('<img src=' + currentImage[0].src + '>');
+					}
+					else
+					{
+						modalImg.attr('src', currentImage[0].src);
+					}
+
+					modal.openModal({
+				      dismissible: true,
+				      opacity: 0.5,
+				      in_duration: 300,
+				      out_duration: 200
+					});
+				});
+
+				$('#img-button-next').click(function() {
+			    indexCurrentImage++;
+			    // Check that the index is not greater than the last image index
+			    if(indexCurrentImage>indexLastImage)
+			    {
+						// Otherwise we put the first image index
+						indexCurrentImage = 0;
+			    }
+			    displayImage(indexCurrentImage);
+				});
+
+				$('#img-button-prev').click(function() {
+			    indexCurrentImage--;
+			    // Check that the index is not negative
+			    if(indexCurrentImage<0)
+			    {
+						// Otherwise we put the last image index
+						indexCurrentImage = indexLastImage;
+			    }
+			    displayImage(indexCurrentImage);
+				});
+			}
+
 			let domMenu = this.domMenu();
 
 			createListenersForElementMenu(domMenu);	

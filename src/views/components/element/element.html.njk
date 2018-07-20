@@ -32,13 +32,18 @@
 
 <div class="collapsible-body moreDetails tabs-content">
 
-  {% if element.image %}
+  {% if element.images.length %}
     <div class="img-container">
-      <img src="{{ element.image }}" class="gogo-img"/>
+        <ul class="images-carousel">
+          {% for currentImage in element.images %}
+            <li><img src="{{ currentImage }}" class="gogo-img"/></li>
+          {% endfor %}
+        </ul>
+      </figure>
     </div>
   {% endif %}
   <div class="collapsible-body-main-container custom-scroll-bar">
-    {% if element.image %}
+    {% if element.images.length %}
       {# transparent overlay to let the image visible #}
       <div class="img-overlay"></div>
     {% endif %}

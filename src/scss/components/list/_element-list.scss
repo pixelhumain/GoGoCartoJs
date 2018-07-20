@@ -108,6 +108,15 @@
     overflow: hidden;
     background-color: #F7F7F7;
 	}
-	    
+
+  .element-item .img-button {
+    margin: auto;
+    padding: 5px 13px;
+    background-image: linear-gradient(#808700, #fff);
+    border-radius: 50%;
+    box-shadow: 1px 1px 2px #505700;
+    color: #808700 !important;
+    cursor: pointer !important;
+  }
 }
 
