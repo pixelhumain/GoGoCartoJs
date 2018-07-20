@@ -101,9 +101,10 @@ export class BoundsModule
 	}
 
 	// Wait from ajax response to update new filledBounds
-	updateFilledBoundsWithBoundsReceived(expectedBound : L.LatLngBounds, mainOptionId : number, getFullRepresentation : boolean)
+	updateFilledBoundsWithBoundsReceived(expectedBound : L.LatLngBounds, mainOptionId : number|string, getFullRepresentation : boolean)
 	{
 		//console.log("updateFilledBoundsWithBoundsReceived", mainOptionId);
+		if (mainOptionId === undefined || App.config.menu.showOnePanePerMainOption) mainOptionId = "all";
 		if(getFullRepresentation) this.fullRepresentationFilledBound[mainOptionId] = expectedBound;
 		else this.compactRepresentationFilledBound[mainOptionId] = expectedBound;
 
