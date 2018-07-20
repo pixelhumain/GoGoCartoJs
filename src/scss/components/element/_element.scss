@@ -10,7 +10,7 @@
 {
 	list-style-type: none;	
 	@include flexbox();
-  @include flex-flow(column nowrap);  
+  	@include flex-flow(column nowrap);  
 
 	h3
 	{

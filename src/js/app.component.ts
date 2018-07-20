@@ -83,6 +83,11 @@ export class AppComponent
 
 		App.gogoControlComponent.updatePosition();
 
+		// update img controls for element list
+		$('#directory-content-list .element-item').each(function() {
+			$(this).find('.img-overlay').css('height', $(this).find('.img-container').height());
+		});
+
 		let infoBarHasChangeDisplayMode = false;
 		// show element info bar aside or at the bottom depending of direcoty-content width
 		if (this.mapWidth() > 900)

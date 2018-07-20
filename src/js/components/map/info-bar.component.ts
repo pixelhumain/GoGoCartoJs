@@ -12,7 +12,7 @@ import { Element } from "../../classes/classes";
 import { App } from "../../gogocarto";
 
 import { Event } from "../../classes/event.class";
-import { createListenersForElementMenu, updateFavoriteIcon, showFullTextMenu, createListenersForLongDescription } from "../element/element-menu.component";
+import { createListenersForElementMenu, updateFavoriteIcon, showFullTextMenu, createListenersForLongDescription, createListenersForImage } from "../element/element-menu.component";
 
 import { createListenersForVoting } from "../modals/vote.component";
 
@@ -90,84 +90,25 @@ export class InfoBarComponent
 			clearTimeout(this.loaderTimer);
 			$('#info-bar-overlay').fadeOut();
 
-			$('#element-info').html(element.component.render());		
-			
-			let images;
+			$('#element-info').html(element.component.render());	
 
-			if((images = $('.img-container img')).length > 1)
+			if (this.elementVisible.images.length) 
 			{
-				let indexLastImage = images.length - 1,
-					indexCurrentImage = 0,
-					displayImage = function (imageIndex)
-					{
-						// Get the image of the given index
-						let currentImage = images.eq(imageIndex);
-						// Hide all images
-						images.css('display', 'none');
-						// Display the image of the given index
-						currentImage.css('display', 'block');
-					};
+				// Animation to move img-button when scrolling
+				$('#element-info-bar .collapsible-body-main-container').scroll(function(e) {
+					let scrollTop = $(this).scrollTop();
+					$(this).find('#img-button-prev').css('left', -scrollTop/5);
+					$(this).find('#img-button-next').css('right', -scrollTop/5);
+					$(this).find('#img-button-next').css('top', scrollTop/2);
+					$(this).find('#img-button-prev').css('top', scrollTop/2);
+					$(this).find('.img-overlay').css('opacity', 1 - scrollTop/200);
+				});	
 
-				displayImage(indexCurrentImage);
-
-				// Add a previous and next button for navigating through the images to the overlay, for being able to click on them
-				$('.img-overlay').append('<span id="img-button-prev" class="img-button">&lt;</span><span id="img-link"></span><span id="img-button-next" class="img-button">&gt;</span>');
-
-				// ----------------------
-				//   REAL SIZE PHOTO
-				// ----------------------
-				$('#img-link').click(function()
-				{
-					// When the user clicks the image, opens a new window with the image
-					let modal = $('#modal-real-size-photo');
-
-					modal.find(".modal-footer").attr('option-id',element.colorOptionId);
-
-					let currentImage = images.eq(indexCurrentImage),
-						modalImg = modal.find('img');
-
-					if(modalImg.length===0)
-					{
-						modal.find(".modal-content").append('<img src=' + currentImage[0].src + '>');
-					}
-					else
-					{
-						modalImg.attr('src', currentImage[0].src);
-					}
-
-					modal.openModal({
-				      dismissible: true,
-				      opacity: 0.5,
-				      in_duration: 300,
-				      out_duration: 200
-					});
-				});
-
-				$('#img-button-next').click(function() {
-			    indexCurrentImage++;
-			    // Check that the index is not greater than the last image index
-			    if(indexCurrentImage>indexLastImage)
-			    {
-						// Otherwise we put the first image index
-						indexCurrentImage = 0;
-			    }
-			    displayImage(indexCurrentImage);
-				});
-
-				$('#img-button-prev').click(function() {
-			    indexCurrentImage--;
-			    // Check that the index is not negative
-			    if(indexCurrentImage<0)
-			    {
-						// Otherwise we put the last image index
-						indexCurrentImage = indexLastImage;
-			    }
-			    displayImage(indexCurrentImage);
-				});
-			}
+				createListenersForImage($('#element-info-bar'), element);
+			}						
 
 			let domMenu = this.domMenu();
-
+			
 			createListenersForElementMenu(domMenu);	
 			createListenersForLongDescription($('#element-info-bar'));
 			createListenersForVoting();
@@ -176,11 +117,7 @@ export class InfoBarComponent
 
 			updateFavoriteIcon(domMenu, element);			
 
-			$('#btn-close-bandeau-detail').click(() =>
-			{  		
-				this.hide();
-				return false;
-			});
+			$('#btn-close-bandeau-detail').click(() => { this.hide(); return false; });
 			
 			$('#element-info .collapsible-header').click(() => { this.toggleDetails(); });			
 		}						
@@ -287,7 +224,6 @@ export class InfoBarComponent
 	{
 		let imgBannerHeight = $('#element-info-bar .img-overlay').height();
 		let marginTop = (imgBannerHeight - $(image).height()) / 2;
-		console.log("img height",$(image).height());
 		if (marginTop < 0) $(image).css('margin-top', `${marginTop}px`);
 	}
 

@@ -34,18 +34,21 @@
 
   {% if element.images.length %}
     <div class="img-container">
-        <ul class="images-carousel">
-          {% for currentImage in element.images %}
-            <li><img src="{{ currentImage }}" class="gogo-img"/></li>
-          {% endfor %}
-        </ul>
-      </figure>
+      <ul class="images-carousel">
+        {% for currentImage in element.images %}
+          <li><img src="{{ currentImage }}" class="gogo-img"/></li>
+        {% endfor %}
+      </ul>
     </div>
   {% endif %}
   <div class="collapsible-body-main-container custom-scroll-bar">
     {% if element.images.length %}
       {# transparent overlay to let the image visible #}
-      <div class="img-overlay"></div>
+      <div class="img-overlay">
+        <span id="img-button-prev" class="img-button"><span class="icon gogo-icon-chevron-left"></span></span>
+        <span id="img-link"></span>
+        <span id="img-button-next" class="img-button"><span class="icon gogo-icon-chevron-right"></span></span>
+      </div>
     {% endif %}
     <div class="collapsible-body-main-content">       
       <div class="body-main-tab-content">

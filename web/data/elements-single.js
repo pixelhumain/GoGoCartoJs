@@ -9,7 +9,7 @@ var elements = [
       "longitude":-0.0339
     },
 
-    "taxonomy": [ "Location", "Auto", "Vélo" ],
+    "taxonomy": [ "Location", "Auto", "Vélo", 10427 ],
     "tags" : ["Open Source", "Réutilisable", "Awesome!"],
 
     "address": {
@@ -26,7 +26,7 @@ var elements = [
     "telephone": "055452545",
     
     // "image" : "https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.italyguides.it%2Fimages%2Fgridfolio%2Ftaormina%2Ftaormina.02.jpg&f=1",
-    "images": ["http://engineering.naukri.com/wp-content/uploads/sites/19/2015/10/open-source.png", "https://images.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.clipartbest.com%2Fcliparts%2FRcA%2FErG%2FRcAErGEei.png&f=1"],
+    "images": [ "https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.italyguides.it%2Fimages%2Fgridfolio%2Ftaormina%2Ftaormina.02.jpg&f=1", "http://engineering.naukri.com/wp-content/uploads/sites/19/2015/10/open-source.png", "https://images.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.clipartbest.com%2Fcliparts%2FRcA%2FErG%2FRcAErGEei.png&f=1"],
 
     "website": "https://example.fr",
     "urls": {

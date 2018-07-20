@@ -11,7 +11,7 @@ import { AppModule, AppStates, AppDataType } from "../../app.module";
 import { App } from "../../gogocarto";
 import { ElementsToDisplayChanged } from "../../modules/elements/elements.module";
 
-import { createListenersForElementMenu, updateFavoriteIcon, createListenersForLongDescription } from "../element/element-menu.component";
+import { createListenersForElementMenu, updateFavoriteIcon, createListenersForLongDescription, createListenersForImage } from "../element/element-menu.component";
 import { Element } from "../../classes/classes";
 import { Event } from "../../classes/event.class";
 
@@ -136,86 +136,7 @@ export class ElementListComponent
 
 			listContentDom.append(element.component.render());
 			
-			let elementDom = $('#element-info-'+element.id);				
-			let directoryListContentDom = $('#directory-content-list');		
-
-			if (!element) {
-				console.log("Element null ?", element);
-			}			
-
-			let images;
-
-			if((images = $('.img-container img')).length > 1)
-			{
-				let indexLastImage = images.length - 1,
-					indexCurrentImage = 0,
-					displayImage = function (imageIndex)
-					{
-						// Get the image of the given index
-						let currentImage = images.eq(imageIndex);
-						// Hide all images
-						images.css('display', 'none');
-						// Display the image of the given index
-						currentImage.css('display', 'block');
-					};
-
-				displayImage(indexCurrentImage);
-
-				// Add a previous and next button for navigating through the images to the overlay, for being able to click on them
-				$('.img-container').append('<div class="img-controls"><span id="img-button-prev" class="img-button" style="position:absolute; left:0;">&lt;</span><span id="img-button-next" class="img-button" style="position:absolute; right:0;">&gt;</span></div>');
-
-				// ----------------------
-				//   REAL SIZE PHOTO
-				// ----------------------
-				$('.images-carousel').click(function()
-				{
-					// When the user clicks the image, opens a new window with the image
-					let modal = $('#modal-real-size-photo');
-
-					modal.find(".modal-footer").attr('option-id',element.colorOptionId);
-
-					let currentImage = images.eq(indexCurrentImage),
-						modalImg = modal.find('img');
-
-					if(modalImg.length===0)
-					{
-						modal.find(".modal-content").append('<img src=' + currentImage[0].src + '>');
-					}
-					else
-					{
-						modalImg.attr('src', currentImage[0].src);
-					}
-
-					modal.openModal({
-			      dismissible: true,
-			      opacity: 0.5,
-			      in_duration: 300,
-			      out_duration: 200
-					});
-				});
-
-				$('#img-button-next').click(function() {
-			    indexCurrentImage++;
-			    // Check that the index is not greater than the last image index
-			    if(indexCurrentImage>indexLastImage)
-			    {
-						// Otherwise we put the first image index
-						indexCurrentImage = 0;
-			    }
-			    displayImage(indexCurrentImage);
-				});
-
-				$('#img-button-prev').click(function() {
-			    indexCurrentImage--;
-			    // Check that the index is not negative
-			    if(indexCurrentImage<0)
-			    {
-						// Otherwise we put the last image index
-						indexCurrentImage = indexLastImage;
-			    }
-			    displayImage(indexCurrentImage);
-				});
-			}
+			let elementDom = $('#directory-content-list #element-info-'+element.id);						
 
 			// check the visibility of an item after it has been expanded
 			elementDom.find('.collapsible-header').click(function() 
@@ -226,24 +147,14 @@ export class ElementListComponent
 						let domMenu = elementDom.find('.menu-element');	
 						createListenersForElementMenu(domMenu);
 						createListenersForLongDescription(elementDom);
+						createListenersForImage(elementDom, element);
 						updateFavoriteIcon(domMenu, element);
 						$(this).addClass('initialized');
 					}, 0);
 
-					// Interval to place the button in the middle height of the images container
-					// We can't place them before because the images container height is equal to 0
-					let intervalId = setInterval( () => {
-						let imgContainerOffset = $('.img-container').offset(),
-							imgContainerHeight = $('.img-container').height(),
-							buttonOuterHeight = $('#img-button-prev').outerHeight();
-
-						if(imgContainerHeight>0)
-						{
-							$('#img-button-prev').offset({top:imgContainerOffset.top+(imgContainerHeight-buttonOuterHeight)/2, left:imgContainerOffset.left});
-							$('#img-button-next').offset({top:imgContainerOffset.top+(imgContainerHeight-buttonOuterHeight)/2, right:0});
-							clearInterval(intervalId);
-						}
-					}, 50);
+					elementDom.find('.img-container').on('new-image', function() {
+						elementDom.find('.img-overlay').css('height', $(this).height());
+					});
 				}			
 
 				setTimeout( () => {

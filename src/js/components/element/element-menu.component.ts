@@ -60,6 +60,70 @@ export function createListenersForLongDescription(object)
 	});
 }
 
+export function createListenersForImage(object, element)
+{
+	let images = object.find('.img-container img');
+
+	if(images.length > 1)
+	{
+		let indexLastImage = images.length - 1,
+			indexCurrentImage = 0,
+			displayImage = function (imageIndex)
+			{
+				// Get the image of the given index
+				let currentImage = images.eq(imageIndex);
+				// Hide all images
+				images.css('display', 'none');
+				// Display the image of the given index
+				currentImage.css('display', 'block');				
+
+				if (currentImage.height()) object.find('.img-container').trigger('new-image');			
+				else currentImage.load(function() { object.find('.img-container').trigger('new-image'); });			
+			};
+
+		displayImage(indexCurrentImage);
+
+		// ----------------------
+		//   REAL SIZE IMAGE
+		// ----------------------
+		object.find('#img-link').click(function()
+		{
+			// don't display modal in small screen
+			if (App.component.width() < 800) return;
+			
+			// When the user clicks the image, opens a new modal with the image
+			let modal = $('#modal-image');
+			modal.find(".modal-footer").attr('option-id', element.colorOptionId);
+
+			let currentImage = images.eq(indexCurrentImage),
+				modalImg = modal.find('img');
+
+			modalImg.attr('src', currentImage[0].src);
+
+			modal.openModal({
+		      dismissible: true,
+		      opacity: 0.5,
+		      in_duration: 300,
+		      out_duration: 200
+			});
+		});
+
+		object.find('#img-button-next').click(function() {
+			indexCurrentImage++;
+			// Check that the index is not greater than the last image index otherwise we put the first image index
+			if(indexCurrentImage > indexLastImage) indexCurrentImage = 0;
+			displayImage(indexCurrentImage);
+		});
+
+		object.find('#img-button-prev').click(function() {
+			indexCurrentImage--;
+			// Check that the index is not negative Otherwise we put the last image index
+			if(indexCurrentImage < 0) indexCurrentImage = indexLastImage;
+			displayImage(indexCurrentImage);
+		});
+	}
+}
+
 export function createListenersForElementMenu(object)
 {
 	object.find('.tooltipped').tooltip();

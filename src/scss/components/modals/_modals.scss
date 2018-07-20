@@ -153,3 +153,13 @@
     margin-bottom: 1rem;
   }
 }
+
+#modal-image
+{
+  width: 90%;
+
+  .modal-content { padding: 0; overflow: auto; }
+
+  img { width: 100%; }
+  
+}

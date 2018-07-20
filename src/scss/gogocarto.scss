@@ -4,6 +4,19 @@
 @import "vendors/components/toast";
 @import "vendors/components/tooltip";
 
+.lean-overlay {
+  position: fixed;
+  z-index:999;
+  top: -100px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 125%;
+  width: 100%;
+  background: #000;
+  display: none;
+}
+
 // Every styles will be loaded inside this container
 // This permit to encapsulate styles, and reuse them
 // If I want to use materialize in my all page (while including gogocarto inside the page) I can simply add

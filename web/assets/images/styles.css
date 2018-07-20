@@ -218,3 +218,9 @@
 .gogo-icon-printemps:before {
   content: "\33";
 }
+.gogo-icon-chevron-left:before {
+  content: "\35";
+}
+.gogo-icon-chevron-right:before {
+  content: "\39";
+}
