@@ -1,90 +1,76 @@
+/**
+ * This file is part of the GoGoCarto project.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @copyright Copyright (c) 2016 Sebastian Castro - 90scastro@gmail.com
+ * @license GNU GPL v3
+ * @Last Modified time: 2016-12-13
+ */
+
+declare var $ : any
 import { Element } from "../../classes/classes";
 import { App } from "../../gogocarto";
+import { ModalAbstractComponent } from "./abstract.component";
 import { capitalize } from "../../utils/string-helpers";
-import { getCurrentElementIdShown, getCurrentElementInfoBarShown } from "../element/element-menu.component";
-declare var $ : any;
 
-export function initializeSendingMail()
+export class SendEmailComponent extends ModalAbstractComponent
 {
-  $('#popup-send-mail #submit-mail').click(() => { handleSubmitMail(); });
-}
-
-export function createListenersForSendEmail(object, element)
-{
-  object.find('.send-mail-btn').click(function()
+  constructor()
   {
-    $('#popup-send-mail .elementName').text(capitalize(element.name));
+    super("#modal-send-email");
+    this.ajaxUrl = App.config.features.sendMail.url;
+  }
 
-    $('#popup-send-mail .input-mail-content').val('');
-    $('#popup-send-mail .input-mail-subject').val('');
-    $('#popup-send-mail #content-error').hide();
-    $('#popup-send-mail #mail-error').hide();
+  beforeOpen(element : Element)
+  {
+    this.dom.find('.elementName').text(capitalize(this.element.name));
+
+    this.dom.find('.input-mail-content').val('');
+    this.dom.find('.input-mail-subject').val('');
+    this.dom.find('#content-error').hide();
+    this.dom.find('#mail-error').hide();
 
     if (App.loginModule.getUserEmail())
     {
-      $('#popup-send-mail .input-mail').hide();
-      $('#popup-send-mail .input-mail').val(App.loginModule.getUserEmail());
+      this.dom.find('.input-mail').hide();
+      this.dom.find('.input-mail').val(App.loginModule.getUserEmail());
     }
     else
     {
-      $('#popup-send-mail .input-mail').val('');
-      $('#popup-send-mail .input-mail').show();
+      this.dom.find('.input-mail').val('');
+      this.dom.find('.input-mail').show();
+    }
+  }
+
+  submit()
+  {
+    let userEmail = this.dom.find('.input-mail').val();
+    let mailSubject = this.dom.find('.input-mail-subject').val();
+    let mailContent = this.dom.find('.input-mail-content').val();
+
+    this.dom.find('#message-error').hide();
+    this.dom.find('#content-error').hide();
+    this.dom.find('#mail-error').hide();
+
+    let errors = false;
+    if (!mailSubject || !mailContent)
+    {
+      this.dom.find('#content-error').show();
+      errors = true;
+    }
+    if (!userEmail || this.dom.find('.input-mail').hasClass('invalid'))
+    {
+      this.dom.find('#mail-error').show();
+      this.dom.find('.input-mail').show();
+      errors = true;
     }
 
-    $('#popup-send-mail').openModal();
-  });
-}
-
-function handleSubmitMail()
-{  
-  let userEmail = $('#popup-send-mail .input-mail').val();
-  let mailSubject = $('#popup-send-mail .input-mail-subject').val();
-  let mailContent = $('#popup-send-mail .input-mail-content').val();
-
-  $('#popup-send-mail #message-error').hide();
-  $('#popup-send-mail #content-error').hide();
-  $('#popup-send-mail #mail-error').hide();
-
-  let errors = false;
-  if (!mailSubject || !mailContent)
-  {
-    $('#popup-send-mail #content-error').show();
-    errors = true;
-  }
-  if (!userEmail || $('#popup-send-mail .input-mail').hasClass('invalid'))
-  {
-    $('#popup-send-mail #mail-error').show();
-    $('#popup-send-mail .input-mail').show();
-    errors = true;
-  }
-  if (!errors)
-  {      
-    let elementId = getCurrentElementIdShown();  
-    let comment = $('#popup-send-mail .input-comment').val();        
-
-    let route = App.config.features.sendMail.url;
-    let data = { elementId: elementId, subject: mailSubject, content: mailContent, userEmail : userEmail };
-
-    App.ajaxModule.sendRequest(route, 'post', data, (response) =>
-    {
-      let success = response.success;
-      let responseMessage = response.message;
-
-      if (success)
-      {
-        $('#popup-send-mail').closeModal();
-        let elementInfo = getCurrentElementInfoBarShown();
-        elementInfo.find('.result-message').html(responseMessage).show();
-        App.infoBarComponent.show();
-      }
-      else
-      {
-        $('#popup-send-mail #message-error').text(responseMessage).show();
-      }
-    },
-    (errorMessage) => 
-    {
-      $('#popup-send-mail #message-error').text(errorMessage).show();
-    });      
+    if (!errors)
+    {      
+      let comment = this.dom.find('.input-comment').val();
+      let data = { elementId: this.element.id, subject: mailSubject, content: mailContent, userEmail : userEmail };
+      this.sendRequest(data);
+    }  
   }  
 }

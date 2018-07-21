@@ -1,13 +1,14 @@
-@import "element-menu";
-@import "interactive-section";
-@import "admin";
-@import "info-bar";
-@import "element-header";
-@import "element-body";
-@import "element-categories";
-
 .element-item
 {
+	@import "element-menu";
+	@import "interactive-section";
+	@import "admin";
+	
+	@import "element-header";
+	@import "element-body";
+	@import "element-images";
+	@import "element-categories";
+
 	list-style-type: none;	
 	@include flexbox();
   	@include flex-flow(column nowrap);  
@@ -16,11 +17,11 @@
 	{
 		font-size: .85rem;
 		text-transform: uppercase;
-    font-weight: 600;
-    padding-left: 0.75rem;
-    margin-bottom: 0;
-    padding-top: 1.5rem;
-  	margin-top: 0;
+		font-weight: 600;
+		padding-left: 0.75rem;
+		margin-bottom: 0;
+		padding-top: 1.5rem;
+		margin-top: 0;
 	}		
 
 	.info-bar-divider 
@@ -33,9 +34,9 @@
 	.btn
 	{
 		height: 2rem;
-  	line-height: 2rem;
-  	padding: 0 1rem;
-  	margin-bottom: 1rem;
+	  	line-height: 2rem;
+	  	padding: 0 1rem;
+	  	margin-bottom: 1rem;
 	}  
 
 	span.added 
@@ -46,8 +47,8 @@
 	span.removed
 	{
 		text-decoration: line-through;
-    margin-right: 5px;
-    color: #b57e7e;
+		margin-right: 5px;
+		color: #b57e7e;
 	}
 
 	a > span.equals

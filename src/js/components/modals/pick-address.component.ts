@@ -1,47 +1,46 @@
 import { App } from "../../gogocarto";
 import { AppStates } from "../../app.module";
-import { getCurrentElementIdShown, getCurrentElementInfoBarShown } from "../element/element-menu.component";
+import { Element } from "../../classes/classes";
+import { ModalAbstractComponent } from "./abstract.component";
 
 declare var $ : any;
 
-export function openPickAddressModal(element)
+export class PickAddressComponent extends ModalAbstractComponent
 {
-  let modal = $('#modal-pick-address');
-  modal.find(".modal-footer").attr('option-id',element.colorOptionId);      
-  
-  modal.openModal({
-    dismissible: true, 
-    opacity: 0.5, 
-    in_duration: 300, 
-    out_duration: 200,
-   });
-}
-export function initializePickAddress()
-{  
-  // button to confirm calculate idrections in modal pick address for directions
-  $('#modal-pick-address #btn-calculate-directions').click(() => handleDirectionsPickingAddress());
-  $('#modal-pick-address input').keyup((e) => { if(e.keyCode == 13) handleDirectionsPickingAddress(); });  
-}
+  constructor() { super("#modal-pick-address"); }
 
-function handleDirectionsPickingAddress()
-{
-  let address = $('#modal-pick-address input').val();
-    
-  if (address)
-  {      
-    App.setState(AppStates.ShowDirections,{id: getCurrentElementIdShown()});
-
-    App.geocoder.geocodeAddress(address,
-    () => {
-      $("#modal-pick-address .modal-error-msg").hide();
-      $('#modal-pick-address').closeModal();        
-    },
-    () => {
-      $("#modal-pick-address .modal-error-msg").show();
-    });      
+  binds()
+  {    
+    // button to confirm calculate idrections in modal pick address for directions
+    this.dom.find('#btn-calculate-directions').click(() => this.submit());
+    this.dom.find('input').keyup((e) => { if(e.keyCode == 13) this.submit(); });  
   }
-  else
+
+  protected beforeOpen(element : Element)
   {
-    $('#modal-pick-address input').addClass('invalid');
+    this.dom.find(".modal-footer").attr('option-id', element.colorOptionId);    
+  }
+
+  submit()
+  {
+    let address = this.dom.find('input').val();
+      
+    if (address)
+    {      
+      App.setState(AppStates.ShowDirections,{id: this.element.id });
+
+      App.geocoder.geocodeAddress(address,
+      (success) => {
+        this.dom.find('.modal-error-msg').hide();
+        this.dom.closeModal();        
+      },
+      (error) => {
+        this.dom.find('.modal-error-msg').show();
+      });      
+    }
+    else
+    {
+      this.dom.find('input').addClass('invalid');
+    }
   }
 }

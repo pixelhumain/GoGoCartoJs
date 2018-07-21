@@ -1,4 +1,4 @@
-.element-item .collapsible-body
+.collapsible-body
 {
   background-color: transpraent;
   padding: 0;
@@ -44,66 +44,7 @@
   .sectionlongDescription {
     padding-bottom: 0;
     padding-top: 1.5rem;
-  } 
-
-  .img-container {
-    .images-carousel { 
-      cursor: pointer !important; 
-    } 
-
-    .gogo-img 
-    {
-      width: 100%;
-      height: auto;    
-    }
   }
-
-  .img-overlay {
-    position: relative;
-    overflow: hidden;
-
-    .img-button { 
-      cursor: pointer !important;       
-      height: 100%;
-      position: absolute;
-      color: white;
-      padding-top: 17% !important;
-      width: 5rem; 
-      @include transition(opacity .5s);
-
-      opacity: .7;
-      &#img-button-prev { 
-        background-image: linear-gradient(to right, rgba(70, 70, 70, 0.4) 0%, rgba(255, 255, 255, 0) 100%); 
-        padding: 0 30px 0 .5rem;
-        left: 0;
-        .icon { left: .6rem; }
-      }
-      &#img-button-next { 
-        background-image: linear-gradient(to left,  rgba(70, 70, 70, 0.4) 0%, rgba(255, 255, 255, 0) 100%); 
-        padding: 0 .5rem 0 30px;
-        right: 0;
-        .icon { right: .6rem; }
-      }      
-
-      &:hover { opacity: 1; }
-
-      .icon {
-        font-size: 3rem;
-        position: absolute;
-        top: calc(50% - 1.5rem);
-        margin: 0;
-        text-shadow: 0px 1px 4px #757575;
-      }
-    } 
-
-    #img-link { 
-      height: 100%;
-      position: absolute;
-      left: 6rem;
-      right: 6rem;
-      cursor: pointer !important; 
-    } 
-  }  
 
   .tags-container 
   {

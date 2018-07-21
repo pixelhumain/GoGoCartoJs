@@ -13,12 +13,12 @@ export class Option extends CategoryOptionTreeNode
 	icon : string;
 	useIconForMarker: boolean;
 	useColorForMarker : boolean;
-  textHelper : string;
+   textHelper : string;
 
-  displayChildrenInMenu : boolean;
+   displayChildrenInMenu : boolean;
 	displayChildrenInInfoBar : boolean;
   
-  intId : number; // And Id as number, used for creating the option url
+   intId : number; // And Id as number, used for creating the option url
 
 	parentOptionIds : number[] = [];
 

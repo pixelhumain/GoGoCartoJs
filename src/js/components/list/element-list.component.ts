@@ -10,12 +10,8 @@
 import { AppModule, AppStates, AppDataType } from "../../app.module";
 import { App } from "../../gogocarto";
 import { ElementsToDisplayChanged } from "../../modules/elements/elements.module";
-
-import { createListenersForElementMenu, updateFavoriteIcon, createListenersForLongDescription, createListenersForImage } from "../element/element-menu.component";
 import { Element } from "../../classes/classes";
 import { Event } from "../../classes/event.class";
-
-import { createListenersForVoting } from "../modals/vote.component";
 
 declare var $;
 
@@ -35,9 +31,7 @@ export class ElementListComponent
 
 	isInitialized : boolean = false;
 
-	constructor()
-	{		
-	}
+	constructor() {}
 
 	initialize()
 	{
@@ -122,65 +116,66 @@ export class ElementListComponent
 		}	
 		else
 		{
-			//console.log("list is full");
-			this.isListFull = true;
+			// console.log("list is full");
 			// waiting for scroll bottom to add more elements to the list
+			this.isListFull = true;			
 		}
 		
+		let listContentDom = $('#directory-content-list ul.collapsible');
+		let that = this;
+
 		for(let i = 0; i < endIndex; i++)
 		{
-			element = elementsToDisplay[i];
-
-			let listContentDom = $('#directory-content-list ul.collapsible');
-			let listContainerDom = $('#directory-content-list .elements-container');
-
+			element = elementsToDisplay[i];			
 			listContentDom.append(element.component.render());
-			
-			let elementDom = $('#directory-content-list #element-info-'+element.id);						
-
-			// check the visibility of an item after it has been expanded
-			elementDom.find('.collapsible-header').click(function() 
-			{
-				if (!$(this).hasClass('initialized'))
-				{
-					setTimeout( () => {
-						let domMenu = elementDom.find('.menu-element');	
-						createListenersForElementMenu(domMenu);
-						createListenersForLongDescription(elementDom);
-						createListenersForImage(elementDom, element);
-						updateFavoriteIcon(domMenu, element);
-						$(this).addClass('initialized');
-					}, 0);
-
-					elementDom.find('.img-container').on('new-image', function() {
-						elementDom.find('.img-overlay').css('height', $(this).height());
-					});
-				}			
-
-				setTimeout( () => {
-					// if all elementDom expanded is not visible					
-					let elementDistanceToTop = elementDom.offset().top - listContainerDom.offset().top;
-
-					if ( (elementDom.offset().top - listContainerDom.offset().top + elementDom.height()) > (listContainerDom.outerHeight() + 150))
-					{
-						listContainerDom.animate({scrollTop: listContainerDom.scrollTop() + elementDom.offset().top - listContainerDom.offset().top}, 550);
-					}					
-					// if element is too high
-					else if ( elementDistanceToTop < 0 ) 
-					{
-						listContainerDom.animate({scrollTop: listContainerDom.scrollTop() + elementDistanceToTop}, 300);
-					}
-					setTimeout( () => $('.info-bar-tabs').tabs(), 0);
-				}, 300);
-			});
-				
+			// bind element header click
+			element.component.dom.find('.collapsible-header').click(function() { that.onElementOpen(this); });
 		}
 
-		createListenersForVoting();
-
 		if ($animate) $('#directory-content-list .elements-container').animate({scrollTop: '0'}, 500);
-
 		$('#directory-content-list ul').collapsible({accordion : true});		
+	}
+
+	private onElementOpen(elementHeaderDom)
+	{
+		let elementDom = $(elementHeaderDom).closest('.element-item');
+		let elementId = elementDom.data('element-id');
+		let element =  App.elementById(elementId);
+		
+		// initialize element component
+		if (!$(elementHeaderDom).hasClass('initialized'))
+		{
+			element.component.initialize();
+			element.component.imagesComponent.onNewImageDisplayed.do( (image) => {
+				elementDom.find('.img-overlay').css('height', elementDom.find('.img-container').height());
+			});				
+
+			setTimeout( () => { $(elementHeaderDom).addClass('initialized'); }, 0);					
+		}
+
+		// on open animation end
+		setTimeout( () => { this.onElementFullyOpenned(elementDom); }, 300);			
+	}
+
+	private onElementFullyOpenned(elementDom)
+	{
+		let listContainerDom = $('#directory-content-list .elements-container');
+		elementDom.find('.img-overlay').css('height', elementDom.find('.img-container').height());
+
+		// check the visibility of an item after it has been expanded
+		let elementDistanceToTop = elementDom.offset().top - listContainerDom.offset().top;
+
+		// if element not visible on screen
+		if ( (elementDom.offset().top - listContainerDom.offset().top + elementDom.height()) > (listContainerDom.outerHeight() + 150))
+		{
+			listContainerDom.animate({scrollTop: listContainerDom.scrollTop() + elementDom.offset().top - listContainerDom.offset().top}, 550);
+		}					
+		// if element is too high
+		else if ( elementDistanceToTop < 0 ) 
+		{
+			listContainerDom.animate({scrollTop: listContainerDom.scrollTop() + elementDistanceToTop}, 300);
+		}
+		setTimeout( () => $('.info-bar-tabs').tabs(), 0);
 	}
 
 	private updateResultMessage()

@@ -1,5 +1,5 @@
 <!-- Pop up message alerte-->
-<div id="popup-report-error" class="modal action-modal">
+<div id="modal-report" class="modal action-modal">
   <div class="modal-content">
   	<form>
 
@@ -8,7 +8,7 @@
 
 		    <p id="select-error" class="error">Vous devez sélectionner un type d'erreur!</p>
 
-				<input class="option-radio-btn "value="0" name="report-error" type="radio" id="report1"/>
+			<input class="option-radio-btn "value="0" name="report-error" type="radio" id="report1"/>
 		    <label class="option-radio-label" for="report1">{{ config.text.elementDefinite | capitalize }} n'existe plus</label>
 
 		    <input class="option-radio-btn "value="1" name="report-error" type="radio" id="report2"/>
@@ -31,14 +31,12 @@
 			
 			<div class="footer">
 				<button type="button"
-						onclick="$('#popup-report-error').closeModal()"  
+						onclick="$('#modal-report').closeModal()"  
 						class="waves-effect waves-teal btn-flat">
 					Annuler
 				</button>
 				
-				<button type="button" 
-						id="submit-report"		
-						class="btn waves-effect waves-light">
+				<button type="submit" class="btn waves-effect waves-light">
 						Envoyer
 				</button>
 			</div>

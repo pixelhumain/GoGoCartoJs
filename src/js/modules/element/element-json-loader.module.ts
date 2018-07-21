@@ -88,14 +88,9 @@ export class ElementJsonParserModule
     App.elementFormaterModule.calculateFormatedOpenHours(element);
     element.openHoursMoreInfos = elementJson.openHoursMoreInfos || elementJson.openHoursString; 
     element.images = [];
-    if(elementJson.image)
-    {
-      element.images.push(elementJson.image);
-    }
-    else if (elementJson.images && elementJson.images.length > 0)
-    {
-      element.images = [].concat(elementJson.images);
-    }
+    if(elementJson.image) element.images.push(elementJson.image);
+    else if (elementJson.images) element.images = [].concat(elementJson.images);
+    element.images = element.images.filter((imageUrl) => imageUrl.length > 0);
     
     // urls
     element.website = elementJson.website || elementJson.site;

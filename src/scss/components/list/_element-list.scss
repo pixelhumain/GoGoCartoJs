@@ -87,10 +87,6 @@
 		@include order(1000000);
 	}
 	
-}
-
-#directory-content-list
-{
 	.menu-element, .info-bar-tabs
 	{
 		position: relative;
@@ -103,17 +99,17 @@
 		.info-bar-tabs { display: flex; }
 	}
 
-	.img-container {
-		max-height: 18rem;
-	   overflow: hidden;
-	   background-color: #F7F7F7;
+	.img-overlay 
+	{
+		max-height: 20rem;
+		overflow: hidden;
 	}
 
-	.img-overlay {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-	}
+	.img-container
+   {
+      max-height: 20rem;
+		background-color: #F7F7F7;
+		overflow: hidden;
+   }
 }
 

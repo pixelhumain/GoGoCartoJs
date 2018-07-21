@@ -1,59 +1,60 @@
 declare var $ : any;
 import { App } from "../../gogocarto";
-import { getCurrentElementIdShown, getCurrentElementInfoBarShown } from "../element/element-menu.component";
-import { AjaxModule } from "../../modules/ajax.module";
+import { Element } from "../../classes/classes";
 
-export function createListenersForMarkAsResolved()
+export class ModerationComponent
 {
-  // vote-button is located on the element-info-bar of a pending element
-  $(".mark-as-moderated-btn").click( function(e)
+  private dom;
+  private element : Element;
+
+  constructor(dom : any, element : Element)
   {
-    // restrict vote to specific roles
-    if (!App.config.isFeatureAvailable('moderation')) 
-    {
-      App.loginModule.loginAction();
-      return;
-    }
-    else
-    {
-      let element = App.elementsModule.getElementById(getCurrentElementIdShown());
-      let comment = $(this).siblings('.moderation-input-comment').val();
-     
-      let route = App.config.features.moderation.url;
-      let data = { elementId: element.id, comment: comment };
-      console.log("send mark as resolved ", data);
-      
-      App.ajaxModule.sendRequest(route, 'post', data, (response) =>
-      {        
-        let responseMessage = response.message;
-        let success = response.success;
-        
-        element.update(true);
-        element.isFullyLoaded = false;
+    this.dom = $(dom); 
+    this.element = element;  
+    this.initialize();
+  }
 
-        // reload Element, and add flash message
-        App.infoBarComponent.showElement(element.id, () => {
-          addFlashMessage(responseMessage);
-        });
-        
-        addFlashMessage(responseMessage);        
-      },
-      (errorMessage) => 
+  private initialize()
+  {
+    // vote-button is located on the element-info-bar of a pending element
+    var that = this;
+    this.dom.find(".mark-as-moderated-btn").click( function(e)
+    {
+      // restrict vote to specific roles
+      if (!App.config.isFeatureAvailable('moderation')) 
       {
-        addFlashMessage(errorMessage);  
-      });  
-    }      
+        App.loginModule.loginAction();
+        return;
+      }
+      else
+      {
+        let comment = $(this).siblings('.moderation-input-comment').val();       
+        let route = App.config.features.moderation.url;
+        let data = { elementId: that.element.id, comment: comment };
+        
+        App.ajaxModule.sendRequest(route, 'post', data, (response) =>
+        {        
+          let responseMessage = response.message;
+          let success = response.success;
+          
+          that.element.update(true);
+          that.element.isFullyLoaded = false;
 
-    e.stopPropagation();
-    e.stopImmediatePropagation();
-    e.preventDefault();
-  });
+          // reload Element, and add flash message
+          App.infoBarComponent.showElement(that.element.id, () => {
+            that.element.component.addFlashMessage(responseMessage);
+          });
+          
+          that.element.component.addFlashMessage(responseMessage);        
+        },
+        (errorMessage) => 
+        {
+          that.element.component.addFlashMessage(errorMessage);  
+        });  
+      }      
+
+      e.stopPropagation();e.stopImmediatePropagation();e.preventDefault();
+    });
+  }
 }
 
-function addFlashMessage(message)
-{
-  let elementInfo = getCurrentElementInfoBarShown();
-  elementInfo.find(".moderation-section").find('.basic-message').hide(); 
-  elementInfo.find('.result-message').html(message).show();
-  App.infoBarComponent.show();
-}

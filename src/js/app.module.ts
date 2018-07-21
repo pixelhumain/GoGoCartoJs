@@ -55,6 +55,13 @@ import { MapControlsComponent } from "./components/map/map-controls.component";
 import { DirectionsComponent } from "./components/map/directions.component";
 import { CustomPopupComponent } from "./components/custom-popup.component";
 
+// MODALS
+import { PickAddressComponent } from './components/modals/pick-address.component';
+import { VoteComponent } from './components/modals/vote.component';
+import { ReportComponent } from './components/modals/report.component';
+import { DeleteComponent } from './components/modals/delete.component';
+import { SendEmailComponent } from './components/modals/send-email.component';
+
 // OTHERS
 import { GoGoConfig } from "./classes/config/gogo-config.class";
 import { App } from "./gogocarto";
@@ -119,6 +126,12 @@ export class AppModule
 	mapControlsComponent = new MapControlsComponent();
 	customPopupComponent = new CustomPopupComponent();
 
+	pickAddressComponent : PickAddressComponent;
+	voteComponent : VoteComponent;
+	reportComponent : ReportComponent;
+	deleteComponent : DeleteComponent;
+	sendEmailComponent : SendEmailComponent;
+	
 	constructor($config : any, $isIframe = false, $loadFullTaxonomy = true, $request = {})
 	{
 		this.config = new GoGoConfig($config);
@@ -127,8 +140,8 @@ export class AppModule
 		this.request = $request;
 		
 		this.loginModule = new LoginModule(this.config.security.userRoles, this.config.security.userEmail);
-  	this.boundsModule = new BoundsModule(this.config);  	
-  	this.stampModule = new StampModule(this.config);
+	  	this.boundsModule = new BoundsModule(this.config);  	
+	  	this.stampModule = new StampModule(this.config);
 
 		Cookies.createCookie('firstVisit', 'done');			
 	}
@@ -138,7 +151,14 @@ export class AppModule
 		this.component = new AppComponent();
 		this.elementsManager = new ElementsManager();
 		this.geocodingManager = new GeocodingManager();
-		this.mapManager = new MapManager();	
+		this.mapManager = new MapManager();
+
+		// intialize modals component (template as been created after AppModule)
+		this.pickAddressComponent = new PickAddressComponent();
+		this.voteComponent = new VoteComponent();
+		this.reportComponent = new ReportComponent();
+		this.deleteComponent = new DeleteComponent();
+		this.sendEmailComponent = new SendEmailComponent();	
 	}
 
 	// ---------------------------

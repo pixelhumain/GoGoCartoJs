@@ -4,6 +4,7 @@
 @import "vendors/components/toast";
 @import "vendors/components/tooltip";
 
+// the lean-overlay added my materialize for modals is outside of gogo-load-css container
 .lean-overlay {
   position: fixed;
   z-index:999;
@@ -29,8 +30,7 @@
   width:100%;
 
   .gogocarto-container
-  {   
-
+  {
     @include flexbox();
     @include flex(1 auto);
     height: 100%;    
@@ -44,6 +44,7 @@
     @import "components/gogo-controls";
     @import 'components/search-bar/search-bar';
     @import "components/element/element";
+    @import "components/info-bar/info-bar";
     @import "components/modals/modals";
     @import "components/commons/shadow-bottom";
     @import "components/commons/scroll-bar";
@@ -79,8 +80,3 @@
     }
   }
 }
-
-
-
-
-

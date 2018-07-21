@@ -2,11 +2,6 @@ declare var $;
 declare var nunjucks, goGoCarto;
 
 import { AppModule, AppDataType, AppModes, AppStates } from './app.module';
-
-import { initializePickAddress } from "./components/modals/pick-address.component";
-import { initializeVoting } from "./components/modals/vote.component";
-import { initializeReportingAndDeleting } from "./components/modals/reporting-deleting.component";
-import { initializeSendingMail } from "./components/modals/send-email.component";
 import { getQueryParams } from "./utils/params";
 
 export var App : AppModule;
@@ -122,11 +117,6 @@ export class GoGoCartoModule
 			App.customPopupComponent.initialize();
 			
 			App.component.initialize();		
-			
-			initializePickAddress();
-			initializeVoting();
-			initializeReportingAndDeleting();
-			initializeSendingMail();			
 
 			App.routerModule.loadInitialState();
 

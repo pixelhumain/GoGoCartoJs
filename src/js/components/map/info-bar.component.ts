@@ -12,9 +12,6 @@ import { Element } from "../../classes/classes";
 import { App } from "../../gogocarto";
 
 import { Event } from "../../classes/event.class";
-import { createListenersForElementMenu, updateFavoriteIcon, showFullTextMenu, createListenersForLongDescription, createListenersForImage } from "../element/element-menu.component";
-
-import { createListenersForVoting } from "../modals/vote.component";
 
 declare var $;
 
@@ -90,32 +87,25 @@ export class InfoBarComponent
 			clearTimeout(this.loaderTimer);
 			$('#info-bar-overlay').fadeOut();
 
-			$('#element-info').html(element.component.render());	
+			$('#element-info').html(this.elementVisible.component.render());	
 
 			if (this.elementVisible.images.length) 
 			{
-				// Animation to move img-button when scrolling
+				// Animation to move img-navigation-btn when scrolling
 				$('#element-info-bar .collapsible-body-main-container').scroll(function(e) {
 					let scrollTop = $(this).scrollTop();
-					$(this).find('#img-button-prev').css('left', -scrollTop/5);
-					$(this).find('#img-button-next').css('right', -scrollTop/5);
-					$(this).find('#img-button-next').css('top', scrollTop/2);
-					$(this).find('#img-button-prev').css('top', scrollTop/2);
+					$(this).find('.img-navigation-btn.prev').css('left', -scrollTop/5);
+					$(this).find('.img-navigation-btn.next').css('right', -scrollTop/5);
+					$(this).find('.img-navigation-btn.next').css('top', scrollTop/2);
+					$(this).find('.img-navigation-btn.prev').css('top', scrollTop/2);
 					$(this).find('.img-overlay').css('opacity', 1 - scrollTop/200);
-				});	
-
-				createListenersForImage($('#element-info-bar'), element);
+				});				
 			}						
 
-			let domMenu = this.domMenu();
-			
-			createListenersForElementMenu(domMenu);	
-			createListenersForLongDescription($('#element-info-bar'));
-			createListenersForVoting();
-
-			setTimeout( () => { $('.info-bar-tabs').tabs(); }, 100);			
-
-			updateFavoriteIcon(domMenu, element);			
+			this.elementVisible.component.initialize();	
+			// on large screen info bar is displayed aside and so we have enough space
+			// to show menu actions details in full text
+			this.elementVisible.component.menuComponent.showFullTextMenu(this.isDisplayedAside());				
 
 			$('#btn-close-bandeau-detail').click(() => { this.hide(); return false; });
 			
@@ -148,10 +138,6 @@ export class InfoBarComponent
 
 	show()
 	{
-		// on large screen info bar is displayed aside and so we have enough space
-		// to show menu actions details in full text
-		showFullTextMenu(this.domMenu(), this.isDisplayedAside());
-
 		this.hideDetails();
 
 		App.searchBarComponent.hideMobileSearchBar();		
@@ -189,8 +175,6 @@ export class InfoBarComponent
 			}, 400);				
 		}	
 
-		this.verticalAlignImages();
-
 		this.isVisible = true;
 	};	
 
@@ -208,23 +192,6 @@ export class InfoBarComponent
 				setTimeout( () => { this.elementVisible.marker.showBigSize(); }, 1000);
 			}	
 		}, 100);
-	}
-
-	verticalAlignImages()
-	{
-		let that = this;
-		$('#element-info-bar .img-container .gogo-img').each( function() {
-			// if image is loaded (height != 0) align image, else do it when image is loaded
-			if ($(this).height()) that.verticalAlignImage(this);			
-			else $(this).load(function() { that.verticalAlignImage(this); });			
-		});
-	}
-
-	private verticalAlignImage(image)
-	{
-		let imgBannerHeight = $('#element-info-bar .img-overlay').height();
-		let marginTop = (imgBannerHeight - $(image).height()) / 2;
-		if (marginTop < 0) $(image).css('margin-top', `${marginTop}px`);
 	}
 
 	private isCurrentMarkerNotVisibleOnMap()
@@ -274,11 +241,11 @@ export class InfoBarComponent
 		if ( $('#element-info-bar .moreDetails').is(':visible') )
 		{
 			this.hideDetails();
-			showFullTextMenu(this.domMenu(), false);
+			this.elementVisible.component.menuComponent.showFullTextMenu(false);
 		}
 		else
 		{
-			if (this.domMenu().width() >= 400) showFullTextMenu(this.domMenu(), true);
+			if (this.domMenu().width() >= 400) this.elementVisible.component.menuComponent.showFullTextMenu(true);
 
 			$('#element-info-bar .element-item').addClass('active');		
 			$('#element-info-bar .moreDetails').show();	
@@ -287,7 +254,7 @@ export class InfoBarComponent
 			$('#element-info-bar').animate({'height':'100%'},400,'swing');
 
 			let elementInfoBar = $("#element-info-bar");
-		  let height =  $('.gogocarto-container').height();
+		   let height =  $('.gogocarto-container').height();
 			height -= elementInfoBar.find('.collapsible-header').outerHeight(true);			
 			height -= elementInfoBar.find('.interactive-section').outerHeight(true);	
 			height -= elementInfoBar.find(".menu-element").outerHeight(true);
@@ -295,7 +262,7 @@ export class InfoBarComponent
 		  $('#element-info-bar .collapsible-body').css('height', height);	
 
 		  this.showBodyMainTab();
-		  this.verticalAlignImages();
+		  this.elementVisible.component.imagesComponent.verticalAlignCurrentImage();
 
 		  App.gogoControlComponent.hide();
 		}	

@@ -8,135 +8,85 @@
  * @Last Modified time: 2016-12-13
  */
 
-declare let grecaptcha;
-declare var $ : any;
-declare let Routing : any;
-
-import { AppModule, AppStates, AppModes } from "../../app.module";
-import { getCurrentElementIdShown, getCurrentElementInfoBarShown } from "../element/element-menu.component";
-import { AjaxModule } from "../../modules/ajax.module";
-import { ElementStatus } from "../../classes/classes";
-
+declare var $ : any
+import { Element, ElementStatus } from "../../classes/classes";
 import { App } from "../../gogocarto";
+import { AppModes } from "../../app.module";
+import { ModalAbstractComponent } from "./abstract.component";
 
-export function initializeVoting()
-{	
-	$('#modal-vote #select-vote').material_select();
+export class VoteComponent extends ModalAbstractComponent
+{
+	constructor() 
+	{ 
+		super("#modal-vote"); 
+		this.ajaxUrl = App.config.features.vote.url;
+      this.dom.find('#select-vote').material_select();	
+	}
 
-	// open a modal containing description of the validation process
-	$(".validation-process-info").click( (e) => 
+	beforeOpen(element : Element)
 	{
-		$("#modal-contribution").openModal();	
-		e.stopPropagation();
-  	e.stopImmediatePropagation();
-  	e.preventDefault();
-	});	
+		// dynamically create vote template
+		this.dom.find('#vote-modal-content').html(App.templateModule.render('vote-modal-content', { 
+			element: this.element, 
+			ElementStatus: ElementStatus,
+			isAdmin: App.config.isFeatureAvailable('directModeration'),
+			eldisplayName: App.config.text.elementDefinite
+		}));  
+	}
 
-	$('#modal-vote #submit-vote').click(() => 
+	submit()
 	{
-		let voteValue = $('#modal-vote .option-radio-btn:checked').attr('value');
+		let voteValue = this.dom.find('.option-radio-btn:checked').attr('value');
 
-		$('#modal-vote #select-error').hide();
+		this.dom.find('#select-error').hide();
 		
 		if (voteValue)
-		{			
-			let elementId = getCurrentElementIdShown();	
-			let comment = $('#modal-vote .input-comment').val();
-
-			console.log("send vote " +voteValue + " to element id ", elementId);
-
+		{				
+			let comment = this.dom.find('.input-comment').val();
 			let route = App.config.features.vote.url;
-			let data = { elementId: elementId, value: voteValue, comment: comment };
+			let data = { elementId: this.element.id, value: voteValue, comment: comment };
 
-			App.ajaxModule.sendRequest(route, 'post', data, (response) =>
-			{				
-				let responseMessage = response.message;
-				let newstatus = response.data;
-				let success = response.success;
-
-				if (success)
-				{
-					let element = App.elementById(elementId);
-
-					$('#modal-vote').closeModal();
-
-					if (element.status != newstatus)
-					{
-						element.status = newstatus;
-						element.update(true);
-						element.isFullyLoaded = false;
-
-						// reload Element, and add flash message
-						if (App.mode == AppModes.Map) 
-							App.infoBarComponent.showElement(element.id, () => {
-								addFlashMessage(responseMessage);
-							});
-						else addFlashMessage(responseMessage);
-					}
-					else
-					{
-						addFlashMessage(responseMessage);
-					}					
-				}
-				else
-				{
-					$('#modal-vote #select-error').text(responseMessage).show();
-				}
-			},
-			(errorMessage) => 
-			{
-				$('#modal-vote #select-error').text(errorMessage).show();
-			});			
+			this.sendRequest(data);		
 		}
 		else
 		{
-			$('#modal-vote #select-error').show();
+			this.dom.find('#select-error').show();
 		}
-	});
-}
+	}
 
-export function createListenersForVoting()
-{
-	// vote-button is located on the element-info-bar of a pending element
-	$(".vote-button").click( function(e)
+	protected onSuccess(response)
 	{
-		// restrict vote to specific roles
-		if (!App.config.isFeatureAvailable('vote')) 
-		{
-			App.loginModule.loginAction();
+		let responseMessage = response.message;
+		let newstatus = response.data;
+
+		if (!response.success) {
+			this.onError(responseMessage);
 			return;
 		}
+		
+		$('#modal-vote').closeModal();
+
+		if (this.element.status != newstatus)
+		{
+			this.element.status = newstatus;
+			this.element.update(true);
+			this.element.isFullyLoaded = false;
+
+			// reload Element, and add flash message
+			if (App.mode == AppModes.Map) 
+				App.infoBarComponent.showElement(this.element.id, () => {
+					this.element.component.addFlashMessage(responseMessage);
+				});
+			else this.element.component.addFlashMessage(responseMessage);
+		}
 		else
 		{
-			let element = App.elementsModule.getElementById(getCurrentElementIdShown());
+			this.element.component.addFlashMessage(responseMessage);
+		}
+	}
 
-			// dynamically create vote template
-			$('#vote-modal-content').html(App.templateModule.render('vote-modal-content', { 
-				element: element, 
-				ElementStatus: ElementStatus,
-				isAdmin: App.config.isFeatureAvailable('directModeration'),
-				eldisplayName: App.config.text.elementDefinite
-			}));
-
-			$('#modal-vote').openModal({
-		    dismissible: true, 
-		    opacity: 0.5, 
-		    in_duration: 300, 
-		    out_duration: 200
-			});	
-		}			
-
-		e.stopPropagation();
-		e.stopImmediatePropagation();
-  	e.preventDefault();
-	});
+	protected onError(errorMessage)
+	{
+		this.dom.find('#select-error').text(errorMessage).show();
+	}
 }
-
-function addFlashMessage(message)
-{
-	let elementInfo = getCurrentElementInfoBarShown();
-	elementInfo.find(".vote-section").find('.basic-message').hide();	
-	elementInfo.find('.result-message').html(message).show();
-	App.infoBarComponent.show();
-}
-

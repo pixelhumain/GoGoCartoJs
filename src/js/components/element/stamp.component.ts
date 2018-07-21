@@ -1,33 +1,33 @@
 declare var $ : any;
 import { App } from "../../gogocarto";
 import { Element } from "../../classes/classes";
-import { getCurrentElementIdShown, getCurrentElementInfoBarShown } from "../element/element-menu.component";
-import { AjaxModule } from "../../modules/ajax.module";
 
 export class StampComponent
 {
   private dom;
-
-  private elementId;
   private element : Element;
 
   private stampId;
   private value : boolean = false; // whether the stamp is activated for this element or not  
 
-  constructor(dom : any)
+  constructor(dom : any, element : Element)
   {
     this.dom = $(dom);
+    this.element = element;
     this.stampId =   this.dom.data('stamp-id');
-    this.elementId = this.dom.data('element-id');
-    this.element = App.elementById(this.elementId);
     this.setValue(this.element.stamps.indexOf(this.stampId) > -1, false);
-    this.dom.click(() => this.handleClick());    
+    this.initialize();
   }
 
-  handleClick()
+  private initialize()
+  {
+    this.dom.click(() => this.handleClick());
+  }
+
+  private handleClick()
   {
     let route = App.config.features.stamp.url;
-    let data = { elementId: this.elementId, stampId: this.stampId, value: !this.value };
+    let data = { elementId: this.element.id, stampId: this.stampId, value: !this.value };
 
     App.ajaxModule.sendRequest(route, 'post', data, (response) =>
     { 
