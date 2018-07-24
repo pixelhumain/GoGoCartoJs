@@ -40,8 +40,10 @@ export class TaxonomyModule
 		let isSkosTaxonomy = taxonomyJson['@graph'];
 		if (isSkosTaxonomy) taxonomyJson = App.taxonomySkosModule.convertSkosIntoGoGoTaxonomy(taxonomyJson);
 		
+		if (Array.isArray(taxonomyJson) && taxonomyJson.length == 1) taxonomyJson = taxonomyJson[0];
+		
 		// If multiple root categories, we encapsulate them into a single fake category & root option
-		if (Array.isArray(taxonomyJson)) {
+		if (Array.isArray(taxonomyJson) && taxonomyJson.length > 1) {
 			for (let json of taxonomyJson) json.isRootCategory = true;
 			taxonomyJson = {
 	      "options":[    
