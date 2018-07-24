@@ -19,7 +19,7 @@ export class ImagesComponent
     this.initialize();
   }
 
-  get currentImage() { return this.domImages.eq(this.indexCurrentImage); }
+  get currentImage() { return this.domImages ? this.domImages.eq(this.indexCurrentImage) : null; }
 
   private initialize()
   {
@@ -42,11 +42,7 @@ export class ImagesComponent
       // When the user clicks the image, opens a new modal with the image
       let modal = $('#modal-image');
       modal.find(".modal-footer").attr('option-id', this.element.colorOptionId);
-
-      let currentImage = this.domImages.eq(this.indexCurrentImage),
-        modalImg = modal.find('img');
-
-      modalImg.attr('src', currentImage[0].src);
+      modal.find('img').attr('src', this.currentImage[0].src);
       modal.openModal();
     });   
   }

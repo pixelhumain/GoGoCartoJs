@@ -2,7 +2,7 @@ import { App } from "../../gogocarto";
 import { Element } from "../../classes/classes";
 declare var $ : any;
 
-export class ModalAbstractComponent
+export class AbstractModalComponent
 {
 	dom : any;
 	element : Element;	
@@ -25,6 +25,7 @@ export class ModalAbstractComponent
 	open(element : Element)
 	{		
 		this.element = element;
+		this.clearLoader();
 		// console.log("openning modal", this.dom, this.element);
 		this.beforeOpen(element);
 		this.dom.openModal();
@@ -35,7 +36,8 @@ export class ModalAbstractComponent
 	protected handleSubmit(e) 
 	{
 		if (!this.element) return;
-		this.submit();
+		this.displayLoader();
+		this.submit();		
 		e.stopPropagation();e.stopImmediatePropagation();e.preventDefault();
 	}
 
@@ -44,9 +46,26 @@ export class ModalAbstractComponent
 	protected sendRequest(data)
 	{
 		App.ajaxModule.sendRequest(this.ajaxUrl, 'post', data,
-		  (response) => this.onSuccess(response),
-		  (errorMessage) => this.onError(errorMessage)
+		  (response)     => { 
+		  		setTimeout( () => this.clearLoader(), 500); 
+		  		this.onSuccess(response);
+		  	},
+		  (errorMessage) => { this.clearLoader(); this.onError(errorMessage); }
 		); 
+	}
+
+	protected displayLoader()
+	{
+		this.dom.find('.cancel-btn').show();
+		this.dom.find('button[type=submit]').hide();
+		this.dom.find('.loader-overlay').fadeIn(800);
+	}
+
+	protected clearLoader()
+	{
+		this.dom.find('.cancel-btn').hide();
+		this.dom.find('button[type=submit]').show();
+		this.dom.find('.loader-overlay').hide();
 	}
 
 	protected onSuccess(response)

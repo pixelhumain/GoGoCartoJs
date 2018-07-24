@@ -1,11 +1,11 @@
 import { App } from "../../gogocarto";
 import { AppStates } from "../../app.module";
 import { Element } from "../../classes/classes";
-import { ModalAbstractComponent } from "./abstract.component";
+import { AbstractModalComponent } from "./abstract-modal.component";
 
 declare var $ : any;
 
-export class PickAddressComponent extends ModalAbstractComponent
+export class PickAddressComponent extends AbstractModalComponent
 {
   constructor() { super("#modal-pick-address"); }
 

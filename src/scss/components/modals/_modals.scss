@@ -110,6 +110,29 @@
     display: block !important;
     height: auto !important;
   }
+
+  .cancel-btn
+  {
+    display: none;
+
+    .preloader-wrapper
+    {
+      height: 15px;
+      width: 15px;
+      top: 1px;
+      .spinner-layer { border-color: white; }
+      .circle-clipper .circle { border-width: 2px; }
+    }
+  }
+
+  .loader-overlay
+  {
+    display: none;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #000000;
+    opacity: 0.35;
+  }
 }
 
 #modal-iframe

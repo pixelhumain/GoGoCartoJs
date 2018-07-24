@@ -12,9 +12,9 @@ declare var $ : any
 import { Element } from "../../classes/classes";
 import { App } from "../../gogocarto";
 import { capitalize } from "../../utils/string-helpers";
-import { ModalAbstractComponent } from "./abstract.component";
+import { AbstractModalComponent } from "./abstract-modal.component";
 
-export class ReportComponent extends ModalAbstractComponent
+export class ReportComponent extends AbstractModalComponent
 {
 	constructor()
 	{
@@ -71,7 +71,9 @@ export class ReportComponent extends ModalAbstractComponent
 			let data =  { elementId: this.element.id, value: reportValue, comment: comment, userEmail : userEmail };
 
 			this.sendRequest(data);		
-		}	
+		} else {
+			this.clearLoader()
+		}
 	}
 
 	protected onError(errorMessage)

@@ -44,5 +44,50 @@ var elements = [
       "Fr":"09:00-11:30 & 5pm to 9pm"
     },  
     "openHoursString": "Fermé pendant les vacances d'été"
+  },
+  {
+    "id": "wd41",
+
+    "name": "GoGo Example2",
+
+    "geo": {
+      "latitude":46.3352,
+      "longitude":-0.0339
+    },
+
+    "taxonomy": [ "Location", "Auto", "Vélo", 10427 ],
+    "tags" : ["Open Source", "Réutilisable", "Awesome!"],
+
+    "address": {
+      "streetAddress":"5 rue Edmond Proust",
+      "addressLocality":"Chenay",
+      "postalCode":"79120",
+      "addressCountry":"FR",
+      "customFormatedAddress": "Immeuble 4B, 5 Edmond Proust à Chenay, France"
+    },
+
+    "description": "Short Description Je souhaiterai proposer aux citoyens, une initiation à la gravure sur brique de lait. Pour permettre à cet atelier d'être en adéquation avec Alternatiba, le thème serait la création d'une monnaie locale, où chacun pourrait graver ce qu'il aimerait voir apparaitre sur cette monnaie. Une exposition et vente sera proposée à l'intérieur du camion Je souhaiterai proposer aux citoyens, une initiation à la gravure sur brique de lait. Pour permettre à cet atelier d'être en adéquation avec Alternatiba, le thème serait la création d'une monnaie locale, où chacun pourrait graver ce qu'il aimerait voir apparaitre sur cette monnaie. Une exposition et vente sera proposée à l'intérieur du camion Je souhaiterai proposer aux citoyens, une initiation à la gravure sur brique de lait. Pour permettre à cet atelier d'être en adéquation avec Alternatiba, le thème serait la création d'une monnaie locale, où chacun pourrait graver ce qu'il aimerait voir apparaitre sur cette monnaie. Une exposition et vente sera proposée à l'intérieur du camion",
+    "descriptionMore": "Un rassemblement était organisé à 13 heures à Paris sous les fenêtres de la ministre de la Santé Agnès Buzyn aux Invalides. Le cortège est ensuite parti de Montparnasse vers 14 heures. Notre reporter Mona Hammoud est sur place. Des représentants de forces politiques étaient présents pour exprimer leur solidarité avec les retraités. La conseillère de Paris, Danielle Simonnet et les députés Adrien Quatennens et Clémentine Autain (La France insoumise) étaient dans le cortège.",
+    "email": "example@gogocarto.fr",
+    "telephone": "055452545",
+    
+    "images": [ "https://images.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.completementflou.com%2Fwp-content%2Fuploads%2F2013%2F01%2Frois-mages-milan-6.jpg&f=1", "https://images.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.yogazentrum-freiburg.de%2Fimages%2F02c6c298370a71935.jpg&f=1"],
+
+    "website": "https://example.fr",
+    "urls": {
+      "communecter": "http://communeter.org",
+      "peertube": "http://framatub.org"
+    },
+    // "urls": ["http://communeter.org", "http://framatube.org"],
+    // "urls": [
+    //   {"type": "communecter", "value": "http://communeter.org" },
+    //   {"type": "peertube", "value": "http://framatube.org" }
+    // ],
+    // "url" : "http://communeter.org",
+    "openHours": {
+      "Mo":"09:00-12:00",
+      "Fr":"09:00-11:30 & 5pm to 9pm"
+    },  
+    "openHoursString": "Fermé pendant les vacances d'été"
   }
 ]

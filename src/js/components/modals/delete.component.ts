@@ -2,9 +2,9 @@ declare var $ : any
 import { Element } from "../../classes/classes";
 import { App } from "../../gogocarto";
 import { capitalize } from "../../utils/string-helpers";
-import { ModalAbstractComponent } from "./abstract.component";
+import { AbstractModalComponent } from "./abstract-modal.component";
 
-export class DeleteComponent extends ModalAbstractComponent
+export class DeleteComponent extends AbstractModalComponent
 {
 	constructor()
    {

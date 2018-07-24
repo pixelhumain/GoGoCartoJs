@@ -1,30 +1,30 @@
 {% include 'components/modals/image.html.njk'  %}
 
 {% if config.isFeatureActivated('report') %}
-  {% include 'components/modals/report-error-for-element.html.njk' %} 
+  {% include 'components/modals/element/report.html.njk' %} 
 {% endif %} 
 
 {% if config.isFeatureActivated('delete') %}
-  {% include 'components/modals/delete-element.html.njk' %}  
-
+  {% include 'components/modals/element/delete.html.njk' %}  
 {% endif %}  
+
 {% if config.isFeatureActivated('directions') %}
-  {% include 'components/modals/pick-address-for-directions.html.njk'  %}  
-
+  {% include 'components/modals/element/pick-address.html.njk'  %} 
 {% endif %}  
-{% if config.isFeatureActivated('share') %} 
-  {% include 'components/modals/share-element-url.html.njk'  %}  
 
-{% endif %} 
-{% if config.isFeatureActivated('export') %}
-  {% include 'components/modals/export-iframe.html.njk' %} 
+{% if config.isFeatureActivated('share') %} 
+  {% include 'components/modals/element/share.html.njk'  %}  
 {% endif %} 
 
 {% if config.isFeatureActivated('vote') %}
-  {% include 'components/modals/vote-for-pending-element.html.njk'  %}
+  {% include 'components/modals/element/vote.html.njk'  %}
   {% include 'components/modals/contribution-information.html.njk'  %}      
 {% endif %}
 
 {% if config.security.hideMailsByShowingSendMailButton %}
-  {% include 'components/modals/send-mail-to-element.html.njk'  %}    
+  {% include 'components/modals/element/send-email.html.njk'  %}    
+{% endif %}
+
+{% if config.isFeatureActivated('export') %}
+  {% include 'components/modals/export-iframe.html.njk' %} 
 {% endif %}

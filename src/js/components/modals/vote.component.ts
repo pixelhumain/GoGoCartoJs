@@ -12,9 +12,9 @@ declare var $ : any
 import { Element, ElementStatus } from "../../classes/classes";
 import { App } from "../../gogocarto";
 import { AppModes } from "../../app.module";
-import { ModalAbstractComponent } from "./abstract.component";
+import { AbstractModalComponent } from "./abstract-modal.component";
 
-export class VoteComponent extends ModalAbstractComponent
+export class VoteComponent extends AbstractModalComponent
 {
 	constructor() 
 	{ 
@@ -26,7 +26,7 @@ export class VoteComponent extends ModalAbstractComponent
 	beforeOpen(element : Element)
 	{
 		// dynamically create vote template
-		this.dom.find('#vote-modal-content').html(App.templateModule.render('vote-modal-content', { 
+		this.dom.find('.specific-content').html(App.templateModule.render('vote-modal-content', { 
 			element: this.element, 
 			ElementStatus: ElementStatus,
 			isAdmin: App.config.isFeatureAvailable('directModeration'),
@@ -50,6 +50,7 @@ export class VoteComponent extends ModalAbstractComponent
 		}
 		else
 		{
+			this.clearLoader();
 			this.dom.find('#select-error').show();
 		}
 	}

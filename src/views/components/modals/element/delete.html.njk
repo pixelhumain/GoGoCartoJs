@@ -1,0 +1,16 @@
+{% extends "components/modals/abstract-modal.html.njk" %}
+
+{% block submitText %}Supprimer{% endblock %}
+
+{% block id %}delete{% endblock %}
+
+{% block content %}
+	<h5 id="modal-title">Supprimer <span class="elementName"></span> ?</h5>
+	<p>Un mail sera envoyé à {{ config.text.elementDefinite }}</p>	
+	
+	<p id="select-error" class="error"></p>
+
+	<div class="input-field">
+		<textarea class="input-comment materialize-textarea" type="text" placeholder="Message optionnel explicatif"/>
+	</div>		
+{% endblock %}

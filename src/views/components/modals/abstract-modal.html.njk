@@ -1,0 +1,26 @@
+<div id="modal-{% block id %}default{% endblock %}" class="modal {% block modalClass %}action-modal{% endblock %} custom-scroll-bar">  	
+   <div class="modal-content">     	
+	  	<div class="specific-content"> 	
+	  		{% block content %}
+	  		{% endblock %}	
+	  	</div>
+
+  		<div class="footer">	
+			<button type="button"
+					onclick="$(this).closest('.modal').closeModal()"  
+					class="waves-effect waves-dark btn-flat">
+				{% block cancelText %}Annuler{% endblock %}
+			</button>
+			<button type="submit" class="btn btn-primary waves-effect waves-light">
+				{% block submitText %}Envoyer{% endblock %}
+			</button>
+			<button class="btn cancel-btn btn-primary waves-effects">
+            {% import 'components/spinner-loader.html.njk' as spinnerLoader %}
+            {{ spinnerLoader.create('modal-submit-loader') }}
+        	</button> 
+		</div>
+
+		<div class="loader-overlay"></div>   	
+	</div>
+
+</div>

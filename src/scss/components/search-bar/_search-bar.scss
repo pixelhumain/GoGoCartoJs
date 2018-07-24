@@ -113,14 +113,14 @@
   	}
 
   	#search-spinner-loader
-  	{
-  		height: 12px;
+    {
+      height: 12px;
       width: 12px;
       top: 1px;
       margin-left: 5px;
-  		.spinner-layer { border-color: #5d5d5d; }
-  		.circle-clipper .circle { border-width: 2px; }
-  	}
+      .spinner-layer { border-color: #5d5d5d; }
+      .circle-clipper .circle { border-width: 2px; }
+    }
   }
 
   .search-no-result 

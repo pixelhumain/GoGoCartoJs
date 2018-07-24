@@ -11,10 +11,10 @@
 declare var $ : any
 import { Element } from "../../classes/classes";
 import { App } from "../../gogocarto";
-import { ModalAbstractComponent } from "./abstract.component";
+import { AbstractModalComponent } from "./abstract-modal.component";
 import { capitalize } from "../../utils/string-helpers";
 
-export class SendEmailComponent extends ModalAbstractComponent
+export class SendEmailComponent extends AbstractModalComponent
 {
   constructor()
   {
@@ -71,6 +71,8 @@ export class SendEmailComponent extends ModalAbstractComponent
       let comment = this.dom.find('.input-comment').val();
       let data = { elementId: this.element.id, subject: mailSubject, content: mailContent, userEmail : userEmail };
       this.sendRequest(data);
-    }  
+    } else {
+      this.clearLoader()
+    }
   }  
 }
