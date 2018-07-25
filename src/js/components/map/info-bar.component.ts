@@ -29,14 +29,12 @@ export class InfoBarComponent
 
 	getCurrElementId() : string { return this.elementVisible ? this.elementVisible.id : null; }
 
-	domMenu() { return $('#element-info-bar .menu-element'); }
+	get dom() { return $('#element-info-bar'); }
+	get domMenu() { return this.dom.find('.menu-element'); }
+	width() : string { return this.dom.width() + 'px'; }
 
-	width() : string { return $('#element-info-bar').width() + 'px'; }
-
-	isDisplayedAside()
-	{
-		return $('#element-info-bar').hasClass('display-aside');
-	}
+	isDisplayedAside() { return this.dom.hasClass('display-aside'); }
+	isDisplayedBottom() { return this.dom.hasClass('display-bottom'); }
 
 	reload()
 	{
@@ -87,12 +85,12 @@ export class InfoBarComponent
 			clearTimeout(this.loaderTimer);
 			$('#info-bar-overlay').fadeOut();
 
-			$('#element-info').html(this.elementVisible.component.render());	
+			this.dom.find('#element-info').html(this.elementVisible.component.render());	
 
 			if (this.elementVisible.images.length) 
 			{
 				// Animation to move img-navigation-btn when scrolling
-				$('#element-info-bar .collapsible-body-main-container').scroll(function(e) {
+				this.dom.find('.collapsible-body-main-container').scroll(function(e) {
 					let scrollTop = $(this).scrollTop();
 					$(this).find('.img-navigation-btn.prev').css('left', -scrollTop/5);
 					$(this).find('.img-navigation-btn.next').css('right', -scrollTop/5);
@@ -103,13 +101,11 @@ export class InfoBarComponent
 			}						
 
 			this.elementVisible.component.initialize();	
-			// on large screen info bar is displayed aside and so we have enough space
-			// to show menu actions details in full text
-			this.elementVisible.component.menuComponent.showFullTextMenu(this.isDisplayedAside());				
+			this.updateMenu();				
 
-			$('#btn-close-bandeau-detail').click(() => { this.hide(); return false; });
+			this.dom.find('#btn-close-bandeau-detail').click(() => { this.hide(); return false; });
 			
-			$('#element-info .collapsible-header').click(() => { this.toggleDetails(); });			
+			this.dom.find('.collapsible-header').click(() => { this.toggleDetails(); });			
 		}						
 		
 		this.show();		
@@ -136,6 +132,27 @@ export class InfoBarComponent
 		}
 	}
 
+	displayAside()
+	{
+		this.dom.addClass('display-aside');
+		this.dom.removeClass('display-bottom');
+		this.updateMenu();
+	}
+
+	displayBottom()
+	{
+		this.dom.removeClass('display-aside');
+		this.dom.addClass('display-bottom');	
+		this.updateMenu();		
+	}
+
+	updateMenu()
+	{
+		// on large screen info bar is displayed aside and so we have enough space
+		// to show menu actions details in full text
+		this.elementVisible.component.menuComponent.showFullTextMenu(this.isDisplayedAside());
+	}
+
 	show()
 	{
 		this.hideDetails();
@@ -144,12 +161,12 @@ export class InfoBarComponent
 		
 		if (!this.isDisplayedAside())
 		{
-			$('#element-info-bar').show();
+			this.dom.show();
 
-			let elementInfoBar_newHeight = $('#element-info').outerHeight(true);
+			let elementInfoBar_newHeight = this.dom.find('#element-info').outerHeight(true);
 
 			this.updateInfoBarSize();
-			$('#element-info-bar').stop(true).animate({'height': elementInfoBar_newHeight}, 350, 'swing', () => 
+			this.dom.stop(true).animate({'height': elementInfoBar_newHeight}, 350, 'swing', () => 
 			{
 				App.component.updateMapSize();
 				this.checkIfMarkerStillVisible();		  		
@@ -157,10 +174,10 @@ export class InfoBarComponent
 		}	
 		else
 		{
-			if (!$('#element-info-bar').is(':visible'))
+			if (!this.dom.is(':visible'))
 			{
-				$('#element-info-bar').css('right','-' + this.width());			
-				$('#element-info-bar').show().stop(true).animate({'right':'0'},350,'swing', () => { 
+				this.dom.css('right','-' + this.width());			
+				this.dom.show().stop(true).animate({'right':'0'},350,'swing', () => { 
 					App.component.updateDirectoryContentMarginIfInfoBarDisplayedAside();
 					this.checkIfMarkerStillVisible();
 				});
@@ -171,7 +188,7 @@ export class InfoBarComponent
 
 			setTimeout( () => { 
 				// just to be sure, put the right property to 0 few ms after
-				$('#element-info-bar').stop(true).css('right', '0'); 			
+				this.dom.stop(true).css('right', '0'); 			
 			}, 400);				
 		}	
 
@@ -198,7 +215,7 @@ export class InfoBarComponent
 	{
 		let marker = this.elementVisible.marker.domMarker();
 		return (App.mapComponent.isMapLoaded && !App.mapComponent.contains(this.elementVisible.position)) ||
-		       (!this.isDisplayedAside() && marker && marker.offset() && (marker.offset().top > $('#element-info-bar').offset().top - 50));
+		       (!this.isDisplayedAside() && marker && marker.offset() && (marker.offset().top > this.dom.offset().top - 50));
 	}
 
 	hide(humanAction : boolean = true)
@@ -206,19 +223,19 @@ export class InfoBarComponent
 		if (!this.isDisplayedAside())
 		{			
 			this.hideDetails();
-			$('#element-info-bar').animate({'height': '0'}, 350, 'swing', () => 
+			this.dom.animate({'height': '0'}, 350, 'swing', () => 
 			{
 				App.component.updateMapSize();
-				$('#element-info-bar').hide();
+				this.dom.hide();
 			});
 		}
 		else
 		{
 			$('#directory-content-map').css('margin-right','0px');
 
-			if ($('#element-info-bar').is(':visible'))
+			if (this.dom.is(':visible'))
 			{		
-				$('#element-info-bar').animate({'right':'-500px'},350,'swing',function()
+				this.dom.animate({'right':'-500px'},350,'swing',function()
 				{ 
 					$(this).hide();  
 	  			App.component.updateMapSize();
@@ -228,7 +245,7 @@ export class InfoBarComponent
 
 		if (humanAction) this.onHide.emit(true);		
 
-		setTimeout( () => $('#element-info').html(''), 350);
+		setTimeout( () => this.dom.find('#element-info').html(''), 350);
 
 		if (this.elementVisible && this.elementVisible.marker) this.elementVisible.marker.showNormalSize(true);
 
@@ -238,28 +255,28 @@ export class InfoBarComponent
 
 	toggleDetails()
 	{	
-		if ( $('#element-info-bar .moreDetails').is(':visible') )
+		if ( this.dom.find('.moreDetails').is(':visible') )
 		{
 			this.hideDetails();
 			this.elementVisible.component.menuComponent.showFullTextMenu(false);
 		}
 		else
 		{
-			if (this.domMenu().width() >= 400) this.elementVisible.component.menuComponent.showFullTextMenu(true);
+			if (this.domMenu.width() >= 400) this.elementVisible.component.menuComponent.showFullTextMenu(true);
 
-			$('#element-info-bar .element-item').addClass('active');		
-			$('#element-info-bar .moreDetails').show();	
-			$('#element-info-bar .moreDetails.tabs').css('display','flex');		
+			this.dom.find('.element-item').addClass('active');		
+			this.dom.find('.moreDetails').show();	
+			this.dom.find('.moreDetails.tabs').css('display','flex');		
 			
-			$('#element-info-bar').animate({'height':'100%'},400,'swing');
+			this.dom.animate({'height':'100%'},400,'swing');
 
-			let elementInfoBar = $("#element-info-bar");
+			let elementInfoBar = this.dom;
 		   let height =  $('.gogocarto-container').height();
 			height -= elementInfoBar.find('.collapsible-header').outerHeight(true);			
 			height -= elementInfoBar.find('.interactive-section').outerHeight(true);	
 			height -= elementInfoBar.find(".menu-element").outerHeight(true);
 
-		  $('#element-info-bar .collapsible-body').css('height', height);	
+		  this.dom.find('.collapsible-body').css('height', height);	
 
 		  this.showBodyMainTab();
 		  this.elementVisible.component.imagesComponent.verticalAlignCurrentImage();
@@ -272,36 +289,33 @@ export class InfoBarComponent
 	{
 		App.gogoControlComponent.show();
 
-		if ($('#element-info-bar .moreDetails').is(':visible'))
+		if (this.dom.find('.moreDetails').is(':visible'))
 		{
-			$('#element-info-bar .moreDetails').hide();
-			$('#element-info-bar .element-item').removeClass('active');	
+			this.dom.find('.moreDetails').hide();
+			this.dom.find('.element-item').removeClass('active');	
 
-			let elementInfoBar_newHeight = $('#element-info').outerHeight(true);
+			let elementInfoBar_newHeight = this.dom.find('#element-info').outerHeight(true);
 
-			$('#element-info-bar').animate({'height': elementInfoBar_newHeight}, 400, 'swing');
+			this.dom.animate({'height': elementInfoBar_newHeight}, 400, 'swing');
 		}	
 	};
 
 	updateInfoBarSize()
 	{
-		if (!this.isDisplayedAside()) 
-		{
-	  	$('#element-info-bar .moreDetails').css('height', 'auto');
-	  } 
+		if (!this.isDisplayedAside()) this.dom.find('.moreDetails').css('height', 'auto');
 		else 
 		{			
-	  	let elementInfoBar = $("#element-info-bar");
-	  	let height = elementInfoBar.outerHeight(true);
-			height -= elementInfoBar.find('.collapsible-header').outerHeight(true);
-			height -= elementInfoBar.find('.interactive-section:visible').outerHeight(true);
-			height -= elementInfoBar.find('.info-bar-tabs:visible').outerHeight(true);
-			height -= elementInfoBar.find(".menu-element").outerHeight(true);
+		  	let elementInfoBar = this.dom;
+		  	let height = elementInfoBar.outerHeight(true);
+				height -= elementInfoBar.find('.collapsible-header').outerHeight(true);
+				height -= elementInfoBar.find('.interactive-section:visible').outerHeight(true);
+				height -= elementInfoBar.find('.info-bar-tabs:visible').outerHeight(true);
+				height -= elementInfoBar.find(".menu-element").outerHeight(true);
 
-	  	$('#element-info-bar .collapsible-body').css('height', height);
+		  	this.dom.find('.collapsible-body').css('height', height);
 		}
 	}	
 
-	private showBodyMainTab() { $('#element-info-bar .info-bar-tabs').tabs('select_tab', 'body-main-tab-content'); }
+	private showBodyMainTab() { this.dom.find('.info-bar-tabs').tabs('select_tab', 'body-main-tab-content'); }
 }
 

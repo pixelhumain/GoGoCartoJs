@@ -92,25 +92,23 @@ export class AppComponent
 		// show element info bar aside or at the bottom depending of direcoty-content width
 		if (this.mapWidth() > 900)
 		{
-			if (!$('#element-info-bar').hasClass('display-aside'))
+			if (!App.infoBarComponent.isDisplayedAside())
 			{
-				$('#element-info-bar').addClass('display-aside');
-				$('#element-info-bar').removeClass('display-bottom');
+				App.infoBarComponent.displayAside();
 				infoBarHasChangeDisplayMode = true;
 			}			
 		}	
 		else
 		{
-			if (!$('#element-info-bar').hasClass('display-bottom'))
+			if (!App.infoBarComponent.isDisplayedBottom())
 			{
-				$('#element-info-bar').removeClass('display-aside');
-				$('#element-info-bar').addClass('display-bottom');		
+				App.infoBarComponent.displayBottom();
 				infoBarHasChangeDisplayMode = true;
 			}
 			$('#directory-content-map').stop(true).css('margin-right', '0');
 		}	
 
-		if ($('#element-info-bar').hasClass('display-aside'))	
+		if (App.infoBarComponent.isDisplayedAside())	
 		{			
 			let infoBarWidth;
 			if (App.config.infobar.width) infoBarWidth = App.config.infobar.width;
