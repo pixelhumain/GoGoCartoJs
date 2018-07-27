@@ -148,6 +148,7 @@ export class InfoBarComponent
 
 	updateMenu()
 	{
+		if (!this.elementVisible) return;
 		// on large screen info bar is displayed aside and so we have enough space
 		// to show menu actions details in full text
 		this.elementVisible.component.menuComponent.showFullTextMenu(this.isDisplayedAside());
@@ -268,6 +269,10 @@ export class InfoBarComponent
 			this.dom.find('.moreDetails').show();	
 			this.dom.find('.moreDetails.tabs').css('display','flex');		
 			
+			// show the expand label in header when interactive section is visible
+			if (this.dom.find('.interactive-section').height() > 0) 
+				this.dom.find('.expandLabel').removeClass('bgdSoftColorAs transform-big');
+
 			this.dom.animate({'height':'100%'},400,'swing');
 
 			let elementInfoBar = this.dom;
@@ -280,7 +285,6 @@ export class InfoBarComponent
 
 		  this.showBodyMainTab();
 		  this.elementVisible.component.imagesComponent.verticalAlignCurrentImage();
-
 		  App.gogoControlComponent.hide();
 		}	
 	};
