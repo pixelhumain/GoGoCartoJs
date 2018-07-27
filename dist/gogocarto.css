@@ -5493,8 +5493,10 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
             float: right; }
         .gogo-load-css .gogocarto-container .element-item .element-item .contributions .contribution-body {
           color: inherit; }
-      .gogo-load-css .gogocarto-container .element-item .info-bar-tabs.tabs .tab a {
-        cursor: pointer; }
+      .gogo-load-css .gogocarto-container .element-item .info-bar-tabs.tabs {
+        z-index: 40; }
+        .gogo-load-css .gogocarto-container .element-item .info-bar-tabs.tabs .tab a {
+          cursor: pointer; }
       .gogo-load-css .gogocarto-container .element-item .item-container {
         border-bottom: 1px dashed grey;
         padding-bottom: 5px;

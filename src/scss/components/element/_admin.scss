@@ -46,8 +46,9 @@
     }
 }
 
-.info-bar-tabs.tabs .tab a {
-    cursor: pointer;
+.info-bar-tabs.tabs {
+    z-index: 40;
+    .tab a { cursor: pointer; }    
 }
 
 .item-container

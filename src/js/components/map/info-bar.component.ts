@@ -270,16 +270,16 @@ export class InfoBarComponent
 			this.dom.find('.moreDetails.tabs').css('display','flex');		
 			
 			// show the expand label in header when interactive section is visible
-			if (this.dom.find('.interactive-section').height() > 0) 
+			if (this.dom.find('.interactive-section').height() > 0 || this.dom.find('.info-bar-tabs').height() > 0) 
 				this.dom.find('.expandLabel').removeClass('bgdSoftColorAs transform-big');
 
 			this.dom.animate({'height':'100%'},400,'swing');
 
-			let elementInfoBar = this.dom;
 		   let height =  $('.gogocarto-container').height();
-			height -= elementInfoBar.find('.collapsible-header').outerHeight(true);			
-			height -= elementInfoBar.find('.interactive-section').outerHeight(true);	
-			height -= elementInfoBar.find(".menu-element").outerHeight(true);
+			height -= this.dom.find('.collapsible-header').outerHeight(true);			
+			height -= this.dom.find('.interactive-section').outerHeight(true);	
+			height -= this.dom.find(".menu-element").outerHeight(true);
+			height -= this.dom.find(".info-bar-tabs").outerHeight(true);
 
 		  this.dom.find('.collapsible-body').css('height', height);	
 
