@@ -1,9 +1,12 @@
 <div id="modal-{% block id %}default{% endblock %}" class="modal {% block modalClass %}action-modal{% endblock %} custom-scroll-bar">  	
-   <div class="modal-content">     	
+   <div class="modal-content">   	
+
 	  	<div class="specific-content"> 	
 	  		{% block content %}
 	  		{% endblock %}	
 	  	</div>
+
+	  	<div class="generic-error-message error" style="display:none"></div> 
 
   		<div class="footer">	
 			<button type="button"

@@ -26,7 +26,7 @@ export class AbstractModalComponent
 	{		
 		this.element = element;
 		this.clearLoader();
-		// console.log("openning modal", this.dom, this.element);
+		this.dom.find('.generic-error-message').hide();
 		this.beforeOpen(element);
 		this.dom.openModal();
 	}

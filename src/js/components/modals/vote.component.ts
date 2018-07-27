@@ -88,6 +88,7 @@ export class VoteComponent extends AbstractModalComponent
 
 	protected onError(errorMessage)
 	{
-		this.dom.find('#select-error').text(errorMessage).show();
+		if (!errorMessage || errorMessage.length == 0) errorMessage = "Oups, une erreur s'est produite ! Veuillez réessayer plus tard ou nous signaler le problème";
+		this.dom.find('.generic-error-message').html(errorMessage).show();
 	}
 }
