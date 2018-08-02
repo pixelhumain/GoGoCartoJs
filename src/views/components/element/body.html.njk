@@ -62,7 +62,7 @@
 <div class="info-bar-divider"></div>
 
 {# Categories  #}
-<div class="section row">
+<div class="section section-taxonomy row">
   {% import here ~ 'category-value.html.njk' as categoryRenderer %}
   {% for mainCategoryValue in rootCategoriesValues %}
     {{ categoryRenderer.renderCategoryValue(mainCategoryValue) }}

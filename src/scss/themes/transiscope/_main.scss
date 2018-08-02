@@ -1,0 +1,27 @@
+$dark: #175259;
+$primary: #3bad78;
+$secondary: #f79900;
+$light: #f3f6f4;
+$disabled: #bcbcbc;
+
+.gogo-theme-transiscope.gogocarto-container
+{
+  #directory-menu { @import "menu"; }
+
+  @import 'marker';
+  @import 'element';
+  
+  .custom-scroll-bar-light::-webkit-scrollbar-track {
+    background-color: transparent;
+    border: none;
+  }
+
+  .custom-scroll-bar-light::-webkit-scrollbar {
+      width: 13px;
+  }
+
+  .custom-scroll-bar-light::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background-color: #ffffff;
+  } 
+}

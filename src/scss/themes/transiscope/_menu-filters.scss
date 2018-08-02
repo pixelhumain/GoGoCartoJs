@@ -1,0 +1,186 @@
+.sub-categories 
+{ 
+  border-left: none; 
+  background-color: $light;
+
+  .sub-categories-content { 
+
+    background-color: transparent; 
+
+    ul { padding-right: 10px; padding-left: 5px; }    
+
+    .subcategorie-option-item { 
+      background-color: white; 
+      margin-bottom: 3px;
+      padding-left: 0;
+      line-height: 2.9rem;
+
+      &.expanded { 
+        margin-bottom: 0; 
+      }
+
+      &.disabled { 
+        color: $disabled; 
+        .icon {
+          color: $disabled !important;
+          background-color: transparent;
+          opacity: 1;
+        }
+      }    
+
+      .option-name {
+        font-weight: bold;
+        font-size: .85rem;
+        opacity: .9;
+        padding-left: .6rem;
+        @include transition(color .1s);
+      }
+
+      .checkbox-wrapper { display: none; }
+
+      .arrow-after {
+        position: absolute;
+        right: 22%;
+        top: 1.25rem;
+        border-radius: 1px;
+      }   
+
+      .option-name:hover .arrow-after 
+      { 
+        margin-right: -1px;
+        margin-top: -1px;
+      }
+
+      &.expanded .option-name
+      { 
+        &:hover .arrow-after { margin-bottom: -3px; } 
+        .arrow-after { margin-bottom: -3px; } 
+      }
+
+      .icon {
+        padding-top: .9rem;
+        font-size: 17px;
+        height: 3rem;
+        width: 2.7rem;  
+        margin-right: 0;        
+        @include transition(color .3s);
+
+        &.fa.fa-recycle { padding-top: 1rem;}
+      }      
+ 
+      &:not(.expanded)  .option-name       .arrow-after { border-color: $primary transparent transparent transparent; opacity: 1; }
+      &.expanded       .option-name       .arrow-after { border-color:  transparent transparent $primary transparent; opacity: 1; top: 1rem; }
+    }  
+
+    .subcategory-item {
+      .name-wrapper  { margin-left: 3rem; margin-right: 0; }
+      .checkbox-wrapper { 
+        left: 0; right: initial; 
+        
+        [type="checkbox"].filled-in + label:after {
+          background-color: transparent;
+          border: none;
+          @include transition(none);
+        }
+        [type="checkbox"].filled-in + label:before {
+          top: 7px;
+          width: 9px;
+          height: 15px;
+          border-right: 3px solid $primary;
+          border-bottom: 3px solid $primary;
+        }
+        [type="checkbox"].filled-in:not(:checked) + label:before {          
+          border-right: 3px solid $disabled;
+          border-bottom: 3px solid $disabled;
+          @include transition(none);
+        }
+      }
+    }
+
+    // subcategories
+    .category-wrapper .subcategories-wrapper:not(.no-withdrawal)  {
+      margin-left: 0 !important;
+      margin-bottom: 6px;
+      border: none; 
+
+      .subcategorie-option-item { 
+        margin-bottom: 0; 
+        line-height: 2.7rem;
+        height: 2.7rem;
+
+        .option-name { font-size: .8rem; }
+
+        .icon {
+          font-size: .85rem;
+          padding-top: .95rem;          
+        }
+        &.disabled {
+          .icon { color: $disabled !important; }
+        }
+      }      
+    }
+
+    #main-option-all {
+      // Main category DOMAINES
+      & > .category-wrapper:first-child {
+        .name-wrapper { color: $primary; }
+        .subcategorie-option-item.checked .icon:not(.subIcon) { color: white; }
+        .subcategorie-option-item .subIcon { background-color: transparent; }
+        .subcategorie-option-item:not(.checked) .icon { background-color: transparent; }
+
+      }
+      // Main category SOURCES
+      & > .category-wrapper:last-child {
+        .name-wrapper { color: $secondary; }      
+
+        [type="checkbox"].filled-in:checked + label:before {
+          top: 7px;
+          width: 9px;
+          height: 15px;
+          border-right: 3px solid $secondary;
+          border-bottom: 3px solid $secondary;
+        }
+
+        .subcategorie-option-item 
+        {
+          
+          &.checked .icon { color: $secondary; }
+          .icon { color: $dark; background-color: transparent; }
+          &:hover          .subcategorie-option-checkbox + label:before { color: $secondary; border-color: $secondary }  
+          &:not(.expanded) .option-name       .arrow-after { border-color: $secondary transparent transparent transparent; opacity: 1; }
+          &:not(.expanded) .option-name:hover .arrow-after { border-color: $secondary transparent transparent transparent !important; opacity: 1; }
+          &.expanded       .option-name       .arrow-after { border-color:  transparent transparent $secondary transparent; opacity: 1; top: 1rem; }
+          &.expanded       .option-name:hover .arrow-after { border-color:  transparent transparent $secondary transparent !important; opacity: 1; }
+        }
+      }
+    }
+
+    #filter-favorite {
+      .icon {
+        padding-top: 3px;
+        padding-left: 10px;
+        background-color: transparent;
+        &:before { color: $disabled }        
+      }
+      .option-name { color: $disabled; }
+
+      &.checked {
+        .option-name { color: $secondary; }
+        .icon:before { color: $secondary } 
+      }
+    }
+
+    .show-only-title { 
+      color: $primary; 
+      padding-left: 0;
+      margin-bottom: 0;
+      padding-left: 0;
+      margin-bottom: 0rem;
+      border-top: none;
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    
+  }  
+}

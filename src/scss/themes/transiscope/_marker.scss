@@ -1,0 +1,21 @@
+.iconInsideMarker-wrapper {
+  background-color: transparent;
+  .iconInsideMarker { color: white;}
+}
+
+.marker-name { color: #f1f1f1;; opacity: 1; }
+
+.moreIconContainer {
+  .moreIconWrapper {
+    font-size: 14px;
+    line-height: 0;
+    padding-left: 1px;
+    box-shadow: 1px 1px 4px 1px #989898;
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  .marker-wrapper.BigSize .iconInsideMarker-wrapper {
+    left: 7px !important;
+  }
+}

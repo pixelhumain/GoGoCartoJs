@@ -58,14 +58,14 @@
 				{% set moderationIsActive = config.isFeatureAvailable('moderation') %}
 
 				{% if pendingIsActive or favoriteIsActive or moderationIsActive %}
-					<li class="subcategory-item expanded unexpandable top-separator">
+					<li class="subcategory-item expanded unexpandable top-separator show-only-title">
 						<div class="name-wrapper">		
 							<span class="name">Afficher uniquement</span>
 						</div>
 					</li>
 				{% endif %}
 
-				<div class="options-wrapper">
+				<div class="options-wrapper show-on-container">
 
 					{# ELEMENT WITH PENDING STATUS#}	
 					{% if pendingIsActive %}

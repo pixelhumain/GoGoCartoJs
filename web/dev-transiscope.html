@@ -46,11 +46,35 @@
             smallWidthStyle: true,
             // showOnePanePerMainOption: true,
             // showCheckboxForMainFilterPane: false
+            image: "assets/images/logo-transiscope.png"
           },
           map:
           {
             saveTileLayerInCookies : true,
-          }
+          },
+          theme: 'transiscope',
+          colors:
+          {
+            neutralDark: '#175259',
+            neutralDarkTransparent: "rgba(23, 82, 89, 0.68)" ,
+            neutralSoftDark: '#175259' ,
+            neutral: '#175259' ,
+            neutralLight: "#f3f6f4" ,
+            secondary: '#3bad78' ,
+            primary: '#3bad78' ,
+            background: "#f3f6f4" ,
+
+            disableColor: '#bcbcbc' ,
+
+            mainFont: 'Roboto' ,
+            titleFont: 'Roboto' ,
+            taxonomyMainTitleFont: 'Roboto' ,     
+          }            
+        });
+
+        $(carto.container).on('templateLoaded', function() {
+          $('.subcategorie-option-item .icon').addClass('bgdColorAs');
+          $('.category-wrapper .subcategories-wrapper:not(.no-withdrawal) .subcategorie-option-item .icon').addClass('subIcon');          
         });
       });
     </script>

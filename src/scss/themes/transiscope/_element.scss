@@ -1,0 +1,101 @@
+.element-item {
+  .collapsible-header { 
+    background-color: $dark;     
+    .collapsible-header-more { line-height: 1.3rem; }
+  }
+
+  .collapsible-body {
+    background-color: $light;
+
+    .collapsible-body-main-content { background-color: $light; padding-left: 0; }
+
+    .info-bar-divider { display: none; }
+
+    .section {
+      background-color: white;
+      margin-top: 1rem;
+      padding-left: .5rem;
+      margin-left: 1rem;
+      margin-right: .7rem;
+
+      &.section-taxonomy {
+        padding: 0;
+
+        h3.category-name {
+          background-color: $light;
+          margin-left: 0;
+          padding-left: 1.5rem;
+          color: $secondary;
+          &:first-child { color: $primary; }
+        }
+      }
+
+      &.sectionlongDescription {
+        margin-top: 0;
+        background-color: $light;
+      }
+    }
+
+    h3 {
+      margin-left: 1.5rem;
+    }
+
+    .category-wrapper {
+      background-color: $light;
+      .option-value {
+        margin-bottom: 3px;
+        background-color: white;
+      }
+    }
+
+    .category-wrapper .category-wrapper {
+      border: none;
+      margin-left: 0;
+      padding-left: 0;
+      .option-value { padding-left: .9rem; }
+    }
+
+    .tags-container {
+      background-color: #f3f6f4;
+      margin-top: 0;
+      padding-top: 1.5rem;
+      padding-left: 0;
+
+      .gogo-tag {
+        background-color: white;
+        border-radius: 0;
+        padding: 8px 14px;
+        color: $primary;
+      }
+    }
+  }
+  .menu-element { 
+    background-color: $primary; 
+
+    .menu-element-item {
+      display: inline-block;
+      font-weight: bold;
+      color: #e6e6e6;
+    }
+  } 
+}
+
+#element-info-bar.display-aside .element-item .collapsible-header 
+{
+  .collapsible-header-title .gogo-icon-close { 
+    font-size: .8rem; 
+
+    &:before {
+      background-color: $primary;
+      color: $dark;
+      border-radius: 3px;
+      padding: 2px;
+    }
+  }
+
+  .name { 
+    font-weight: bold; 
+    font-size: 1.4rem;    
+    line-height: 1.8rem;
+  }
+}

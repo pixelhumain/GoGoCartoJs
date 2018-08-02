@@ -69,6 +69,7 @@ export class CategoryOptionTreeNode
 	setChecked(bool : boolean)
 	{
 		this.isChecked = bool;
+		this.getDom().toggleClass("checked", bool);
 		this.getDomCheckbox().prop("checked", bool);
 		this.isPristine = false;
 	}
@@ -76,15 +77,8 @@ export class CategoryOptionTreeNode
 	setDisabled(bool : boolean)
 	{
 		this.isDisabled = bool;
-		if (bool)
-		{
-			if (!this.getDom().hasClass('disabled')) this.getDom().addClass('disabled');
-			this.setChecked(false);			
-		}
-		else
-		{
-			this.getDom().removeClass('disabled');
-		}
+		this.getDom().toggleClass("disabled", bool);
+		if (bool) this.setChecked(false);			
 		this.isPristine = false;
 	}
 

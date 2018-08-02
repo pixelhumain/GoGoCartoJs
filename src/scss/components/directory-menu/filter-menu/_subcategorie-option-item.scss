@@ -18,7 +18,7 @@
 
 	&:not(.expanded) 
   { 
-  	.gogo-icon-name-wrapper 
+  	.option-name
 		{
       &:hover .arrow-after { margin-bottom: -5px; } 
       .arrow-after { margin-bottom: -4px; }	
@@ -29,16 +29,17 @@
 	{
     margin-right: 3rem;
 
-    .option-name { position: absolute; width: 100%; }
-
-    &:hover
-    {
-    	.arrow-after 
-			{ 
-				border: solid 6px;
-	    	margin-bottom: 1px;
-	    }
-    }
+    .option-name { 
+      position: absolute; width: 100%; 
+      &:hover
+      {
+        .arrow-after 
+        { 
+          border: solid 6px;
+          margin-bottom: 1px;
+        }
+      }
+    }    
 	}
 
   .arrow-after

@@ -31,7 +31,7 @@ export class FiltersComponent
       let favoriteCheckbox = $('#favorite-checkbox');
 
       let checkValue = !favoriteCheckbox.is(':checked');
-
+      $(this).toggleClass('checked', checkValue);
       App.filterModule.showOnlyFavorite(checkValue);
 
       if (checkValue) {
@@ -160,24 +160,25 @@ export class FiltersComponent
     // -------------------------------
     // ------ SUB OPTIONS ------------
     // -------------------------------
-    $('.subcategorie-option-item:not(#filter-favorite):not(#filter-pending):not(#filter-moderation) .gogo-icon-name-wrapper').click(function(e : Event)
+    $('.subcategorie-option-item:not(#filter-favorite):not(#filter-pending):not(#filter-moderation) .option-name').click(function(e : Event)
     {
-      let optionId = $(this).attr('data-option-id');
+      let optionDom = $(this).closest('.subcategorie-option-item');
+      let optionId = optionDom.attr('data-option-id');
       let option = App.taxonomyModule.getOptionById(optionId);
 
       if (option.isMainOption && App.config.menu.showOnePanePerMainOption) App.filtersComponent.setMainOption(option.id);
-      else if ($(this).hasClass('uncheckable')) return;
+      else if (optionDom.hasClass('uncheckable')) return;
       else if (option.isCollapsible()) option.toggleChildrenDetail()
       else option.toggle();
     });
 
-    $('.subcategorie-option-item:not(#filter-favorite):not(#filter-pending):not(#filter-moderation) .checkbox-wrapper').click(function(e)
+    $('.subcategorie-option-item:not(#filter-favorite):not(#filter-pending):not(#filter-moderation)').find('.icon, .checkbox-wrapper').click(function(e)
     {    
       e.stopPropagation();
       e.stopImmediatePropagation();
       e.preventDefault();
 
-      let optionId = $(this).attr('data-option-id');
+      let optionId = $(this).closest('.subcategorie-option-item').attr('data-option-id');
       App.taxonomyModule.getOptionById(optionId).toggle();
     });
   }
