@@ -1,5 +1,9 @@
 <div id="directory-menu-main-container">
-
+	{% if config.menu.image %}
+		<div class="top-image-container">
+			<img src="{{ config.menu.image }}" class="menu-top-image" />
+		</div>
+	{% endif %}
   <div class="directory-menu-header">
 
 		{% include 'components/search-bar/search-bar.html.njk' %}	

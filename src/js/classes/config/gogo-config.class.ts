@@ -42,6 +42,7 @@ export class GoGoConfig
     showOnePanePerMainOption: false,
     showCheckboxForMainFilterPane: true,
     showCheckboxForSubFilterPane: true,
+    image: undefined
   };
   readonly infobar =
   {
