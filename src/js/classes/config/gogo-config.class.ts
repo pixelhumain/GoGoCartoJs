@@ -47,6 +47,7 @@ export class GoGoConfig
   {
     width: undefined,
     activate: true,
+    bodyTemplate: undefined
   };
   readonly general =
   {
@@ -146,7 +147,6 @@ export class GoGoConfig
     titleFont: undefined ,
     taxonomyMainTitleFont: undefined ,     
   }
-  readonly bodyTemplate = undefined;
 
 	constructor(config : any)
 	{
@@ -201,7 +201,11 @@ export class GoGoConfig
             switch(prop) {
               case 'defaultBounds' : new_prop = L.latLngBounds(object[prop]);break;
               case 'defaultCenter' : new_prop = L.latLng(object[prop]);break;
-              case 'bodyTemplate': let parser=new commonmark.Parser(),htmlRenderer=new commonmark.HtmlRenderer();new_prop=htmlRenderer.render(parser.parse(object[prop]));break;
+              case 'bodyTemplate': 
+                let parser = new commonmark.Parser()
+                let htmlRenderer = new commonmark.HtmlRenderer();
+                new_prop = htmlRenderer.render(parser.parse(object[prop]));
+                break;
               default: new_prop = object[prop];break;
             }
             that[prop] = new_prop;
