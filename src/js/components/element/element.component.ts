@@ -59,7 +59,7 @@ export class ElementComponent
     return html;
   };
 
-  get dom() { return $(`#element-info-${this.element.id}`); }
+  get dom() { return App.mode == AppModes.List ? $(`#directory-content-list #element-info-${this.element.id}`) : $(`#element-info-${this.element.id}`); }
 
   // once the html rendered is inserted in the dom, we need to call this method to initializ various interactions and subcomponents
   initialize()
