@@ -6,6 +6,7 @@ import { ElementMenuComponent } from "./element-menu.component";
 import { ModerationComponent } from '../element/moderation.component';
 import { InteractiveSectionComponent } from './interactive-section.component';
 declare var $;
+declare var nunjucks;
 
 export class ElementComponent
 {
@@ -37,8 +38,7 @@ export class ElementComponent
     else
       rootCategoriesValues = this.element.getRootCategoriesValues();
     
-    let html = App.templateModule.render('element', 
-    {
+    let options = {
       element : this.element, 
       showDistance: App.geocoder.getLocation() ? true : false,
       listingMode: App.mode == AppModes.List, 
@@ -54,8 +54,16 @@ export class ElementComponent
       isMapMode : App.mode == AppModes.Map,
       config : App.config,
       smallWidth : App.mode == AppModes.Map && App.infoBarComponent.isDisplayedAside(),
-      allowedStamps : App.stampModule.allowedStamps
-    });
+      allowedStamps : App.stampModule.allowedStamps,
+      body : undefined
+    };
+
+    // If there is a body template configured, then we use it. We use the default body otherwise.
+    if(App.config.bodyTemplate) options.body = nunjucks.renderString(App.config.bodyTemplate, this.element).replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, '"');
+    else options.body = nunjucks.render('components/element/body.html.njk', options);
+
+    let html = App.templateModule.render('element', options);
+
     return html;
   };
 
