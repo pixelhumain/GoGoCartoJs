@@ -62,7 +62,7 @@
         {% endif %}
 
         {# Element description #}
-        {% include here ~ 'body.html.njk' %}  
+        {{ body|safe }}
       </div>
 
       {# History #}

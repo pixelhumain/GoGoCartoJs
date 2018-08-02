@@ -46,7 +46,8 @@ gulp.task('scriptsLibs', function() {
   return gulp.src(['src/js/libs/**/!(leaflet-routing-machine)*.js', 
                   'src/js/libs/leaflet-routing-machine.js' ,
                   '!src/js/libs/materialize/unused/**/*.js',
-                  '!src/js/libs/nunjucks.js',
+                  '!src/js/libs/nunjucks-slim.js',
+                  '!src/js/libs/commonmark.js'
                    ])
     .pipe(concat('libs.js'))
     .pipe(gulp.dest('build'));
