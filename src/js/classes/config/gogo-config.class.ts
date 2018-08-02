@@ -124,6 +124,7 @@ export class GoGoConfig
 
     hideMailsByShowingSendMailButton: true,
   };
+  readonly theme = 'default';
   // see gogo-styles for defaut values
   readonly colors =
   {
