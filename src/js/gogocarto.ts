@@ -93,6 +93,7 @@ export class GoGoCartoModule
 		if ($(this.container).length == 0) console.warn('[GoGoCarto] The container "' + this.container + '" was not found');
 		else $(this.container).append(layout);
 
+		$(this.container).trigger('templateLoaded');
 		
 		if (App.taxonomyModule.options.length)
 		{
