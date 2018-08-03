@@ -61,7 +61,9 @@ export class ElementComponent
     // If there is a body template configured, then we use it. We use the default body otherwise.
     if (App.config.infobar.bodyTemplate) 
     {
-      options.body = nunjucks.renderString(App.config.infobar.bodyTemplate, this.element);
+      // Compile the body template once for all
+      if(!App.config.infobar.bodyTemplate.compiled) App.config.infobar.bodyTemplate = nunjucks.compile(App.config.infobar.bodyTemplate.content);
+      options.body = App.config.infobar.bodyTemplate.render(this.element);
       options.body = options.body.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, '"');
     }
     else options.body = nunjucks.render('components/element/body.html.njk', options);

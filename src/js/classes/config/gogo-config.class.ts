@@ -4,7 +4,6 @@ import { GoGoFeature } from './gogo-feature.class';
 import { ElementStatus } from '../classes'; 
 import { DEFAULT_FEATURES } from './gogo-default-feature' ;
 declare var L : any;
-declare var commonmark;
 
 export class GoGoConfig
 {
@@ -201,11 +200,6 @@ export class GoGoConfig
             switch(prop) {
               case 'defaultBounds' : new_prop = L.latLngBounds(object[prop]);break;
               case 'defaultCenter' : new_prop = L.latLng(object[prop]);break;
-              case 'bodyTemplate': 
-                let parser = new commonmark.Parser()
-                let htmlRenderer = new commonmark.HtmlRenderer();
-                new_prop = htmlRenderer.render(parser.parse(object[prop]));
-                break;
               default: new_prop = object[prop];break;
             }
             that[prop] = new_prop;
