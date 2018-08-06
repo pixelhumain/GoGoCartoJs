@@ -3,4 +3,13 @@
   .moreIconContainer {
     .moreIconWrapper { background-color: #DADAD9;; }
   }
+
+  .show-directory-menu-button .arrow-right {
+    display: none;
+  }
+
+  .element-item .collapsible-header-more .inline-option-values.option-value 
+  {
+    &:not(:last-child) { &:after { content: ","; } }
+  }
 }

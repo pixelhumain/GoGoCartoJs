@@ -7,7 +7,7 @@
   .search-icon
   {
     font-size: 1.1rem;
-    color: white;
+    color: white !important;
     height: 2.5rem;
     line-height: 2.5rem;
 
@@ -36,5 +36,14 @@
     &:-moz-placeholder { 
       color: white;
     }
+  }
+}
+
+.search-options {
+  padding-left: 14px;
+  padding-right: 2rem;
+  padding-bottom: 1.2rem;
+  .search-action-btn {
+    color: $dark;
   }
 }

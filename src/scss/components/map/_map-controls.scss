@@ -38,6 +38,13 @@ a.leaflet-control-zoom-out {
     left: 15px;
     color: white;
 
+    .arrow-right
+    {          
+      display: inline-block;
+      border: solid 8px;
+      border-color: transparent transparent transparent #eeeeee;
+    }  
+
     i {
       margin-right: 5px !important;
     }

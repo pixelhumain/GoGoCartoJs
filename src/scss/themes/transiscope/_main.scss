@@ -10,6 +10,8 @@ $disabled: #bcbcbc;
 
   @import 'marker';
   @import 'element';
+  @import 'map';
+  @import 'list';
   
   .custom-scroll-bar-light::-webkit-scrollbar-track {
     background-color: transparent;
@@ -23,5 +25,26 @@ $disabled: #bcbcbc;
   .custom-scroll-bar-light::-webkit-scrollbar-thumb {
     border-radius: 0;
     background-color: #ffffff;
-  } 
+  }
+
+  .custom-scroll-bar::-webkit-scrollbar-track {
+    background-color: transparent;
+    border: none;
+  }
+
+  .custom-scroll-bar::-webkit-scrollbar {
+      width: 18px;
+  }
+
+  .custom-scroll-bar::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    background-color: #ffffff;
+  }  
+
+  .btn {
+    font-weight: bold;
+    box-shadow: none;
+    border-radius: none;
+    font-size: .9rem;
+  }
 }

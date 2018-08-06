@@ -30,7 +30,8 @@
 	  {% endif %}
 	  
 	  <div class={{ '' if categoryValue.category.displaySuboptionsInline else 'row'}}>
-	    <span class="option-value col {{ optionClass }} {{ 'last' if loop.last else ''}} {{ 'first' if loop.first else ''}}">
+	    <span class="option-value col colorAs {{ optionClass }} {{ 'last' if loop.last else ''}} {{ 'first' if loop.first else ''}}"
+	    			option-id={{ optionValue.option.id }}>
 
 	    	{% set iconClass = optionValue.option.icon if optionValue.option.icon else 'gogo-icon-angle-right' %}	
 	    	{% set iconColorId = optionValue.option.id if optionValue.option.icon else '' %}	

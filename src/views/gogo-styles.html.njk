@@ -149,6 +149,7 @@
       {% set softColor = option.softColor if option.softColor else option.color %}
 	    .gogo-load-css .bgdSoftColorAs[option-id="{{ option.id }}"] { background-color: {{ softColor }} }
 	    .gogo-load-css .borderSoftColorAs[option-id="{{ option.id }}"] { border-color: {{ softColor }} }
+      .gogo-load-css .borderColorAs[option-id="{{ option.id }}"] { border-color: {{ option.color }} }
 	    .gogo-load-css .bgdColorAs[option-id="{{ option.id }}"] { background-color: {{ option.color }} }
 	    .gogo-load-css .colorAs[option-id="{{ option.id }}"] { color: {{ option.color }} }
     {% endif %}

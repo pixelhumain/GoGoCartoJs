@@ -42,7 +42,6 @@
 
       .option-value 
       {
-        &:not(:last-child) { &:after { content: ","; } }
         &.disabled { color: #9C9C9C; font-weight: normal; }
       }
     }

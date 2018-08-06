@@ -1,3 +1,4 @@
+
 {# Header Title #}
 <div class='collapsible-header-title row'>
 
@@ -39,9 +40,17 @@
 
   {# Categories litteral #}
   <span class="inline-option-values gogo-neutral col s8 hideOnLargeScreen">
-    {% for optionValue in currOptionsValues %} 
+    
+    {% for optionValue in currOptionsValues %}       
+      <span class="inline-option-value {{ 'main-option' if optionValue.option.isMainOption else '' }}">
         {% set isDisabled =   '' if optionValue.isFilledByFilters else 'disabled' %}
-        <span class="option-value {{ isDisabled }}">{{ optionValue.option.name }}</span>            
+        {% set option = optionValue.option %}
+        {% set icon = option.icon if option.useIconForMarker else (option.parent.parent.icon if option.parent else '') %}
+        {% if icon %}    
+          <span class="icon {{ icon }} colorAs" option-id='{{ option.id }}' ></span>
+        {% endif %}
+        <span class="option-value {{ isDisabled }} colorAs" option-id='{{ option.id }}'>{{ option.nameShort }}</span>   
+      </span>      
     {% endfor %}
 
     {% if not currOptionsValues|length %}

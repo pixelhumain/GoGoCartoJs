@@ -3,10 +3,7 @@
 </div> 
 
 <div id="map-gogo-controls">
-  <div class="show-directory-menu-button gogo-bg-primary gogo-map-control" style="display:none">  
-    <span class="text">Menu</span>
-    <i class="gogo-icon-angle-right"></i>
-  </div> 
+  {% include 'components/buttons/show-directory-menu-button.html.njk' %}
   
   {% if config.isFeatureActivated('listMode') %}
     <div class="show-as-list-button gogo-map-control gogo-primary"><i class="gogo-icon-list"></i></div>  

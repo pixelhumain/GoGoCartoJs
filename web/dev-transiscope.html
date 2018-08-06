@@ -23,7 +23,7 @@
     <script src="../build/templates.js"></script>
 
     <script src="data/taxonomy-pwa.js"></script>
-    <script src="data/elements-pwa.js"></script>
+    <script src="data/elements-single.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
 
@@ -33,20 +33,19 @@
         carto = goGoCarto('#gogocarto', {
           data:
           {
-            taxonomy: 'http://semantic-bus.org/data/api/TaxonomiePWA',
-            //elements: 'http://semantic-bus.org/data/api/PWA_All',
-            elements: 'http://semantic-bus.org/data/api/PWA_Bounds',
-            // elementsCompactApiUrl: 'http://semantic-bus.org/data/api/PWA_Bounds_Compact',
-            elementsCompactApiUrl: "https://semantic-bus.org/data/api/PWA_Bounds_Compact_Raw",
-            elementByIdUrl: 'http://semantic-bus.org/data/api/PWA_One?id={ID}',
-            requestByBounds: true,
+            // taxonomy: 'http://semantic-bus.org/data/api/TaxonomiePWA',
+            // elements: 'http://semantic-bus.org/data/api/PWA_Bounds',
+            // elementsCompactApiUrl: "https://semantic-bus.org/data/api/PWA_Bounds_Compact_Raw",
+            // elementByIdUrl: 'http://semantic-bus.org/data/api/PWA_One?id={ID}',
+            // requestByBounds: true,
+            taxonomy: taxonomy,
+            elements: elements
           },
           menu: { 
             width: 350 ,
             smallWidthStyle: true,
             // showOnePanePerMainOption: true,
             // showCheckboxForMainFilterPane: false
-            image: "assets/images/logo-transiscope.png"
           },
           map:
           {
@@ -56,7 +55,7 @@
           colors:
           {
             neutralDark: '#175259',
-            neutralDarkTransparent: "rgba(23, 82, 89, 0.68)" ,
+            neutralDarkTransparent: "#175259" ,
             neutralSoftDark: '#175259' ,
             neutral: '#175259' ,
             neutralLight: "#f3f6f4" ,
@@ -69,7 +68,13 @@
             mainFont: 'Roboto' ,
             titleFont: 'Roboto' ,
             taxonomyMainTitleFont: 'Roboto' ,     
-          }            
+          },
+          images:
+          {
+            buttonOpenMenu: "assets/images/logo-transiscope-small.png",
+            menuTopImage: "assets/images/logo-transiscope.png"
+          }
+                             
         });
 
         $(carto.container).on('templateLoaded', function() {
