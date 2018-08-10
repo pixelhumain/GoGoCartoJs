@@ -8,10 +8,13 @@ $disabled: #bcbcbc;
 {
   #directory-menu { @import "menu"; }
 
+  font-size: 14px;
+
   @import 'marker';
   @import 'element';
   @import 'map';
   @import 'list';
+  @import 'controls';
   
   .custom-scroll-bar-light::-webkit-scrollbar-track {
     background-color: transparent;

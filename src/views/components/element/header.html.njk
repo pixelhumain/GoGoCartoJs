@@ -41,15 +41,22 @@
   {# Categories litteral #}
   <span class="inline-option-values gogo-neutral col s8 hideOnLargeScreen">
     
+    {% set lastIconToDisplay = '' %}
     {% for optionValue in currOptionsValues %}       
       <span class="inline-option-value {{ 'main-option' if optionValue.option.isMainOption else '' }}">
         {% set isDisabled =   '' if optionValue.isFilledByFilters else 'disabled' %}
         {% set option = optionValue.option %}
-        {% set icon = option.icon if option.useIconForMarker else (option.parent.parent.icon if option.parent else '') %}
-        {% if icon %}    
-          <span class="icon {{ icon }} colorAs" option-id='{{ option.id }}' ></span>
+        {% set icon = option.icon %}
+        {% set parentIcon = option.getOwner().getOwner().icon if option.getOwner() else '' %}
+        {% set iconToDisplay = parentIcon if parentIcon and not option.useIconForMarker else icon %}
+
+        {% set sameIcon = iconToDisplay == lastIconToDisplay %}
+        {% if iconToDisplay and not sameIcon %}    
+          <span class="icon {{ iconToDisplay }} bgdColorAs colorAs" option-id='{{ option.id }}' ></span>
         {% endif %}
-        <span class="option-value {{ isDisabled }} colorAs" option-id='{{ option.id }}'>{{ option.nameShort }}</span>   
+        {% set lastIconToDisplay = iconToDisplay %}
+
+        <span class="option-value {{ isDisabled }} {{ 'same-icon-as-last-item' if sameIcon else '' }} colorAs" option-id='{{ option.id }}'>{{ option.nameShort }}</span>   
       </span>      
     {% endfor %}
 

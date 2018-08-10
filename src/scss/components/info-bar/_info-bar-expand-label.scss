@@ -4,7 +4,7 @@
   
   &.active 
   {
-    .expandLabel:before { content: "Moins d'infos" }
+    .expandLabel:after { content: "Moins d'infos" }
 
     .expandLabel.transform-big {
       position: absolute;
@@ -33,7 +33,7 @@
 
   &:not(.active) 
   { 
-    .expandLabel:before { content: "Plus d'infos" }
+    .expandLabel:after { content: "Plus d'infos" }
     .expandLabel, .expandLabel:not(.transform-big) { background-color: transparent !important; }
   }
 }

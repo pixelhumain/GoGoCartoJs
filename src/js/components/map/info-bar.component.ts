@@ -263,7 +263,7 @@ export class InfoBarComponent
 		}
 		else
 		{
-			if (this.domMenu.width() >= 400) this.elementVisible.component.menuComponent.showFullTextMenu(true);
+			if (this.domMenu.width() >= this.domMenu.find('.menu-element-item:visible').length*100) this.elementVisible.component.menuComponent.showFullTextMenu(true);
 
 			this.dom.find('.element-item').addClass('active');		
 			this.dom.find('.moreDetails').show();	

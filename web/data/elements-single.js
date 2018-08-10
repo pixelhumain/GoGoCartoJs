@@ -9,7 +9,7 @@ var elements = [
       "longitude":-0.0339
     },
 
-    "taxonomy": [ "Location", "Auto", "Vélo", 10427, "0dechet", "alternatiba", "ressourcerie" ],
+    "taxonomy": [ "Location", "Auto", "Vélo", 10427, 10517, "0dechet", "alternatiba", "ressourcerie" ],
     "tags" : ["Open Source", "Réutilisable", "Awesome!"],
 
     "address": {

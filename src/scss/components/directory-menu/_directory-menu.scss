@@ -22,6 +22,8 @@
     height: 100%;
     @media #{$small-only} { overflow: scroll; }
 
+    .menu-top-image { width: 100%; }
+
     .directory-menu-header
     {      
       width: 100%;

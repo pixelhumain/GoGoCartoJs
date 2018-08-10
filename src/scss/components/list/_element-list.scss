@@ -19,7 +19,7 @@
 		height: 100%;
 		@media #{$medium-and-up} { height: calc(100% - 3.5rem); }
 		width: 100%;
-		overflow-y: auto;
+		overflow-y: scroll;
 		margin :0;
 
 		padding-left: 0rem; padding-right: 0rem;

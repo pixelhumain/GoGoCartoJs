@@ -15,8 +15,9 @@
     <link rel="stylesheet" href="assets/gogocarto.css"> 
     <link rel="stylesheet" href="assets/images/styles.css">
 
-    <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Lobster|Roboto:400,700" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css"> -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:500,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     
     <script src="../build/libs.js"></script>
     <script src="../build/directory.js"></script>
@@ -33,13 +34,13 @@
         carto = goGoCarto('#gogocarto', {
           data:
           {
-            // taxonomy: 'http://semantic-bus.org/data/api/TaxonomiePWA',
-            // elements: 'http://semantic-bus.org/data/api/PWA_Bounds',
-            // elementsCompactApiUrl: "https://semantic-bus.org/data/api/PWA_Bounds_Compact_Raw",
-            // elementByIdUrl: 'http://semantic-bus.org/data/api/PWA_One?id={ID}',
-            // requestByBounds: true,
-            taxonomy: taxonomy,
-            elements: elements
+            taxonomy: 'http://semantic-bus.org/data/api/TaxonomiePWA',
+            elements: 'http://semantic-bus.org/data/api/PWA_Bounds',
+            elementsCompactApiUrl: "https://semantic-bus.org/data/api/PWA_Bounds_Compact_Raw",
+            elementByIdUrl: 'http://semantic-bus.org/data/api/PWA_One?id={ID}',
+            requestByBounds: true,
+            // taxonomy: taxonomy,
+            // elements: elements
           },
           menu: { 
             width: 350 ,
@@ -72,9 +73,8 @@
           images:
           {
             buttonOpenMenu: "assets/images/logo-transiscope-small.png",
-            menuTopImage: "assets/images/logo-transiscope.png"
-          }
-                             
+            menuTopImage: "assets/images/logo-transiscope6.png"
+          }                             
         });
 
         $(carto.container).on('templateLoaded', function() {

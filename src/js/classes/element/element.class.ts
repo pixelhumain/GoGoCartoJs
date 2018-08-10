@@ -16,7 +16,7 @@ import { OptionValue, CategoryValue, Option, Category, Contribution, VoteReport,
 import { capitalize } from "../../utils/string-helpers";
 
 import { App } from "../../gogocarto";
-declare var $;
+declare var $, Map;
 
 export class Element extends ElementBase
 {	
@@ -113,8 +113,33 @@ export class Element extends ElementBase
 		let currOptionValues = this.getCurrOptionsValues();
     let idsToRemove = []
     for (let ov of currOptionValues) idsToRemove = idsToRemove.concat(ov.option_.parentOptionIds);
-    return currOptionValues.filter( (oV) => idsToRemove.indexOf(oV.option_.id) == -1);
+    let deepestOv = currOptionValues.filter( (oV) => idsToRemove.indexOf(oV.option_.id) == -1);
+
+  	// group by owner
+  	let groupedByParentOvs = {}
+  	for (let ov of deepestOv) { 
+  		let parentName = ov.option.parentOptionName;
+  		if (parentName in groupedByParentOvs) groupedByParentOvs[parentName].push(ov); 
+  		else groupedByParentOvs[parentName] = [ov]; 
+  	}
+  	let deepestOrderedOv = [];
+  	for (let parent in groupedByParentOvs) { deepestOrderedOv = deepestOrderedOv.concat(groupedByParentOvs[parent]); }
+  	return deepestOrderedOv;
 	}
+
+	private groupBy(list, keyGetter) {
+    const map = new Map();
+    list.forEach((item) => {
+        const key = keyGetter(item);
+        const collection = map.get(key);
+        if (!collection) {
+            map.set(key, [item]);
+        } else {
+            collection.push(item);
+        }
+    });
+    return map;
+}
 
 	getCurrMainOptionValue() : OptionValue
 	{

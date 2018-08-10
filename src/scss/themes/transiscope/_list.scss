@@ -11,8 +11,9 @@
     text-decoration: none;
     font-size: .8rem;
     font-weight: bold;
-    position: absolute;
-    right: 20px;
+    float: right;
+    margin-top: 12px;
+    margin-right: -8px;
 
     &:hover { color: white !important; }
 
@@ -21,4 +22,17 @@
       margin-right: 10px;
     }
   }
+
+  .show-directory-menu-button {
+    top: 0px;
+    left: -40px;
+    border-radius: 0 0 5px 0;
+    padding-bottom: 0;
+    padding-top: 6px;
+    @include box-shadow-1(none);
+  }
+
+  background-color: $light;
+  color: $primary;
+  text-align: left;
 }

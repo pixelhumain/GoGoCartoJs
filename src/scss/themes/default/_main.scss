@@ -8,8 +8,14 @@
     display: none;
   }
 
-  .element-item .collapsible-header-more .inline-option-values.option-value 
-  {
-    &:not(:last-child) { &:after { content: ","; } }
+  .element-item .collapsible-header-more .inline-option-values {
+    .icon { display: none; }
+    .option-value 
+    {
+      color: inherit;
+    }
+    .inline-option-value:not(:last-child) { 
+      &:after { content: ","; margin-right: 5px; } 
+    }
   }
 }
