@@ -42,15 +42,7 @@
 
       .option-value 
       {
-        &.disabled { color: #9C9C9C; font-weight: normal; }
-
-        &.same-icon-as-last-item { 
-          margin-left: -17px;
-          &:before {
-            content: "+";
-            margin-right: 5px;
-          }
-        }
+        &.disabled { color: #9C9C9C; font-weight: normal; }        
       }
     }
     .description
