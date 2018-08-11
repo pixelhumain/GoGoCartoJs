@@ -30,6 +30,8 @@
     padding-bottom: 0;
     padding-top: 6px;
     @include box-shadow-1(none);
+
+    @media #{$large-only} { left: 0px; }
   }
 
   background-color: $light;
