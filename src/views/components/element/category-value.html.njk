@@ -33,11 +33,12 @@
 	    <span class="option-value col colorAs {{ optionClass }} {{ 'last' if loop.last else ''}} {{ 'first' if loop.first else ''}}"
 	    			option-id={{ optionValue.option.id }}>
 
-	    	{% set iconClass = optionValue.option.icon if optionValue.option.icon else 'gogo-icon-angle-right' %}	
-	    	{% set iconColorId = optionValue.option.id if optionValue.option.icon else '' %}	
+	    	{% set iconClass = optionValue.option.icon %}
 				
-				<span class="icon {{ iconClass }} colorAs" option-id={{ iconColorId }}></span>
-				
+				{% if iconClass %}
+					<span class="icon {{ iconClass }} colorAs" option-id={{ optionValue.option.id }}></span>
+				{% endif %}
+
 	      <span class="option-name {{ optionValue.diff }}" option-id={{ optionValue.option.id }}>
 	      {{ optionValue.option.name }}</span>
 
