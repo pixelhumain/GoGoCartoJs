@@ -3467,6 +3467,8 @@ th {
     background-color: #DADAD9; }
   .gogo-load-css .gogo-theme-default.gogocarto-container .show-directory-menu-button .arrow-right {
     display: none; }
+  .gogo-load-css .gogo-theme-default.gogocarto-container .element-item .collapsible-body .category-wrapper .option-value {
+    color: inherit; }
   .gogo-load-css .gogo-theme-default.gogocarto-container .element-item .collapsible-header-more .inline-option-values .icon {
     display: none; }
   .gogo-load-css .gogo-theme-default.gogocarto-container .element-item .collapsible-header-more .inline-option-values .option-value {
@@ -4041,6 +4043,9 @@ th {
         -webkit-box-shadow: none;
         -moz-box-shadow: none;
         box-shadow: none; }
+        @media only screen and (min-width: 1201px) {
+          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-content-list .element-list-header .show-directory-menu-button {
+            left: 0px; } }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container #gogo-controls-mobile .feature-button {
       margin-right: 0;
       float: left; }
