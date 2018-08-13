@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <style>
+      html, body, #gogocarto
+      {
+        height: 100%;
+        width: 100%;  
+      }
+    </style>
+
+    <link rel="stylesheet" href="assets/gogocarto.css"> 
+    <link rel="stylesheet" href="assets/images/styles.css">
+
+    <link href="https://file.myfontastic.com/p9QtVQwDCkDvVq6VJesnxg/icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    
+    <script src="../build/libs.js"></script>
+    <script src="../build/directory.js"></script>
+    <script src="../build/templates.js"></script>
+
+    <script src="data/colors.js"></script>
+    <script src="data/taxonomy-simple.js"></script>
+    <script src="data/elements-single.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
+
+    <script>
+      $(document).ready(function()
+      {   
+        carto = goGoCarto('#gogocarto', {
+          data:
+          {
+            taxonomy: taxonomy,
+            elements: elements
+          },
+          infobar:
+          {            
+            bodyTemplate: { 
+              content: "http://localhost/GoGoCartoJs/web/data/custom-template-simple.md",
+              type: "url"
+            }
+            // bodyTemplate: { content: "{{longDescription}}\n### Informations générales\r{{ name }}\n{{ website|urlize }}\r___\r**Address** : {{ address.formatedAddress }}" }
+            // bodyTemplate: {
+            //   content: [
+            //     "### Informations générales",
+            //     "{{ name }}",
+            //     "{{ website|urlize }}",
+            //     "___",
+            //     "**Address** : {{ address.formatedAddress }}"
+            //   ]
+            // }
+          }        
+        });
+      });
+    </script>
+    
+  </head>
+  <body>
+  	<div id="gogocarto"></div>
+  </body>
+  
+</html>
+
