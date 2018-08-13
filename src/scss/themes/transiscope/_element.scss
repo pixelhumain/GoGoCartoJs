@@ -207,7 +207,7 @@
     width: auto;
     float: right;
     border: 2px solid;
-    color: $secondary;
+    color: $primary;
     padding: 8px 15px;
     text-align: center;
     border-radius: 20px;
@@ -215,7 +215,7 @@
     &:before {
       margin-right: 8px;
       color: white;
-      background-color: $secondary;
+      background-color: $primary;
       border-radius: 50%;
       padding: 0 4px;
     }    
@@ -264,59 +264,12 @@
   .element-item.active {
     .expandLabel.transform-big {
       background-color: white;
-      color: $secondary;
-      &:hover { color: $secondary; }
+      color: $primary;
+      &:hover { color: $primary; }
       @media #{$small-only} { padding: 8px 10px; }
     }
 
     .collapsible-header { padding-bottom: .8rem; }
     .inline-option-values { display: none; }
   }
-}
-
-#directory-content-list {  
-
-  .element-item {
-    .inline-option-values {
-      width: 100%;
-      .inline-option-value:last-child {
-        float: right;
-        margin-right: 0;
-        .option-value { color: $dark; }
-      }
-    }
-
-    .menu-element {
-      text-align: right;
-      padding: 0;
-      padding-right: 10px;
-      height: 2.3rem !important;
-      .menu-element-item .menu-icon {
-        font-size: 18px !important;
-        &:before { line-height: 2.3rem !important; }
-      }
-
-      .menu-element-item-text {
-        font-size: 11px;
-        line-height: 2.5rem;
-      }
-    }
-        
-
-    .expandLabel { display: none }
-
-    .location {
-      font-weight: normal;
-      color: $primary;
-      .postalCode { font-size: 14px; }
-    }
-
-    .collapsible-body-main-content { padding-bottom: 0; }
-
-    .collapsible-body .tags-container {
-      margin-bottom: 0;
-      padding-bottom: 1rem;
-    } 
-    
-  }  
 }
