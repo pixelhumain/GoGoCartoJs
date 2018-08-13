@@ -9,13 +9,27 @@ declare var commonmark;
 
 export class TemplateModule
 {
+	nunjucksEnvironment: any;
+
 	constructor()
 	{
 		// we can configure this path and the templates names from GoGoCarto
 		// to override default templates
 		// As default templates are precompiled into javascript templates.js file
 		// if there is some templates we did not override, nunjucks will get the precompiled one
-		nunjucks.configure('../src/views', { autoescape: true });
+		this.nunjucksEnvironment = nunjucks.configure('../src/views', { autoescape: true });
+
+		// Add custom filters here
+		this.nunjucksEnvironment.addFilter('gogotags', function(tags) {
+		    let value = '<div class="tags-container">';
+		    for(let currentIndex=0;currentIndex<tags.length;++currentIndex)
+		    {
+					value += '<span class="gogo-tag">' + tags[currentIndex] + '</span>';
+		    }
+		    value += '</div>'
+
+		    return value;
+		});
 	}
 
 	initialize(config: GoGoConfig, callback: () => void)
@@ -30,7 +44,14 @@ export class TemplateModule
 					{
 						content = content.join('\n');
 					}
-			    config.infobar.bodyTemplate.content = this.parseMarkdownSyntax(content);
+					if(config.infobar.bodyTemplate.isMarkdown)
+					{
+						config.infobar.bodyTemplate.content = this.parseMarkdownSyntax(content);
+					}
+					else
+					{
+						config.infobar.bodyTemplate.content = content;
+					}
 			    config.infobar.bodyTemplate.compiled = false;
 			    callback();
 			    break;
@@ -40,7 +61,14 @@ export class TemplateModule
 						dataType: 'text',
 						url: config.infobar.bodyTemplate.content,
 						success: (data) => {
-							config.infobar.bodyTemplate.content = that.parseMarkdownSyntax(data);
+							if(config.infobar.bodyTemplate.isMarkdown)
+							{
+								config.infobar.bodyTemplate.content = this.parseMarkdownSyntax(data);
+							}
+							else
+							{
+								config.infobar.bodyTemplate.content = data;
+							}
 							config.infobar.bodyTemplate.compiled = false;
 							callback();
 						},
@@ -76,6 +104,16 @@ export class TemplateModule
 			default: console.warn('[GoGoCarto] No template associated to templateName', templateName);
 		}
 
-		return nunjucks.render(fileUrl, options);
+		return this.nunjucksEnvironment.render(fileUrl, options);
+	}
+
+	compile(template:string): any
+	{
+		return nunjucks.compile(template, this.nunjucksEnvironment);
+	}
+
+	defaultBodyRender(options: any = {})
+	{
+		return this.nunjucksEnvironment.render('components/element/body.html.njk', options);
 	}
 }

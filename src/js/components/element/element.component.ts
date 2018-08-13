@@ -62,11 +62,11 @@ export class ElementComponent
     if (App.config.infobar.bodyTemplate) 
     {
       // Compile the body template once for all
-      if(!App.config.infobar.bodyTemplate.compiled) App.config.infobar.bodyTemplate = nunjucks.compile(App.config.infobar.bodyTemplate.content);
+      if(!App.config.infobar.bodyTemplate.compiled) App.config.infobar.bodyTemplate = App.templateModule.compile(App.config.infobar.bodyTemplate.content);
       options.body = App.config.infobar.bodyTemplate.render(this.element);
       options.body = options.body.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, '"');
     }
-    else options.body = nunjucks.render('components/element/body.html.njk', options);
+    else options.body = App.templateModule.defaultBodyRender(options);
 
     let html = App.templateModule.render('element', options);
 
