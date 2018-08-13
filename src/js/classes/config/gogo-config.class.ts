@@ -46,7 +46,11 @@ export class GoGoConfig
   {
     width: undefined,
     activate: true,
-    bodyTemplate: undefined
+    bodyTemplate: {
+      content: undefined,
+      type: "string", // string | url
+      isMarkdown: true
+    }
   };
   readonly general =
   {

@@ -56,17 +56,7 @@ export class ElementComponent
       smallWidth : App.mode == AppModes.Map && App.infoBarComponent.isDisplayedAside(),
       allowedStamps : App.stampModule.allowedStamps,
       body : undefined
-    };
-
-    // If there is a body template configured, then we use it. We use the default body otherwise.
-    if (App.config.infobar.bodyTemplate) 
-    {
-      // Compile the body template once for all
-      if(!App.config.infobar.bodyTemplate.compiled) App.config.infobar.bodyTemplate = App.templateModule.compile(App.config.infobar.bodyTemplate.content);
-      options.body = App.config.infobar.bodyTemplate.render(this.element);
-      options.body = options.body.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, '"');
-    }
-    else options.body = App.templateModule.defaultBodyRender(options);
+    };    
 
     let html = App.templateModule.render('element', options);
 
