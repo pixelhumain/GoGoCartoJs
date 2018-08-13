@@ -193,6 +193,7 @@ export class AjaxModule
 			complete: () =>
 			{
 			  this.isRetrievingElements = false;
+			  this.currBoundsRetrieving = null; 
 			  clearTimeout(this.loaderTimer);
 			  setTimeout( () => $('#directory-loading').hide(), 250);
 			  if (this.requestWaitingToBeExecuted)
