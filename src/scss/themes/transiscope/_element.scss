@@ -1,0 +1,322 @@
+.element-item {
+  .collapsible-header { 
+    background-color: $dark;  
+    .name { font-weight: 900; }
+    .collapsible-header-more { line-height: 1.3rem; }
+    .element-main-icon { display: none !important; }
+
+    .collapsible-header-title .gogo-icon-close {       
+      &:before {
+        background-color: $secondary;
+        color: white;
+        border-radius: 3px;
+        padding: 2px;
+      }
+    }
+  }
+
+  .menu-element-item-text {
+    display: inline-block !important;
+    text-transform: uppercase;
+    line-height: 3rem;
+    margin-left: 10px;
+    font-size: 12px;
+  }
+  @media (max-width: 460px) { 
+    .menu-element-item {
+       margin: 0 .5rem !important;
+      .menu-element-item-text { font-size: 11px; margin-left: 5px;}
+      .menu-icon { font-size: 16px; }
+    }
+      
+  }
+
+  .collapsible-body {
+    background-color: $light;
+
+    .collapsible-body-main-content { background-color: $light; padding-left: 0; }
+
+    .info-bar-divider { display: none; }
+
+    .description { line-height: 1.3rem; }
+    .section {
+      background-color: white;
+      margin-top: 1rem;
+      padding-left: 1rem;
+      margin-right: .4rem;
+      line-height: 1.5rem;
+      padding-top: .7rem;
+      padding-bottom: .6rem;
+
+      &.section-taxonomy {
+        padding: 0;
+        // font-size: 13px;
+
+        h3.category-name {
+          background-color: $light;
+          margin-left: 0;
+          padding-left: 1.5rem;
+          color: $secondary;
+          &:first-child { color: $primary; }
+        }
+      }
+
+      &.sectionlongDescription {
+        margin-top: 0;
+        background-color: $light;
+      }
+    }
+
+    h3 {
+      margin-left: 1rem;
+      font-weight: 900;
+    }
+
+    .category-wrapper {
+      background-color: $light;
+
+      .option-value {
+        margin-bottom: 3px;
+        border-left: 10px solid;
+        padding-left: 1rem;
+        background-color: white;
+        line-height: 2.5rem;
+        .option-name { color: $dark; line-height: 2.5rem; }
+        .icon.fa { 
+          margin-right: 10px; 
+          font-size: .9rem;
+          padding-top: .8rem;
+        }
+      }
+
+      .row + .category-wrapper {
+        .row:last-child {
+          .option-value { padding-bottom: 1.8rem; }
+        }
+      }
+    }
+
+    .category-wrapper .category-wrapper {
+      border: none;
+      margin-left: 0;
+      padding-left: 0;
+      .option-value { 
+        padding-left: .9rem; 
+        margin-top: -8px; 
+        height: 1.5rem;
+        line-height: 1.5rem;
+        .option-name { 
+          color: inherit; 
+          margin-left: 4px;
+          line-height: 1rem;
+          &:before {
+            content: "➡";
+            font-size: 1.2rem;
+            margin-right: 6px;
+          }
+        }
+        .icon { 
+          display: none;           
+        }
+      }
+    }
+
+    .sectionOpenHours {
+      .day:after {
+        content: "➡";
+        font-size: 1.2rem;
+        color: $primary;
+        float: right;
+      }
+      .openHours { padding-left: 0}
+    }
+
+    .tags-container {
+      background-color: $light;
+      margin-top: 0;
+      padding-top: 1rem;
+      padding-left: 1.5rem;
+      margin-bottom: -10px;
+      text-align: center;
+
+      .gogo-tag {
+        background-color: white;
+        border-radius: 0;
+        padding: 4px 14px;
+        color: $primary;
+      }
+    }
+  }
+  .menu-element { 
+    background-color: $primary; 
+
+    .menu-element-item {
+      display: inline-block;
+      font-weight: bold;
+      color: #e6e6e6;
+    }
+  } 
+
+  .inline-option-values {
+    width: calc(100% - 140px);
+    font-weight: normal;
+
+    .inline-option-value {     
+      
+      margin-right: 20px;
+      display: inline-block;  
+      @media #{$medium-and-up} {
+        .icon { 
+          margin-right: 5px; 
+          font-size: .9rem;
+          padding-top: .6rem;
+          background-color: transparent;
+        }
+        .option-value { 
+          line-height: 2rem;
+          font-style: normal;
+          font-weight: normal;
+
+          &.same-icon-as-last-item { 
+            margin-left: -17px;
+            &:before {
+              content: "+";
+              margin-right: 5px;
+            }
+          }
+        }
+      }
+
+      @media #{$small-only} { 
+        &:last-child { display: none; }
+        .option-value { display: none; }
+        .icon { 
+          color: white;
+          border-radius: 50%;
+          font-size: .9rem;
+          padding: 10px 9px;
+          margin-right: 5px;
+        }
+        margin-right: 0;
+      }    
+    }
+    
+  }
+
+  .expandLabel {
+    width: auto;
+    float: right;
+    border: 2px solid;
+    color: $secondary;
+    padding: 8px 15px;
+    text-align: center;
+    border-radius: 20px;
+    margin-top: -3px;
+    &:before {
+      margin-right: 8px;
+      color: white;
+      background-color: $secondary;
+      border-radius: 50%;
+      padding: 0 4px;
+    }    
+  }
+  &.active .expandLabel:before { 
+    content: "-";
+    padding: 0 6px;
+    padding-bottom: 1px;
+    font-weight: 900;
+    font-size: 16px;
+  }
+  &:not(.active) .expandLabel:before { content: "+" }
+}
+
+#element-info-bar.display-aside .element-item .collapsible-header 
+{
+  padding: .5rem 0;
+  .collapsible-header-title { 
+    padding-bottom: 1rem;
+    
+    .gogo-icon-close { 
+      font-size: .8rem;
+      &:before {
+        background-color: $primary;
+        color: $dark;
+      }
+    }
+  }
+
+  .name {     
+    font-size: 1.4rem;    
+    line-height: 1.8rem;
+  }
+}
+
+#element-info-bar.display-bottom {
+  .gogo-icon-close { font-size: 1rem; }
+  @media #{$small-only} { 
+    .element-item .expandLabel {
+      margin-right: 10px;
+      font-size: 13px;
+      font-weight: 900;
+      padding: 8px 10px;
+    }
+  }
+  .element-item.active {
+    .expandLabel.transform-big {
+      background-color: white;
+      color: $secondary;
+      &:hover { color: $secondary; }
+      @media #{$small-only} { padding: 8px 10px; }
+    }
+
+    .collapsible-header { padding-bottom: .8rem; }
+    .inline-option-values { display: none; }
+  }
+}
+
+#directory-content-list {  
+
+  .element-item {
+    .inline-option-values {
+      width: 100%;
+      .inline-option-value:last-child {
+        float: right;
+        margin-right: 0;
+        .option-value { color: $dark; }
+      }
+    }
+
+    .menu-element {
+      text-align: right;
+      padding: 0;
+      padding-right: 10px;
+      height: 2.3rem !important;
+      .menu-element-item .menu-icon {
+        font-size: 18px !important;
+        &:before { line-height: 2.3rem !important; }
+      }
+
+      .menu-element-item-text {
+        font-size: 11px;
+        line-height: 2.5rem;
+      }
+    }
+        
+
+    .expandLabel { display: none }
+
+    .location {
+      font-weight: normal;
+      color: $primary;
+      .postalCode { font-size: 14px; }
+    }
+
+    .collapsible-body-main-content { padding-bottom: 0; }
+
+    .collapsible-body .tags-container {
+      margin-bottom: 0;
+      padding-bottom: 1rem;
+    } 
+    
+  }  
+}

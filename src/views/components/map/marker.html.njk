@@ -25,7 +25,7 @@
 
 				{% set disableOption = 'disabled' if not otherOptionValue.isFilledByFilters %}
 
-				<div class="moreIconWrapper {{ disableOption }} {{ 'colorAs' if otherOptionValue.colorOptionId }} {{pendingClass}}" style="left:{{ 32 * loop.index0 }}px"
+				<div class="moreIconWrapper {{ disableOption }} {{ 'colorAs bgdColorAs' if otherOptionValue.colorOptionId }} {{pendingClass}}" style="left:{{ 32 * loop.index0 }}px"
 						option-id="{{ otherOptionValue.colorOptionId }}">
 					<span class="moreIcon iconInsideMarker {{ disableOption }} {{ otherOptionValue.option.icon }} colorAs {{pendingClass}}" 
 						option-id="{{ otherOptionValue.optionId if otherOptionValue.option.color else otherOptionValue.colorOptionId }}">

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <style>
+      html, body, #gogocarto
+      {
+        height: 100%;
+        width: 100%;  
+      }
+
+      .subcategory-item { margin-bottom: -.5rem; }
+    </style>
+
+    <link rel="stylesheet" href="assets/gogocarto.css"> 
+    <link rel="stylesheet" href="assets/images/styles.css">
+
+    <!-- <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css"> -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:500,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    
+    <script src="../build/libs.js"></script>
+    <script src="../build/directory.js"></script>
+    <script src="../build/templates.js"></script>
+
+    <script src="data/taxonomy-pwa.js"></script>
+    <script src="data/elements-single.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
+
+    <script>
+      $(document).ready(function()
+      {  
+        carto = goGoCarto('#gogocarto', {
+          data:
+          {
+            taxonomy: 'http://semantic-bus.org/data/api/TaxonomiePWA',
+            elements: 'http://semantic-bus.org/data/api/PWA_Bounds',
+            elementsCompactApiUrl: "https://semantic-bus.org/data/api/PWA_Bounds_Compact_Raw",
+            elementByIdUrl: 'http://semantic-bus.org/data/api/PWA_One?id={ID}',
+            requestByBounds: true,
+            // taxonomy: taxonomy,
+            // elements: elements
+          },
+          menu: { 
+            width: 350 ,
+            smallWidthStyle: true,
+            // showOnePanePerMainOption: true,
+            // showCheckboxForMainFilterPane: false
+          },
+          map:
+          {
+            saveTileLayerInCookies : true,
+          },
+          theme: 'transiscope',
+          colors:
+          {
+            neutralDark: '#175259',
+            neutralDarkTransparent: "#175259" ,
+            neutralSoftDark: '#175259' ,
+            neutral: '#175259' ,
+            neutralLight: "#f3f6f4" ,
+            secondary: '#3bad78' ,
+            primary: '#3bad78' ,
+            background: "#f3f6f4" ,
+
+            disableColor: '#bcbcbc' ,
+
+            mainFont: 'Roboto' ,
+            titleFont: 'Roboto' ,
+            taxonomyMainTitleFont: 'Roboto' ,     
+          },
+          images:
+          {
+            buttonOpenMenu: "assets/images/logo-transiscope-small.png",
+            menuTopImage: "assets/images/logo-transiscope6.png"
+          }                             
+        });
+
+        $(carto.container).on('templateLoaded', function() {
+          $('.subcategorie-option-item .icon').addClass('bgdColorAs');
+          $('.category-wrapper .subcategories-wrapper:not(.no-withdrawal) .subcategorie-option-item .icon').addClass('subIcon');          
+        });
+      });
+    </script>
+    
+  </head>
+  <body>
+  	<div id="gogocarto"></div>
+  </body>
+  
+</html>
+

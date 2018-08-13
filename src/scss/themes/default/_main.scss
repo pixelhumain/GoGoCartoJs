@@ -1,0 +1,25 @@
+.gogo-theme-default.gogocarto-container
+{
+  .moreIconContainer {
+    .moreIconWrapper { background-color: #DADAD9;; }
+  }
+
+  .show-directory-menu-button .arrow-right {
+    display: none;
+  }
+
+  .element-item .collapsible-body .category-wrapper .option-value {
+    color: inherit;
+  }
+
+  .element-item .collapsible-header-more .inline-option-values {
+    .icon { display: none; }
+    .option-value 
+    {
+      color: inherit;
+    }
+    .inline-option-value:not(:last-child) { 
+      &:after { content: ","; margin-right: 5px; } 
+    }
+  }
+}

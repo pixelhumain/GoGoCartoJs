@@ -1,0 +1,25 @@
+#directory-menu-main-container 
+{
+  .top-image-container { height: 90px; }
+
+  .shadow-bottom { border-top: none; width: calc(100% - 23px); }  
+
+  .directory-menu-header 
+  {
+    @media (min-width: 850px) { width: calc(100% + 23px); }
+
+    background-color: $dark;
+    @media (min-width: 850px) { border-radius: 0 8px 8px 0; }
+
+    .btn-close-menu.large-screen .arrow-left {
+      border: solid 8px;
+      border-color: transparent $secondary transparent transparent;
+    }
+
+    @import 'menu-header';
+  }
+
+  @import 'menu-filters';
+
+  
+}

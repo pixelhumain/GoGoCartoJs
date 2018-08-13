@@ -40,7 +40,7 @@ export class GoGoConfig
     smallWidthStyle: false,
     showOnePanePerMainOption: false,
     showCheckboxForMainFilterPane: true,
-    showCheckboxForSubFilterPane: true,
+    showCheckboxForSubFilterPane: true,    
   };
   readonly infobar =
   {
@@ -122,6 +122,8 @@ export class GoGoConfig
 
     hideMailsByShowingSendMailButton: true,
   };
+
+  readonly theme = 'default';
   // see gogo-styles for defaut values
   readonly colors =
   {
@@ -145,6 +147,12 @@ export class GoGoConfig
     mainFont: undefined ,
     titleFont: undefined ,
     taxonomyMainTitleFont: undefined ,     
+  }
+
+  readonly images =
+  {
+    buttonOpenMenu: undefined,
+    menuTopImage: undefined
   }
 
 	constructor(config : any)

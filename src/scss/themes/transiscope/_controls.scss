@@ -1,0 +1,22 @@
+#gogo-controls-mobile {
+  .feature-button { margin-right: 0; float: left; }
+  #mobile-search-icon {
+    border-radius: 8px 0 0 8px;
+    margin-right: 2px;
+  }
+  #mobile-filters-icon {
+    background-color: $dark;
+    border-radius: 0 8px 8px 0;
+    padding-top: 5px;
+    i { display: none; }    
+  }
+  .show-as-list-button, .show-as-map-button {
+    color: $primary;
+    border-radius: 8px;    
+  }
+
+  .show-as-map-button {
+    background-color: $secondary !important;
+    color: white;
+  }
+}

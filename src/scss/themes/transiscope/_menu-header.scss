@@ -1,0 +1,49 @@
+.search-bar-with-options-container .search-bar-container 
+{
+  height: 4rem;
+  padding-left: .5rem;
+  padding-right: 1.4rem;
+
+  .search-icon
+  {
+    font-size: 1.1rem;
+    color: white !important;
+    height: 2.5rem;
+    line-height: 2.5rem;
+
+    &:before { line-height: 2.5rem; }
+
+    &.search-bar-icon { left: 2rem; }
+    &.search-geolocalize { right: 2.8rem; }
+  }
+
+  .search-bar {
+    background-color: $primary;
+    border-radius: 0;
+    height: 2.5rem;
+    padding: 0 3rem;
+    width: 95%;
+
+    &::-webkit-input-placeholder { 
+      color: white;
+    }
+    &::-moz-placeholder { 
+      color: white;
+    }
+    &:-ms-input-placeholder { 
+      color: white;
+    }
+    &:-moz-placeholder { 
+      color: white;
+    }
+  }
+}
+
+.search-options {
+  padding-left: 14px;
+  padding-right: 2rem;
+  padding-bottom: 1.2rem;
+  .search-action-btn {
+    color: $dark;
+  }
+}

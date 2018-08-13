@@ -30,16 +30,17 @@
 
 			{% set isSubcategories = recursive and option.subcategories|length and option.displayChildrenInMenu %}
 
-	    <li class="subcategorie-option-item row 
+	    <li class="subcategorie-option-item row checked
 	    					{{ 'option-collapsible' if isSubcategories}} {{ 'expanded' if option.showExpanded }} 
 	    					{{ 'unexpandable' if option.unexpandable }}
-	    					{{ 'tooltipped' if option.textHelper }}"	    					  		
-	    		id="option-{{ option.id }}"
+	    					{{ 'tooltipped' if option.textHelper }}    
+	    					{{ 'uncheckable' if not isCheckable }}"					  		
+	    		id="option-{{ option.id }}" data-option-id='{{ option.id }}'
 	    		data-position="right" data-delay="700" data-tooltip="{{ option.textHelper | capitalize }}"
 	    		{% if not option.displayInMenu %} style="display:none"{% endif %}>
 	    	
 	    		{# --- ICON & NAME--- #}
-	    		<div class="gogo-icon-name-wrapper {{ 'uncheckable' if not isCheckable }}" data-option-id='{{ option.id }}'>
+	    		<div class="gogo-icon-name-wrapper" data-option-id='{{ option.id }}'>
 
 						{# --- ICON ---- #}
 						{% set iconClass = option.icon if option.icon else ( 'gogo-icon-marker' if option.useColorForMarker else '') %}	

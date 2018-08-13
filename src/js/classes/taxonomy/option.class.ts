@@ -71,4 +71,6 @@ export class Option extends CategoryOptionTreeNode
 		}
 		return resultOptions;
 	}
+
+	get parentOptionName() : string { return this.getOwner() ? this.getOwner().getOwner() ? this.getOwner().getOwner().name : '' : ''; }
 }

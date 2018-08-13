@@ -92,18 +92,18 @@
   .gogo-load-css #main-option-all.show-one-pane-per-main-option .gogo-icon-name-wrapper:hover:after { color: {{ primary }}; }
   
   .gogo-load-css .subcategorie-option-item:hover          .subcategorie-option-checkbox + label:before { color: {{ primary }}; border-color: {{ primary }} }  
-  .gogo-load-css .subcategorie-option-item:not(.expanded) .gogo-icon-name-wrapper       .arrow-after { border-color: {{ neutral }} transparent transparent transparent; opacity: 0.6; }
-  .gogo-load-css .subcategorie-option-item:not(.expanded) .gogo-icon-name-wrapper:hover .arrow-after { border-color: {{ primary }} transparent transparent transparent !important; opacity: 1; }
-  .gogo-load-css .subcategorie-option-item.expanded       .gogo-icon-name-wrapper       .arrow-after { border-color:  transparent transparent {{ neutral }} transparent; opacity: 0.6; }
-  .gogo-load-css .subcategorie-option-item.expanded       .gogo-icon-name-wrapper:hover .arrow-after { border-color:  transparent transparent {{ primary }} transparent !important; opacity: 1; }
+  .gogo-load-css .subcategorie-option-item:not(.expanded) .option-name       .arrow-after { border-color: {{ neutral }} transparent transparent transparent; opacity: 0.6; }
+  .gogo-load-css .subcategorie-option-item:not(.expanded) .option-name:hover .arrow-after { border-color: {{ primary }} transparent transparent transparent !important; opacity: 1; }
+  .gogo-load-css .subcategorie-option-item.expanded       .option-name       .arrow-after { border-color:  transparent transparent {{ neutral }} transparent; opacity: 0.6; }
+  .gogo-load-css .subcategorie-option-item.expanded       .option-name:hover .arrow-after { border-color:  transparent transparent {{ primary }} transparent !important; opacity: 1; }
   
   .gogo-load-css .subcategorie-option-item.disabled:not(:hover) { color: {{ disableColor }}; }
   .gogo-load-css .subcategorie-option-item.disabled .subcategorie-option-checkbox + label:before { border-color: {{ disableColor }}; }
   .gogo-load-css .subcategorie-option-item.disabled:not(:hover) .icon { color: {{ disableColor }}; opacity: .7;}
   .gogo-load-css .subcategorie-option-item.disabled:not(:hover) .arrow-after { border-color: {{ disableColor }} transparent transparent transparent !important;}
 
-  .gogo-load-css .subcategorie-option-item.expanded.disabled .gogo-icon-name-wrapper .arrow-after { border-color:  transparent transparent {{ disableColor }} transparent !important; }
-  .gogo-load-css .subcategorie-option-item.expanded.disabled .gogo-icon-name-wrapper:hover .arrow-after { border-color:  transparent transparent {{ primary }} transparent !important; }
+  .gogo-load-css .subcategorie-option-item.expanded.disabled .option-name .arrow-after { border-color:  transparent transparent {{ disableColor }} transparent !important; }
+  .gogo-load-css .subcategorie-option-item.expanded.disabled .option-name:hover .arrow-after { border-color:  transparent transparent {{ primary }} transparent !important; }
 
   .gogo-load-css .subcategory-item                .name-wrapper:hover { color: {{ primary }}; }
   .gogo-load-css .subcategory-item:not(.expanded) .name-wrapper       .arrow-after { border-color: {{ neutral }} transparent transparent  transparent; opacity: 0.6; }
@@ -125,6 +125,10 @@
   {
     color: #fff;
     background-color: {{ primary }};
+  }
+
+  .gogo-load-css .marker-cluster div {
+    font-family: {{ mainFont }}, sans-serif;
   }
 
   .gogo-load-css .btn:hover { background-color: {{ primary }}; }  
@@ -149,6 +153,7 @@
       {% set softColor = option.softColor if option.softColor else option.color %}
 	    .gogo-load-css .bgdSoftColorAs[option-id="{{ option.id }}"] { background-color: {{ softColor }} }
 	    .gogo-load-css .borderSoftColorAs[option-id="{{ option.id }}"] { border-color: {{ softColor }} }
+      .gogo-load-css .borderColorAs[option-id="{{ option.id }}"] { border-color: {{ option.color }} }
 	    .gogo-load-css .bgdColorAs[option-id="{{ option.id }}"] { background-color: {{ option.color }} }
 	    .gogo-load-css .colorAs[option-id="{{ option.id }}"] { color: {{ option.color }} }
     {% endif %}

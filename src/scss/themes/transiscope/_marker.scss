@@ -1,0 +1,53 @@
+.iconInsideMarker-wrapper {
+  background-color: transparent;
+  .iconInsideMarker { color: white;}
+}
+
+.marker-name { color: #f1f1f1;; opacity: 1; }
+
+.moreIconContainer {
+  .moreIconWrapper {
+    font-size: 14px;
+    line-height: 0;
+    padding-left: 1px;
+    box-shadow: 1px 1px 4px 1px #989898;
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  .marker-wrapper.BigSize .iconInsideMarker-wrapper {
+    left: 7px !important;
+  }
+}
+
+.marker-cluster 
+{
+  div { font-size: 15px; }
+
+  &.marker-cluster-small div
+  {
+    $size: 34px;
+    background-color: #f8ab00;
+    width: $size;
+    height: $size;   
+    span { line-height: $size; }    
+  }
+
+  &.marker-cluster-medium div
+  {
+    $size: 38px;
+    background-color: #f78b16;
+    width: $size;
+    height: $size;   
+    span { line-height: $size; }  
+  }
+
+  &.marker-cluster-large div
+  {
+    $size: 44px;
+    background-color: #f5701e;
+    width: $size;
+    height: $size;   
+    span { line-height: $size; }  
+  }
+}

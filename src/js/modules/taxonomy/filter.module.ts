@@ -99,7 +99,7 @@ export class FilterModule
 				if (App.config.menu.showOnePanePerMainOption) elementOptions = elementOptions.filter((optValue) => optValue.optionId != App.currMainId);
 
 				// if this element don't have any option in this category, don't need to check
-				if (elementOptions.length == 0 && log) console.log("--" + "Element don't have options in this category");
+				if (elementOptions.length == 0 && log) console.log("--" + "Element don't have options in this category. Catgeoyr mandatory ? ", category.isMandatory);
 				if (elementOptions.length == 0) return !category.isMandatory;
 
 				let isSomeOptionInCategoryCheckedOptions = elementOptions.some(optionValue => checkedOptions.indexOf(optionValue.option) > -1); 

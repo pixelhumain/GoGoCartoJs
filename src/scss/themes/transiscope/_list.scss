@@ -1,0 +1,40 @@
+#directory-content-list .element-list-header {
+  .show-as-map-button {
+    height: 2rem;
+    line-height: 2rem;
+    border-radius: 5px;
+    top: 15px;
+    padding: 0px 15px;
+    background-color: $secondary;
+    left: initial !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: .8rem;
+    font-weight: bold;
+    float: right;
+    margin-top: 12px;
+    margin-right: -8px;
+
+    &:hover { color: white !important; }
+
+    .btn-back {
+      font-size: 1.2rem;
+      margin-right: 10px;
+    }
+  }
+
+  .show-directory-menu-button {
+    top: 0px;
+    left: -40px;
+    border-radius: 0 0 5px 0;
+    padding-bottom: 0;
+    padding-top: 6px;
+    @include box-shadow-1(none);
+
+    @media #{$large-only} { left: 0px; }
+  }
+
+  background-color: $light;
+  color: $primary;
+  text-align: left;
+}
