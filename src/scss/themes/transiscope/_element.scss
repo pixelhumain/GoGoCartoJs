@@ -7,7 +7,7 @@
 
     .collapsible-header-title .gogo-icon-close {       
       &:before {
-        background-color: $secondary;
+        background-color: $primary;
         color: white;
         border-radius: 3px;
         padding: 2px;
@@ -207,7 +207,7 @@
     width: auto;
     float: right;
     border: 2px solid;
-    color: $primary;
+    color: $secondary;
     padding: 8px 15px;
     text-align: center;
     border-radius: 20px;
@@ -215,7 +215,7 @@
     &:before {
       margin-right: 8px;
       color: white;
-      background-color: $primary;
+      background-color: $secondary;
       border-radius: 50%;
       padding: 0 4px;
     }    
@@ -252,7 +252,9 @@
 }
 
 #element-info-bar.display-bottom {
-  .gogo-icon-close { font-size: 1rem; }
+  .gogo-icon-close { font-size: .9rem; }
+  .collapsible-header .name { font-size: 15px; } 
+
   @media #{$small-only} { 
     .element-item .expandLabel {
       margin-right: 10px;
@@ -264,8 +266,8 @@
   .element-item.active {
     .expandLabel.transform-big {
       background-color: white;
-      color: $primary;
-      &:hover { color: $primary; }
+      color: $secondary;
+      &:hover { color: $secondary; }
       @media #{$small-only} { padding: 8px 10px; }
     }
 

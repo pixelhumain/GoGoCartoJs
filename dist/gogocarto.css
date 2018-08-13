@@ -3740,7 +3740,7 @@ th {
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-header .element-main-icon {
         display: none !important; }
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-header .collapsible-header-title .gogo-icon-close:before {
-        background-color: #f79900;
+        background-color: #3bad78;
         color: white;
         border-radius: 3px;
         padding: 2px; }
@@ -3889,7 +3889,7 @@ th {
       width: auto;
       float: right;
       border: 2px solid;
-      color: #3bad78;
+      color: #f79900;
       padding: 8px 15px;
       text-align: center;
       border-radius: 20px;
@@ -3897,7 +3897,7 @@ th {
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .expandLabel:before {
         margin-right: 8px;
         color: white;
-        background-color: #3bad78;
+        background-color: #f79900;
         border-radius: 50%;
         padding: 0 4px; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item.active .expandLabel:before {
@@ -3921,7 +3921,9 @@ th {
         font-size: 1.4rem;
         line-height: 1.8rem; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container #element-info-bar.display-bottom .gogo-icon-close {
-      font-size: 1rem; }
+      font-size: .9rem; }
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container #element-info-bar.display-bottom .collapsible-header .name {
+      font-size: 15px; }
     @media only screen and (max-width: 600px) {
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container #element-info-bar.display-bottom .element-item .expandLabel {
         margin-right: 10px;
@@ -3930,9 +3932,9 @@ th {
         padding: 8px 10px; } }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container #element-info-bar.display-bottom .element-item.active .expandLabel.transform-big {
       background-color: white;
-      color: #3bad78; }
+      color: #f79900; }
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container #element-info-bar.display-bottom .element-item.active .expandLabel.transform-big:hover {
-        color: #3bad78; }
+        color: #f79900; }
       @media only screen and (max-width: 600px) {
         .gogo-load-css .gogo-theme-transiscope.gogocarto-container #element-info-bar.display-bottom .element-item.active .expandLabel.transform-big {
           padding: 8px 10px; } }
