@@ -118,11 +118,10 @@ export class GoGoCartoModule
 			App.customPopupComponent.initialize();
 			
 			App.component.initialize();		
-
-			App.routerModule.loadInitialState();
 			
 			App.templateModule.elementTemplate.onReady.do(() =>
 			{
+				App.routerModule.loadInitialState();
 				// wait for initial state to be loaded
 				setTimeout( () => App.elementsJsonModule.loadLocalElements(), 100);
 			});
