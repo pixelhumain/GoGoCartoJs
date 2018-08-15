@@ -39,6 +39,7 @@ export class ElementBase
   longDescription: string;
   longDescriptionMore: string;
   openHours : any;
+  vimeoId: number;
 
   commitment : string;  
   telephone : string;

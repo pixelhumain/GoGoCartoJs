@@ -86,7 +86,8 @@ export class ElementJsonParserModule
     element.email = elementJson.email || elementJson.contact || '';
     element.openHours = elementJson.openHours;
     App.elementFormaterModule.calculateFormatedOpenHours(element);
-    element.openHoursMoreInfos = elementJson.openHoursMoreInfos || elementJson.openHoursString; 
+    element.openHoursMoreInfos = elementJson.openHoursMoreInfos || elementJson.openHoursString;
+    element.vimeoId = elementJson.vimeoId;
     element.images = [];
     if(elementJson.image) element.images.push(elementJson.image);
     else if (elementJson.images) element.images = [].concat(elementJson.images);
