@@ -7,7 +7,7 @@
 
     .collapsible-header-title .gogo-icon-close {       
       &:before {
-        background-color: $secondary;
+        background-color: $primary;
         color: white;
         border-radius: 3px;
         padding: 2px;
@@ -252,7 +252,9 @@
 }
 
 #element-info-bar.display-bottom {
-  .gogo-icon-close { font-size: 1rem; }
+  .gogo-icon-close { font-size: .9rem; }
+  .collapsible-header .name { font-size: 15px; } 
+
   @media #{$small-only} { 
     .element-item .expandLabel {
       margin-right: 10px;
@@ -272,51 +274,4 @@
     .collapsible-header { padding-bottom: .8rem; }
     .inline-option-values { display: none; }
   }
-}
-
-#directory-content-list {  
-
-  .element-item {
-    .inline-option-values {
-      width: 100%;
-      .inline-option-value:last-child {
-        float: right;
-        margin-right: 0;
-        .option-value { color: $dark; }
-      }
-    }
-
-    .menu-element {
-      text-align: right;
-      padding: 0;
-      padding-right: 10px;
-      height: 2.3rem !important;
-      .menu-element-item .menu-icon {
-        font-size: 18px !important;
-        &:before { line-height: 2.3rem !important; }
-      }
-
-      .menu-element-item-text {
-        font-size: 11px;
-        line-height: 2.5rem;
-      }
-    }
-        
-
-    .expandLabel { display: none }
-
-    .location {
-      font-weight: normal;
-      color: $primary;
-      .postalCode { font-size: 14px; }
-    }
-
-    .collapsible-body-main-content { padding-bottom: 0; }
-
-    .collapsible-body .tags-container {
-      margin-bottom: 0;
-      padding-bottom: 1rem;
-    } 
-    
-  }  
 }

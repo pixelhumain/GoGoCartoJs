@@ -31,10 +31,67 @@
     padding-top: 6px;
     @include box-shadow-1(none);
 
-    @media #{$large-only} { left: 0px; }
+    @media (min-width: 1500px) { left: 0px; }
   }
 
   background-color: $light;
   color: $primary;
   text-align: left;
+}
+
+#directory-content-list .element-item {
+  
+  &:not(.active) { @include box-shadow-1(none); }
+  .collapsible-header { border-bottom: 1px solid $light };
+  .collapsible-body { border-bottom: none; }
+  .section { margin-right: 0; }
+
+  .inline-option-values {
+    width: 100%;
+    .inline-option-value:last-child {
+      float: right;
+      margin-right: 0;
+      .option-value { color: $dark; }
+    }
+  }
+
+  .menu-element {
+    text-align: right;
+    padding: 0;
+    padding-right: 10px;
+    height: 2.3rem !important;
+    .menu-element-item .menu-icon {
+      font-size: 18px !important;
+      &:before { line-height: 2.3rem !important; }
+    }
+
+    .menu-element-item-text {
+      font-size: 11px;
+      line-height: 2.5rem;
+    }
+  }      
+
+  .expandLabel { display: none }
+
+  .location {
+    font-weight: normal;
+    color: $primary;
+    .postalCode { font-size: 14px; }
+  }
+
+  .collapsible-body-main-content { padding-bottom: 0; }
+
+  .collapsible-body .tags-container {
+    margin-bottom: 0;
+    padding-bottom: 1rem;
+  } 
+
+  .section-taxonomy .category-wrapper:last-child .option-value:last-child { margin-bottom: 0; }
+
+}
+
+#directory-content-list .collapsible.popout > li { margin-bottom: 3px; }
+
+#directory-list-spinner-loader .spinner-layer {
+    border-color: $dark;
 }
