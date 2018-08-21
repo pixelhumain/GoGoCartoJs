@@ -10,29 +10,21 @@ declare var commonmark;
 
 export class TemplateElementFiltersModule
 {
-  nunjucksEnvironment : any;
+  filters = [ 'gogotags' ];
 
   public addGoGoFilters(nunjucksEnvironment)
   {
-    this.nunjucksEnvironment = nunjucksEnvironment;
-
     // adds custom fitlers here
-    this.addGoGoTags();
+    for(let currentIndex=0; currentIndex<this.filters.length; ++currentIndex)
+    {
+      let currentFilter = this.filters[currentIndex];
+      nunjucksEnvironment.addFilter(currentFilter, function(value) {
+        let objectArgument = {};
+        objectArgument[currentFilter] = value;
+        return nunjucksEnvironment.render("templates/element-filters/"+ currentFilter +".html.njk", objectArgument);
+      });
+    }
 
-    return this.nunjucksEnvironment;
-  }
-
-  private addGoGoTags()
-  {
-    this.nunjucksEnvironment.addFilter('gogotags', function(tags) {
-      let value = '<div class="tags-container">';
-      for(let currentIndex=0;currentIndex<tags.length;++currentIndex)
-      {
-        value += '<span class="gogo-tag">' + tags[currentIndex] + '</span>';
-      }
-      value += '</div>'
-
-      return value;
-    });
+    return nunjucksEnvironment;
   }
 }
