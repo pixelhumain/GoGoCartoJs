@@ -18,7 +18,7 @@
 
 	&:not(.expanded) 
   { 
-  	.option-name
+  	.gogo-icon-name-wrapper  .option-name
 		{
       &:hover .arrow-after { margin-bottom: -5px; } 
       .arrow-after { margin-bottom: -4px; }	

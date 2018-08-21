@@ -4561,9 +4561,9 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       height: 2.8rem;
       overflow: hidden;
       text-overflow: ellipsis; }
-      .gogo-load-css .gogocarto-container .subcategorie-option-item:not(.expanded) .option-name:hover .arrow-after {
+      .gogo-load-css .gogocarto-container .subcategorie-option-item:not(.expanded) .gogo-icon-name-wrapper .option-name:hover .arrow-after {
         margin-bottom: -5px; }
-      .gogo-load-css .gogocarto-container .subcategorie-option-item:not(.expanded) .option-name .arrow-after {
+      .gogo-load-css .gogocarto-container .subcategorie-option-item:not(.expanded) .gogo-icon-name-wrapper .option-name .arrow-after {
         margin-bottom: -4px; }
       .gogo-load-css .gogocarto-container .subcategorie-option-item .gogo-icon-name-wrapper {
         margin-right: 3rem; }

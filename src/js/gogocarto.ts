@@ -137,6 +137,7 @@ export class GoGoCartoModule
 		this.app.mapManager.onMarkerClick.do( (id) => this.fireEvent('markerClick', {id: id}));
 	}
 
+	// fire event on the Dom container so they can be catched by other javascript code
 	private fireEvent($eventName, $data) 
 	{
 		$(this.container).trigger($eventName, $data);

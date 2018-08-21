@@ -43,7 +43,8 @@ var elements = [
     "openHours": {
       "Mo":"09:00-12:00",
       "Fr":"09:00-11:30 & 5pm to 9pm"
-    },  
+    },
+    "vimeoId": 262718584,
     "openHoursString": "Fermé pendant les vacances d'été"
   },
   {
@@ -85,6 +86,7 @@ var elements = [
     //   {"type": "peertube", "value": "http://framatube.org" }
     // ],
     // "url" : "http://communeter.org",
+    "vimeoId": 196157581,
     "openHours": {
       "Mo":"09:00-12:00",
       "Fr":"09:00-11:30 & 5pm to 9pm"
