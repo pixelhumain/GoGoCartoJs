@@ -34,51 +34,7 @@
     <script>
       $(document).ready(function()
       { 
-        carto = goGoCarto('#gogocarto', {
-          data:
-          {
-            taxonomy: 'https://semantic-bus.org/data/api/TaxonomiePWA',
-            elements: 'https://semantic-bus.org/data/api/PWA_Bounds',
-            elementsCompactApiUrl: "https://semantic-bus.org/data/api/PWA_Bounds_Compact_Raw",
-            elementByIdUrl: 'https://semantic-bus.org/data/api/PWA_One?id={ID}',
-            requestByBounds: true,
-            // taxonomy: taxonomy,
-            // elements: elements
-          },
-          menu: { 
-            width: 350 ,
-            smallWidthStyle: true,
-            // showOnePanePerMainOption: true,
-            // showCheckboxForMainFilterPane: false
-          },
-          map:
-          {
-            saveTileLayerInCookies : true,
-          },
-          theme: 'transiscope',
-          colors:
-          {
-            neutralDark: '#175259',
-            neutralDarkTransparent: "#175259" ,
-            neutralSoftDark: '#175259' ,
-            neutral: '#175259' ,
-            neutralLight: "#f3f6f4" ,
-            secondary: '#3bad78' ,
-            primary: '#3bad78' ,
-            background: "#f3f6f4" ,
-
-            disableColor: '#bcbcbc' ,
-
-            mainFont: 'Roboto' ,
-            titleFont: 'Roboto' ,
-            taxonomyMainTitleFont: 'Roboto' ,     
-          },
-          images:
-          {
-            buttonOpenMenu: "../assets/images/logo-transiscope-small.png",
-            menuTopImage: "../assets/images/logo-transiscope6.png"
-          }                             
-        });
+        carto = goGoCarto('#gogocarto', "https://rawgit.com/pixelhumain/GoGoCartoJs/master/web/data/configuration-transiscope.json");
 
         $(carto.container).on('templateLoaded', function() {
           $('.subcategorie-option-item .icon').addClass('bgdColorAs');
