@@ -15,9 +15,8 @@ export class TemplateElementFiltersModule
   public addGoGoFilters(nunjucksEnvironment)
   {
     // adds custom fitlers here
-    for(let currentIndex=0; currentIndex<this.filters.length; ++currentIndex)
+    for(const currentFilter of this.filters)
     {
-      let currentFilter = this.filters[currentIndex];
       nunjucksEnvironment.addFilter(currentFilter, function(value) {
         let objectArgument = {};
         objectArgument[currentFilter] = value;
