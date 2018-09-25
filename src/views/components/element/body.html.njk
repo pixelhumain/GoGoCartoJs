@@ -25,37 +25,24 @@
   {# Tel #}
   {% set telephone = element.getProperty('telephone') %}
   {% if telephone %}
-    <span class="col s12 tel">{{ telephone|safe }}</span>
+    {{telephone|gogotelephone}}
   {% endif %}
 
   {# Mail #}
   {% set email = element.getProperty('email') %}
   {% if email %}
-    <span class="col s12 tel">
-    {# if element is pending we need to show the email no matter the security rules #}
-    {% if config.security.hideMailsByShowingSendMailButton and not (element.isPending() and config.isFeatureAvailable('pending')) %}
-      <button class="btn send-mail-btn">Envoyer un Mail</button>
-    {% else %}
-      {{ element.getProperty('email')|safe }}           
-    {% endif %}
-    </span>
+    {{ email|gogoemail(hideMail = config.security.hideMailsByShowingSendMailButton, isPending = element.isPending(), featurePendingAvailable = config.isFeatureAvailable('pending')) }}
   {% endif %}
 
   {# WebSite #}
   {% set website = element.getProperty('website') %}
   {% if website %}
-    <span class="col s12 tel"><a href="{{ element.website }}" target="_blank">{{ website|safe }}</a>
-    </span>
+    {{website|gogowebsite}}
   {% endif %}
 
   {% set urls = element.urls %}
   {% if urls %}
-    {% for url in urls %}
-      <div class="col s12">
-        {#{% if url.type %}<span class="label">{{ url.type }}</span>{% endif %}#}
-        <a href="{{ url.value }}" target="_blank">{{  url.value|safe }}</a>
-      </div>
-    {% endfor %}
+    {{ urls|gogourls }}
   {% endif %}
 
 </div>
@@ -70,48 +57,21 @@
 
   {% set tags = element.getProperty('tags') %}
   {% if tags %}
-    <div class="col s12 tags-container">
-      {% for tag in tags %}<span class="gogo-tag">{{ tag }}</span>{% endfor %}
-    </div>
+    {{ tags|gogotags}}
   {% endif %}
 </div>
 
 {% set commitment = element.getProperty('commitment') %}      
 {% if commitment %}
-  <div class="info-bar-divider"></div>
-  <h3>Engagement Citoyen</h3>   
-  <div class="section row">
-    <span class="col s12 description">{{ commitment|safe }}</span>  
-  </div>  
+  <div class="info-bar-divider">
+  {{commitment|gogocommitment}}
 {% endif %}
 
 {# Open Hours #}
 {% set openHoursMoreInfos = element.getProperty('openHoursMoreInfos') %}     
 {% if element.formatedOpenHours|length or openHoursMoreInfos %}
   <div class="info-bar-divider"></div>
-  <h3>Horaires d'ouverture</h3>  
-  <div class="section row sectionOpenHours">  
-    {% set count = 0 %} 
-
-    {% for key, horaire in element.formatedOpenHours %} 
-      {% if horaire != null %}
-
-        <div class='row'>
-          <span class="col s3 day">{{ key|capitalize }}</span>
-          <span class="col s9 openHours">{{ horaire }} </span>
-        </div>
-        {% set count = count + 1 %} 
-
-      {% endif %}
-    {% endfor %} 
-
-    {% if openHoursMoreInfos %}
-      <div class='col' {% if count != 0 %}style="margin-top:1rem;"{% endif %}>{{ openHoursMoreInfos|safe }}</div> 
-      {% set count = count + 1 %} 
-    {% endif %}
-
-    {% if count == 0 %}<div class='col'> Non renseignées </div>{% endif %}  
-  </div> 
+  {{openHoursMoreInfos|gogoopenhours(formatedOpenHours = element.formatedOpenHours)}}
 {% endif %}
 
 {# Vidéo #}

@@ -53,7 +53,7 @@ export class TemplateElementModule
     if (this.bodyTemplate)
       return this.bodyTemplate.render(options.element).replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, '"');      
     
-    return App.templateModule.render('element-body-default', options);
+    return App.templateModule.render('element-body-default', options).replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, '"');
   }
 
   private parseMarkdownSyntax(markdownString: string): string

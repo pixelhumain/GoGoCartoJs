@@ -1,0 +1,1 @@
+<span class="col s12 tel">{% if hideMail and not (isPending and featurePendingAvailable) %}<button class="btn send-mail-btn">Envoyer un Mail</button>{% else %}{{gogoemail|safe}} {% endif %}</span>
