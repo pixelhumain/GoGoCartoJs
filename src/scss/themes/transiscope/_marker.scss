@@ -51,3 +51,8 @@
     span { line-height: $size; }  
   }
 }
+
+.marker-wrapper .mini-icon-stamp-container { 
+  color: white; 
+  .mini-icon-stamp:before { background-color: #f09b00; }
+}

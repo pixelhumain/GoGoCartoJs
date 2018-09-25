@@ -154,6 +154,11 @@
       display: inline-block;
       font-weight: bold;
       color: #e6e6e6;
+
+      .menu-icon.gogo-icon-star-full { 
+        color: white; 
+        &:before { background-color: #f09b00; }
+      }
     }
   } 
 

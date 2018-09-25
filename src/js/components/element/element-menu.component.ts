@@ -57,7 +57,7 @@ export class ElementMenuComponent
 		let that = this;
 		
 		// STAMPS
-		this.dom.find('.item-stamp').each(() => { new StampComponent(this, that.element); });
+		this.dom.find('.item-stamp').each(function() { new StampComponent(this, that.element); });
 
 		// DELETE
 		this.dom.find('.item-delete').click(() => { App.deleteComponent.open(this.element); });
