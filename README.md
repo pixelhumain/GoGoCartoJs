@@ -6,10 +6,10 @@ A javascript component to create terrific cartography ! GoGoCartoJs is the auton
 .   .   ![alt text](docs/images/mobile.png "Mobile")
 
 
-Online documentation
+Discover
 -------------------
 
-[Discover](https://pixelhumain.github.io/GoGoCartoJs)
+[Read the online full documentation](https://pixelhumain.github.io/GoGoCartoJs)
 
 Demo
 -----
@@ -23,8 +23,8 @@ Download
 [Download Latest Release](https://github.com/pixelhumain/GoGoCartoJs/releases)
 
 
-Learn More
+Contact
 --------
+You can contact us at https://chat.lescommuns.org/channel/gogocarto
 
-[Read the online full documentation](https://pixelhumain.github.io/GoGoCartoJs)
 
