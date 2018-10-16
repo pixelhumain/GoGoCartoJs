@@ -224,3 +224,9 @@
 .gogo-icon-chevron-right:before {
   content: "\39";
 }
+.gogo-icon-date:before {
+  content: "\21";
+}
+.gogo-icon-number:before {
+  content: "\22";
+}
