@@ -1,14 +1,8 @@
 .collapsible-body
 {
-  .section.categories
-  {
-    h3 { margin-bottom: 90%; }
-  }
-
   .category-name 
   { 
-    padding-top: .6rem;
-    padding-bottom: 1rem;
+    padding-top: 1rem;
   }  
 
   .category-wrapper + .category-name  { padding-top: 1.2rem; }
@@ -64,7 +58,7 @@
     .option-value
     { 
       line-height: 2.5rem;        
-      padding-right: 0;
+      padding: 0;
 
       &.inline 
       {

@@ -16,70 +16,57 @@
 {% endif %}
 
 {# Contact infos #}
-<h3>Informations générales</h3>   
-<div class="section row sectionInfos">
+{{ 'Informations générales'|gogotitle }}
 
-  {# Address #}
-  <span class="col s12 address">{{ element.getProperty('address')|safe }}</span>
-  
-  {# Tel #}
-  {% set telephone = element.getProperty('telephone') %}
-  {% if telephone %}
-    {{telephone|gogotelephone}}
-  {% endif %}
+{# Address #}
+{{ element.getProperty('address')|gogotext }}
 
-  {# Mail #}
-  {% set email = element.getProperty('email') %}
-  {% if email %}
-    {{ email|gogoemail(hideMail = config.security.hideMailsByShowingSendMailButton, isPending = element.isPending(), featurePendingAvailable = config.isFeatureAvailable('pending')) }}
-  {% endif %}
+{# Tel #}
+{{ element.getProperty('telephone')|gogotext }}
 
-  {# WebSite #}
-  {% set website = element.getProperty('website') %}
-  {% if website %}
-    {{website|gogowebsite}}
-  {% endif %}
+{# Mail #}
+{{ element.getProperty('email')|gogoemail(isPending = element.isPending()) }}
 
-  {% set urls = element.urls %}
-  {% if urls %}
-    {{ urls|gogourls }}
-  {% endif %}
+{# WebSite #}
+{{ element.getProperty('website')|gogourl }}
 
-</div>
-<div class="info-bar-divider"></div>
+{% set urls = element.urls %}
+{% if urls %}
+  {% for currentUrl in urls %}
+    {{ url.value|gogourl }}
+  {% endfor %}    
+{% endif %}
+
+{{ ''|gogoseparator }}
 
 {# Categories  #}
-<div class="section section-taxonomy row">
+<div class="field field-taxonomy">
   {% import here ~ 'category-value.html.njk' as categoryRenderer %}
   {% for mainCategoryValue in rootCategoriesValues %}
     {{ categoryRenderer.renderCategoryValue(mainCategoryValue) }}
-  {% endfor %}
-
-  {% set tags = element.getProperty('tags') %}
-  {% if tags %}
-    {{ tags|gogotags}}
-  {% endif %}
+  {% endfor %}  
 </div>
 
-{% set commitment = element.getProperty('commitment') %}      
-{% if commitment %}
-  <div class="info-bar-divider">
-  {{commitment|gogocommitment}}
+{{ element.getProperty('tags')|gogotags}}
+
+{% if element.getProperty('commitment') %}
+{{ ''|gogoseparator }}
+{{ 'Engagement Citoyen'|gogotitle }}
+{{ element.getProperty('commitment')|gogotext }}
 {% endif %}
 
 {# Open Hours #}
-{% set openHoursMoreInfos = element.getProperty('openHoursMoreInfos') %}     
-{% if element.formatedOpenHours|length or openHoursMoreInfos %}
-  <div class="info-bar-divider"></div>
-  {{openHoursMoreInfos|gogoopenhours(formatedOpenHours = element.formatedOpenHours)}}
+{% if element.formatedOpenHours|length or element.getProperty('openHoursMoreInfos') %}
+  {{ ''|gogoseparator }}
+  {{ "Horaires d'ouverture"|gogotitle }} 
+  {{ element.formatedOpenHours|gogoopenhours }}
+  {{ element.getProperty('openHoursMoreInfos')|gogootext }}
 {% endif %}
 
 {# Vidéo #}
-{% set vimeoId = element.getProperty('vimeoId') %}
-{% if vimeoId %}
-  <div class="info-bar-divider"></div>
-  <h3>Video</h3>
-  {% if vimeoId %}
-    <style>.embed-container { position: relative; padding-bottom: 65.25%; height: 0; overflow: hidden; max-width: 100%; height: auto; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src="https://player.vimeo.com/video/{{ vimeoId }}?byline=0&amp;portrait=0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" frameborder="0"></iframe></div>
-  {% endif %}
+{% if element.getProperty('vimeoId') %}
+  {{ ''|gogoseparator }}
+  {{ 'Video'|gogotitle }}
+  {{ element.getProperty('vimeoId')|gogovimeo }}
 {% endif %}
+

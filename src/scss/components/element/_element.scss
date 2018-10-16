@@ -11,32 +11,44 @@
 
 	list-style-type: none;	
 	@include flexbox();
-  	@include flex-flow(column nowrap);  
+  @include flex-flow(column nowrap);  
 
 	h3
 	{
 		font-size: .85rem;
 		text-transform: uppercase;
 		font-weight: 600;
-		padding-left: 0.75rem;
-		margin-bottom: 0;
+		margin: 0; padding: 0;
+		margin-bottom: 1rem;
 		padding-top: 1.5rem;
-		margin-top: 0;
-	}		
+		text-align: left;
 
-	.info-bar-divider 
+		&.first-element-of-body-content { padding-top: .5rem; }
+		&.unique-element-between-dividers { display: none; }
+	}	
+
+	.info-bar-divider ~ h3 {
+		padding-top: 1rem;
+	}	
+
+	.row { margin-bottom: 0 }
+
+	p { padding: 0; }
+
+	.info-bar-divider
 	{
 	  height: 1px;
 	  overflow: hidden;
 	  background-color: #CCCCCC;
+	  margin: .5rem 0;
 	}
 
 	.btn
 	{
 		height: 2rem;
-	  	line-height: 2rem;
-	  	padding: 0 1rem;
-	  	margin-bottom: 1rem;
+  	line-height: 2rem;
+  	padding: 0 1rem;
+  	margin-bottom: 1rem;
 	}  
 
 	span.added 

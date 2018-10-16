@@ -50,10 +50,21 @@ export class TemplateElementModule
   // If there is a body template configured, then we use it. We use the default body otherwise.
   renderBody(options)
   {    
+    let renderedTemplate = ""
     if (this.bodyTemplate)
-      return this.bodyTemplate.render(options.element).replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, '"');      
-    
-    return App.templateModule.render('element-body-default', options).replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, '"');
+      renderedTemplate = this.bodyTemplate.render(options.element);      
+    else
+      renderedTemplate = App.templateModule.render('element-body-default', options);
+
+    return this.fixTemplate(renderedTemplate);
+  }
+
+  private fixTemplate(template) {
+    template = template.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, '"');
+    template = template.replace('<hr />', '<div class="info-bar-divider"></div>');
+    template = template.replace(/<h1>|<h2>|<h4>|<h5>/g, '<h3>');
+    template = template.replace(/<\/h1>|<\/h2>|<\/h4>|<\/h5>/g, '</h3>');
+    return template;
   }
 
   private parseMarkdownSyntax(markdownString: string): string

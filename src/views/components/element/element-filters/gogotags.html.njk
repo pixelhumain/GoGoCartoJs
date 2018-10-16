@@ -1,0 +1,7 @@
+{% if value %}
+  <div class="field field-tags tags-container">
+    {% for tag in value %}
+      <span class="gogo-tag">{{ tag }}</span>  
+    {% endfor %}
+  </div>
+{% endif %}

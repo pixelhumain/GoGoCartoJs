@@ -10,7 +10,7 @@ declare var commonmark;
 
 export class TemplateElementFiltersModule
 {
-  filters = [ 'gogocommitment', 'gogoemail', 'gogoopenhours', 'gogotags', 'gogotelephone', 'gogourls', 'gogowebsite' ];
+  filters = [ 'gogotext', 'gogoemail', 'gogoopenhours', 'gogotags', 'gogovimeo', 'gogourl', 'gogotitle', 'gogoseparator' ];
 
   public addGoGoFilters(nunjucksEnvironment)
   {
@@ -19,12 +19,10 @@ export class TemplateElementFiltersModule
     {
       nunjucksEnvironment.addFilter(currentFilter, function(value, kwargs) {
         let objectArgument = {};
-        if(kwargs)
-        {
-          $.extend(objectArgument, kwargs);
-        }
-        objectArgument[currentFilter] = value;
-        return nunjucksEnvironment.render("templates/element-filters/"+ currentFilter +".html.njk", objectArgument);
+        if(kwargs) $.extend(objectArgument, kwargs);
+        objectArgument['value'] = value;
+        objectArgument['config'] = App.config;
+        return nunjucksEnvironment.render("components/element/element-filters/"+ currentFilter +".html.njk", objectArgument);
       });
     }
 
