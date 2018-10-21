@@ -1,0 +1,12 @@
+{% if value %}
+  {% set longText = splitLongText(value, truncate, 20) %}
+  <div class="section row sectionlongDescription" style="padding-bottom:0">
+    <div class="col s12 description long-descrition">
+      <span>{{ longText.first|safe }}</span>
+      {% if longText.second %}
+        <span style="display:none" class="description-more">{{ longText.second|safe }}</span>  
+        <a class="show-more-description">Afficher plus</a>
+      {% endif %}
+    </div>        
+  </div>
+{% endif %}
