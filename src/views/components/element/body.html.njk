@@ -1,72 +1,55 @@
-{% set here = "components/element/" %}
 {# -------------- #}
 {#  BODY DEFAULT  #}
 {# -------------- #}
-{% set longDescription = element.getProperty('longDescription') %}
-{% if longDescription %}
-  <div class="section row sectionlongDescription" style="padding-bottom:0">
-    <div class="col s12 description long-descrition">
-      <span>{{ longDescription|safe }}</span>
-      {% if element.longDescriptionMore %}
-        <span style="display:none" class="description-more">{{ element.longDescriptionMore|safe }}</span>  
-        <a class="show-more-description">Afficher plus</a>
-      {% endif %}
-    </div>        
-  </div>
-{% endif %}
+{{ element.getProperty('longDescription')|gogo_textarea(truncate = 40) }}
 
 {# Contact infos #}
-{{ 'Informations générales'|gogotitle }}
+{{ 'Informations générales'|gogo_title }}
 
 {# Address #}
-{{ element.getProperty('address')|gogotext }}
+{{ element.getProperty('address')|gogo_text }}
 
 {# Tel #}
-{{ element.getProperty('telephone')|gogotext }}
+{{ element.getProperty('telephone')|gogo_text }}
 
 {# Mail #}
-{{ element.getProperty('email')|gogoemail(isPending = element.isPending()) }}
+{{ element.getProperty('email')|gogo_email(isPending = element.isPending()) }}
 
 {# WebSite #}
-{{ element.getProperty('website')|gogourl }}
+{{ element.getProperty('website')|gogo_url }}
 
 {% set urls = element.urls %}
 {% if urls %}
   {% for currentUrl in urls %}
-    {{ url.value|gogourl }}
+    {{ url.value|gogo_url }}
   {% endfor %}    
 {% endif %}
 
-{{ ''|gogoseparator }}
+{{ ''|gogo_separator }}
 
 {# Categories  #}
-<div class="field field-taxonomy">
-  {% import here ~ 'category-value.html.njk' as categoryRenderer %}
-  {% for mainCategoryValue in rootCategoriesValues %}
-    {{ categoryRenderer.renderCategoryValue(mainCategoryValue) }}
-  {% endfor %}  
-</div>
+{{ element.getProperty('rootCategoriesValues')|gogo_taxonomy }}
 
-{{ element.getProperty('tags')|gogotags}}
+{{ element.getProperty('tags')|gogo_tags}}
 
 {% if element.getProperty('commitment') %}
-{{ ''|gogoseparator }}
-{{ 'Engagement Citoyen'|gogotitle }}
-{{ element.getProperty('commitment')|gogotext }}
+{{ ''|gogo_separator }}
+{{ 'Engagement Citoyen'|gogo_title }}
+{{ element.getProperty('commitment')|gogo_text }}
 {% endif %}
 
 {# Open Hours #}
 {% if element.formatedOpenHours|length or element.getProperty('openHoursMoreInfos') %}
-  {{ ''|gogoseparator }}
-  {{ "Horaires d'ouverture"|gogotitle }} 
-  {{ element.formatedOpenHours|gogoopenhours }}
-  {{ element.getProperty('openHoursMoreInfos')|gogootext }}
+  {{ ''|gogo_separator }}
+  {{ "Horaires d'ouverture"|gogo_title }}
+  {{ element.formatedOpenHours|gogo_openhours }}
+  {{ element.getProperty('openHoursMoreInfos')|gogo_text }}
 {% endif %}
 
 {# Vidéo #}
 {% if element.getProperty('vimeoId') %}
-  {{ ''|gogoseparator }}
-  {{ 'Video'|gogotitle }}
-  {{ element.getProperty('vimeoId')|gogovimeo }}
+  {{ ''|gogo_separator }}
+  {{ 'Video'|gogo_title }}
+  {{ element.getProperty('vimeoId')|gogo_vimeo }}
 {% endif %}
 

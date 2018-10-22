@@ -1,0 +1,6 @@
+<div class="field field-taxonomy">
+  {% import 'components/element/category-value.html.njk' as categoryRenderer %}
+  {% for mainCategoryValue in value %}
+    {{ categoryRenderer.renderCategoryValue(mainCategoryValue) }}
+  {% endfor %}  
+</div>

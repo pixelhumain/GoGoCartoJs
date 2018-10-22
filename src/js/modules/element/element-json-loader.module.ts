@@ -154,11 +154,11 @@ export class ElementJsonParserModule
         element.longDescription = result.second;
       }
 
-      if (element.longDescription.length > 500) {
-        let result = splitLongText(element.longDescription, 500, 100);
-        element.longDescription = result.first; 
-        element.longDescriptionMore = result.second;             
-      }        
+      // if (element.longDescription.length > 500) {
+      //   let result = splitLongText(element.longDescription, 500, 100);
+      //   element.longDescription = result.first;
+      //   element.longDescriptionMore = result.second;
+      // }
     }
   }
 }
