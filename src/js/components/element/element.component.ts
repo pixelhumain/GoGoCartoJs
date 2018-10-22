@@ -31,12 +31,6 @@ export class ElementComponent
     this.element.updateDistance();
 
     let optionsToDisplay = this.element.getIconsToDisplay();
-
-    let rootCategoriesValues;
-    if (this.element.status == ElementStatus.PendingModification && this.element.modifiedElement)  
-      rootCategoriesValues = this.element.modifiedElement.getRootCategoriesValues();
-    else
-      rootCategoriesValues = this.element.getRootCategoriesValues();
     
     let options = {
       element : this.element, 
@@ -46,16 +40,15 @@ export class ElementComponent
       mainOptionToDisplay: optionsToDisplay[0], 
       otherOptionsToDisplay: optionsToDisplay.slice(1),  
       currOptionsValues: this.element.getCurrDeepestOptionsValues().filter( (oV) => oV.option.displayInInfoBar).sort( (a,b) => a.isFilledByFilters ? -1 : 1),      
-      rootCategoriesValues : rootCategoriesValues,
-      editUrl : App.config.features.edit.url + this.element.id,
+      editUrl: App.config.features.edit.url + this.element.id,
       ElementStatus: ElementStatus,
       ElementModerationState: ElementModerationState,
-      isIframe : App.isIframe,
-      isMapMode : App.mode == AppModes.Map,
-      config : App.config,
-      smallWidth : App.mode == AppModes.Map && App.infoBarComponent.isDisplayedAside(),
-      allowedStamps : App.stampModule.allowedStamps,
-      body : undefined
+      isIframe: App.isIframe,
+      isMapMode: App.mode == AppModes.Map,
+      config: App.config,
+      smallWidth: App.mode == AppModes.Map && App.infoBarComponent.isDisplayedAside(),
+      allowedStamps: App.stampModule.allowedStamps,
+      body: App.templateModule.elementTemplate.renderBody($.extend(this.element, { gogo_taxonomy: this.element.gogo_taxonomy()}))
     };    
 
     let html = App.templateModule.render('element', options);

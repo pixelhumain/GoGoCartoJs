@@ -48,13 +48,14 @@ export class TemplateElementModule
   }  
 
   // If there is a body template configured, then we use it. We use the default body otherwise.
-  renderBody(options)
+  renderBody(element)
   {    
-    let renderedTemplate = ""
+    let renderedTemplate = "";
+    console.log("renderBody", element);
     if (this.bodyTemplate)
-      renderedTemplate = this.bodyTemplate.render(options.element);      
+      renderedTemplate = this.bodyTemplate.render(element);      
     else
-      renderedTemplate = App.templateModule.render('element-body-default', options);
+      renderedTemplate = App.templateModule.render('element-body-default', {element: element});
 
     return this.fixTemplate(renderedTemplate);
   }

@@ -100,6 +100,14 @@ export class ElementBase
     return optionTree.children[0].children[0].children;
   }
 
+  gogo_taxonomy() : CategoryValue[]
+  {
+    if (this.status == ElementStatus.PendingModification && this.modifiedElement)  
+      return this.modifiedElement.getRootCategoriesValues();
+    else 
+      return this.getRootCategoriesValues();
+  }
+
   getOptionValueByCategoryId($categoryId)
   {
     return this.optionsValues.filter((oV) => oV.categoryOwner.id == $categoryId);

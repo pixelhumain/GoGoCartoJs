@@ -45,8 +45,6 @@ export class TemplateModule
 			default: console.warn('[GoGoCarto] No template associated to templateName', templateName);
 		}
 
-		if (templateName == 'element') options.body = this.elementTemplate.renderBody(options);
-
 		return this.nunjucksEnvironment.render(fileUrl, options);
 	}
 
