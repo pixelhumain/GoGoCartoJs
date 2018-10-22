@@ -1,22 +1,22 @@
 {# -------------- #}
 {#  BODY DEFAULT  #}
 {# -------------- #}
-{{ element.getProperty('longDescription')|gogo_textarea(truncate = 40) }}
+{{ descriptionMore|gogo_textarea(truncate = 40) }}
 
 {# Contact infos #}
 {{ 'Informations générales'|gogo_title }}
 
 {# Address #}
-{{ element.getProperty('address')|gogo_text }}
+{{ address|gogo_text }}
 
 {# Tel #}
-{{ element.getProperty('telephone')|gogo_text }}
+{{ telephone|gogo_phone }}
 
 {# Mail #}
-{{ element.getProperty('email')|gogo_email(isPending = element.isPending()) }}
+{{ email|gogo_email }}
 
 {# WebSite #}
-{{ element.getProperty('website')|gogo_url }}
+{{ website|gogo_url }}
 
 {% set urls = element.urls %}
 {% if urls %}
@@ -28,28 +28,28 @@
 {{ ''|gogo_separator }}
 
 {# Categories  #}
-{{ element.gogo_taxonomy|gogo_taxonomy }}
+{{ taxonomy|gogo_taxonomy }}
 
-{{ element.getProperty('tags')|gogo_tags}}
+{{ tags|gogo_tags}}
 
-{% if element.getProperty('commitment') %}
+{% if commitment %}
 {{ ''|gogo_separator }}
 {{ 'Engagement Citoyen'|gogo_title }}
-{{ element.getProperty('commitment')|gogo_text }}
+{{ commitment|gogo_text }}
 {% endif %}
 
 {# Open Hours #}
-{% if element.formatedOpenHours|length or element.getProperty('openHoursMoreInfos') %}
+{% if element.formatedOpenHours|length or openHoursMoreInfos %}
   {{ ''|gogo_separator }}
   {{ "Horaires d'ouverture"|gogo_title }}
   {{ element.formatedOpenHours|gogo_openhours }}
-  {{ element.getProperty('openHoursMoreInfos')|gogo_text }}
+  {{ openHoursMoreInfos|gogo_text }}
 {% endif %}
 
 {# Vidéo #}
-{% if element.getProperty('vimeoId') %}
+{% if vimeoId %}
   {{ ''|gogo_separator }}
   {{ 'Video'|gogo_title }}
-  {{ element.getProperty('vimeoId')|gogo_vimeo }}
+  {{ vimeoId|gogo_vimeo }}
 {% endif %}
 

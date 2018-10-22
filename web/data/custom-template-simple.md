@@ -11,8 +11,8 @@ Encore du text h1 h5
 ### Test template distant
 {{ name }}
 
-{{ gogo_taxonomy|gogo_taxonomy }}
+{{ taxonomy|gogo_taxonomy }}
 
 ___
 
-**Address** : {{ address.formatedAddress }}
+**Address** : {{ address }}

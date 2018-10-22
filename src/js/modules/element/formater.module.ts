@@ -2,27 +2,8 @@ import { ElementBase, ElementStatus } from '../../classes/classes';
 import { capitalize } from "../../utils/string-helpers";
 import { App } from "../../gogocarto";
 
-var capitalizeConfiguration =
-{
-  name: true,
-  description: true,
-  longDescription: true,
-  address: false,
-  telephone: false,
-  website: false,
-  email: false,
-  openHoursMoreInfos: true,
-}
-
 export class ElementFormaterModule
 {
-  getFormatedTel(value)
-  {
-    if (!value) return '';
-    if (value.length == 10) return value.replace(/(.{2})(?!$)/g,"$1 ");
-    return value;
-  }  
-
   calculateFormatedOpenHours(element : ElementBase)
   {         
     element.formatedOpenHours = {};
@@ -38,12 +19,12 @@ export class ElementFormaterModule
 
   getProperty(element : ElementBase, propertyName)
   {
-    let value = this.getFormatedValue(element, propertyName);
+    let value = this.getValue(element, propertyName);
     
     // in iframe the pending modifications are not displayed, just the old version
     if (element.status != ElementStatus.PendingModification || !App.config.isFeatureAvailable('pending') || !element.modifiedElement) return value;
 
-    let modifiedValue = this.getFormatedValue(element.modifiedElement, propertyName);
+    let modifiedValue = this.getValue(element.modifiedElement, propertyName);
 
     if (!value && !modifiedValue) return '';
 
@@ -75,13 +56,13 @@ export class ElementFormaterModule
     return dailySlot.replace(/-/g, ' - ').replace(/,/g, ' et ');
   };   
 
-  private getFormatedValue(element : ElementBase, propertyName)
+  private getValue(element : ElementBase, propertyName)
   {
     let value;
     if (propertyName == 'address') value = element.address.getFormatedAddress();
-    else value = element[propertyName]
+    else if (propertyName in element) value = element[propertyName]
+    else value = element.data[propertyName]
     
-    value = capitalizeConfiguration[propertyName] ? capitalize(value) : value;
     return value;
   }
 }

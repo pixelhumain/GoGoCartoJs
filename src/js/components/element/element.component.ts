@@ -29,11 +29,11 @@ export class ElementComponent
 
     this.element.update();
     this.element.updateDistance();
-
+    let elementTodisplay = this.element.toDisplay();
     let optionsToDisplay = this.element.getIconsToDisplay();
     
     let options = {
-      element : this.element, 
+      element : elementTodisplay, 
       showDistance: App.geocoder.getLocation() ? true : false,
       listingMode: App.mode == AppModes.List, 
       optionsToDisplay: optionsToDisplay,
@@ -48,7 +48,7 @@ export class ElementComponent
       config: App.config,
       smallWidth: App.mode == AppModes.Map && App.infoBarComponent.isDisplayedAside(),
       allowedStamps: App.stampModule.allowedStamps,
-      body: App.templateModule.elementTemplate.renderBody($.extend(this.element, { gogo_taxonomy: this.element.gogo_taxonomy()}))
+      body: App.templateModule.elementTemplate.renderBody(elementTodisplay)
     };    
 
     let html = App.templateModule.render('element', options);

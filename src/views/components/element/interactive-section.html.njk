@@ -1,5 +1,5 @@
 <div class="interactive-section"> 
-  {% if element.isPending() %}
+  {% if element.isPending %}
     <div class="vote-section">
       <span class="basic-message">
         <span class="gogo-icon-attention"></span>
@@ -26,7 +26,7 @@
     }
   %}
 
-  {% if element.needsModeration() and config.isFeatureAvailable('moderation') %}
+  {% if element.needsModeration and config.isFeatureAvailable('moderation') %}
     <div class="moderation-section">
       <span class="basic-message">
         <span class="gogo-icon-moderation"></span>

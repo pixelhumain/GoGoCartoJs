@@ -1,4 +1,4 @@
-{% if element.isPending() and element.pendingContribution %}
+{% if element.isPending and element.pendingContribution %}
   <div class="pending-contribution">
     {% set item = element.pendingContribution %}
     {% include here ~ "admin/contribution-item.html.njk" %}

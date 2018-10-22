@@ -6,7 +6,7 @@
   class="element-item" 
   data-element-id="{{ element.id }}">
 
-{% set pendingClass = 'pending' if (element.isPending() or element.isDeleted()) and config.isFeatureAvailable('pending') else '' %}
+{% set pendingClass = 'pending' if (element.isPending or element.isDeleted) and config.isFeatureAvailable('pending') else '' %}
 {% set isHistoryAvailable = config.isFeatureAvailable('elementHistory') %}
 
 {# HEADER #}

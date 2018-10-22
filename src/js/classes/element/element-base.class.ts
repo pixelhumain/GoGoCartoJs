@@ -1,4 +1,4 @@
-import { Contribution, VoteReport, OptionValue, PostalAddress, Option, CategoryValue, ElementUrl } from "../classes";
+import { Contribution, VoteReport, OptionValue, PostalAddress, Option, CategoryValue } from "../classes";
 import { capitalize } from "../../utils/string-helpers";
 import { App } from "../../gogocarto";
 
@@ -27,48 +27,38 @@ export enum ElementModerationState
 
 export class ElementBase
 {
+  // MANDATORY DATA
   id : string;
   name : string;
   position : L.LatLng;
-
-  status : ElementStatus;
-  moderationState : ElementModerationState;
-   
   address : PostalAddress;
-  description : string;
-  longDescription: string;
-  longDescriptionMore: string;
-  openHours : any;
-  vimeoId: number;
-
-  commitment : string;  
-  telephone : string;
-  website : string;
-  email : string;
-  
-  formatedOpenHours;
-  openHoursMoreInfos : any;
-  images : string[];
-  urls : ElementUrl[];
-  tags : string[];
-  
-  modifiedElement : ElementBase = null;
-
   optionsValues : OptionValue[] = [];
+  mainOptionOwnerIds : number[] = [];
+  optionTree : OptionValue; 
+
+  // OPTIONAL DATA
+  status : ElementStatus;
+  moderationState : ElementModerationState;  
+  searchScore : number = null;
+  isFullyLoaded : boolean = false;
+
+  // SPECIFIC DATA
+  openHours : any;  
+  formatedOpenHours;
+  images : string[];
   stamps : any[] = [];
 
-  mainOptionOwnerIds : number[] = [];
+  // CUSTOM DATA
+  data : any = {};
 
+  // ADMIN HISTORY DATA
   reports : VoteReport[];
   contributions : Contribution[];
   pendingContribution : Contribution;
-  votes : VoteReport[];
+  votes : VoteReport[];  
 
-  optionTree : OptionValue;  
-
-  searchScore : number = null;
-
-  isFullyLoaded : boolean = false;
+  // PENDING ELEMENTS
+  modifiedElement : ElementBase = null;    
 
   constructor(elementJson : any)
   {
@@ -100,7 +90,7 @@ export class ElementBase
     return optionTree.children[0].children[0].children;
   }
 
-  gogo_taxonomy() : CategoryValue[]
+  gogoTaxonomy() : CategoryValue[]
   {
     if (this.status == ElementStatus.PendingModification && this.modifiedElement)  
       return this.modifiedElement.getRootCategoriesValues();

@@ -4,7 +4,7 @@ import { App } from "../../gogocarto";
 import { GoGoConfig } from "../../classes/config/gogo-config.class";
 import { Event } from "../../classes/classes";
 
-import { splitLongText } from "../../utils/string-helpers";
+import { splitLongText, formatPhoneNumber } from "../../utils/string-helpers";
 
 declare var $;
 declare var nunjucks;
@@ -12,7 +12,7 @@ declare var commonmark;
 
 export class TemplateElementFiltersModule
 {
-  filters = [ 'gogo_text', 'gogo_email', 'gogo_openhours', 'gogo_tags', 'gogo_vimeo', 'gogo_url', 'gogo_title', 'gogo_separator', 'gogo_taxonomy', 'gogo_textarea' ];
+  filters = [ 'gogo_text', 'gogo_email', 'gogo_openhours', 'gogo_tags', 'gogo_vimeo', 'gogo_url', 'gogo_title', 'gogo_separator', 'gogo_taxonomy', 'gogo_textarea', 'gogo_phone' ];
 
   public addGoGoFilters(nunjucksEnvironment)
   {
@@ -41,6 +41,9 @@ export class TemplateElementFiltersModule
       case 'gogo_textarea':
         functionToAdd['splitLongText'] = splitLongText;
         break;
+      case 'gogo_phone':
+        functionToAdd['formatPhoneNumber'] = formatPhoneNumber;
+        break;      
       default:
     }
     return functionToAdd;

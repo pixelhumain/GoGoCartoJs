@@ -51,11 +51,10 @@ export class TemplateElementModule
   renderBody(element)
   {    
     let renderedTemplate = "";
-    console.log("renderBody", element);
     if (this.bodyTemplate)
       renderedTemplate = this.bodyTemplate.render(element);      
     else
-      renderedTemplate = App.templateModule.render('element-body-default', {element: element});
+      renderedTemplate = App.templateModule.render('element-body-default', element);
 
     return this.fixTemplate(renderedTemplate);
   }
