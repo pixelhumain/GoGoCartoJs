@@ -1,6 +1,6 @@
 # Test template distant
 
-{{ name|gogo_url }}
+{{ description|gogo_textarea(truncate = 100) }}
 blabla le petit text
 
 ## Test template distant
