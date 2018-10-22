@@ -38,6 +38,7 @@
     @include flex(1 auto);
     height: 100%;    
     position: relative;
+    overflow: hidden;
 
     @import "components/loaders";  
     @import "components/directory-menu/directory-menu";
