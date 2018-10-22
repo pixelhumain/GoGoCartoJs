@@ -39,10 +39,10 @@
 {% endif %}
 
 {# Open Hours #}
-{% if element.formatedOpenHours|length or openHoursMoreInfos %}
+{% if formatedOpenHours|length or openHoursMoreInfos %}
   {{ ''|gogo_separator }}
   {{ "Horaires d'ouverture"|gogo_title }}
-  {{ element.formatedOpenHours|gogo_openhours }}
+  {{ formatedOpenHours|gogo_openhours }}
   {{ openHoursMoreInfos|gogo_text }}
 {% endif %}
 

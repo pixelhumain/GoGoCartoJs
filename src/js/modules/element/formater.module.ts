@@ -19,7 +19,7 @@ export class ElementFormaterModule
 
   getProperty(element : ElementBase, propertyName)
   {
-    let value = this.getValue(element, propertyName);
+    let value = this.getValue(element, propertyName) || "";
     
     // in iframe the pending modifications are not displayed, just the old version
     if (element.status != ElementStatus.PendingModification || !App.config.isFeatureAvailable('pending') || !element.modifiedElement) return value;
