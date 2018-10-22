@@ -3478,8 +3478,6 @@ th {
     margin-right: 5px; }
   .gogo-load-css .gogo-theme-transiscope.gogocarto-container {
     font-size: 14px; }
-    .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .top-image-container {
-      height: 90px; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .shadow-bottom {
       border-top: none;
       width: calc(100% - 23px); }
@@ -3514,7 +3512,8 @@ th {
           border-radius: 0;
           height: 2.5rem;
           padding: 0 3rem;
-          width: 95%; }
+          width: 95%;
+          color: white; }
           .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-bar-with-options-container .search-bar-container .search-bar::-webkit-input-placeholder {
             color: white; }
           .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-bar-with-options-container .search-bar-container .search-bar::-moz-placeholder {
@@ -3731,6 +3730,10 @@ th {
       height: 44px; }
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container .marker-cluster.marker-cluster-large div span {
         line-height: 44px; }
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .marker-wrapper .mini-icon-stamp-container {
+      color: white; }
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .marker-wrapper .mini-icon-stamp-container .mini-icon-stamp:before {
+        background-color: #f09b00; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-header {
       background-color: #175259; }
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-header .name {
@@ -3851,6 +3854,10 @@ th {
         display: inline-block;
         font-weight: bold;
         color: #e6e6e6; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .menu-element .menu-element-item .menu-icon.gogo-icon-star-full {
+          color: white; }
+          .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .menu-element .menu-element-item .menu-icon.gogo-icon-star-full:before {
+            background-color: #f09b00; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .inline-option-values {
       width: calc(100% - 140px);
       font-weight: normal; }
@@ -4124,6 +4131,7 @@ th {
     flex: 1 auto;
     height: 100%;
     position: relative;
+    overflow: hidden;
     /*
 * @Author: Sebastian Castro
 * @Date:   2017-02-28 10:25:51
@@ -6214,52 +6222,51 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
             .gogo-load-css .gogocarto-container .element-item .collapsible-header .collapsible-header-more .description p {
               margin: 0; }
       .gogo-load-css .gogocarto-container .element-item .collapsible-body {
-        background-color: transpraent;
+        background-color: transparent;
         padding: 0;
         position: relative; }
         .gogo-load-css .gogocarto-container .element-item .collapsible-body .collapsible-body-main-content {
           background-color: #F7F7F7;
-          padding: 0 0rem 1rem .5rem; }
+          padding: .8rem;
+          text-align: justify;
+          line-height: 2rem; }
           @media only screen and (min-width: 601px) {
             .gogo-load-css .gogocarto-container .element-item .collapsible-body .collapsible-body-main-content {
-              padding: 0 0rem 1rem 1rem; } }
-        .gogo-load-css .gogocarto-container .element-item .collapsible-body h2 {
-          font-weight: bold !important;
-          font-size: 1rem !important;
-          line-height: 110% !important;
-          margin: 0.5rem 0 .8rem 0; }
-        .gogo-load-css .gogocarto-container .element-item .collapsible-body .row {
-          margin-bottom: 0; }
-        .gogo-load-css .gogocarto-container .element-item .collapsible-body .section {
-          padding-top: .9rem; }
-        .gogo-load-css .gogocarto-container .element-item .collapsible-body .description {
-          text-align: justify;
-          line-height: 1.5;
-          padding-right: 1.5rem; }
-        .gogo-load-css .gogocarto-container .element-item .collapsible-body .show-more-description {
-          display: inline;
-          text-decoration: underline; }
-          .gogo-load-css .gogocarto-container .element-item .collapsible-body .show-more-description:hover {
-            cursor: pointer; }
-        .gogo-load-css .gogocarto-container .element-item .collapsible-body .send-mail-btn {
-          font-size: .8rem;
-          margin: .4rem 0 .5rem 0;
-          line-height: 1.8rem;
-          height: 1.8rem; }
-        .gogo-load-css .gogocarto-container .element-item .collapsible-body .sectionInfos, .gogo-load-css .gogocarto-container .element-item .collapsible-body .sectionOpenHours {
-          line-height: 2rem; }
-        .gogo-load-css .gogocarto-container .element-item .collapsible-body .sectionlongDescription {
-          padding-bottom: 0;
-          padding-top: 1.5rem; }
-        .gogo-load-css .gogocarto-container .element-item .collapsible-body .tags-container {
-          margin-top: 1.5rem; }
-        .gogo-load-css .gogocarto-container .element-item .collapsible-body .gogo-tag {
-          margin-right: 8px;
-          border-radius: 5px;
-          background-color: gainsboro;
-          padding: 4px 10px;
-          display: inline-block;
-          margin-bottom: 8px; }
+              padding: 1rem; } }
+          .gogo-load-css .gogocarto-container .element-item .collapsible-body .collapsible-body-main-content .field-textarea {
+            line-height: 1.5rem; }
+          .gogo-load-css .gogocarto-container .element-item .collapsible-body .collapsible-body-main-content .show-more {
+            display: inline;
+            text-decoration: underline; }
+            .gogo-load-css .gogocarto-container .element-item .collapsible-body .collapsible-body-main-content .show-more:hover {
+              cursor: pointer; }
+          .gogo-load-css .gogocarto-container .element-item .collapsible-body .collapsible-body-main-content .field-email .send-mail-btn {
+            font-size: .8rem;
+            margin: .4rem 0 .5rem 0;
+            line-height: 1.8rem;
+            height: 1.8rem; }
+          .gogo-load-css .gogocarto-container .element-item .collapsible-body .collapsible-body-main-content .field-tags {
+            margin-top: 1.5rem; }
+            .gogo-load-css .gogocarto-container .element-item .collapsible-body .collapsible-body-main-content .field-tags .gogo-tag {
+              margin-right: 8px;
+              border-radius: 5px;
+              background-color: gainsboro;
+              padding: 4px 10px;
+              display: inline-block;
+              margin-bottom: 8px; }
+          .gogo-load-css .gogocarto-container .element-item .collapsible-body .collapsible-body-main-content .field-vimeo {
+            position: relative;
+            padding-bottom: 65.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            height: auto; }
+            .gogo-load-css .gogocarto-container .element-item .collapsible-body .collapsible-body-main-content .field-vimeo iframe, .gogo-load-css .gogocarto-container .element-item .collapsible-body .collapsible-body-main-content .field-vimeo object, .gogo-load-css .gogocarto-container .element-item .collapsible-body .collapsible-body-main-content .field-vimeo embed {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%; }
       .gogo-load-css .gogocarto-container .element-item .img-container {
         position: absolute;
         width: 100%;
@@ -6314,11 +6321,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           left: 6rem;
           right: 6rem;
           cursor: pointer !important; }
-      .gogo-load-css .gogocarto-container .element-item .collapsible-body .section.categories h3 {
-        margin-bottom: 90%; }
       .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-name {
-        padding-top: .6rem;
-        padding-bottom: 1rem; }
+        padding-top: 1rem; }
       .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper + .category-name {
         padding-top: 1.2rem; }
       .gogo-load-css .gogocarto-container .element-item .collapsible-body .row + .category-wrapper .category-name {
@@ -6354,7 +6358,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
             color: #9C9C9C; }
         .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .option-value {
           line-height: 2.5rem;
-          padding-right: 0; }
+          padding: 0; }
           .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .option-value.inline {
             display: inline-block;
             font-style: italic; }
@@ -6381,14 +6385,26 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         font-size: .85rem;
         text-transform: uppercase;
         font-weight: 600;
-        padding-left: 0.75rem;
-        margin-bottom: 0;
+        margin: 0;
+        padding: 0;
+        margin-bottom: 1rem;
         padding-top: 1.5rem;
-        margin-top: 0; }
+        text-align: left; }
+        .gogo-load-css .gogocarto-container .element-item h3.first-element-of-body-content {
+          padding-top: .5rem; }
+        .gogo-load-css .gogocarto-container .element-item h3.unique-element-between-dividers {
+          display: none; }
+      .gogo-load-css .gogocarto-container .element-item .info-bar-divider ~ h3 {
+        padding-top: 1rem; }
+      .gogo-load-css .gogocarto-container .element-item .row {
+        margin-bottom: 0; }
+      .gogo-load-css .gogocarto-container .element-item p {
+        padding: 0; }
       .gogo-load-css .gogocarto-container .element-item .info-bar-divider {
         height: 1px;
         overflow: hidden;
-        background-color: #CCCCCC; }
+        background-color: #CCCCCC;
+        margin: .5rem 0; }
       .gogo-load-css .gogocarto-container .element-item .btn, .gogo-load-css .gogocarto-container .element-item .btn-large {
         height: 2rem;
         line-height: 2rem;
@@ -6910,4 +6926,10 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
 }
 .gogo-icon-chevron-right:before {
   content: "\39";
+}
+.gogo-icon-date:before {
+  content: "\21";
+}
+.gogo-icon-number:before {
+  content: "\22";
 }
