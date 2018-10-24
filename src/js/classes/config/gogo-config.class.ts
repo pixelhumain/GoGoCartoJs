@@ -50,6 +50,11 @@ export class GoGoConfig
       content: undefined,
       type: "string", // string | url
       isMarkdown: true
+    },
+    headerTemplate: {
+      content: undefined,
+      type: "string", // string | url
+      isMarkdown: true
     }
   };
   readonly general =

@@ -8,6 +8,11 @@ declare var $;
 declare var nunjucks;
 declare var commonmark;
 
+export enum HtmlElement {
+  Body,
+  Header
+}
+
 export class TemplateElementModule
 {
   onReady = new Event<any>();
@@ -15,48 +20,89 @@ export class TemplateElementModule
   bodyConfig : any;
   bodyTemplate : any; // nunjucks template
 
+  headerConfig : any;
+  headerTemplate : any; // nunjucks template
   initialize()
   {
     this.bodyConfig = App.config.infobar.bodyTemplate;
 
-    if (!this.bodyConfig.content) { this.onReady.emit(); return; } // nothng to do
+    this.headerConfig = App.config.infobar.headerTemplate;
+
+    this.getHtmlElementData(this.bodyConfig, HtmlElement.Body);
+
+    this.getHtmlElementData(this.headerConfig, HtmlElement.Header);
+  }
+
+  private getHtmlElementData(htmlElementConfig: any, htmlElementConcerned: HtmlElement)
+  {
+    if (!htmlElementConfig.content) { this.onReady.emit(); return; } // nothing to do
     
-    switch(this.bodyConfig.type)
+    switch(htmlElementConfig.type)
     {
       case "string":
-        let content = this.bodyConfig.content;
+        let content = htmlElementConfig.content;
         if (Array.isArray(content)) content = content.join('\n');
-        this.compileBody(content);          
+        this.compile(htmlElementConfig, htmlElementConcerned, content);
+        this.onReady.emit();
         break;
       case "url":
         $.ajax({
           dataType: 'text',
-          url: this.bodyConfig.content,
-          success: (data) => { this.compileBody(data); },
-          error: () => { console.error("Error while getting the body template at url ", this.bodyConfig.content)}
+          url: htmlElementConfig.content,
+          success: (data) => { this.compile(htmlElementConfig, htmlElementConcerned, data);this.onReady.emit(); },
+          error: () => { this.showError(htmlElementConcerned, htmlElementConfig.content); }
         });
         break;
     }
   }
 
-  // Compile the body template once for all
-  compileBody(content : any)
+  private showError(htmlElementConcerned: HtmlElement, urlConcerned: string)
   {
-    if (this.bodyConfig.isMarkdown) content = this.parseMarkdownSyntax(content);
-    this.bodyTemplate = App.templateModule.compile(content);    
-    this.onReady.emit();
-  }  
+    let errorMessage;
+    switch(htmlElementConcerned)
+    {
+      case HtmlElement.Body:
+        errorMessage = "Error while getting the body template at url :";
+        break;
+      case HtmlElement.Header:
+        errorMessage = "Error while getting the header template at url :";
+        break;
+    }
+    console.error(errorMessage, urlConcerned);
+  }
 
-  // If there is a body template configured, then we use it. We use the default body otherwise.
-  renderBody(options)
+  renderHtmlElement(htmlElementConcerned: HtmlElement, options: any): any
   {    
-    let renderedTemplate = ""
-    if (this.bodyTemplate)
-      renderedTemplate = this.bodyTemplate.render(options.element);      
-    else
-      renderedTemplate = App.templateModule.render('element-body-default', options);
+    let renderedTemplate = "";
+    switch(htmlElementConcerned)
+    {
+      case HtmlElement.Body:
+        renderedTemplate = this.renderBody(options);
+        break;
+      case HtmlElement.Header:
+        renderedTemplate = this.renderHeader(options);
+        break;
+    }
 
     return this.fixTemplate(renderedTemplate);
+  }
+
+  // If there is a body template configured, then we use it. We use the default body otherwise.
+  private renderBody(options:any): any
+  {
+    if (this.bodyTemplate)
+      return this.bodyTemplate.render(options.element);
+    else
+      return App.templateModule.render('element-body-default', options);
+  }
+
+  // If there is a header template configured, then we use it. We use the default header otherwise.
+  private renderHeader(options: any): any
+  {
+    if (this.headerTemplate)
+      return this.headerTemplate.render(options.element);
+    else
+      return App.templateModule.render('element-header-default', options);
   }
 
   private fixTemplate(template) {
@@ -65,6 +111,22 @@ export class TemplateElementModule
     template = template.replace(/<h1>|<h2>|<h4>|<h5>/g, '<h3>');
     template = template.replace(/<\/h1>|<\/h2>|<\/h4>|<\/h5>/g, '</h3>');
     return template;
+  }
+
+  // Compile given content as a template once for all
+  private compile(htmlElementConfig : any, htmlElementConcerned: HtmlElement, content: any)
+  {
+    if (htmlElementConfig.isMarkdown) content = this.parseMarkdownSyntax(content);
+    let template = App.templateModule.compile(content);
+    switch(htmlElementConcerned)
+    {
+      case HtmlElement.Body:
+        this.bodyTemplate = template;
+        break;
+      case HtmlElement.Header:
+        this.headerTemplate = template;
+        break;
+    }
   }
 
   private parseMarkdownSyntax(markdownString: string): string

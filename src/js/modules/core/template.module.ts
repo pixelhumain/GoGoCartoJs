@@ -2,7 +2,7 @@ import { AppModule } from "../../app.module";
 
 import { App } from "../../gogocarto";
 import { GoGoConfig } from "../../classes/config/gogo-config.class";
-import { TemplateElementModule } from "../element/template-element.module";
+import { HtmlElement, TemplateElementModule } from "../element/template-element.module";
 import { TemplateElementFiltersModule } from "../element/template-element-filters.module";
 
 declare var $;
@@ -41,11 +41,16 @@ export class TemplateModule
 			case 'gogo-styles'         : fileUrl = 'gogo-styles.html.njk'; break;
 			case 'element'             : fileUrl = 'components/element/element.html.njk'; break;
 			case 'element-body-default': fileUrl = 'components/element/body.html.njk'; break;
+			case 'element-header-default': fileUrl = 'components/element/header.html.njk'; break;
 			case 'vote-modal-content'  : fileUrl = 'components/modals/element/vote-content.html.njk'; break;
 			default: console.warn('[GoGoCarto] No template associated to templateName', templateName);
 		}
 
-		if (templateName == 'element') options.body = this.elementTemplate.renderBody(options);
+		if (templateName == 'element')
+		{
+			options.header = this.elementTemplate.renderHtmlElement(HtmlElement.Header, options);
+			options.body = this.elementTemplate.renderHtmlElement(HtmlElement.Body, options);
+		}
 
 		return this.nunjucksEnvironment.render(fileUrl, options);
 	}
