@@ -46,10 +46,10 @@ export class ElementComponent
       currOptionsValues: this.element.getCurrDeepestOptionsValues().filter( (oV) => oV.option.displayInInfoBar).sort( (a,b) => a.isFilledByFilters ? -1 : 1),      
 
       // body
-      body: App.templateModule.elementTemplate.renderHtmlElement('body', elementTodisplay),
+      body: App.templateModule.elementTemplate.renderBody(elementTodisplay),
       
       //header
-      header: App.templateModule.elementTemplate.renderHtmlElement('header', elementTodisplay),
+      header: App.templateModule.elementTemplate.renderHeader(elementTodisplay),
 
       listingMode: App.mode == AppModes.List, 
       isIframe: App.isIframe,

@@ -8,9 +8,9 @@ declare var $;
 declare var nunjucks;
 declare var commonmark;
 
-export enum HtmlElement {
-  Body = 'body',
-  Header = 'header'
+enum HtmlElement {
+  Body,
+  Header
 }
 
 export class TemplateElementModule
@@ -25,15 +25,17 @@ export class TemplateElementModule
   initialize()
   {
     this.bodyConfig = App.config.infobar.bodyTemplate;
+    this.bodyConfig.type = HtmlElement.Body;
 
     this.headerConfig = App.config.infobar.headerTemplate;
+    this.headerConfig.type = HtmlElement.Header;
 
-    this.getHtmlElementData(this.bodyConfig, HtmlElement.Body);
+    this.getHtmlElementData(this.bodyConfig);
 
-    this.getHtmlElementData(this.headerConfig, HtmlElement.Header);
+    this.getHtmlElementData(this.headerConfig);
   }
 
-  private getHtmlElementData(htmlElementConfig: any, htmlElementConcerned: HtmlElement)
+  private getHtmlElementData(htmlElementConfig: any)
   {
     if (!htmlElementConfig.content) { this.onReady.emit(); return; } // nothing to do
     
@@ -42,15 +44,15 @@ export class TemplateElementModule
       case "string":
         let content = htmlElementConfig.content;
         if (Array.isArray(content)) content = content.join('\n');
-        this.compile(htmlElementConfig, htmlElementConcerned, content);
+        this.compile(htmlElementConfig, content);
         this.onReady.emit();
         break;
       case "url":
         $.ajax({
           dataType: 'text',
           url: htmlElementConfig.content,
-          success: (data) => { this.compile(htmlElementConfig, htmlElementConcerned, data);this.onReady.emit(); },
-          error: () => { this.showError(htmlElementConcerned, htmlElementConfig.content); }
+          success: (data) => { this.compile(htmlElementConfig, data);this.onReady.emit(); },
+          error: () => { this.showError(htmlElementConfig.type, htmlElementConfig.content); }
         });
         break;
     }
@@ -71,38 +73,26 @@ export class TemplateElementModule
     console.error(errorMessage, urlConcerned);
   }
 
-  renderHtmlElement(htmlElementConcerned: string, element): any
-  {    
-    let renderedTemplate = "";
-    switch(htmlElementConcerned)
-    {
-      case HtmlElement.Body:
-        renderedTemplate = this.renderBody(element);
-        break;
-      case HtmlElement.Header:
-        renderedTemplate = this.renderHeader(element);
-        break;
-    }
-
+  // If there is a body template configured, then we use it. We use the default body otherwise.
+  renderBody(element): any
+  {
+    let renderedTemplate;
+    if (this.bodyTemplate)
+      renderedTemplate = this.bodyTemplate.render(element);
+    else
+      renderedTemplate = App.templateModule.render('element-body-default', element);
     return this.fixTemplate(renderedTemplate);
   }
 
-  // If there is a body template configured, then we use it. We use the default body otherwise.
-  private renderBody(element): any
-  {
-    if (this.bodyTemplate)
-      return this.bodyTemplate.render(element);
-    else
-      return App.templateModule.render('element-body-default', element);
-  }
-
   // If there is a header template configured, then we use it. We use the default header otherwise.
-  private renderHeader(element): any
+  renderHeader(element): any
   {
+    let renderedTemplate;
     if (this.headerTemplate)
-      return this.headerTemplate.render(element);
+      renderedTemplate = this.headerTemplate.render(element);
     else
-      return App.templateModule.render('element-header-default', element);
+      renderedTemplate = App.templateModule.render('element-header-default', element);
+    return this.fixTemplate(renderedTemplate);
   }
 
   private fixTemplate(template) {
@@ -114,11 +104,11 @@ export class TemplateElementModule
   }
 
   // Compile given content as a template once for all
-  private compile(htmlElementConfig : any, htmlElementConcerned: HtmlElement, content: any)
+  private compile(htmlElementConfig : any, content: any)
   {
     if (htmlElementConfig.isMarkdown) content = this.parseMarkdownSyntax(content);
     let template = App.templateModule.compile(content);
-    switch(htmlElementConcerned)
+    switch(htmlElementConfig.type)
     {
       case HtmlElement.Body:
         this.bodyTemplate = template;
