@@ -29,33 +29,36 @@ export class ElementComponent
 
     this.element.update();
     this.element.updateDistance();
-
+    let elementTodisplay = this.element.toDisplay();
     let optionsToDisplay = this.element.getIconsToDisplay();
-
-    let rootCategoriesValues;
-    if (this.element.status == ElementStatus.PendingModification && this.element.modifiedElement)  
-      rootCategoriesValues = this.element.modifiedElement.getRootCategoriesValues();
-    else
-      rootCategoriesValues = this.element.getRootCategoriesValues();
     
     let options = {
-      element : this.element, 
+      element : elementTodisplay, 
+      ElementStatus: ElementStatus,
+      ElementModerationState: ElementModerationState,
+      config: App.config,
+
+      // header
       showDistance: App.geocoder.getLocation() ? true : false,
-      listingMode: App.mode == AppModes.List, 
       optionsToDisplay: optionsToDisplay,
       mainOptionToDisplay: optionsToDisplay[0], 
       otherOptionsToDisplay: optionsToDisplay.slice(1),  
       currOptionsValues: this.element.getCurrDeepestOptionsValues().filter( (oV) => oV.option.displayInInfoBar).sort( (a,b) => a.isFilledByFilters ? -1 : 1),      
-      rootCategoriesValues : rootCategoriesValues,
-      editUrl : App.config.features.edit.url + this.element.id,
-      ElementStatus: ElementStatus,
-      ElementModerationState: ElementModerationState,
-      isIframe : App.isIframe,
-      isMapMode : App.mode == AppModes.Map,
-      config : App.config,
-      smallWidth : App.mode == AppModes.Map && App.infoBarComponent.isDisplayedAside(),
-      allowedStamps : App.stampModule.allowedStamps,
-      body : undefined
+
+      // body
+      body: App.templateModule.elementTemplate.renderHtmlElement('body', elementTodisplay),
+      
+      //header
+      header: App.templateModule.elementTemplate.renderHtmlElement('header', elementTodisplay),
+
+      listingMode: App.mode == AppModes.List, 
+      isIframe: App.isIframe,
+      isMapMode: App.mode == AppModes.Map,
+
+      // menu
+      editUrl: App.config.features.edit.url + this.element.id,
+      smallWidth: App.mode == AppModes.Map && App.infoBarComponent.isDisplayedAside(),
+      allowedStamps: App.stampModule.allowedStamps   
     };    
 
     let html = App.templateModule.render('element', options);
@@ -76,11 +79,11 @@ export class ElementComponent
     this.dom.find('.send-mail-btn').click( () => App.sendEmailComponent.open(this.element));
 
     // SHOW LONG DESCRIPTION BUTTON
-    this.dom.find('.show-more-description').click( function() 
+    this.dom.find('.show-more').click( function() 
     { 
-      let descriptionMore = $(this).siblings('.description-more');
-      let textButton = descriptionMore.is(":visible") ? "Afficher plus" : "Afficher moins";
-      descriptionMore.toggle();    
+      let textMore = $(this).siblings('.text-more');
+      let textButton = textMore.is(":visible") ? "Afficher plus" : "Afficher moins";
+      textMore.toggle();    
       $(this).text(textButton);
     });
 

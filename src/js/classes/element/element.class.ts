@@ -91,11 +91,6 @@ export class Element extends ElementBase
 		this.distanceFromBoundsCenter = this.distanceFromBoundsCenter ? Math.round(1.2*this.distanceFromBoundsCenter) : null;
 	}
 
-	getProperty(propertyName)
-	{
-		return App.elementFormaterModule.getProperty(this, propertyName);
-	}
-
 	getIconsToDisplay() : OptionValue[]
   {
     let result = this.iconsToDisplay;
@@ -127,20 +122,6 @@ export class Element extends ElementBase
   	return deepestOrderedOv;
 	}
 
-	private groupBy(list, keyGetter) {
-    const map = new Map();
-    list.forEach((item) => {
-        const key = keyGetter(item);
-        const collection = map.get(key);
-        if (!collection) {
-            map.set(key, [item]);
-        } else {
-            collection.push(item);
-        }
-    });
-    return map;
-}
-
 	getCurrMainOptionValue() : OptionValue
 	{
 		return this.optionsValues.filter( (optionValue) => optionValue.option.id == App.currMainId).shift();
@@ -169,5 +150,26 @@ export class Element extends ElementBase
 	get component() { return this.component_ || (this.component_ = new ElementComponent(this)); }	
 	get isInitialized() { return this.isInitialized_; }
 
+  toDisplay()
+  {
+    let result = {
+      name: this.formatProp('name'),
+      address: this.formatProp('address'),
+      distance: this.distance,
+      taxonomy: this.gogoTaxonomy(),
+      status: this.status,
+      isPending: this.isPending(),
+      isDeleted: this.isDeleted(),
+      needsModeration: this.needsModeration(),
+      formatedOpenHours: this.formatedOpenHours
+    };
+    $.each(this.data, (key, value) => {
+       if(!(key in result)) result[key] = this.formatProp(key)
+    });
+    console.log("elementTodisplay", this.name, result);
+    return result; 
+  }
+
+  formatProp(propertyName) { return  App.elementFormaterModule.getProperty(this, propertyName); }
 }
 

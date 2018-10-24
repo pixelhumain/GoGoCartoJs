@@ -13,12 +13,11 @@
 
     @media #{$medium-and-up} { padding: 1rem; }    
     
-    .description { 
-      line-height: 1.5;
-      padding-right: 1.5rem; 
+    .field-textarea { 
+      line-height: 1.5rem;
     }
 
-    .show-more-description { 
+    .show-more { 
       display: inline;
       text-decoration: underline;
       &:hover { 

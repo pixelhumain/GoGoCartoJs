@@ -9,8 +9,8 @@ declare var nunjucks;
 declare var commonmark;
 
 export enum HtmlElement {
-  Body,
-  Header
+  Body = 'body',
+  Header = 'header'
 }
 
 export class TemplateElementModule
@@ -71,16 +71,16 @@ export class TemplateElementModule
     console.error(errorMessage, urlConcerned);
   }
 
-  renderHtmlElement(htmlElementConcerned: HtmlElement, options: any): any
+  renderHtmlElement(htmlElementConcerned: string, element): any
   {    
     let renderedTemplate = "";
     switch(htmlElementConcerned)
     {
       case HtmlElement.Body:
-        renderedTemplate = this.renderBody(options);
+        renderedTemplate = this.renderBody(element);
         break;
       case HtmlElement.Header:
-        renderedTemplate = this.renderHeader(options);
+        renderedTemplate = this.renderHeader(element);
         break;
     }
 
@@ -88,21 +88,21 @@ export class TemplateElementModule
   }
 
   // If there is a body template configured, then we use it. We use the default body otherwise.
-  private renderBody(options:any): any
+  private renderBody(element): any
   {
     if (this.bodyTemplate)
-      return this.bodyTemplate.render(options.element);
+      return this.bodyTemplate.render(element);
     else
-      return App.templateModule.render('element-body-default', options);
+      return App.templateModule.render('element-body-default', element);
   }
 
   // If there is a header template configured, then we use it. We use the default header otherwise.
-  private renderHeader(options: any): any
+  private renderHeader(element): any
   {
     if (this.headerTemplate)
-      return this.headerTemplate.render(options.element);
+      return this.headerTemplate.render(element);
     else
-      return App.templateModule.render('element-header-default', options);
+      return App.templateModule.render('element-header-default', element);
   }
 
   private fixTemplate(template) {

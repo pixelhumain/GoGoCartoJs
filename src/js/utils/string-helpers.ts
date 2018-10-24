@@ -50,3 +50,10 @@ export function splitLongText(text : string, length : number, size : number = 50
   let text2 = text.slice(offset);
   return { first: text1, second: text2 };
 }
+
+export function formatPhoneNumber(value)
+{
+  if (!value) return '';
+  if (value.length == 10) return value.replace(/(.{2})(?!$)/g,"$1 ");
+  return value;
+}  

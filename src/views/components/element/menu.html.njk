@@ -47,7 +47,7 @@
     </div>
   {% endif %}
 
-  {% if config.isFeatureAvailable('edit') and (not element.isPending() or config.isFeatureAvailable('directModeration')) %} 
+  {% if config.isFeatureAvailable('edit') and (not element.isPending or config.isFeatureAvailable('directModeration')) %} 
     <div class="menu-element-item item-edit">
       {% set editText = 'Modifier' if config.isFeatureAvailable('directModeration') else 'Proposer des modifications' %}
       <a href={{ editUrl }} {% if isIframe %}target="_blank"{% endif %}>
@@ -57,7 +57,7 @@
     </div>
   {% endif %}
 
-  {% if config.isFeatureAvailable('report') and not element.isPending() %} 
+  {% if config.isFeatureAvailable('report') and not element.isPending %} 
     <div class="menu-element-item item-report"> 
       <span class="menu-icon btn-report gogo-icon-exclamation-1 tooltipped" 
       data-position="top" data-delay="0" data-tooltip="Signaler une erreur"></span>
