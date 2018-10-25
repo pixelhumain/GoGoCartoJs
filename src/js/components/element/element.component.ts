@@ -79,14 +79,19 @@ export class ElementComponent
     this.dom.find('.send-mail-btn').click( () => App.sendEmailComponent.open(this.element));
 
     // SHOW LONG DESCRIPTION BUTTON
-    this.dom.find('.show-more').click( function() 
-    { 
+    this.dom.find('.show-more').click( function(e) 
+    {       
       let textMore = $(this).siblings('.text-more');
+      e.stopPropagation();e.stopImmediatePropagation();e.preventDefault();
+      if (!textMore.is(":visible") && !App.infoBarComponent.isDetailsVisible) App.infoBarComponent.toggleDetails();
       let textButton = textMore.is(":visible") ? "Afficher plus" : "Afficher moins";
       textMore.toggle();    
       $(this).text(textButton);
     });
 
+    // replace send-email-btn by email value, cause we need to see the email to validate or not
+    if (this.element.isPending()) $('.field-email').html(this.element.formatProp('email'));
+    
     // INIT TABS (for admin section)
     setTimeout( () => { this.dom.find('.info-bar-tabs').tabs(); }, 100);
 

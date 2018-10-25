@@ -18,7 +18,6 @@ declare var $;
 export class InfoBarComponent
 {
 	isVisible : boolean = false;
-	isDetailsVisible = false;
 
 	elementVisible : Element = null;
 
@@ -254,9 +253,11 @@ export class InfoBarComponent
 		this.isVisible = false;		
 	};
 
+	get isDetailsVisible() { return this.dom.find('.moreDetails').is(':visible'); }
+
 	toggleDetails()
 	{	
-		if ( this.dom.find('.moreDetails').is(':visible') )
+		if (this.isDetailsVisible)
 		{
 			this.hideDetails();
 			this.elementVisible.component.menuComponent.showFullTextMenu(false);

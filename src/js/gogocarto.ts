@@ -118,17 +118,12 @@ export class GoGoCartoModule
 			App.customPopupComponent.initialize();
 			
 			App.component.initialize();		
-			
-			let onReadyReceived = 0;
+
 			App.templateModule.elementTemplate.onReady.do(() =>
 			{
-				++onReadyReceived;
-				if(onReadyReceived==2)
-				{
-					App.routerModule.loadInitialState();
-					// wait for initial state to be loaded
-					setTimeout( () => App.elementsJsonModule.loadLocalElements(), 100);
-				}
+				App.routerModule.loadInitialState();
+				// wait for initial state to be loaded
+				setTimeout( () => App.elementsJsonModule.loadLocalElements(), 100);
 			});
 
 			App.templateModule.initialize();

@@ -1,6 +1,9 @@
 #element-info-bar .element-item
 {
-  .expandLabel { font-weight: bold; } 
+  .expandLabel { 
+    font-weight: bold;     
+    padding-right: 0;
+  } 
   
   &.active 
   {

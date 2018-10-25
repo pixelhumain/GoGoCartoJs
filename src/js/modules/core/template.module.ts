@@ -40,8 +40,8 @@ export class TemplateModule
 			case 'marker'              : fileUrl = 'components/map/marker.html.njk'; break;
 			case 'gogo-styles'         : fileUrl = 'gogo-styles.html.njk'; break;
 			case 'element'             : fileUrl = 'components/element/element.html.njk'; break;
-			case 'element-body-default': fileUrl = 'components/element/body.html.njk'; break;
-			case 'element-header-default': fileUrl = 'components/element/header.html.njk'; break;
+			case 'element-body-default': fileUrl = 'components/element/default-body-content.html.njk'; break;
+			case 'element-header-default': fileUrl = 'components/element/default-header-content.html.njk'; break;
 			case 'vote-modal-content'  : fileUrl = 'components/modals/element/vote-content.html.njk'; break;
 			default: console.warn('[GoGoCarto] No template associated to templateName', templateName);
 		}

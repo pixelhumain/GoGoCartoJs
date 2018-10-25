@@ -3,70 +3,62 @@ import { AppModule } from "../../app.module";
 import { App } from "../../gogocarto";
 import { GoGoConfig } from "../../classes/config/gogo-config.class";
 import { Event } from "../../classes/classes";
-
+import { TemplateNames, TemplateConfig } from '../../classes/config/template-config.class';
 declare var $;
 declare var nunjucks;
 declare var commonmark;
 
-enum HtmlElement {
-  Body,
-  Header
-}
-
 export class TemplateElementModule
 {
   onReady = new Event<any>();
+  isReady : boolean = false;
 
-  bodyConfig : any;
-  bodyTemplate : any; // nunjucks template
+  bodyConfig : TemplateConfig;
+  bodyTemplate : any = null; // nunjucks template
 
-  headerConfig : any;
-  headerTemplate : any; // nunjucks template
+  headerConfig : TemplateConfig;
+  headerTemplate : any = null; // nunjucks template
+  
   initialize()
   {
-    this.bodyConfig = App.config.infobar.bodyTemplate;
-    this.bodyConfig.type = HtmlElement.Body;
-
-    this.headerConfig = App.config.infobar.headerTemplate;
-    this.headerConfig.type = HtmlElement.Header;
+    this.bodyConfig = new TemplateConfig(App.config.infobar.bodyTemplate, TemplateNames.ElementBody);
+    this.headerConfig = new TemplateConfig(App.config.infobar.headerTemplate, TemplateNames.ElementHeader);
 
     this.getHtmlElementData(this.bodyConfig);
-
     this.getHtmlElementData(this.headerConfig);
   }
 
-  private getHtmlElementData(htmlElementConfig: any)
+  private getHtmlElementData(htmlElementConfig: TemplateConfig)
   {
-    if (!htmlElementConfig.content) { this.onReady.emit(); return; } // nothing to do
-    
+    if (!htmlElementConfig.content) { this.checkTemplatesReady(); return; } // nothing to do
+    console.log('getHtmlElementData', htmlElementConfig);
     switch(htmlElementConfig.type)
     {
       case "string":
         let content = htmlElementConfig.content;
         if (Array.isArray(content)) content = content.join('\n');
         this.compile(htmlElementConfig, content);
-        this.onReady.emit();
         break;
       case "url":
         $.ajax({
           dataType: 'text',
           url: htmlElementConfig.content,
-          success: (data) => { this.compile(htmlElementConfig, data);this.onReady.emit(); },
-          error: () => { this.showError(htmlElementConfig.type, htmlElementConfig.content); }
+          success: (data) => { this.compile(htmlElementConfig, data); },
+          error: () => { this.showError(htmlElementConfig.name, htmlElementConfig.content); }
         });
         break;
     }
-  }
+  }  
 
-  private showError(htmlElementConcerned: HtmlElement, urlConcerned: string)
+  private showError(htmlElementConcerned: TemplateNames, urlConcerned: string)
   {
     let errorMessage;
     switch(htmlElementConcerned)
     {
-      case HtmlElement.Body:
+      case TemplateNames.ElementBody:
         errorMessage = "Error while getting the body template at url :";
         break;
-      case HtmlElement.Header:
+      case TemplateNames.ElementHeader:
         errorMessage = "Error while getting the header template at url :";
         break;
     }
@@ -104,18 +96,31 @@ export class TemplateElementModule
   }
 
   // Compile given content as a template once for all
-  private compile(htmlElementConfig : any, content: any)
+  private compile(htmlElementConfig : TemplateConfig, content: any)
   {
     if (htmlElementConfig.isMarkdown) content = this.parseMarkdownSyntax(content);
     let template = App.templateModule.compile(content);
-    switch(htmlElementConfig.type)
+    console.log("compile template", htmlElementConfig.type);
+    switch(htmlElementConfig.name)
     {
-      case HtmlElement.Body:
+      case TemplateNames.ElementBody:
         this.bodyTemplate = template;
         break;
-      case HtmlElement.Header:
+      case TemplateNames.ElementHeader:
         this.headerTemplate = template;
         break;
+    }
+    this.checkTemplatesReady();
+  }
+
+  private checkTemplatesReady()
+  {
+    console.log("check templates ready");
+    if ( !this.isReady && (!this.bodyConfig.isUrl() || this.bodyTemplate) && (this.headerTemplate || !this.headerConfig.isUrl()) )
+    {
+      console.log("Templates READY !");
+      this.isReady = true;
+      this.onReady.emit();
     }
   }
 

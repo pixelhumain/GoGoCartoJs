@@ -1,7 +1,9 @@
+{% if value %}
 <div class="field field-email">
-  {% if config.security.hideMailsByShowingSendMailButton %} {# and not (isPending and config.isFeatureAvailable('pending') #}
+  {% if config.security.hideMailsByShowingSendMailButton %}
     <button class="btn send-mail-btn">Envoyer un Mail</button>
   {% else %}
     {{ value|safe }} 
   {% endif %}
 </div>
+{% endif %}

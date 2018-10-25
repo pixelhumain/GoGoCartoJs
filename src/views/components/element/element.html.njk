@@ -11,7 +11,7 @@
 
 {# HEADER #}
 <div class="collapsible-header bgdSoftColorAs {{pendingClass}}" option-id={{mainOptionToDisplay.colorOptionId}}>
-    {{ header|safe }}
+  {% include here ~ 'header.html.njk' %} 
 </div>
 
 {# INTERACTIVE SECTION #}

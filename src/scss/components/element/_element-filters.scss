@@ -1,0 +1,54 @@
+.field-textarea { 
+  line-height: 1.5rem;
+  text-align: justify;
+}
+
+.show-more { 
+  display: inline;
+  text-decoration: underline;
+  &:hover { 
+    cursor: pointer;
+  }
+}
+
+.field-email {
+  .send-mail-btn
+  {
+    font-size: .8rem;
+    margin: .4rem 0 .5rem 0;
+    line-height: 1.8rem;
+    height: 1.8rem;
+  }  
+} 
+
+.field-tags
+{
+  margin-top: .8rem;
+
+  .gogo-tag 
+  {
+    margin-right: 8px;
+    border-radius: 5px;
+    background-color: gainsboro;
+    padding: 0px 10px;
+    display: inline-block;
+    margin-bottom: 8px;
+  } 
+}  
+
+.field-vimeo { 
+  position: relative; 
+  padding-bottom: 65.25%; 
+  height: 0; 
+  overflow: hidden; 
+  max-width: 100%; 
+  height: auto; 
+
+  iframe, object, embed { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+  }
+}

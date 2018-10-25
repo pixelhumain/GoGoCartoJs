@@ -2,9 +2,9 @@
 {# Header Title #}
 <div class='collapsible-header-title row'>
 
-  <span class="col s12 name">
+  <span class="name">
 
-  {% set mainIcon = 'gogo-icon-attention' if isPending and config.isFeatureAvailable('pending') else mainOptionToDisplay.option.icon %}
+    {% set mainIcon = 'gogo-icon-attention' if isPending and config.isFeatureAvailable('pending') else mainOptionToDisplay.option.icon %}
     {# Icon #}
     <span class="element-main-icon icon {{ mainIcon }} colorAs {{pendingClass}} hideOnLargeScreen" option-id={{mainOptionToDisplay.colorOptionId}}></span>
        
@@ -12,7 +12,7 @@
     <span class="icon gogo-icon-close gogo-h-primary" id="btn-close-bandeau-detail"></span>            
 
     {# Name #}
-    {{ name|safe }}
+    {{ element.name|safe }}
     {% if isDeleted %}</br><u>(Cet élément a été refusé ou supprimé)</u>{% endif %}
 
     {# Distance #}
@@ -35,8 +35,7 @@
 {# Header More #}
 <div class='collapsible-header-more row'>
 
-  {# Description #}
-  <span class="description col s12">{{ description|safe }}</span>
+  <div class="custom-header">{{ header|safe }}</div>  
 
   {# Categories litteral #}
   <span class="inline-option-values gogo-neutral col s8 hideOnLargeScreen">

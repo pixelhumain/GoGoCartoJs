@@ -1,0 +1,1 @@
+{{ description|gogo_textarea(truncate = 200) }}

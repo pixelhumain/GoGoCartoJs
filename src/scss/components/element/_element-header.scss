@@ -21,11 +21,15 @@
 
     .distance 
     { 
-        float: right; 
-        margin-left: 1rem;
+      float: right; 
+      margin-left: 1rem;
     } 
     
     .location { display: none; } 
+  }
+
+  .custom-header {
+    margin-bottom: .5rem;
   }
 
   .collapsible-header-more 
@@ -39,18 +43,13 @@
     { 
       font-weight: bold;
       font-style: italic;
+      padding-left: 0;
+      margin-bottom: .3rem;
 
       .option-value 
       {
         &.disabled { color: #9C9C9C; font-weight: normal; }        
       }
-    }
-    .description
-    {
-      margin-bottom: .7rem;
-      text-align: justify;
-
-      p { margin: 0}
     }
   }   
 } 
