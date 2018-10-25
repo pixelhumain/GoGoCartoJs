@@ -6468,6 +6468,9 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         color: inherit; }
         .gogo-load-css .gogocarto-container #element-info-bar.display-bottom .element-item .collapsible-header a:hover {
           color: black; }
+    .gogo-load-css .gogocarto-container #element-info-bar.display-bottom .element-item .collapsible-header, .gogo-load-css .gogocarto-container #element-info-bar.display-bottom .element-item .collapsible-body {
+      padding-left: .5rem;
+      padding-right: .5rem; }
     .gogo-load-css .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header {
       border: none;
       color: white;

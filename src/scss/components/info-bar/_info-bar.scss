@@ -34,6 +34,11 @@
     background-color: white !important; 
     a { color: inherit; &:hover { color: black; } }
   }  
+
+  .collapsible-header, .collapsible-body { 
+    padding-left: .5rem;
+    padding-right: .5rem;
+  }
 } 
 
 #element-info-bar.display-aside .element-item
