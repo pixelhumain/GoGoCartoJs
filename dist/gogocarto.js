@@ -36368,7 +36368,7 @@ frame.set("loop.last", t_1 === t_2 - 1);
 frame.set("loop.length", t_2);
 output += " \n    ";
 if(t_5 != runtime.contextOrFrameLookup(context, frame, "null")) {
-output += "\n      <div class='row'>\n        <span class=\"col s3 day\">";
+output += "\n      <div class=\"row\">\n        <span class=\"col s3 day\">";
 output += runtime.suppressValue(env.getFilter("capitalize").call(context, t_4), env.opts.autoescape);
 output += "</span>\n        <span class=\"col s9 openHours\">";
 output += runtime.suppressValue(t_5, env.opts.autoescape);
@@ -36395,7 +36395,7 @@ frame.set("loop.last", t_1 === t_2 - 1);
 frame.set("loop.length", t_2);
 output += " \n    ";
 if(t_7 != runtime.contextOrFrameLookup(context, frame, "null")) {
-output += "\n      <div class='row'>\n        <span class=\"col s3 day\">";
+output += "\n      <div class=\"row\">\n        <span class=\"col s3 day\">";
 output += runtime.suppressValue(env.getFilter("capitalize").call(context, t_6), env.opts.autoescape);
 output += "</span>\n        <span class=\"col s9 openHours\">";
 output += runtime.suppressValue(t_7, env.opts.autoescape);

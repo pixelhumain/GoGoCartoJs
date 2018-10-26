@@ -3765,34 +3765,42 @@ th {
       background-color: #f3f6f4; }
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .collapsible-body-main-content {
         background-color: #f3f6f4;
-        padding-left: 0; }
+        padding: 0;
+        padding-bottom: 1rem; }
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .info-bar-divider {
         display: none; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .description {
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field-textarea {
         line-height: 1.3rem; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .section {
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field {
         background-color: white;
-        margin-top: 1rem;
-        padding-left: 1rem;
-        margin-right: .4rem;
-        line-height: 1.5rem;
-        padding-top: .7rem;
-        padding-bottom: .6rem; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .section.section-taxonomy {
+        padding-left: 1.5rem;
+        padding-top: .8rem;
+        padding-bottom: .8rem;
+        padding-right: 1rem;
+        line-height: 1.5rem; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field.field-taxonomy {
           padding: 0; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .section.section-taxonomy h3.category-name {
+          .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field.field-taxonomy h3.category-name {
             background-color: #f3f6f4;
             margin-left: 0;
             padding-left: 1.5rem;
-            color: #f79900; }
-            .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .section.section-taxonomy h3.category-name:first-child {
+            color: #f79900;
+            margin-bottom: 0;
+            padding-bottom: 1rem; }
+            .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field.field-taxonomy h3.category-name:first-child {
               color: #3bad78; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .section.sectionlongDescription {
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field.field-textarea.first-element-of-body-content {
           margin-top: 0;
-          background-color: #f3f6f4; }
+          background-color: #f3f6f4;
+          padding-bottom: 0; }
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field + .field {
+        padding-top: 0;
+        margin-top: -.4rem; }
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body h3 {
-        margin-left: 1rem;
-        font-weight: 900; }
+        font-weight: 900;
+        padding-left: 1.5rem; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body h3.first-element-of-body-content {
+          padding-top: 1.2rem; }
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper {
         background-color: #f3f6f4; }
         .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .option-value {
@@ -3829,21 +3837,21 @@ th {
               margin-right: 6px; }
           .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .category-wrapper .option-value .icon {
             display: none; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .sectionOpenHours .day:after {
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field-openhours .day:after {
         content: "➡";
         font-size: 1.2rem;
         color: #3bad78;
-        float: right; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .sectionOpenHours .openHours {
+        margin: 0 8px 0 10px; }
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field-openhours .openHours {
         padding-left: 0; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .tags-container {
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field-tags {
         background-color: #f3f6f4;
         margin-top: 0;
         padding-top: 1rem;
         padding-left: 1.5rem;
         margin-bottom: -10px;
         text-align: center; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .tags-container .gogo-tag {
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field-tags .gogo-tag {
           background-color: white;
           border-radius: 0;
           padding: 4px 14px;
@@ -3916,7 +3924,8 @@ th {
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item:not(.active) .expandLabel:before {
       content: "+"; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header {
-      padding: .5rem 0; }
+      padding: .5rem 0;
+      padding-left: .5rem; }
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .collapsible-header-title {
         padding-bottom: 1rem; }
         .gogo-load-css .gogo-theme-transiscope.gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .collapsible-header-title .gogo-icon-close {
@@ -5376,6 +5385,9 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     .gogo-load-css .gogocarto-container .show-directory-menu-button {
       left: 15px;
       color: white; }
+      .gogo-load-css .gogocarto-container .show-directory-menu-button img {
+        height: 35px;
+        margin-right: 5px; }
       .gogo-load-css .gogocarto-container .show-directory-menu-button .arrow-right {
         display: inline-block;
         border: solid 8px;
