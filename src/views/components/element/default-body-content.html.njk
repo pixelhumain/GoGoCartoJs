@@ -35,7 +35,7 @@
 {% if commitment %}
 {{ ''|gogo_separator }}
 {{ 'Engagement Citoyen'|gogo_title }}
-{{ commitment|gogo_text }}
+{{ commitment|gogo_textarea(truncate = 400) }}
 {% endif %}
 
 {# Open Hours #}
