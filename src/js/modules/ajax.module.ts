@@ -60,7 +60,7 @@ export class AjaxModule
 		
 		$.ajax({
 			url: this.getSingleElementApiUrl(elementId),
-			method: "get",
+			method: "post",
 			data: { },
 			success: response => 
 			{	        
@@ -167,7 +167,7 @@ export class AjaxModule
 		
 		$.ajax({
 			url: $request.route,
-			method: "get",
+			method: "post",
 			data: $request.data,
 			beforeSend: () =>
 			{ 				
