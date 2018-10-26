@@ -34,21 +34,20 @@
   .collapsible-body {
     background-color: $light;
 
-    .collapsible-body-main-content { background-color: $light; padding-left: 0; }
+    .collapsible-body-main-content { background-color: $light; padding: 0; padding-bottom: 1rem; }
 
     .info-bar-divider { display: none; }
 
-    .description { line-height: 1.3rem; }
-    .section {
+    .field-textarea { line-height: 1.3rem; }
+    .field {
       background-color: white;
-      margin-top: 1rem;
-      padding-left: 1rem;
-      margin-right: .4rem;
+      padding-left: 1.5rem;
+      padding-top: .8rem;
+      padding-bottom: .8rem;
+      padding-right: 1rem;
       line-height: 1.5rem;
-      padding-top: .7rem;
-      padding-bottom: .6rem;
 
-      &.section-taxonomy {
+      &.field-taxonomy {
         padding: 0;
         // font-size: 13px;
 
@@ -58,18 +57,28 @@
           padding-left: 1.5rem;
           color: $secondary;
           &:first-child { color: $primary; }
+          margin-bottom: 0;
+          padding-bottom: 1rem;
         }
       }
 
-      &.sectionlongDescription {
+      &.field-textarea.first-element-of-body-content {
         margin-top: 0;
         background-color: $light;
+        padding-bottom: 0;
       }
     }
 
+    .field + .field {
+      padding-top: 0;
+      margin-top: -.4rem;
+    }
+
     h3 {
-      margin-left: 1rem;
       font-weight: 900;
+      padding-left: 1.5rem;
+
+      &.first-element-of-body-content { padding-top: 1.2rem; }
     }
 
     .category-wrapper {
@@ -121,17 +130,17 @@
       }
     }
 
-    .sectionOpenHours {
+    .field-openhours {
       .day:after {
         content: "➡";
         font-size: 1.2rem;
         color: $primary;
-        float: right;
+        margin: 0 8px 0 10px;
       }
       .openHours { padding-left: 0}
     }
 
-    .tags-container {
+    .field-tags {
       background-color: $light;
       margin-top: 0;
       padding-top: 1rem;
@@ -238,6 +247,7 @@
 #element-info-bar.display-aside .element-item .collapsible-header 
 {
   padding: .5rem 0;
+  padding-left: .5rem;
   .collapsible-header-title { 
     padding-bottom: 1rem;
     
