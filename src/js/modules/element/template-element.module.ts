@@ -31,7 +31,6 @@ export class TemplateElementModule
   private getHtmlElementData(htmlElementConfig: TemplateConfig)
   {
     if (!htmlElementConfig.content) { this.checkTemplatesReady(); return; } // nothing to do
-    console.log('getHtmlElementData', htmlElementConfig);
     switch(htmlElementConfig.type)
     {
       case "string":
@@ -100,7 +99,6 @@ export class TemplateElementModule
   {
     if (htmlElementConfig.isMarkdown) content = this.parseMarkdownSyntax(content);
     let template = App.templateModule.compile(content);
-    console.log("compile template", htmlElementConfig.type);
     switch(htmlElementConfig.name)
     {
       case TemplateNames.ElementBody:
@@ -115,10 +113,8 @@ export class TemplateElementModule
 
   private checkTemplatesReady()
   {
-    console.log("check templates ready");
     if ( !this.isReady && (!this.bodyConfig.isUrl() || this.bodyTemplate) && (this.headerTemplate || !this.headerConfig.isUrl()) )
     {
-      console.log("Templates READY !");
       this.isReady = true;
       this.onReady.emit();
     }
