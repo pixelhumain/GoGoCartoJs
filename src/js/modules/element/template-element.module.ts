@@ -31,7 +31,7 @@ export class TemplateElementModule
   private getHtmlElementData(htmlElementConfig: TemplateConfig)
   {
     if (!htmlElementConfig.content) { this.checkTemplatesReady(); return; } // nothing to do
-    switch(htmlElementConfig.type)
+    switch(htmlElementConfig.type.toLowerCase())
     {
       case "string":
         let content = htmlElementConfig.content;

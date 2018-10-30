@@ -55,12 +55,28 @@ InfoBar is the panel to display element informations, opened on marker click
 "infobar": {
     "width": 520,
     "activate": true,
+    "bodyTemplate": {
+      "content": "http://localhost/GoGoCartoJs/web/data/custom-element-body-template.md",
+      "isMarkdown": true,
+      "type": "url"
+    },
+    "headerTemplate": {
+      "content": "http://localhost/GoGoCartoJs/web/data/custom-element-header-template.md",
+      "isMarkdown": true,
+      "type": "url"
+    }
   }
 ```
 
 Custom **width** in pixel
 
 If **activate** is set to false, nothing happens on marker click, the info bar is not displayed
+
+Custom **bodyTemplate** and **headerTemplate** of an element can be provided.
+An object need to be given with the following options:
+  * **content** is a string or an array of string. This option is an URL as a single string, or an HTML code using Markdown syntax (syntax here : [Link](https://commonmark.org/help/))) and/or a Nunjucks syntax (see here: [Link](https://mozilla.github.io/nunjucks/templating.html)) as a single string or an array of string. (Markdown and Nunjucks syntaxes can be mixed).
+  * **isMardown** is set to true, if the content given uses Markdown syntax, false otherwise.
+  * **type** must be set to "url", if the content is remote, or "string" so the content is used as is.
 
 Texts
 ------
