@@ -39,14 +39,14 @@ Not very satisfying ! It is just using the title and the taxonomy attributes. So
 
 {% raw %}{{ motivation }}{% endraw %}
 
-**Created at : {{ createdAt }}**
+**Created at : {% raw %}{{ createdAt }}{% endraw %}**
 ___________
 
-{{ taxonomy|gogo_taxonomy }}
+{% raw %}{{ taxonomy|gogo_taxonomy }}
 ```
 ![](images/templates/body.png)
 
-You can see that I used some mardown syntax (heading, bold, and horizontal rule) and also I used the Nunjuck syntax for variables {{ myAttribute }}.
+You can see that I used some mardown syntax (heading, bold, and horizontal rule) and also I used the Nunjuck syntax for variables {% raw %}{{ myAttribute }}{% endraw %}.
 For the attribute taxonomy, I used a special filter called "gogo_taxonomy", see list of filters below.
 
 How to provide custom template to the configuration
@@ -58,7 +58,7 @@ From the above example, there is three options
 ```javascript
 "infobar": {
     "bodyTemplate": {
-      "content": "## Hello my custom template\n{{ motivation }}\n**Created at : {{ createdAt }}**\n_________\n{{ taxonomy|gogo_taxonomy}}",
+      "content": "## Hello my custom template\n{% raw %}{{ motivation }}{% endraw %}\n**Created at : {% raw %}{{ createdAt }}{% endraw %}**\n_________\n{% raw %}{{ taxonomy|gogo_taxonomy}}{% endraw %}",
     },
   }
 ```
@@ -69,11 +69,11 @@ From the above example, there is three options
     "bodyTemplate": {
       "content": [
         "## Hello my custom template",
-        "{{ motivation }}",
+        "{% raw %}{{ motivation }}{% endraw %}",
         "",
-        "**Created at : {{ createdAt }}**",
+        "**Created at : {% raw %}{{ createdAt }}{% endraw %}**",
         "____________",
-        "{{ taxonomy|gogo_taxonomy}}"
+        "{% raw %}{{ taxonomy|gogo_taxonomy}}{% endraw %}"
       ]
     }
   }
@@ -97,7 +97,7 @@ You can also customize the header template, for example
 ```javascript
 "infobar": {
     "headerTemplate": {
-      "content": "Motivation : {{ motivation }}"
+      "content": "Motivation : {% raw %}{{ motivation }}{% endraw %}"
     }
     "bodyTemplate": { 
       "content": "http://path/to/custom-element-body-template.md",
@@ -116,12 +116,12 @@ Nunjucks come with some builtin filters, see [Documentation](https://mozilla.git
 
 GoGoCarto has also some custom filters
 
-**gogo_taxonomy** Use it with the taxonomy atribute `{{ taxonomy|gogo_taxonomy}}`
+**gogo_taxonomy** Use it with the taxonomy atribute `{% raw %}{{ taxonomy|gogo_taxonomy}}{% endraw %}`
 
 **gogo_textarea(truncate = 400)** This is used to display long text. There is an optional parameter called truncate which truncate the texte around the given character length and add a "display more" button 
 
 ```
-{{ motivation|gogo_textarea(truncate = 400) }}
+{% raw %}{{ motivation|gogo_textarea(truncate = 400){% endraw %} }}
 ```
 
 ![](images/templates/gogo-textarea-truncate.png)
@@ -138,7 +138,7 @@ GoGoCarto has also some custom filters
 }
 ```
 ```
-{{ blop|gogo_tags }}
+{% raw %}{{ blop|gogo_tags }}{% endraw %}
 ```
 
 ![](images/templates/gogo-tags.png)
