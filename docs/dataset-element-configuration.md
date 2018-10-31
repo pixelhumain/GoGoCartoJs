@@ -1,9 +1,9 @@
 Element Configuration
 ========
 For GoGoCarto to work properly, you need to provide at least 3 informations per element
-* A title
-* A position (latitude, longitude)
-* A set of categories filled by the element (= taxonomy). It must be an array of Ids. The Ids can be number or string. Those Ids must be the same than the one given in the [Taxonomy](taxonomy.md) dataset
+* A **title**
+* A **position** (latitude, longitude)
+* A set of categories filled by the element (= **taxonomy**). It must be an array of Ids. The Ids can be number or string. Those Ids must be the same than the one given in the [Taxonomy](taxonomy.md) dataset
 
 GoGoCarto will try to find those informations in the following attributes
 * title / name
@@ -39,18 +39,18 @@ Specific Attributes
 
 Be careful that some attributes names are reserved and have specifc behaviour
 
-Id
----
+**Id**
+
 The unique Id of each element. Can number or string, and is automatically generated if you do not provide one.
 
-Image or Images
------
+**Image or Images**
+
 Url to an image (or array of url) that will be diplayed in the element info bar
 
 ![](images/infobar-image.png)
 
-Address
--------
+**Address**
+
 If provide an address with the following structure, postalCode and addresLocality will be used in the List mode to display an overview of the location.
 ```
  "address": {
