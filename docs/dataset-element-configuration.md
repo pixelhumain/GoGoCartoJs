@@ -46,6 +46,7 @@ The unique Id of each element. Can number or string, and is automatically genera
 Image or Images
 -----
 Url to an image (or array of url) that will be diplayed in the element info bar
+
 ![](images/infobar-image.png)
 
 Address
@@ -60,7 +61,7 @@ If provide an address with the following structure, postalCode and addresLocalit
     "customFormatedAddress": "Immeuble 4B, 5 Edmond Proust à Chenay, France"
  },
  ```
-![](images/listemode-address.png)
+![](images/listmode-address.png)
  
 
 
