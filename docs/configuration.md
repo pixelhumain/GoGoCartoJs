@@ -233,9 +233,11 @@ images: {
 }
 ```
 MenuTopImage
+
 ![](images/menu-top-image.png)
 
 buttonOpenMenu
+
 ![](images/button-open-menu.png)
 
 Theme
@@ -244,6 +246,7 @@ Theme
 "theme": "transiscope",
 ```
 For now only two exists : the default one and "transiscope" :
+
 ![](images/themes/transiscope.png)
 
 
