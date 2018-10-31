@@ -61,7 +61,7 @@ InfoBar is the panel to display element informations, opened on marker click
       "type": "url"
     },
     "headerTemplate": {
-      "content": "{{ description|gogo_textarea }}",
+      "content": "{% raw %}{{ description|gogo_textarea }}{% endraw %}",
       "isMarkdown": false,
       "type": "string"
     }
