@@ -4,7 +4,7 @@ Info Bar Templates
 A template allow you to customize the rendering of the Info Bar. 
 
 Templates can use [Markdown syntax](https://commonmark.org/help/) and/or a [Nunjucks syntax](https://mozilla.github.io/nunjucks/templating.html).
-Templates can access all the attributes of an element with the syntax {{ myAttribute }}
+Templates can access all the attributes of an element with the syntax {% raw %}{{ myAttribute }}{% endraw %}
 
 
 Examples
@@ -37,12 +37,12 @@ Not very satisfying ! It is just using the title and the taxonomy attributes. So
 ```
 ## Hello my custom template
 
-{{ motivation }}
+{% raw %}{{ motivation }}{% endraw %}
 
 **Created at : {{ createdAt }}**
 ___________
 
-{{ taxonomy|gogo_taxonomy}}
+{{ taxonomy|gogo_taxonomy }}
 ```
 ![](images/templates/body.png)
 
