@@ -34,7 +34,7 @@ If I do not provide a custom template, then the result will be
 
 Not very satisfying ! It is just using the title and the taxonomy attributes. So we will now use this custom body template
 
-```markdown
+```
 ## Hello my custom template
 
 {{ motivation }}
@@ -66,8 +66,8 @@ From the above example, there is three options
 **Option 2** : string array
 ```javascript
 "infobar": {
-    bodyTemplate: {
-      content: [
+    "bodyTemplate": {
+      "content": [
         "## Hello my custom template",
         "{{ motivation }}",
         "",
@@ -82,8 +82,8 @@ From the above example, there is three options
 **Option 3** : file
 ```javascript
 "infobar": {
-    bodyTemplate: { 
-      content: "http://path/to/custom-element-body-template.md",
+    "bodyTemplate": { 
+      "content": "http://path/to/custom-element-body-template.md",
       type: "url"
     },
   }
@@ -96,12 +96,12 @@ You can also customize the header template, for example
 
 ```javascript
 "infobar": {
-    headerTemplate: {
-      content: "Motivation : {{ motivation }}"
+    "headerTemplate": {
+      "content": "Motivation : {{ motivation }}"
     }
-    bodyTemplate: { 
-      content: "http://path/to/custom-element-body-template.md",
-      type: "url"
+    "bodyTemplate": { 
+      "content": "http://path/to/custom-element-body-template.md",
+      "type": "url"
     },
   }
 ```
@@ -120,7 +120,7 @@ GoGoCarto has also some custom filters
 
 **gogo_textarea(truncate = 400)** This is used to display long text. There is an optional parameter called truncate which truncate the texte around the given character length and add a "display more" button 
 
-```markdown
+```
 {{ motivation|gogo_textarea(truncate = 400) }}
 ```
 
@@ -138,7 +138,7 @@ GoGoCarto has also some custom filters
 }
 ```
 ```
-{{ blop||gogo_tags }}
+{{ blop|gogo_tags }}
 ```
 
 ![](images/templates/gogo-tags.png)
