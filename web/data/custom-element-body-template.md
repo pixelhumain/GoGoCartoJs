@@ -1,18 +1,11 @@
-# Test template distant
+Hello my custom template
+===================
 
-{{ description|gogo_textarea(truncate = 100) }}
-blabla le petit text
+{{ motivation|gogo_textarea(truncate = 400) }}
 
-## Test template distant
+**Created at : {{ createdAt }}**
+{% set ar = ["Hello", "Awesome", "GoGoCarto"] %}
+{{ blop|gogo_tags }}
+_________________
 
-{{ name|gogo_url }}
-Encore du text h1 h5
-
-### Test template distant
-{{ name }}
-
-{{ taxonomy|gogo_taxonomy }}
-
-___
-
-**Address** : {{ address }}
+{{ taxonomy|gogo_taxonomy}}

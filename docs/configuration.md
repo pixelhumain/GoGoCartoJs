@@ -56,14 +56,14 @@ InfoBar is the panel to display element informations, opened on marker click
     "width": 520,
     "activate": true,
     "bodyTemplate": {
-      "content": "http://localhost/GoGoCartoJs/web/data/custom-element-body-template.md",
+      "content": "http://localhost/GoGoCartoJs/web/data/body-template.md",
       "isMarkdown": true,
       "type": "url"
     },
     "headerTemplate": {
-      "content": "http://localhost/GoGoCartoJs/web/data/custom-element-header-template.md",
-      "isMarkdown": true,
-      "type": "url"
+      "content": "{{ description|gogo_textarea }}",
+      "isMarkdown": false,
+      "type": "string"
     }
   }
 ```
@@ -72,9 +72,9 @@ Custom **width** in pixel
 
 If **activate** is set to false, nothing happens on marker click, the info bar is not displayed
 
-Custom **bodyTemplate** and **headerTemplate** of an element can be provided.
+Custom **bodyTemplate** and **headerTemplate** of an element can be provided. See [Info Bar Templates](infor-bar-templates.md) to learn how to build a template.
 An object need to be given with the following options:
-  * **content** is a string or an array of string. This option is an URL as a single string, or an HTML code using Markdown syntax (syntax here : [Link](https://commonmark.org/help/))) and/or a Nunjucks syntax (see here: [Link](https://mozilla.github.io/nunjucks/templating.html)) as a single string or an array of string. (Markdown and Nunjucks syntaxes can be mixed).
+  * **content** is a string containing inline template, or an url to a template file. 
   * **isMardown** is set to true, if the content given uses Markdown syntax, false otherwise.
   * **type** must be set to "url", if the content is remote, or "string" so the content is used as is.
 
@@ -148,6 +148,8 @@ Please visit [Features Documentation](features.md) to discover in detail the fea
   "searchPlace": // Allow search for a place
   "searchElements": // Allow search for elements (needs a distant API)
   "searchGeolocate": // Add geolocation button to geolocate the user position
+
+  "customPopup": // Display a custom text on the bottom of the map
 },
 ```
 
@@ -195,7 +197,15 @@ Here an example of full custom features configuration
   export:   { inIframe: false },
   share: { },
   layers: { },
-  mapdefaultview: { }
+  mapdefaultview: { },
+  customPopup: {  
+    inIframe: false, 
+    options: { 
+      text: "Hello ! this is some custom text",
+      showOnlyOnce: true, // If user click "close" the popup will never show again
+      id: 4, // bump this id everytime you want the showOnlyOnce to be reseted
+    }
+  },
 },
 ```
 
@@ -213,6 +223,29 @@ Security
 To set dynamically **userRole** and **userEmail**, please check [How to interact with Component](usage.md)
 
 **hideMailsByShowingSendMailButton** will prevent from displaying the email of the element. Instead a "sendMail" button is displayed, which will open a popup and send a request to your server for sending an email.
+
+Images
+------
+```javascript
+images: {
+  menuTopImage: "http://url/to/image",
+  buttonOpenMenu: "http://url/to/image"  
+}
+```
+MenuTopImage
+![](images/menu-top-image.png)
+
+buttonOpenMenu
+![](images/button-open-menu.png)
+
+Theme
+------
+```javascript
+"theme": "transiscope",
+```
+For now only two exists : the default one and "transiscope" :
+![](images/themes/transiscope.png)
+
 
 Colors
 ------
