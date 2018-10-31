@@ -72,7 +72,7 @@ Custom **width** in pixel
 
 If **activate** is set to false, nothing happens on marker click, the info bar is not displayed
 
-Custom **bodyTemplate** and **headerTemplate** of an element can be provided. See [Info Bar Templates](infor-bar-templates.md) to learn how to build a template.
+Custom **bodyTemplate** and **headerTemplate** of an element can be provided. See [Info Bar Templates](info-bar-templates.md) to learn how to build a template.
 An object need to be given with the following options:
   * **content** is a string containing inline template, or an url to a template file. 
   * **isMardown** is set to true, if the content given uses Markdown syntax, false otherwise.
@@ -233,9 +233,11 @@ images: {
 }
 ```
 MenuTopImage
+
 ![](images/menu-top-image.png)
 
 buttonOpenMenu
+
 ![](images/button-open-menu.png)
 
 Theme
@@ -244,6 +246,7 @@ Theme
 "theme": "transiscope",
 ```
 For now only two exists : the default one and "transiscope" :
+
 ![](images/themes/transiscope.png)
 
 

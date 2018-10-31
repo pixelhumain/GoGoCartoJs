@@ -25,6 +25,8 @@ toc:
         url: docs/dataset.html
       - page: Element Ontology
         url: docs/dataset-element-configuration.html
+      - page: InfoBar Templates
+        url: docs/info-bar-templates.html
   - title: Contribute
     subfolderitems:
       - page: Installation
