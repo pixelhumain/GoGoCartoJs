@@ -3,29 +3,32 @@
 {# -------------- #}
 {{ descriptionMore|gogo_textarea(truncate = 400) }}
 
-{# Contact infos #}
-{{ 'Informations générales'|gogo_title }}
+{% if address or telephone or email or website or element.urls %}
+  {# Contact infos #}
+  {{ 'Informations générales'|gogo_title }}
 
-{# Address #}
-{{ address|gogo_text }}
+  {# Address #}
+  {{ address|gogo_text }}
 
-{# Tel #}
-{{ telephone|gogo_tel }}
+  {# Tel #}
+  {{ telephone|gogo_tel }}
 
-{# Mail #}
-{{ email|gogo_email }}
+  {# Mail #}
+  {{ email|gogo_email }}
 
-{# WebSite #}
-{{ website|gogo_url }}
+  {# WebSite #}
+  {{ website|gogo_url }}
 
-{% set urls = element.urls %}
-{% if urls %}
-  {% for currentUrl in urls %}
-    {{ url.value|gogo_url }}
-  {% endfor %}    
+  {% set urls = element.urls %}
+  {% if urls %}
+    {% for currentUrl in urls %}
+      {{ url.value|gogo_url }}
+    {% endfor %}    
+  {% endif %}
+
+  {{ ''|gogo_separator }}
+
 {% endif %}
-
-{{ ''|gogo_separator }}
 
 {# Categories  #}
 {{ taxonomy|gogo_taxonomy }}
