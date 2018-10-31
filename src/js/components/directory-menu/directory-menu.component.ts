@@ -70,6 +70,9 @@ export class DirectoryMenuComponent
       this.dragTarget.css({width: dragTargetWidth + 'px', right: 0, left: ''});
       App.component.updateMapSize();
 			App.component.updateComponentsSize();
+
+      let searchText = this.dom.find('.search-options').width() > 250 ? "Chercher" : "Go";
+      this.dom.find('.search-btn').text(searchText);
     }, 400);     			
   }
 
