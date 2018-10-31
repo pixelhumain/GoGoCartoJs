@@ -155,6 +155,7 @@ export class Element extends ElementBase
     let result = {
       name: this.formatProp('name'),
       address: this.formatProp('address'),
+      originalAddress: this.address,
       distance: this.distance,
       taxonomy: this.gogoTaxonomy(),
       status: this.status,

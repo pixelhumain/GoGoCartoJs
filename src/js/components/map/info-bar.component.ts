@@ -294,16 +294,22 @@ export class InfoBarComponent
 	{
 		App.gogoControlComponent.show();
 
-		if (this.dom.find('.moreDetails').is(':visible'))
+		if (this.isDetailsVisible)
 		{
 			this.dom.find('.moreDetails').hide();
 			this.dom.find('.element-item').removeClass('active');	
-
-			let elementInfoBar_newHeight = this.dom.find('#element-info').outerHeight(true);
-
-			this.dom.animate({'height': elementInfoBar_newHeight}, 400, 'swing');
+			this.updateInfoBarHeaderSize();
 		}	
 	};
+
+	updateInfoBarHeaderSize()
+	{
+		if (!this.isDisplayedAside() && !this.isDetailsVisible)
+		{
+			let elementInfoBar_newHeight = this.dom.find('#element-info').outerHeight(true);
+			this.dom.animate({'height': elementInfoBar_newHeight}, 400, 'swing');
+		}			
+	}
 
 	updateInfoBarSize()
 	{

@@ -21,6 +21,7 @@
     {% endif %}    
 
     {# Short address (for list mode) #}
+    {% set address = element.originalAddress %}
     {% if address %}
       <span class="location gogo-neutral">
         {% if address.postalCode %}<span class="postalCode">{{ address.postalCode }}</span>{% endif %}

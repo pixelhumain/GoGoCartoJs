@@ -82,11 +82,11 @@ export class ElementComponent
     this.dom.find('.show-more').click( function(e) 
     {       
       let textMore = $(this).siblings('.text-more');
-      e.stopPropagation();e.stopImmediatePropagation();e.preventDefault();
-      if (!textMore.is(":visible") && !App.infoBarComponent.isDetailsVisible) App.infoBarComponent.toggleDetails();
+      e.stopPropagation();e.stopImmediatePropagation();e.preventDefault();      
       let textButton = textMore.is(":visible") ? "Afficher plus" : "Afficher moins";
       textMore.toggle();    
       $(this).text(textButton);
+      if (App.mode == AppModes.Map && App.infoBarComponent.isVisible) App.infoBarComponent.updateInfoBarHeaderSize();
     });
 
     // replace send-email-btn by email value, cause we need to see the email to validate or not
