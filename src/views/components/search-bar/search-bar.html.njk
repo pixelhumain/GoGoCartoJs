@@ -4,14 +4,14 @@
     
     {# Search Input #}
     <div class="input-field search-bar-container"> 
-    	<a class="gogo-icon-search gogo-h-primary search-icon search-bar-icon"></a>
+        <a class="gogo-icon-search gogo-h-primary search-icon search-bar-icon"></a>
 
         {% if config.isFeatureActivated('searchGeolocate') %}
             <a class="gogo-icon-locate gogo-h-primary search-icon tooltipped search-geolocalize"
                 data-position="right" data-delay="0" data-tooltip="Geolocaliser votre position"></a>
         {% endif %}
 
-        <input class="validate search-bar"
+        <input class="validate search-bar gogo-section-content"
         	   type="text" 
         	   name="adresse" 
         	   onClick="this.setSelectionRange(0, this.value.length)" 

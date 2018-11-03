@@ -1,11 +1,10 @@
 .sub-categories 
 { 
-  border-left: none; 
-  background-color: $light;
+  border-left: none;  
 
   .sub-categories-content { 
 
-    background-color: transparent; 
+    background-color: $light !important;
 
     ul { padding-right: 10px; padding-left: 5px; }    
 

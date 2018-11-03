@@ -6,12 +6,11 @@
   {
     @media (min-width: 850px) { width: calc(100% + 23px); }
 
-    background-color: $dark;
+    background-color: $dark !important;
     @media (min-width: 850px) { border-radius: 0 8px 8px 0; }
 
     .btn-close-menu.large-screen .arrow-left {
-      border: solid 8px;
-      border-color: transparent $secondary transparent transparent;
+      color: $secondary;
     }
 
     @import 'menu-header';

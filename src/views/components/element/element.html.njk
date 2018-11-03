@@ -3,7 +3,7 @@
 {#  ELEMENT INFO  #}
 {# -------------- #}
 <li id="element-info-{{ element.id }}" 
-  class="element-item" 
+  class="element-item gogo-section-content" 
   data-element-id="{{ element.id }}">
 
 {% set pendingClass = 'pending' if (element.isPending or element.isDeleted) and config.isFeatureAvailable('pending') else '' %}
