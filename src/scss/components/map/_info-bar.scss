@@ -8,8 +8,6 @@
 
     @include box-shadow-1(0 -8px 8px -5px rgba(173, 173, 173, 0.75));  
 
-    background-color: #F7F7F7;
-
     // element info bar can be displayed at the bottom of the map, or aside
     // display-aside attribution is made in app.component.ts
     &.display-bottom

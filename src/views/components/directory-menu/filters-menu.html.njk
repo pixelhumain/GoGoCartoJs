@@ -8,26 +8,26 @@
 
 			<div class="icon main-icon active" id="main-option-gogo-icon-all" data-option-id="all">
 				<div class="main-icon-text">Tous</div>
-				<div class="main-option-tooltip gogo-bg-neutral-dark-transparent">Tous les {{ config.text.elementPlural }}</div>
+				<div class="main-option-tooltip gogo-bg-neutral-dark">Tous les {{ config.text.elementPlural }}</div>
 			</div> 
 			
 			{# MAIN OPTIONS ICONS & TOOLTIP #}
 			{% for mainOption in mainCategory.options %}
-				<div class="icon main-icon {{ mainOption.icon }} gogo-neutral gogo-h-neutral-light"  id="main-option-gogo-icon-{{mainOption.id}}" data-option-id="{{ mainOption.id }}">
-					<div class="main-option-tooltip gogo-bg-neutral-dark-transparent">{{ mainOption.name }}</div>
+				<div class="icon main-icon {{ mainOption.icon }} gogo-neutral"  id="main-option-gogo-icon-{{mainOption.id}}" data-option-id="{{ mainOption.id }}">
+					<div class="main-option-tooltip gogo-bg-neutral-dark">{{ mainOption.name }}</div>
 				</div>
 			{% endfor %}	
 
 		</div>
 	{% endif %}
 
-	<div class="sub-categories {{ "" if config.menu.showOnePanePerMainOption else "with-left-border" }}">
+	<div class="sub-categories {{ "one-pane-per-main-option" if config.menu.showOnePanePerMainOption else "single-pane" }}">
 
 		{% if config.menu.showOnePanePerMainOption %}
 			<div class="sub-categorie-main-title gogo-neutral-dark" id="menu-subcategories-title"></div>
 		{% endif %}
 
-		<div class="sub-categories-content no-top-divider {{ "" if config.menu.showOnePanePerMainOption else "full-height" }}">
+		<div class="sub-categories-content gogo-section-content no-top-divider {{ "" if config.menu.showOnePanePerMainOption else "full-height" }}">
 			<ul>
 				{# ALL CATEGORIES #}
 				<div id="main-option-all" class="main-option-subcategories-container {{ "show-one-pane-per-main-option" if config.menu.showOnePanePerMainOption else "" }}" 

@@ -1,8 +1,8 @@
-<div class="gogo-load-css">
+  <div class="gogo-load-css">
   <div class="gogocarto-container gogo-theme-{{ config.theme }}">
     
     {# Menu #}
-    <section id="directory-menu" class="gogo-bg-neutral-dark" style="display:none"> 
+    <section id="directory-menu" style="display:none"> 
        {% include 'components/directory-menu/directory-menu.html.njk' %} 
     </section>
 
@@ -28,7 +28,7 @@
       {# section containing information one a specific element, displayed upon map #}
       {% include 'components/map/info-bar.html.njk' %}    
 
-      <div id="directory-content-list" class="gogo-bg-background" style="display:none">
+      <div id="directory-content-list" class="gogo-section-background" style="display:none">
         {% include 'components/list/list.html.njk' %}       
       </div>
 

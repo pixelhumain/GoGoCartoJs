@@ -1,69 +1,63 @@
 {% macro createcolor(name, value) %}
   .gogo-{{ name }} { color: {{ value }}; }
-  .gogo-h-{{ name }}:hover { color: {{ value }} !important; }
-  .gogo-h-{{ name }}.hover { color: {{ value }} !important; }
+  .gogo-h-{{ name }}:hover, .gogo-h-{{ name }}.hover { color: {{ value }} !important; }
   .gogo-bg-{{ name }} { background-color: {{ value }} !important; }
-  .gogo-h-bg-{{ name }}:hover { background-color: {{ value }} !important; }
-  .gogo-border-{{ name }} { border-color: {{ value }}; }
-  .gogo-h-border-{{ name }}:hover { border-color: {{ value }} !important; }
+{% endmacro %}
+
+{% macro createBackgroung(name, bgdColor) %}
+  {% set textColor = config.colors.textDark if bgdColor.isLight() else config.colors.textLight %}
+  {% set textSoftColor = config.colors.textDarkSoft if bgdColor.isLight() else config.colors.textLightSoft %}
+
+  .gogo-load-css .gogo-{{ name }} { background-color: {{ bgdColor }} !important; color: {{ textColor }}; }
+  .gogo-load-css .gogo-{{ name }} .gogo-color-soft { color: {{ textSoftColor }} }
+  .gogo-load-css .gogo-{{ name }} .gogo-color-link { color: {{ textSoftColor }} }
+  .gogo-load-css .gogo-{{ name }} .gogo-color-link:hover { color: {{ textColor }}; cursor: pointer; }
 {% endmacro %}
 
 <style>
+  {% set textDark        = config.colors.textDark %}
+  {% set textDarkSoft    = config.colors.textDarkSoft %}  
+  {% set textLight       = config.colors.textLight %}
+  {% set textLightSoft   = config.colors.textLightSoft %} 
 
-  {# Main colors #}
-  {% set neutralDark     = config.colors.neutralDark      | default('#272626') %}  
-  {% set neutralSoftDark = config.colors.neutralSoftDark  | default('#717171') %}
-  {% set neutral         = config.colors.neutral          | default('#676565') %}
-  {% set neutralLight    = config.colors.neutralLight     | default('#eeeeee') %}
-  {% set secondary       = config.colors.secondary        | default('#4A7874') %}
-  {% set primary         = config.colors.primary          | default('#de5a5f') %}
-  {% set background      = config.colors.background       | default('#4A7874') %}
+  {% set contentBgd = config.colors.contentBackground %}
+  {% set text     = config.colors.textDark if contentBgd.isLight() else config.colors.textLight %}
+  {% set textSoft = config.colors.textDarkSoft if contentBgd.isLight() else config.colors.textLightSoft %}
 
-  {% set mainFont  = config.colors.mainFont  | default('Roboto') %}
-  {% set titleFont = config.colors.titleFont | default('Roboto') %}
+  {% set primary         = config.colors.primary %}
+  {% set background      = config.colors.background %}
 
-  {# secondary colors #}
-  {% set neutralDarkTransparent = config.colors.neutralDarkTransparent  | default('rgba(64,64,64,.88)') %}
-  {% set textColor              = config.colors.textColor               | default(neutralDark) %}
-  {% set disableColor           = config.colors.disableColor            | default('#828282') %}
-  {% set listTitle              = config.colors.listTitle               | default(neutralLight) %}
-  {% set listTitleBackBtn       = config.colors.listTitleBackBtn        | default(neutralLight) %}
-  {% set listTitleBackground    = config.colors.listTitleBackground     | default(neutralDarkTransparent) %}
-  {% set searchBar              = config.colors.searchBar               | default(primary) %}
-  {% set interactiveColor       = config.colors.interactiveSection      | default(primary) %}
+  {% set mainFont  = config.colors.mainFont %}
+  {% set titleFont = config.colors.titleFont | default(mainFont) %}
 
-  {% set taxonomyMainTitleFont  = config.colors.taxonomyMainTitleFont   | default(mainFont) %}
+  {% set contentBackgroundElementBody = config.colors.contentBackgroundElementBody %}
+  {% set menuOptionHover = config.colors.menuOptionHover %}
+  {% set disabled           = config.colors.disabled %}
+  {% set lineBorder          = config.colors.lineBorder %}
+  {% set searchBar          = config.colors.searchBar          | default(primary) %}
+  {% set interactiveColor   = config.colors.interactiveSection | default(primary) %}
 
   {# DESIGN #}
-  {{ createcolor('neutral-dark', neutralDark) }}
-  {{ createcolor('neutral-dark-transparent', neutralDarkTransparent) }}
-  {{ createcolor('neutral', neutral) }}
-  {{ createcolor('neutral-soft-dark', neutralSoftDark ) }}
-  {{ createcolor('neutral-light', neutralLight) }}
   {{ createcolor('primary', primary) }}
-  {{ createcolor('secondary', secondary) }}  
+
+  /*{{ createcolor('neutral-dark', neutralDark) }}
+  {{ createcolor('neutral', neutral) }}   
   {{ createcolor('background', background) }}
-  {{ createcolor('disabled', disableColor) }}
+  {{ createcolor('disabled', disabled) }}*/
 
-  .gogo-load-css 
-  {
-    font-family: {{ mainFont }}, sans-serif;
-    color: {{ textColor }};
-  }
+  {{ createBackgroung('section-content', contentBgd) }}
+  {{ createBackgroung('section-primary', primary) }}
+  {{ createBackgroung('section-background', background) }}
 
-  .gogo-load-css h1
-  {
-    font-family: {{ titleFont }};
-  }
+  .gogo-load-css { font-family: {{ mainFont }}, sans-serif; }
+  .gogo-load-css h1 { font-family: {{ titleFont }}; }
 
   .gogo-load-css .directory-menu-header { background-color: {{ searchBar }} }
-
-  .gogo-load-css .element-list-header { color: {{ listTitle }}; background-color: {{ listTitleBackground }} }
-  .gogo-load-css .element-list-header .show-as-map-button       { color: {{ listTitleBackBtn }}; }
   .gogo-load-css .element-list-header .show-as-map-button:hover { color: {{ primary }}; }
 
-  .gogo-load-css .gogo-font-title { font-family: {{ titleFont }}, sans-serif;}
-  .gogo-load-css .sub-categorie-main-title { font-family: {{ taxonomyMainTitleFont }}, sans-serif; }
+  .gogo-load-css .gogo-font-title,
+  .gogo-load-css .sub-categorie-main-title
+  { font-family: {{ titleFont }}, sans-serif;}
 
   @media (max-width: 700px) {
     .gogo-load-css .collapsible-header .expandLabel { color: {{ primary }}; }
@@ -73,51 +67,77 @@
   .gogo-load-css .interactive-section { background-color: {{ interactiveColor }}; }
 
   .gogo-load-css .search-bar::selection {
-      background: {{ searchBar }}; 
-      color: white;
+    background: {{ searchBar }}; 
+    color: white;
   }
   .gogo-load-css .search-bar::-moz-selection {
-      background: {{ searchBar }}; 
-      color: white;
+    background: {{ searchBar }}; 
+    color: white;
   }
 
-  .gogo-load-css .search-bar-with-options-container.mobile .search-options label.search-option-radio-label { color: {{ neutralDark }}; }
-  .gogo-load-css .search-bar-with-options-container.mobile .search-options label.search-option-radio-label:before{ border-color: {{ neutral }}; }
+  {% if config.colors.infoBarMenu %}
+    .gogo-load-css .gogocarto-container .element-item .menu-element { background-color: {{ config.colors.infoBarMenu }}; }
+    .gogo-load-css .gogocarto-container #element-info-bar .element-item.active .expandLabel.transform-big { background-color: {{ config.colors.infoBarMenu }}; }
+  {% endif %}
+  {% if config.colors.infoBarHeader %}
+    .gogo-load-css .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header { background-color: {{ config.colors.infoBarHeader }}; }
+  {% endif %}
+
+  .gogo-load-css .search-bar-with-options-container.mobile .search-options label.search-option-radio-label { color: {{ textSoft }}; }
+  .gogo-load-css .search-bar-with-options-container.mobile .search-options label.search-option-radio-label:before{ border-color: {{ textSoft }}; }
   .gogo-load-css .search-bar-with-options-container.mobile .search-options label.search-option-radio-label:after { 
-    border-color: {{ neutral }}; 
-    background-color: {{ neutral }}; 
+    border-color: {{ textSoft }}; 
+    background-color: {{ textSoft }}; 
   }
-  
-  .gogo-load-css .sub-categories.with-left-border { border-left: 12px solid {{ neutralDark }}; }
+
+  .gogo-load-css .gogocarto-container #directory-content-list .element-item .collapsible-header { background-color: {{ contentBgd }}; border-color: {{ lineBorder }} }
+  .gogo-load-css #element-info-bar.display-bottom .element-item .collapsible-header { border-color: {{ lineBorder }} }
+  .gogo-load-css .gogocarto-container .element-item .info-bar-divider { background-color: {{ lineBorder }}; }
+
   .gogo-load-css #main-option-all.show-one-pane-per-main-option .gogo-icon-name-wrapper:hover:after { color: {{ primary }}; }
+
+  .gogo-load-css .subcategorie-option-item:hover { background-color: {{ menuOptionHover }}; }
+  .gogo-load-css .gogocarto-container .element-item .collapsible-body .collapsible-body-main-container { background-color: {{ contentBackgroundElementBody }}; }
   
   .gogo-load-css .subcategorie-option-item:hover          .subcategorie-option-checkbox + label:before { color: {{ primary }}; border-color: {{ primary }} }  
   .gogo-load-css .subcategorie-option-item:not(.expanded) .option-name       .arrow-after { border-color: {{ neutral }} transparent transparent transparent; opacity: 0.6; }
   .gogo-load-css .subcategorie-option-item:not(.expanded) .option-name:hover .arrow-after { border-color: {{ primary }} transparent transparent transparent !important; opacity: 1; }
   .gogo-load-css .subcategorie-option-item.expanded       .option-name       .arrow-after { border-color:  transparent transparent {{ neutral }} transparent; opacity: 0.6; }
   .gogo-load-css .subcategorie-option-item.expanded       .option-name:hover .arrow-after { border-color:  transparent transparent {{ primary }} transparent !important; opacity: 1; }
-  
-  .gogo-load-css .subcategorie-option-item.disabled:not(:hover) { color: {{ disableColor }}; }
-  .gogo-load-css .subcategorie-option-item.disabled .subcategorie-option-checkbox + label:before { border-color: {{ disableColor }}; }
-  .gogo-load-css .subcategorie-option-item.disabled:not(:hover) .icon { color: {{ disableColor }}; opacity: .7;}
-  .gogo-load-css .subcategorie-option-item.disabled:not(:hover) .arrow-after { border-color: {{ disableColor }} transparent transparent transparent !important;}
 
-  .gogo-load-css .subcategorie-option-item.expanded.disabled .option-name .arrow-after { border-color:  transparent transparent {{ disableColor }} transparent !important; }
+  .gogo-load-css .subcategorie-option-item.disabled:not(:hover) { color: {{ disabled }}; }
+  .gogo-load-css .subcategorie-option-item.disabled .subcategorie-option-checkbox + label:before { border-color: {{ disabled }}; }
+  .gogo-load-css .subcategorie-option-item.disabled:not(:hover) .icon { color: {{ disabled }}; opacity: .7;}
+  .gogo-load-css .subcategorie-option-item.disabled:not(:hover) .arrow-after { border-color: {{ disabled }} transparent transparent transparent !important;}
+
+  .gogo-load-css .subcategorie-option-item.expanded.disabled .option-name .arrow-after { border-color:  transparent transparent {{ disabled }} transparent !important; }
   .gogo-load-css .subcategorie-option-item.expanded.disabled .option-name:hover .arrow-after { border-color:  transparent transparent {{ primary }} transparent !important; }
 
   .gogo-load-css .subcategory-item                .name-wrapper:hover { color: {{ primary }}; }
-  .gogo-load-css .subcategory-item:not(.expanded) .name-wrapper       .arrow-after { border-color: {{ neutral }} transparent transparent  transparent; opacity: 0.6; }
+  .gogo-load-css .subcategory-item:not(.expanded) .name-wrapper       .arrow-after { border-color: {{ textSoft }} transparent transparent  transparent; opacity: 0.6; }
   .gogo-load-css .subcategory-item:not(.expanded) .name-wrapper:hover .arrow-after { border-color: {{ primary }} transparent transparent  transparent !important; opacity: 1; }
-  .gogo-load-css .subcategory-item.expanded       .name-wrapper       .arrow-after { border-color:  transparent transparent {{ neutral }} transparent; opacity: 0.6;}
+  .gogo-load-css .subcategory-item.expanded       .name-wrapper       .arrow-after { border-color:  transparent transparent {{ textSoft }} transparent; opacity: 0.6;}
   .gogo-load-css .subcategory-item.expanded       .name-wrapper:hover .arrow-after { border-color:  transparent transparent {{ primary }} transparent !important; opacity: 1; }
 
-  .gogo-load-css .subcategory-item.disabled { color: {{ disableColor }}; }
-  .gogo-load-css .subcategory-item.disabled .subcategorie-checkbox + label:after { border-color: {{ disableColor }} !important; }
-  .gogo-load-css .subcategory-item.disabled .icon { color: {{ disableColor }}; }
-  .gogo-load-css .subcategory-item.disabled .name-wrapper .arrow-after { border-color: {{ disableColor }} transparent transparent transparent !important; }
-  .gogo-load-css .subcategory-item.disabled.expanded .name-wrapper .arrow-after { border-color:  transparent transparent {{ disableColor }} transparent !important;}
+  .gogo-load-css .subcategory-item.disabled { color: {{ disabled }}; }
+  .gogo-load-css .subcategory-item.disabled .subcategorie-checkbox + label:after { border-color: {{ disabled }} !important; }
+  .gogo-load-css .subcategory-item.disabled .icon { color: {{ disabled }}; }
+  .gogo-load-css .subcategory-item.disabled .name-wrapper .arrow-after { border-color: {{ disabled }} transparent transparent transparent !important; }
+  .gogo-load-css .subcategory-item.disabled.expanded .name-wrapper .arrow-after { border-color:  transparent transparent {{ disabled }} transparent !important;}  
 
-  .gogo-load-css .subcategory-item .checkbox-wrapper .checkbox-container .subcategorie-checkbox + label:after { color: {{ neutralSoftDark }}; background-color: {{ neutralSoftDark }} }
+  .gogo-load-css .subcategory-item .checkbox-wrapper .checkbox-container .subcategorie-checkbox + label:after { color: {{ textSoft }}; background-color: {{ textSoft }} }
+  .gogo-load-css .subcategorie-option-item .subcategorie-option-checkbox + label:before { border-color: {{ textSoft }}; }
+  .gogo-load-css .subcategorie-option-item.disabled .subcategorie-option-checkbox + label:before { border-color: {{ disabled }}; }
+  .gogo-load-css .subcategory-item .checkbox-wrapper .checkbox-container .subcategorie-checkbox:checked + label:before { border-color: {{ contentBgd }}; }
+
+  .gogo-load-css .subcategorie-option-item .checkbox-wrapper {
+    background: -moz-linear-gradient(left, {{ contentBgd.setAlpha(0.3) }} 0%, {{ contentBgd.setAlpha(0.8) }} 25%, {{ contentBgd.setAlpha(1) }} 80%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, {{ contentBgd.setAlpha(0.3) }} 0%,{{ contentBgd.setAlpha(0.8) }} 25%,{{ contentBgd.setAlpha(1) }} 80%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, {{ contentBgd.setAlpha(0.3) }} 0%,{{ contentBgd.setAlpha(0.8) }} 25%,{{ contentBgd.setAlpha(1) }} 80%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='{{ contentBgd.setAlpha(0.3) }}', endColorstr='{{ contentBgd.setAlpha(1) }}',GradientType=1 ); /* IE6-9 */
+  }
+
+  .gogo-load-css [type="checkbox"] + label { color: {{ textSoft }}; }
 
   .gogo-load-css a { color: {{ primary }}; }
 
@@ -134,8 +154,8 @@
   .gogo-load-css .btn:hover { background-color: {{ primary }}; }  
   .gogo-load-css .btn:focus { background-color: {{ primary }}; }  
 
-  .backdrop { background-color: {{ neutralDarkTransparent }}; } // tooltip
-  .toast { background-color: {{ neutralDarkTransparent }} !important; }
+  .backdrop { background-color: {{ neutralDark }}; } // tooltip
+  .toast { background-color: {{ neutralDark }} !important; }
 
   .gogo-load-css .feature-button.primary { color: white; background-color: {{ primary }}; }
   .gogo-load-css .feature-button.soft-primary { color: {{ primary }}; }
@@ -165,7 +185,7 @@
   .gogo-load-css .colorAs.pending { color:#484848 }
   
   .gogo-load-css .tabs.info-bar-tabs {
-    background-color: {{ neutralDarkTransparent }};
+    background-color: {{ neutralDark }};
   }
   .gogo-load-css .tabs.info-bar-tabs .indicator {
     bottom: 0;

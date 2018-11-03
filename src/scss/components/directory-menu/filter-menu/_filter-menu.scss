@@ -166,10 +166,7 @@
 
 	.sub-categories
 	{
-		@include flex(1 auto);
-		padding-left: 7px;
-    padding-right: 4px;
-    background-color: #eeeeee;  
+		@include flex(1 auto);		
 
 		.sub-categorie-main-title
 		{
@@ -184,8 +181,6 @@
 		.sub-categories-content
 		{
 			height: calc(100% - 3rem);
-			@include border-radius(5px);
-			padding-right: 5px;
 			padding-top:0px;
 			background-color: white;
 

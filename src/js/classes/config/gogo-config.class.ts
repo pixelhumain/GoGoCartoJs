@@ -4,6 +4,7 @@ import { GoGoFeature } from './gogo-feature.class';
 import { ElementStatus } from '../classes'; 
 import { DEFAULT_FEATURES } from './gogo-default-feature' ;
 declare var L : any;
+declare var tinycolor;
 
 export class GoGoConfig
 {
@@ -136,26 +137,30 @@ export class GoGoConfig
   // see gogo-styles for defaut values
   readonly colors =
   {
-    neutralDark: undefined ,
-    neutralDarkTransparent: undefined ,
-    neutralSoftDark: undefined ,
-    neutral: undefined ,
-    neutralLight: undefined ,
-    secondary: undefined ,
-    primary: undefined ,
-    background: undefined ,
+    
+    contentBackground: tinycolor('white'),  // background color of text zone
+    background: tinycolor('#f4f4f4'),    // background color of non text zone
 
-    textColor: undefined ,
-    disableColor: undefined ,
-    listTitle: undefined ,
-    listTitleBackBtn: undefined,
-    listTitleBackground: undefined ,
-    searchBar: undefined, 
-    interactiveSection: undefined,
+    // simple text and textSoft properties can be used, see this.fillColors
+    textDark: tinycolor('#222120'),     // text color on light background
+    textDarkSoft: tinycolor('#787878'), // soft text color on light background
+    textLight: tinycolor('white'),       // text color on dark background
+    textLightSoft: tinycolor('#cfcfcf'), // soft text color on dark background
 
-    mainFont: undefined ,
-    titleFont: undefined ,
-    taxonomyMainTitleFont: undefined ,     
+    primary: tinycolor('#de5a5f'),       // Used for buttons, and for search bar by default    
+
+    infoBarHeader: undefined, // by default auto colored with main option color
+    infoBarMenu: undefined,   // by default auto colored with main option color
+    
+    contentBackgroundElementBody: undefined, // by default calculated from contentBackground
+    menuOptionHover: undefined, // by default calculated from contentBackground
+    lineBorder: undefined, // by default calculated from contentBackground
+    disabled: undefined,  // by default calculated from contentBackground
+    searchBar: undefined,          // by default primary
+    interactiveSection: undefined, // by default primary
+
+    mainFont: tinycolor('Roboto'),
+    titleFont: undefined, // by default titleFont
   }
 
   readonly images =
@@ -173,6 +178,23 @@ export class GoGoConfig
     this.data.retrieveElementsByApi = typeof this.data.elements == "string";
     if (config.map && config.map.defaultBounds) this.map.defaultBoundsProvided = true;
     if (!this.features['sendMail'].active) this.security.hideMailsByShowingSendMailButton = false;
+
+    if (!this.colors.menuOptionHover ) {
+      let menuOptionHover = tinycolor(this.colors.contentBackground.toString());
+      this.colors.menuOptionHover = menuOptionHover.isDark() ? menuOptionHover.lighten(5) : menuOptionHover.darken(5);
+    }
+    if (!this.colors.contentBackgroundElementBody ) {
+      let contentBackgroundSoft = tinycolor(this.colors.contentBackground.toString());
+      this.colors.contentBackgroundElementBody = contentBackgroundSoft.isDark() ? contentBackgroundSoft.darken(3) : contentBackgroundSoft.darken(3);
+    }
+    if (!this.colors.lineBorder ) {
+      let lineBorder = tinycolor(this.colors.contentBackground.toString()).greyscale();
+      this.colors.lineBorder = lineBorder.isDark() ? lineBorder.lighten(15) : lineBorder.darken(15);
+    }
+    if (!this.colors.disabled) {
+      let disabled = tinycolor(this.colors.contentBackground.toString()).greyscale();
+      this.colors.disabled = disabled.isDark() ? disabled.lighten(35) : disabled.darken(35);
+    }
     console.log(this);
 	}
   
@@ -199,35 +221,48 @@ export class GoGoConfig
     return this.isFeatureActivated(featureName) && roleProvided;
   } 
 
-  private recursiveFillProperty(that, object)
+  private recursiveFillProperty(gogoConfig, userConfig)
   {
     // we don't want to apply recursively inside objects properties
     let objectsProperties = ['roles', 'defaultCenter', 'defaultBounds', 'tileLayers', 'options'];
 
     // if we provide feature config, we enable it automatically
-    if (that instanceof GoGoFeature) that.active = true;
+    if (gogoConfig instanceof GoGoFeature) gogoConfig.active = true;
 
-    for(var prop in object) 
+    for(var prop in userConfig) 
     {
-        if (that.hasOwnProperty(prop))
+        if (gogoConfig.hasOwnProperty(prop))
         {
-          if (typeof that[prop] != 'object' || objectsProperties.indexOf(prop) > -1)
+          if (typeof gogoConfig[prop] != 'object' || objectsProperties.indexOf(prop) > -1)
           {
             let new_prop;
             switch(prop) {
-              case 'defaultBounds' : new_prop = L.latLngBounds(object[prop]);break;
-              case 'defaultCenter' : new_prop = L.latLng(object[prop]);break;
-              default: new_prop = object[prop];break;
+              case 'defaultBounds' : new_prop = L.latLngBounds(userConfig[prop]);break;
+              case 'defaultCenter' : new_prop = L.latLng(userConfig[prop]);break;
+              default: new_prop = userConfig[prop];break;
             }
-            that[prop] = new_prop;
+            gogoConfig[prop] = new_prop;
           }
+          else if (prop == 'colors')
+            this.fillColors(gogoConfig[prop], userConfig[prop])
           else            
-            this.recursiveFillProperty(that[prop], object[prop]);
+            this.recursiveFillProperty(gogoConfig[prop], userConfig[prop]);
         }
         else
         {
           console.warn("[GoGoCarto] Config option '" + prop + "' does not exist");
         }
+    }
+  }
+
+  private fillColors(gogoConfig, userConfig)
+  {
+    for(var prop in userConfig) 
+    {
+      let color = tinycolor(userConfig[prop]);
+      if (prop == "text") prop = color.isDark() ? 'textDark' : 'testLight';
+      if (prop == "textSoft") prop = color.isDark() ? 'textDarkSoft' : 'testLightSoft';
+      gogoConfig[prop] = color;
     }
   }
 

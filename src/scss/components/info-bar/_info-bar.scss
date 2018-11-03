@@ -16,7 +16,8 @@
       height: 100%;
       width: 100%;
       position: absolute;
-      top: 0;    
+      top: 0;   
+      left: 0; 
       overflow-y: auto;
     }
 
@@ -31,9 +32,10 @@
 { 
   .collapsible-header 
   { 
-    background-color: white !important; 
+    background-color: inherit !important; 
     a { color: inherit; &:hover { color: black; } }
-  }  
+  } 
+  &:not(.active) .collapsible-header { border: none !important; }
 
   .collapsible-header, .collapsible-body { 
     padding-left: .5rem;

@@ -17,13 +17,13 @@
 
     {# Distance #}
     {% if showDistance and distance != null %}
-      <span class="distance gogo-neutral">~ {{ distance if isMapMode else distanceFromBoundsCenter }} km</span>
+      <span class="distance gogo-color-soft">~ {{ distance if isMapMode else distanceFromBoundsCenter }} km</span>
     {% endif %}    
 
     {# Short address (for list mode) #}
     {% set address = element.originalAddress %}
     {% if address %}
-      <span class="location gogo-neutral">
+      <span class="location gogo-color-soft">
         {% if address.postalCode %}<span class="postalCode">{{ address.postalCode }}</span>{% endif %}
         {% if address.addressLocality %}<span class="city"> {{ address.addressLocality }}</span>{% endif %}
       </span>
@@ -39,7 +39,7 @@
   <div class="custom-header">{{ header|safe }}</div>  
 
   {# Categories litteral #}
-  <span class="inline-option-values gogo-neutral col s8 hideOnLargeScreen">
+  <span class="inline-option-values gogo-color-soft col s8 hideOnLargeScreen">
     
     {% set lastIconToDisplay = '' %}
     {% for optionValue in currOptionsValues %}       
