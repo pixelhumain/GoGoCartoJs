@@ -11,11 +11,6 @@ $moderation-color: #c53f36;
 {
   color: $moderation-color;
 
-  &:hover
-  {
-    background-color: white;
-  }
-
   .moderation-checkbox:not(:checked) + label:before
   {
     background-color: transparent;
@@ -30,12 +25,7 @@ $moderation-color: #c53f36;
 
 #filter-pending
 {
-  color: $pending-color;
-
-  &:hover
-  {
-    background-color: white;
-  } 
+  color: $pending-color; 
 
   .pending-checkbox:not(:checked) + label:before
   {

@@ -17,7 +17,6 @@
     {
       position: absolute;  
       font-size: 1.2rem;
-      color: #777;
       height: 2rem;
       line-height: 2rem;
 
@@ -42,7 +41,6 @@
       border: none !important;
       // let space for geolocalize button
       padding-right: 2.3rem;
-      background-color: white;
       @include border-radius(5px);
       @include box-sizing(border-box);
 
@@ -77,17 +75,15 @@
     padding-bottom: .7rem;
 
   	label.search-option-radio-label 
-  	{
-      color: #ececec;    
+  	{  
       font-size: .9rem;
       line-height: 2.2rem;
       padding-left: 27px;
       margin-right: 13px;
 
-
       &:before
       {
-      	border: 2px solid #e0e0e0;
+      	border: 2px solid;
       	top: 3px;
   	    width: 14px;
   	    height: 14px;
@@ -95,8 +91,7 @@
 
       &:after
       {
-      	border: 2px solid #dedede;
-    		background-color: #dedede;
+      	border: 2px solid;
     		top: 3px;
   	    width: 14px;
   	    height: 14px;
@@ -131,13 +126,6 @@
     text-align: center;
     font-weight: bold;
   }
-}
-
-// only when search bar is inside directory menu, we change the search button color
-#directory-menu-main-container .search-action-btn
-{
-  background-color: #dddddd;
-  color: #272626;
 }
 
 #directory-menu.small-width 

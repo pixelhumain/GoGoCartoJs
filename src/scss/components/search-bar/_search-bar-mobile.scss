@@ -9,10 +9,9 @@
 
 #search-overlay-mobile .search-bar-with-options-container.mobile
 {
-  display:none; 
+  display: none; 
   z-index: 10;
   position: relative;
-  background-color: white;
   margin: 15px;    
   border-radius: 3px;
   @include box-shadow-1(0 2px 6px rgba(0,0,0,0.3));

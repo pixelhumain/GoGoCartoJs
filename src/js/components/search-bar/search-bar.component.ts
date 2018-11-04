@@ -162,10 +162,10 @@ export class SearchBarComponent
 		{
 			let mobileSearchBar = $('.search-bar-with-options-container');
 			if(mobileSearchBar.parent('#search-overlay-mobile').length!=1)
-				$('.search-bar-with-options-container').appendTo('#search-overlay-mobile').addClass('mobile');
+				$('.search-bar-with-options-container').appendTo('#search-overlay-mobile').addClass('mobile gogo-section-content');
 		}
 		else
-			$('.search-bar-with-options-container').removeClass('mobile').prependTo('.directory-menu-header').show();
+			$('.search-bar-with-options-container').removeClass('mobile gogo-section-content').prependTo('.directory-menu-header').show();
 	}
 
 	showSearchOptions()
