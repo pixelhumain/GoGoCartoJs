@@ -21,6 +21,8 @@
     }
   }
 
+  .subcategorie-option-item .icon { background-color: transparent; }
+
   #directory-menu {
     .sub-categories {
       padding-left: 7px;
@@ -107,4 +109,6 @@
 
   .gogo-load-css .icon.gogo-icon-star-full { padding-top: 2px !important; }
   .gogo-load-css .icon.gogo-icon-star-full:before { color: #cc8901; background-color: transparent }  
+
+  .gogo-load-css .gogo-map-control { border: 1px dashed transparent; border-color: #a5a5a5; }
 }

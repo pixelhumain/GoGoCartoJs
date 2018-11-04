@@ -33,7 +33,7 @@
 	    	{% set iconClass = optionValue.option.icon if optionValue.option.icon else 'gogo-icon-angle-right' %}	
 	    	{% set iconColorId = optionValue.option.id if optionValue.option.icon else '' %}	
 				{% if iconClass %}    
-					<span class="icon {{ iconClass }} colorAs" option-id={{ iconColorId }} ></span>
+					<span class="icon {{ iconClass }} gogo-color-as" option-id={{ iconColorId }} ></span>
 				{% endif %}
 				
 	      <span class="option-name {{ optionValue.diff }}" option-id={{ optionValue.option.id }} >

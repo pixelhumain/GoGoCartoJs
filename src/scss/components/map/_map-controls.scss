@@ -1,216 +1,209 @@
 a.leaflet-control-zoom-in {
-    font-size: 18px !important;
-    color: #3d3d3d;
+  font-size: 18px !important;
 }
 
 a.leaflet-control-zoom-out {
-    font-size: 25px! important;
-    font-weight: normal;
-    color: #3d3d3d;
-    text-indent: 0;
+  font-size: 25px! important;
+  font-weight: normal;
+  text-indent: 0;
 }
 
 .leaflet-control-zoom.leaflet-bar.leaflet-control {
-    margin-right: 22px;
-    margin-top: 20px;
-    border:none;
-    @include box-shadow-1(0 2px 6px rgba(0,0,0,0.3));
-    @media #{$small-only} { 
-        display:none;
-    }
+  margin-right: 22px;
+  margin-top: 20px;
+  border:none;
+  @include box-shadow-1(0 2px 6px rgba(0,0,0,0.3));
+  @media #{$small-only} { 
+    display:none;
+  }
+  a { background-color: inherit !important; }
 }
 
 #map-gogo-controls
 {
-    display:none;
-    
-    @media #{$medium-and-up} {
-        display: block;
-        position: absolute;
-        z-index: 500;
-        left: 15px;
-        top: 12px;
-    }
+  display:none;
+  
+  @media #{$medium-and-up} {
+    display: block;
+    position: absolute;
+    z-index: 500;
+    left: 15px;
+    top: 12px;
+  }
 }
 
 .show-directory-menu-button
 {
-    left: 15px;
-    color: white;
+  left: 15px;
+  img { height: 35px; margin-right: 5px; }
 
-    img { height: 35px; margin-right: 5px; }
+  .arrow-right
+  {      
+    display: inline-block;
+    border: solid 8px;
+    border-color: transparent transparent transparent #eeeeee;
+  }  
 
-    .arrow-right
-    {          
-      display: inline-block;
-      border: solid 8px;
-      border-color: transparent transparent transparent #eeeeee;
-    }  
-
-    i {
-      margin-right: 5px !important;
-    }
+  i {
+    margin-right: 5px !important;
+  }
 }
 
 .show-as-list-button 
 {
-    background-color: #ffffff;
-
-    @media #{$medium-and-up} 
-    {
-        &:after { content: "Afficher sous forme de liste"}
-    }
+  @media #{$medium-and-up} 
+  {
+    &:after { content: "Afficher sous forme de liste"}
+  }
 }
 
 .gogo-map-control
 {
-    margin-right: 15px;
-    display: inline-block;
-    line-height: 1.5;
-    font-family: "Roboto", sans-serif;
-    font-weight: normal;
+  margin-right: 15px;
+  display: inline-block;
+  line-height: 1.5;
+  font-weight: normal;
+  font-size: 14px !important;
+  padding: 5px 10px;
+  @include box-shadow-1(2px 3px 1px rgba(0,0,0,.25));
+  text-align: center;  
+  border-radius: 5px;
 
-    font-size: 14px !important;
-    padding: 5px 10px;
-    @include box-shadow-1(2px 3px 1px rgba(0,0,0,.25));
-    cursor: pointer;
-    text-align: center;
-    border: 1px dashed transparent;
-    border-color: #a5a5a5;
-    border-radius: 5px;
+  &:hover{ cursor : pointer; }
 
-    &:hover{ cursor : pointer; }
-
-    i {
-        font-size: 1rem;
-        float: left;
-        line-height: 1rem;
-        padding-top: 3px;
-        margin-right: 10px;
-    }
+  i {
+    font-size: 1rem;
+    float: left;
+    line-height: 1rem;
+    padding-top: 3px;
+    margin-right: 10px;
+  }
 }
 
 #map-features-buttons
 {
-    position: absolute;
-    top: 20px;
-    z-index: 500;
-    right: 20px;
-    width: 50px;
-    @media #{$medium-and-up}  { width: 33px; top: 100px; }
+  position: absolute;
+  top: 20px;
+  z-index: 500;
+  right: 20px;
+  width: 50px;
+  @media #{$medium-and-up}  { width: 33px; top: 100px; }
+}
+
+#mobile-filters-icon img {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+  margin-top: 3px;
 }
 
 .feature-button
 {
-    position: relative;
-    background-color: white;
-    color: #3d3d3d;        
-    
-    margin-bottom: 13px;
-    text-align: center;
+  position: relative;     
+  
+  margin-bottom: 13px;
+  text-align: center;
 
-    width: 50px;
-    border-radius: 50%;
-    height: 50px;
-    border: none;
-    @include box-shadow-1(0 2px 6px rgba(0,0,0,0.3));
+  width: 50px;
+  border-radius: 50%;
+  height: 50px;
+  border: none;
+  @include box-shadow-1(0 2px 6px rgba(0,0,0,0.3));
 
-    @media #{$medium-and-up} 
-    {
-        width: 33px;
-        height: 33px;
-        border-radius: 4px;
-    }
-    
-    &:hover{ cursor : pointer; background-color: #f4f4f4;}
+  @media #{$medium-and-up} 
+  {
+    width: 33px;
+    height: 33px;
+    border-radius: 4px;
+  }
 
-    i {
-        font-size: 22px;
-        line-height: 55px;   
+  i {
+    font-size: 22px;
+    line-height: 55px;   
 
-        &.gogo-icon-list { font-size: 18px; } 
-         
-        @media #{$medium-and-up}  { font-size: 18px; line-height: 39px; }      
-    }
+    &.gogo-icon-list { font-size: 18px; } 
+     
+    @media #{$medium-and-up}  { font-size: 18px; line-height: 39px; }    
+  }
 
-    &#close-layers-panel 
-    { 
-        z-index: 10000; 
-        background-color: transparent;
-        color: #888888;
+  &#close-layers-panel 
+  { 
+    z-index: 10000; 
+    background-color: transparent;
+    color: #888888;
 
-        &:hover { background-color: transparent; color: #616161; }
+    &:hover { background-color: transparent; color: #616161; }
 
-        i { font-size: 16px;line-height: 44px; margin-left: 2px; }
-    }  
+    i { font-size: 16px;line-height: 44px; margin-left: 2px; }
+  }  
 
-    &#change-layers {
-        @media screen and (max-width: 600px) { display:none; }
-    }
-    &#export-iframe-btn
-    {
-        @media screen and (max-width: 600px) { display:none; }
-    }
+  &#change-layers {
+    @media screen and (max-width: 600px) { display:none; }
+  }
+  &#export-iframe-btn
+  {
+    @media screen and (max-width: 600px) { display:none; }
+  }
 
-    &#map-default-view-btn  { 
-        i { font-size: 14px; }
-        @media screen and (max-width: 600px) { display:none; }
-    } 
+  &#map-default-view-btn  { 
+    i { font-size: 14px; }
+    @media screen and (max-width: 600px) { display:none; }
+  } 
 
-    &#geolocalize-btn { 
-        @media screen and (min-width: 600px) { display:none; }
-    }  
+  &#geolocalize-btn { 
+    @media screen and (min-width: 600px) { display:none; }
+  }  
 }
 
 
 
 .leaflet-control-layers-toggle
 {
-    display:none;
+  display:none;
 }
 .leaflet-control-layers
 {
-    padding: 0 !important;
-    display: none;
-    position: relative;
-    z-index: 600;
-    margin-right: 19px !important;
-    margin-top: 15px !important;
+  padding: 0 !important;
+  display: none;
+  position: relative;
+  z-index: 600;
+  margin-right: 19px !important;
+  margin-top: 15px !important;
 }
 
 .leaflet-control-layers-list
 {
-    display: block !important;
-    padding: 5px 25px 10px 15px;
-    position: relative !important;
+  display: block !important;
+  padding: 5px 25px 10px 15px;
+  position: relative !important;
 
-    @extend .custom-scroll-bar-light
+  @extend .custom-scroll-bar-light
 }
 
 .leaflet-control-layers-selector:checked + span
 {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .leaflet-control-layers-base
 {
-    label
+  label
+  {
+    text-transform: uppercase;
+    padding-top: 4px;
+    line-height: 1.4rem;
+    border-bottom: 1px dashed #cccccc;
+
+    &:hover
     {
-        text-transform: uppercase;
-        padding-top: 4px;
-        line-height: 1.4rem;
-        border-bottom: 1px dashed #cccccc;
+      background-color: #f4f4f4;
+      cursor: pointer;
+    }
 
-        &:hover
-        {
-            background-color: #f4f4f4;
-            cursor: pointer;
-        }
-
-        &:last-child
-        {
-            border: none;
-        }
-    }    
+    &:last-child
+    {
+      border: none;
+    }
+  }  
 }
 

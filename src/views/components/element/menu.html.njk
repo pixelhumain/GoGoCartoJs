@@ -1,12 +1,12 @@
-<div class="menu-element bgdSoftColorAs {{pendingClass}}" option-id={{mainOptionToDisplay.colorOptionId}}>  
+<div class="menu-element gogo-bg-soft-color-as {{pendingClass}}" option-id={{mainOptionToDisplay.colorOptionId}}>  
   
   {% if config.isFeatureAvailable('favorite') %} 
-    <div class="menu-element-item item-add-favorite">
+    <div class="menu-element-item gogo-color-link item-add-favorite">
       <span class="menu-icon gogo-icon-star-empty small-icon tooltipped" 
       data-position="top" data-delay="0" data-tooltip="Enregistrer comme favoris"></span>
       <span class="menu-element-item-text">Enregistrer</span>
     </div>
-    <div class="menu-element-item item-remove-favorite" style="display:none">
+    <div class="menu-element-item gogo-color-link item-remove-favorite" style="display:none">
       <span class="menu-icon gogo-icon-star-full small-icon tooltipped"
       data-position="top" data-delay="0" data-tooltip="Retirer des favoris"></span>
       <span class="menu-element-item-text favorite">Enregistré</span>
@@ -15,7 +15,7 @@
 
   {% if config.isFeatureAvailable('stamp') %}
     {% for stamp in allowedStamps %}
-      <div class="menu-element-item item-stamp" data-stamp-id="{{ stamp.id }}" data-element-id="{{ element.id }}">
+      <div class="menu-element-item gogo-color-link item-stamp" data-stamp-id="{{ stamp.id }}" data-element-id="{{ element.id }}">
         <span class="menu-icon {{ stamp.icon }} small-icon tooltipped" 
         data-position="top" data-delay="0" data-tooltip="Etiquetter {{ stamp.name }}"></span>
         <span class="menu-element-item-text">{{ stamp.name }}</span>
@@ -24,7 +24,7 @@
   {% endif %}
 
   {% if not isMapMode %}
-    <div class="menu-element-item item-show-on-map"> 
+    <div class="menu-element-item gogo-color-link item-show-on-map"> 
       <span class="menu-icon gogo-icon-locate tooltipped" 
       data-position="top" data-delay="0" data-tooltip="Afficher sur la carte"></span>
       <span class="menu-element-item-text">Voir sur la carte</span>
@@ -32,7 +32,7 @@
   {% endif %}
   
   {% if config.isFeatureAvailable('share') %} 
-    <div class="menu-element-item item-share">
+    <div class="menu-element-item gogo-color-link item-share">
       <span class="menu-icon gogo-icon-share-alt tooltipped"
       data-position="top" data-delay="0" data-tooltip="Partager l'URL"></span>
       <span class="menu-element-item-text">Partager l'URL</span>
@@ -40,7 +40,7 @@
   {% endif %}
 
   {% if config.isFeatureAvailable('directions') %} 
-    <div class="menu-element-item item-directions">
+    <div class="menu-element-item gogo-color-link item-directions">
       <span class="menu-icon gogo-icon-directions tooltipped" 
       data-position="top" data-delay="0" data-tooltip="Itinéraire vers cet élément"></span>
       <span class="menu-element-item-text">Itinéraire</span>
@@ -48,7 +48,7 @@
   {% endif %}
 
   {% if config.isFeatureAvailable('edit') and (not element.isPending or config.isFeatureAvailable('directModeration')) %} 
-    <div class="menu-element-item item-edit">
+    <div class="menu-element-item gogo-color-link item-edit">
       {% set editText = 'Modifier' if config.isFeatureAvailable('directModeration') else 'Proposer des modifications' %}
       <a href={{ editUrl }} {% if isIframe %}target="_blank"{% endif %}>
       <span class="menu-icon gogo-icon-edit tooltipped" 
@@ -58,7 +58,7 @@
   {% endif %}
 
   {% if config.isFeatureAvailable('report') and not element.isPending %} 
-    <div class="menu-element-item item-report"> 
+    <div class="menu-element-item gogo-color-link item-report"> 
       <span class="menu-icon btn-report gogo-icon-exclamation-1 tooltipped" 
       data-position="top" data-delay="0" data-tooltip="Signaler une erreur"></span>
       <span class="menu-element-item-text">Signaler une erreur</span>
@@ -66,7 +66,7 @@
   {% endif %}     
 
   {% if config.isFeatureAvailable('delete') and element.status != ElementStatus.PendingAdd %} 
-    <div class="menu-element-item item-delete"> 
+    <div class="menu-element-item gogo-color-link item-delete"> 
       <span class="menu-icon btn-delete gogo-icon-delete tooltipped" 
       data-position="top" data-delay="0" data-tooltip="Supprimer"></span>
       <span class="menu-element-item-text">Supprimer</span>

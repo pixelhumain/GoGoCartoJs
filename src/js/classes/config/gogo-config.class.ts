@@ -143,9 +143,9 @@ export class GoGoConfig
 
     // simple text and textSoft properties can be used, see this.fillColors
     textDark: tinycolor('#222120'),     // text color on light background
-    textDarkSoft: tinycolor('#787878'), // soft text color on light background
+    textDarkSoft: undefined, // soft text color on light background
     textLight: tinycolor('white'),       // text color on dark background
-    textLightSoft: tinycolor('#cfcfcf'), // soft text color on dark background
+    textLightSoft: undefined, // soft text color on dark background
 
     primary: tinycolor('#de5a5f'),       // Used for buttons, and for search bar by default    
     secondary: undefined,       // Used by some themes (not default one). Equal primary by default  
@@ -159,8 +159,12 @@ export class GoGoConfig
     disabled: undefined,  // by default calculated from contentBackground
     searchBar: undefined,          // by default primary
     interactiveSection: undefined, // by default primary
-
-    mainFont: tinycolor('Roboto'),
+    mapControlsBgd: undefined,
+    mapControls: undefined    
+  }
+  readonly fonts =
+  {
+    mainFont: 'Roboto',
     titleFont: undefined, // by default titleFont
   }
 
@@ -194,6 +198,14 @@ export class GoGoConfig
     if (!this.colors.disabled) {
       let disabled = tinycolor(this.colors.contentBackground.toString()).greyscale();
       this.colors.disabled = disabled.isDark() ? disabled.lighten(35) : disabled.darken(35);
+    }
+    if (!this.colors.mapControlsBgd) { this.colors.mapControlsBgd = this.colors.contentBackground; }
+    if (!this.colors.mapControls) { this.colors.mapControls = this.colors.mapControlsBgd.isDark() ? this.colors.textLightSoft : this.colors.textDarkSoft; }
+    if (!this.colors.textLightSoft) {
+      this.colors.textLightSoft = tinycolor(this.colors.textLight.toString()).darken(10);
+    }
+    if (!this.colors.textDarkSoft) {
+      this.colors.textDarkSoft = tinycolor(this.colors.textDark.toString()).lighten(10);
     }
     console.log(this);
 	}

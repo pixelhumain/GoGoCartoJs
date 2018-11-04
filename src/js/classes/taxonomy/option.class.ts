@@ -5,6 +5,7 @@ import { CategoryOptionTreeNode, CategoryOptionTreeNodeType } from "../../compon
 import { App } from "../../gogocarto";
 import { capitalize, slugify } from "../../utils/string-helpers";
 declare let $ : any;
+declare var tinycolor : any;
 
 export class Option extends CategoryOptionTreeNode
 { 
@@ -39,8 +40,8 @@ export class Option extends CategoryOptionTreeNode
 		this.showExpanded = $optionJson.showExpanded || false;
 		this.unexpandable = $optionJson.unexpandable || false;
 		
-		this.color = $optionJson.color;
-		this.softColor = $optionJson.softColor || this.color;
+		this.color = tinycolor($optionJson.color);
+		this.softColor = tinycolor($optionJson.softColor || this.color);
 		this.icon = $optionJson.icon;
 		this.textHelper = $optionJson.textHelper;
 		this.useIconForMarker = ('useIconForMarker' in $optionJson) ? $optionJson.useIconForMarker : !!this.icon;

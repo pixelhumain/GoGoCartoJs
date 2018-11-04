@@ -1,12 +1,12 @@
-<div class="marker-name bgdColorAs {{pendingClass}}" option-id="{{mainOptionToDisplay.colorOptionId}}" style="display:none">{{ element.name }}</div>
+<div class="marker-name gogo-bg-color-as {{pendingClass}}" option-id="{{mainOptionToDisplay.colorOptionId}}" style="display:none">{{ element.name }}</div>
 
-<div class="marker-wrapper colorAs {{pendingClass}}" option-id="{{mainOptionToDisplay.colorOptionId}}" id="marker-{{ element.id }}">
+<div class="marker-wrapper gogo-color-as {{pendingClass}}" option-id="{{mainOptionToDisplay.colorOptionId}}" id="marker-{{ element.id }}">
 
 	<div class="rotate animate gogo-icon-marker"></div>
 	
 	<div class="iconInsideMarker-wrapper rotate">
 		{% set mainIcon = 'gogo-icon-attention' if showPending else mainOptionToDisplay.option.icon %}
-		<div class="iconInsideMarker colorAs {{pendingClass}} {{ 'disabled' if not mainOptionToDisplay.isFilledByFilters }} {{mainIcon}}" 
+		<div class="iconInsideMarker gogo-color-as {{pendingClass}} {{ 'disabled' if not mainOptionToDisplay.isFilledByFilters }} {{mainIcon}}" 
 		option-id="{{ mainOptionToDisplay.optionId if mainOptionToDisplay.option.color else mainOptionToDisplay.colorOptionId }}">
 	</div>
 
@@ -25,9 +25,9 @@
 
 				{% set disableOption = 'disabled' if not otherOptionValue.isFilledByFilters %}
 
-				<div class="moreIconWrapper {{ disableOption }} {{ 'colorAs bgdColorAs' if otherOptionValue.colorOptionId }} {{pendingClass}}" style="left:{{ 32 * loop.index0 }}px"
+				<div class="moreIconWrapper {{ disableOption }} {{ 'gogo-color-as gogo-bg-color-as' if otherOptionValue.colorOptionId }} {{pendingClass}}" style="left:{{ 32 * loop.index0 }}px"
 						option-id="{{ otherOptionValue.colorOptionId }}">
-					<span class="moreIcon iconInsideMarker {{ disableOption }} {{ otherOptionValue.option.icon }} colorAs {{pendingClass}}" 
+					<span class="moreIcon iconInsideMarker {{ disableOption }} {{ otherOptionValue.option.icon }} gogo-color-as {{pendingClass}}" 
 						option-id="{{ otherOptionValue.optionId if otherOptionValue.option.color else otherOptionValue.colorOptionId }}">
 					</span>
 			 	</div>

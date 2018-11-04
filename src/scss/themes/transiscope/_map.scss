@@ -1,10 +1,6 @@
-.leaflet-control-zoom-in, .leaflet-control-zoom-out, .feature-button {
+.leaflet-control-zoom-in, .leaflet-control-zoom-out, .feature-button.gogo-section-controls .gogo-color-link {
   color: $dark;
-
-  &:hover {
-    color: $primary;
-    background-color: white;
-  }
+  &:hover { color: $primary; }
 }
 
 .leaflet-control-layers { margin-right: 17px !important}

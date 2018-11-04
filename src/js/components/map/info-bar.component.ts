@@ -272,7 +272,7 @@ export class InfoBarComponent
 			
 			// show the expand label in header when interactive section is visible
 			if (this.dom.find('.interactive-section').height() > 0 || this.dom.find('.info-bar-tabs').height() > 0) 
-				this.dom.find('.expandLabel').removeClass('bgdSoftColorAs transform-big');
+				this.dom.find('.expandLabel').removeClass('gogo-bg-soft-color-as transform-big');
 
 			this.dom.animate({'height':'100%'},400,'swing');
 

@@ -1,17 +1,20 @@
 {% macro createcolor(name, value) %}
-  .gogo-{{ name }} { color: {{ value }}; }
-  .gogo-h-{{ name }}:hover, .gogo-h-{{ name }}.hover { color: {{ value }} !important; }
-  .gogo-bg-{{ name }} { background-color: {{ value }} !important; }
+  .gogo-load-css .gogo-{{ name }} { color: {{ value }}; }
+  .gogo-load-css .gogo-h-{{ name }}:hover, .gogo-h-{{ name }}.hover { color: {{ value }} !important; }
+  .gogo-load-css .gogo-bg-{{ name }} { background-color: {{ value }} !important; }
 {% endmacro %}
 
 {% macro createBackgroung(name, bgdColor) %}
-  {% set textColor = config.colors.textDark if bgdColor.isLight() else config.colors.textLight %}
-  {% set textSoftColor = config.colors.textDarkSoft if bgdColor.isLight() else config.colors.textLightSoft %}
-
-  .gogo-load-css .gogo-{{ name }} { background-color: {{ bgdColor }} !important; color: {{ textColor }}; }
-  .gogo-load-css .gogo-{{ name }} .gogo-color-soft { color: {{ textSoftColor }} }
-  .gogo-load-css .gogo-{{ name }} .gogo-color-link { color: {{ textSoftColor }} }
-  .gogo-load-css .gogo-{{ name }} .gogo-color-link:hover { color: {{ textColor }}; cursor: pointer; }
+  {% if bgdColor %}
+    {% set textColor = config.colors.textDark if bgdColor.isLight() else config.colors.textLight %}
+    {% set textSoftColor = config.colors.textDarkSoft if bgdColor.isLight() else config.colors.textLightSoft %}
+    {% set name = name|replace('&#39;', '"') %}
+    .gogo-load-css .gogo-{{ name }} { background-color: {{ bgdColor }}; color: {{ textColor }}; }
+    .gogo-load-css .gogo-{{ name }} .gogo-color-soft { color: {{ textSoftColor }} }
+    .gogo-load-css .gogo-{{ name }} .gogo-color-link { color: {{ textSoftColor }} }
+    @media (max-width: 1100px) { .gogo-load-css .gogo-{{ name }} .gogo-color-link { color: {{ textColor }} } }
+    .gogo-load-css .gogo-{{ name }} .gogo-color-link:hover { color: {{ textColor }}; cursor: pointer; }
+  {% endif %}
 {% endmacro %}
 
 <style>
@@ -28,8 +31,8 @@
   {% set secondary       = config.colors.secondary | default(primary) %}
   {% set background      = config.colors.background %}
 
-  {% set mainFont  = config.colors.mainFont %}
-  {% set titleFont = config.colors.titleFont | default(mainFont) %}
+  {% set mainFont  = config.fonts.mainFont %}
+  {% set titleFont = config.fonts.titleFont | default(mainFont) %}
 
   {% set contentBackgroundElementBody = config.colors.contentBackgroundElementBody %}
   {% set menuOptionHover = config.colors.menuOptionHover %}
@@ -38,16 +41,39 @@
   {% set searchBar          = config.colors.searchBar          | default(primary) %}
   {% set interactiveColor   = config.colors.interactiveSection | default(primary) %}
 
-  {# DESIGN #}
-  {{ createcolor('primary', primary) }}
+  {# DESIGN #}  
   {{ createBackgroung('section-content', contentBgd) }}
   {{ createBackgroung('section-primary', primary) }}
+  {{ createBackgroung('section-searchbar', searchBar) }}
+  {{ createBackgroung('section-searchbar', searchBar) }}
   {{ createBackgroung('section-background', background) }}
+  {{ createBackgroung('section-controls', config.colors.mapControlsBgd) }}
+  {{ createcolor('primary', primary) }}
+
+  {# TAXONOMY COLORS #}
+  .gogo-load-css .gogo-bg-soft-color-as { background-color: #484848 }
+  .gogo-load-css .gogo-bg-color-as { background-color: #484848 }
+  .gogo-load-css .gogo-color-as { color:#484848 }  
+
+  {% for option in optionList %} 
+     {% if option.icon or option.color %}
+      {# if no softColor, softcolor equals color #}
+      {% set softColor = option.softColor if option.softColor else option.color %}
+      {% set name = "bg-color-as[option-id='" ~ option.id ~ "']" %}
+      {{ createBackgroung(name|safe, option.color) }}
+      {% set name = "bg-soft-color-as[option-id='" ~ option.id ~ "']" %}
+      {{ createBackgroung(name|safe, softColor) }}
+      .gogo-load-css .gogo-color-as[option-id="{{ option.id }}"] { color: {{ option.color }} }
+    {% endif %}
+  {% endfor %} 
+
+  .gogo-load-css .gogo-bg-soft-color-as.pending { background-color: #616161 }
+  .gogo-load-css .gogo-bg-color-as.pending { background-color: #484848 }
+  .gogo-load-css .gogo-color-as.pending { color:#484848 }
 
   .gogo-load-css { font-family: {{ mainFont }}, sans-serif; }
   .gogo-load-css h1 { font-family: {{ titleFont }}; }
 
-  .gogo-load-css .directory-menu-header { background-color: {{ searchBar }} }
   .gogo-load-css .element-list-header .show-as-map-button:hover { color: {{ primary }}; }
 
   .gogo-load-css .gogo-font-title,
@@ -92,7 +118,7 @@
   .gogo-load-css #main-option-all.show-one-pane-per-main-option .gogo-icon-name-wrapper:hover:after { color: {{ primary }}; }
 
   .gogo-load-css .subcategorie-option-item:hover { background-color: {{ menuOptionHover }}; }
-  .gogo-load-css .gogocarto-container .element-item .collapsible-body .collapsible-body-main-container { background-color: {{ contentBackgroundElementBody }}; }
+  .gogo-load-css .gogocarto-container .element-item .collapsible-body { background-color: {{ contentBackgroundElementBody }}; }
   
   .gogo-load-css .subcategorie-option-item:hover          .subcategorie-option-checkbox + label:before { color: {{ primary }}; border-color: {{ primary }} }  
   .gogo-load-css .subcategorie-option-item:not(.expanded) .option-name       .arrow-after { border-color: {{ neutral }} transparent transparent transparent; opacity: 0.6; }
@@ -136,49 +162,18 @@
 
   .gogo-load-css a { color: {{ primary }}; }
 
-  .gogo-load-css .btn
-  {
-    color: #fff;
-    background-color: {{ primary }};
-  }
-
-  .gogo-load-css .marker-cluster div {
-    font-family: {{ mainFont }}, sans-serif;
-  }
-
+  .gogo-load-css .btn { color: #fff; background-color: {{ primary }}; }
   .gogo-load-css .btn:hover { background-color: {{ primary }}; }  
   .gogo-load-css .btn:focus { background-color: {{ primary }}; }  
 
-  .backdrop { background-color: {{ text }}; } // tooltip
-  .toast { background-color: {{ text }} !important; }
+  .gogo-load-css .marker-cluster div {
+    font-family: {{ mainFont }}, sans-serif;
+  }  
 
-  .gogo-load-css .feature-button.primary { color: white; background-color: {{ primary }}; }
-  .gogo-load-css .feature-button.soft-primary { color: {{ primary }}; }
-  .gogo-load-css .feature-button.neutral { color: white; background-color: {{ neutral }} !important; }
-
-  {# TAXONOMY #}
-	.gogo-load-css .bgdSoftColorAs { background-color: #484848 }
-  .gogo-load-css .borderSoftColorAs { border-color: #484848 }
-  .gogo-load-css .bgdColorAs { background-color: #484848 }
-  .gogo-load-css .colorAs { color:#484848 }  
-
-  {% for option in optionList %} 
-     {% if option.icon or option.color %}
-      {# if no softColor, softcolor equals color #}
-      {% set softColor = option.softColor if option.softColor else option.color %}
-	    .gogo-load-css .bgdSoftColorAs[option-id="{{ option.id }}"] { background-color: {{ softColor }} }
-	    .gogo-load-css .borderSoftColorAs[option-id="{{ option.id }}"] { border-color: {{ softColor }} }
-      .gogo-load-css .borderColorAs[option-id="{{ option.id }}"] { border-color: {{ option.color }} }
-	    .gogo-load-css .bgdColorAs[option-id="{{ option.id }}"] { background-color: {{ option.color }} }
-	    .gogo-load-css .colorAs[option-id="{{ option.id }}"] { color: {{ option.color }} }
-    {% endif %}
-  {% endfor %} 
-
-  .gogo-load-css .bgdSoftColorAs.pending { background-color: #616161 }
-  .gogo-load-css .borderSoftColorAs.pending { border-color: #616161 }
-  .gogo-load-css .bgdColorAs.pending { background-color: #484848 }
-  .gogo-load-css .colorAs.pending { color:#484848 }
-  
+  .backdrop, .material-tooltip, .toast { 
+    background-color: {{ textSoft if text.isDark() else contentBgd }};
+    font-family: {{ mainFont }}, sans-serif; 
+  }
   .gogo-load-css .tabs.info-bar-tabs {
     background-color: {{ text }};
   }
@@ -188,9 +183,32 @@
     background-color: {{ textSoft }};
   }
 
+  .gogo-load-css #directory-content-list .bottom-gradient {
+    background: -moz-linear-gradient(top, {{ contentBgd.setAlpha(0) }} 0%, {{ contentBgd.setAlpha(1) }} 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, {{ contentBgd.setAlpha(0) }} 0%,{{ contentBgd.setAlpha(1) }} 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, {{ contentBgd.setAlpha(0) }}) 0%,{{ contentBgd.setAlpha(1) }} 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='{{ contentBgd.setAlpha(0) }}', endColorstr='{{ contentBgd.setAlpha(1) }}',GradientType=0 ); /* IE6-9 */
+  }  
+
+  .custom-scroll-bar::-webkit-scrollbar {
+      width: 12px;
+  }
+  .custom-scroll-bar::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      border: 3px solid {{ background }};
+      background-color: {{ textSoft }};
+  } 
+  .custom-scroll-bar::-webkit-scrollbar-track {
+    background-color: {{ background }};
+    border: 1px solid {{ background.darken(5) }};
+  }
+  {% set background = background.lighten(5) %} /* restor color */
+
   {# THEMES #}
   .gogo-theme-presdecheznous .directory-menu-header .search-icon.search-geolocalize { color: {{ textSoft }}; }  
   .gogo-theme-presdecheznous .directory-menu-header .search-icon.search-bar-icon { background-color: {{ text }}; }
+
+
   
 </style>
 

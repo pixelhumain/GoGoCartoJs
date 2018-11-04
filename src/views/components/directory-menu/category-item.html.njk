@@ -45,7 +45,7 @@
 						{# --- ICON ---- #}
 						{% set iconClass = option.icon if option.icon else ( 'gogo-icon-marker' if option.useColorForMarker else '') %}	
 						{% if iconClass %}    
-							<span class="icon {{ iconClass }} colorAs" option-id='{{ option.id }}' ></span>
+							<span class="icon {{ iconClass }} gogo-bg-color-as gogo-color-as" option-id='{{ option.id }}' ></span>
 						{% endif %}
 
 						{# --- NAME ---- #}

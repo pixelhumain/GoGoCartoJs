@@ -67,11 +67,6 @@ $moderation-color: #c53f36;
     }
   }
 
-  &:hover
-  {
-    background-color: white;
-  } 
-
   .favorite-checkbox:not(:checked) + label:before
   {
     background-color: transparent;

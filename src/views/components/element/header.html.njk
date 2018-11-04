@@ -6,10 +6,10 @@
 
     {% set mainIcon = 'gogo-icon-attention' if isPending and config.isFeatureAvailable('pending') else mainOptionToDisplay.option.icon %}
     {# Icon #}
-    <span class="element-main-icon icon {{ mainIcon }} colorAs {{pendingClass}} hideOnLargeScreen" option-id={{mainOptionToDisplay.colorOptionId}}></span>
+    <span class="element-main-icon icon {{ mainIcon }} gogo-color-as {{pendingClass}} hideOnLargeScreen" option-id={{mainOptionToDisplay.colorOptionId}}></span>
        
     {# Close Button #}
-    <span class="icon gogo-icon-close gogo-h-primary" id="btn-close-bandeau-detail"></span>            
+    <span class="icon gogo-icon-close gogo-color-link" id="btn-close-bandeau-detail"></span>            
 
     {# Name #}
     {{ element.name|safe }}
@@ -52,11 +52,11 @@
 
         {% set sameIcon = iconToDisplay == lastIconToDisplay %}
         {% if iconToDisplay and not sameIcon %}    
-          <span class="icon {{ iconToDisplay }} bgdColorAs colorAs" option-id='{{ option.id }}' ></span>
+          <span class="icon {{ iconToDisplay }} gogo-bg-color-as gogo-color-as" option-id='{{ option.id }}' ></span>
         {% endif %}
         {% set lastIconToDisplay = iconToDisplay %}
 
-        <span class="option-value {{ isDisabled }} {{ 'same-icon-as-last-item' if sameIcon else '' }} colorAs" option-id='{{ option.id }}'>{{ option.nameShort }}</span>   
+        <span class="option-value {{ isDisabled }} {{ 'same-icon-as-last-item' if sameIcon else '' }} gogo-color-as" option-id='{{ option.id }}'>{{ option.nameShort }}</span>   
       </span>      
     {% endfor %}
 
@@ -67,6 +67,6 @@
   </span>      
 
   {# Toggle Details Buttons #}
-  <a><span class="col s4 right-align expandLabel gogo-neutral-dark hideOnLargeScreen bgdSoftColorAs transform-big" option-id={{mainOptionToDisplay.colorOptionId}}></span></a>
+  <a><span class="col s4 right-align expandLabel gogo-neutral-dark hideOnLargeScreen gogo-bg-soft-color-as transform-big" option-id={{mainOptionToDisplay.colorOptionId}}></span></a>
 
 </div> 

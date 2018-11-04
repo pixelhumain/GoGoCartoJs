@@ -61,6 +61,11 @@ export class MapComponent
 		    layers: [defaultBaseLayer]
 		});
 
+		setTimeout(function() { 
+			$('.leaflet-control-zoom').addClass('gogo-section-controls');	
+			$('.leaflet-control-zoom a').addClass('gogo-color-link');
+		}, 0);
+		
 		this.markerClustererGroup = L.markerClusterGroup({
 		    spiderfyOnMaxZoom: true,
 		    showCoverageOnHover: false,
