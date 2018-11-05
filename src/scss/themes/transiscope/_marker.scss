@@ -24,28 +24,14 @@
 {
   div { font-size: 15px; }
 
-  &.marker-cluster-small div
-  {
-    $size: 34px;
-    background-color: #f8ab00;
-    width: $size;
-    height: $size;   
-    span { line-height: $size; }    
-  }
+  &.marker-cluster-small div { background-color: #f8ab00; }
+  &.marker-cluster-medium div { background-color: #f78b16; }
+  &.marker-cluster-large div { background-color: #f5701e; }
 
-  &.marker-cluster-medium div
+  // we increase font-size, no we need to display bigger cluster for bug numbers
+  &.marker-cluster-large.xl div
   {
-    $size: 38px;
-    background-color: #f78b16;
-    width: $size;
-    height: $size;   
-    span { line-height: $size; }  
-  }
-
-  &.marker-cluster-large div
-  {
-    $size: 44px;
-    background-color: #f5701e;
+    $size: 54px;
     width: $size;
     height: $size;   
     span { line-height: $size; }  

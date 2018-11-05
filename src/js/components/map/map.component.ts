@@ -75,6 +75,17 @@ export class MapComponent
 		    spiderfyDistanceMultiplier: 1.1,
 		    chunkedLoading: true,
 		    animate: false,
+		    iconCreateFunction: function(cluster) {
+					var childCount = cluster.getChildCount();
+					
+					var c = ' marker-cluster-';
+					if (childCount < 10) { c += 'small'; }
+					else if (childCount < 100) { c += 'medium'; }
+					else if (childCount < 1000) { c += 'large'; }
+					else { c += 'large xl'; }
+
+					return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
+				},
 		    maxClusterRadius: (zoom) =>
 		    {
 		    	if (zoom > 10) return 60;
