@@ -10,7 +10,7 @@
 {% set isHistoryAvailable = config.isFeatureAvailable('elementHistory') %}
 
 {# HEADER #}
-<div class="collapsible-header gogo-bg-soft-color-as {{pendingClass}}" option-id={{mainOptionToDisplay.colorOptionId}}>
+<div class="collapsible-header {{pendingClass}}" option-id={{mainOptionToDisplay.colorOptionId}}>
   {% include here ~ 'header.html.njk' %} 
 </div>
 

@@ -74,7 +74,6 @@
         @include transition(transform .2s)
         font-size: 0.85rem;
         font-weight: bold;
-        color: white;
         opacity: 1;        
       }
     }    
@@ -124,7 +123,6 @@
 
 	    &.active
 	    {
-    		color: white;
     		padding-right: 8px;    		
 	    }
     }

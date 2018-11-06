@@ -160,7 +160,7 @@ export class GoGoConfig
     searchBar: undefined,          // by default primary
     interactiveSection: undefined, // by default primary
     mapControlsBgd: undefined,
-    mapControls: undefined    
+    mapControls: undefined,  
   }
   readonly fonts =
   {
@@ -210,10 +210,10 @@ export class GoGoConfig
     }
 
     if (!this.colors.textLightSoft) {
-      this.colors.textLightSoft = tinycolor(this.colors.textLight.toString()).darken(10);
+      this.colors.textLightSoft = tinycolor(this.colors.textLight.toString()).darken(15);
     }
     if (!this.colors.textDarkSoft) {
-      this.colors.textDarkSoft = tinycolor(this.colors.textDark.toString()).lighten(10);
+      this.colors.textDarkSoft = tinycolor(this.colors.textDark.toString()).lighten(15);
     }
     console.log(this);
 	}

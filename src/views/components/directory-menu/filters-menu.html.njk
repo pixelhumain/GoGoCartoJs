@@ -2,7 +2,7 @@
 
 	{# MAIN CATEGORIE SIDE BAR #}
 	{% if config.menu.showOnePanePerMainOption %}		
-		<div class="main-categories gogo-bg-neutral-dark custom-scroll-bar-light" {{  '' if fullTaxonomy else 'style="display:none"' }}>
+		<div class="main-categories gogo-section-content-opposite custom-scroll-bar-light" {{  '' if fullTaxonomy else 'style="display:none"' }}>
 
 			<div class="icon main-gogo-icon-background gogo-bg-neutral" id="active-main-option-background"></div>
 
@@ -13,18 +13,18 @@
 			
 			{# MAIN OPTIONS ICONS & TOOLTIP #}
 			{% for mainOption in mainCategory.options %}
-				<div class="icon main-icon {{ mainOption.icon }} gogo-neutral"  id="main-option-gogo-icon-{{mainOption.id}}" data-option-id="{{ mainOption.id }}">
-					<div class="main-option-tooltip gogo-bg-neutral-dark">{{ mainOption.name }}</div>
+				<div class="icon main-icon {{ mainOption.icon }} gogo-color-link"  id="main-option-gogo-icon-{{mainOption.id}}" data-option-id="{{ mainOption.id }}">
+					<div class="main-option-tooltip">{{ mainOption.name }}</div>
 				</div>
 			{% endfor %}	
 
 		</div>
 	{% endif %}
 
-	<div class="sub-categories {{ "one-pane-per-main-option" if config.menu.showOnePanePerMainOption else "single-pane" }}">
+	<div class="sub-categories gogo-section-background {{ "one-pane-per-main-option" if config.menu.showOnePanePerMainOption else "single-pane" }}">
 
 		{% if config.menu.showOnePanePerMainOption %}
-			<div class="sub-categorie-main-title gogo-neutral-dark" id="menu-subcategories-title"></div>
+			<div class="sub-categorie-main-title" id="menu-subcategories-title"></div>
 		{% endif %}
 
 		<div class="sub-categories-content gogo-section-content no-top-divider {{ "" if config.menu.showOnePanePerMainOption else "full-height" }}">

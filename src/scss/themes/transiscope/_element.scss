@@ -217,7 +217,7 @@
     
   }
 
-  .expandLabel {
+  .expand-label {
     width: auto;
     float: right;
     border: 2px solid;
@@ -234,14 +234,14 @@
       padding: 0 4px;
     }    
   }
-  &.active .expandLabel:before { 
+  &.active .expand-label:before { 
     content: "-";
     padding: 0 6px;
     padding-bottom: 1px;
     font-weight: 900;
     font-size: 16px;
   }
-  &:not(.active) .expandLabel:before { content: "+" }
+  &:not(.active) .expand-label:before { content: "+" }
 }
 
 #element-info-bar.display-aside .element-item .collapsible-header 
@@ -271,7 +271,7 @@
   .collapsible-header .name { font-size: 15px; } 
 
   @media #{$small-only} { 
-    .element-item .expandLabel {
+    .element-item .expand-label {
       margin-right: 10px;
       font-size: 13px;
       font-weight: 900;
@@ -279,7 +279,7 @@
     }
   }
   .element-item.active {
-    .expandLabel.transform-big {
+    .expand-label.transform-big {
       background-color: white;
       color: $secondary;
       &:hover { color: $secondary; }

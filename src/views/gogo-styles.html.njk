@@ -12,6 +12,8 @@
     .gogo-load-css .gogo-{{ name }} { background-color: {{ bgdColor }}; color: {{ textColor }}; }
     .gogo-load-css .gogo-{{ name }} .gogo-color-soft { color: {{ textSoftColor }} }
     .gogo-load-css .gogo-{{ name }} .gogo-color-link { color: {{ textSoftColor }} }
+    .gogo-load-css .gogo-{{ name }} .gogo-color-link.active { color: {{ textColor }} }
+    .gogo-load-css .gogo-{{ name }} .gogo-color-link.hover { color: {{ textColor }} }
     @media (max-width: 1100px) { .gogo-load-css .gogo-{{ name }} .gogo-color-link { color: {{ textColor }} } }
     .gogo-load-css .gogo-{{ name }} .gogo-color-link:hover { color: {{ textColor }}; cursor: pointer; }
   {% endif %}
@@ -43,8 +45,8 @@
 
   {# DESIGN #}  
   {{ createBackgroung('section-content', contentBgd) }}
+  {{ createBackgroung('section-content-opposite', text) }}
   {{ createBackgroung('section-primary', primary) }}
-  {{ createBackgroung('section-searchbar', searchBar) }}
   {{ createBackgroung('section-searchbar', searchBar) }}
   {{ createBackgroung('section-background', background) }}
   {{ createBackgroung('section-controls', config.colors.mapControlsBgd) }}
@@ -81,9 +83,10 @@
   { font-family: {{ titleFont }}, sans-serif;}
 
   @media (max-width: 700px) {
-    .gogo-load-css .collapsible-header .expandLabel { color: {{ primary }}; }
+    .gogo-load-css .collapsible-header .expand-label { color: {{ primary }}; }
   }
-  .gogo-load-css .collapsible-header:hover .expandLabel { color: {{ primary }}; }
+  .gogo-load-css .collapsible-header .expand-label { color: {{ text }}; }
+  .gogo-load-css .collapsible-header:hover .expand-label { color: {{ primary }}; }
 
   .gogo-load-css .interactive-section { background-color: {{ interactiveColor }}; }
 
@@ -124,7 +127,7 @@
 
   {% if config.colors.infoBarMenu %}
     .gogo-load-css .gogocarto-container .element-item .menu-element { background-color: {{ config.colors.infoBarMenu }}; }
-    .gogo-load-css .gogocarto-container #element-info-bar .element-item.active .expandLabel.transform-big { background-color: {{ config.colors.infoBarMenu }}; }
+    .gogo-load-css .gogocarto-container #element-info-bar .element-item.active .expand-label.transform-big { background-color: {{ config.colors.infoBarMenu }}; }
   {% endif %}
   {% if config.colors.infoBarHeader %}
     .gogo-load-css .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header { background-color: {{ config.colors.infoBarHeader }}; }
@@ -136,19 +139,17 @@
     border-color: {{ lineBorder }};
     color: {{ text }};
   }
-  .gogo-load-css .gogocarto-container #directory-content-list .element-item .collapsible-header .gogo-color-soft,
-  #element-info-bar.display-bottom .collapsible-header .gogo-color-soft {
-    color: {{ textSoft }};
-  }
 
+  {# ELEMENT INFO BAR #}
   .gogo-load-css #element-info-bar.display-bottom .element-item .collapsible-header { border-color: {{ lineBorder }} }
   .gogo-load-css .gogocarto-container .element-item .info-bar-divider { background-color: {{ lineBorder }}; }
-
-  .gogo-load-css #main-option-all.show-one-pane-per-main-option .gogo-icon-name-wrapper:hover:after { color: {{ primary }}; }
-
-  .gogo-load-css .subcategorie-option-item:hover { background-color: {{ menuOptionHover }}; }
   .gogo-load-css .gogocarto-container .element-item .collapsible-body { background-color: {{ contentBackgroundElementBody }}; }
   
+  {# MENU, FILTERS #}
+  .gogo-load-css .subcategorie-option-item:hover { background-color: {{ menuOptionHover }}; }  
+  .gogo-load-css #main-option-all.show-one-pane-per-main-option .gogo-icon-name-wrapper:hover:after { color: {{ primary }}; }
+  .gogo-load-css .main-categories #active-main-option-background { background-color: {{ textDarkSoft }}; }
+
   .gogo-load-css .gogocarto-container .subcategory-item.top-separator { border-color: {{ lineBorder }}; }
   .gogo-load-css .subcategorie-option-item:hover          .subcategorie-option-checkbox + label:before { color: {{ primary }}; border-color: {{ primary }} }  
   .gogo-load-css .subcategorie-option-item:not(.expanded) .option-name       .arrow-after { border-color: {{ neutral }} transparent transparent transparent; opacity: 0.6; }
@@ -200,8 +201,8 @@
     font-family: {{ mainFont }}, sans-serif;
   }  
 
-  .backdrop, .material-tooltip, .toast { 
-    background-color: {{ textSoft if text.isDark() else contentBgd }};
+  .backdrop, .material-tooltip, .toast, .main-option-tooltip { 
+    background-color: {{ textDark if text.isDark() else contentBgd }};
     font-family: {{ mainFont }}, sans-serif; 
   }
   .gogo-load-css .tabs.info-bar-tabs {

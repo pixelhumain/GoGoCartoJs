@@ -2,18 +2,6 @@ import { OptionValue } from "../../classes/classes";
 import { capitalize } from "../../utils/string-helpers";
 declare var JsDiff : any;
 
-var diffConfiguration =
-{
-  name: JsDiff.diffSentences,
-  description: JsDiff.diffSentences,
-  address: JsDiff.diffSentences,
-  commitment: JsDiff.diffSentences,
-  telephone: JsDiff.diffSentences,
-  website: JsDiff.diffSentences,
-  email: JsDiff.diffSentences,
-  openHoursMoreInfos: JsDiff.diffSentences,
-}
-
 export class ElementDiffModule
 {
   getDiffValue(value, modifiedValue, propertyName)
@@ -21,7 +9,7 @@ export class ElementDiffModule
     let spanClass = '',
     span = null;
 
-    let DiffMethod = diffConfiguration[propertyName] ? diffConfiguration[propertyName] : JsDiff.diffSentences
+    let DiffMethod = JsDiff.diffSentences;
     let diff = DiffMethod(value, modifiedValue);
     let display = document.createElement('div'),
         fragment = document.createDocumentFragment();

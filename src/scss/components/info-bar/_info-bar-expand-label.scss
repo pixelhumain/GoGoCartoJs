@@ -1,15 +1,15 @@
 #element-info-bar .element-item
 {
-  .expandLabel { 
+  .expand-label { 
     font-weight: bold;     
     padding-right: 0;
   } 
   
   &.active 
   {
-    .expandLabel:after { content: "Moins d'infos" }
+    .expand-label:after { content: "Moins d'infos" }
 
-    .expandLabel.transform-big {
+    .expand-label.transform-big {
       position: absolute;
       color: white;
       z-index: 2;   
@@ -36,7 +36,7 @@
 
   &:not(.active) 
   { 
-    .expandLabel:after { content: "Plus d'infos" }
-    .expandLabel, .expandLabel:not(.transform-big) { background-color: transparent !important; }
+    .expand-label:after { content: "Plus d'infos" }
+    .expand-label, .expand-label:not(.transform-big) { background-color: transparent !important; }
   }
 }
