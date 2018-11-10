@@ -18,8 +18,13 @@ export class ElementIconsModule
     {
       element.iconsToDisplay.push(element.getCurrMainOptionValue());
     }
-    
-    // console.log("Icons to display sorted", element.getIconsToDisplay());
+
+    element.iconsToDisplay.sort( (a,b) => {
+      if (a.isFilledByFilters < b.isFilledByFilters) return 1;          
+      else if (a.isFilledByFilters > b.isFilledByFilters) return -1;          
+      else return a.index < b.index ? -1 : 1;
+    });
+    // console.log("Update element icons to display", element.iconsToDisplay);
   }
 
   private recursivelySearchIconsToDisplay(parentOptionValue : OptionValue, recursive : boolean = true) : OptionValue[]
@@ -52,37 +57,37 @@ export class ElementIconsModule
 
   private checkForDisabledOptionValues(element : Element)
   {
-    this.recursivelyCheckForDisabledOptionValues(element.getOptionTree(), App.currMainId == 'all');
+    this.recursivelyCheckForDisabledOptionValues(element.getOptionTree());
   }
 
-  private recursivelyCheckForDisabledOptionValues(optionValue : OptionValue, noRecursive : boolean = true)
+  private recursivelyCheckForDisabledOptionValues(optionValue : OptionValue)
   {
     let isEveryCategoryContainsOneOptionNotdisabled = true;
-    //console.log("checkForDisabledOptionValue Norecursive : " + noRecursive, optionValue);
+    // console.log("checkForDisabledOptionValue : ", optionValue);
 
     for(let categoryValue of optionValue.children)
     {
       let isSomeOptionNotdisabled = false;
       for (let suboptionValue of categoryValue.children)
       {
-        if (suboptionValue.children.length == 0 || noRecursive)
+        if (suboptionValue.children.length == 0)
         {
-          //console.log("bottom option " + suboptionValue.option.name,suboptionValue.option.isChecked );
+          // console.log("bottom option " + suboptionValue.option.name,suboptionValue.option.isChecked );
           suboptionValue.isFilledByFilters = !suboptionValue.option.isDisabled;          
         }
         else
         {
-          this.recursivelyCheckForDisabledOptionValues(suboptionValue, noRecursive);
+          this.recursivelyCheckForDisabledOptionValues(suboptionValue);
         }
         if (suboptionValue.isFilledByFilters) isSomeOptionNotdisabled = true;
       }
       if (!isSomeOptionNotdisabled) isEveryCategoryContainsOneOptionNotdisabled = false;
-      //console.log("CategoryValue " + categoryValue.category.name + "isSomeOptionNotdisabled", isSomeOptionNotdisabled);
+      // console.log("CategoryValue " + categoryValue.category.name + "isSomeOptionNotdisabled", isSomeOptionNotdisabled);
     }
 
     if (optionValue.option)
     {
-      //console.log("OptionValue " + optionValue.option.name + " : isEveryCategoyrContainOnOption", isEveryCategoryContainsOneOptionNotdisabled );
+      // console.log("OptionValue " + optionValue.option.name + " : isEveryCategoyrContainOnOption", isEveryCategoryContainsOneOptionNotdisabled );
       optionValue.isFilledByFilters = isEveryCategoryContainsOneOptionNotdisabled;
       if (!optionValue.isFilledByFilters) optionValue.setRecursivelyFilledByFilters(optionValue.isFilledByFilters);
     }

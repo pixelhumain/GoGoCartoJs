@@ -91,11 +91,7 @@ export class Element extends ElementBase
 		this.distanceFromBoundsCenter = this.distanceFromBoundsCenter ? Math.round(1.2*this.distanceFromBoundsCenter) : null;
 	}
 
-	getIconsToDisplay() : OptionValue[]
-  {
-    let result = this.iconsToDisplay;
-    return result.sort( (a,b) => a.isFilledByFilters ? -1 : 1);
-  }
+	getIconsToDisplay() : OptionValue[] { return this.iconsToDisplay; }
 
 	getCurrOptionsValues() : OptionValue[]
 	{
