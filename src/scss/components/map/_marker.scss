@@ -7,6 +7,13 @@
     &:hover { z-index: 10000000 !important; }  
 }
 
+.marker-location-position.leaflet-marker-icon {
+    border-radius: 50%;
+    border: 1px solid white;
+    width: 14px;
+    height: 14px;    
+}
+
 .marker-name
 {
     position: absolute;

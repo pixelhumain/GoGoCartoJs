@@ -67,7 +67,7 @@ export class InfoBarComponent
 				if (callback) callback();
 			},
 			() => {
-				console.log("Ajax failure for elementId", elementId);
+				console.error("Ajax failure for elementId", elementId);
 			});			
 
 			// if ajax retrieving take more than 500ms, we show spinner loader

@@ -9,7 +9,7 @@
  */
 import { AppModule, AppStates, AppDataType, AppModes } from "../../app.module";
 import { GeocodeResult } from "../../modules/geocoder.module";
-declare var $;
+declare var $, L;
 import { App } from "../../gogocarto";
 import { ViewPort } from "../../classes/classes";
 
@@ -24,6 +24,8 @@ export class SearchBarComponent
 
 	searchInput() { return $('.search-bar'); }
 
+	locationMarker : L.Marker;
+	locationIcon = L.divIcon({className: 'marker-location-position'});
 	private currSearchText : string = '';
 
 	constructor() {}
@@ -78,6 +80,7 @@ export class SearchBarComponent
           (result) => { 
             this.clearSearchResult(false); 
             this.hideSearchOptions(); 
+            this.displaySearchResultMarkerOnMap();
             App.mapComponent.fitBounds(App.geocoder.getBounds(), true); 
           },
           () => {
@@ -110,6 +113,7 @@ export class SearchBarComponent
 			this.setValue("Geolocalisé");
 			this.hideSearchOptions();			
 			this.clearLoader();
+			this.displaySearchResultMarkerOnMap();
 		});
 	}	
 
@@ -228,6 +232,7 @@ export class SearchBarComponent
 		App.setDataType(AppDataType.All);		
 		this.hideSearchResult();		
 		this.clearLoader();	
+		if (this.locationMarker) this.locationMarker.remove();
 		this.currSearchText = '';
 		if (resetValue) {
 			this.setValue("");
@@ -264,6 +269,11 @@ export class SearchBarComponent
 		$('.search-no-result').hide();
 		$('.search-cancel-btn').show();
 		$('.search-btn').hide();
+	}
+
+	private displaySearchResultMarkerOnMap()
+	{
+		this.locationMarker = new L.Marker(App.geocoder.getLocation(), { icon: this.locationIcon }).addTo(App.map());
 	}
     
 }
