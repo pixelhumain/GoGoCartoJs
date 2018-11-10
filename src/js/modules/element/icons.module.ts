@@ -24,7 +24,7 @@ export class ElementIconsModule
       else if (a.isFilledByFilters > b.isFilledByFilters) return -1;          
       else return a.index < b.index ? -1 : 1;
     });
-    // console.log("Update element icons to display", element.iconsToDisplay);
+    // console.log("Update element icons to display", element.iconsToDisplay, element);
   }
 
   private recursivelySearchIconsToDisplay(parentOptionValue : OptionValue, recursive : boolean = true) : OptionValue[]
@@ -32,16 +32,14 @@ export class ElementIconsModule
     if (!parentOptionValue) return [];
     
     let resultOptions : OptionValue[] = [];    
-
     for(let categoryValue of parentOptionValue.children)
     {
       for(let optionValue of categoryValue.children)
       {
         let result = [];
-        
         if (recursive || optionValue.optionId == "RootFakeOption")
         {
-          result = this.recursivelySearchIconsToDisplay(optionValue) || [];
+          result = this.recursivelySearchIconsToDisplay(optionValue, recursive) || [];
           resultOptions = resultOptions.concat(result);
         }
 

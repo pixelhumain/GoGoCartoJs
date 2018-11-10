@@ -201,7 +201,7 @@ export class CategoryOptionTreeNode
 		let resultNodes = [];
 		resultNodes = resultNodes.concat(currOption.getSiblingsPristine());
 		let parentOption = currOption.getOwner().getOwner();
-		if (this.isMainOption || App.config.menu.showOnePanePerMainOption && parentOption.isMainOption) return resultNodes;
+		if (this.isMainOption || App.config.menu.showOnePanePerMainOption && parentOption && parentOption.isMainOption) return resultNodes;
 		else if (parentOption) resultNodes = resultNodes.concat(this.recursivelyGetPristine(parentOption));		
 
 		return resultNodes;

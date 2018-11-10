@@ -198,4 +198,5 @@ export class TaxonomyModule
 
 	// the main category : i.e. the first root category (could have many root categories) 
 	get mainCategory() { return this.rootCategories[0]; }
+	get otherRootCategories() { return this.rootCategories.slice(1); }
 }

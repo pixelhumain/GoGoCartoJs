@@ -92,7 +92,6 @@ export class AppComponent
 		// show element info bar aside or at the bottom depending of direcoty-content width
 		if (this.mapWidth() > 900)
 		{
-			console.log("map 900 is display aside ?",App.infoBarComponent.isDisplayedAside() );
 			if (!App.infoBarComponent.isDisplayedAside())
 			{
 				App.infoBarComponent.displayAside();

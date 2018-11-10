@@ -186,7 +186,6 @@ export class FiltersComponent
   setMainOption(optionId)
   {
     if (this.currentActiveMainOptionId == optionId) return;
-
     if (this.currentActiveMainOptionId != null) App.elementsModule.clearCurrentsElement();
 
     let oldId = this.currentActiveMainOptionId;
@@ -198,13 +197,11 @@ export class FiltersComponent
     }
     else
     {
-      let mainOption = App.taxonomyModule.getMainOptionById(optionId);        
-
+      let mainOption = App.taxonomyModule.getMainOptionById(optionId);
       $('#menu-subcategories-title').text(mainOption.name);
     }
 
     this.updateMainOptionBackground();
-
     App.infoBarComponent.hide();
 
     //console.log("setMainOptionId " + optionId + " / oldOption : " + oldId);

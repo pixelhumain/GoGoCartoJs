@@ -100,7 +100,6 @@ export class ElementOptionValuesModule
   updateOptionValueColor(element : Element, $optionValue : OptionValue)
   {
     if (!$optionValue) return;
-    // console.log("updateOptionValue", $optionValue.option.name);
     if ($optionValue.option.useColorForMarker)
     {
       $optionValue.colorOptionId = $optionValue.optionId;

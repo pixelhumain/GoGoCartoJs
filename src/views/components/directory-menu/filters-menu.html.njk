@@ -29,28 +29,36 @@
 
 		<div class="sub-categories-content gogo-section-content no-top-divider {{ "" if config.menu.showOnePanePerMainOption else "full-height" }}">
 			<ul>
-				{# ALL CATEGORIES #}
-				<div id="main-option-all" class="main-option-subcategories-container {{ "show-one-pane-per-main-option" if config.menu.showOnePanePerMainOption else "" }}" 
-						 style="display:none;">
-					{% import 'components/directory-menu/category-item.html.njk' as categoryRenderer %}
-					{% for rootCategory in rootCategories %}
-						{{ categoryRenderer.renderItem(rootCategory, not config.menu.showOnePanePerMainOption, config.menu.showCheckboxForMainFilterPane) }}
-					{% endfor %} 
-				</div>
+				{% import 'components/directory-menu/category-item.html.njk' as categoryRenderer %}
 
-				{# SUBCATEGORIES FOR EACH MAIN OPTION #}
-				{% if config.menu.showOnePanePerMainOption %}					
+				{% if config.menu.showOnePanePerMainOption %}
+					{# FIRST CATEGORY MAIN OPTIONS#}
+					<div id="main-option-all" class="main-option-subcategories-container show-one-pane-per-main-option" style="display:none;">						
+						{{ categoryRenderer.renderItem(mainCategory, not config.menu.showOnePanePerMainOption, config.menu.showCheckboxForMainFilterPane) }}						
+					</div>		
+					{# FIRST CATEGORY SUB CATEGORIES AND OPTIONS #}	
 					{% for mainOption in mainCategory.options %}
-
-						<div id="main-option-{{ mainOption.id }}" class="main-option-subcategories-container" style="display:none">		
-
+						<div id="main-option-{{ mainOption.id }}" class="main-option-subcategories-container" style="display:none">	
 							{% for category in mainOption.subcategories %}
 								{{ categoryRenderer.renderItem(category, true, config.menu.showCheckboxForSubFilterPane) }} 
 							{% endfor %} 
-
 						</div>
-
 					{% endfor %}
+
+					{# OTHERS CATEGORIES #}	
+					{% set otherCategories = rootCategories.slice(1) %}
+					<div id="other-categories">
+						{% for rootCategory in otherCategories %}
+							{{ categoryRenderer.renderItem(rootCategory, true, true) }}
+						{% endfor %} 
+					</div>
+				{% else %}
+					{# ALL CATEGORIES #}
+					<div id="main-option-all" class="main-option-subcategories-container" style="display:none;">
+						{% for rootCategory in rootCategories %}
+							{{ categoryRenderer.renderItem(rootCategory, not config.menu.showOnePanePerMainOption, config.menu.showCheckboxForMainFilterPane) }}
+						{% endfor %} 
+					</div>
 				{% endif %}
 
 				{% set pendingIsActive = config.isFeatureAvailable('pending') %}

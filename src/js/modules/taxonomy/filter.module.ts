@@ -7,7 +7,7 @@
  * @license GNU GPL v3
  * @Last Modified time: 2016-12-13
  */
-import { Option, Element, ElementModerationState} from "../../classes/classes";
+import { Option, Category, Element, ElementModerationState} from "../../classes/classes";
 
 import { App } from "../../gogocarto";
 declare var $ : any;
@@ -58,63 +58,62 @@ export class FilterModule
 		}
 		else if (App.currMainId == 'all')
 		{
-			let elementOptions = element.getOptionValueByCategoryId( App.taxonomyModule.taxonomy.id);
-			let checkedOptions = App.taxonomyModule.taxonomy.checkedOptions;
-
-			// console.log("\nelementsOptions", elementOptions.map( (value) => value.option.name));
-			// console.log("checkedOptions", checkedOptions.map( (value) => value.name));
-
-			let result = elementOptions.some(optionValue => checkedOptions.indexOf(optionValue.option) > -1);
-			return result ;
+		  let mainOptionsChecked = App.taxonomyModule.getMainOptions().filter( child => !child.isDisabled);;
+			let mainCategoryFilled = mainOptionsChecked.some( (mainOption) => element.haveOption(mainOption) );
+			let otherCategoriesFilled = App.taxonomyModule.otherRootCategories.every( (category) => this.recursivelyCheckInCategory(category, element));
+			return mainCategoryFilled && otherCategoriesFilled;
 		}
 		else
 		{
 			let mainOption = App.taxonomyModule.getCurrMainOption();			
-			let isPassingFilters = this.recursivelyCheckedInOption(mainOption, element);			
-			return isPassingFilters;
+			let mainOptionFilled = this.recursivelyCheckedInOption(mainOption, element);			
+			let otherCategoriesFilled = App.taxonomyModule.otherRootCategories.every( (category) => this.recursivelyCheckInCategory(category, element));
+			return mainOptionFilled && otherCategoriesFilled;
 		}		
 	}
 
+  log = false;
+
 	private recursivelyCheckedInOption(option : Option, element : Element) : boolean
 	{
-		let log = false;
-
-		if (log) console.log( "Check for option ", option.name);
+		if (this.log) console.log( "Check for option ", option.name);
 
 		let result;
 		if (option.subcategories.length == 0 || (option.isDisabled && !option.isMainOption) )
 		{
-			if (log) console.log( "No subcategories ");
+			if (this.log) console.log( "No subcategories ");
 			result = option.isChecked && element.haveOption(option);
 		}
 		else
 		{
-			result = option.subcategories.every( (category) =>
-			{
-				if (log) console.log("--" + "Category", category.name);
-
-				if (!category.useForFiltering) return true;
-				let checkedOptions = category.checkedOptions;
-				let elementOptions = element.getOptionValueByCategoryId(category.id);
-				if (App.config.menu.showOnePanePerMainOption) elementOptions = elementOptions.filter((optValue) => optValue.optionId != App.currMainId);
-
-				// if this element don't have any option in this category, don't need to check
-				if (elementOptions.length == 0 && log) console.log("--" + "Element don't have options in this category. Catgeoyr mandatory ? ", category.isMandatory);
-				if (elementOptions.length == 0) return !category.isMandatory;
-
-				let isSomeOptionInCategoryCheckedOptions = elementOptions.some(optionValue => checkedOptions.indexOf(optionValue.option) > -1); 
-
-				if (log) console.log("--" + "isSomeOptionInCategoryCheckedOptions", isSomeOptionInCategoryCheckedOptions);
-				if (isSomeOptionInCategoryCheckedOptions)
-					return true;
-				else
-				{				
-					if (log) console.log("--" + "So we checked in suboptions", category.name);
-					return elementOptions.some( (optionValue) => this.recursivelyCheckedInOption(optionValue.option, element));
-				}
-			});
+			result = option.subcategories.every( (category) => this.recursivelyCheckInCategory(category, element));
 		}
-		if (log) console.log("Return ", result);
+		if (this.log) console.log("Return ", result);
 		return result;
+	}
+
+	private recursivelyCheckInCategory(category : Category, element : Element) : boolean
+	{
+		if (this.log) console.log("--" + "Category", category.name);
+
+		if (!category.useForFiltering) return true;
+		let checkedOptions = category.checkedOptions;
+		let elementOptions = element.getOptionValueByCategoryId(category.id);
+		if (App.config.menu.showOnePanePerMainOption) elementOptions = elementOptions.filter((optValue) => optValue.optionId != App.currMainId);
+
+		// if this element don't have any option in this category, don't need to check
+		if (elementOptions.length == 0 && this.log) console.log("--" + "Element don't have options in this category. Catgeoyr mandatory ? ", category.isMandatory);
+		if (elementOptions.length == 0) return !category.isMandatory && category.isChecked;
+
+		let isSomeOptionInCategoryCheckedOptions = elementOptions.some(optionValue => checkedOptions.indexOf(optionValue.option) > -1); 
+
+		if (this.log) console.log("--" + "isSomeOptionInCategoryCheckedOptions", isSomeOptionInCategoryCheckedOptions);
+		if (isSomeOptionInCategoryCheckedOptions)
+			return true;
+		else
+		{				
+			if (this.log) console.log("--" + "So we checked in suboptions", category.name);
+			return elementOptions.some( (optionValue) => this.recursivelyCheckedInOption(optionValue.option, element));
+		}
 	}
 }
