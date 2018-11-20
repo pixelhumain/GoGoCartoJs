@@ -17,6 +17,7 @@
 
   .menu-element-item-text {
     display: inline-block !important;
+    @media #{$small-only} { display:none !important; }
     text-transform: uppercase;
     line-height: 3rem;
     margin-left: 10px;
@@ -42,6 +43,7 @@
     .field {
       background-color: white;
       padding-left: 1.5rem;
+      @media #{$small-only} { padding-left: .8rem; }
       padding-top: .8rem;
       padding-bottom: .8rem;
       padding-right: 1rem;
@@ -54,7 +56,6 @@
         h3.category-name {
           background-color: $light;
           margin-left: 0;
-          padding-left: 1.5rem;
           color: $secondary;
           &:first-child { color: $primary; }
           margin-bottom: 0;
@@ -63,7 +64,7 @@
       }
 
       &.field-textarea.first-element-of-body-content {
-        margin-top: 0;
+        padding-top: 1.3rem;
         background-color: $light;
         padding-bottom: 0;
       }
@@ -74,9 +75,12 @@
       margin-top: -.4rem;
     }
 
+    .field-openhours .day { padding-left: 0; }
+
     h3 {
       font-weight: 900;
       padding-left: 1.5rem;
+      @media #{$small-only} { padding-left: .8rem; }
 
       &.first-element-of-body-content { padding-top: 1.2rem; }
     }
@@ -142,9 +146,7 @@
 
     .field-tags {
       background-color: $light;
-      margin-top: 0;
-      padding-top: 1rem;
-      padding-left: 1.5rem;
+      margin-top: 1rem !important;
       margin-bottom: -10px;
       text-align: center;
 
@@ -212,20 +214,27 @@
           margin-right: 5px;
         }
         margin-right: 0;
+      }
+
+      .icon.disabled {
+        color: #bbbbbb;
       }    
     }
     
   }
+
+  .collapsible-header .custom-header { margin-bottom: .8rem; }
 
   .expand-label {
     width: auto;
     float: right;
     border: 2px solid;
     color: $secondary;
-    padding: 8px 15px;
+    padding: 8px 15px !important;
     text-align: center;
     border-radius: 20px;
     margin-top: -3px;
+    margin-right: -.5rem;
     &:before {
       margin-right: 8px;
       color: white;
@@ -270,12 +279,20 @@
   .gogo-icon-close { font-size: .9rem; }
   .collapsible-header .name { font-size: 15px; } 
 
+  .element-item.active {
+    .collapsible-header-title {
+      @media (min-width:850px) { padding-left: 2rem; }
+      padding-top: 1.2rem;
+      padding-bottom: 1rem;
+    }
+  }
+
   @media #{$small-only} { 
     .element-item .expand-label {
       margin-right: 10px;
       font-size: 13px;
       font-weight: 900;
-      padding: 8px 10px;
+      padding: 8px 10px !important;
     }
   }
   .element-item.active {
@@ -283,10 +300,10 @@
       background-color: white;
       color: $secondary;
       &:hover { color: $secondary; }
-      @media #{$small-only} { padding: 8px 10px; }
+      @media #{$small-only} { padding: 8px 10px !important; }
     }
 
-    .collapsible-header { padding-bottom: .8rem; }
+    .collapsible-header { padding-bottom: .4rem; }
     .inline-option-values { display: none; }
   }
 }

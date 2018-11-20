@@ -42,3 +42,14 @@
   color: white; 
   .mini-icon-stamp:before { background-color: #f09b00; }
 }
+
+.moreIconContainer .moreIconWrapper.disabled {
+    border: none;
+    padding-top: 3px;
+    background-color: #929292;
+
+    .iconInsideMarker.disabled {
+      color: #d2d0d0 !important;
+    }
+}
+

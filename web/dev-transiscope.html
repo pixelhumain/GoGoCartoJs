@@ -31,9 +31,13 @@
     <script>
       $(document).ready(function()
       {  
-        carto = goGoCarto('#gogocarto', {
+        // carto = goGoCarto('#gogocarto', "https://transiscope.org/wp-content/configuration-transiscope-V2.json");
+
+        carto = goGoCarto('#gogocarto', 
+        {
           "data":
           {
+            // "taxonomy": "https://transiscope.org/wp-content/TaxonomiePWA-V2.json",
             "taxonomy": "https://semantic-bus.org/data/api/TaxonomiePWA",
             "elements": "https://transiscope.gogocarto.fr/api/elements",
             "requestByBounds": true
@@ -66,9 +70,7 @@
             "secondary": "#3bad78",
             "primary": "#3bad78",
             "background": "#f3f6f4",
-            "disabled": "#bcbcbc",
-
-            "mainFont": "Roboto",
+            "disableColor": "#bcbcbc",             
           },
           "images":
           {
