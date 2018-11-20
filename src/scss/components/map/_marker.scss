@@ -242,6 +242,11 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
             width: 25px;
             height: 25px;
             top: 7px;
+            &.font-awesome { 
+                left: 5px !important; 
+                right: initial;
+                top: 6px; 
+            }
         }
         .gogo-icon-plus-circle { top: -7px; right: -7px; }
         .moreIconContainer { left: 30px; }
@@ -258,6 +263,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
             width: 25px;
             height: 25px;
             top: 3px;
+            &.font-awesome { left: 8px !important; top: 2px; }
         }
         .gogo-icon-plus-circle { top: -7px; right: -8px; }
         .moreIconContainer { left: 30px }

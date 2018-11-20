@@ -4,8 +4,8 @@
 
 	<div class="rotate animate gogo-icon-marker"></div>
 	
-	<div class="iconInsideMarker-wrapper rotate">
-		{% set mainIcon = 'gogo-icon-attention' if showPending else mainOptionToDisplay.option.icon %}
+	{% set mainIcon = 'gogo-icon-attention' if showPending else mainOptionToDisplay.option.icon %}
+	<div class="iconInsideMarker-wrapper rotate {{ 'font-awesome' if mainIcon.indexOf('fa') >= 0 else '' }}">		
 		<div class="iconInsideMarker gogo-color-as {{pendingClass}} {{ 'disabled' if not mainOptionToDisplay.isFilledByFilters }} {{mainIcon}}" 
 		option-id="{{ mainOptionToDisplay.optionId if mainOptionToDisplay.option.color else mainOptionToDisplay.colorOptionId }}">
 	</div>
