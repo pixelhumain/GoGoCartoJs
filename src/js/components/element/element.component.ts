@@ -43,7 +43,11 @@ export class ElementComponent
       optionsToDisplay: optionsToDisplay,
       mainOptionToDisplay: optionsToDisplay[0], 
       otherOptionsToDisplay: optionsToDisplay.slice(1),  
-      currOptionsValues: this.element.getCurrDeepestOptionsValues().filter( (oV) => oV.option.displayInInfoBar).sort( (a,b) => a.isFilledByFilters ? -1 : 1),      
+      currOptionsValues: this.element.getCurrDeepestOptionsValues().filter( (oV) => oV.option.displayInInfoBar).sort( (a,b) => {
+        if (a.isFilledByFilters < b.isFilledByFilters) return 1;          
+        else if (a.isFilledByFilters > b.isFilledByFilters) return -1;          
+        else return a.index < b.index ? -1 : 1;
+      }),
 
       // body
       body: App.templateModule.elementTemplate.renderBody(elementTodisplay),

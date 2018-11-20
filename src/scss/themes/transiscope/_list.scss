@@ -49,7 +49,7 @@
 
   .inline-option-values {
     width: 100%;
-    .inline-option-value:last-child {
+    .inline-option-value[main-category-owner-name="Sources"] {
       float: right;
       margin-right: 0;
       .option-value { color: $dark; }

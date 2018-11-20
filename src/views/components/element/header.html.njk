@@ -41,17 +41,17 @@
   <span class="inline-option-values gogo-color-soft col s8 hideOnLargeScreen">
     
     {% set lastIconToDisplay = '' %}
-    {% for optionValue in currOptionsValues %}       
-      <span class="inline-option-value {{ 'main-option' if optionValue.option.isMainOption else '' }}">
-        {% set isDisabled =   '' if optionValue.isFilledByFilters else 'disabled' %}
-        {% set option = optionValue.option %}
+    {% for optionValue in currOptionsValues %}   
+      {% set option = optionValue.option %}    
+      <span class="inline-option-value {{ 'main-option' if optionValue.option.isMainOption else '' }}" main-category-owner-name="{{ option.getMainCategoryOwner().name }}">
+        {% set isDisabled =   '' if optionValue.isFilledByFilters else 'disabled' %}        
         {% set icon = option.icon %}
         {% set parentIcon = option.getOwner().getOwner().icon if option.getOwner() else '' %}
         {% set iconToDisplay = parentIcon if parentIcon and not option.useIconForMarker else icon %}
 
         {% set sameIcon = iconToDisplay == lastIconToDisplay %}
         {% if iconToDisplay and not sameIcon %}    
-          <span class="icon {{ iconToDisplay }} gogo-bg-color-as gogo-color-as" option-id='{{ option.id }}' ></span>
+          <span class="icon {{ isDisabled }} {{ iconToDisplay }} gogo-bg-color-as gogo-color-as" option-id='{{ option.id }}' ></span>
         {% endif %}
         {% set lastIconToDisplay = iconToDisplay %}
 

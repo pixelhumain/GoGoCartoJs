@@ -127,9 +127,9 @@ export class TaxonomyModule
 		for(let option of category.children)
 		{
 			if (option.isMainOption || parentOption === null) option.mainOwnerId = "all";
-			else if (parentOption.isMainOption) option.mainOwnerId = parentOption.id;
+			else if (parentOption.isMainOption || (!parentOption.mainOwnerId && parentOption.id != "Racine")) option.mainOwnerId = parentOption.id;
 			else option.mainOwnerId = parentOption.mainOwnerId;
-
+			
 			if (parentOption) (<Option>option).parentOptionIds = parentOption.parentOptionIds.concat([parentOption.id]);
 
 			for(let subcategory of option.children)
