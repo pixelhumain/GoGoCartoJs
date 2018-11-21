@@ -136,8 +136,7 @@ export class GoGoConfig
   readonly theme = 'default';
   // see gogo-styles for defaut values
   readonly colors =
-  {
-    
+  {    
     contentBackground: tinycolor('white'),  // background color of text zone
     background: tinycolor('#f4f4f4'),    // background color of non text zone
 
@@ -161,6 +160,7 @@ export class GoGoConfig
     interactiveSection: undefined, // by default primary
     mapControlsBgd: undefined,
     mapControls: undefined,  
+    mapListBtn: undefined,
   }
   readonly fonts =
   {
@@ -214,6 +214,9 @@ export class GoGoConfig
     }
     if (!this.colors.textDarkSoft) {
       this.colors.textDarkSoft = tinycolor(this.colors.textDark.toString()).lighten(15);
+    }
+    if (!this.colors.mapListBtn) {
+      this.colors.mapListBtn = tinycolor.readability(this.colors.primary, this.colors.mapControlsBgd) ? this.colors.primary : this.colors.mapControls;
     }
     console.log(this);
 	}

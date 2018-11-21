@@ -62,8 +62,9 @@ export class MapComponent
 		});
 
 		setTimeout(function() { 
-			$('.leaflet-control-zoom').addClass('gogo-section-controls');	
+			$('.leaflet-control-zoom').addClass('gogo-section-controls');				
 			$('.leaflet-control-zoom a').addClass('gogo-color-link');
+			$('.leaflet-control-layers').addClass('gogo-section-controls');	
 		}, 0);
 		
 		this.markerClustererGroup = L.markerClusterGroup({

@@ -155,12 +155,8 @@ a.leaflet-control-zoom-out {
   }  
 }
 
+.leaflet-control-layers-toggle { display:none; }
 
-
-.leaflet-control-layers-toggle
-{
-  display:none;
-}
 .leaflet-control-layers
 {
   padding: 0 !important;
@@ -169,15 +165,15 @@ a.leaflet-control-zoom-out {
   z-index: 600;
   margin-right: 19px !important;
   margin-top: 15px !important;
+  border: none;
+  @include box-shadow-1(0 2px 6px rgba(0,0,0,0.3));
 }
 
 .leaflet-control-layers-list
 {
   display: block !important;
-  padding: 5px 25px 10px 15px;
+  padding: 3px 0;
   position: relative !important;
-
-  @extend .custom-scroll-bar-light
 }
 
 .leaflet-control-layers-selector:checked + span
@@ -190,20 +186,12 @@ a.leaflet-control-zoom-out {
   label
   {
     text-transform: uppercase;
-    padding-top: 4px;
     line-height: 1.4rem;
     border-bottom: 1px dashed #cccccc;
+    padding: 4px 15px 0 15px;
 
-    &:hover
-    {
-      background-color: #f4f4f4;
-      cursor: pointer;
-    }
-
-    &:last-child
-    {
-      border: none;
-    }
+    &:hover { cursor: pointer; }
+    &:last-child { border: none; }
   }  
 }
 

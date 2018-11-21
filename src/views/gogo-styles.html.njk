@@ -4,9 +4,11 @@
   .gogo-load-css .gogo-bg-{{ name }} { background-color: {{ value }} !important; }
 {% endmacro %}
 
-{% macro createBackgroung(name, bgdColor) %}
+{% macro createBackgroung(name, bgdColor, textColor = null) %}
   {% if bgdColor %}
-    {% set textColor = config.colors.textDark if bgdColor.isLight() else config.colors.textLight %}
+    {% if not textColor %}
+      {% set textColor = config.colors.textDark if bgdColor.isLight() else config.colors.textLight %}
+    {% endif %}
     {% set textSoftColor = config.colors.textDarkSoft if bgdColor.isLight() else config.colors.textLightSoft %}
     {% set name = name|replace('&#39;', '"') %}
     .gogo-load-css .gogo-{{ name }} { background-color: {{ bgdColor }}; color: {{ textColor }}; }
@@ -51,7 +53,7 @@
   {{ createBackgroung('section-primary', primary) }}
   {{ createBackgroung('section-searchbar', searchBar) }}
   {{ createBackgroung('section-background', background) }}
-  {{ createBackgroung('section-controls', config.colors.mapControlsBgd) }}
+  {{ createBackgroung('section-controls', config.colors.mapControlsBgd, config.colors.mapControls) }}
   {{ createcolor('primary', primary) }}
 
   {# TAXONOMY COLORS #}
@@ -77,4 +79,5 @@
 {% include 'styles/list.html.njk' %}
 {% include 'styles/menu-filters.html.njk' %}
 {% include 'styles/search-bar.html.njk' %}
+{% include 'styles/map.html.njk' %}
 

@@ -1,0 +1,14 @@
+<style>
+  {% set textHoverColor = config.colors.textLightSoft if config.colors.mapControlsBgd.isLight() else config.colors.textDarkSoft %}
+  .gogo-load-css .leaflet-control-layers-base label:hover { background-color: {{ textHoverColor }}; }
+
+  .gogo-load-css #modal-iframe .iframe-input, .gogo-load-css #modal-iframe #iframe-code {
+    background-color: {{ textLightSoft }};
+    color: {{ textDarkSoft }};
+  }
+
+  .gogo-load-css .show-as-list-button {    
+    color: {{ config.colors.listBtnColor }};
+  }
+  
+</style>

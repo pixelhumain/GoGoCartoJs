@@ -111,6 +111,7 @@ export class DirectionsComponent
 	showItineraryPanel(element : Element)
 	{
 		$('#directory-menu-main-container').removeClass().addClass("directions");	
-		$('.leaflet-routing-container').prependTo('.directory-menu-content');		
+		$('.leaflet-routing-container').prependTo('.directory-menu-content');	
+		setTimeout(() => { $('.leaflet-routing-container').find('h2 .distance').addClass('gogo-color-soft'); }, 200);
 	}
 }
