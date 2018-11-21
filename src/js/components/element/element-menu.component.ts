@@ -38,17 +38,16 @@ export class ElementMenuComponent
 		this.dom.find('.item-remove-favorite').toggle(this.element.isFavorite);
 	}
 
+	checkDisplayFullText()
+	{
+		let fullText = this.dom.width() >= this.dom.find('.menu-element-item:visible').length*120;
+		this.showFullTextMenu(fullText);
+	}
+
 	showFullTextMenu(bool : boolean)
 	{
-		if (bool)
-		{
-			this.dom.addClass("full-text");
-			this.dom.find('.tooltipped').tooltip('remove');	
-		}
-		else
-		{
-			this.dom.removeClass("full-text");
-		}
+		if (bool) this.dom.addClass("full-text").find('.tooltipped').tooltip('remove');	
+		else this.dom.removeClass("full-text");
 	}
 
 	private initialize()

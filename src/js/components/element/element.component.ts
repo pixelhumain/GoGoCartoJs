@@ -99,6 +99,8 @@ export class ElementComponent
     // INIT TABS (for admin section)
     setTimeout( () => { this.dom.find('.info-bar-tabs').tabs(); }, 100);
 
+    setTimeout( () => { this.menuComponent.checkDisplayFullText(); }, 100);    
+
     // Give a special class of first element displayed (useful for styling)
     this.dom.find('.body-main-tab-content').find(">:first-child").addClass('first-element-of-body-content');    
   }

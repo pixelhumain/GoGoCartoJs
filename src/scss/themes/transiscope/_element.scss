@@ -16,20 +16,18 @@
   }
 
   .menu-element-item-text {
-    display: inline-block !important;
-    @media #{$small-only} { display:none !important; }
     text-transform: uppercase;
     line-height: 3rem;
     margin-left: 10px;
     font-size: 12px;
   }
   @media (max-width: 460px) { 
+    .menu-element.full-text { padding: 0; }
     .menu-element-item {
        margin: 0 .5rem !important;
       .menu-element-item-text { font-size: 11px; margin-left: 5px;}
       .menu-icon { font-size: 16px; }
-    }
-      
+    }      
   }
 
   .collapsible-body {

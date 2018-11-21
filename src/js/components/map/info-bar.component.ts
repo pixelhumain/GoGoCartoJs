@@ -148,21 +148,20 @@ export class InfoBarComponent
 	updateMenu()
 	{
 		if (!this.elementVisible) return;
-		// on large screen info bar is displayed aside and so we have enough space
-		// to show menu actions details in full text
-		this.elementVisible.component.menuComponent.showFullTextMenu(this.isDisplayedAside());
+		this.checkDisplayMenuIconFullText();		
 	}
 
 	show()
 	{
 		this.hideDetails();
 
-		App.searchBarComponent.hideMobileSearchBar();		
+		App.searchBarComponent.hideMobileSearchBar();	
 		
 		if (!this.isDisplayedAside())
 		{
 			this.dom.show();
 			this.dom.find('.collapsible-header').removeClass('gogo-bg-soft-color-as');
+			this.dom.find('#element-info').css('margin-bottom', this.domMenu.outerHeight());
 			let elementInfoBar_newHeight = this.dom.find('#element-info').outerHeight(true);
 
 			this.updateInfoBarSize();
@@ -191,6 +190,7 @@ export class InfoBarComponent
 				this.dom.stop(true).css('right', '0'); 			
 			}, 400);				
 		}	
+		this.checkDisplayMenuIconFullText();
 
 		this.isVisible = true;
 	};	
@@ -255,17 +255,24 @@ export class InfoBarComponent
 
 	get isDetailsVisible() { return this.dom.find('.moreDetails').is(':visible'); }
 
+	// Check if there is enough space to display the full text menu
+	// No matter what, menu is displayed full text when info bar is displayed aside, or when full detail is toggled
+	checkDisplayMenuIconFullText()
+	{
+		if (this.elementVisible && this.elementVisible.component.menuComponent) {
+			if (this.isDisplayedAside() || this.isDetailsVisible) this.elementVisible.component.menuComponent.showFullTextMenu(true);
+			else this.elementVisible.component.menuComponent.checkDisplayFullText();
+		}			
+	}
+
 	toggleDetails()
 	{	
 		if (this.isDetailsVisible)
 		{
-			this.hideDetails();
-			this.elementVisible.component.menuComponent.showFullTextMenu(false);
+			this.hideDetails();			
 		}
 		else
 		{
-			if (this.domMenu.width() >= this.domMenu.find('.menu-element-item:visible').length*100) this.elementVisible.component.menuComponent.showFullTextMenu(true);
-
 			this.dom.find('.element-item').addClass('active');		
 			this.dom.find('.moreDetails').show();	
 			this.dom.find('.moreDetails.tabs').css('display','flex');		
@@ -288,6 +295,8 @@ export class InfoBarComponent
 		  this.elementVisible.component.imagesComponent.verticalAlignCurrentImage();
 		  App.gogoControlComponent.hide();
 		}	
+
+		this.checkDisplayMenuIconFullText();
 	};
 
 	hideDetails()
