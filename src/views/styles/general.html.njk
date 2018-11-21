@@ -1,0 +1,49 @@
+<style> 
+  {# FONTS #}
+  .gogo-load-css { font-family: {{ mainFont }}, sans-serif; }
+  .gogo-load-css h1,
+  .gogo-load-css .gogo-font-title,
+  .gogo-load-css .sub-categorie-main-title
+  { font-family: {{ titleFont }}, sans-serif;}  
+
+  {# FORM  #}
+  .gogo-load-css [type="checkbox"] + label { color: {{ textSoft }}; }
+
+  {# LINK #}
+  .gogo-load-css a { color: {{ primary }}; }
+
+  {# BUTTON #}
+  .gogo-load-css .btn { color: #fff; background-color: {{ primary }}; }
+  .gogo-load-css .btn:hover { background-color: {{ primary }}; }  
+  .gogo-load-css .btn:focus { background-color: {{ primary }}; }  
+
+  {# MARKERS #}
+  .gogo-load-css .marker-cluster div {
+    font-family: {{ mainFont }}, sans-serif;
+  }  
+  .gogo-load-css .marker-location-position.leaflet-marker-icon {
+    box-shadow: {{ primary }} 0px 0px 4px 1px;
+    background-color: {{ primary }};
+  }
+
+  {# TOOLTIPS #}
+  .backdrop, .material-tooltip, .toast, .main-option-tooltip { 
+    background-color: {{ textDark if text.isDark() else contentBgd }};
+    font-family: {{ mainFont }}, sans-serif; 
+  }
+
+  {# SCROLLBAR #}
+  .custom-scroll-bar::-webkit-scrollbar {
+      width: 12px;
+  }
+  .custom-scroll-bar::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      border: 3px solid {{ background }};
+      background-color: {{ textSoft }};
+  } 
+  .custom-scroll-bar::-webkit-scrollbar-track {
+    background-color: {{ background }};
+    border: 1px solid {{ background.darken(5) }};
+  }
+  {% set background = background.lighten(5) %} /* restor color */ 
+</style>

@@ -1,0 +1,39 @@
+<style>
+  {# ELEMENT INFO #}
+  @media (max-width: 700px) {
+    .gogo-load-css .collapsible-header .expand-label { color: {{ primary }}; }
+  }
+  .gogo-load-css .collapsible-header .expand-label { color: {{ text }}; }
+  .gogo-load-css .collapsible-header:hover .expand-label { color: {{ primary }}; }
+
+  .gogo-load-css .interactive-section { background-color: {{ interactiveColor }}; }
+  
+  {% if config.colors.infoBarMenu %}
+    .gogo-load-css .gogocarto-container .element-item .menu-element { background-color: {{ config.colors.infoBarMenu }}; }
+    .gogo-load-css .gogocarto-container #element-info-bar .element-item.active .expand-label.transform-big { background-color: {{ config.colors.infoBarMenu }}; }
+  {% endif %}
+  {% if config.colors.infoBarHeader %}
+    .gogo-load-css .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header { background-color: {{ config.colors.infoBarHeader }}; }
+  {% endif %}
+
+  .gogo-load-css .gogocarto-container #directory-content-list .element-item .collapsible-header,
+  #element-info-bar.display-bottom .collapsible-header { 
+    background-color: {{ contentBgd }}; 
+    border-color: {{ lineBorder }};
+    color: {{ text }};
+  }
+
+  {# ELEMENT INFO BAR #}
+  .gogo-load-css #element-info-bar.display-bottom .element-item .collapsible-header { border-color: {{ lineBorder }} }
+  .gogo-load-css .gogocarto-container .element-item .info-bar-divider { background-color: {{ lineBorder }}; }
+  .gogo-load-css .gogocarto-container .element-item .collapsible-body { background-color: {{ contentBackgroundElementBody }}; }
+
+  .gogo-load-css .tabs.info-bar-tabs {
+    background-color: {{ text }};
+  }
+  .gogo-load-css .tabs.info-bar-tabs .indicator {
+    bottom: 0;
+    top: initial;
+    background-color: {{ textSoft }};
+  }
+</style>

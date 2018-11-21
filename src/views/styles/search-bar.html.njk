@@ -1,0 +1,36 @@
+<style>
+  .gogo-load-css .search-bar { background-color: {{ contentBgd }} !important; }
+  .gogo-load-css .search-bar::selection {
+    background: {{ searchBar }}; 
+    color: white;
+  }
+  .gogo-load-css .search-bar::-moz-selection {
+    background: {{ searchBar }}; 
+    color: white;
+  }
+  {% set searchBarText = textLightSoft if searchBar.isDark() else textDarkSoft %}
+  {% set searchBarBtnText = textDarkSoft if searchBar.isDark() else textLightSoft %}
+  .gogo-load-css .search-bar-with-options-container .search-option-radio-label:before { border-color: {{ searchBarText }}; }
+  .gogo-load-css .search-bar-with-options-container .search-option-radio-label:after { 
+    border-color: {{ searchBarText }} !important; 
+    background-color: {{ searchBarText }} !important;
+  }
+  .gogo-load-css .search-bar-with-options-container .search-action-btn { 
+    background-color: {{ searchBarText }}; 
+    color: {{ searchBarBtnText }};  
+  }
+  .gogo-load-css .search-bar-with-options-container .search-action-btn:hover { background-color: {{ searchBarText.lighten(10) }};  }
+
+  {% set searchBarMobileText = textLightSoft if contentBgd.isDark() else textDarkSoft %}
+  {% set searchBarMobileBtnText = textDarkSoft if contentBgd.isDark() else textLightSoft %}
+  .gogo-load-css .search-bar-with-options-container.mobile .search-option-radio-label:before { border-color: {{ searchBarMobileText }}; }
+  .gogo-load-css .search-bar-with-options-container.mobile .search-option-radio-label:after { 
+    border-color: {{ searchBarMobileText }} !important; 
+    background-color: {{ searchBarMobileText }} !important;
+  }
+  .gogo-load-css .search-bar-with-options-container.mobile .search-action-btn { 
+    background-color: {{ searchBarMobileText }}; 
+    color: {{ searchBarMobileBtnText }}; 
+  }
+  .gogo-load-css .search-bar-with-options-container.mobile .search-action-btn:hover { background-color: {{ searchBarMobileText.lighten(10) }};  }
+</style>

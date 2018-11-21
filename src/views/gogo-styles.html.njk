@@ -19,30 +19,32 @@
   {% endif %}
 {% endmacro %}
 
+{# The following file generate styling accoring to GoGoCartoJS configuration #}
+
+{% set textDark        = config.colors.textDark %}
+{% set textDarkSoft    = config.colors.textDarkSoft %}  
+{% set textLight       = config.colors.textLight %}
+{% set textLightSoft   = config.colors.textLightSoft %} 
+
+{% set contentBgd = config.colors.contentBackground %}
+{% set text     = config.colors.textDark if contentBgd.isLight() else config.colors.textLight %}
+{% set textSoft = config.colors.textDarkSoft if contentBgd.isLight() else config.colors.textLightSoft %}
+
+{% set primary         = config.colors.primary %}
+{% set secondary       = config.colors.secondary | default(primary) %}
+{% set background      = config.colors.background %}
+
+{% set mainFont  = config.fonts.mainFont %}
+{% set titleFont = config.fonts.titleFont | default(mainFont) %}
+
+{% set contentBackgroundElementBody = config.colors.contentBackgroundElementBody %}
+{% set menuOptionHover = config.colors.menuOptionHover %}
+{% set disabled           = config.colors.disabled %}
+{% set lineBorder         = config.colors.lineBorder %}
+{% set searchBar          = config.colors.searchBar          | default(primary) %}
+{% set interactiveColor   = config.colors.interactiveSection | default(primary) %}
+
 <style>
-  {% set textDark        = config.colors.textDark %}
-  {% set textDarkSoft    = config.colors.textDarkSoft %}  
-  {% set textLight       = config.colors.textLight %}
-  {% set textLightSoft   = config.colors.textLightSoft %} 
-
-  {% set contentBgd = config.colors.contentBackground %}
-  {% set text     = config.colors.textDark if contentBgd.isLight() else config.colors.textLight %}
-  {% set textSoft = config.colors.textDarkSoft if contentBgd.isLight() else config.colors.textLightSoft %}
-
-  {% set primary         = config.colors.primary %}
-  {% set secondary       = config.colors.secondary | default(primary) %}
-  {% set background      = config.colors.background %}
-
-  {% set mainFont  = config.fonts.mainFont %}
-  {% set titleFont = config.fonts.titleFont | default(mainFont) %}
-
-  {% set contentBackgroundElementBody = config.colors.contentBackgroundElementBody %}
-  {% set menuOptionHover = config.colors.menuOptionHover %}
-  {% set disabled           = config.colors.disabled %}
-  {% set lineBorder         = config.colors.lineBorder %}
-  {% set searchBar          = config.colors.searchBar          | default(primary) %}
-  {% set interactiveColor   = config.colors.interactiveSection | default(primary) %}
-
   {# DESIGN #}  
   {{ createBackgroung('section-content', contentBgd) }}
   {{ createBackgroung('section-content-opposite', text) }}
@@ -67,183 +69,12 @@
       {{ createBackgroung(name|safe, softColor) }}
       .gogo-load-css .gogo-color-as[option-id="{{ option.id }}"] { color: {{ option.color }} }
     {% endif %}
-  {% endfor %} 
-
-  .gogo-load-css .gogo-bg-soft-color-as.pending { background-color: #616161 }
-  .gogo-load-css .gogo-bg-color-as.pending { background-color: #484848 }
-  .gogo-load-css .gogo-color-as.pending { color:#484848 }
-
-  .gogo-load-css { font-family: {{ mainFont }}, sans-serif; }
-  .gogo-load-css h1 { font-family: {{ titleFont }}; }
-
-  .gogo-load-css .element-list-header .show-as-map-button:hover { color: {{ primary }}; }
-
-  .gogo-load-css .marker-location-position.leaflet-marker-icon {
-    box-shadow: {{ primary }} 0px 0px 4px 1px;
-    background-color: {{ primary }};
-  }
-  .gogo-load-css .gogo-font-title,
-  .gogo-load-css .sub-categorie-main-title
-  { font-family: {{ titleFont }}, sans-serif;}
-
-  @media (max-width: 700px) {
-    .gogo-load-css .collapsible-header .expand-label { color: {{ primary }}; }
-  }
-  .gogo-load-css .collapsible-header .expand-label { color: {{ text }}; }
-  .gogo-load-css .collapsible-header:hover .expand-label { color: {{ primary }}; }
-
-  .gogo-load-css .interactive-section { background-color: {{ interactiveColor }}; }
-
-  .gogo-load-css .search-bar { background-color: {{ contentBgd }} !important; }
-  .gogo-load-css .search-bar::selection {
-    background: {{ searchBar }}; 
-    color: white;
-  }
-  .gogo-load-css .search-bar::-moz-selection {
-    background: {{ searchBar }}; 
-    color: white;
-  }
-  {% set searchBarText = textLightSoft if searchBar.isDark() else textDarkSoft %}
-  {% set searchBarBtnText = textDarkSoft if searchBar.isDark() else textLightSoft %}
-  .gogo-load-css .search-bar-with-options-container .search-option-radio-label:before { border-color: {{ searchBarText }}; }
-  .gogo-load-css .search-bar-with-options-container .search-option-radio-label:after { 
-    border-color: {{ searchBarText }} !important; 
-    background-color: {{ searchBarText }} !important;
-  }
-  .gogo-load-css .search-bar-with-options-container .search-action-btn { 
-    background-color: {{ searchBarText }}; 
-    color: {{ searchBarBtnText }};  
-  }
-  .gogo-load-css .search-bar-with-options-container .search-action-btn:hover { background-color: {{ searchBarText.lighten(10) }};  }
-
-  {% set searchBarMobileText = textLightSoft if contentBgd.isDark() else textDarkSoft %}
-  {% set searchBarMobileBtnText = textDarkSoft if contentBgd.isDark() else textLightSoft %}
-  .gogo-load-css .search-bar-with-options-container.mobile .search-option-radio-label:before { border-color: {{ searchBarMobileText }}; }
-  .gogo-load-css .search-bar-with-options-container.mobile .search-option-radio-label:after { 
-    border-color: {{ searchBarMobileText }} !important; 
-    background-color: {{ searchBarMobileText }} !important;
-  }
-  .gogo-load-css .search-bar-with-options-container.mobile .search-action-btn { 
-    background-color: {{ searchBarMobileText }}; 
-    color: {{ searchBarMobileBtnText }}; 
-  }
-  .gogo-load-css .search-bar-with-options-container.mobile .search-action-btn:hover { background-color: {{ searchBarMobileText.lighten(10) }};  }
-
-  {% if config.colors.infoBarMenu %}
-    .gogo-load-css .gogocarto-container .element-item .menu-element { background-color: {{ config.colors.infoBarMenu }}; }
-    .gogo-load-css .gogocarto-container #element-info-bar .element-item.active .expand-label.transform-big { background-color: {{ config.colors.infoBarMenu }}; }
-  {% endif %}
-  {% if config.colors.infoBarHeader %}
-    .gogo-load-css .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header { background-color: {{ config.colors.infoBarHeader }}; }
-  {% endif %}
-
-  .gogo-load-css .gogocarto-container #directory-content-list .element-item .collapsible-header,
-  #element-info-bar.display-bottom .collapsible-header { 
-    background-color: {{ contentBgd }}; 
-    border-color: {{ lineBorder }};
-    color: {{ text }};
-  }
-
-  {# ELEMENT INFO BAR #}
-  .gogo-load-css #element-info-bar.display-bottom .element-item .collapsible-header { border-color: {{ lineBorder }} }
-  .gogo-load-css .gogocarto-container .element-item .info-bar-divider { background-color: {{ lineBorder }}; }
-  .gogo-load-css .gogocarto-container .element-item .collapsible-body { background-color: {{ contentBackgroundElementBody }}; }
-  
-  {# MENU, FILTERS #}
-  .gogo-load-css .subcategorie-option-item:hover { background-color: {{ menuOptionHover }}; }  
-  .gogo-load-css #main-option-all.show-one-pane-per-main-option .gogo-icon-name-wrapper:hover:after { color: {{ primary }}; }
-  .gogo-load-css .main-categories #active-main-option-background { background-color: {{ textDarkSoft }}; }
-
-  .gogo-load-css .gogocarto-container .subcategory-item.top-separator { border-color: {{ lineBorder }}; }
-  .gogo-load-css .subcategorie-option-item:hover          .subcategorie-option-checkbox + label:before { color: {{ primary }}; border-color: {{ primary }} }  
-  .gogo-load-css .subcategorie-option-item:not(.expanded) .option-name       .arrow-after { border-color: {{ textSoft }} transparent transparent transparent; opacity: 0.6; }
-  .gogo-load-css .subcategorie-option-item:not(.expanded) .option-name:hover .arrow-after { border-color: {{ primary }} transparent transparent transparent !important; opacity: 1; }
-  .gogo-load-css .subcategorie-option-item.expanded       .option-name       .arrow-after { border-color:  transparent transparent {{ neutral }} transparent; opacity: 0.6; }
-  .gogo-load-css .subcategorie-option-item.expanded       .option-name:hover .arrow-after { border-color:  transparent transparent {{ primary }} transparent !important; opacity: 1; }
-
-  .gogo-load-css .subcategorie-option-item.disabled:not(:hover) { color: {{ disabled }}; }
-  .gogo-load-css .subcategorie-option-item.disabled .subcategorie-option-checkbox + label:before { border-color: {{ disabled }}; }
-  .gogo-load-css .subcategorie-option-item.disabled:not(:hover) .icon { color: {{ disabled }}; opacity: .7;}
-  .gogo-load-css .subcategorie-option-item.disabled:not(:hover) .arrow-after { border-color: {{ disabled }} transparent transparent transparent !important;}
-
-  .gogo-load-css .subcategorie-option-item.expanded.disabled .option-name .arrow-after { border-color:  transparent transparent {{ disabled }} transparent !important; }
-  .gogo-load-css .subcategorie-option-item.expanded.disabled .option-name:hover .arrow-after { border-color:  transparent transparent {{ primary }} transparent !important; }
-
-  .gogo-load-css .subcategory-item                .name-wrapper:hover { color: {{ primary }}; }
-  .gogo-load-css .subcategory-item:not(.expanded) .name-wrapper       .arrow-after { border-color: {{ textSoft }} transparent transparent  transparent; opacity: 0.6; }
-  .gogo-load-css .subcategory-item:not(.expanded) .name-wrapper:hover .arrow-after { border-color: {{ primary }} transparent transparent  transparent !important; opacity: 1; }
-  .gogo-load-css .subcategory-item.expanded       .name-wrapper       .arrow-after { border-color:  transparent transparent {{ textSoft }} transparent; opacity: 0.6;}
-  .gogo-load-css .subcategory-item.expanded       .name-wrapper:hover .arrow-after { border-color:  transparent transparent {{ primary }} transparent !important; opacity: 1; }
-
-  .gogo-load-css .subcategory-item.disabled { color: {{ disabled }}; }
-  .gogo-load-css .subcategory-item.disabled .subcategorie-checkbox + label:after { border-color: {{ disabled }} !important; }
-  .gogo-load-css .subcategory-item.disabled .icon { color: {{ disabled }}; }
-  .gogo-load-css .subcategory-item.disabled .name-wrapper .arrow-after { border-color: {{ disabled }} transparent transparent transparent !important; }
-  .gogo-load-css .subcategory-item.disabled.expanded .name-wrapper .arrow-after { border-color:  transparent transparent {{ disabled }} transparent !important;}  
-
-  .gogo-load-css .subcategory-item .checkbox-wrapper .checkbox-container .subcategorie-checkbox + label:after { color: {{ textSoft }}; background-color: {{ textSoft }} }
-  .gogo-load-css .subcategorie-option-item .subcategorie-option-checkbox + label:before { border-color: {{ textSoft }}; }
-  .gogo-load-css .subcategorie-option-item.disabled .subcategorie-option-checkbox + label:before { border-color: {{ disabled }}; }
-  .gogo-load-css .subcategory-item .checkbox-wrapper .checkbox-container .subcategorie-checkbox:checked + label:before { border-color: {{ contentBgd }}; }
-
-  .gogo-load-css .subcategorie-option-item .checkbox-wrapper {
-    background: -moz-linear-gradient(left, {{ contentBgd.setAlpha(0.3) }} 0%, {{ contentBgd.setAlpha(0.8) }} 25%, {{ contentBgd.setAlpha(1) }} 80%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, {{ contentBgd.setAlpha(0.3) }} 0%,{{ contentBgd.setAlpha(0.8) }} 25%,{{ contentBgd.setAlpha(1) }} 80%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, {{ contentBgd.setAlpha(0.3) }} 0%,{{ contentBgd.setAlpha(0.8) }} 25%,{{ contentBgd.setAlpha(1) }} 80%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='{{ contentBgd.setAlpha(0.3) }}', endColorstr='{{ contentBgd.setAlpha(1) }}',GradientType=1 ); /* IE6-9 */
-  }
-
-  .gogo-load-css [type="checkbox"] + label { color: {{ textSoft }}; }
-
-  .gogo-load-css a { color: {{ primary }}; }
-
-  .gogo-load-css .btn { color: #fff; background-color: {{ primary }}; }
-  .gogo-load-css .btn:hover { background-color: {{ primary }}; }  
-  .gogo-load-css .btn:focus { background-color: {{ primary }}; }  
-
-  .gogo-load-css .marker-cluster div {
-    font-family: {{ mainFont }}, sans-serif;
-  }  
-
-  .backdrop, .material-tooltip, .toast, .main-option-tooltip { 
-    background-color: {{ textDark if text.isDark() else contentBgd }};
-    font-family: {{ mainFont }}, sans-serif; 
-  }
-  .gogo-load-css .tabs.info-bar-tabs {
-    background-color: {{ text }};
-  }
-  .gogo-load-css .tabs.info-bar-tabs .indicator {
-    bottom: 0;
-    top: initial;
-    background-color: {{ textSoft }};
-  }
-
-  .gogo-load-css #directory-content-list .bottom-gradient {
-    background: -moz-linear-gradient(top, {{ contentBgd.setAlpha(0) }} 0%, {{ contentBgd.setAlpha(1) }} 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, {{ contentBgd.setAlpha(0) }} 0%,{{ contentBgd.setAlpha(1) }} 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, {{ contentBgd.setAlpha(0) }}) 0%,{{ contentBgd.setAlpha(1) }} 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='{{ contentBgd.setAlpha(0) }}', endColorstr='{{ contentBgd.setAlpha(1) }}',GradientType=0 ); /* IE6-9 */
-  }  
-
-  .custom-scroll-bar::-webkit-scrollbar {
-      width: 12px;
-  }
-  .custom-scroll-bar::-webkit-scrollbar-thumb {
-      border-radius: 10px;
-      border: 3px solid {{ background }};
-      background-color: {{ textSoft }};
-  } 
-  .custom-scroll-bar::-webkit-scrollbar-track {
-    background-color: {{ background }};
-    border: 1px solid {{ background.darken(5) }};
-  }
-  {% set background = background.lighten(5) %} /* restor color */
-
-  {# THEMES #}
-  .gogo-theme-presdecheznous .directory-menu-header .search-icon.search-geolocalize { color: {{ textSoft }}; }  
-  .gogo-theme-presdecheznous .directory-menu-header .search-icon.search-bar-icon { background-color: {{ text }}; }
-
-
-  
+  {% endfor %}   
 </style>
+
+{% include 'styles/general.html.njk' %}
+{% include 'styles/element-info-bar.html.njk' %}
+{% include 'styles/list.html.njk' %}
+{% include 'styles/menu-filters.html.njk' %}
+{% include 'styles/search-bar.html.njk' %}
 

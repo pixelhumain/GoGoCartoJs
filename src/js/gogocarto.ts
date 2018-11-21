@@ -97,6 +97,7 @@ export class GoGoCartoModule
 		
 		if (App.taxonomyModule.options.length)
 		{
+			// Adds styles depending on configuration
 			let styles = App.templateModule.render('gogo-styles', {'optionList':App.taxonomyModule.options, 'config':App.config});
 			let domToAddStyles = $('head').length ? $('head') : $('html');
 			if (domToAddStyles.length) domToAddStyles.append(styles);
