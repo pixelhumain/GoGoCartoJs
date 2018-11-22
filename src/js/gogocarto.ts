@@ -3,7 +3,7 @@ declare var nunjucks, goGoCarto;
 
 import { AppModule, AppDataType, AppModes, AppStates } from './app.module';
 import { getQueryParams } from "./utils/params";
-
+import { afterTemplateLoaded } from './themes';
 export var App : AppModule;
 
 export class GoGoCartoModule
@@ -94,6 +94,7 @@ export class GoGoCartoModule
 		else $(this.container).append(layout);
 
 		$(this.container).trigger('templateLoaded');
+		afterTemplateLoaded();		
 		
 		if (App.taxonomyModule.options.length)
 		{
