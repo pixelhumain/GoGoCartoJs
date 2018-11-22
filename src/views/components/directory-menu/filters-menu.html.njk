@@ -28,7 +28,7 @@
 		{% endif %}
 
 		<div class="sub-categories-content gogo-section-content no-top-divider {{ "" if config.menu.showOnePanePerMainOption else "full-height" }}">
-			<ul>
+			<ul class="custom-scroll-bar">
 				{% import 'components/directory-menu/category-item.html.njk' as categoryRenderer %}
 
 				{% if config.menu.showOnePanePerMainOption %}
