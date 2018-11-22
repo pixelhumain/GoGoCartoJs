@@ -23,8 +23,8 @@
     <script src="../build/directory.js"></script>
     <script src="../build/templates.js"></script>
 
-    <script src="data/taxonomy-pwa.js"></script>
-    <script src="data/elements-single.js"></script>
+    <script src="data/taxonomy-transiscope.js"></script>
+    <!-- <script src="data/elements-single.js"></script> -->
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
 
@@ -38,7 +38,7 @@
           "data":
           {
             // "taxonomy": "https://transiscope.org/wp-content/TaxonomiePWA-V2.json",
-            "taxonomy": "https://semantic-bus.org/data/api/TaxonomiePWA",
+            "taxonomy": taxonomy, // "https://semantic-bus.org/data/api/TaxonomiePWA",
             "elements": "https://transiscope.gogocarto.fr/api/elements",
             "requestByBounds": true
           },
@@ -67,20 +67,17 @@
           "colors":
           {
             "text": "#175259",
-            "secondary": "#3bad78",
+            "textLightSoft": "#ece9e9",
             "primary": "#3bad78",
+            "secondary": "#f79900",
+            "contentBackground": "white",
             "background": "#f3f6f4",
-            "disableColor": "#bcbcbc",             
+            "disableColor": "#bcbcbc"
           },
           "images":
           {
             "buttonOpenMenu":  "https://transiscope.org/wp-content/uploads/2018/09/icon-2.png"            
           }           
-        });
-
-        $(carto.container).on('templateLoaded', function() {
-          $('.subcategorie-option-item .icon').addClass('bgdColorAs');
-          $('.category-wrapper .subcategories-wrapper:not(.no-withdrawal) .subcategorie-option-item .icon').addClass('subIcon');          
         });
       });
     </script>

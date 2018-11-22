@@ -52,6 +52,7 @@
   {{ createBackgroung('section-content-opposite', text) }}
   {{ createBackgroung('section-primary', primary) }}
   {{ createBackgroung('section-searchbar', searchBar) }}
+  {{ createBackgroung('section-background', background) }}  
   {{ createBackgroung('section-background', background) }}
   {{ createBackgroung('section-controls', config.colors.mapControlsBgd, config.colors.mapControls) }}
   {{ createcolor('primary', primary) }}
@@ -72,6 +73,10 @@
       .gogo-load-css .gogo-color-as[option-id="{{ option.id }}"] { color: {{ option.color }} }
     {% endif %}
   {% endfor %}   
+
+  {% if config.colors.infoBarMenu %}
+    {{ createBackgroung('section-infobar-menu.menu-element', config.colors.infoBarMenu) }}
+  {% endif %}
 </style>
 
 {% include 'styles/general.html.njk' %}
@@ -80,4 +85,9 @@
 {% include 'styles/menu-filters.html.njk' %}
 {% include 'styles/search-bar.html.njk' %}
 {% include 'styles/map.html.njk' %}
+
+{# THEMES #}
+{% if config.theme == "transiscope" %}
+  {% include 'styles/themes/transiscope.html.njk' %}
+{% endif %}
 

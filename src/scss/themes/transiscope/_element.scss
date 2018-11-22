@@ -1,14 +1,11 @@
 .element-item {
-  .collapsible-header { 
-    background-color: $dark;  
+  .collapsible-header {  
     .name { font-weight: 900; }
     .collapsible-header-more { line-height: 1.3rem; }
     .element-main-icon { display: none !important; }
 
     .collapsible-header-title .gogo-icon-close {       
-      &:before {
-        background-color: $primary;
-        color: white;
+      &:before {        
         border-radius: 3px;
         padding: 2px;
       }
@@ -30,16 +27,14 @@
     }      
   }
 
-  .collapsible-body {
-    background-color: $light;
+  .collapsible-body {   
 
-    .collapsible-body-main-content { background-color: $light; padding: 0; padding-bottom: 1rem; }
+    .collapsible-body-main-content { padding: 0; padding-bottom: 1rem; }
 
     .info-bar-divider { display: none; }
 
     .field-textarea { line-height: 1.3rem; }
-    .field {
-      background-color: white;
+    .field {      
       padding-left: 1.5rem;
       @media #{$small-only} { padding-left: .8rem; }
       padding-top: .8rem;
@@ -49,21 +44,16 @@
 
       &.field-taxonomy {
         padding: 0;
-        // font-size: 13px;
 
-        h3.category-name {
-          background-color: $light;
-          margin-left: 0;
-          color: $secondary;
-          &:first-child { color: $primary; }
+        h3.category-name {          
+          margin-left: 0;          
           margin-bottom: 0;
           padding-bottom: 1rem;
         }
       }
 
       &.field-textarea.first-element-of-body-content {
-        padding-top: 1.3rem;
-        background-color: $light;
+        padding-top: 1.3rem;       
         padding-bottom: 0;
       }
     }
@@ -84,15 +74,13 @@
     }
 
     .category-wrapper {
-      background-color: $light;
 
       .option-value {
         margin-bottom: 3px;
         border-left: 10px solid;
         padding-left: 1rem;
-        background-color: white;
         line-height: 2.5rem;
-        .option-name { color: $dark; line-height: 2.5rem; }
+        .option-name { line-height: 2.5rem; }
         .icon.fa { 
           margin-right: 10px; 
           font-size: .9rem;
@@ -136,33 +124,27 @@
       .day:after {
         content: "➡";
         font-size: 1.2rem;
-        color: $primary;
         margin: 0 8px 0 10px;
       }
       .openHours { padding-left: 0}
     }
 
     .field-tags {
-      background-color: $light;
+      
       margin-top: 1rem !important;
       margin-bottom: -10px;
       text-align: center;
 
-      .gogo-tag {
-        background-color: white;
+      .gogo-tag {        
         border-radius: 0;
         padding: 4px 14px;
-        color: $primary;
       }
     }
   }
   .menu-element { 
-    background-color: $primary; 
-
     .menu-element-item {
       display: inline-block;
       font-weight: bold;
-      color: #e6e6e6;
 
       .menu-icon.gogo-icon-star-full { 
         color: white; 
@@ -227,17 +209,14 @@
   .expand-label {
     width: auto;
     float: right;
-    border: 2px solid;
-    color: $secondary;
+    border: 2px solid;    
     padding: 8px 15px !important;
     text-align: center;
     border-radius: 20px;
     margin-top: -3px;
     margin-right: -.5rem;
     &:before {
-      margin-right: 8px;
-      color: white;
-      background-color: $secondary;
+      margin-right: 8px;      
       border-radius: 50%;
       padding: 0 4px;
     }    
@@ -261,10 +240,6 @@
     
     .gogo-icon-close { 
       font-size: .8rem;
-      &:before {
-        background-color: $primary;
-        color: $dark;
-      }
     }
   }
 
@@ -295,10 +270,7 @@
     }
   }
   .element-item.active {
-    .expand-label.transform-big {
-      background-color: white;
-      color: $secondary;
-      &:hover { color: $secondary; }
+    .expand-label.transform-big {      
       @media #{$small-only} { padding: 8px 10px !important; }
     }
 

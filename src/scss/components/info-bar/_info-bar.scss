@@ -53,29 +53,27 @@
 {
   .collapsible-header
   {         
-      //background-color: $secondary-color;//$submenu-color;
-      border: none;      
-      color: white;
-      cursor: default;
-      width: 100%;
+    border: none;  
+    cursor: default;
+    width: 100%;
 
-      a { color: white; &:hover { color: #e6e6e6 } }
+    a { color: white; &:hover { color: #e6e6e6 } }
 
-      .collapsible-header-title
-      {
-          position: relative;
-          line-height: 2.5rem;
-          font-weight: normal;
+    .collapsible-header-title
+    {
+        position: relative;
+        line-height: 2.5rem;
+        font-weight: normal;
 
-          .distance { font-size: 1.3rem; color: inherit; }
-          .gogo-icon-close { font-size: 1.5rem; margin-top: -.8rem; }
-      }
+        .distance { font-size: 1.3rem; color: inherit; }
+        .gogo-icon-close { font-size: 1.5rem; margin-top: -.8rem; }
+    }
 
-      .collapsible-header-more { margin-bottom: 1rem; }
+    .collapsible-header-more { margin-bottom: 1rem; }
 
-      .name { font-size: 1.8rem; text-align: left; }
-      .name, .description { width: 100% !important; }
-      .description { margin-bottom : 0; }
+    .name { font-size: 1.8rem; text-align: left; }
+    .name, .description { width: 100% !important; }
+    .description { margin-bottom : 0; }
   }
 
   .collapsible-body

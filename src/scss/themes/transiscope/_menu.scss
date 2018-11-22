@@ -4,19 +4,13 @@
 
   .directory-menu-header 
   {
-    @media (min-width: 850px) { width: calc(100% + 23px); }
-
-    background-color: $dark !important;
-    @media (min-width: 850px) { border-radius: 0 8px 8px 0; }
-
-    .btn-close-menu.large-screen .arrow-left {
-      color: $secondary;
-    }
+    @media (min-width: 850px) { 
+      width: calc(100% + 23px); 
+      border-radius: 0 8px 8px 0;
+    }     
 
     @import 'menu-header';
   }
 
   @import 'menu-filters';
-
-  
 }

@@ -6,8 +6,7 @@
 
   .search-icon
   {
-    font-size: 1.1rem;
-    color: white !important;
+    font-size: 1.1rem;    
     height: 2.5rem;
     line-height: 2.5rem;
 
@@ -17,34 +16,16 @@
     &.search-geolocalize { right: 2.8rem; }
   }
 
-  .search-bar {
-    background-color: $primary !important;
+  .search-bar {    
     border-radius: 0;
     height: 2.5rem;
     padding: 0 3rem;
-    width: 95%;
-    color: white;
-
-    &::-webkit-input-placeholder { 
-      color: white;
-    }
-    &::-moz-placeholder { 
-      color: white;
-    }
-    &:-ms-input-placeholder { 
-      color: white;
-    }
-    &:-moz-placeholder { 
-      color: white;
-    }
+    width: 95%;    
   }
 }
 
 .search-options {
   padding-left: 14px;
   padding-right: 2rem;
-  padding-bottom: 1.2rem;
-  .search-action-btn {
-    color: $dark;
-  }
+  padding-bottom: 1.2rem;  
 }

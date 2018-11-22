@@ -13,7 +13,8 @@
     .gogo-load-css .gogocarto-container #element-info-bar .element-item.active .expand-label.transform-big { background-color: {{ config.colors.infoBarMenu }}; }
   {% endif %}
   {% if config.colors.infoBarHeader %}
-    .gogo-load-css .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header { background-color: {{ config.colors.infoBarHeader }}; }
+    {% set textColor = config.colors.textDark if config.colors.infoBarHeader.isLight() else config.colors.textLight %}
+    .gogo-load-css .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header { background-color: {{ config.colors.infoBarHeader }}; color: {{ textColor }} }
   {% endif %}
 
   .gogo-load-css .gogocarto-container #directory-content-list .element-item .collapsible-header,

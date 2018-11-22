@@ -217,6 +217,11 @@ export class GoGoConfig
     if (!this.colors.mapListBtn) {
       this.colors.mapListBtn = tinycolor.readability(this.colors.primary, this.colors.mapControlsBgd) ? this.colors.primary : this.colors.mapControls;
     }
+
+    if (this.theme == "transiscope") {
+      this.colors.infoBarHeader = this.colors.textDark;
+      this.colors.infoBarMenu = this.colors.primary;
+    }
     console.log(this);
 	}
   
