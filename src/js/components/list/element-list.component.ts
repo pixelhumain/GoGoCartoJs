@@ -146,6 +146,7 @@ export class ElementListComponent
 		if (!$(elementHeaderDom).hasClass('initialized'))
 		{
 			element.component.initialize();
+			setTimeout( () => { element.component.menuComponent.checkDisplayFullText(); }, 100);    
 			element.component.imagesComponent.onNewImageDisplayed.do( (image) => {
 				elementDom.find('.img-overlay').css('height', elementDom.find('.img-container').height());
 			});				

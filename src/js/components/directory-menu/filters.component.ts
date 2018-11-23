@@ -31,6 +31,7 @@ export class FiltersComponent
       let favoriteCheckbox = $('#favorite-checkbox');
 
       let checkValue = !favoriteCheckbox.is(':checked');
+      $('.show-only-container .subcategorie-option-item').removeClass('checked');
       $(this).toggleClass('checked', checkValue);
       App.filterModule.showOnlyFavorite(checkValue);
 
@@ -58,7 +59,8 @@ export class FiltersComponent
       let pendingCheckbox = $('#pending-checkbox');
 
       let checkValue = !pendingCheckbox.is(':checked');
-
+      $('.show-only-container .subcategorie-option-item').removeClass('checked');
+      $(this).toggleClass('checked', checkValue);
       App.filterModule.showOnlyPending(checkValue);
       
       if (checkValue) {
@@ -85,7 +87,8 @@ export class FiltersComponent
       let moderationCheckbox = $('#moderation-checkbox');
 
       let checkValue = !moderationCheckbox.is(':checked');
-
+      $('.show-only-container .subcategorie-option-item').removeClass('checked');
+      $(this).toggleClass('checked', checkValue);
       App.filterModule.showOnlyModeration(checkValue);
       
       if (checkValue) {

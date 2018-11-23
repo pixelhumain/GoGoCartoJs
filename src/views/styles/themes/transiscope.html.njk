@@ -24,7 +24,7 @@
   .gogo-load-css .gogo-theme-transiscope .collapsible-body .menu-element .menu-element-item { color: {{ textSoft }}; }
   .gogo-load-css .gogo-theme-transiscope .element-item .expand-label { color: {{ secondary }}; }
   .gogo-load-css .gogo-theme-transiscope .element-item .expand-label:before { background-color: {{ secondary }}; color: {{ textLight }}; }
-  
+  .gogo-load-css .element-item .info-bar-tabs { background-color: {{ primary }}; }
   {# INFOBAR #}
 
   .gogo-load-css #element-info-bar.display-aside .element-item .collapsible-header .gogo-icon-close:before {
@@ -68,7 +68,6 @@
   
   {# MENU #}
 
-  .gogo-load-css #directory-menu-main-container .directory-menu-header {  background-color: {{ text }} !important; }
   .gogo-load-css #directory-menu-main-container .directory-menu-header .btn-close-menu.large-screen .arrow-left { color: {{ secondary }}; }
 
   {# MENU HEADER #}
@@ -79,7 +78,7 @@
   .gogo-load-css .gogo-theme-transiscope .search-bar-container .search-bar::-moz-placeholder  { color: {{ textLight }} !important; }
   .gogo-load-css .gogo-theme-transiscope .search-bar-container .search-bar:-ms-input-placeholder  { color: {{ textLight }} !important; }
   .gogo-load-css .gogo-theme-transiscope .search-bar-container .search-bar:-moz-placeholder { color: {{ textLight }} !important; }
-  .gogo-load-css .gogo-theme-transiscope .search-options .search-action-btn { color: {{ text }}; }
+  .gogo-load-css .gogo-theme-transiscope .search-options .search-action-btn { color: {{ searchBar }}; }
 
   {# MENU FILTER #}
 
@@ -101,31 +100,31 @@
 
   .gogo-load-css #main-option-all > .category-wrapper:first-child .name-wrapper { color: {{ primary }}; }
   .gogo-load-css #main-option-all > .category-wrapper:first-child .subcategorie-option-item.checked .icon:not(.subIcon) { color: {{ textLight }}; }
-  .gogo-load-css #main-option-all > .category-wrapper:last-child .name-wrapper { color: {{ secondary }}; } 
-  .gogo-load-css #main-option-all > .category-wrapper:last-child [type="checkbox"].filled-in:checked + label:before {
+  .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) .name-wrapper { color: {{ secondary }}; } 
+  .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) [type="checkbox"].filled-in:checked + label:before {
     border-right: 3px solid {{ secondary }};
     border-bottom: 3px solid {{ secondary }};
   } 
-  .gogo-load-css #main-option-all > .category-wrapper:last-child .subcategorie-option-item.checked .icon { color: {{ secondary }}; }
-  .gogo-load-css #main-option-all > .category-wrapper:last-child .subcategorie-option-item .icon { color: {{ text }}; background-color: transparent; }           
-  .gogo-load-css #main-option-all > .category-wrapper:last-child .subcategorie-option-item:hover .subcategorie-option-checkbox + label:before { 
+  .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) .subcategorie-option-item.checked .icon { color: {{ secondary }}; }
+  .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) .subcategorie-option-item .icon { color: {{ text }}; background-color: transparent; }           
+  .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) .subcategorie-option-item:hover .subcategorie-option-checkbox + label:before { 
     color: {{ secondary }}; 
     border-color: {{ secondary }} 
   }  
-  .gogo-load-css #main-option-all > .category-wrapper:last-child .subcategorie-option-item:not(.expanded) .option-name .arrow-after { 
+  .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) .subcategorie-option-item:not(.expanded) .option-name .arrow-after { 
     border-color: {{ secondary }} transparent transparent transparent; opacity: 1; 
   }
-  .gogo-load-css #main-option-all > .category-wrapper:last-child .subcategorie-option-item:not(.expanded) .option-name:hover .arrow-after { 
+  .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) .subcategorie-option-item:not(.expanded) .option-name:hover .arrow-after { 
     border-color: {{ secondary }} transparent transparent transparent !important; opacity: 1; 
   }
-  .gogo-load-css #main-option-all > .category-wrapper:last-child .subcategorie-option-item.expanded .option-name .arrow-after { 
+  .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) .subcategorie-option-item.expanded .option-name .arrow-after { 
     border-color:  transparent transparent {{ secondary }} transparent; opacity: 1; top: 1rem; 
   }
-  .gogo-load-css #main-option-all > .category-wrapper:last-child .subcategorie-option-item.expanded .option-name:hover .arrow-after { 
+  .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) .subcategorie-option-item.expanded .option-name:hover .arrow-after { 
     border-color:  transparent transparent {{ secondary }} transparent !important; opacity: 1; 
   }
-  .gogo-load-css #filter-favorite .icon:before { color: {{ disabled }} !important } 
-  .gogo-load-css #filter-favorite .option-name { color: {{ disabled }} } 
+  .gogo-load-css .show-only-container .subcategorie-option-item:not(.checked) .icon:before { color: {{ disabled }} !important } 
+  .gogo-load-css .show-only-container .subcategorie-option-item:not(.checked) .option-name { color: {{ disabled }} } 
   .gogo-load-css #filter-favorite.checked .icon:before { color: {{ secondary }} !important }  
   .gogo-load-css #filter-favorite.checked .option-name { color: {{ secondary }} }                      
   .gogo-load-css .sub-categories-content .show-only-title { color: {{ primary }}; }

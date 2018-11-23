@@ -32,13 +32,13 @@
         carto = goGoCarto('#gogocarto', {
           data:
           {
-            taxonomy: "http://localhost/GoGoCarto/web/app_dev.php/api/taxonomy",
-            elements: 'http://localhost/GoGoCarto/web/app_dev.php/api/elements',
+            taxonomy: "http://stylestandard2.saas.localhost/GoGoCarto/web/app_dev.php/api/taxonomy",
+            elements: 'http://stylestandard2.saas.localhost/GoGoCarto/web/app_dev.php/api/elements',
             requestByBounds: true,
           },
           menu:
           {
-            showOnePanePerMainOption: true,
+            showOnePanePerMainOption: false,
             // showCheckboxForMainFilterPane: false
           },
           features:
@@ -113,27 +113,16 @@
               {"name":"mapbox","url":"https:\/\/api.mapbox.com\/styles\/v1\/mapbox\/streets-v10\/tiles\/256\/{z}\/{x}\/{y}?access_token=pk.eyJ1Ijoic2ViYWxsb3QiLCJhIjoiY2l4MGtneGVjMDF0aDJ6cWNtdWFvc2Y3YSJ9.nIZr6G2t08etMzft_BHHUQ"},
               {"name":"pas de fond","url":""}],
           }, 
-          colors:
-          {
-            neutralDark: neutralDark ,
-            neutralDarkTransparent: neutralDarkTransparent ,
-            neutralSoftDark: neutralSoftDark ,
-            neutral: neutral ,
-            neutralLight: neutralLight ,
-            secondary: secondary ,
-            primary: primary ,
-            background: background ,
-
-            textColor: textColor ,
-            disableColor: disableColor ,
-            listTitle: listTitle ,
-            listTitleBackBtn: listTitleBackBtn,
-            listTitleBackground: listTitleBackground ,
-
-            mainFont: mainFont ,
-            titleFont: titleFont ,
-            taxonomyMainTitleFont: taxonomyMainTitleFont ,   
-          } 
+          colors: {
+            "text": "#175259",
+            "textLightSoft": "#ece9e9",
+            "primary": "#3bad78",
+            "secondary": "#f79900",
+            "contentBackground": "white",
+            "background": "#f3f6f4",
+            "disabled": "#bcbcbc"
+          },
+          theme: "transiscope"
         });
       });
     </script>
