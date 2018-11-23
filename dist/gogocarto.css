@@ -3485,224 +3485,148 @@ th {
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .shadow-bottom {
       border-top: none;
       width: calc(100% - 23px); }
-    .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header {
-      background-color: #175259 !important; }
-      @media (min-width: 850px) {
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header {
-          width: calc(100% + 23px); } }
-      @media (min-width: 850px) {
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header {
-          border-radius: 0 8px 8px 0; } }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .btn-close-menu.large-screen .arrow-left {
-        color: #f79900; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-bar-with-options-container .search-bar-container {
-        height: 4rem;
-        padding-left: .5rem;
-        padding-right: 1.4rem; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-bar-with-options-container .search-bar-container .search-icon {
-          font-size: 1.1rem;
-          color: white !important;
-          height: 2.5rem;
+    @media (min-width: 850px) {
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header {
+        width: calc(100% + 23px);
+        border-radius: 0 8px 8px 0; } }
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-bar-with-options-container .search-bar-container {
+      height: 4rem;
+      padding-left: .5rem;
+      padding-right: 1.4rem; }
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-bar-with-options-container .search-bar-container .search-icon {
+        font-size: 1.1rem;
+        height: 2.5rem;
+        line-height: 2.5rem; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-bar-with-options-container .search-bar-container .search-icon:before {
           line-height: 2.5rem; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-bar-with-options-container .search-bar-container .search-icon:before {
-            line-height: 2.5rem; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-bar-with-options-container .search-bar-container .search-icon.search-bar-icon {
-            left: 2rem; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-bar-with-options-container .search-bar-container .search-icon.search-geolocalize {
-            right: 2.8rem; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-bar-with-options-container .search-bar-container .search-bar {
-          background-color: #3bad78 !important;
-          border-radius: 0;
-          height: 2.5rem;
-          padding: 0 3rem;
-          width: 95%;
-          color: white; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-bar-with-options-container .search-bar-container .search-bar::-webkit-input-placeholder {
-            color: white; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-bar-with-options-container .search-bar-container .search-bar::-moz-placeholder {
-            color: white; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-bar-with-options-container .search-bar-container .search-bar:-ms-input-placeholder {
-            color: white; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-bar-with-options-container .search-bar-container .search-bar:-moz-placeholder {
-            color: white; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-options {
-        padding-left: 14px;
-        padding-right: 2rem;
-        padding-bottom: 1.2rem; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-options .search-action-btn {
-          color: #175259; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-bar-with-options-container .search-bar-container .search-icon.search-bar-icon {
+          left: 2rem; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-bar-with-options-container .search-bar-container .search-icon.search-geolocalize {
+          right: 2.8rem; }
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-bar-with-options-container .search-bar-container .search-bar {
+        border-radius: 0;
+        height: 2.5rem;
+        padding: 0 3rem;
+        width: 95%; }
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-options {
+      padding-left: 14px;
+      padding-right: 2rem;
+      padding-bottom: 1.2rem; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories {
       border-left: none; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content {
-        background-color: #f3f6f4 !important; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content ul {
-          padding-right: 10px;
-          padding-left: 5px; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item {
-          background-color: white;
-          margin-bottom: 3px;
-          padding-left: 0;
-          line-height: 2.5rem;
-          height: 2.5rem; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item.expanded {
-            margin-bottom: 0; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item.disabled {
-            color: #bcbcbc; }
-            .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item.disabled .icon {
-              color: #bcbcbc !important;
-              background-color: transparent;
-              opacity: 1; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .option-name {
-            font-weight: 500;
-            font-size: 13px;
-            padding-left: .6rem;
-            -webkit-transition: color 0.1s;
-            -moz-transition: color 0.1s;
-            -o-transition: color 0.1s;
-            -ms-transition: color 0.1s;
-            transition: color 0.1s; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .checkbox-wrapper {
-            display: none; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .arrow-after {
-            position: absolute;
-            right: 19%;
-            top: 1.1rem;
-            border-radius: 1px; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .option-name:hover .arrow-after {
-            margin-right: -1px;
-            margin-top: -1px; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item.expanded .option-name:hover .arrow-after {
-            margin-bottom: -3px; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item.expanded .option-name .arrow-after {
-            margin-bottom: -3px; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .icon {
-            padding-top: .7rem;
-            font-size: 17px;
-            height: 3rem;
-            width: 2.5rem;
-            margin-right: 0;
-            -webkit-transition: color 0.3s;
-            -moz-transition: color 0.3s;
-            -o-transition: color 0.3s;
-            -ms-transition: color 0.3s;
-            transition: color 0.3s; }
-            .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .icon.fa.fa-recycle, .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .icon.fa.fa-link {
-              padding-top: .8rem; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item:not(.expanded) .option-name .arrow-after {
-            border-color: #3bad78 transparent transparent transparent;
-            opacity: 1; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item.expanded .option-name .arrow-after {
-            border-color: transparent transparent #3bad78 transparent;
-            opacity: 1;
-            top: .9rem; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategory-item .name-wrapper {
-          margin-left: 3rem;
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content ul {
+        padding-right: 10px;
+        padding-left: 5px; }
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item {
+        margin-bottom: 3px;
+        padding-left: 0;
+        line-height: 2.5rem;
+        height: 2.5rem; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item.expanded {
+          margin-bottom: 0; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item.disabled .icon {
+          background-color: transparent;
+          opacity: 1; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .option-name {
+          font-weight: 500;
+          font-size: 13px;
+          padding-left: .6rem;
+          -webkit-transition: color 0.1s;
+          -moz-transition: color 0.1s;
+          -o-transition: color 0.1s;
+          -ms-transition: color 0.1s;
+          transition: color 0.1s; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .checkbox-wrapper {
+          display: none; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .arrow-after {
+          position: absolute;
+          right: 19%;
+          top: 1.1rem;
+          border-radius: 1px; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .option-name:hover .arrow-after {
+          margin-right: -1px;
+          margin-top: -1px; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item.expanded .option-name:hover .arrow-after {
+          margin-bottom: -3px; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item.expanded .option-name .arrow-after {
+          margin-bottom: -3px; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .icon {
+          padding-top: .7rem;
+          font-size: 17px;
+          height: 3rem;
+          width: 2.5rem;
           margin-right: 0;
-          font-weight: 900; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategory-item .checkbox-wrapper {
-          left: 0;
-          right: initial; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategory-item .checkbox-wrapper [type="checkbox"].filled-in + label:after {
-            background-color: transparent;
-            border: none;
-            -webkit-transition: none;
-            -moz-transition: none;
-            -o-transition: none;
-            -ms-transition: none;
-            transition: none; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategory-item .checkbox-wrapper [type="checkbox"].filled-in + label:before {
-            top: 7px;
-            width: 9px;
-            height: 15px;
-            border-right: 3px solid #3bad78;
-            border-bottom: 3px solid #3bad78; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategory-item .checkbox-wrapper [type="checkbox"].filled-in:not(:checked) + label:before {
-            border-right: 3px solid #bcbcbc;
-            border-bottom: 3px solid #bcbcbc;
-            -webkit-transition: none;
-            -moz-transition: none;
-            -o-transition: none;
-            -ms-transition: none;
-            transition: none; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .category-wrapper .subcategories-wrapper:not(.no-withdrawal) {
-          margin-left: 0 !important;
-          margin-bottom: 6px;
-          border: none; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .category-wrapper .subcategories-wrapper:not(.no-withdrawal) .subcategorie-option-item {
-            margin-bottom: 0;
-            line-height: 2.7rem;
-            height: 2.7rem; }
-            .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .category-wrapper .subcategories-wrapper:not(.no-withdrawal) .subcategorie-option-item .option-name {
-              font-size: .8rem; }
-            .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .category-wrapper .subcategories-wrapper:not(.no-withdrawal) .subcategorie-option-item .icon {
-              font-size: .85rem;
-              padding-top: .95rem; }
-            .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .category-wrapper .subcategories-wrapper:not(.no-withdrawal) .subcategorie-option-item.disabled .icon {
-              color: #bcbcbc !important; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #main-option-all > .category-wrapper:first-child .name-wrapper {
-          color: #3bad78; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #main-option-all > .category-wrapper:first-child .subcategorie-option-item.checked .icon:not(.subIcon) {
-          color: white; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #main-option-all > .category-wrapper:first-child .subcategorie-option-item .subIcon {
-          background-color: transparent; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #main-option-all > .category-wrapper:first-child .subcategorie-option-item:not(.checked) .icon {
-          background-color: transparent; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #main-option-all > .category-wrapper:last-child .name-wrapper {
-          color: #f79900; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #main-option-all > .category-wrapper:last-child [type="checkbox"].filled-in:checked + label:before {
+          -webkit-transition: color 0.3s;
+          -moz-transition: color 0.3s;
+          -o-transition: color 0.3s;
+          -ms-transition: color 0.3s;
+          transition: color 0.3s; }
+          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .icon.fa.fa-recycle, .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .icon.fa.fa-link {
+            padding-top: .8rem; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item:not(.expanded) .option-name .arrow-after {
+          opacity: 1; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item.expanded .option-name .arrow-after {
+          opacity: 1;
+          top: .9rem; }
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategory-item .name-wrapper {
+        margin-left: 3rem;
+        margin-right: 0;
+        font-weight: 900; }
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategory-item .checkbox-wrapper {
+        left: 0;
+        right: initial; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategory-item .checkbox-wrapper [type="checkbox"].filled-in + label:after {
+          background-color: transparent;
+          border: none;
+          -webkit-transition: none;
+          -moz-transition: none;
+          -o-transition: none;
+          -ms-transition: none;
+          transition: none; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategory-item .checkbox-wrapper [type="checkbox"].filled-in + label:before {
           top: 7px;
           width: 9px;
-          height: 15px;
-          border-right: 3px solid #f79900;
-          border-bottom: 3px solid #f79900; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #main-option-all > .category-wrapper:last-child .subcategorie-option-item.checked .icon {
-          color: #f79900; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #main-option-all > .category-wrapper:last-child .subcategorie-option-item .icon {
-          color: #175259;
-          background-color: transparent; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #main-option-all > .category-wrapper:last-child .subcategorie-option-item:hover .subcategorie-option-checkbox + label:before {
-          color: #f79900;
-          border-color: #f79900; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #main-option-all > .category-wrapper:last-child .subcategorie-option-item:not(.expanded) .option-name .arrow-after {
-          border-color: #f79900 transparent transparent transparent;
-          opacity: 1; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #main-option-all > .category-wrapper:last-child .subcategorie-option-item:not(.expanded) .option-name:hover .arrow-after {
-          border-color: #f79900 transparent transparent transparent !important;
-          opacity: 1; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #main-option-all > .category-wrapper:last-child .subcategorie-option-item.expanded .option-name .arrow-after {
-          border-color: transparent transparent #f79900 transparent;
-          opacity: 1;
-          top: 1rem; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #main-option-all > .category-wrapper:last-child .subcategorie-option-item.expanded .option-name:hover .arrow-after {
-          border-color: transparent transparent #f79900 transparent !important;
-          opacity: 1; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #filter-favorite .icon {
-          padding-top: 3px;
-          padding-left: 10px;
-          background-color: transparent; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #filter-favorite .icon:before {
-            color: #bcbcbc; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #filter-favorite .option-name {
-          color: #bcbcbc; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #filter-favorite.checked .option-name {
-          color: #f79900; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #filter-favorite.checked .icon:before {
-          color: #f79900; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .show-only-title {
-          color: #3bad78;
-          padding-left: 0;
+          height: 15px; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategory-item .checkbox-wrapper [type="checkbox"].filled-in:not(:checked) + label:before {
+          -webkit-transition: none;
+          -moz-transition: none;
+          -o-transition: none;
+          -ms-transition: none;
+          transition: none; }
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .category-wrapper .subcategories-wrapper:not(.no-withdrawal) {
+        margin-left: 0 !important;
+        margin-bottom: 6px;
+        border: none; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .category-wrapper .subcategories-wrapper:not(.no-withdrawal) .subcategorie-option-item {
           margin-bottom: 0;
-          padding-left: 0;
-          margin-bottom: 0rem;
-          border-top: none;
-          margin-top: 0;
-          padding-top: 0; }
-    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .iconInsideMarker-wrapper {
-      background-color: transparent; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .iconInsideMarker-wrapper .iconInsideMarker {
-        color: white; }
+          line-height: 2.7rem;
+          height: 2.7rem; }
+          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .category-wrapper .subcategories-wrapper:not(.no-withdrawal) .subcategorie-option-item .option-name {
+            font-size: .8rem; }
+          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .category-wrapper .subcategories-wrapper:not(.no-withdrawal) .subcategorie-option-item .icon {
+            font-size: .85rem;
+            padding-top: .95rem; }
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #main-option-all > .category-wrapper:first-child .subcategorie-option-item .subIcon {
+        background-color: transparent; }
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #main-option-all > .category-wrapper:first-child .subcategorie-option-item:not(.checked) .icon {
+        background-color: transparent; }
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #main-option-all > .category-wrapper:last-child [type="checkbox"].filled-in:checked + label:before {
+        top: 7px;
+        width: 9px;
+        height: 15px; }
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #filter-favorite .icon {
+        padding-top: 3px;
+        padding-left: 10px;
+        background-color: transparent; }
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .show-only-title {
+        padding-left: 0;
+        margin-bottom: 0;
+        padding-left: 0;
+        margin-bottom: 0rem;
+        border-top: none;
+        margin-top: 0;
+        padding-top: 0; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container .marker-name {
-      color: #f1f1f1;
       opacity: 1; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container .moreIconContainer .moreIconWrapper {
       font-size: 14px;
@@ -3732,29 +3656,23 @@ th {
       background-color: #d0c8c8; }
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container .moreIconContainer .moreIconWrapper.disabled .iconInsideMarker.disabled {
         color: #949494 !important; }
-    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-header {
-      background-color: #175259; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-header .name {
-        font-weight: 900; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-header .collapsible-header-more {
-        line-height: 1.3rem; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-header .element-main-icon {
-        display: none !important; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-header .collapsible-header-title .gogo-icon-close:before {
-        background-color: #3bad78;
-        color: white;
-        border-radius: 3px;
-        padding: 2px; }
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-header .name {
+      font-weight: 900; }
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-header .collapsible-header-more {
+      line-height: 1.3rem; }
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-header .element-main-icon {
+      display: none !important; }
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-header .collapsible-header-title .gogo-icon-close:before {
+      border-radius: 3px;
+      padding: 2px; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .menu-element-item-text {
-      display: inline-block !important;
       text-transform: uppercase;
       line-height: 3rem;
       margin-left: 10px;
       font-size: 12px; }
-      @media only screen and (max-width: 600px) {
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .menu-element-item-text {
-          display: none !important; } }
     @media (max-width: 460px) {
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .menu-element.full-text {
+        padding: 0; }
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .menu-element-item {
         margin: 0 .5rem !important; }
         .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .menu-element-item .menu-element-item-text {
@@ -3762,116 +3680,96 @@ th {
           margin-left: 5px; }
         .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .menu-element-item .menu-icon {
           font-size: 16px; } }
-    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body {
-      background-color: #f3f6f4; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .collapsible-body-main-content {
-        background-color: #f3f6f4;
-        padding: 0;
-        padding-bottom: 1rem; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .info-bar-divider {
-        display: none; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field-textarea {
-        line-height: 1.3rem; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field {
-        background-color: white;
-        padding-left: 1.5rem;
-        padding-top: .8rem;
-        padding-bottom: .8rem;
-        padding-right: 1rem;
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .collapsible-body-main-content {
+      padding: 0;
+      padding-bottom: 1rem; }
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .info-bar-divider {
+      display: none; }
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field-textarea {
+      line-height: 1.3rem; }
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field {
+      padding-left: 1.5rem;
+      padding-top: .8rem;
+      padding-bottom: .8rem;
+      padding-right: 1rem;
+      line-height: 1.5rem; }
+      @media only screen and (max-width: 600px) {
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field {
+          padding-left: .8rem; } }
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field.field-taxonomy {
+        padding: 0; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field.field-taxonomy h3.category-name {
+          margin-left: 0;
+          margin-bottom: 0;
+          padding-bottom: 1rem; }
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field.field-textarea.first-element-of-body-content {
+        padding-top: 1.3rem;
+        padding-bottom: 0; }
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field + .field {
+      padding-top: 0;
+      margin-top: -.4rem; }
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field-openhours .day {
+      padding-left: 0; }
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body h3 {
+      font-weight: 900;
+      padding-left: 1.5rem; }
+      @media only screen and (max-width: 600px) {
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body h3 {
+          padding-left: .8rem; } }
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body h3.first-element-of-body-content {
+        padding-top: 1.2rem; }
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .option-value {
+      margin-bottom: 3px;
+      border-left: 10px solid;
+      padding-left: 1rem;
+      line-height: 2.5rem; }
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .option-value .option-name {
+        line-height: 2.5rem; }
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .option-value .icon.fa {
+        margin-right: 10px;
+        font-size: .9rem;
+        padding-top: .8rem; }
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .row + .category-wrapper .row:last-child .option-value {
+      padding-bottom: 1.8rem; }
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .category-wrapper {
+      border: none;
+      margin-left: 0;
+      padding-left: 0; }
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .category-wrapper .option-value {
+        padding-left: .9rem;
+        margin-top: -8px;
+        height: 1.5rem;
         line-height: 1.5rem; }
-        @media only screen and (max-width: 600px) {
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field {
-            padding-left: .8rem; } }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field.field-taxonomy {
-          padding: 0; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field.field-taxonomy h3.category-name {
-            background-color: #f3f6f4;
-            margin-left: 0;
-            color: #f79900;
-            margin-bottom: 0;
-            padding-bottom: 1rem; }
-            .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field.field-taxonomy h3.category-name:first-child {
-              color: #3bad78; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field.field-textarea.first-element-of-body-content {
-          padding-top: 1.3rem;
-          background-color: #f3f6f4;
-          padding-bottom: 0; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field + .field {
-        padding-top: 0;
-        margin-top: -.4rem; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field-openhours .day {
-        padding-left: 0; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body h3 {
-        font-weight: 900;
-        padding-left: 1.5rem; }
-        @media only screen and (max-width: 600px) {
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body h3 {
-            padding-left: .8rem; } }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body h3.first-element-of-body-content {
-          padding-top: 1.2rem; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper {
-        background-color: #f3f6f4; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .option-value {
-          margin-bottom: 3px;
-          border-left: 10px solid;
-          padding-left: 1rem;
-          background-color: white;
-          line-height: 2.5rem; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .option-value .option-name {
-            color: #175259;
-            line-height: 2.5rem; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .option-value .icon.fa {
-            margin-right: 10px;
-            font-size: .9rem;
-            padding-top: .8rem; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .row + .category-wrapper .row:last-child .option-value {
-          padding-bottom: 1.8rem; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .category-wrapper {
-        border: none;
-        margin-left: 0;
-        padding-left: 0; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .category-wrapper .option-value {
-          padding-left: .9rem;
-          margin-top: -8px;
-          height: 1.5rem;
-          line-height: 1.5rem; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .category-wrapper .option-value .option-name {
-            color: inherit;
-            margin-left: 4px;
-            line-height: 1rem; }
-            .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .category-wrapper .option-value .option-name:before {
-              content: "➡";
-              font-size: 1.2rem;
-              margin-right: 6px; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .category-wrapper .option-value .icon {
-            display: none; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field-openhours .day:after {
-        content: "➡";
-        font-size: 1.2rem;
-        color: #3bad78;
-        margin: 0 8px 0 10px; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field-openhours .openHours {
-        padding-left: 0; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field-tags {
-        background-color: #f3f6f4;
-        margin-top: 1rem !important;
-        margin-bottom: -10px;
-        text-align: center; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field-tags .gogo-tag {
-          background-color: white;
-          border-radius: 0;
-          padding: 4px 14px;
-          color: #3bad78; }
-    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .menu-element {
-      background-color: #3bad78; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .menu-element .menu-element-item {
-        display: inline-block;
-        font-weight: bold;
-        color: #e6e6e6; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .menu-element .menu-element-item .menu-icon.gogo-icon-star-full {
-          color: white; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .menu-element .menu-element-item .menu-icon.gogo-icon-star-full:before {
-            background-color: #f09b00; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .category-wrapper .option-value .option-name {
+          color: inherit;
+          margin-left: 4px;
+          line-height: 1rem; }
+          .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .category-wrapper .option-value .option-name:before {
+            content: "➡";
+            font-size: 1.2rem;
+            margin-right: 6px; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .category-wrapper .option-value .icon {
+          display: none; }
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field-openhours .day:after {
+      content: "➡";
+      font-size: 1.2rem;
+      margin: 0 8px 0 10px; }
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field-openhours .openHours {
+      padding-left: 0; }
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field-tags {
+      margin-top: 1rem !important;
+      margin-bottom: -10px;
+      text-align: center; }
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field-tags .gogo-tag {
+        border-radius: 0;
+        padding: 4px 14px; }
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .menu-element .menu-element-item {
+      display: inline-block;
+      font-weight: bold; }
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .menu-element .menu-element-item .menu-icon.gogo-icon-star-full {
+        color: white; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .menu-element .menu-element-item .menu-icon.gogo-icon-star-full:before {
+          background-color: #f09b00; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .inline-option-values {
       width: calc(100% - 140px);
       font-weight: normal; }
@@ -3917,7 +3815,6 @@ th {
       width: auto;
       float: right;
       border: 2px solid;
-      color: #f79900;
       padding: 8px 15px !important;
       text-align: center;
       border-radius: 20px;
@@ -3925,8 +3822,6 @@ th {
       margin-right: -.5rem; }
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .expand-label:before {
         margin-right: 8px;
-        color: white;
-        background-color: #f79900;
         border-radius: 50%;
         padding: 0 4px; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item.active .expand-label:before {
@@ -3944,9 +3839,6 @@ th {
         padding-bottom: 1rem; }
         .gogo-load-css .gogo-theme-transiscope.gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .collapsible-header-title .gogo-icon-close {
           font-size: .8rem; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .collapsible-header-title .gogo-icon-close:before {
-            background-color: #3bad78;
-            color: #175259; }
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header .name {
         font-size: 1.4rem;
         line-height: 1.8rem; }
@@ -3966,22 +3858,13 @@ th {
         font-size: 13px;
         font-weight: 900;
         padding: 8px 10px !important; } }
-    .gogo-load-css .gogo-theme-transiscope.gogocarto-container #element-info-bar.display-bottom .element-item.active .expand-label.transform-big {
-      background-color: white;
-      color: #f79900; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #element-info-bar.display-bottom .element-item.active .expand-label.transform-big:hover {
-        color: #f79900; }
-      @media only screen and (max-width: 600px) {
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #element-info-bar.display-bottom .element-item.active .expand-label.transform-big {
-          padding: 8px 10px !important; } }
+    @media only screen and (max-width: 600px) {
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #element-info-bar.display-bottom .element-item.active .expand-label.transform-big {
+        padding: 8px 10px !important; } }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container #element-info-bar.display-bottom .element-item.active .collapsible-header {
       padding-bottom: .4rem; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container #element-info-bar.display-bottom .element-item.active .inline-option-values {
       display: none; }
-    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-control-zoom-in, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-control-zoom-out, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .feature-button.gogo-section-controls .gogo-color-link {
-      color: #175259; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-control-zoom-in:hover, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-control-zoom-out:hover, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .feature-button.gogo-section-controls .gogo-color-link:hover {
-        color: #3bad78; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-control-layers {
       margin-right: 17px !important; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container .gogo-map-control {
@@ -3990,9 +3873,6 @@ th {
       font-size: 12px !important;
       line-height: 22px;
       padding: 5px 15px;
-      background-color: white;
-      color: #f79900;
-      border: 1px solid #d7d7d7;
       -webkit-box-shadow: 1px 2px 4px 1px rgba(0, 0, 0, 0.12);
       -moz-box-shadow: 1px 2px 4px 1px rgba(0, 0, 0, 0.12);
       box-shadow: 1px 2px 4px 1px rgba(0, 0, 0, 0.12); }
@@ -4012,7 +3892,6 @@ th {
       position: absolute;
       left: -20px;
       top: 80px;
-      background-color: #175259 !important;
       padding-top: 10px;
       padding-bottom: 3px;
       padding-left: 10px;
@@ -4022,11 +3901,7 @@ th {
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container .show-directory-menu-button .arrow-right {
         margin-bottom: 10px;
         margin-left: 4px; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .show-directory-menu-button:hover .arrow-right {
-        border-color: transparent transparent transparent #f79900; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-content-list .element-list-header {
-      background-color: #f3f6f4;
-      color: #3bad78;
       text-align: left; }
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-content-list .element-list-header .show-as-map-button {
         height: 2rem;
@@ -4034,8 +3909,6 @@ th {
         border-radius: 5px;
         top: 15px;
         padding: 0px 15px;
-        background-color: #f79900;
-        color: white;
         left: initial !important;
         text-transform: uppercase;
         text-decoration: none;
@@ -4044,8 +3917,6 @@ th {
         float: right;
         margin-top: 12px;
         margin-right: -8px; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-content-list .element-list-header .show-as-map-button:hover {
-          color: white !important; }
         .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-content-list .element-list-header .show-as-map-button .btn-back {
           font-size: 1.2rem;
           margin-right: 10px; }
@@ -4065,8 +3936,6 @@ th {
       -webkit-box-shadow: none;
       -moz-box-shadow: none;
       box-shadow: none; }
-    .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-content-list .element-item .collapsible-header {
-      border-bottom: 1px solid #f3f6f4; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-content-list .element-item .collapsible-body {
       border-bottom: none; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-content-list .element-item .section {
@@ -4076,8 +3945,6 @@ th {
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-content-list .element-item .inline-option-values .inline-option-value[main-category-owner-name="Sources"] {
         float: right;
         margin-right: 0; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-content-list .element-item .inline-option-values .inline-option-value[main-category-owner-name="Sources"] .option-value {
-          color: #175259; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-content-list .element-item .menu-element {
       text-align: right;
       padding: 0;
@@ -4093,8 +3960,7 @@ th {
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-content-list .element-item .expand-label {
       display: none; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-content-list .element-item .location {
-      font-weight: normal;
-      color: #3bad78; }
+      font-weight: normal; }
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-content-list .element-item .location .postalCode {
         font-size: 14px; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-content-list .element-item .collapsible-body-main-content {
@@ -4106,8 +3972,6 @@ th {
       margin-bottom: 0; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-content-list .collapsible.popout > li {
       margin-bottom: 3px; }
-    .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-list-spinner-loader .spinner-layer {
-      border-color: #175259; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container #gogo-controls-mobile .feature-button {
       margin-right: 0;
       float: left; }
@@ -4115,33 +3979,26 @@ th {
       border-radius: 8px 0 0 8px;
       margin-right: 2px; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container #gogo-controls-mobile #mobile-filters-icon {
-      background-color: #175259;
       border-radius: 0 8px 8px 0;
       padding-top: 5px; }
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container #gogo-controls-mobile #mobile-filters-icon i {
         display: none; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container #gogo-controls-mobile .show-as-list-button, .gogo-load-css .gogo-theme-transiscope.gogocarto-container #gogo-controls-mobile .show-as-map-button {
-      color: #3bad78;
       border-radius: 8px; }
-    .gogo-load-css .gogo-theme-transiscope.gogocarto-container #gogo-controls-mobile .show-as-map-button {
-      background-color: #f79900 !important;
-      color: white; }
-    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .custom-scroll-bar-light::-webkit-scrollbar-track, .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu .sub-categories .sub-categories-content ul::-webkit-scrollbar-track, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-control-layers-list::-webkit-scrollbar-track {
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .custom-scroll-bar-light::-webkit-scrollbar-track, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-routing-alt::-webkit-scrollbar-track, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-routing-geocoders::-webkit-scrollbar-track, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-routing-error::-webkit-scrollbar-track {
       background-color: transparent;
       border: none; }
-    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .custom-scroll-bar-light::-webkit-scrollbar, .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu .sub-categories .sub-categories-content ul::-webkit-scrollbar, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-control-layers-list::-webkit-scrollbar {
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .custom-scroll-bar-light::-webkit-scrollbar, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-routing-alt::-webkit-scrollbar, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-routing-geocoders::-webkit-scrollbar, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-routing-error::-webkit-scrollbar {
       width: 13px; }
-    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .custom-scroll-bar-light::-webkit-scrollbar-thumb, .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu .sub-categories .sub-categories-content ul::-webkit-scrollbar-thumb, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-control-layers-list::-webkit-scrollbar-thumb {
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .custom-scroll-bar-light::-webkit-scrollbar-thumb, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-routing-alt::-webkit-scrollbar-thumb, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-routing-geocoders::-webkit-scrollbar-thumb, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-routing-error::-webkit-scrollbar-thumb {
       border-radius: 0;
       background-color: #ffffff; }
-    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .custom-scroll-bar::-webkit-scrollbar-track, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-routing-alt::-webkit-scrollbar-track, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-routing-geocoders::-webkit-scrollbar-track, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-routing-error::-webkit-scrollbar-track {
-      background-color: transparent;
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .custom-scroll-bar::-webkit-scrollbar-track {
       border: none; }
-    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .custom-scroll-bar::-webkit-scrollbar, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-routing-alt::-webkit-scrollbar, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-routing-geocoders::-webkit-scrollbar, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-routing-error::-webkit-scrollbar {
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .custom-scroll-bar::-webkit-scrollbar {
       width: 18px; }
-    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .custom-scroll-bar::-webkit-scrollbar-thumb, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-routing-alt::-webkit-scrollbar-thumb, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-routing-geocoders::-webkit-scrollbar-thumb, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .leaflet-routing-error::-webkit-scrollbar-thumb {
-      border-radius: 0;
-      background-color: #ffffff; }
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .custom-scroll-bar::-webkit-scrollbar-thumb {
+      border-radius: 0; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container .btn, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .btn-large {
       font-weight: bold;
       box-shadow: none;
@@ -4396,7 +4253,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       display: -ms-flexbox;
       display: -webkit-flex;
       display: flex;
-      background-color: white;
       /* padding-top: 4px; */
       transition: all 0.2s ease;
       box-sizing: border-box; }
@@ -4412,7 +4268,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       font-weight: 600; }
       .gogo-load-css .gogocarto-container .leaflet-routing-container h2 .distance {
         font-weight: normal;
-        color: #5d5d5d;
         margin-left: 5px; }
     .gogo-load-css .gogocarto-container .leaflet-routing-container h3 {
       font-size: .9rem;
@@ -4505,7 +4360,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       font: bold 18px 'Lucida Console', Monaco, monospace;
       border: 1px solid #ccc;
       border-radius: 4px;
-      background-color: white;
       margin: 0;
       margin-right: 3px;
       float: right;
@@ -4532,7 +4386,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       width: 100%;
       border: 1px solid #ccc;
       border-radius: 0 0 4px 4px;
-      background-color: white;
       cursor: pointer; }
     .gogo-load-css .gogocarto-container .leaflet-routing-geocoder-result-open {
       max-height: 800px; }
@@ -5597,20 +5450,23 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       position: relative;
       z-index: 600;
       margin-right: 19px !important;
-      margin-top: 15px !important; }
+      margin-top: 15px !important;
+      border: none;
+      -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      -moz-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); }
     .gogo-load-css .gogocarto-container .leaflet-control-layers-list {
       display: block !important;
-      padding: 5px 25px 10px 15px;
+      padding: 3px 0;
       position: relative !important; }
     .gogo-load-css .gogocarto-container .leaflet-control-layers-selector:checked + span {
       font-weight: bold; }
     .gogo-load-css .gogocarto-container .leaflet-control-layers-base label {
       text-transform: uppercase;
-      padding-top: 4px;
       line-height: 1.4rem;
-      border-bottom: 1px dashed #cccccc; }
+      border-bottom: 1px dashed #cccccc;
+      padding: 4px 15px 0 15px; }
       .gogo-load-css .gogocarto-container .leaflet-control-layers-base label:hover {
-        background-color: #f4f4f4;
         cursor: pointer; }
       .gogo-load-css .gogocarto-container .leaflet-control-layers-base label:last-child {
         border: none; }
@@ -5661,10 +5517,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         display: block; }
       .gogo-load-css .gogocarto-container #element-info-bar.inside-normal-mode .star-names-icons {
         display: none; }
-      .gogo-load-css .gogocarto-container #element-info-bar #element-info {
-        margin-bottom: 3rem; }
-        .gogo-load-css .gogocarto-container #element-info-bar #element-info .moreDetails {
-          display: none; }
+      .gogo-load-css .gogocarto-container #element-info-bar #element-info .moreDetails {
+        display: none; }
       .gogo-load-css .gogocarto-container #element-info-bar .gogo-icon-close {
         float: right;
         margin: 0;
@@ -5786,7 +5640,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           .gogo-load-css .gogocarto-container #directory-content-list .elements-container {
             padding-left: 10rem;
             padding-right: 10rem; } }
-        .gogo-load-css .gogocarto-container #directory-content-list .elements-container.custom-scroll-bar::-webkit-scrollbar, .gogo-load-css .gogocarto-container #directory-content-list .elements-container.leaflet-routing-alt::-webkit-scrollbar, .gogo-load-css .gogocarto-container #directory-content-list .elements-container.leaflet-routing-geocoders::-webkit-scrollbar, .gogo-load-css .gogocarto-container #directory-content-list .elements-container.leaflet-routing-error::-webkit-scrollbar {
+        .gogo-load-css .gogocarto-container #directory-content-list .elements-container.custom-scroll-bar::-webkit-scrollbar {
           width: 14px; }
         .gogo-load-css .gogocarto-container #directory-content-list .elements-container .bottom-gradient {
           position: fixed;
@@ -6021,7 +5875,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       padding-bottom: .7rem; }
       .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-options label.search-option-radio-label {
         font-size: .9rem;
-        line-height: 2.2rem;
+        line-height: 2.1rem;
         padding-left: 27px;
         margin-right: 13px; }
         .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-options label.search-option-radio-label:before {
@@ -6577,7 +6431,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           padding-top: 5px; } }
     .gogo-load-css .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header {
       border: none;
-      color: white;
       cursor: default;
       width: 100%; }
       .gogo-load-css .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header a {
@@ -6707,8 +6560,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       font-size: .9rem;
       font-family: "Lucida Console", Monaco, monospace;
       margin: 1rem;
-      text-align: center;
-      background-color: whitesmoke; }
+      text-align: center; }
     .gogo-load-css .gogocarto-container #modal-iframe #iframe-code {
       width: 100%;
       padding: 1rem;
@@ -6738,12 +6590,12 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       border-top: 1px solid rgba(0, 0, 0, 0.6);
       background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.4)), to(rgba(0, 0, 0, 0)));
       -webkit-mask-box-image: -webkit-gradient(linear, left top, right top, color-stop(0, rgba(0, 0, 0, 0)), color-stop(0.5, rgba(0, 0, 0, 0.8)), color-stop(1, rgba(0, 0, 0, 0))); }
-    .gogo-load-css .gogocarto-container .custom-scroll-bar-light::-webkit-scrollbar-track, .gogo-load-css .gogocarto-container #directory-menu .sub-categories .sub-categories-content ul::-webkit-scrollbar-track, .gogo-load-css .gogocarto-container .leaflet-control-layers-list::-webkit-scrollbar-track {
+    .gogo-load-css .gogocarto-container .custom-scroll-bar-light::-webkit-scrollbar-track, .gogo-load-css .gogocarto-container .leaflet-routing-alt::-webkit-scrollbar-track, .gogo-load-css .gogocarto-container .leaflet-routing-geocoders::-webkit-scrollbar-track, .gogo-load-css .gogocarto-container .leaflet-routing-error::-webkit-scrollbar-track {
       background-color: #f6f6f6;
       border: 1px solid #f0f0f0; }
-    .gogo-load-css .gogocarto-container .custom-scroll-bar-light::-webkit-scrollbar, .gogo-load-css .gogocarto-container #directory-menu .sub-categories .sub-categories-content ul::-webkit-scrollbar, .gogo-load-css .gogocarto-container .leaflet-control-layers-list::-webkit-scrollbar {
+    .gogo-load-css .gogocarto-container .custom-scroll-bar-light::-webkit-scrollbar, .gogo-load-css .gogocarto-container .leaflet-routing-alt::-webkit-scrollbar, .gogo-load-css .gogocarto-container .leaflet-routing-geocoders::-webkit-scrollbar, .gogo-load-css .gogocarto-container .leaflet-routing-error::-webkit-scrollbar {
       width: 7px; }
-    .gogo-load-css .gogocarto-container .custom-scroll-bar-light::-webkit-scrollbar-thumb, .gogo-load-css .gogocarto-container #directory-menu .sub-categories .sub-categories-content ul::-webkit-scrollbar-thumb, .gogo-load-css .gogocarto-container .leaflet-control-layers-list::-webkit-scrollbar-thumb {
+    .gogo-load-css .gogocarto-container .custom-scroll-bar-light::-webkit-scrollbar-thumb, .gogo-load-css .gogocarto-container .leaflet-routing-alt::-webkit-scrollbar-thumb, .gogo-load-css .gogocarto-container .leaflet-routing-geocoders::-webkit-scrollbar-thumb, .gogo-load-css .gogocarto-container .leaflet-routing-error::-webkit-scrollbar-thumb {
       -webkit-border-radius: 10px;
       -moz-border-radius: 10px;
       border-radius: 10px;
