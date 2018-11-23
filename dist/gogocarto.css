@@ -3540,7 +3540,7 @@ th {
           display: none; }
         .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .arrow-after {
           position: absolute;
-          right: 19%;
+          right: 3.5rem;
           top: 1.1rem;
           border-radius: 1px; }
         .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .option-name:hover .arrow-after {
@@ -3551,7 +3551,7 @@ th {
         .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item.expanded .option-name .arrow-after {
           margin-bottom: -3px; }
         .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .icon {
-          padding-top: .7rem;
+          padding-top: .2rem;
           font-size: 17px;
           height: 3rem;
           width: 2.5rem;
@@ -3561,6 +3561,8 @@ th {
           -o-transition: color 0.3s;
           -ms-transition: color 0.3s;
           transition: color 0.3s; }
+          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .icon.fa {
+            padding-top: .7rem; }
           .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .icon.fa.fa-recycle, .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .icon.fa.fa-link {
             padding-top: .8rem; }
         .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item:not(.expanded) .option-name .arrow-after {
@@ -3604,17 +3606,20 @@ th {
           .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .category-wrapper .subcategories-wrapper:not(.no-withdrawal) .subcategorie-option-item .option-name {
             font-size: .8rem; }
           .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .category-wrapper .subcategories-wrapper:not(.no-withdrawal) .subcategorie-option-item .icon {
-            font-size: .85rem;
-            padding-top: .95rem; }
+            font-size: .85rem; }
+            .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .category-wrapper .subcategories-wrapper:not(.no-withdrawal) .subcategorie-option-item .icon.fa {
+              padding-top: .95rem; }
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #main-option-all > .category-wrapper:first-child .subcategorie-option-item .subIcon {
         background-color: transparent; }
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #main-option-all > .category-wrapper:first-child .subcategorie-option-item:not(.checked) .icon {
         background-color: transparent; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #main-option-all > .category-wrapper:last-child [type="checkbox"].filled-in:checked + label:before {
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #main-option-all > .category-wrapper:not(:first-child) [type="checkbox"].filled-in:checked + label:before {
         top: 7px;
         width: 9px;
         height: 15px; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #filter-favorite .icon {
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #main-option-all > .category-wrapper > .subcategory-item .arrow-after {
+        display: none; }
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .show-only-container .subcategorie-option-item .icon {
         padding-top: 3px;
         padding-left: 10px;
         background-color: transparent; }
@@ -5010,8 +5015,9 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     .gogo-load-css .gogocarto-container .filter-menu .icon.fa {
       padding-top: .7rem;
       width: 1.5rem;
-      text-align: center;
       font-size: 1.2rem; }
+    .gogo-load-css .gogocarto-container .filter-menu .icon {
+      text-align: center; }
     .gogo-load-css .gogocarto-container .leaflet-marker-container {
       width: 0px !important;
       height: 0px !important;
