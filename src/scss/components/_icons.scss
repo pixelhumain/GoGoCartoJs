@@ -17,30 +17,31 @@
 	color: #DFDFDF;
 }
 
-#directory-menu .main-categories .icon.main-icon.fa 
-{
-  font-size: 1.2rem;
-
-  &:before { position: relative; left: 0; top: 0; }
+#directory-menu .main-categories {
+  .icon.main-icon.fa, .icon.main-icon.fas, .icon.main-icon.fab
+  {
+    font-size: 1.2rem;
+    &:before { position: relative; left: 0; top: 0; }
+  }
 }
 
-.icon.fa 
+.icon.fa, .icon.fab, .icon.fas 
 {
   padding-top: .5rem;
   font-size: 1.3rem;
 }
 
-.element-main-icon.icon.fa
+.element-main-icon.icon.fa, .element-main-icon.icon.fas, .element-main-icon.icon.fab
 {
   padding-top: 4px;
 }
 
-.iconInsideMarker.fa 
+.iconInsideMarker.fa, .iconInsideMarker.fas, .iconInsideMarker.fab
 {
   padding-top: 0;
 }
 
-.filter-menu .icon.fa
+.filter-menu .icon.fa, .filter-menu .icon.fas, .filter-menu .icon.fab
 {
   padding-top: .7rem;
   width: 1.5rem;  

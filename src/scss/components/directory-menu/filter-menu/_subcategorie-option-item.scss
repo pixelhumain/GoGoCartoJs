@@ -51,11 +51,8 @@
     border-radius: 4px;
   }
 
-	.icon
-	{
-		font-size: 1.3rem;
-    &.fa { font-size: 1.2rem; }
-	}	
+	.icon { font-size: 1.3rem; }
+  .icon.fa, .icon.fas, .icon.fab { font-size: 1.2rem; }
 
 	.subcategorie-option-checkbox 
 	{

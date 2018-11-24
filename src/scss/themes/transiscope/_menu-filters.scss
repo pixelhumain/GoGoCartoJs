@@ -54,7 +54,6 @@
 
       .icon {
         padding-top: .2rem;
-        &.fa { padding-top: .7rem; }
         font-size: 17px;
         height: 3rem;
         width: 2.5rem;  
@@ -62,7 +61,8 @@
         @include transition(color .3s);
 
         &.fa.fa-recycle, &.fa.fa-link { padding-top: .8rem;}
-      }      
+      }  
+      .icon.fa, .icon.fab, .icon.fas  { padding-top: .7rem; }     
  
       &:not(.expanded) .option-name .arrow-after { opacity: 1; }
       &.expanded       .option-name .arrow-after { opacity: 1; top: .9rem; }
@@ -104,8 +104,8 @@
 
         .icon {
           font-size: .85rem;
-          &.fa { padding-top: .95rem; }          
         }
+        .icon.fa, .icon.fab, .icon.fas { padding-top: .95rem; }      
       }      
     }
 

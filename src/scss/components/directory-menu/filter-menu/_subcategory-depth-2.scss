@@ -47,12 +47,10 @@
       font-size: 1.2rem; 
       padding-top: 1px; 
       margin-right: .8rem; 
-
-      &.fa {
-        font-size: 1.1rem;
-        padding-top: .7rem;
-      }
-
+    }
+    .icon.fa, .icon.fas, .icon.fab {
+      font-size: 1.1rem;
+      padding-top: .7rem;
     }
 
   	.subcategorie-option-checkbox 

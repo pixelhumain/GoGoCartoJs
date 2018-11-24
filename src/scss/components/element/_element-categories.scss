@@ -72,10 +72,10 @@
       .icon 
       { 
         font-size: 1.2rem;
-        &.fa { font-size: 1.1rem; padding-top: .8rem; } 
         &.gogo-icon-marker { font-size : 1.1rem; } 
         &.disabled { color:#BFBFBF !important; }
-      }       
+      }  
+      .icon.fa, .icon.fab, .icon.fas { font-size: 1.1rem; padding-top: .8rem; } 
 
       &.disabled { color: #9C9C9C !important; }
     }
