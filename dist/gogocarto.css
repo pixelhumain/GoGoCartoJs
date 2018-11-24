@@ -3561,10 +3561,10 @@ th {
           -o-transition: color 0.3s;
           -ms-transition: color 0.3s;
           transition: color 0.3s; }
-          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .icon.fa {
-            padding-top: .7rem; }
           .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .icon.fa.fa-recycle, .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .icon.fa.fa-link {
             padding-top: .8rem; }
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .icon.fa, .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .icon.fab, .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item .icon.fas {
+          padding-top: .7rem; }
         .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item:not(.expanded) .option-name .arrow-after {
           opacity: 1; }
         .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .subcategorie-option-item.expanded .option-name .arrow-after {
@@ -3607,8 +3607,8 @@ th {
             font-size: .8rem; }
           .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .category-wrapper .subcategories-wrapper:not(.no-withdrawal) .subcategorie-option-item .icon {
             font-size: .85rem; }
-            .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .category-wrapper .subcategories-wrapper:not(.no-withdrawal) .subcategorie-option-item .icon.fa {
-              padding-top: .95rem; }
+          .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .category-wrapper .subcategories-wrapper:not(.no-withdrawal) .subcategorie-option-item .icon.fa, .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .category-wrapper .subcategories-wrapper:not(.no-withdrawal) .subcategorie-option-item .icon.fab, .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content .category-wrapper .subcategories-wrapper:not(.no-withdrawal) .subcategorie-option-item .icon.fas {
+            padding-top: .95rem; }
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #main-option-all > .category-wrapper:first-child .subcategorie-option-item .subIcon {
         background-color: transparent; }
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories .sub-categories-content #main-option-all > .category-wrapper:first-child .subcategorie-option-item:not(.checked) .icon {
@@ -3730,7 +3730,7 @@ th {
       line-height: 2.5rem; }
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .option-value .option-name {
         line-height: 2.5rem; }
-      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .option-value .icon.fa {
+      .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .option-value .icon.fa, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .option-value .icon.fab, .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .option-value .icon.fas {
         margin-right: 10px;
         font-size: .9rem;
         padding-top: .8rem; }
@@ -4583,8 +4583,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         border-radius: 4px; }
       .gogo-load-css .gogocarto-container .subcategorie-option-item .icon {
         font-size: 1.3rem; }
-        .gogo-load-css .gogocarto-container .subcategorie-option-item .icon.fa {
-          font-size: 1.2rem; }
+      .gogo-load-css .gogocarto-container .subcategorie-option-item .icon.fa, .gogo-load-css .gogocarto-container .subcategorie-option-item .icon.fas, .gogo-load-css .gogocarto-container .subcategorie-option-item .icon.fab {
+        font-size: 1.2rem; }
       .gogo-load-css .gogocarto-container .subcategorie-option-item .subcategorie-option-checkbox + label:before {
         width: 13px;
         height: 13px;
@@ -4671,9 +4671,9 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           font-size: 1.2rem;
           padding-top: 1px;
           margin-right: .8rem; }
-          .gogo-load-css .gogocarto-container .category-wrapper .subcategories-wrapper:not(.no-withdrawal) .subcategorie-option-item .icon.fa {
-            font-size: 1.1rem;
-            padding-top: .7rem; }
+        .gogo-load-css .gogocarto-container .category-wrapper .subcategories-wrapper:not(.no-withdrawal) .subcategorie-option-item .icon.fa, .gogo-load-css .gogocarto-container .category-wrapper .subcategories-wrapper:not(.no-withdrawal) .subcategorie-option-item .icon.fas, .gogo-load-css .gogocarto-container .category-wrapper .subcategories-wrapper:not(.no-withdrawal) .subcategorie-option-item .icon.fab {
+          font-size: 1.1rem;
+          padding-top: .7rem; }
         .gogo-load-css .gogocarto-container .category-wrapper .subcategories-wrapper:not(.no-withdrawal) .subcategorie-option-item .subcategorie-option-checkbox + label:before {
           width: 10px;
           height: 10px;
@@ -4999,20 +4999,20 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           padding-top: 2px; } }
     .gogo-load-css .gogocarto-container .icon.disabled {
       color: #DFDFDF; }
-    .gogo-load-css .gogocarto-container #directory-menu .main-categories .icon.main-icon.fa {
+    .gogo-load-css .gogocarto-container #directory-menu .main-categories .icon.main-icon.fa, .gogo-load-css .gogocarto-container #directory-menu .main-categories .icon.main-icon.fas, .gogo-load-css .gogocarto-container #directory-menu .main-categories .icon.main-icon.fab {
       font-size: 1.2rem; }
-      .gogo-load-css .gogocarto-container #directory-menu .main-categories .icon.main-icon.fa:before {
+      .gogo-load-css .gogocarto-container #directory-menu .main-categories .icon.main-icon.fa:before, .gogo-load-css .gogocarto-container #directory-menu .main-categories .icon.main-icon.fas:before, .gogo-load-css .gogocarto-container #directory-menu .main-categories .icon.main-icon.fab:before {
         position: relative;
         left: 0;
         top: 0; }
-    .gogo-load-css .gogocarto-container .icon.fa {
+    .gogo-load-css .gogocarto-container .icon.fa, .gogo-load-css .gogocarto-container .icon.fab, .gogo-load-css .gogocarto-container .icon.fas {
       padding-top: .5rem;
       font-size: 1.3rem; }
-    .gogo-load-css .gogocarto-container .element-main-icon.icon.fa {
+    .gogo-load-css .gogocarto-container .element-main-icon.icon.fa, .gogo-load-css .gogocarto-container .element-main-icon.icon.fas, .gogo-load-css .gogocarto-container .element-main-icon.icon.fab {
       padding-top: 4px; }
-    .gogo-load-css .gogocarto-container .iconInsideMarker.fa {
+    .gogo-load-css .gogocarto-container .iconInsideMarker.fa, .gogo-load-css .gogocarto-container .iconInsideMarker.fas, .gogo-load-css .gogocarto-container .iconInsideMarker.fab {
       padding-top: 0; }
-    .gogo-load-css .gogocarto-container .filter-menu .icon.fa {
+    .gogo-load-css .gogocarto-container .filter-menu .icon.fa, .gogo-load-css .gogocarto-container .filter-menu .icon.fas, .gogo-load-css .gogocarto-container .filter-menu .icon.fab {
       padding-top: .7rem;
       width: 1.5rem;
       font-size: 1.2rem; }
@@ -6326,13 +6326,13 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
               margin-right: .8rem; }
           .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .option-value .icon {
             font-size: 1.2rem; }
-            .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .option-value .icon.fa {
-              font-size: 1.1rem;
-              padding-top: .8rem; }
             .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .option-value .icon.gogo-icon-marker {
               font-size: 1.1rem; }
             .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .option-value .icon.disabled {
               color: #BFBFBF !important; }
+          .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .option-value .icon.fa, .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .option-value .icon.fab, .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .option-value .icon.fas {
+            font-size: 1.1rem;
+            padding-top: .8rem; }
           .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .option-value.disabled {
             color: #9C9C9C !important; }
         .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .category-wrapper .option-value {
