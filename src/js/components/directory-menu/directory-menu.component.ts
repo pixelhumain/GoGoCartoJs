@@ -71,7 +71,7 @@ export class DirectoryMenuComponent
       App.component.updateMapSize();
 			App.component.updateComponentsSize();
 
-      let searchText = this.dom.find('.search-options').width() > 250 ? "Chercher" : "Go";
+      let searchText = this.dom.find('.search-options').width() > 280 ? "Chercher" : "Go";
       this.dom.find('.search-btn').text(searchText);
     }, 400);     			
   }

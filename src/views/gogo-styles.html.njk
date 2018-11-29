@@ -87,7 +87,5 @@
 {% include 'styles/map.html.njk' %}
 
 {# THEMES #}
-{% if config.theme == "transiscope" %}
-  {% include 'styles/themes/transiscope.html.njk' %}
-{% endif %}
+{% include 'styles/themes/' ~ config.theme ~ '.html.njk' ignore missing %}
 
