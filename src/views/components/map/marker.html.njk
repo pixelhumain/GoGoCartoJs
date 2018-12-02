@@ -1,4 +1,5 @@
-<div class="marker-name gogo-bg-color-as {{pendingClass}}" option-id="{{mainOptionToDisplay.colorOptionId}}" style="display:none">{{ element.name }}</div>
+<div class="marker-name gogo-bg-color-as {{pendingClass}} {{ 'gogo-color-soft' if config.theme == 'presdecheznous' else '' }}"
+					option-id="{{mainOptionToDisplay.colorOptionId}}" style="display:none">{{ element.name }}</div>
 
 <div class="marker-wrapper gogo-color-as {{pendingClass}}" option-id="{{mainOptionToDisplay.colorOptionId}}" id="marker-{{ element.id }}">
 
