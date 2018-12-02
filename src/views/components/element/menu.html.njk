@@ -30,7 +30,7 @@
       <span class="menu-element-item-text">Voir sur la carte</span>
     </div>     
   {% endif %}
-  
+
   {% if config.isFeatureAvailable('share') %} 
     <div class="menu-element-item gogo-color-link item-share">
       <span class="menu-icon gogo-icon-share-alt tooltipped"
@@ -47,7 +47,7 @@
     </div>
   {% endif %}
 
-  {% if config.isFeatureAvailable('edit') and (not element.isPending or config.isFeatureAvailable('directModeration')) %} 
+  {% if config.isFeatureAvailable('edit') and (not element.isPending or config.isFeatureAvailable('directModeration')) and element.isEditable %} 
     <div class="menu-element-item gogo-color-link item-edit">
       {% set editText = 'Modifier' if config.isFeatureAvailable('directModeration') else 'Proposer des modifications' %}
       <a href={{ editUrl }} {% if isIframe %}target="_blank"{% endif %}>

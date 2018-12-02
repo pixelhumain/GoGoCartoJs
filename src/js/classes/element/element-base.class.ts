@@ -41,6 +41,7 @@ export class ElementBase
   moderationState : ElementModerationState;  
   searchScore : number = null;
   isFullyLoaded : boolean = false;
+  isEditable : boolean = true;
 
   // SPECIFIC DATA
   openHours : any;  

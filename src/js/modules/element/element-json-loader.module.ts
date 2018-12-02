@@ -47,6 +47,7 @@ export class ElementJsonParserModule
     element.status = elementJson.status == undefined ? 1 : elementJson.status;
     element.moderationState = elementJson.moderationState || 0;    
     element.searchScore = elementJson.searchScore;    
+    element.isEditable = elementJson.editable || elementJson.isEditable || (element.status != 7 && element.status != -7);
 
     // SPECIFIC DATA
     element.openHours = elementJson.openHours;
