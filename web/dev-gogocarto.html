@@ -30,101 +30,102 @@
     <script>
       $(document).ready(function()
       {   
-        carto = goGoCarto('#gogocarto', {
-          data:
-          {
-            taxonomy: "http://import.saas.localhost/GoGoCarto/web/app_dev.php/api/taxonomy",
-            elements: 'http://import.saas.localhost/GoGoCarto/web/app_dev.php/api/elements',
-            requestByBounds: true,
-          },
-          menu:
-          {
-            showOnePanePerMainOption: false,
-            // showCheckboxForMainFilterPane: false
-          },
-          features:
-          {
-            listMode: {},
-            searchPlace: { },
-            searchGeolocate: {},
-            searchElements:   { 
-                url: 'http://localhost/GoGoCarto/web/app_dev.php/api/elements/search' 
-            },
-            delete:   { 
-                url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/delete', 
-                roles: ['admin'], inIframe: false 
-            },            
-            report:   { 
-                url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/report', 
-                roles: ['anonymous', 'user'] 
-            },
-            vote:     { 
-                url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/vote',   
-                roles: ['user', 'admin'], inIframe: false 
-            },
-            stamp:     { 
-                url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/stamp',  
-                inIframe: false, 
-                options: { allowedStamps: [
-                    {id: 1, name: "test", elementIds: []},
-                    {id: 2, name: "Label bio", elementIds: ["10cE", "10bY", "10c0"]}
-                  ] 
-                } 
-            },
-            customPopup: {  
-                inIframe: false, 
-                options: { 
-                  text: "Votez pour noussur un plus long texte voir ce que ça donne si on veux bien lire jusque là <a href='http://test.fr'>lien</a>",
-                  showOnlyOnce: true,
-                  id: 4,
-                }
-            },
-            moderation: { 
-                inIframe: false, roles: ['admin'], 
-                url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/resolve-reports'
-            },
-            edit:     { url: 'http://localhost/GoGoCarto/web/app_dev.php/elements/edit/' },
-            sendMail: { url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/sendMail' },
-            favorite: { inIframe: false },
-            directions: { active: true },
-            export:   { inIframe: false },
-            pending:  { inIframe: false, roles: ['anonymous', 'user', 'admin'] },            
-            elementHistory: { inIframe: false, roles: ['admin'] },
-            directModeration:  { roles: ['admin'] },
-            share: { active: true },
-            layers: { active: true },
-            mapdefaultview: { active: true }
-          },
-          security:
-          {
-            userRoles: ['admin'],
-            userEmail: "test@gt.gt",
-            loginAction: function() { console.log("needToLog"); },
-          },
-          map:
-          {
-            defaultBounds: [ [52,10], [40,-5] ],
-            defaultTileLayer: "cartodb",
-            saveViewportInCookies: true,
-            saveTileLayerInCookies : true,
-            tileLayers : [
-              {"name":"cartodb","url":"https:\/\/cartodb-basemaps-{s}.global.ssl.fastly.net\/light_all\/{z}\/{x}\/{y}.png", attribution: "hello"},
-              {"name":"hydda","url":"https:\/\/{s}.tile.openstreetmap.se\/hydda\/full\/{z}\/{x}\/{y}.png"},
-              {"name":"wikimedia","url":"https:\/\/maps.wikimedia.org\/osm-intl\/{z}\/{x}\/{y}.png"},
-              {"name":"mapbox","url":"https:\/\/api.mapbox.com\/styles\/v1\/mapbox\/streets-v10\/tiles\/256\/{z}\/{x}\/{y}?access_token=pk.eyJ1Ijoic2ViYWxsb3QiLCJhIjoiY2l4MGtneGVjMDF0aDJ6cWNtdWFvc2Y3YSJ9.nIZr6G2t08etMzft_BHHUQ"},
-              {"name":"pas de fond","url":""}],
-          }, 
-          colors: {
-            "text": "#175259",
-            "textLightSoft": "#ece9e9",
-            "primary": "#3bad78",
-            "secondary": "#f79900",
-            "contentBackground": "white",
-            "background": "#f3f6f4",
-            "disabled": "#bcbcbc"
-          },
-          theme: "presdecheznous"
-        });
+        carto = goGoCarto('#gogocarto', "http://import.saas.localhost/GoGoCarto/web/app_dev.php/api/gogocartojs-conf.json");
+        // {
+        //   data:
+        //   {
+        //     taxonomy: "http://import.saas.localhost/GoGoCarto/web/app_dev.php/api/taxonomy",
+        //     elements: 'http://import.saas.localhost/GoGoCarto/web/app_dev.php/api/elements',
+        //     requestByBounds: true,
+        //   },
+        //   menu:
+        //   {
+        //     showOnePanePerMainOption: false,
+        //     // showCheckboxForMainFilterPane: false
+        //   },
+        //   features:
+        //   {
+        //     listMode: {},
+        //     searchPlace: { },
+        //     searchGeolocate: {},
+        //     searchElements:   { 
+        //         url: 'http://localhost/GoGoCarto/web/app_dev.php/api/elements/search' 
+        //     },
+        //     delete:   { 
+        //         url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/delete', 
+        //         roles: ['admin'], inIframe: false 
+        //     },            
+        //     report:   { 
+        //         url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/report', 
+        //         roles: ['anonymous', 'user'] 
+        //     },
+        //     vote:     { 
+        //         url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/vote',   
+        //         roles: ['user', 'admin'], inIframe: false 
+        //     },
+        //     stamp:     { 
+        //         url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/stamp',  
+        //         inIframe: false, 
+        //         options: { allowedStamps: [
+        //             {id: 1, name: "test", elementIds: []},
+        //             {id: 2, name: "Label bio", elementIds: ["10cE", "10bY", "10c0"]}
+        //           ] 
+        //         } 
+        //     },
+        //     customPopup: {  
+        //         inIframe: false, 
+        //         options: { 
+        //           text: "Votez pour noussur un plus long texte voir ce que ça donne si on veux bien lire jusque là <a href='http://test.fr'>lien</a>",
+        //           showOnlyOnce: true,
+        //           id: 4,
+        //         }
+        //     },
+        //     moderation: { 
+        //         inIframe: false, roles: ['admin'], 
+        //         url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/resolve-reports'
+        //     },
+        //     edit:     { url: 'http://localhost/GoGoCarto/web/app_dev.php/elements/edit/' },
+        //     sendMail: { url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/sendMail' },
+        //     favorite: { inIframe: false },
+        //     directions: { active: true },
+        //     export:   { inIframe: false },
+        //     pending:  { inIframe: false, roles: ['anonymous', 'user', 'admin'] },            
+        //     elementHistory: { inIframe: false, roles: ['admin'] },
+        //     directModeration:  { roles: ['admin'] },
+        //     share: { active: true },
+        //     layers: { active: true },
+        //     mapdefaultview: { active: true }
+        //   },
+        //   security:
+        //   {
+        //     userRoles: ['admin'],
+        //     userEmail: "test@gt.gt",
+        //     loginAction: function() { console.log("needToLog"); },
+        //   },
+        //   map:
+        //   {
+        //     defaultBounds: [ [52,10], [40,-5] ],
+        //     defaultTileLayer: "cartodb",
+        //     saveViewportInCookies: true,
+        //     saveTileLayerInCookies : true,
+        //     tileLayers : [
+        //       {"name":"cartodb","url":"https:\/\/cartodb-basemaps-{s}.global.ssl.fastly.net\/light_all\/{z}\/{x}\/{y}.png", attribution: "hello"},
+        //       {"name":"hydda","url":"https:\/\/{s}.tile.openstreetmap.se\/hydda\/full\/{z}\/{x}\/{y}.png"},
+        //       {"name":"wikimedia","url":"https:\/\/maps.wikimedia.org\/osm-intl\/{z}\/{x}\/{y}.png"},
+        //       {"name":"mapbox","url":"https:\/\/api.mapbox.com\/styles\/v1\/mapbox\/streets-v10\/tiles\/256\/{z}\/{x}\/{y}?access_token=pk.eyJ1Ijoic2ViYWxsb3QiLCJhIjoiY2l4MGtneGVjMDF0aDJ6cWNtdWFvc2Y3YSJ9.nIZr6G2t08etMzft_BHHUQ"},
+        //       {"name":"pas de fond","url":""}],
+        //   }, 
+        //   colors: {
+        //     "text": "#175259",
+        //     "textLightSoft": "#ece9e9",
+        //     "primary": "#3bad78",
+        //     "secondary": "#f79900",
+        //     "contentBackground": "white",
+        //     "background": "#f3f6f4",
+        //     "disabled": "#bcbcbc"
+        //   },
+        //   theme: "presdecheznous"
+        // });
       });
     </script>
     

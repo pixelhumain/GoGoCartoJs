@@ -201,7 +201,7 @@ export class GoGoConfig
     if (!this.colors.mapControlsBgd) { this.colors.mapControlsBgd = this.colors.contentBackground; }
     if (!this.colors.mapControls) { this.colors.mapControls = this.colors.mapControlsBgd.isDark() ? this.colors.textLightSoft : this.colors.textDarkSoft; }
     
-    if (!config.colors.text && !config.colors.textDark && !config.colors.textLight) {
+    if (config.colors && !config.colors.text && !config.colors.textDark && !config.colors.textLight) {
       if (this.colors.contentBackground.isDark())
         this.colors.textDark = this.colors.contentBackground;
       else

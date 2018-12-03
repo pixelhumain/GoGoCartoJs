@@ -3713,8 +3713,6 @@ th {
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field + .field {
       padding-top: 0;
       margin-top: -.4rem; }
-    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field-openhours .day {
-      padding-left: 0; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body h3 {
       font-weight: 900;
       padding-left: 1.5rem; }
@@ -3759,8 +3757,6 @@ th {
       content: "➡";
       font-size: 1.2rem;
       margin: 0 8px 0 10px; }
-    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field-openhours .openHours {
-      padding-left: 0; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field-tags {
       margin-top: 1rem !important;
       margin-bottom: -10px;
@@ -5176,7 +5172,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     .gogo-load-css .gogocarto-container .leaflet-marker-container.rotateLeft .moreIconContainer {
       left: 30px; }
     .gogo-load-css .gogocarto-container .leaflet-marker-container.rotateLeft .marker-name {
-      bottom: 47px;
+      bottom: 43px;
       left: -50px; }
     .gogo-load-css .gogocarto-container .leaflet-marker-container.rotateRight .marker-wrapper {
       right: -35px;
@@ -5201,7 +5197,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     .gogo-load-css .gogocarto-container .leaflet-marker-container.rotateRight .moreIconContainer {
       left: 30px; }
     .gogo-load-css .gogocarto-container .leaflet-marker-container.rotateRight .marker-name {
-      bottom: 47px;
+      bottom: 53px;
       left: -10px; }
     .gogo-load-css .gogocarto-container .leaflet-marker-container.rotateSoftLeft .marker-wrapper {
       right: -13px;
@@ -6264,13 +6260,16 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           padding: 0px 10px;
           display: inline-block;
           margin-bottom: 8px; }
+      .gogo-load-css .gogocarto-container .element-item .field-openhours .day, .gogo-load-css .gogocarto-container .element-item .field-openhours .openHours {
+        padding-left: 0; }
       .gogo-load-css .gogocarto-container .element-item .field-vimeo {
         position: relative;
         padding-bottom: 65.25%;
         height: 0;
         overflow: hidden;
         max-width: 100%;
-        height: auto; }
+        height: auto;
+        margin-top: -1rem; }
         .gogo-load-css .gogocarto-container .element-item .field-vimeo iframe, .gogo-load-css .gogocarto-container .element-item .field-vimeo object, .gogo-load-css .gogocarto-container .element-item .field-vimeo embed {
           position: absolute;
           top: 0;
@@ -6285,6 +6284,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         padding-top: .9rem; }
       .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper {
         margin-top: 0 !important; }
+        .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper a.option-url {
+          color: inherit; }
         .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .strong {
           text-decoration: underline; }
         .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper:not(:first-child) {
@@ -6335,6 +6336,15 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
             padding-top: .8rem; }
           .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .option-value.disabled {
             color: #9C9C9C !important; }
+          .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .option-value .gogo-icon-external-link {
+            float: none;
+            font-size: .8rem;
+            position: relative; }
+            .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .option-value .gogo-icon-external-link:before {
+              position: absolute;
+              bottom: 0;
+              left: 1rem;
+              opacity: .8; }
         .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .category-wrapper .option-value {
           padding-left: .6rem; }
       .gogo-load-css .gogocarto-container .element-item h3 {

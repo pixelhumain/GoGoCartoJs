@@ -59,9 +59,9 @@
   {{ createcolor('primary', primary) }}
 
   {# TAXONOMY COLORS #}
-  .gogo-load-css .gogo-bg-soft-color-as { background-color: {{ text }} }
-  .gogo-load-css .gogo-bg-color-as { background-color: {{ text }} }
   .gogo-load-css .gogo-color-as { color: {{ text }}}  
+  {{ createBackgroung('bg-soft-color-as', text) }}
+  {{ createBackgroung('bg-color-as', text) }}
 
   {% for option in optionList %} 
      {% if option.icon or option.color %}
