@@ -8,7 +8,8 @@ var taxonomy = {
       "nameShort":"Agricuture",
       "color":"#98A100",
       "softColor":"#808700",
-      "icon":"icon-leaf-1"
+      "icon":"icon-leaf-1",
+      "url": "http://gogocarto.fr"
     },    
     {
       "id":10517,
