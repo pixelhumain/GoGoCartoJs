@@ -36,6 +36,10 @@
   } 
 }  
 
+.field-openhours {
+  .day, .openHours { padding-left: 0; }
+}
+
 .field-vimeo { 
   position: relative; 
   padding-bottom: 65.25%; 
@@ -43,6 +47,7 @@
   overflow: hidden; 
   max-width: 100%; 
   height: auto; 
+  margin-top: -1rem;
 
   iframe, object, embed { 
     position: absolute; 

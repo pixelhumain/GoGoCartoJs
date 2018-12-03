@@ -43,7 +43,7 @@ export class Option extends CategoryOptionTreeNode
 		this.color = $optionJson.color ? tinycolor($optionJson.color) : null;
 		this.softColor = tinycolor($optionJson.softColor || this.color);
 		this.icon = $optionJson.icon;
-		if (this.icon && (this.icon.indexOf("fab ") || this.icon.indexOf("fas "))) this.icon += " fa";
+		if (this.icon && (this.icon.indexOf("fab ") > 0 || this.icon.indexOf("fas ") > 0)) this.icon += " fa";
 		this.textHelper = $optionJson.textHelper;
 		this.useIconForMarker = ('useIconForMarker' in $optionJson) ? $optionJson.useIconForMarker : !!this.icon;
 		this.useColorForMarker = ('useColorForMarker' in $optionJson) ? $optionJson.useColorForMarker : !!this.color;		
