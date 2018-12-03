@@ -89,6 +89,7 @@ export class ElementComponent
       e.stopPropagation();e.stopImmediatePropagation();e.preventDefault();      
       let textButton = textMore.is(":visible") ? "Afficher plus" : "Afficher moins";
       textMore.toggle();    
+      if (textMore.is(":visible")) textMore.css('display', 'inline');
       $(this).text(textButton);
       if (App.mode == AppModes.Map && App.infoBarComponent.isVisible) App.infoBarComponent.updateInfoBarHeaderSize();
     });

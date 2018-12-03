@@ -1,9 +1,9 @@
 {% if value %}
   {% set longText = splitLongText(value, truncate|default(1000), tolerance|default(50)) %}
   <div class="field field-textarea">
-    <span>{{ longText.first|safe }}</span>
+    <div style="display: inline">{{ longText.first|safe }}</div>
     {% if longText.second %}
-      <span style="display:none" class="text-more">{{ longText.second|safe }}</span>  
+      <div style="display:none" class="text-more">{{ longText.second|safe }}</div>  
       <a class="show-more">Afficher plus</a>
     {% endif %}
   </div>     
