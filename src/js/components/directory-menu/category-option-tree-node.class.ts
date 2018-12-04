@@ -60,7 +60,7 @@ export class CategoryOptionTreeNode
 		return null;
 	}
 
-	getMainOwner() { return this.mainOwnerId == "all" ? this : App.taxonomyModule.getOptionById(this.mainOwnerId); }
+	getMainOwner() { return ["RootFakeOption", "all"].indexOf(this.mainOwnerId) > -1 ? this : App.taxonomyModule.getOptionById(this.mainOwnerId); }
 	getMainCategoryOwner() : CategoryOptionTreeNode { return this.getMainOwner().getOwner(); }
 
 	protected disabledChildren() : CategoryOptionTreeNode[] { return this.children.filter( child => child.isDisabled); }

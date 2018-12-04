@@ -3942,7 +3942,8 @@ th {
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-content-list .element-item .section {
       margin-right: 0; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-content-list .element-item .inline-option-values {
-      width: 100%; }
+      width: 100%;
+      padding: 0; }
       .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-content-list .element-item .inline-option-values .inline-option-value[main-category-owner-name="Sources"] {
         float: right;
         margin-right: 0; }
