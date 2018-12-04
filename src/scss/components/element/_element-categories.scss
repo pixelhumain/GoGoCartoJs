@@ -63,6 +63,7 @@
     { 
       line-height: 2.5rem;        
       padding: 0;
+      position-relative
 
       &.inline 
       {
@@ -84,16 +85,8 @@
       &.disabled { color: #9C9C9C !important; }     
 
       .gogo-icon-external-link {
-        float: none ;
+        float: right;
         font-size: .8rem;
-        position: relative;
-        &:before {
-          position: absolute;
-          bottom: 0;
-          left: 1rem;
-          opacity: .8;
-        }
-
       }
     }
     .category-wrapper .option-value { padding-left: .6rem; }      

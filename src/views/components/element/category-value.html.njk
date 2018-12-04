@@ -31,7 +31,7 @@
 	  
 	  <div class={{ '' if categoryValue.category.displaySuboptionsInline else 'row'}}>
 	  	{# Option Icon and Name #}
-	  	{% if option.url %}<a class="option-url" href="{{ option.url }}" taregt="_blank">{% endif %}
+	  	{% if option.url %}<a class="option-url" href="{{ option.url }}" target="_blank">{% endif %}
 	    <span class="option-value col gogo-color-as {{ optionClass }} {{ 'last' if loop.last else ''}} {{ 'first' if loop.first else ''}}"
 	    			option-id={{ option.id }}>
 				{% if  option.icon %}

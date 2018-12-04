@@ -34629,9 +34629,9 @@ output += "; \n    border-color: ";
 output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "lineBorder"), env.opts.autoescape);
 output += ";\n    color: ";
 output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "text"), env.opts.autoescape);
-output += ";\n  }\n\n  .gogo-load-css .field-taxonomy .option-value:hover .gogo-icon-external-link:before { color: ";
-output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "primary"), env.opts.autoescape);
-output += "; opacity: 1 !important; }\n\n  ";
+output += ";\n  }\n\n  .gogo-load-css .field-taxonomy .option-value .gogo-icon-external-link { color: ";
+output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "text"), env.opts.autoescape);
+output += "; opacity: .5; }\n  .gogo-load-css .field-taxonomy .option-value:hover .gogo-icon-external-link { color: inherit; opacity: 1 !important; }\n\n  ";
 output += "\n  .gogo-load-css #element-info-bar.display-bottom .element-item .collapsible-header { border-color: ";
 output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "lineBorder"), env.opts.autoescape);
 output += " }\n  .gogo-load-css .gogocarto-container .element-item .info-bar-divider { background-color: ";
@@ -36083,7 +36083,7 @@ t_2 += "\n\t  \t";
 if(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "option")),"url")) {
 t_2 += "<a class=\"option-url\" href=\"";
 t_2 += runtime.suppressValue(runtime.memberLookup((runtime.contextOrFrameLookup(context, frame, "option")),"url"), env.opts.autoescape);
-t_2 += "\" taregt=\"_blank\">";
+t_2 += "\" target=\"_blank\">";
 ;
 }
 t_2 += "\n\t    <span class=\"option-value col gogo-color-as ";

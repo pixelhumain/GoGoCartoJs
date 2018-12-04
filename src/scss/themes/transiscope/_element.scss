@@ -112,7 +112,7 @@
             margin-right: 6px;
           }
         }
-        .icon { 
+        .icon:not(.gogo-icon-external-link) { 
           display: none;           
         }
       }
