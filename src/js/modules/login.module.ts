@@ -27,5 +27,8 @@ export class LoginModule
 
 	getRoles() { return this.roles_; }
 
-  loginAction() { App.config.security.loginAction(); }
+  loginAction() { 
+  	if (typeof App.config.security.loginAction == 'function') App.config.security.loginAction()
+  	else eval(App.config.security.loginAction);
+  }
 }
