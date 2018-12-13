@@ -58,8 +58,11 @@ export class MapComponent
 
 		this.map_ = L.map('directory-content-map', {
 		    zoomControl: false,
+		    attributionControl: false,
 		    layers: [defaultBaseLayer]
 		});
+
+		L.control.attribution({prefix: '<a target="_blank" href="https://pixelhumain.github.io/GoGoCartoJs/">GoGoCarto</a> | <a target="_blank" href="https://leafletjs.com">Leaflet</a>'}).addTo(this.map_);
 
 		setTimeout(function() { 
 			$('.leaflet-control-zoom').addClass('gogo-section-controls');				
