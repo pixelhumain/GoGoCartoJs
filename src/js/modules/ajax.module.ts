@@ -175,6 +175,7 @@ export class AjaxModule
 			},
 			success: response =>
 			{	
+				if (typeof response == "string") response = JSON.parse(response);
 				if (response.data !== null)
 				{
 					// let end = new Date().getTime();					
