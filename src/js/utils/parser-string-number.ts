@@ -26,7 +26,7 @@ function parseNumberToString(number : number) : string
 
   for (i = 0; i < length; i++) 
   {
-    result += String.fromCharCode(96 + parseInt(base26[i],26));
+    result += String.fromCharCode(97 + parseInt(base26[i],26));
   }
 
   return result;
@@ -41,7 +41,7 @@ function parseStringToNumber(string : string) : number
 
   for (i = length - 1; i >= 0; i--) 
   {
-    result += (string.charCodeAt(i) - 96) * Math.pow(26, length - i - 1);
+    result += (string.charCodeAt(i) - 97) * Math.pow(26, length - i - 1);
   }
 
   return result;
