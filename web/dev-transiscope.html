@@ -31,54 +31,54 @@
     <script>
       $(document).ready(function()
       {  
-        // carto = goGoCarto('#gogocarto', "https://transiscope.org/wp-content/configuration-transiscope-V2.json");
+        carto = goGoCarto('#gogocarto', "https://transiscope.gogocarto.fr/api/gogocartojs-conf.json");
 
-        carto = goGoCarto('#gogocarto', 
-        {
-          "data":
-          {
-            // "taxonomy": "https://transiscope.org/wp-content/TaxonomiePWA-V2.json",
-            "taxonomy": taxonomy, // "https://semantic-bus.org/data/api/TaxonomiePWA",
-            "elements": "https://transiscope.gogocarto.fr/api/elements",
-            "requestByBounds": true
-          },
-          "menu": 
-          { 
-            "width": 350,
-            "smallWidthStyle": true
-          },
-          "map":
-          {
-            "saveTileLayerInCookies" : true
-          },
-          "features": {
-            "listMode": {},
-            "searchPlace": { },
-            "searchElements": { "url": "https://transiscope.gogocarto.fr/api/elements/search" },
-            "searchGeolocate": {},
-            "favorite": {},
-            "share": {},
-            "export": {},
-            "directions": {},           
-            "layers": {},
-            "mapdefaultview": {}
-          },
-          "theme": "transiscope",
-          "colors":
-          {
-            "text": "#175259",
-            "textLightSoft": "#ece9e9",
-            "primary": "#3bad78",
-            "secondary": "#f79900",
-            "contentBackground": "white",
-            "background": "#f3f6f4",
-            "disableColor": "#bcbcbc"
-          },
-          "images":
-          {
-            "buttonOpenMenu":  "https://transiscope.org/wp-content/uploads/2018/09/icon-2.png"            
-          }           
-        });
+      //   carto = goGoCarto('#gogocarto', 
+      //   {
+      //     "data":
+      //     {
+      //       // "taxonomy": "https://transiscope.org/wp-content/TaxonomiePWA-V2.json",
+      //       "taxonomy": taxonomy, // "https://semantic-bus.org/data/api/TaxonomiePWA",
+      //       "elements": "https://transiscope.gogocarto.fr/api/elements",
+      //       "requestByBounds": true
+      //     },
+      //     "menu": 
+      //     { 
+      //       "width": 350,
+      //       "smallWidthStyle": true
+      //     },
+      //     "map":
+      //     {
+      //       "saveTileLayerInCookies" : true
+      //     },
+      //     "features": {
+      //       "listMode": {},
+      //       "searchPlace": { },
+      //       "searchElements": { "url": "https://transiscope.gogocarto.fr/api/elements/search" },
+      //       "searchGeolocate": {},
+      //       "favorite": {},
+      //       "share": {},
+      //       "export": {},
+      //       "directions": {},           
+      //       "layers": {},
+      //       "mapdefaultview": {}
+      //     },
+      //     "theme": "transiscope",
+      //     "colors":
+      //     {
+      //       "text": "#175259",
+      //       "textLightSoft": "#ece9e9",
+      //       "primary": "#3bad78",
+      //       "secondary": "#f79900",
+      //       "contentBackground": "white",
+      //       "background": "#f3f6f4",
+      //       "disableColor": "#bcbcbc"
+      //     },
+      //     "images":
+      //     {
+      //       "buttonOpenMenu":  "https://transiscope.org/wp-content/uploads/2018/09/icon-2.png"            
+      //     }           
+      //   });
       });
     </script>
     
