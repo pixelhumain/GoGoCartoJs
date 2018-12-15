@@ -158,7 +158,8 @@ export class Element extends ElementBase
       isPending: this.isPending(),
       isDeleted: this.isDeleted(),
       needsModeration: this.needsModeration(),
-      formatedOpenHours: this.formatedOpenHours
+      formatedOpenHours: this.formatedOpenHours,
+      isEditable: this.isEditable
     };
     $.each(this.data, (key, value) => {
        if(!(key in result)) result[key] = this.formatProp(key)
