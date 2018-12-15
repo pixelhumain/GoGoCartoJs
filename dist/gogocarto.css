@@ -3756,7 +3756,8 @@ th {
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field-openhours .day:after {
       content: "➡";
       font-size: 1.2rem;
-      margin: 0 8px 0 10px; }
+      margin: 0 8px 0 10px;
+      float: right; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .field-tags {
       margin-top: 1rem !important;
       margin-bottom: -10px;
