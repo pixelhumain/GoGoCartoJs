@@ -1,18 +1,16 @@
 {
-  "name": "GoGoCartoJs",
-  "version": "1.0.0",
+  "name": "gogocarto-js",
+  "version": "1.1.1",
   "homepage": "https://github.com/Biopen/GoGoCartoJS",
-  "description": "Front end directory part of GoGoCarto project",
+  "description": "A javascript component to create terrific cartography ! Front end part of GoGoCarto project",
   "keywords": [
     "map",
-    "mapping",
-    "cartography",
-    "directory"
+    "dataviz"
   ],
   "license": "GPL-3.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Biopen/GoGoCartoJS.git"
+    "url": "https://github.com/Biopen/GoGoCartoJs.git"
   },
   "engines": {
     "node": "6.5.0"
