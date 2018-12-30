@@ -43,13 +43,18 @@ export class AjaxModule
 
 	sendRequest(route : string, method : string, data : any, callbackSuccess?, callbackFailure?)
 	{
-		//console.log("SendAjaxRequest to " + route, data);
+		// console.log("SendAjaxRequest to " + route, data);
 		$.ajax({
 			url: route,
 			method: method,
 			data: data,
 			success: response => { if (response && callbackSuccess) callbackSuccess(response); },
-			error: response => { if (callbackFailure) callbackFailure(response.data); }
+			error: response => { 
+				// when working with cross domain, there is a bug the server return empty response (status code = 0)
+				// even if the request has been completed
+				if (response.status == 0 && callbackSuccess) callbackSuccess(response);
+				else if (callbackFailure) callbackFailure(response.data); 
+			}
 		});
 	}
 
