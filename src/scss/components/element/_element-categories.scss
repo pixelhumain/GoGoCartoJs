@@ -24,7 +24,9 @@
     // a category inside an other, so we add margin
     .category-wrapper 
     {
-      margin-left: 1.2rem;
+      margin-left: .5rem;
+      .category-wrapper  { margin-left: 1.2rem; }
+      
       padding-left: .5rem;
       border-left: 1px dotted #c3c3c3;
 
