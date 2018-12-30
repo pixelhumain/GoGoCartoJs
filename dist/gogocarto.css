@@ -6116,8 +6116,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         padding-bottom: 5px;
         margin-bottom: 5px; }
       .gogo-load-css .gogocarto-container .element-item .vote-report-item {
-        line-height: 1.5rem !important;
-        padding: 10px; }
+        line-height: 1.5rem !important; }
       .gogo-load-css .gogocarto-container .element-item .pending-contribution {
         line-height: 1.5rem !important;
         margin-bottom: 0rem;
