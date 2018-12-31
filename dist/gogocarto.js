@@ -34638,7 +34638,9 @@ output += " }\n  .gogo-load-css .gogocarto-container .element-item .info-bar-div
 output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "lineBorder"), env.opts.autoescape);
 output += "; }\n  .gogo-load-css .gogocarto-container .element-item .collapsible-body { background-color: ";
 output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "contentBackgroundElementBody"), env.opts.autoescape);
-output += "; }\n\n  .gogo-load-css .tabs.info-bar-tabs {\n    background-color: ";
+output += "; }\n  .gogo-load-css .gogocarto-container .element-item .collapsible-body-main-content { background-color: ";
+output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "contentBackgroundElementBody"), env.opts.autoescape);
+output += "; }\n  \n\n  .gogo-load-css .tabs.info-bar-tabs {\n    background-color: ";
 output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "textDark"), env.opts.autoescape);
 output += ";\n  }\n  .gogo-load-css .tabs.info-bar-tabs .indicator {\n    bottom: 0;\n    top: initial;\n    background-color: ";
 output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "textSoft"), env.opts.autoescape);
@@ -37678,7 +37680,7 @@ output += "<style>\n.gogo-theme-presdecheznous .directory-menu-header .search-ic
 output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "textSoft"), env.opts.autoescape);
 output += "; }  \n.gogo-theme-presdecheznous .directory-menu-header .search-icon.search-bar-icon { background-color: ";
 output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "text"), env.opts.autoescape);
-output += "; }\n.gogo-load-css .gogocarto-container .leaflet-marker-container .marker-name { opacity: .9; }\n</style>";
+output += "; }\n.gogo-load-css .gogocarto-container .leaflet-marker-container .marker-name { opacity: .9; }\n\n.gogo-load-css .gogo-theme-presdecheznous.gogocarto-container .element-item .info-bar-divider {\n  margin-left: -.5rem;\n}\n\n.gogo-load-css .gogocarto-container #element-info-bar.display-aside .element-item .collapsible-header {\n  padding-left: .6rem;\n  padding-right: .5rem;\n}\n@media only screen and (min-width: 601px) {\n  .gogo-load-css .gogocarto-container .element-item .collapsible-body .collapsible-body-main-content { padding-left: 1.6rem; }\n}\n\n</style>";
 if(parentTemplate) {
 parentTemplate.rootRenderFunc(env, context, frame, runtime, cb);
 } else {
@@ -37712,11 +37714,7 @@ output += "; }\n  .gogo-load-css .gogo-theme-transiscope .element-item .collapsi
 output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "primary"), env.opts.autoescape);
 output += "; \n    color: ";
 output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "textLight"), env.opts.autoescape);
-output += ";\n  }\n  .gogo-load-css .gogo-theme-transiscope .element-item .collapsible-body { background-color: ";
-output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "background"), env.opts.autoescape);
-output += "; }\n  .gogo-load-css .gogo-theme-transiscope .element-item .collapsible-body .collapsible-body-main-content { background-color: ";
-output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "background"), env.opts.autoescape);
-output += "; }\n  .gogo-load-css .gogo-theme-transiscope .collapsible-body .field { background-color: ";
+output += ";\n  }\n  .gogo-load-css .gogo-theme-transiscope .collapsible-body .field { background-color: ";
 output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "contentBgd"), env.opts.autoescape);
 output += "; }\n  .gogo-load-css .gogo-theme-transiscope .collapsible-body .field-taxonomy h3.category-name { color: ";
 output += runtime.suppressValue(runtime.contextOrFrameLookup(context, frame, "secondary"), env.opts.autoescape);

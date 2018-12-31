@@ -6292,9 +6292,11 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper:not(:first-child) {
           margin-top: .5rem; }
         .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .category-wrapper {
-          margin-left: 1.2rem;
+          margin-left: .5rem;
           padding-left: .5rem;
           border-left: 1px dotted #c3c3c3; }
+          .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .category-wrapper .category-wrapper {
+            margin-left: 1.2rem; }
           .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .category-wrapper h3.category-name {
             font-size: 85%;
             padding-bottom: .4rem;
