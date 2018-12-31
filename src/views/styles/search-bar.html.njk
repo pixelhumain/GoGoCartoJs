@@ -8,8 +8,8 @@
     background: {{ searchBar }}; 
     color: white;
   }
-  {% set searchBarText = textLightSoft if searchBar.isDark() else textDarkSoft %}
-  {% set searchBarBtnText = textDarkSoft if searchBar.isDark() else textLightSoft %}
+  {% set searchBarText = searchBar.mostReadable([textLightSoft, textDarkSoft]) %}
+  
   .gogo-load-css .search-bar-with-options-container .search-option-radio-label:before { border-color: {{ searchBarText }}; }
   .gogo-load-css .search-bar-with-options-container .search-option-radio-label:after { 
     border-color: {{ searchBarText }} !important; 
@@ -17,7 +17,7 @@
   }
   .gogo-load-css .search-bar-with-options-container .search-action-btn { 
     background-color: {{ searchBarText }}; 
-    color: {{ searchBarBtnText }};  
+    color: {{ textLight if searchBarText ==  textDarkSoft else textDark }};  
   }
   .gogo-load-css .search-bar-with-options-container .search-action-btn:hover { background-color: {{ searchBarText.lighten(10) }};  }
 

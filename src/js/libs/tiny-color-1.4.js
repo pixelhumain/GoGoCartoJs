@@ -263,6 +263,9 @@ tinycolor.prototype = {
     },
     tetrad: function() {
         return this._applyCombination(tetrad, arguments);
+    },
+    mostReadable: function(colorList) {
+        return tinycolor.mostReadable(this, colorList);
     }
 };
 

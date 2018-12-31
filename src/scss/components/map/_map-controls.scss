@@ -44,6 +44,8 @@ a.leaflet-control-zoom-out {
     border-color: transparent transparent transparent #eeeeee;
   }  
 
+  img { display: none; }
+
   i {
     margin-right: 5px !important;
   }
@@ -95,6 +97,7 @@ a.leaflet-control-zoom-out {
   height: 35px;
   object-fit: contain;
   margin-top: 3px;
+  display: none;
 }
 
 .feature-button
