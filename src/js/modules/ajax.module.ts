@@ -189,7 +189,7 @@ export class AjaxModule
 					response.fullRepresentation = response.ontology == "gogocompact" ? false : true;
 					
 					if ($expectedFilledBounds)
-						App.boundsModule.updateFilledBoundsWithBoundsReceived($expectedFilledBounds, $request.data.mainOptionId,  $request.data.fullRepresentation);
+						App.boundsModule.updateFilledBoundsWithBoundsReceived($expectedFilledBounds, $request.data.categories,  $request.data.fullRepresentation);
 
 					if (response.allElementsSends || !App.config.data.requestByBounds) this.allElementsReceived = true;
 
