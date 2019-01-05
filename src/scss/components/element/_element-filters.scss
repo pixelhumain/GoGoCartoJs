@@ -1,6 +1,7 @@
 .field-textarea { 
   line-height: 1.5rem;
   text-align: justify;
+  div { white-space: pre-wrap; }
 }
 
 .show-more { 
