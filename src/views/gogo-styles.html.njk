@@ -59,9 +59,10 @@
   {{ createcolor('primary', primary) }}
 
   {# TAXONOMY COLORS #}
-  .gogo-load-css .gogo-color-as { color: {{ text }}}  
+  
   {{ createBackgroung('bg-soft-color-as', text) }}
   {{ createBackgroung('bg-color-as', text) }}
+  .gogo-load-css .gogo-color-as { color: #5b5b5b; }  
 
   {% for option in optionList %} 
      {% if option.icon or option.color %}
@@ -71,7 +72,9 @@
       {{ createBackgroung(name|safe, option.color) }}
       {% set name = "bg-soft-color-as[option-id='" ~ option.id ~ "']" %}
       {{ createBackgroung(name|safe, softColor) }}
-      .gogo-load-css .gogo-color-as[option-id="{{ option.id }}"] { color: {{ option.color }} }
+      {% if option.color %}
+        .gogo-load-css .gogo-color-as[option-id="{{ option.id }}"] { color: {{ option.color }} }
+      {% endif %}
     {% endif %}
   {% endfor %}   
 
