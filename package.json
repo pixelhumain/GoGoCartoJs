@@ -1,7 +1,7 @@
 {
   "name": "gogocarto-js",
   "version": "1.1.4",
-  "homepage": "https://github.com/Biopen/GoGoCartoJS",
+  "homepage": "https://gitlab.adullact.net/pixelhumain/GoGoCartoJs",
   "description": "A javascript component to create terrific cartography ! Front end part of GoGoCarto project",
   "keywords": [
     "map",
@@ -10,7 +10,7 @@
   "license": "GPL-3.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Biopen/GoGoCartoJs.git"
+    "url": "https://gitlab.adullact.net/pixelhumain/GoGoCartoJs.git"
   },
   "engines": {
     "node": "6.5.0"
