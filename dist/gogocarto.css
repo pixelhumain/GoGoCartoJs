@@ -6090,11 +6090,11 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       .gogo-load-css .gogocarto-container .element-item .label-default {
         background-color: #d2d6de;
         color: #444; }
-      .gogo-load-css .gogocarto-container .element-item .element-item .contributions {
+      .gogo-load-css .gogocarto-container .element-item .contributions {
         border: none;
         box-shadow: none;
         margin-top: 0; }
-        .gogo-load-css .gogocarto-container .element-item .element-item .contributions .contribution-header {
+        .gogo-load-css .gogocarto-container .element-item .contributions .contribution-header {
           color: inherit;
           background-color: transparent;
           border: none;
@@ -6102,11 +6102,11 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           line-height: 2rem;
           padding: 15px 0;
           border-bottom: 1px solid grey; }
-          .gogo-load-css .gogocarto-container .element-item .element-item .contributions .contribution-header .contribution-status {
+          .gogo-load-css .gogocarto-container .element-item .contributions .contribution-header .contribution-status {
             float: left; }
-          .gogo-load-css .gogocarto-container .element-item .element-item .contributions .contribution-header .contribution-updated-at {
+          .gogo-load-css .gogocarto-container .element-item .contributions .contribution-header .contribution-updated-at {
             float: right; }
-        .gogo-load-css .gogocarto-container .element-item .element-item .contributions .contribution-body {
+        .gogo-load-css .gogocarto-container .element-item .contributions .contribution-body {
           color: inherit; }
       .gogo-load-css .gogocarto-container .element-item .info-bar-tabs.tabs {
         z-index: 40; }
