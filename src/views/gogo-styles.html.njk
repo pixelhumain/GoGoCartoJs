@@ -46,6 +46,7 @@
 {% set lineBorder         = config.colors.lineBorder %}
 {% set searchBar          = config.colors.searchBar          | default(primary) %}
 {% set interactiveColor   = config.colors.interactiveSection | default(primary) %}
+{% set pending            = config.colors.pending %}
 
 <style>
   {# DESIGN #}  
@@ -76,7 +77,13 @@
         .gogo-load-css .gogo-color-as[option-id="{{ option.id }}"] { color: {{ option.color }} }
       {% endif %}
     {% endif %}
-  {% endfor %}   
+  {% endfor %}  
+
+  .gogo-load-css .pending { color: {{ pending }} !important; } 
+  .gogo-load-css .pending.gogo-bg-soft-color-as, .gogo-load-css .pending.gogo-bg-color-as  { 
+    background-color: {{ pending }} !important;  
+    color: {{ config.colors.textDarkSoft if pending.isLight() else config.colors.textLightSoft }} !important;
+  }   
 
   {% if config.colors.infoBarMenu %}
     {{ createBackgroung('section-infobar-menu.menu-element', config.colors.infoBarMenu) }}

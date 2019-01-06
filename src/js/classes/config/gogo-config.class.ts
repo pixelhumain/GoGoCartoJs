@@ -160,6 +160,7 @@ export class GoGoConfig
     mapControlsBgd: undefined,
     mapControls: undefined,  
     mapListBtn: undefined,
+    pending: tinycolor("#565656")
   }
   readonly fonts =
   {

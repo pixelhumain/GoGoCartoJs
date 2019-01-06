@@ -42,4 +42,13 @@
     background: linear-gradient(to right, {{ contentBgd.setAlpha(0.3) }} 0%,{{ contentBgd.setAlpha(0.8) }} 25%,{{ contentBgd.setAlpha(1) }} 80%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='{{ contentBgd.setAlpha(0.3) }}', endColorstr='{{ contentBgd.setAlpha(1) }}',GradientType=1 ); /* IE6-9 */
   }
+
+  .gogo-load-css #filter-pending { color: {{ pending }}; }
+  .gogo-load-css #filter-pending .pending-checkbox + label:before { color: {{ pending }}; }  
+  .gogo-load-css #filter-pending .pending-checkbox:not(:checked) + label:before
+  {
+    background-color: transparent;
+    border-color:{{ pending }};
+  }
+  
 </style>
