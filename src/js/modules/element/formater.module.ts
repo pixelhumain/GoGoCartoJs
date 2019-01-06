@@ -30,7 +30,6 @@ export class ElementFormaterModule
 
     value = value || '';
     modifiedValue = modifiedValue || '';
-
     return App.elementDiffModule.getDiffValue(value, modifiedValue, propertyName)
   }
 
@@ -63,6 +62,6 @@ export class ElementFormaterModule
     else if (propertyName in element) value = element[propertyName]
     else value = element.data[propertyName]
     
-    return value;
+    return `${value}`;
   }
 }

@@ -1,5 +1,10 @@
 {% if value %}
 <div class="field field-url">
-  <a href="{{ value }}" target="_blank">{{ value|safe }}</a>
+  {% set pending = value.indexOf('span class') > 0 %}
+  {% if pending %}
+    {{ value|safe }}
+  {% else %}
+   <a href="{{ value }}" target="_blank">{{ value|safe }}</a>
+  {% endif %}
 </div>
 {% endif %}

@@ -1,6 +1,7 @@
 {% if value %}
 <div class="field field-email">
-  {% if config.security.hideMailsByShowingSendMailButton %}
+  {% set pending = value.indexOf('span class') > 0 %}
+  {% if not pending and config.security.hideMailsByShowingSendMailButton %}
     <button class="btn send-mail-btn">Envoyer un Mail</button>
   {% else %}
     {{ value|safe }} 
