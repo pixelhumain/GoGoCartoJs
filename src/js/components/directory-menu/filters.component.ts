@@ -226,6 +226,7 @@ export class FiltersComponent
 
     $('.main-option-subcategories-container:not(#main-option-' + optionId + ')').hide();
     $('#main-option-' + optionId).fadeIn(400);
+    $('.sub-categories-content ul').scrollTop(0)
 
     $('.main-categories .main-icon').removeClass('active');
     $('#main-option-gogo-icon-' + optionId).addClass('active');
