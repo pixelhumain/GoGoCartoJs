@@ -4468,13 +4468,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         border-color: #c53f36; }
       .gogo-load-css .gogocarto-container #filter-moderation .moderation-checkbox + label:before {
         color: #c53f36; }
-    .gogo-load-css .gogocarto-container #filter-pending {
-      color: #565656; }
-      .gogo-load-css .gogocarto-container #filter-pending .pending-checkbox:not(:checked) + label:before {
-        background-color: transparent;
-        border-color: #565656; }
-      .gogo-load-css .gogocarto-container #filter-pending .pending-checkbox + label:before {
-        color: #565656; }
     .gogo-load-css .gogocarto-container #filter-favorite {
       color: #cc8901; }
       .gogo-load-css .gogocarto-container #filter-favorite .gogo-icon-star-full {
@@ -4691,7 +4684,9 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       .gogo-load-css .gogocarto-container #directory-menu.small-width .category-wrapper .subcategories-wrapper:not(.no-withdrawal) {
         margin-left: 1rem; }
       .gogo-load-css .gogocarto-container #directory-menu.small-width .main-categories {
-        width: 3rem; }
+        width: 3rem;
+        overflow-y: auto;
+        overflow-x: hidden; }
         .gogo-load-css .gogocarto-container #directory-menu.small-width .main-categories .icon {
           height: 3.4rem;
           width: 3rem; }
@@ -4815,7 +4810,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         height: 3rem;
         line-height: 3rem;
         font-weight: bold;
-        text-align: center; }
+        text-align: center;
+        overflow: hidden; }
         @media only screen and (max-width: 600px) {
           .gogo-load-css .gogocarto-container #directory-menu .sub-categories .sub-categorie-main-title {
             font-size: 1.2rem; } }
@@ -6247,6 +6243,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       .gogo-load-css .gogocarto-container .element-item .field-textarea {
         line-height: 1.5rem;
         text-align: justify; }
+        .gogo-load-css .gogocarto-container .element-item .field-textarea div {
+          white-space: pre-wrap; }
       .gogo-load-css .gogocarto-container .element-item .show-more {
         display: inline;
         text-decoration: underline; }
