@@ -24,6 +24,8 @@
 
   .main-categories { 
     width: 3rem; 
+    overflow-y: auto;
+    overflow-x: hidden;
     .icon { height: 3.4rem; width: 3rem;}
     .icon:before { left: .6rem; }
   }
@@ -41,7 +43,6 @@
     .subcategorie-option-item { padding-left: .6rem; }  
   }
 }
-
 
 #directory-menu 
 {

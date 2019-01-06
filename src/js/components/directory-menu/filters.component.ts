@@ -122,7 +122,7 @@ export class FiltersComponent
     // follow main active option background when user scroll through main options
     $('.main-categories').on('scroll', () =>
     {
-      $('#active-main-option-background').css('top', $('#main-option-gogo-icon-' + this.currentActiveMainOptionId).position().top);
+      $('#active-main-option-background').css('top', $('#main-option-gogo-icon-' + this.currentActiveMainOptionId).position().top + $('.main-categories').scrollTop());
     });
 
     
@@ -233,6 +233,6 @@ export class FiltersComponent
 
     if(!$('#main-option-gogo-icon-' + optionId).position()) { return; }
 
-    $('#active-main-option-background').animate({top: $('#main-option-gogo-icon-' + optionId).position().top}, 400, 'easeOutQuart');
+    $('#active-main-option-background').animate({top: $('#main-option-gogo-icon-' + optionId).position().top + $('.main-categories').scrollTop()}, 400, 'easeOutQuart');
   }
 }
