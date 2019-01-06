@@ -149,6 +149,7 @@ export class Element extends ElementBase
   toDisplay()
   {
     let result = {
+      id: this.id,
       name: this.formatProp('name'),
       address: this.formatProp('address'),
       originalAddress: this.address,
@@ -159,7 +160,11 @@ export class Element extends ElementBase
       isDeleted: this.isDeleted(),
       needsModeration: this.needsModeration(),
       formatedOpenHours: this.formatedOpenHours,
-      isEditable: this.isEditable
+      isEditable: this.isEditable,
+      pendingContribution: this.pendingContribution,
+      contributions: this.contributions,
+      reports: this.reports,
+      votes: this.votes
     };
     $.each(this.data, (key, value) => {
        if(!(key in result)) result[key] = this.formatProp(key)
