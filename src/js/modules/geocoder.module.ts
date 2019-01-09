@@ -131,9 +131,9 @@ export class GeocoderModule
 		}			
 	}
 
-	geolocateUser(callbackComplete?)
+	geolocateUser(callbackComplete?, forceApi = false)
 	{		
-		if (navigator.geolocation) {
+		if (navigator.geolocation && !forceApi) {
 			navigator.geolocation.getCurrentPosition((position) => {
 				// associate zoom to accuracy
 				let zoom = 17 - Math.log(position.coords.accuracy / 3000) * Math.LOG2E;
@@ -141,7 +141,11 @@ export class GeocoderModule
 				zoom = Math.max(zoom, 8);
 				let viewPort = new ViewPort(position.coords.latitude, position.coords.longitude, zoom);
 				this.handleGeolocalisationResponse(viewPort, callbackComplete);
-			}, (e) => { console.error("Erreur while geolocating", e); App.component.toastMessage("Désolé, impossible de calculer votre position", 6000)}, {enableHighAccuracy: true});
+			}, (e) => { 
+				console.error("Erreur while geolocating", e); 
+				this.geolocateUser(callbackComplete, true);
+			}, 
+			{enableHighAccuracy: true});
 		}
 		else
 			$.getJSON("http://www.geoplugin.net/json.gp", (data) => {  // "http://ip-api.com/json/"
