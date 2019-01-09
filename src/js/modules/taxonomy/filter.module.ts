@@ -15,15 +15,12 @@ declare var $ : any;
 export class FilterModule
 {
 	showOnlyFavorite_ : boolean = false;
-	showPending_ : boolean = true;
 	showOnlyPending_ : boolean = false;
 	showOnlyModeration_ : boolean = false;
 
 	constructor() {	}
 
 	showOnlyFavorite(bool : boolean) { this.showOnlyFavorite_ = bool; }
-
-	showPending(bool : boolean) { this.showPending_ = bool; }
 
 	showOnlyPending(bool : boolean) { this.showOnlyPending_ = bool; }
 
@@ -36,17 +33,14 @@ export class FilterModule
 		if (this.showOnlyFavorite_) return element.isFavorite;
 
 		if (this.showOnlyModeration_ && (!element.needsModeration() || element.moderationState == ElementModerationState.PossibleDuplicate)) return false;
-
 		if (App.config.isFeatureAvailable('pending'))
 		{
-			if (this.showOnlyPending_) return element.isPending();
-
-			if(!this.showPending_ && element.isPending()) return false;
+			if (this.showOnlyPending_ && !element.isPending()) return false;
 		}
 		else
 		{
-			if(element.isPending()) return false;
-		}		
+			if (element.isPending()) return false;	
+		}
 
 		if (!App.config.menu.showOnePanePerMainOption)
 		{

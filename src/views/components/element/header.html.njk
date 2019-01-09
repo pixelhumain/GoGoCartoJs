@@ -12,7 +12,7 @@
 
     {# Name #}
     {{ element.name|safe }}
-    {% if isDeleted %}</br><u>(Cet élément a été refusé ou supprimé)</u>{% endif %}
+    {% if element.isDeleted %}</br><u>(Cet élément a été refusé ou supprimé)</u>{% endif %}
 
     {# Distance #}
     {% if showDistance and distance != null %}

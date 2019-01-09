@@ -139,7 +139,7 @@ export class Element extends ElementBase
 	}
 
 	isPending() { return this.status == ElementStatus.PendingAdd || this.status == ElementStatus.PendingModification; }
-	isDeleted() { return this.status <= ElementStatus.AdminRefused }
+	isDeleted() { return this.status <= ElementStatus.AdminRefused && this.status != ElementStatus.DynamicImportTemp }
 	needsModeration() { return this.moderationState != ElementModerationState.NotNeeded }	
 
 	get marker() : Marker { return this.marker_; }

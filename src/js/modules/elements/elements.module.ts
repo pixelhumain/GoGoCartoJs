@@ -123,7 +123,7 @@ export class ElementsModule
 			if (this.noNeedToCheckBounds()) elementInBounds = true;
 			else elementInBounds = currBounds && element.position && currBounds.contains(element.position);
 
-			if ( elementInBounds && filterModule.checkIfElementPassFilters(element))
+			if (elementInBounds && filterModule.checkIfElementPassFilters(element))
 			{
 				if (!element.isDisplayed)
 				{

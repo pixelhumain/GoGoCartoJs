@@ -4,6 +4,8 @@ import { App } from "../../gogocarto";
 
 export enum ElementStatus 
 {
+  DynamicImportTemp = -7, // Temporary status used while importing  
+  Duplicate = -6,
   ModifiedElement = -5,
   Deleted = -4,
   CollaborativeRefused = -3,
@@ -11,7 +13,12 @@ export enum ElementStatus
   PendingModification = -1,
   PendingAdd = 0,
   AdminValidate = 1,
-  CollaborativeValidate = 2
+  CollaborativeValidate = 2,
+  AddedByAdmin = 3,
+  ModifiedByAdmin = 4,
+  ModifiedByOwner = 5,
+  ModifiedFromHash = 6,
+  DynamicImport = 7
 }
 
 export enum ElementModerationState
