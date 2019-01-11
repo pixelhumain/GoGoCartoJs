@@ -1,6 +1,7 @@
 import { ElementBase, ElementStatus } from '../../classes/classes'; 
 import { capitalize } from "../../utils/string-helpers";
 import { App } from "../../gogocarto";
+declare var $;
 
 export class ElementFormaterModule
 {
@@ -24,8 +25,8 @@ export class ElementFormaterModule
     // in iframe the pending modifications are not displayed, just the old version
     if (element.status != ElementStatus.PendingModification || !App.config.isFeatureAvailable('pending') || !element.modifiedElement) return value;
 
+    if ($.isArray(value) || typeof(value) == "object") return value;
     let modifiedValue = this.getValue(element.modifiedElement, propertyName);
-
     if (!value && !modifiedValue) return '';
 
     value = value || '';
@@ -60,8 +61,7 @@ export class ElementFormaterModule
     let value;
     if (propertyName == 'address') value = element.address.getFormatedAddress();
     else if (propertyName in element) value = element[propertyName]
-    else value = element.data[propertyName]
-    
-    return `${value}`;
+    else value = element.data[propertyName]    
+    return value;
   }
 }

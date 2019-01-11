@@ -158,6 +158,7 @@ export class Element extends ElementBase
       status: this.status,
       isPending: this.isPending(),
       isDeleted: this.isDeleted(),
+      images: this.images,
       needsModeration: this.needsModeration(),
       formatedOpenHours: this.formatedOpenHours,
       isEditable: this.isEditable,
