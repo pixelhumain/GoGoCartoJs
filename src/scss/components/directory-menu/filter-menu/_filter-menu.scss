@@ -24,8 +24,7 @@
 
   .main-categories { 
     width: 3rem; 
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: visible;
     .icon { height: 3.4rem; width: 3rem;}
     .icon:before { left: .6rem; }
   }

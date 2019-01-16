@@ -29,8 +29,15 @@ export class ElementFormaterModule
     let modifiedValue = this.getValue(element.modifiedElement, propertyName);
     if (!value && !modifiedValue) return '';
 
-    value = value || '';
-    modifiedValue = modifiedValue || '';
+    value = `${value}` || '';
+    modifiedValue = `${modifiedValue}` || '';
+
+    // Switch value and modified Value for updatedAt attribute
+    if (propertyName == 'updatedAt') { 
+      let tmp_value = value;
+      value = modifiedValue;
+      modifiedValue = tmp_value;
+    }
     return App.elementDiffModule.getDiffValue(value, modifiedValue, propertyName)
   }
 

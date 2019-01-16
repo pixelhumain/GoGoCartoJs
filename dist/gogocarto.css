@@ -4685,8 +4685,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         margin-left: 1rem; }
       .gogo-load-css .gogocarto-container #directory-menu.small-width .main-categories {
         width: 3rem;
-        overflow-y: auto;
-        overflow-x: hidden; }
+        overflow: visible; }
         .gogo-load-css .gogocarto-container #directory-menu.small-width .main-categories .icon {
           height: 3.4rem;
           width: 3rem; }
@@ -5791,7 +5790,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       position: relative;
       line-height: 3rem;
       top: 0;
-      z-index: 800;
+      z-index: 600;
       width: 100%;
       padding: 0;
       padding-left: 10px;
