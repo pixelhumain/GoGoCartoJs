@@ -12,12 +12,14 @@ import { App } from "../../gogocarto";
 import { ElementsToDisplayChanged } from "../../modules/elements/elements.module";
 import { Element } from "../../classes/classes";
 import { Event } from "../../classes/event.class";
+import { arraysEqual } from "../../utils/array";
 
 declare var $;
 
 export class ElementListComponent
 {
 	elementToDisplayCount : number = 0; 
+	visibleElementIds : string[] = [];
 
 	// Number of element in one list
 	ELEMENT_LIST_SIZE_STEP : number = 15;
@@ -52,12 +54,9 @@ export class ElementListComponent
 
 	update($elementsToDisplay : Element[]) 
 	{
-		//console.log("elementList update", $elementsResult);
 		if ($elementsToDisplay.length == 0) this.stepsCount = 1;
 
 		this.hideSpinnerLoader();
-		this.clear();		
-
 		this.draw($elementsToDisplay, false);
 	}
 
@@ -71,7 +70,7 @@ export class ElementListComponent
 
 	hideSpinnerLoader() { $('#directory-list-spinner-loader').hide(); }
 
-	clear() { $('#directory-content-list li').remove(); }
+	clear() { $('#directory-content-list li').remove(); this.visibleElementIds = []; }
 
 	reInitializeElementToDisplayLength()
 	{
@@ -86,7 +85,7 @@ export class ElementListComponent
 		let elementsToDisplay : Element[] = $elementList.filter( (el) => el.isFullyLoaded); 
 
 		this.elementToDisplayCount = elementsToDisplay.length;
-		// console.log('ElementList draw', elementsToDisplay.length);
+		console.log('ElementList draw', elementsToDisplay.length);
 
 		if (App.dataType == AppDataType.All)
 		{
@@ -98,8 +97,7 @@ export class ElementListComponent
 			elementsToDisplay.sort(this.compareSearchScore);
 		}		
 
-		let maxElementsToDisplay = this.ELEMENT_LIST_SIZE_STEP * this.stepsCount;
-		let endIndex = Math.min(maxElementsToDisplay, elementsToDisplay.length);  
+		let maxElementsToDisplay = this.ELEMENT_LIST_SIZE_STEP * this.stepsCount;		
 
 		this.updateResultMessage();
 		
@@ -109,6 +107,7 @@ export class ElementListComponent
 			if (App.dataType == AppDataType.All)
 			{
 				// expand bounds
+				console.log("not enugh elements, expand bounds");
 				App.boundsModule.extendBounds(0.5);
 				this.showSpinnerLoader();
 				App.elementsManager.checkForNewElementsToRetrieve(true);		
@@ -121,12 +120,37 @@ export class ElementListComponent
 			this.isListFull = true;			
 		}
 		
+		// If new elements to display are different than the visible one, draw them
+		let newIdsToDisplay = elementsToDisplay.map( (el) => el.id);
+		console.log('Visible elements', this.visibleElementIds, "new elements", newIdsToDisplay);
+		if (arraysEqual(newIdsToDisplay, this.visibleElementIds)) { console.log("nothing to draw"); return; }
+
+		let newElementsToDisplayIncludesPerfectlyOldOnes = false;
+		if (newIdsToDisplay.length > this.visibleElementIds.length)
+		{
+			newElementsToDisplayIncludesPerfectlyOldOnes = true;
+			for (var i = 0; i < this.visibleElementIds.length; ++i) {
+		    if (newIdsToDisplay[i] !== this.visibleElementIds[i]) newElementsToDisplayIncludesPerfectlyOldOnes = false;
+		  }
+		}
+		console.log("newElementsToDisplayIncludesPerfectlyOldOnes", newElementsToDisplayIncludesPerfectlyOldOnes);
+		
+		let startIndex, endIndex = Math.min(maxElementsToDisplay, elementsToDisplay.length);
+		if (newElementsToDisplayIncludesPerfectlyOldOnes) {
+			startIndex = this.visibleElementIds.length;
+		} else {
+			this.clear();
+			startIndex = 0;
+		}
+		
 		let listContentDom = $('#directory-content-list ul.collapsible');
 		let that = this;
 
-		for(let i = 0; i < endIndex; i++)
+		console.log("startIndex", startIndex, "endIndex", endIndex);
+		for(let i = startIndex; i < endIndex; i++)
 		{
-			element = elementsToDisplay[i];			
+			element = elementsToDisplay[i];	
+			this.visibleElementIds.push(element.id);		
 			listContentDom.append(element.component.render());
 			// bind element header click
 			element.component.dom.find('.collapsible-header').click(function() { that.onElementOpen(this); });
@@ -212,7 +236,6 @@ export class ElementListComponent
 			this.stepsCount++;
 			//console.log("bottom reached");
 			this.isListFull = false;
-			this.clear();
 			this.draw(App.elements());
 		}		
 	}
