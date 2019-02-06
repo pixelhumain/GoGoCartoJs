@@ -8,11 +8,10 @@
     background-color: {{ primary }}; 
     color: {{ textLight }};
   }
-  .gogo-load-css .gogo-theme-transiscope .collapsible-body .field { background-color: {{ contentBgd }}; }
-  .gogo-load-css .gogo-theme-transiscope .collapsible-body .field-taxonomy h3.category-name { color: {{ secondary }}; background-color: {{ background }}; }
+  .gogo-load-css .gogo-theme-transiscope .collapsible-body .field:not(.field-taxonomy) { background-color: {{ contentBgd }}; }
+  .gogo-load-css .gogo-theme-transiscope .collapsible-body .field-taxonomy h3.category-name { color: {{ secondary }}; }
   .gogo-load-css .gogo-theme-transiscope .collapsible-body .field-taxonomy h3.category-name:first-child { color: {{ primary }}; }
-  .gogo-load-css .gogo-theme-transiscope .collapsible-body .field-textarea.first-element-of-body-content { background-color: {{ background }}; }
-  .gogo-load-css .gogo-theme-transiscope .collapsible-body .category-wrapper { background-color: {{ background }}; }
+  .gogo-load-css .gogo-theme-transiscope .collapsible-body .field-textarea.first-element-of-body-content { background-color: {{ contentBackgroundElementBody }}; }
   .gogo-load-css .gogo-theme-transiscope .collapsible-body .category-wrapper .option-value { background-color: {{ contentBgd }}; }
   .gogo-load-css .gogo-theme-transiscope .collapsible-body .category-wrapper .option-value .option-name { color: {{ text }}; }
   .gogo-load-css .gogo-theme-transiscope .collapsible-body .field-openhours .day:after { color: {{ primary }}; }

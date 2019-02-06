@@ -189,7 +189,7 @@ export class GoGoConfig
       this.colors.menuOptionHover = menuOptionHover.isDark() ? menuOptionHover.lighten(5) : menuOptionHover.darken(5);
     }
     if (!this.colors.contentBackgroundElementBody ) {
-      this.colors.contentBackgroundElementBody = tinycolor(this.colors.contentBackground.toString()).darken(3);
+      this.colors.contentBackgroundElementBody = this.colors.background; // tinycolor(this.colors.contentBackground.toString()).darken(3);
     }
     if (!this.colors.lineBorder ) {
       let lineBorder = tinycolor(this.colors.contentBackground.toString()).greyscale();
