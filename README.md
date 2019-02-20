@@ -1,9 +1,9 @@
 GoGoCartoJs
 ==========
-A javascript component to create terrific cartography ! GoGoCartoJs is the autonomous frontend part of the [GoGoCarto Project](https://github.com/pixelhumain/GoGoCarto)
+A javascript component to create terrific cartography ! GoGoCartoJs is the autonomous frontend part of the [GoGoCarto Project](https://gitlab.adullact.net/pixelhumain/GoGoCarto)
 
-![alt text](docs/images/desktop.png "Desktop")
-.   .   ![alt text](docs/images/mobile.png "Mobile")
+![alt text](https://gitlab.adullact.net/pixelhumain/GoGoCartoJs/raw/master/docs/images/desktop.png "Desktop")
+.   .   ![alt text](https://gitlab.adullact.net/pixelhumain/GoGoCartoJs/raw/master/docs/images/mobile.png "Mobile")
 
 
 Discover
@@ -17,10 +17,9 @@ Demo
 [Try it Now!](https://pixelhumain.github.io/GoGoCartoJs/web/examples)
 
 
-Download
+Install
 --------
-
-[Download Latest Release](https://github.com/pixelhumain/GoGoCartoJs/releases)
+`npm install gogocarto-js`
 
 
 Contact
