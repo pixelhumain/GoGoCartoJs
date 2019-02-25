@@ -23,8 +23,8 @@ export class Category extends CategoryOptionTreeNode
 
 		this.isRootCategory = $categoryJson.isRootCategory || false;
 
-		this.displayInMenu = ($categoryJson.displayInMenu || this.isRootCategory) && this.name != "";
-		this.displayInInfoBar = ($categoryJson.displayInInfoBar || this.isRootCategory) && this.name != "";
+		this.displayInMenu = ($categoryJson.displayInMenu != undefined ? $categoryJson.displayInMenu : true) && this.name != "";
+		this.displayInInfoBar = ($categoryJson.displayInInfoBar != undefined ? $categoryJson.displayInInfoBar : true) && this.name != "";
 
 		this.showExpanded = $categoryJson.showExpanded !== false;
 		this.unexpandable = $categoryJson.unexpandable || false;
