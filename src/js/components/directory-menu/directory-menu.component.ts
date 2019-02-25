@@ -87,7 +87,7 @@ export class DirectoryMenuComponent
     this.onHide.emit();
 
     this.overlay.velocity({opacity: 0}, this.ANIM_300);
-    this.dragTarget.css({width: '10px', right: '', left: '0'});
+    this.dragTarget.css({width: '20px', right: '', left: '0'});
     this.dom.velocity({left: -1 * (this.width + 20)}, this.ANIM_300);
 
     setTimeout( () => {
@@ -158,7 +158,7 @@ export class DirectoryMenuComponent
 		if (pageWidth > 850) {
       menuwidth =  pageWidth > 1450 ? menuBigWidth : menuSmallWidth;
 		} else {
-      menuwidth =  Math.min(Math.min(Math.max(pageWidth - 60, menuSmallWidth), menuBigWidth), pageWidth - 20);
+      menuwidth =  Math.min(Math.min(Math.max(pageWidth - 60, menuSmallWidth), menuBigWidth), pageWidth - 50);
 		}
 		
 		this.dom.css('width', menuwidth + 'px');
