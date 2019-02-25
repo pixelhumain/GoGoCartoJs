@@ -17,9 +17,11 @@ Demo
 [Try it Now!](https://pixelhumain.github.io/GoGoCartoJs/web/examples)
 
 
-Install
+Install / Download
 --------
 `npm install gogocarto-js`
+
+Or download latest version [here](https://gitlab.adullact.net/pixelhumain/GoGoCartoJs/tags)
 
 
 Contact
