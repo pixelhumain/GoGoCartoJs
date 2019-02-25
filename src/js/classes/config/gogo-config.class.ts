@@ -221,6 +221,7 @@ export class GoGoConfig
     if (this.theme == "transiscope") {
       this.colors.infoBarHeader = this.colors.textDark;
       this.colors.infoBarMenu = this.colors.primary;
+      this.colors.menuOptionHover = this.colors.contentBackground;
       if (!this.colors.interactiveSection) this.colors.interactiveSection = this.colors.secondary;
       if (!this.colors.searchBar) this.colors.searchBar = this.colors.textDark;
     }

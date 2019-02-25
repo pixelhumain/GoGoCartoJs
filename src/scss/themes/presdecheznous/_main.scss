@@ -35,6 +35,13 @@
     }
   }
 
+  #directory-menu .main-categories {
+    .icon.main-icon.fa, .icon.main-icon.fas, .icon.main-icon.fab {
+      padding-right: 0;
+      &.active { padding-left: 5px; }
+    }
+  }
+
   .search-bar-with-options-container .search-bar-container .search-bar
   {
     height: 2.5rem;
@@ -111,4 +118,5 @@
   .gogo-load-css .icon.gogo-icon-star-full:before { color: #cc8901; background-color: transparent }  
 
   .gogo-load-css .gogo-map-control { border: 1px dashed transparent; border-color: #a5a5a5; }
+
 }
