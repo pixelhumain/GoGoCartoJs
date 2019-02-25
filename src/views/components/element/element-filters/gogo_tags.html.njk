@@ -1,7 +1,7 @@
 {% if value %}
   <div class="field field-tags tags-container">
     {% for tag in value %}
-      <span class="gogo-tag">{{ tag }}</span>  
+      <span class="gogo-tag">{{ tag|trim|capitalize }}</span>  
     {% endfor %}
   </div>
 {% endif %}
