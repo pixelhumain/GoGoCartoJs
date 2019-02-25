@@ -63,6 +63,9 @@ export class DirectoryMenuComponent
     this.dom.velocity({left: 0}, this.ANIM_200); 
     this.overlay.show().velocity({opacity: 1}, this.ANIM_200);
 
+    // Fixs strange bug those container were not taking full width, they need a redraw for the width to be calculating again
+    setTimeout( () => { this.dom.find('#other-categories, .show-only-container ').css('width', '99%'); }, 0);
+
     setTimeout( () => {
     	App.filtersComponent.updateMainOptionBackground();	
 
@@ -73,6 +76,9 @@ export class DirectoryMenuComponent
 
       let searchText = this.dom.find('.search-options').width() > 280 ? "Chercher" : "Go";
       this.dom.find('.search-btn').text(searchText);
+
+      // same fix as above
+      this.dom.find('#other-categories, .show-only-container ').css('width', '100%');
     }, 400);     			
   }
 
