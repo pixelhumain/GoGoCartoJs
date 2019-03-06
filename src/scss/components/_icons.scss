@@ -18,30 +18,30 @@
 }
 
 #directory-menu .main-categories {
-  .icon.main-icon.fa, .icon.main-icon.fas, .icon.main-icon.fab
+  .icon.main-icon.fa, .icon.main-icon.fas, .icon.main-icon.fab, .icon.main-icon.far
   {
     font-size: 1.2rem;
     &:before { position: relative; left: 0; top: 0; }
   }
 }
 
-.icon.fa, .icon.fab, .icon.fas 
+.icon.fa, .icon.fab, .icon.fas, .icon.far
 {
   padding-top: .5rem;
   font-size: 1.3rem;
 }
 
-.element-main-icon.icon.fa, .element-main-icon.icon.fas, .element-main-icon.icon.fab
+.element-main-icon.icon.fa, .element-main-icon.icon.fas, .element-main-icon.icon.fab, .element-main-icon.icon.far
 {
   padding-top: 4px;
 }
 
-.iconInsideMarker.fa, .iconInsideMarker.fas, .iconInsideMarker.fab
+.iconInsideMarker.fa, .iconInsideMarker.fas, .iconInsideMarker.fab, .iconInsideMarker.far
 {
   padding-top: 0;
 }
 
-.filter-menu .icon.fa, .filter-menu .icon.fas, .filter-menu .icon.fab
+.filter-menu .icon.fa, .filter-menu .icon.fas, .filter-menu .icon.fab, .filter-menu .icon.far
 {
   padding-top: .7rem;
   width: 1.5rem;  
