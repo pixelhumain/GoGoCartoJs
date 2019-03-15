@@ -60,7 +60,7 @@ export class TaxonomyModule
 		else if (!isSkosTaxonomy) taxonomyJson.isRootCategory = true;
 
 		this.taxonomy = this.recursivelyCreateCategoryAndOptions(taxonomyJson);
-		this.rootCategories = this.findRootCategories();
+		this.rootCategories = [this.taxonomy];
 		for(let option of this.mainCategory.children) option.isMainOption = true;
 		
 		if (this.rootCategories.length > 1)
@@ -68,12 +68,6 @@ export class TaxonomyModule
 		else
 			this.recursivelyCalculateParentsOptionIds(this.mainCategory);
 	}	
-
-	private findRootCategories() : Category[]
-	{
-		if (this.taxonomy.displayInMenu) return [this.taxonomy];
-		return this.taxonomy.options[0].subcategories;
-	}
 
 	private recursivelyCreateCategoryAndOptions(categoryJson : any) : Category
 	{
