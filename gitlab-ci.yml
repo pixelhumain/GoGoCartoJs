@@ -13,6 +13,6 @@ pages:
   - bundle exec jekyll build -d public
   artifacts:
     paths:
-    - docs
+    - public
   only:
   - master
