@@ -9,9 +9,10 @@
  */
 declare let $, jQuery : any;
 
-import { AppModule } from "../../app.module";
+import { AppModule, AppModes } from "../../app.module";
 import { Category, Option } from "../../modules/taxonomy/taxonomy.module";
 import { App } from "../../gogocarto";
+import { Element } from "../../classes/classes";
 
 export class FiltersComponent
 {  
@@ -22,6 +23,8 @@ export class FiltersComponent
   initialize()
   {  
     $('.filter-menu .tooltipped').tooltip();
+
+    App.mapComponent.onIdle.do( (elements)=> { this.updateElementCount(); });    
 
     // -------------------------------
     // --------- FAVORITE-------------
@@ -234,5 +237,49 @@ export class FiltersComponent
     if(!$('#main-option-gogo-icon-' + optionId).position()) { return; }
 
     $('#active-main-option-background').animate({top: $('#main-option-gogo-icon-' + optionId).position().top + $('.main-categories').scrollTop()}, 400, 'easeOutQuart');
+  }
+
+  updateElementCount()
+  {   
+    if (App.config.menu.displayNumberOfElementForEachCategory) 
+    {
+      let allElements = App.elementsModule.currEveryElements(); 
+      let bounds = App.map().getBounds();
+      let elementsInBounds;
+      if (App.mode == AppModes.Map)
+         elementsInBounds = allElements.filter(element => bounds.contains(element.position));
+      else
+        elementsInBounds = allElements;
+
+      let optionMappingCount = [];
+      for(let option of App.taxonomyModule.options) {
+        optionMappingCount[option.id] = 0;
+      }
+      let element : Element;
+      for(element of elementsInBounds) {
+        for(let ov of element.optionsValues) { optionMappingCount[ov.optionId]++ }
+      }
+
+      for(let option of App.taxonomyModule.options) 
+      {
+        let count = optionMappingCount[option.id];
+        if (count == 0)
+          $(`#option-${option.id} .elements-by-category-count`).hide();
+        else {
+          if (App.config.menu.displayNumberOfElementRoundResults) count = this.roundResult(count);
+          $(`#option-${option.id} .elements-by-category-count`).show().text(count);
+        }
+           
+      }
+    }
+  }
+
+  private roundResult(count)
+  {
+    if (count < 10) return count;
+    length = count.toString().length;
+    let pow = Math.pow(10, length - 1);
+    count = Math.floor(count/pow)*pow;
+    return `${count}+`;
   }
 }

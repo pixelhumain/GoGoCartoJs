@@ -4,7 +4,12 @@
   .gogo-load-css #main-option-all.show-one-pane-per-main-option .gogo-icon-name-wrapper:hover:after { color: {{ primary }}; background-color: {{ menuOptionHover }} }
   .gogo-load-css .main-categories #active-main-option-background { background-color: {{ textDarkSoft }}; }
 
+  .gogo-load-css .subcategorie-option-item .elements-by-category-count { background-color: {{ menuOptionHover }}; color: {{ textSoft }}; }
+  .gogo-load-css .subcategorie-option-item:hover .elements-by-category-count { color: {{ primary }}; }
+  .gogo-load-css .subcategorie-option-item.disabled .elements-by-category-count { background-color: transparent; color: {{ disabled }}; }
+
   .gogo-load-css .gogocarto-container .subcategory-item.top-separator { border-color: {{ lineBorder }}; }
+
   .gogo-load-css .subcategorie-option-item:hover          .subcategorie-option-checkbox + label:before { color: {{ primary }}; border-color: {{ primary }} }  
   .gogo-load-css .subcategorie-option-item:not(.expanded) .option-name       .arrow-after { border-color: {{ textSoft }} transparent transparent transparent; opacity: 0.6; }
   .gogo-load-css .subcategorie-option-item:not(.expanded) .option-name:hover .arrow-after { border-color: {{ primary }} transparent transparent transparent !important; opacity: 1; }
@@ -13,6 +18,7 @@
 
   .gogo-load-css .subcategorie-option-item.disabled:not(:hover) { color: {{ disabled }}; }
   .gogo-load-css .subcategorie-option-item.disabled .subcategorie-option-checkbox + label:before { border-color: {{ disabled }}; }
+ 
   .gogo-load-css .subcategorie-option-item.disabled:not(:hover) .icon { color: {{ disabled }}; opacity: .7;}
   .gogo-load-css .subcategorie-option-item.disabled:not(:hover) .arrow-after { border-color: {{ disabled }} transparent transparent transparent !important;}
 

@@ -23,7 +23,9 @@ Menu
   "smallWidthStyle": false
   "showOnePanePerMainOption": false,
   "showCheckboxForMainFilterPane": true, // you can hide the checkboxes for a lighter design
-  "showCheckboxForSubFilterPane": true
+  "showCheckboxForSubFilterPane": true,
+  "displayNumberOfElementForEachCategory": false,
+  "displayNumberOfElementRoundResults": false // display 300+ instead of 325
 },
 ```
 You can custom the menu **width** (in pixel)
@@ -35,6 +37,9 @@ for each main option children.
 [Check OneFilterPanePerMainOption Demo](https://pixelhumain.github.io/GoGoCartoJs/web/examples/index-full-taxonomy.html#/carte/@45.94,-0.38,10z?cat=all) 
 
 Set **smallWidthStyle** to false to use smaller font size and margins, so the taxonomy fit better into the fixed width
+
+**displayNumberOfElementForEachCategory** Will add a label next to each category to display how many elements on the current viewport have this category
+Use **displayNumberOfElementRoundResults** to round the results (display 300+ instead of 325)
 
 General
 ------

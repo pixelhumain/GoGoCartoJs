@@ -28,6 +28,7 @@
 	.gogo-icon-name-wrapper 
 	{
     margin-right: 3rem;
+    position: relative;
 
     .option-name { 
       position: absolute; width: 100%; 
@@ -38,9 +39,26 @@
           border: solid 6px;
           margin-bottom: 1px;
         }
-      }
+      }  
+
+      &.without-icon .elements-by-category-count { right: 0 !important; }    
     }    
 	}
+
+  .elements-by-category-count { 
+    display:none;
+    padding: 2px 8px;
+    font-size: .8em;
+    border-radius: 5px;
+    position: absolute;
+    height: 20px;
+    line-height: 18px;
+    right: 2.2rem;
+    font-weight: bold;
+    top: 13px;
+    z-index: 5;
+    opacity: .9;
+  }
 
   .arrow-after
 	{

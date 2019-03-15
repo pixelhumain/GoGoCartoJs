@@ -56,6 +56,8 @@ export class ElementsManager
     {
       App.elementsModule.updateElementsToDisplay(true);  
     }
+
+    App.filtersComponent.updateElementCount();
   }; 
 
   handleElementsToDisplayChanged(result : ElementsToDisplayChanged)

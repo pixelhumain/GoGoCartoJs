@@ -147,10 +147,11 @@
       top: 5px;
       line-height: 1rem;
       position: absolute;
-      right: 10px;
+      right: 0;
       z-index: 10;
       top: 11px;
     }
+    .elements-by-category-count { display: none !important; }
   }
 
   .secondary-filters {

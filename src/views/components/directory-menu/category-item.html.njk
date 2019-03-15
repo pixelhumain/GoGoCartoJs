@@ -1,4 +1,4 @@
-{% macro renderItem(category, recursive, displayCheckbox, topSeparator = false) %}
+{% macro renderItem(category, recursive, displayCheckbox, config, topSeparator = false) %}
 {% set isCheckable = category.useForFiltering %}
 
 <div class="category-wrapper">
@@ -50,13 +50,15 @@
 						{% endif %}
 
 						{# --- NAME ---- #}
-						<span class="option-name">
+						<span class="option-name {{ 'with-icon' if iconClass else 'without-icon' }}">
 							{{ option.nameShort if option.nameShort else option.name }}
 							{# --- ARROW COLAPSIBLE ---- #}
-							{% if isSubcategories and not option.unexpandable %}<div class="arrow-after"></div>{% endif %}
-						</span> 					
-						
-					</div>				
+							{% if isSubcategories and not option.unexpandable %}<div class="arrow-after"></div>{% endif %}	
+							{% if config.menu.displayNumberOfElementForEachCategory %}<span class="elements-by-category-count gogo-bg-color-as" option-id='{{ option.id }}'>0</span>{% endif %}								
+						</span> 
+
+							
+					</div>										
 
 					{% if displayCheckbox %}
 						{# --- CHECKBOX ---- #}
@@ -73,7 +75,7 @@
 	    {% if isSubcategories %}
 	    	<div class="subcategories-wrapper {{ "" if option.displayInMenu else "no-withdrawal"}}" {% if not option.showExpanded%} style="display:none"{% endif %}>
 		    {% for subcategory in option.subcategories %}
-		    		{{ renderItem(subcategory, true, displayCheckbox) }}
+		    		{{ renderItem(subcategory, true, displayCheckbox, config) }}
 				{% endfor %} 
 				</div>
 			{% endif %}
