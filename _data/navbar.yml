@@ -8,7 +8,7 @@ toc:
       - page: Configuration
         url: docs/configuration.html
       - page: Download
-        url: https://github.com/pixelhumain/GoGoCartoJs/releases
+        url: https://gitlab.adullact.net/pixelhumain/GoGoCartoJs/tags
   - title: Taxonomy
     subfolderitems:
       - page: Overview

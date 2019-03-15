@@ -9,12 +9,12 @@ A javascript component to create terrific cartography ! GoGoCartoJs is the auton
 Discover
 -------------------
 
-[Read the online full documentation](https://pixelhumain.github.io/GoGoCartoJs)
+[Read the online full documentation](https://pixelhumain.gitlab.io/GoGoCartoJs)
 
 Demo
 -----
 
-[Try it Now!](https://pixelhumain.github.io/GoGoCartoJs/web/examples)
+[Try it Now!](https://pixelhumain.gitlab.io/GoGoCartoJs/web/examples)
 
 
 Install / Download

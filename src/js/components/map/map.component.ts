@@ -62,7 +62,7 @@ export class MapComponent
 		    layers: [defaultBaseLayer]
 		});
 
-		L.control.attribution({prefix: '<a target="_blank" href="https://pixelhumain.github.io/GoGoCartoJs/">GoGoCarto</a> | <a target="_blank" href="https://leafletjs.com">Leaflet</a>'}).addTo(this.map_);
+		L.control.attribution({prefix: '<a target="_blank" href="https://pixelhumain.gitlab.io/GoGoCartoJs">GoGoCarto</a> | <a target="_blank" href="https://leafletjs.com">Leaflet</a>'}).addTo(this.map_);
 
 		setTimeout(function() { 
 			$('.leaflet-control-zoom').addClass('gogo-section-controls');				
