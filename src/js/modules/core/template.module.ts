@@ -38,6 +38,7 @@ export class TemplateModule
 		{
 			case 'layout'              : fileUrl = 'layout.html.njk'; break;
 			case 'marker'              : fileUrl = 'components/map/marker.html.njk'; break;
+			case 'marker-popup-default': fileUrl = 'components/map/marker-popup-default.html.njk'; break;
 			case 'gogo-styles'         : fileUrl = 'gogo-styles.html.njk'; break;
 			case 'element'             : fileUrl = 'components/element/element.html.njk'; break;
 			case 'element-body-default': fileUrl = 'components/element/default-body-content.html.njk'; break;

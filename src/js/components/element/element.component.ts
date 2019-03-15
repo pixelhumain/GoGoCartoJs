@@ -50,8 +50,7 @@ export class ElementComponent
       }),
 
       // body
-      body: App.templateModule.elementTemplate.renderBody(elementTodisplay),
-      
+      body: App.templateModule.elementTemplate.renderBody(elementTodisplay),      
       //header
       header: App.templateModule.elementTemplate.renderHeader(elementTodisplay),
 

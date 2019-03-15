@@ -18,14 +18,19 @@ export class TemplateElementModule
 
   headerConfig : TemplateConfig;
   headerTemplate : any = null; // nunjucks template
+
+  markerPopupConfig : TemplateConfig;
+  markerPopupTemplate : any = null; // nunjucks template
   
   initialize()
   {
     this.bodyConfig = new TemplateConfig(App.config.infobar.bodyTemplate, TemplateNames.ElementBody);
     this.headerConfig = new TemplateConfig(App.config.infobar.headerTemplate, TemplateNames.ElementHeader);
+    this.markerPopupConfig = new TemplateConfig(App.config.marker.popupTemplate, TemplateNames.MarkerPopup);
 
     this.getHtmlElementData(this.bodyConfig);
     this.getHtmlElementData(this.headerConfig);
+    this.getHtmlElementData(this.markerPopupConfig);
   }
 
   private getHtmlElementData(htmlElementConfig: TemplateConfig)
@@ -43,26 +48,11 @@ export class TemplateElementModule
           dataType: 'text',
           url: htmlElementConfig.content,
           success: (data) => { this.compile(htmlElementConfig, data); },
-          error: () => { this.showError(htmlElementConfig.name, htmlElementConfig.content); }
+          error: () => { console.error("Error while getting the template at url", htmlElementConfig.content); }
         });
         break;
     }
   }  
-
-  private showError(htmlElementConcerned: TemplateNames, urlConcerned: string)
-  {
-    let errorMessage;
-    switch(htmlElementConcerned)
-    {
-      case TemplateNames.ElementBody:
-        errorMessage = "Error while getting the body template at url :";
-        break;
-      case TemplateNames.ElementHeader:
-        errorMessage = "Error while getting the header template at url :";
-        break;
-    }
-    console.error(errorMessage, urlConcerned);
-  }
 
   // If there is a body template configured, then we use it. We use the default body otherwise.
   renderBody(element): any
@@ -86,6 +76,17 @@ export class TemplateElementModule
     return this.fixTemplate(renderedTemplate);
   }
 
+  // If there is a header template configured, then we use it. We use the default header otherwise.
+  renderMarkerPopup(element): any
+  {
+    let renderedTemplate;
+    if (this.markerPopupTemplate)
+      renderedTemplate = this.markerPopupTemplate.render(element);
+    else
+      renderedTemplate = App.templateModule.render('marker-popup-default', element);
+    return this.fixTemplate(renderedTemplate);
+  }
+
   private fixTemplate(template) {
     template = template.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, '"');
     template = template.replace(/<hr \/>|<hr>/g, '<div class="info-bar-divider"></div>');
@@ -101,19 +102,16 @@ export class TemplateElementModule
     let template = App.templateModule.compile(content);
     switch(htmlElementConfig.name)
     {
-      case TemplateNames.ElementBody:
-        this.bodyTemplate = template;
-        break;
-      case TemplateNames.ElementHeader:
-        this.headerTemplate = template;
-        break;
+      case TemplateNames.ElementBody: this.bodyTemplate = template;break;
+      case TemplateNames.ElementHeader: this.headerTemplate = template;break;
+      case TemplateNames.MarkerPopup: this.markerPopupTemplate = template;break;
     }
     this.checkTemplatesReady();
   }
 
   private checkTemplatesReady()
   {
-    if ( !this.isReady && (!this.bodyConfig.isUrl() || this.bodyTemplate) && (this.headerTemplate || !this.headerConfig.isUrl()) )
+    if ( !this.isReady && (!this.bodyConfig.isUrl() || this.bodyTemplate) && (this.headerTemplate || !this.headerConfig.isUrl()) && (this.markerPopupTemplate || !this.markerPopupConfig.isUrl()))
     {
       this.isReady = true;
       this.onReady.emit();

@@ -60,6 +60,14 @@ export class GoGoConfig
       isMarkdown: true
     }
   };
+  readonly marker =
+  {
+    popupTemplate: {
+      content: undefined,
+      type: "string", // string | url
+      isMarkdown: true
+    }
+  };
   readonly general =
   {
     activateHistoryStateAndRouting: true

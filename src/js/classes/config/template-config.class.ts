@@ -1,6 +1,7 @@
 export enum TemplateNames {
   ElementBody,
-  ElementHeader
+  ElementHeader,
+  MarkerPopup
 }
 
 export class TemplateConfig

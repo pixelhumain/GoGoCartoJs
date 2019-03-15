@@ -14,7 +14,7 @@
     height: 14px;    
 }
 
-.marker-name
+.marker-popup
 {
     position: absolute;
     white-space: nowrap;
@@ -24,6 +24,8 @@
     padding: 5px 10px;
     bottom: 55px;
     left: -30px;
+
+    p { margin: 0; }
 }
 
 .marker-wrapper
@@ -212,7 +214,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         }
         .gogo-icon-plus-circle { top: -7px; right: -7px; }
         .moreIconContainer { left: 30px; }
-        .marker-name { bottom: 43px; left: -50px;}
+        .marker-popup { bottom: 43px; left: -50px;}
     }
     &.rotateRight
     {
@@ -228,7 +230,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         }
         .gogo-icon-plus-circle { top: -7px; right: -8px; }
         .moreIconContainer { left: 30px }
-        .marker-name { bottom: 53px; left: -10px;}
+        .marker-popup { bottom: 53px; left: -10px;}
     }
 
     &.rotateSoftLeft
@@ -250,7 +252,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         }
         .gogo-icon-plus-circle { top: -7px; right: -7px; }
         .moreIconContainer { left: 30px; }
-        .marker-name { bottom: 51px; left: -44px;}
+        .marker-popup { bottom: 51px; left: -44px;}
     }
     &.rotateSoftRight
     {
@@ -267,6 +269,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         }
         .gogo-icon-plus-circle { top: -7px; right: -8px; }
         .moreIconContainer { left: 30px }
-        .marker-name { bottom: 56px; left: -10px;}
+        .marker-popup { bottom: 56px; left: -10px;}
     }
 }

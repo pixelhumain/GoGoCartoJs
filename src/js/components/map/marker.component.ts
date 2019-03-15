@@ -60,7 +60,8 @@ export class Marker
 			disableMarker : disableMarker,
 			pendingClass : element.isPending() && App.config.isFeatureAvailable('pending') ? 'pending' : '',
 			showPending : element.isPending() && App.config.isFeatureAvailable('pending'),
-			config : App.config
+			config : App.config,
+			popup: App.templateModule.elementTemplate.renderMarkerPopup(element.toDisplay()),
 		});
 
 		// save the class because it has been modified by marker cluster adding or
@@ -83,7 +84,7 @@ export class Marker
 	{			
 		this.addClassToLeafletMarker_("BigSize");
 		let domMarker = this.domMarker();
-		domMarker.parent().find('.marker-name').show();
+		domMarker.parent().find('.marker-popup').show();
 		domMarker.find('.moreIconContainer').show();
 		domMarker.find('.gogo-icon-plus-circle').hide();
 	};
@@ -94,7 +95,7 @@ export class Marker
 
 		let domMarker = this.domMarker();
 		this.removeClassToLeafletMarker_("BigSize");
-		domMarker.parent().find('.marker-name').hide();
+		domMarker.parent().find('.marker-popup').hide();
 		domMarker.find('.moreIconContainer').hide();
 		domMarker.find('.gogo-icon-plus-circle').show();
 	};
@@ -126,13 +127,13 @@ export class Marker
 	private addClassToLeafletMarker_(classToAdd) 
 	{		
 		this.domMarker().addClass(classToAdd);
-		this.domMarker().siblings('.marker-name').addClass(classToAdd); 
+		this.domMarker().siblings('.marker-popup').addClass(classToAdd); 
 	};
 
 	private removeClassToLeafletMarker_(classToRemove) 
 	{		
 		this.domMarker().removeClass(classToRemove);
-		this.domMarker().siblings('.marker-name').removeClass(classToRemove);      
+		this.domMarker().siblings('.marker-popup').removeClass(classToRemove);      
 	};
 
 	isDisplayedOnElementInfoBar() { return App.infoBarComponent.getCurrElementId() == this.elementId; }

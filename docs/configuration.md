@@ -83,6 +83,19 @@ An object need to be given with the following options:
   * **isMardown** is set to true, if the content given uses Markdown syntax, false otherwise.
   * **type** must be set to "url", if the content is remote, or "string" so the content is used as is.
 
+Marker
+------
+```javascript
+"marker": {
+    "popupTemplate": {
+      "content": "Hi {{ name }} !",
+      "isMarkdown": false,
+      "type": "string"
+    },
+  }
+```
+Same as `InfoBar` templates, you can customize the popup when mouse hover a marker. by default this popup display the name of the element
+
 Texts
 ------
 Custom texts to label the elements of the dataset.
