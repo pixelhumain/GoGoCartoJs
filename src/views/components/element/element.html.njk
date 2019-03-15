@@ -7,7 +7,7 @@
   data-element-id="{{ element.id }}">
 
 {% set pendingClass = 'pending' if (element.isPending or element.isDeleted) and config.isFeatureAvailable('pending') else '' %}
-{% set isHistoryAvailable = config.isFeatureAvailable('elementHistory') %}
+{% set isHistoryAvailable = config.isFeatureAvailable('elementHistory') and element.contributions and element.contributions.length > 0 %}
 
 {# HEADER #}
 <div class="collapsible-header {{pendingClass}}" option-id={{mainOptionToDisplay.colorOptionId}}>
