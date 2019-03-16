@@ -66,7 +66,7 @@ export class ElementFormaterModule
   private getValue(element : ElementBase, propertyName)
   {
     let value;
-    if (propertyName == 'address') value = element.address.getFormatedAddress();
+    if (propertyName == 'address') value = element.address ? element.address.getFormatedAddress() : "";
     else if (propertyName in element) value = element[propertyName]
     else value = element.data[propertyName]    
     return value;
