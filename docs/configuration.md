@@ -87,6 +87,8 @@ Marker
 ------
 ```javascript
 "marker": {
+    "displayPopup": true,
+    "popupAlwaysVisible": false,
     "popupTemplate": {
       "content": "Hi {{ name }} !",
       "isMarkdown": false,
@@ -94,6 +96,7 @@ Marker
     },
   }
 ```
+When activated, the popup is a content displayed on top of the marker, by default only when mouse hover the marker
 Same as `InfoBar` templates, you can customize the popup when mouse hover a marker. by default this popup display the name of the element
 
 Texts

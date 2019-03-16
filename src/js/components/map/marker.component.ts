@@ -95,7 +95,7 @@ export class Marker
 
 		let domMarker = this.domMarker();
 		this.removeClassToLeafletMarker_("BigSize");
-		domMarker.parent().find('.marker-popup').hide();
+		if (!App.config.marker.popupAlwaysVisible) domMarker.parent().find('.marker-popup').hide();
 		domMarker.find('.moreIconContainer').hide();
 		domMarker.find('.gogo-icon-plus-circle').show();
 	};

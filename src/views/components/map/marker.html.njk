@@ -1,6 +1,8 @@
 {# POPUP #}
+{% if config.marker.displayPopup %}
 <div class="marker-popup gogo-bg-color-as {{pendingClass}} {{ 'gogo-color-soft' if config.theme == 'presdecheznous' else '' }}"
-					option-id="{{mainOptionToDisplay.colorOptionId}}" style="display:none">{{ popup|safe }}</div>
+					option-id="{{mainOptionToDisplay.colorOptionId}}" style="{{ 'display: block !important;' if config.marker.popupAlwaysVisible else 'display:none'}}">{{ popup|safe }}</div>
+{% endif %}
 
 {# MARKER #}
 <div class="marker-wrapper gogo-color-as {{pendingClass}}" option-id="{{mainOptionToDisplay.colorOptionId}}" id="marker-{{ element.id }}">

@@ -62,6 +62,8 @@ export class GoGoConfig
   };
   readonly marker =
   {
+    displayPopup: true,
+    popupAlwaysVisible: false,
     popupTemplate: {
       content: undefined,
       type: "string", // string | url

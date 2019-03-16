@@ -22,7 +22,8 @@
     font-size: 1rem;
     border-radius: 5px;
     padding: 5px 10px;
-    bottom: 55px;
+    bottom: 45px;
+    &.BigSize { bottom: 55px; }
     left: -30px;
 
     p { margin: 0; }
