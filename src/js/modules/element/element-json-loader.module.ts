@@ -5,6 +5,9 @@ declare var $, L;
 
 export class ElementJsonParserModule
 {
+  // contains the ontology of the compact Json. This mapping must be provided in the elements ajax response
+  compactMapping = ['id', ['name'], 'latitude', 'longitude', 'status', 'moderationState'];
+
   load(elementJson : any, element : Element | ElementBase)
   {
     // patch to handle compactJson stored inside a "compactJson" property (use with Semantic Bus)
@@ -25,8 +28,10 @@ export class ElementJsonParserModule
 
   private loadFromCompactJson(elementJson : any, element : Element | ElementBase)
   {
-    element.id = elementJson.id; // the element has been modified before to fixs bad ids     
-    element.name = capitalize(elementJson[1]);
+    element.id = elementJson.id; // the element has been modified before to fixs bad ids   
+    for (let i = 0; i < this.compactMapping[1].length; ++i) {
+      element.data[this.compactMapping[1][i]] = elementJson[1][i];
+    }
     element.position = L.latLng(elementJson[2], elementJson[3]);     
     App.elementOptionValuesModule.createOptionValues(elementJson[4], element);   
     element.status = elementJson.length >= 6 ? elementJson[5] : 1;  

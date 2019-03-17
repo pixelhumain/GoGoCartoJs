@@ -48,6 +48,7 @@ export class ElementsManager
   handleNewElementsReceivedFromServer(result)
   {        
     let elementsJson = result.data || result["@graph"] || result; 
+    if (result.mapping) App.elementJsonParser.compactMapping = result.mapping;
     let elements = App.elementsJsonModule.convertJsonElements(elementsJson, true, result.fullRepresentation);
     // console.log("new Elements length", elements);
     
