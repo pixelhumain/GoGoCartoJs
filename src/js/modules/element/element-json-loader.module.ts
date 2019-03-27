@@ -30,7 +30,10 @@ export class ElementJsonParserModule
   {
     element.id = elementJson.id; // the element has been modified before to fixs bad ids   
     for (let i = 0; i < this.compactMapping[1].length; ++i) {
-      element.data[this.compactMapping[1][i]] = elementJson[1][i];
+      let attrName = this.compactMapping[1][i];
+      let value = elementJson[1][i];
+      element.data[attrName] = value;
+      if (attrName == 'images') element.images = value;
     }
     element.position = L.latLng(elementJson[2], elementJson[3]);     
     App.elementOptionValuesModule.createOptionValues(elementJson[4], element);   

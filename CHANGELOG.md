@@ -1,3 +1,6 @@
+# 1.4.2
+* BUG: Fixs images in compactJson (used in marker popup template)
+
 # 1.4.1
 * MINOR documentation now accessible on [gitlab pages](https://pixelhumain.gitlab.io/GoGoCartoJs)
 * FEATURE: Custom templates for Marker Popup
