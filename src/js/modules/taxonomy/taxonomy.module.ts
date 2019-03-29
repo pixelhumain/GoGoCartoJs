@@ -46,13 +46,14 @@ export class TaxonomyModule
 		if (Array.isArray(taxonomyJson) && taxonomyJson.length > 1) {
 			for (let json of taxonomyJson) json.isRootCategory = true;
 			taxonomyJson = {
+				"name": "RootFakeCategory",
 	      "options":[    
 	        {
 	          "name":"RootFakeOption",
 	          "displayInInfoBar": false,
 	          "displayInMenu": false,
 	          "showExpanded": true,
-	          "subcategories": taxonomyJson,
+	          "subcategories": taxonomyJson
 	        }
 	      ]
 	    };	    
@@ -60,7 +61,7 @@ export class TaxonomyModule
 		else if (!isSkosTaxonomy) taxonomyJson.isRootCategory = true;
 
 		this.taxonomy = this.recursivelyCreateCategoryAndOptions(taxonomyJson);
-		this.rootCategories = [this.taxonomy];
+		this.rootCategories =  this.taxonomy.name == "RootFakeCategory" ? this.taxonomy.options[0].subcategories : [this.taxonomy];
 		for(let option of this.mainCategory.children) option.isMainOption = true;
 		
 		if (this.rootCategories.length > 1)
