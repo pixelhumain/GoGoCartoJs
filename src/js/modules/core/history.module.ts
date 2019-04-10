@@ -1,13 +1,3 @@
-/**
- * This file is part of the GoGoCarto project.
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
- * @copyright Copyright (c) 2016 Sebastian Castro - 90scastro@gmail.com
- * @license GNU GPL v3
- * @Last Modified time: 2016-12-13
- */
-
 import { Event } from "../../classes/event.class";
 import { slugify, capitalize } from "../../utils/string-helpers";
 import { AppModule, AppStates, AppModes, AppDataType } from "../../app.module";

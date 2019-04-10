@@ -1,20 +1,9 @@
-/**
- * This file is part of the GoGoCarto project.
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
- * @copyright Copyright (c) 2016 Sebastian Castro - 90scastro@gmail.com
- * @license GNU GPL v3
- * @Last Modified time: 2016-12-13
- */
-
 import { AppModule, AppStates, AppModes } from "../../app.module";
 import { Option, Category } from "../../classes/classes";
 export { Option, Category } from "../../classes/classes";
 import { slugify } from '../../utils/string-helpers';
 import { App } from "../../gogocarto";
 declare let $ : any;
-
 
 export class TaxonomyModule
 {

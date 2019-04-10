@@ -1,18 +1,8 @@
-/**
- * This file is part of the GoGoCarto project.
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
- * @copyright Copyright (c) 2016 Sebastian Castro - 90scastro@gmail.com
- * @license GNU GPL v3
- * @Last Modified time: 2016-08-31
- */
 import { AppModule, AppStates, AppDataType, AppModes } from "../../app.module";
 import { GeocodeResult } from "../../modules/geocoder.module";
 declare var $, L;
 import { App } from "../../gogocarto";
 import { ViewPort } from "../../classes/classes";
-
 
 export class SearchBarComponent
 {
