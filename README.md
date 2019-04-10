@@ -23,6 +23,12 @@ Install / Download
 
 Or download latest version [here](https://gitlab.adullact.net/pixelhumain/GoGoCartoJs/tags)
 
+Or use the following links
+```html
+<script src="https://gogocarto.fr/js/gogocarto.min.js"></script> 
+<link rel="stylesheet" href="https://gogocarto.fr/assets/css/gogocarto.min.css"> 
+```
+
 
 Contact
 --------
