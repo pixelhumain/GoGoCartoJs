@@ -1,3 +1,6 @@
+# 1.4.3
+* FEATURE: Ability to disable clustering
+
 # 1.4.2
 * BUG: Fixs images in compactJson (used in marker popup template)
 * BUG: Fixs broken showOnePanePerMainOption

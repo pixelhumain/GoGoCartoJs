@@ -81,6 +81,7 @@ export class GoGoConfig
     defaultBoundsProvided : false,
     defaultCenter : L.latLng(46, 0),
     maxBounds : L.latLngBounds(L.latLng(-90, -180), L.latLng(90, 180)),
+    useClusters: false,
     saveViewportInCookies : false,
     saveTileLayerInCookies : false,
     defaultTileLayer : 'cartodb',

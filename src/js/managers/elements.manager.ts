@@ -76,7 +76,7 @@ export class ElementsManager
     {
       if (!App.mapComponent.isInitialized) { return;}
 
-      App.mapComponent.markerClustererGroup.restoreUnclusters(true);     
+      if (App.config.map.useClusters) App.mapComponent.markersGroup.restoreUnclusters(true);     
 
       // In some cases, markerCluster works faster clearing alls markers and adding them again
       if (result.elementsToRemove.length + result.newElements.length > result.elementsToDisplay.length)
@@ -90,7 +90,7 @@ export class ElementsManager
         App.mapComponent.addMarkers(result.newElements.map( (e) => e.marker.getLeafletMarker()));
       }      
 
-      App.mapComponent.markerClustererGroup.checkForUnclestering(App.map().getBounds());
+      if (App.config.map.useClusters) App.mapComponent.markersGroup.checkForUnclestering(App.map().getBounds());
     }  
 
     let end = new Date().getTime();

@@ -23,7 +23,7 @@ export class MapComponent
 	//Leaflet map
 	map_ : L.Map = null;
 
-	markerClustererGroup = null;
+	markersGroup = null;
 	isInitialized : boolean = false;
 	isMapLoaded : boolean = false;
 	oldZoom = -1;
@@ -70,40 +70,45 @@ export class MapComponent
 			$('.leaflet-control-layers').addClass('gogo-section-controls');	
 		}, 0);
 		
-		this.markerClustererGroup = L.markerClusterGroup({
-		    spiderfyOnMaxZoom: true,
-		    showCoverageOnHover: false,
-		    zoomToBoundsOnClick: true,
-		    spiderfyOnHover: false,
-		    spiderfyMaxCount: Infinity,
-		    spiderfyDistanceMultiplier: 1.1,
-		    chunkedLoading: true,
-		    animate: false,
-		    iconCreateFunction: function(cluster) {
-					var childCount = cluster.getChildCount();
-					
-					var c = ' marker-cluster-';
-					if (childCount < 10) { c += 'small'; }
-					else if (childCount < 100) { c += 'medium'; }
-					else if (childCount < 1000) { c += 'large'; }
-					else { c += 'large xl'; }
+		if (App.config.map.useClusters) 
+		{
+			this.markersGroup = L.markerClusterGroup({
+			    spiderfyOnMaxZoom: true,
+			    showCoverageOnHover: false,
+			    zoomToBoundsOnClick: true,
+			    spiderfyOnHover: false,
+			    spiderfyMaxCount: Infinity,
+			    spiderfyDistanceMultiplier: 1.1,
+			    chunkedLoading: true,
+			    animate: false,
+			    iconCreateFunction: function(cluster) {
+						var childCount = cluster.getChildCount();
+						
+						var c = ' marker-cluster-';
+						if (childCount < 10) { c += 'small'; }
+						else if (childCount < 100) { c += 'medium'; }
+						else if (childCount < 1000) { c += 'large'; }
+						else { c += 'large xl'; }
 
-					return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
-				},
-		    maxClusterRadius: (zoom) =>
-		    {
-		    	if (zoom > 10) return 60;
-		    	if (zoom > 7) return 70;
-		    	else return 70;
-		    }
-		});
+						return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster' + c, iconSize: new L.Point(40, 40) });
+					},
+			    maxClusterRadius: (zoom) =>
+			    {
+			    	if (zoom > 10) return 60;
+			    	if (zoom > 7) return 70;
+			    	else return 70;
+			    }
+			});
+		} else {
+			this.markersGroup = L.layerGroup();
+		}
 
-		this.markerClustererGroup.on('spiderfied', (clusters, markers) =>
+		this.markersGroup.on('spiderfied', (clusters, markers) =>
 		{
 			App.elementsModule.updateElementsIcons(true);
 		});
 
-		this.addMarkerClusterGroup();		
+		this.map_.addLayer(this.markersGroup);
 
 		L.control.zoom({position:'topright'}).addTo(this.map_);		
 		L.control.layers(baseLayers, {}, {position:'topright', collapsed: false}).addTo(this.map_);
@@ -135,8 +140,6 @@ export class MapComponent
 		this.onMapReady.emit();
 	};
 
-	addMarkerClusterGroup() { this.map_.addLayer(this.markerClustererGroup); }
-
 	resize()
 	{
 		//console.log("Resize, curr viewport :");
@@ -150,27 +153,35 @@ export class MapComponent
 
 	addMarker(marker : L.Marker)
 	{
-		this.markerClustererGroup.addLayer(marker);
+		this.markersGroup.addLayer(marker);
 	}
 
 	addMarkers(markers : L.Marker[])
 	{
-		if (this.markerClustererGroup) this.markerClustererGroup.addLayers(markers);
+		if (!this.markersGroup) return;
+		if (App.config.map.useClusters) this.markersGroup.addLayers(markers);
+		else {
+			for(let marker of markers) this.addMarker(marker);
+		}
 	}
 
 	removeMarker(marker : L.Marker)
 	{
-		this.markerClustererGroup.removeLayer(marker);
+		this.markersGroup.removeLayer(marker);
 	}
 
 	removeMarkers(markers : L.Marker[])
 	{
-		if (this.markerClustererGroup) this.markerClustererGroup.removeLayers(markers);
+		if (!this.markersGroup) return;
+		if (App.config.map.useClusters) this.markersGroup.removeLayers(markers);
+		else {
+			for(let marker of markers) this.removeMarker(marker);
+		}
 	}
 
 	clearMarkers()
 	{
-		if (this.markerClustererGroup) this.markerClustererGroup.clearLayers();
+		if (this.markersGroup) this.markersGroup.clearLayers();
 	}
 
 	fitElementsBounds(elements : Element[])

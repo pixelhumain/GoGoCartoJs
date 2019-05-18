@@ -124,6 +124,7 @@ Map
     "_southWest": { "lat": -90, "lng": -180 }, 
     "_northEast": { "lat": 90, "lng": 180 }
   },
+  "useClusters": true,
   "saveViewportInCookies": false,
   "saveTileLayerInCookies": false,
   "defaultTileLayer": "cartodb",
@@ -143,6 +144,7 @@ Map
 ```
 **DefaultBounds** and **DefautCenter** are used for the initial map state.
 **MaxBounds** is used to prevent loading elements outside of this bounds
+**useClusters** a cluster is when we group at least 4 marker into a single object displayed on the map
 
 Features
 ------

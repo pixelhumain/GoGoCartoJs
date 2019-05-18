@@ -1,6 +1,6 @@
 {
   "name": "gogocarto-js",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "homepage": "https://gitlab.adullact.net/pixelhumain/GoGoCartoJs",
   "description": "A javascript component to create terrific cartography ! Front end part of GoGoCarto project",
   "keywords": [
@@ -36,6 +36,7 @@
     "tsify": "^2.0.7",
     "typescript": "^2.1.4",
     "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.8.0"
+    "watchify": "^3.8.0",
+    "natives": "^1.1.6"
   }
 }
