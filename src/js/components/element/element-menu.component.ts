@@ -30,7 +30,7 @@ export class ElementMenuComponent
 
 	checkDisplayFullText()
 	{
-		let fullText = this.dom.width() >= this.dom.find('.menu-element-item:visible').length*120;
+		let fullText = this.dom.width() >= this.dom.find('.menu-element-item:visible').length*130;
 		this.showFullTextMenu(fullText);
 	}
 

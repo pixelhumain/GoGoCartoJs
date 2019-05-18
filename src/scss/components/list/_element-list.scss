@@ -80,7 +80,10 @@
 	{ 
 		margin: 0;
 		& > li { margin: 0 }
-		& > li.active { margin: 1rem 0; }
+		& > li.active { 
+			margin: 1rem 0; 
+			.collapsible-header { border-bottom: 0; }
+		}
 	}
 
 	.spinner-loader
