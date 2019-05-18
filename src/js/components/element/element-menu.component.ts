@@ -71,7 +71,7 @@ export class ElementMenuComponent
 		});
 
 		// SHARE
-		this.dom.find('.item-share').click(() =>
+		this.dom.find('.item-share-url').click(() =>
 		{		
 			let modal = $('#modal-share-element');
 			modal.find(".modal-footer").attr('option-id', this.element.colorOptionId);
