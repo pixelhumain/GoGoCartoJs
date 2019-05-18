@@ -296,9 +296,10 @@ export class InfoBarComponent
 
 		if (this.isDetailsVisible)
 		{
-			this.dom.find('.moreDetails').hide();
 			this.dom.find('.element-item').removeClass('active');	
-			this.updateInfoBarHeaderSize();
+			let elementInfoBar_newHeight = this.dom.find('#element-info').outerHeight(true) - this.dom.find('.moreDetails').height();
+			this.dom.animate({'height': elementInfoBar_newHeight }, 400, 'swing');
+			setTimeout(() => this.dom.find('.moreDetails').hide(), 400);
 		}	
 	};
 
