@@ -28,6 +28,10 @@ export class TemplateModule
 	{
 		this.elementTemplate.initialize();
 		this.nunjucksEnvironment = this.elementFilters.addGoGoFilters(this.nunjucksEnvironment);
+		// mapping between entries and strings (for i18n)
+		this.nunjucksEnvironment.addFilter('i18n', function(entry) {
+		    return App.config.translate(entry);
+		});
 	}
 
 	render(templateName : string, options : any = {}) : string

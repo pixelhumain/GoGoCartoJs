@@ -3,6 +3,8 @@ import { TileLayer } from '../map/tile-layer.class';
 import { GoGoFeature } from './gogo-feature.class';
 import { ElementStatus } from '../classes'; 
 import { DEFAULT_FEATURES } from './gogo-default-feature' ;
+import { FR } from '../../locale/fr';
+import { EN } from '../../locale/en';
 declare var L : any;
 declare var tinycolor;
 
@@ -174,18 +176,25 @@ export class GoGoConfig
     mapControls: undefined,  
     mapListBtn: undefined,
     pending: tinycolor("#565656")
-  }
+  };
   readonly fonts =
   {
     mainFont: 'Roboto',
     titleFont: undefined, // by default titleFont
-  }
+  };
 
   readonly images =
   {
     buttonOpenMenu: undefined,
     menuTopImage: undefined
-  }
+  };
+
+  readonly language = 'fr';
+
+  readonly i18n = {
+    en: EN,
+    fr: FR
+  };
 
 	constructor(config : any)
 	{
@@ -241,6 +250,15 @@ export class GoGoConfig
     console.log(this);
 	}
   
+  // Function for i18n, mapping between the given entry and the string according to the language chosen
+  translate(entry: string)
+  {
+    let value = this.i18n[this.language][entry];
+    if(!value)
+      console.warn(`[GoGoCartoJS] Entry '$(entry)' not found`);
+    return value;
+  }
+
   isFeatureActivated(featureName) : boolean
   {
     if (!this.features.hasOwnProperty(featureName)) { console.warn(`[GoGoCartoJs] feature ${featureName} doesn't exist`); return false; }
