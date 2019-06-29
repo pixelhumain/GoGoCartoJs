@@ -5721,6 +5721,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           margin: 0; }
         .gogo-load-css .gogocarto-container #directory-content-list .collapsible.popout > li.active {
           margin: 1rem 0; }
+          .gogo-load-css .gogocarto-container #directory-content-list .collapsible.popout > li.active .collapsible-header {
+            border-bottom: 0; }
       .gogo-load-css .gogocarto-container #directory-content-list .spinner-loader {
         -webkit-box-ordinal-group: 1000000;
         -moz-box-ordinal-group: 1000000;
@@ -6650,9 +6652,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
     .gogo-load-css .gogocarto-container .custom-scroll-bar-light::-webkit-scrollbar, .gogo-load-css .gogocarto-container .leaflet-routing-alt::-webkit-scrollbar, .gogo-load-css .gogocarto-container .leaflet-routing-geocoders::-webkit-scrollbar, .gogo-load-css .gogocarto-container .leaflet-routing-error::-webkit-scrollbar {
       width: 7px; }
     .gogo-load-css .gogocarto-container .custom-scroll-bar-light::-webkit-scrollbar-thumb, .gogo-load-css .gogocarto-container .leaflet-routing-alt::-webkit-scrollbar-thumb, .gogo-load-css .gogocarto-container .leaflet-routing-geocoders::-webkit-scrollbar-thumb, .gogo-load-css .gogocarto-container .leaflet-routing-error::-webkit-scrollbar-thumb {
-      -webkit-border-radius: 10px;
-      -moz-border-radius: 10px;
-      border-radius: 10px;
       background-color: #c3c3c3; }
     .gogo-load-css .gogocarto-container #gogo-custom-popup {
       position: absolute;
