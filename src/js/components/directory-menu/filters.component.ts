@@ -6,22 +6,23 @@ import { App } from "../../gogocarto";
 import { Element } from "../../classes/classes";
 
 export class FiltersComponent
-{  
+{
   currentActiveMainOptionId = null;
 
   constructor() {}
 
   initialize()
-  {  
+  {
     $('.filter-menu .tooltipped').tooltip();
 
-    App.mapComponent.onIdle.do( (elements)=> { this.updateElementCount(); });    
+    // App.mapComponent.onIdle.do( (elements)=> { this.updateElementCount(); });
+    App.elementsModule.onElementsToDisplayChanged.do( () => { this.updateElementCount(); });
 
     // -------------------------------
     // --------- FAVORITE-------------
     // -------------------------------
     $('#filter-favorite').click(function(e : Event)
-    {      
+    {
       let favoriteCheckbox = $('#favorite-checkbox');
 
       let checkValue = !favoriteCheckbox.is(':checked');
@@ -35,7 +36,7 @@ export class FiltersComponent
         App.filterModule.showOnlyModeration(false);
         $('#moderation-checkbox').prop('checked',false);
       }
-      
+
       App.elementsModule.updateElementsToDisplay(true);
 
       favoriteCheckbox.prop('checked',checkValue);
@@ -49,14 +50,14 @@ export class FiltersComponent
     // --------- PENDING-------------
     // -------------------------------
     $('#filter-pending').click(function(e : Event)
-    {      
+    {
       let pendingCheckbox = $('#pending-checkbox');
 
       let checkValue = !pendingCheckbox.is(':checked');
       $('.show-only-container .subcategorie-option-item').removeClass('checked');
       $(this).toggleClass('checked', checkValue);
       App.filterModule.showOnlyPending(checkValue);
-      
+
       if (checkValue) {
         App.filterModule.showOnlyFavorite(false);
         $('#favorite-checkbox').prop('checked',false);
@@ -77,14 +78,14 @@ export class FiltersComponent
     // --------- MODERAITON-------------
     // -------------------------------
     $('#filter-moderation').click(function(e : Event)
-    {      
+    {
       let moderationCheckbox = $('#moderation-checkbox');
 
       let checkValue = !moderationCheckbox.is(':checked');
       $('.show-only-container .subcategorie-option-item').removeClass('checked');
       $(this).toggleClass('checked', checkValue);
       App.filterModule.showOnlyModeration(checkValue);
-      
+
       if (checkValue) {
         App.filterModule.showOnlyFavorite(false);
         $('#favorite-checkbox').prop('checked',false);
@@ -119,30 +120,30 @@ export class FiltersComponent
       $('#active-main-option-background').css('top', $('#main-option-gogo-icon-' + this.currentActiveMainOptionId).position().top + $('.main-categories').scrollTop());
     });
 
-    
+
 
     // ----------------------------------
     // ------ CATEGORIES ----------------
     // ----------------------------------
     $('.subcategory-item .name-wrapper:not(.uncheckable)').click(function()
-    {    
+    {
       let categoryId = $(this).attr('data-category-id');
       App.taxonomyModule.getCategoryById(categoryId).toggleChildrenDetail();
-    });  
+    });
 
     $('.subcategory-item .checkbox-wrapper').click(function(e)
-    {    
+    {
       e.stopPropagation();
       e.stopImmediatePropagation();
       e.preventDefault();
 
       let categoryId = $(this).attr('data-category-id');
       App.taxonomyModule.getCategoryById(categoryId).toggle();
-      
-    });      
+
+    });
 
     // Add surbrillance in main-categories sidebar filters menu whenn hovering a main category
-    $('#main-option-all.show-one-pane-per-main-option .gogo-icon-name-wrapper').hover( 
+    $('#main-option-all.show-one-pane-per-main-option .gogo-icon-name-wrapper').hover(
       function(e : Event) {
         let optionId = $(this).attr('data-option-id');
         let sidebarIcon = $('#main-option-gogo-icon-' + optionId);
@@ -170,7 +171,7 @@ export class FiltersComponent
     });
 
     $('.subcategorie-option-item:not(#filter-favorite):not(#filter-pending):not(#filter-moderation)').find('.icon, .checkbox-wrapper').click(function(e)
-    {    
+    {
       e.stopPropagation();
       e.stopImmediatePropagation();
       e.preventDefault();
@@ -206,17 +207,17 @@ export class FiltersComponent
 
     setTimeout( () => {
       App.elementListComponent.reInitializeElementToDisplayLength();
-    
+
       App.boundsModule.updateFilledBoundsAccordingToNewMainOptionId();
       App.elementsManager.checkForNewElementsToRetrieve();
       App.elementsModule.updateElementsToDisplay(true,true);
-    }, 400);    
+    }, 400);
   }
 
   // the main option selected got a specific background, who can vertically translate
   updateMainOptionBackground()
   {
-    let optionId = this.currentActiveMainOptionId;    
+    let optionId = this.currentActiveMainOptionId;
 
     $('.main-option-subcategories-container:not(#main-option-' + optionId + ')').hide();
     $('#main-option-' + optionId).fadeIn(400);
@@ -231,36 +232,41 @@ export class FiltersComponent
   }
 
   updateElementCount()
-  {   
-    if (App.config.menu.displayNumberOfElementForEachCategory) 
+  {
+    if (App.config.menu.displayNumberOfElementForEachCategory && App.map())
     {
-      let allElements = App.elementsModule.currEveryElements(); 
+      let allElements = App.elementsModule.currEveryElements();
       let bounds = App.map().getBounds();
       let elementsInBounds;
       if (App.mode == AppModes.Map)
-         elementsInBounds = allElements.filter(element => bounds.contains(element.position));
+        elementsInBounds = allElements.filter(element => bounds.contains(element.position));
       else
         elementsInBounds = allElements;
 
-      let optionMappingCount = [];
+      let optionMappingCount = [], optionDisabledMappingCount = [];
       for(let option of App.taxonomyModule.options) {
         optionMappingCount[option.id] = 0;
+        optionDisabledMappingCount[option.id] = 0;
       }
       let element : Element;
-      for(element of elementsInBounds) {
+      let displayedElements = elementsInBounds.filter(element => element.isDisplayed);
+      for(element of displayedElements) {
         for(let ov of element.optionsValues) { optionMappingCount[ov.optionId]++ }
       }
+      for(element of allElements) {
+        for(let ov of element.optionsValues) { optionDisabledMappingCount[ov.optionId]++ }
+      }
 
-      for(let option of App.taxonomyModule.options) 
+      for(let option of App.taxonomyModule.options)
       {
-        let count = optionMappingCount[option.id];
+        let count = option.isChecked ? optionMappingCount[option.id] : optionDisabledMappingCount[option.id];
         if (count == 0)
           $(`#option-${option.id} .elements-by-category-count`).hide();
         else {
           if (App.config.menu.displayNumberOfElementRoundResults) count = this.roundResult(count);
           $(`#option-${option.id} .elements-by-category-count`).show().text(count);
         }
-           
+
       }
     }
   }
