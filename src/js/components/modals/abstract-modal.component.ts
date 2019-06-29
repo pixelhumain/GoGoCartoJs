@@ -5,7 +5,7 @@ declare var $ : any;
 export class AbstractModalComponent
 {
 	dom : any;
-	element : Element;	
+	element : Element;
 	protected ajaxUrl = "";
 
 	constructor(dom : string)
@@ -23,7 +23,7 @@ export class AbstractModalComponent
 	}
 
 	open(element : Element)
-	{		
+	{
 		this.element = element;
 		this.clearLoader();
 		this.dom.find('.generic-error-message').hide();
@@ -33,11 +33,11 @@ export class AbstractModalComponent
 
 	protected beforeOpen(element : Element) { }
 
-	protected handleSubmit(e) 
+	protected handleSubmit(e)
 	{
 		if (!this.element) return;
 		this.displayLoader();
-		this.submit();		
+		this.submit();
 		e.stopPropagation();e.stopImmediatePropagation();e.preventDefault();
 	}
 
@@ -46,17 +46,17 @@ export class AbstractModalComponent
 	protected sendRequest(data)
 	{
 		App.ajaxModule.sendRequest(this.ajaxUrl, 'post', data,
-		  (response)     => { 
-		  		setTimeout( () => this.clearLoader(), 500); 
+		  (response)     => {
+		  		setTimeout( () => this.clearLoader(), 500);
 		  		this.onSuccess(response);
 		  	},
 		  (errorMessage) => { this.clearLoader(); this.onError(errorMessage); }
-		); 
+		);
 	}
 
 	protected displayLoader()
 	{
-		this.dom.find('.cancel-btn').show();
+		this.dom.find('.cancel-btn').css('display', 'inline-block');
 		this.dom.find('button[type=submit]').hide();
 		this.dom.find('.loader-overlay').fadeIn(800);
 	}
@@ -64,7 +64,7 @@ export class AbstractModalComponent
 	protected clearLoader()
 	{
 		this.dom.find('.cancel-btn').hide();
-		this.dom.find('button[type=submit]').show();
+		this.dom.find('button[type=submit]').css('display', 'inline-block');
 		this.dom.find('.loader-overlay').hide();
 	}
 
