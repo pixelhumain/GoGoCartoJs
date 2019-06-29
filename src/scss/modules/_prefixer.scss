@@ -227,35 +227,51 @@
   display: -webkit-flex;
   display: flex;
 }
-    @mixin flex($values) {
-      -webkit-box-flex: $values;
-      -moz-box-flex:  $values;
-      -webkit-flex:  $values;
-      -ms-flex:  $values;
-      flex:  $values;
-    }
-    @mixin order($val) {
-      -webkit-box-ordinal-group: $val;
-      -moz-box-ordinal-group: $val;
-      -ms-flex-order: $val;
-      -webkit-order: $val;
-      order: $val;
-    }
-    @mixin flex-flow($val) {
-        -ms-flex-flow: $val;
-        -webkit-flex-flow: $val;
-        flex-flow: $val;
-    }
-    @mixin align($align) {
-      -webkit-flex-align: $align;
-      -ms-flex-align: $align;
-      -webkit-align-items: $align;
-      align-items: $align;
-    }
-    @mixin justify-content($val) {
-      -webkit-justify-content: $val;
-      justify-content: $val;
-    }
+@mixin flex($values) {
+  -webkit-box-flex: $values;
+  -moz-box-flex:  $values;
+  -webkit-flex:  $values;
+  -ms-flex:  $values;
+  flex:  $values;
+}
+@mixin order($val) {
+  -webkit-box-ordinal-group: $val;
+  -moz-box-ordinal-group: $val;
+  -ms-flex-order: $val;
+  -webkit-order: $val;
+  order: $val;
+}
+@mixin flex-flow($val) {
+    -ms-flex-flow: $val;
+    -webkit-flex-flow: $val;
+    flex-flow: $val;
+}
+@mixin align($align) {
+  -webkit-flex-align: $align;
+  -ms-flex-align: $align;
+  -webkit-align-items: $align;
+  align-items: $align;
+}
+@mixin justify-content($val) {
+  -webkit-justify-content: $val;
+  justify-content: $val;
+}
+@mixin flex-direction($direction) {
+ @if $direction == column {
+   -webkit-flex-direction:vertical;
+   -moz-flex-direction:vertical;
+   -ms-flex-direction:column;
+   -webkit-flex-direction:column;
+   flex-direction:column;
+ } @else {
+   -webkit-flex-direction:horizontal;
+   -moz-flex-direction:horizontal;
+   -ms-flex-direction:row;
+   -webkit-flex-direction:row;
+   flex-direction:row;
+ }
+}
+
 // Gradients
 
 @mixin gradient($default: #F5F5F5, $start: #EEE, $stop: #FFF) {

@@ -8,6 +8,5 @@
 }
 
 .custom-scroll-bar-light::-webkit-scrollbar-thumb {
-    @include border-radius(10px);
     background-color: #c3c3c3;
-} 
+}

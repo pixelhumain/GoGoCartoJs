@@ -10,21 +10,21 @@ import { App } from "../../gogocarto";
 declare var $, Map;
 
 export class Element extends ElementBase
-{	
+{
 	private marker_ : Marker = null;
-	private component_ : ElementComponent = null;	
+	private component_ : ElementComponent = null;
 
 	colorOptionId : any;
 
 	private isInitialized_ : boolean = false;
 
-	iconsToDisplay : OptionValue[] = [];	
+	iconsToDisplay : OptionValue[] = [];
 
 	distance : number;
-	distanceFromBoundsCenter : number;	
+	distanceFromBoundsCenter : number;
 
 	// for elements module algorithms
-	isDisplayed : boolean = false;	
+	isDisplayed : boolean = false;
 
 	isShownAlone : boolean = false;
 	isFavorite : boolean = false;
@@ -32,7 +32,7 @@ export class Element extends ElementBase
 
 	constructor(elementJson : any)
   {
-    super(elementJson);  
+    super(elementJson);
   }
 
   updateWithJson(elementJson)
@@ -40,14 +40,14 @@ export class Element extends ElementBase
   	super.updateWithJson(elementJson);
   	this.createOptionsTree();
     this.update(true);
-  }	
+  }
 
-	initialize() 
-	{		
+	initialize()
+	{
 		App.elementIconsModule.updateIconsToDisplay(this);
 
 		this.marker_ = new Marker(this.id, this.position);
-		this.isInitialized_ = true;	
+		this.isInitialized_ = true;
 	}
 
 	update($force : boolean = false)
@@ -60,11 +60,11 @@ export class Element extends ElementBase
 			optionValuesToUpdate.push(this.getCurrMainOptionValue());
 			for(let optionValue of optionValuesToUpdate) App.elementOptionValuesModule.updateOptionValueColor(this, optionValue);
 
-			this.colorOptionId = this.iconsToDisplay.length > 0 && this.getIconsToDisplay()[0] ? this.getIconsToDisplay()[0].colorOptionId : null;	
+			this.colorOptionId = this.iconsToDisplay.length > 0 && this.getIconsToDisplay()[0] ? this.getIconsToDisplay()[0].colorOptionId : null;
 
 			if (this.marker) this.marker.update();
 			this.needToBeUpdatedWhenShown = false;
-		}		
+		}
 	}
 
 	updateDistance()
@@ -72,11 +72,11 @@ export class Element extends ElementBase
 		this.distance = null;
 		this.distanceFromBoundsCenter = App.boundsModule.extendedBounds ? App.boundsModule.extendedBounds.getCenter().distanceTo(this.position) / 1000 : null;
 
-		if (App.geocoder.getLocation()) 
+		if (App.geocoder.getLocation())
 			this.distance = App.mapComponent.distanceFromLocationTo(this.position);
 		else
 			this.distance = this.distanceFromBoundsCenter;
-		
+
 		// Making the distance more realistic multiplying
 		this.distance = this.distance ? Math.round(1.2*this.distance) : null;
 		this.distanceFromBoundsCenter = this.distanceFromBoundsCenter ? Math.round(1.2*this.distanceFromBoundsCenter) : null;
@@ -99,10 +99,10 @@ export class Element extends ElementBase
 
   	// group by owner
   	let groupedByParentOvs = {}
-  	for (let ov of deepestOv) { 
+  	for (let ov of deepestOv) {
   		let parentName = ov.option.parentOptionName;
-  		if (parentName in groupedByParentOvs) groupedByParentOvs[parentName].push(ov); 
-  		else groupedByParentOvs[parentName] = [ov]; 
+  		if (parentName in groupedByParentOvs) groupedByParentOvs[parentName].push(ov);
+  		else groupedByParentOvs[parentName] = [ov];
   	}
   	let deepestOrderedOv = [];
   	for (let parent in groupedByParentOvs) { deepestOrderedOv = deepestOrderedOv.concat(groupedByParentOvs[parent]); }
@@ -122,7 +122,7 @@ export class Element extends ElementBase
 	getOptionsIdsInCategorieId(categoryId) : number[]
 	{
 		return this.getCurrOptionsValues().filter( (optionValue) => optionValue.option.ownerId == categoryId).map( (optionValue) => optionValue.optionId);
-	}	
+	}
 
 	displayStamps() : Stamp[]
 	{
@@ -131,10 +131,10 @@ export class Element extends ElementBase
 
 	isPending() { return this.status == ElementStatus.PendingAdd || this.status == ElementStatus.PendingModification; }
 	isDeleted() { return this.status <= ElementStatus.AdminRefused && this.status != ElementStatus.DynamicImportTemp }
-	needsModeration() { return this.moderationState != ElementModerationState.NotNeeded }	
+	needsModeration() { return this.moderationState != ElementModerationState.NotNeeded }
 
 	get marker() : Marker { return this.marker_; }
-	get component() { return this.component_ || (this.component_ = new ElementComponent(this)); }	
+	get component() { return this.component_ || (this.component_ = new ElementComponent(this)); }
 	get isInitialized() { return this.isInitialized_; }
 
   toDisplay()
@@ -161,7 +161,8 @@ export class Element extends ElementBase
     $.each(this.data, (key, value) => {
        if(!(key in result)) result[key] = this.formatProp(key)
     });
-    return result; 
+    console.log(result);
+    return result;
   }
 
   formatProp(propertyName) { return  App.elementFormaterModule.getProperty(this, propertyName); }
