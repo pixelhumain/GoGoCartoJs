@@ -2,7 +2,7 @@
 <div class="field field-email">
   {% set pending = value.indexOf('span class') > 0 %}
   {% if not pending and config.security.hideMailsByShowingSendMailButton %}
-    <button class="btn send-mail-btn">Envoyer un Mail</button>
+    <button class="btn send-mail-btn">{{ 'send.email' | i18n}}</button>
   {% else %}
     {{ value|safe }} 
   {% endif %}

@@ -42,9 +42,9 @@ export class SearchBarComponent
 		this.searchInput().on('keyup', () => this.showSearchOptions());
 
 		this.placeholders = {
-			default: "Recherchez un lieu, " + App.config.text.elementIndefinite + "...",
-			place: "Entrez une adresse, un CP, une ville...",
-			element: "Entrez le nom d'" + App.config.text.elementIndefinite
+			default: App.config.translate('find.a.place') + ", " + App.config.translate('element.indefinite') + "...",
+			place: App.config.translate('enter.an.address.postal.code.city'),
+			element: App.config.translate('enter.the.name.of') + App.config.translate('element.indefinite')
 		}		
 
 		this.updateSearchPlaceholder();

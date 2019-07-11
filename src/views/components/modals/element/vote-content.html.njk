@@ -1,6 +1,6 @@
-<h5>{{ 'Décidez pour' if isAdmin else 'Partagez votre connaissance concernant' }} {{elDisplayName}} <span class="elementName">{{ element.name }}</span></h5>
+<h5>{{ 'decide.for' if isAdmin else 'share.your.knowledge.about'|i18n }} {{elDisplayName}} <span class="elementName">{{ element.name }}</span></h5>
 
-<p id="select-error" class="error">Vous devez sélectionner votre vote !</p>
+<p id="select-error" class="error">{{ 'you.must.select.your.vote'|i18n }}</p>
 
 {% set isPendingAdd = element.status == ElementStatus.PendingAdd %}
 
@@ -9,41 +9,41 @@
 	<input class="option-radio-btn "value="-1" name="voteOption" type="radio" id="option7"/>
   <label class="option-radio-label" for="option7">
   	{% if isAdmin %}
-  		Refuser {{ "l'ajout" if isPendingAdd else 'les modifications' }}
+  		{{ 'reject'|i18n }} {{ 'the.addition' if isPendingAdd else 'modifications'|i18n|lower }}
   	{% else %}
-  		Je suis ne suis pas d'accord avec les modifications proposées
+  		{{ 'i.do.not.agree.with.the.proposed.modifications'|i18n }}
   	{% endif %}
   </label>
 
 	<input class="option-radio-btn "value="1" name="voteOption" type="radio" id="option6"/>
   <label class="option-radio-label" for="option6">
   	{% if isAdmin %}
-  		Accepter {{ "l'ajout" if isPendingAdd else 'les modifications' }}
+  		{{ 'accept'|i18n }} {{ 'the.addition' if isPendingAdd else 'modifications'|i18n|lower }}
   	{% else %}
-  		Je valide les modifications proposées
+  		{{ 'i.validate.the.proposed.modifications'|i18n }}
   	{% endif %}
   </label>  
 
 {% else %}
 
 		<input class="option-radio-btn "value="-2" name="voteOption" type="radio" id="option3"/>
-	  <label class="option-radio-label" for="option3">{{elDisplayName}} ne respecte pas la charte de près de chez nous, et ne doit donc pas y être répertorié</label>
+	  <label class="option-radio-label" for="option3">{{elDisplayName}} {{ 'does.not.respect.PDCN.charter.should.not.be.listed.here'|i18n }}</label>
 
 	  <input class="option-radio-btn "value="-1" name="voteOption" type="radio" id="option4"/>
-	  <label class="option-radio-label" for="option4">{{elDisplayName}} n'existe pas</label>
+	  <label class="option-radio-label" for="option4">{{elDisplayName}} {{ 'doest.not.exist'|i18n|lower }}</label>
 
 	  <input class="option-radio-btn "value="0" name="voteOption" type="radio" id="option0"/>
-	  <label class="option-radio-label" for="option0">{{elDisplayName}} existe mais les informations indiquées ne sont pas correctes</label>
+	  <label class="option-radio-label" for="option0">{{elDisplayName}} {{ 'exists.but.given.informations.are.incorrect'|i18n }}</label>
 
 	  <input class="option-radio-btn "value="1" name="voteOption" type="radio" id="option1"/>
-	  <label class="option-radio-label" for="option1">{{elDisplayName}} existe, mais je n'en sais pas plus sur lui</label>
+	  <label class="option-radio-label" for="option1">{{elDisplayName}} {{ 'exists.but.i.do.not.know.anything.else.about.it'|i18n }}</label>
 
 	  <input class="option-radio-btn "value="2" name="voteOption" type="radio" id="option2"/>
-	  <label class="option-radio-label" for="option2">{{elDisplayName}} existe et je valide l'exactitude des informations renseignées</label>  
+	  <label class="option-radio-label" for="option2">{{elDisplayName}} {{ 'exists.and.i.validate.the.accuracy.of.the.given.informations'|i18n }}</label>  
 
 {% endif %}
 
 <div class="input-field">
-	{% set placeHolder = "Justificatif en cas de refus (qui sera inséré dans l'e-mail automatique)" if isAdmin else "Commentaire optionnel pour la modération" %}
-	<input class="input-comment" type="text" placeholder="{{ placeHolder }}"/>
+	{% set placeHolder = "placeholder.input.comment" if isAdmin else "placeholder.input.comment.administration" %}
+	<input class="input-comment" type="text" placeholder="{{ placeHolder | i18n }}"/>
 </div>

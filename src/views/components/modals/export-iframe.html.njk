@@ -2,25 +2,25 @@
 <div id="modal-iframe" class="modal action-modal gogo-section-content custom-scroll-bar-light">
   <div class="modal-content">
   	<form>
-	    <h5 id="modal-title">Copiez ce code Html dans votre site web !</h5>
-	    <p class="subtitle">L'iframe sera initialisée dans la position actuelle de la carte. Déplacez la carte dans la position voulue avant d'ouvrir cette fenêtre !</p>	 
+	    <h5 id="modal-title">{{ 'copy.html.code'|i18n }}</h5>
+	    <p class="subtitle">{{ 'iframe.initialized.position.map'|i18n }}</p>	 
 
-	    <label for="iframe-width">Largeur</label>
+	    <label for="iframe-width">{{ 'width'|i18n }}</label>
 	    <input type="number" class="iframe-input iframe-param" id="iframe-width" value="800"/>      
 
-      <label for="iframe-height">Hauteur</label>
+      <label for="iframe-height">{{ 'height'|i18n }}</label>
       <input type="number" class="iframe-input iframe-param" id="iframe-height" value="600"/>
       
       <div class="checkboxes-container">
         {% if config.isFeatureAvailable('stamp') %}
           {% for stamp in allowedStamps %}
             <input type="checkbox" class="iframe-param stamp-param" id="iframe-stamp-{{stamp.id}}" data-id="{{stamp.id}}" />
-            <label for="iframe-stamp-{{stamp.id}}">Afficher uniquement les acteurs avec l'étiquette <strong>{{ stamp.name }}</strong></label>
+            <label for="iframe-stamp-{{stamp.id}}">{{ 'show.only.actors.with.label'|i18n }} <strong>{{ stamp.name }}</strong></label>
           {% endfor %}
         {% endif %}
 
         <input type="checkbox" class="iframe-param" id="part-taxonomy-checkbox" />
-        <label for="part-taxonomy-checkbox">Afficher uniquement les catégories actuellement sélectionnées</label>
+        <label for="part-taxonomy-checkbox">{{ 'show.only.selected.categories'|i18n }}</label>
       </div>
 
 			<div class="input-field">
@@ -35,7 +35,7 @@
 				<button type="button"
 					onclick="$('#modal-iframe').closeModal()"  
 					class="btn waves-effect waves-light">
-				OK!
+				{{ 'ok'|i18n }}
 			</button>
 			</div>
 

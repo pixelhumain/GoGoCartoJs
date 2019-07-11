@@ -20,7 +20,7 @@ export class VoteComponent extends AbstractModalComponent
 			element: this.element, 
 			ElementStatus: ElementStatus,
 			isAdmin: App.config.isFeatureAvailable('directModeration'),
-			eldisplayName: App.config.text.elementDefinite
+			eldisplayName: App.config.translate('element.definite')
 		}));  
 	}
 

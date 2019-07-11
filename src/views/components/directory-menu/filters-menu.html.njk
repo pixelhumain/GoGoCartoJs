@@ -7,8 +7,8 @@
 			<div class="icon main-gogo-icon-background gogo-bg-neutral" id="active-main-option-background"></div>
 
 			<div class="icon main-icon active" id="main-option-gogo-icon-all" data-option-id="all">
-				<div class="main-icon-text">Tous</div>
-				<div class="main-option-tooltip gogo-bg-neutral-dark">Tous les {{ config.text.elementPlural }}</div>
+				<div class="main-icon-text">{{ 'all' | i18n }}</div>
+				<div class="main-option-tooltip gogo-bg-neutral-dark">{{ 'all.the' | i18n }} {{ 'element.plural' | i18n }}</div>
 			</div> 
 			
 			{# MAIN OPTIONS ICONS & TOOLTIP #}
@@ -68,7 +68,7 @@
 				{% if pendingIsActive or favoriteIsActive or moderationIsActive %}
 					<li class="subcategory-item expanded unexpandable top-separator show-only-title">
 						<div class="name-wrapper">		
-							<span class="name">Afficher uniquement</span>
+							<span class="name">{{ 'show.only' | i18n }}</span>
 						</div>
 					</li>
 				{% endif %}
@@ -78,10 +78,10 @@
 					{# ELEMENT WITH PENDING STATUS#}	
 					{% if pendingIsActive %}
 						<li class="subcategorie-option-item row tooltipped" id="filter-pending" 
-								data-position="right" data-delay="700" data-tooltip="Afficher uniquement les éléments en cours de validation">
+								data-position="right" data-delay="700" data-tooltip="{{ 'show.only.elements.validation.process' | i18n }}">
 					    <span class="icon gogo-icon-attention"></span>
 				    	<span class="option-name">
-				    		<span class="validation-process-info">En cours de validation</span>
+				    		<span class="validation-process-info">{{ 'in.process.validation' | i18n }}</span>
 				    	</span> 
 
 					    {# --- CHECKBOX ---- #}
@@ -96,9 +96,9 @@
 
 					{% if moderationIsActive %}
 						<li class="subcategorie-option-item row tooltipped" id="filter-moderation" 
-								data-position="right" data-delay="700" data-tooltip="Afficher uniquement les éléments à modérer">
+								data-position="right" data-delay="700" data-tooltip="{{ 'show.only.elements.to.moderate' | i18n }}">
 					    <span class="icon gogo-icon-moderation"></span>
-				    	<span class="option-name">A modérer</span>
+				    	<span class="option-name">{{ 'to.moderate' | i18n }}</span>
 
 					    {# --- CHECKBOX ---- #}
 							<div class="checkbox-wrapper">
@@ -112,9 +112,9 @@
 
 					{# FAVORITE #}
 					{% if favoriteIsActive %}
-						<li class="subcategorie-option-item row tooltipped" id="filter-favorite" data-position="right" data-delay="700" data-tooltip="Afficher uniquement les favoris">
+						<li class="subcategorie-option-item row tooltipped" id="filter-favorite" data-position="right" data-delay="700" data-tooltip="{{ 'show.only.favorites' | i18n }}">
 					    <span class="icon gogo-icon-star-full"></span>
-					    <span class="option-name">Vos favoris</span> 
+					    <span class="option-name">{{ 'your.favorites' | i18n }}</span> 
 
 					    {# --- CHECKBOX ---- #}
 							<div class="checkbox-wrapper">

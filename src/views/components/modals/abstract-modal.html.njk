@@ -12,10 +12,10 @@
 			<button type="button"
 					onclick="$(this).closest('.modal').closeModal()"  
 					class="waves-effect waves-dark btn-flat">
-				{% block cancelText %}Annuler{% endblock %}
+				{% block cancelText %}{{ 'cancel' | i18n }}{% endblock %}
 			</button>
 			<button type="submit" class="btn btn-primary waves-effect waves-light">
-				{% block submitText %}Envoyer{% endblock %}
+				{% block submitText %}{{ 'send' | i18n }}{% endblock %}
 			</button>
 			<button class="btn cancel-btn btn-primary waves-effects">
             {% import 'components/spinner-loader.html.njk' as spinnerLoader %}
