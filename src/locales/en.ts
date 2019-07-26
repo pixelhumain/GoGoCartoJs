@@ -10,9 +10,12 @@ export const EN =
   'anonymous': 'Anonymous',
   'anonymous.email': 'Anonymous with email',
   'anonymous.link': 'Anonymous with link',
+  'around': 'around',
+  'around.map.center': 'around map center',
 
   //B
   'by': 'By',
+  'back.to.map': "Back To Map",
 
   //C
   'cancel': 'Cancel',
@@ -83,7 +86,6 @@ export const EN =
   'i.validate.the.proposed.modifications': 'I validate the proposed modifications',
   'iframe.initialized.position.map': 'The iframe will be initialized in the current position of the map. Move the map to the desired position before opening this window !',
   'import': 'Import',
-  'in.process.validation': 'In the process of validation',
   'informations.incorrect': 'The informations are incorrect',
 
   //L
@@ -104,6 +106,7 @@ export const EN =
   'modified.direct.link': 'Modified with direct link',
   'modified.owner': 'Modified by owner',
   'modified.pending': 'Modified pending',
+  'my.position': 'my position',
 
   //N
   'new': 'New ',
@@ -121,6 +124,7 @@ export const EN =
   'pending.add': 'Pending (add)',
   'pending.for.too.long': 'Pending for too long',
   'pending.modifications': 'Pending (modifications)',
+  'pending.validation': 'Pending for validation',
   'place': 'A place',
   'placeholder.input.comment': "Proof in case of refusal (which will be inserted in the automatic email)",
   'placeholder.input.comment.administration': "Optional comment for moderation",
@@ -158,8 +162,9 @@ export const EN =
   'send.email': 'Send an email',
   'send.email.to': 'Send an email to ',
   'share.link': 'Share this link with others',
-  'share.url': 'Partager l\'URL',
+  'share.url': 'Share',
   'share.your.knowledge.about': 'Share your knowledge about',
+  'show.as.list': 'Show as List',
   'show.more': 'Show more',
   'show.on.map': 'Show on the map',
   'show.only': 'Show only',
@@ -189,5 +194,5 @@ export const EN =
   //Y
   'you.must.select.your.vote': 'You must select your vote !',
   'your.email': 'Your email address',
-  'your.favorites': 'Your favorites'
+  'your.favorites': 'Favorites'
 }

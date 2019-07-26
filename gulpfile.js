@@ -13,7 +13,7 @@ var gulp = require('gulp'),
     notifier = require('node-notifier'),
     nunjucks = require('gulp-nunjucks');
 
-function handleError(err) 
+function handleError(err)
 {
   console.log(err.toString());
   notifier.notify({
@@ -43,7 +43,7 @@ gulp.task("scriptsDirectory", function () {
 });
 
 gulp.task('scriptsLibs', function() {
-  return gulp.src(['src/js/libs/**/!(leaflet-routing-machine)*.js', 
+  return gulp.src(['src/js/libs/**/!(leaflet-routing-machine)*.js',
                   'src/js/libs/leaflet-routing-machine.js' ,
                   '!src/js/libs/materialize/unused/**/*.js',
                   '!src/js/libs/nunjucks-slim.js',
@@ -62,7 +62,7 @@ gulp.task('templates', function() {
 
 gulp.task('sass', function () {
   return gulp.src(['src/scss/**/*.scss'])
-    .pipe(sass().on('error', sass.logError))    
+    .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('web/assets'));
 });
 
@@ -120,12 +120,12 @@ gulp.task('gzip_js', ['prod_js'],  function() {
 });
 
 
-gulp.task('watch', function() 
+gulp.task('watch', function()
 {
   gulp.watch(['src/scss/**/*.scss'], ['sass']);
 
-  gulp.watch(['src/js/**/*.ts'], ['scriptsDirectory']);
-  
+  gulp.watch(['src/js/**/*.ts', 'src/locales/**/*.ts'], ['scriptsDirectory']);
+
   gulp.watch('src/js/libs/**/*.js', ['scriptsLibs']);
 
   gulp.watch('src/views/**/*.njk', ['templates']);

@@ -1,25 +1,25 @@
-<div class="interactive-section"> 
+<div class="interactive-section">
   {% if element.isPending %}
     <div class="vote-section">
       <span class="basic-message">
         <span class="gogo-icon-attention"></span>
         <span class="text pending-text validation-process-info" >
-          <span class="long-text">{{ 'new'|i18n ~ config.text.element if element.status == ElementStatus.PendingAdd else 'modification.plural'|i18n }}</span>
-          {{ 'in.process.validation'|i18n }}
+          <span class="long-text">{{ 'new'|i18n ~ 'element'|i18n if element.status == ElementStatus.PendingAdd else 'modification.plural'|i18n }}</span>
+          {{ 'pending.validation'|i18n }}
         </span>
         {% if config.isFeatureActivated('vote') %}
           <span class="vote-button btn action-btn waves-effect waves-light">{{ 'decide'|i18n if config.isFeatureAvailable('directModeration') else 'vote'|i18n }}</span>
           {% endif %}
-      </span>        
+      </span>
     </div>
   {% endif %}
 
   {% set moderationStates = {
     '-2':'geolocation.error',
     '-1':'no.category.provided',
-    '0':'no.moderation.necessary', 
-    '1':'errors.reported', 
-    '2':'non.consensual.votes',  
+    '0':'no.moderation.necessary',
+    '1':'errors.reported',
+    '2':'non.consensual.votes',
     '3':'pending.for.too.long',
     '4':'potential.duplicate'
     }
@@ -31,12 +31,12 @@
         <span class="gogo-icon-moderation"></span>
         <span class="text">{{ moderationStates[element.moderationState]|i18n }}</span>
         {% if config.isFeatureAvailable('directModeration') %}
-          {% if element.moderationState in [ElementModerationState.ReportsSubmitted, ElementModerationState.PossibleDuplicate]  %} 
+          {% if element.moderationState in [ElementModerationState.ReportsSubmitted, ElementModerationState.PossibleDuplicate]  %}
             <span class="mark-as-moderated-btn btn action-btn waves-effect waves-light">{{ 'mark.as.resolved'|i18n }}</span>
             <input type="text" class="moderation-input-comment" placeholder="{{ 'comment.for.moderation'|i18n }}"/>
           {% endif %}
         {% endif %}
-      </span>        
+      </span>
     </div>
   {% endif %}
 

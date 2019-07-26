@@ -23,7 +23,7 @@ export class ModeManager
     if ($mode == AppModes.Map) this.setMapMode();
     else this.setListMode();
 
-    // if previous mode wasn't null 
+    // if previous mode wasn't null
     let oldMode = this.mode_;
     this.mode_ = $mode;
 
@@ -31,24 +31,24 @@ export class ModeManager
     if (oldMode != null && !$backFromHistory) App.historyModule.pushNewState();
 
     App.gogoControlComponent.updatePosition();
-    
+
     setTimeout( () => App.elementsModule.updateElementsToDisplay(true) , 300);
 
     if ($updateTitleAndState)
     {
-      App.documentTitleModule.updateDocumentTitle();  
+      App.documentTitleModule.updateDocumentTitle();
 
       // after clearing, we set the current state again
-      if ($mode == AppModes.Map) App.setState(App.state, {id : App.stateManager.stateElementId});  
+      if ($mode == AppModes.Map) App.setState(App.state, {id : App.stateManager.stateElementId});
     }
   }
 
   private setMapMode()
   {
     App.mapComponent.show();
-    App.elementListComponent.hide();        
+    App.elementListComponent.hide();
 
-    App.mapComponent.initialize();    
+    App.mapComponent.initialize();
 
     if (App.mapComponent.isMapLoaded) App.boundsModule.extendBounds(0, App.mapComponent.getBounds());
   }
@@ -56,9 +56,9 @@ export class ModeManager
   private setListMode()
   {
     App.mapComponent.hide();
-    App.elementListComponent.show();        
+    App.elementListComponent.show();
 
-    // console.log("list mode", App.geocoder.getLocation());      
+    // console.log("list mode", App.geocoder.getLocation());
 
     if (App.dataType == AppDataType.All)
     {
@@ -67,16 +67,16 @@ export class ModeManager
 
       if (App.mapComponent.isInitialized) {
         centerLocation = App.mapComponent.getCenter();
-        App.elementListComponent.setTitle(' autour du centre de la carte');
+        App.elementListComponent.setTitle(App.config.translate('around.map.center'));
       }
-      else if (App.geocoder.getLocation()) {          
+      else if (App.geocoder.getLocation()) {
         centerLocation = App.geocoder.getLocation();
-        App.elementListComponent.setTitle(' autour de <i>' + capitalize(unslugify(address)) + '</i>');
+        App.elementListComponent.setTitle(` ${App.config.translate('around')} <i>${capitalize(unslugify(address))}</i>`);
       }
       else {
         centerLocation = App.boundsModule.defaultCenter;
         App.elementListComponent.setTitle('');
-      }         
+      }
 
       App.boundsModule.createBoundsFromLocation(centerLocation);
       App.elementsManager.checkForNewElementsToRetrieve(true);
@@ -85,7 +85,7 @@ export class ModeManager
     {
       App.elementsModule.updateElementsToDisplay(true,false);
       App.elementListComponent.setTitle('');
-    }      
+    }
   }
 
   get mode() { return this.mode_; }

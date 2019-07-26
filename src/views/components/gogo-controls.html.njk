@@ -7,7 +7,9 @@
     {% if config.images.buttonOpenMenu %}<img src="{{ config.images.buttonOpenMenu }}" />{% endif %}
   </div>
   {% if config.isFeatureActivated('listMode') %}
-    <div class="show-as-list-button feature-button gogo-section-controls leaflet-bar"><i class="gogo-icon-list"></i></div>
+    <div class="show-as-list-button feature-button gogo-section-controls leaflet-bar">
+      <i class="gogo-icon-list"></i>
+    </div>
   {% endif %}
   <div class="show-as-map-button feature-button gogo-section-controls leaflet-bar"><i class="gogo-icon-map"></i></div>
 </div>

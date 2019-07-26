@@ -1,16 +1,19 @@
-<div class="element-list-header">  
+<div class="element-list-header">
 
   {% include 'components/buttons/show-directory-menu-button.html.njk' %}
-        
-  <span class="show-as-map-button gogo-h-primary"> <span class="icon btn-back gogo-icon-material-design-icons-1"></span></span>
+
+  <span class="show-as-map-button gogo-h-primary">
+    <span class="icon btn-back gogo-icon-material-design-icons-1"></span>
+    <span class="button-text">{{ 'back.to.map' | i18n }}</span>
+  </span>
 
   <div class="title-text" style="display:none">
     {{ results | i18n }}
     <span class="element-list-title-number-results"></span>
     <span class="element-list-title-text"></span>
-  </div> 
+  </div>
 
-  <div class='shadow-bottom' id="list-title-shadow-bottom"></div>   
+  <div class='shadow-bottom' id="list-title-shadow-bottom"></div>
 </div>
 
 <div class="elements-container custom-scroll-bar">

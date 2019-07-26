@@ -18,16 +18,16 @@ export class GeocodingManager
     //console.log("handleGeocodeResult", App.geocoder.getLocation());
     $('#directory-spinner-loader').hide();
 
-    if (App.state == AppStates.ShowDirections)  
+    if (App.state == AppStates.ShowDirections)
     {
       // we restart directions from App new start location
       App.setState(AppStates.ShowDirections,{id: App.stateManager.stateElementId });
-    }    
+    }
     else
     {
       if (App.mode == AppModes.Map && App.state != AppStates.ShowElementAlone)
       {
-        App.setState(AppStates.Normal);      
+        App.setState(AppStates.Normal);
       }
       else
       {
@@ -36,12 +36,12 @@ export class GeocodingManager
         App.elementsModule.clearCurrentsElement();
         App.elementsModule.updateElementsToDisplay(true);
         let address = App.geocoder.lastAddressRequest;
-        if (App.geocoder.getLocation()) 
-          App.elementListComponent.setTitle(' autour de <i>' + capitalize(unslugify(address))) + '</i>';
-      }      
+        if (App.geocoder.getLocation())
+          App.elementListComponent.setTitle(` ${App.config.translate('around')} <i>${capitalize(unslugify(address))}</i>`);
+      }
 
       App.documentTitleModule.updateDocumentTitle();
-    }        
+    }
   }
 
   handleGeolocalizationResult(viewPort)
@@ -49,16 +49,16 @@ export class GeocodingManager
     if (App.mode == AppModes.Map)
     {
       App.setState(AppStates.Normal);
-      App.mapComponent.panToLocation(viewPort.toLocation(), viewPort.zoom, false);      
+      App.mapComponent.panToLocation(viewPort.toLocation(), viewPort.zoom, false);
     }
     else
     {
       App.boundsModule.createBoundsFromLocation(viewPort.toLocation());
       App.elementsModule.clearCurrentsElement();
       App.elementsModule.updateElementsToDisplay(true);
-      App.elementListComponent.setTitle(' autour de <i>ma position</i>');
+      App.elementListComponent.setTitle(` ${App.config.translate('around')} <i>${App.config.translate('my.position')}</i>`);
       // save the viewport if we go to map after
       App.mapComponent.setViewPort(viewPort);
-    }    
+    }
   }
 }

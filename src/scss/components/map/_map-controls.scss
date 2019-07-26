@@ -13,7 +13,7 @@ a.leaflet-control-zoom-out {
   margin-top: 20px;
   border:none;
   @include box-shadow-1(0 2px 6px rgba(0,0,0,0.3));
-  @media #{$small-only} { 
+  @media #{$small-only} {
     display:none;
   }
   a { background-color: inherit !important; }
@@ -22,7 +22,7 @@ a.leaflet-control-zoom-out {
 #map-gogo-controls
 {
   display:none;
-  
+
   @media #{$medium-and-up} {
     display: block;
     position: absolute;
@@ -38,11 +38,11 @@ a.leaflet-control-zoom-out {
   img { height: 35px; margin-right: 5px; }
 
   .arrow-right
-  {      
+  {
     display: inline-block;
     border: solid 8px;
     border-color: transparent transparent transparent #eeeeee;
-  }  
+  }
 
   img { display: none; }
 
@@ -51,11 +51,11 @@ a.leaflet-control-zoom-out {
   }
 }
 
-.show-as-list-button 
+.show-as-list-button
 {
-  @media #{$medium-and-up} 
+  @media #{$small-only}
   {
-    &:after { content: "Afficher sous forme de liste"}
+    .button-text { display: none; }
   }
 }
 
@@ -68,7 +68,7 @@ a.leaflet-control-zoom-out {
   font-size: 14px !important;
   padding: 5px 10px;
   @include box-shadow-1(2px 3px 1px rgba(0,0,0,.25));
-  text-align: center;  
+  text-align: center;
   border-radius: 5px;
 
   &:hover{ cursor : pointer; }
@@ -102,8 +102,8 @@ a.leaflet-control-zoom-out {
 
 .feature-button
 {
-  position: relative;     
-  
+  position: relative;
+
   margin-bottom: 13px;
   text-align: center;
 
@@ -113,7 +113,7 @@ a.leaflet-control-zoom-out {
   border: none;
   @include box-shadow-1(0 2px 6px rgba(0,0,0,0.3));
 
-  @media #{$medium-and-up} 
+  @media #{$medium-and-up}
   {
     width: 33px;
     height: 33px;
@@ -122,23 +122,23 @@ a.leaflet-control-zoom-out {
 
   i {
     font-size: 22px;
-    line-height: 55px;   
+    line-height: 55px;
 
-    &.gogo-icon-list { font-size: 18px; } 
-     
-    @media #{$medium-and-up}  { font-size: 18px; line-height: 39px; }    
+    &.gogo-icon-list { font-size: 18px; }
+
+    @media #{$medium-and-up}  { font-size: 18px; line-height: 39px; }
   }
 
-  &#close-layers-panel 
-  { 
-    z-index: 10000; 
+  &#close-layers-panel
+  {
+    z-index: 10000;
     background-color: transparent;
     color: #888888;
 
     &:hover { background-color: transparent; color: #616161; }
 
     i { font-size: 16px;line-height: 44px; margin-left: 2px; }
-  }  
+  }
 
   &#change-layers {
     @media screen and (max-width: 600px) { display:none; }
@@ -148,14 +148,14 @@ a.leaflet-control-zoom-out {
     @media screen and (max-width: 600px) { display:none; }
   }
 
-  &#map-default-view-btn  { 
+  &#map-default-view-btn  {
     i { font-size: 14px; }
     @media screen and (max-width: 600px) { display:none; }
-  } 
+  }
 
-  &#geolocalize-btn { 
+  &#geolocalize-btn {
     @media screen and (min-width: 600px) { display:none; }
-  }  
+  }
 }
 
 .leaflet-control-layers-toggle { display:none; }
@@ -195,6 +195,6 @@ a.leaflet-control-zoom-out {
 
     &:hover { cursor: pointer; }
     &:last-child { border: none; }
-  }  
+  }
 }
 

@@ -10,9 +10,12 @@ export const FR =
   'anonymous': 'Anonyme',
   'anonymous.email': 'Anonyme avec email',
   'anonymous.link': 'Anonyme avec lien',
+  'around': 'autour de',
+  'around.map.center': 'autour du centre de la carte',
 
   //B
   'by': 'Par',
+  'back.to.map': "Retour à la carte",
 
   //C
   'cancel': 'Annuler',
@@ -83,7 +86,6 @@ export const FR =
   'i.validate.the.proposed.modifications': 'Je valide les modifications proposées',
   'iframe.initialized.position.map': 'L\'iframe sera initialisée dans la position actuelle de la carte. Déplacez la carte dans la position voulue avant d\'ouvrir cette fenêtre !',
   'import': 'Import',
-  'in.process.validation': 'En cours de validation',
   'informations.incorrect': 'Les informations sont incorrectes',
 
   //L
@@ -104,6 +106,7 @@ export const FR =
   'modified.direct.link': 'Modifié avec lien direct',
   'modified.owner': 'Modifié par propriétaire',
   'modified.pending': 'en attente de modification',
+  'my.position': 'ma position',
 
   //N
   'new': 'Nouvel ',
@@ -121,6 +124,7 @@ export const FR =
   'pending.add': 'En attente (ajout)',
   'pending.for.too.long': 'En attente depuis trop longtemps',
   'pending.modifications': 'En attente (modifications)',
+  'pending.validation': 'En cours de validation',
   'place': 'Un lieu',
   'placeholder.input.comment': "Justificatif en cas de refus (qui sera inséré dans l'e-mail automatique)",
   'placeholder.input.comment.administration':"Commentaire optionnel pour la modération",
@@ -160,6 +164,7 @@ export const FR =
   'share.link': 'Partager ce lien avec d\'autres',
   'share.url': 'Partager l\'URL',
   'share.your.knowledge.about': 'Partagez votre connaissance concernant',
+  'show.as.list': 'Afficher sous forme de liste',
   'show.more': 'Afficher plus',
   'show.on.map': 'Afficher sur la carte',
   'show.only': 'Afficher uniquement',
