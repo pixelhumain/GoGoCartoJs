@@ -3,8 +3,8 @@ import { TileLayer } from '../map/tile-layer.class';
 import { GoGoFeature } from './gogo-feature.class';
 import { ElementStatus } from '../classes';
 import { DEFAULT_FEATURES } from './gogo-default-feature' ;
-import { FR } from '../../locale/fr';
-import { EN } from '../../locale/en';
+import { FR } from '../../../locales/fr';
+import { EN } from '../../../locales/en';
 declare var L : any;
 declare var tinycolor;
 
@@ -234,13 +234,13 @@ export class GoGoConfig
 
     console.log(this);
 	}
-  
+
   // Function for i18n, mapping between the given entry and the string according to the language chosen
   translate(entry: string): string
   {
     let value = this.i18n[this.language][entry];
     if(!value)
-      console.warn(`[GoGoCartoJS] Entry '$(entry)' not found`);
+      console.warn(`[GoGoCartoJS] Entry '${entry}' not found`);
     return value;
   }
 

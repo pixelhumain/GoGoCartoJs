@@ -22,16 +22,16 @@ export class TemplateModule
 		// As default templates are precompiled into javascript templates.js file
 		// if there is some templates we did not override, nunjucks will get the precompiled one
 		this.nunjucksEnvironment = nunjucks.configure('../src/views', { autoescape: true });
-	}	
-
-	initialize()
-	{
-		this.elementTemplate.initialize();
 		this.nunjucksEnvironment = this.elementFilters.addGoGoFilters(this.nunjucksEnvironment);
 		// mapping between entries and strings (for i18n)
 		this.nunjucksEnvironment.addFilter('i18n', function(entry) {
 		    return App.config.translate(entry);
 		});
+	}
+
+	initialize()
+	{
+		this.elementTemplate.initialize();
 	}
 
 	render(templateName : string, options : any = {}) : string
@@ -57,5 +57,5 @@ export class TemplateModule
 	compile(template:string): any
 	{
 		return nunjucks.compile(template, this.nunjucksEnvironment);
-	}	
+	}
 }

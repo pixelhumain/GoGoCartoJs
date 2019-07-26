@@ -5,7 +5,7 @@
 {% set isPendingAdd = element.status == ElementStatus.PendingAdd %}
 
 {% if isAdmin or not isPendingAdd %}
-	
+
 	<input class="option-radio-btn "value="-1" name="voteOption" type="radio" id="option7"/>
   <label class="option-radio-label" for="option7">
   	{% if isAdmin %}
@@ -22,12 +22,12 @@
   	{% else %}
   		{{ 'i.validate.the.proposed.modifications'|i18n }}
   	{% endif %}
-  </label>  
+  </label>
 
 {% else %}
 
 		<input class="option-radio-btn "value="-2" name="voteOption" type="radio" id="option3"/>
-	  <label class="option-radio-label" for="option3">{{elDisplayName}} {{ 'does.not.respect.PDCN.charter.should.not.be.listed.here'|i18n }}</label>
+	  <label class="option-radio-label" for="option3">{{elDisplayName}} {{ 'does.not.respect.charter.should.not.be.listed.here'|i18n }}</label>
 
 	  <input class="option-radio-btn "value="-1" name="voteOption" type="radio" id="option4"/>
 	  <label class="option-radio-label" for="option4">{{elDisplayName}} {{ 'doest.not.exist'|i18n|lower }}</label>
@@ -39,7 +39,7 @@
 	  <label class="option-radio-label" for="option1">{{elDisplayName}} {{ 'exists.but.i.do.not.know.anything.else.about.it'|i18n }}</label>
 
 	  <input class="option-radio-btn "value="2" name="voteOption" type="radio" id="option2"/>
-	  <label class="option-radio-label" for="option2">{{elDisplayName}} {{ 'exists.and.i.validate.the.accuracy.of.the.given.informations'|i18n }}</label>  
+	  <label class="option-radio-label" for="option2">{{elDisplayName}} {{ 'exists.and.i.validate.the.accuracy.of.the.given.informations'|i18n }}</label>
 
 {% endif %}
 

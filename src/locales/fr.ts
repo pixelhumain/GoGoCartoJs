@@ -1,4 +1,4 @@
-export const FR = 
+export const FR =
 {
   //A
   'accept': 'Accepter',
@@ -19,15 +19,15 @@ export const FR =
   'can.not.locate.address': 'Impossible de localiser cette adresse !',
   'card': 'Fiche',
   'close': 'Fermer',
-  'collaborative.moderation.': 'Modération collaborative',
+  'collaborative.moderation': 'Modération collaborative',
   'collaborative.moderation.paragaphs': `<p>
     Lorsqu'un élément est ajouté ou modifié, la mise à jour des données n'est pas instantanée. L'élément va d'abords apparaître "grisé" sur la carte,
-    et il sera alors possible à tous les utilisateurs logué de voter une et une seule fois pour cet élément. 
-    Ce vote n'est pas une opinion, mais un partage de connaissance. 
+    et il sera alors possible à tous les utilisateurs logué de voter une et une seule fois pour cet élément.
+    Ce vote n'est pas une opinion, mais un partage de connaissance.
     Si vous connaissez cet élément, ou savez que cet élément n'existe pas, alors votre savoir nous intéresse !
-  </p> 
+  </p>
   <p>
-    Au bout d'un certain nombre de votes, l'élément pourra alors être automatiquement validé ou refusé. 
+    Au bout d'un certain nombre de votes, l'élément pourra alors être automatiquement validé ou refusé.
     En cas de litige (des votes à la fois positifs et négatifs), un modérateur interviendra au plus vite. On compte sur vous!
   </p>`,
   'comment.for.moderation': 'Commentaire pour la modération',
@@ -39,7 +39,6 @@ export const FR =
   'does.not.exist': 'N\'existe pas',
   'does.not.respect.charter': 'Ne respecte pas la charte',
   'does.not.respect.charter.nothing.to.do.here': 'ne respecte pas la charte, il n\'a rien à faire ici',
-  'does.not.respect.PDCN.charter.should.not.be.listed.here': 'ne respecte pas la charte de près de chez nous, et ne doit donc pas y être répertorié',
   'duplicate.on.map': 'est référencé plusieurs fois sur la carte (doublon)',
 
   //E
@@ -81,7 +80,7 @@ export const FR =
 
   //I
   'i.do.not.agree.with.the.proposed.modifications': 'Je ne suis suis pas d\'accord avec les modifications proposées',
-  'i.validate.the.proposed.modifications': 'Je valide les modifications proposées', 
+  'i.validate.the.proposed.modifications': 'Je valide les modifications proposées',
   'iframe.initialized.position.map': 'L\'iframe sera initialisée dans la position actuelle de la carte. Déplacez la carte dans la position voulue avant d\'ouvrir cette fenêtre !',
   'import': 'Import',
   'in.process.validation': 'En cours de validation',
@@ -170,7 +169,7 @@ export const FR =
   'show.only.favorites' : 'Afficher uniquement les favoris',
   'show.only.selected.categories': 'Afficher uniquement les catégories actuellement sélectionnées',
   'starting.address': 'Entrez une adresse de départ',
-  
+
   //T
   'the': 'le',
   'the.addition': 'l\'ajout',

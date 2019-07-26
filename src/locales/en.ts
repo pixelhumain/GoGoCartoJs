@@ -19,13 +19,13 @@ export const EN =
   'can.not.locate.address': 'Can not locate this address !',
   'card': 'Card',
   'close': 'Close',
-  'collaborative.moderation.': 'Collaborative moderation',
+  'collaborative.moderation': 'Collaborative moderation',
   'collaborative.moderation.paragaphs': `<p>
     When an element is added or modified, the update of the data is not instantaneous. The element will initially appear "grayed" on the map,
     and it will then be possible for all users logged to vote once and for this item.
     This vote is not an opinion, but a sharing of knowledge.
     If you know this element, or know that this element does not exist, then your knowledge interests us!
-  </p> 
+  </p>
   <p>
     After a certain number of votes, the element can then be automatically validated or refused.
     In case of dispute (both positive and negative votes), a moderator will intervene as soon as possible. We count on you!
@@ -39,7 +39,6 @@ export const EN =
   'does.not.exist': 'Does not exist',
   'does.not.respect.charter': 'Does not respect the charter',
   'does.not.respect.charter.nothing.to.do.here': 'does not respect the charter, it has nothing to do here',
-  'does.not.respect.PDCN.charter.should.not.be.listed.here': ' de chez nous, et ne doit donc pas y être répertorié',
   'duplicate.on.map': 'is referenced several times on the map (duplicate)',
 
   //E
@@ -81,7 +80,7 @@ export const EN =
 
   //I
   'i.do.not.agree.with.the.proposed.modifications': 'I do not agree with the proposed modifications',
-  'i.validate.the.proposed.modifications': 'I validate the proposed modifications', 
+  'i.validate.the.proposed.modifications': 'I validate the proposed modifications',
   'iframe.initialized.position.map': 'The iframe will be initialized in the current position of the map. Move the map to the desired position before opening this window !',
   'import': 'Import',
   'in.process.validation': 'In the process of validation',
@@ -117,7 +116,7 @@ export const EN =
 
   //O
   'ok': 'OK!',
-  
+
   //P
   'pending.add': 'Pending (add)',
   'pending.for.too.long': 'Pending for too long',
