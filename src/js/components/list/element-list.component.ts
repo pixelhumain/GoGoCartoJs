@@ -9,7 +9,7 @@ declare var $;
 
 export class ElementListComponent
 {
-	elementToDisplayCount : number = 0; 
+	elementToDisplayCount : number = 0;
 	visibleElementIds : string[] = [];
 
 	// Number of element in one list
@@ -30,20 +30,20 @@ export class ElementListComponent
 	{
 		// detect when user reach bottom of list
 		var that = this;
-		$('#directory-content-list .elements-container').on('scroll', function(e) 
+		$('#directory-content-list .elements-container').on('scroll', function(e)
 		{
 			if($(this).scrollTop() > 0)
 				$("#list-title-shadow-bottom").show();
 			else
 				$("#list-title-shadow-bottom").hide();
 
-			if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {            
+			if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
 		    	that.handleBottom();
 		  }
 		});
 	}
 
-	update($elementsToDisplay : Element[]) 
+	update($elementsToDisplay : Element[])
 	{
 		if ($elementsToDisplay.length == 0) this.stepsCount = 1;
 
@@ -54,7 +54,7 @@ export class ElementListComponent
 	setTitle($value : string) { $('.element-list-title-text').html($value); }
 
 	show() { $('#directory-content-list').show(); }
-	
+
 	hide() { $('#directory-content-list').hide(); }
 
 	showSpinnerLoader() { $('#directory-list-spinner-loader').show(); }
@@ -70,10 +70,10 @@ export class ElementListComponent
 		this.stepsCount = 1;
 	}
 
-	private draw($elementList : Element[], $animate = false) 
+	private draw($elementList : Element[], $animate = false)
 	{
 		let element : Element;
-		let elementsToDisplay : Element[] = $elementList.filter( (el) => el.isFullyLoaded); 
+		let elementsToDisplay : Element[] = $elementList.filter( (el) => el.isFullyLoaded);
 
 		this.elementToDisplayCount = elementsToDisplay.length;
 		console.log('ElementList draw', elementsToDisplay.length);
@@ -86,35 +86,16 @@ export class ElementListComponent
 		else if (App.dataType == AppDataType.SearchResults)
 		{
 			elementsToDisplay.sort(this.compareSearchScore);
-		}		
+		}
 
-		let maxElementsToDisplay = this.ELEMENT_LIST_SIZE_STEP * this.stepsCount;		
+		let maxElementsToDisplay = this.ELEMENT_LIST_SIZE_STEP * this.stepsCount;
 
 		this.updateResultMessage();
-		
-		// if the list is not full, we send ajax request
-		if (elementsToDisplay.length < maxElementsToDisplay)
-		{
-			if (App.dataType == AppDataType.All)
-			{
-				// expand bounds
-				console.log("not enugh elements, expand bounds");
-				App.boundsModule.extendBounds(0.5);
-				this.showSpinnerLoader();
-				App.elementsManager.checkForNewElementsToRetrieve(true);		
-			}			
-		}	
-		else
-		{
-			// console.log("list is full");
-			// waiting for scroll bottom to add more elements to the list
-			this.isListFull = true;			
-		}
-		
+
 		// If new elements to display are different than the visible one, draw them
 		let newIdsToDisplay = elementsToDisplay.map( (el) => el.id);
 		console.log('Visible elements', this.visibleElementIds, "new elements", newIdsToDisplay);
-		if (arraysEqual(newIdsToDisplay, this.visibleElementIds)) { console.log("nothing to draw"); return; }
+		if (newIdsToDisplay.length >= maxElementsToDisplay && arraysEqual(newIdsToDisplay, this.visibleElementIds)) { console.log("nothing to draw"); return; }
 
 		let newElementsToDisplayIncludesPerfectlyOldOnes = false;
 		if (newIdsToDisplay.length > this.visibleElementIds.length)
@@ -125,7 +106,7 @@ export class ElementListComponent
 		  }
 		}
 		console.log("newElementsToDisplayIncludesPerfectlyOldOnes", newElementsToDisplayIncludesPerfectlyOldOnes);
-		
+
 		let startIndex, endIndex = Math.min(maxElementsToDisplay, elementsToDisplay.length);
 		if (newElementsToDisplayIncludesPerfectlyOldOnes) {
 			startIndex = this.visibleElementIds.length;
@@ -133,22 +114,44 @@ export class ElementListComponent
 			this.clear();
 			startIndex = 0;
 		}
-		
+
 		let listContentDom = $('#directory-content-list ul.collapsible');
 		let that = this;
 
 		console.log("startIndex", startIndex, "endIndex", endIndex);
 		for(let i = startIndex; i < endIndex; i++)
 		{
-			element = elementsToDisplay[i];	
-			this.visibleElementIds.push(element.id);		
+			element = elementsToDisplay[i];
+			this.visibleElementIds.push(element.id);
 			listContentDom.append(element.component.render());
 			// bind element header click
 			element.component.dom.find('.collapsible-header').click(function() { that.onElementOpen(this); });
 		}
 
 		if ($animate) $('#directory-content-list .elements-container').animate({scrollTop: '0'}, 500);
-		$('#directory-content-list ul').collapsible({accordion : true});		
+		$('#directory-content-list ul').collapsible({accordion : true});
+
+		// if the list is not full, we send ajax request
+		if (elementsToDisplay.length < maxElementsToDisplay)
+		{
+			if (App.dataType == AppDataType.All)
+			{
+				// expand bounds
+				console.log("not enugh elements, expand bounds");
+				if (App.boundsModule.extendBounds(0.5)) {
+					this.showSpinnerLoader();
+					App.elementsManager.checkForNewElementsToRetrieve(true);
+				} else {
+					this.handleAllElementsRetrieved();
+				}
+			}
+		}
+		else
+		{
+			// console.log("list is full");
+			// waiting for scroll bottom to add more elements to the list
+			this.isListFull = true;
+		}
 	}
 
 	private onElementOpen(elementHeaderDom)
@@ -156,21 +159,21 @@ export class ElementListComponent
 		let elementDom = $(elementHeaderDom).closest('.element-item');
 		let elementId = elementDom.data('element-id');
 		let element =  App.elementById(elementId);
-		
+
 		// initialize element component
 		if (!$(elementHeaderDom).hasClass('initialized'))
 		{
 			element.component.initialize();
-			element.component.menuComponent.showFullTextMenu(true);  
+			element.component.menuComponent.showFullTextMenu(true);
 			element.component.imagesComponent.onNewImageDisplayed.do( (image) => {
 				elementDom.find('.img-overlay').css('height', elementDom.find('.img-container').height());
-			});				
+			});
 
-			setTimeout( () => { $(elementHeaderDom).addClass('initialized'); }, 0);					
+			setTimeout( () => { $(elementHeaderDom).addClass('initialized'); }, 0);
 		}
 
 		// on open animation end
-		setTimeout( () => { this.onElementFullyOpenned(elementDom); }, 300);			
+		setTimeout( () => { this.onElementFullyOpenned(elementDom); }, 300);
 	}
 
 	private onElementFullyOpenned(elementDom)
@@ -185,9 +188,9 @@ export class ElementListComponent
 		if ( (elementDom.offset().top - listContainerDom.offset().top + elementDom.height()) > (listContainerDom.outerHeight() + 150))
 		{
 			listContainerDom.animate({scrollTop: listContainerDom.scrollTop() + elementDom.offset().top - listContainerDom.offset().top}, 550);
-		}					
+		}
 		// if element is too high
-		else if ( elementDistanceToTop < 0 ) 
+		else if ( elementDistanceToTop < 0 )
 		{
 			listContainerDom.animate({scrollTop: listContainerDom.scrollTop() + elementDistanceToTop}, 300);
 		}
@@ -197,9 +200,9 @@ export class ElementListComponent
 	private updateResultMessage()
 	{
 		$('.no-result-message').hide();
-		
+
 		if (this.elementToDisplayCount > 0)
-		{			
+		{
 			$('.element-list-header .title-text').show();
    		$('.element-list-title-number-results').text('(' + this.elementToDisplayCount + ')');
    	}
@@ -217,28 +220,28 @@ export class ElementListComponent
 			let noResultImg = $('.no-result-message img');
 			noResultImg.attr('src', noResultImg.data('src'));
 			$('.element-list-header .title-text').show();
-		}		
+		}
 	}
 
 	private handleBottom()
 	{
-		if (this.isListFull) 
+		if (this.isListFull)
 		{
 			this.stepsCount++;
-			//console.log("bottom reached");
+			console.log("bottom reached");
 			this.isListFull = false;
 			this.draw(App.elements());
-		}		
+		}
 	}
 
-	private compareDistance(a:Element,b:Element) 
-	{  
+	private compareDistance(a:Element,b:Element)
+	{
 	  if (a.distanceFromBoundsCenter == b.distanceFromBoundsCenter) return 0;
 	  return a.distanceFromBoundsCenter < b.distanceFromBoundsCenter ? -1 : 1;
 	}
 
-	private compareSearchScore(a:Element,b:Element) 
-	{  
+	private compareSearchScore(a:Element,b:Element)
+	{
 	  if (a.searchScore == b.searchScore) return 0;
 	  return a.searchScore < b.searchScore ? 1 : -1;
 	}
