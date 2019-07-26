@@ -11,8 +11,8 @@ export class DocumentTitleModule
     let title : string;
     let elementName : string;
 
-    if ( (options && options.id) || App.stateManager.stateElementId) 
-    {      
+    if ( (options && options.id) || App.stateManager.stateElementId)
+    {
       let element = App.elementById(App.stateManager.stateElementId);
       if (!element) return;
       elementName = capitalize(element ? element.name : '');
@@ -20,19 +20,19 @@ export class DocumentTitleModule
 
     if (App.dataType == AppDataType.SearchResults)
     {
-      title = 'Recherche : ' + App.searchBarComponent.getCurrSearchText();  
+      title = 'Recherche : ' + App.searchBarComponent.getCurrSearchText();
     }
     else if (App.mode == AppModes.List)
-    {    
-      title = 'Liste des ' + App.config.text.elementPlural + ' ' + this.getLocationAddressForTitle();    
+    {
+      title = 'Liste des ' + App.config.text.elementPlural + this.getLocationAddressForTitle();
     }
     else
     {
       switch (App.state)
       {
-        case AppStates.ShowElement:        
+        case AppStates.ShowElement:
           title = capitalize(App.config.text.element) + ' - ' + elementName;
-          break;  
+          break;
 
         case AppStates.ShowElementAlone:
           title = capitalize(App.config.text.element) + ' - ' + elementName;
@@ -42,21 +42,21 @@ export class DocumentTitleModule
           title = 'Itinéraire - ' + elementName;
           break;
 
-        case AppStates.Normal:      
-          title = 'Carte des ' + App.config.text.elementPlural + ' ' + this.getLocationAddressForTitle();      
+        case AppStates.Normal:
+          title = 'Carte des ' + App.config.text.elementPlural + this.getLocationAddressForTitle();
           break;
       }
     }
 
-    document.title = title;  
+    document.title = title;
   };
 
   private getLocationAddressForTitle()
   {
     if (App.geocoder.getLocationAddress())
     {
-      return "- " + App.geocoder.getLocationAddress();
+      return " - " + App.geocoder.getLocationAddress();
     }
-    return "- France";
+    return "";
   }
 }
