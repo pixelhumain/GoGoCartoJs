@@ -2,13 +2,13 @@
 
 {% block modalClass %}simple-modal{% endblock %}
 
-{% block submitText %}Calculer l'itinéraire{% endblock %}
+{% block submitText %}{{ 'find.route' | i18n }}{% endblock %}
 
 {% block id %}pick-address{% endblock %}
 
 {% block content %}
-  <h5 id="modal-title">Entrez une adresse de départ</h5>
-  <div class="modal-error-msg">Impossible de localiser cette adresse !</div>
+  <h5 id="modal-title">{{ 'starting.address' | i18n }}</h5>
+  <div class="modal-error-msg">{{ 'can.not.locate.address' | i18n }}</div>
   <input type="text" 
          class="input-simple-modal"
          onClick="this.setSelectionRange(0, this.value.length)"
@@ -18,10 +18,10 @@
 <div id="modal-directions-fail" class="modal">
   <div class="modal-content">
 
-    <h5 id="modal-title">Calcul d'un itinéraire</h5>
-    <p>Une ereur est survenue pendant le calcul de l'itinéraire, désolé !</p>   
+    <h5 id="modal-title">{{ 'route.calculation' | i18n }}</h5>
+    <p>{{ 'error.occurend.route.calculation' | i18n }}</p>   
   </div>
   <div class="modal-footer">
-    <span class="modal-action modal-close waves-effect waves-light btn-flat">OK</span>
+    <span class="modal-action modal-close waves-effect waves-light btn-flat">{{'ok' | i18n }}</span>
   </div>   
 </div>

@@ -5,7 +5,7 @@
   <span class="show-as-map-button gogo-h-primary"> <span class="icon btn-back gogo-icon-material-design-icons-1"></span></span>
 
   <div class="title-text" style="display:none">
-    Résultats
+    {{ results | i18n }}
     <span class="element-list-title-number-results"></span>
     <span class="element-list-title-text"></span>
   </div> 
@@ -18,9 +18,9 @@
   <div class="bottom-gradient hide-on-med-and-up"></div>
   <div class="spinner-loader"><center>{{ spinnerLoader.create('directory-list-spinner-loader') }}</center></div>
   <div class="no-result-message" style="display:none">
-    <b>Aucun résultat trouvé</b></br>
-    <i>« L’échec est le fondement de la réussite. »</i> </br>
-    <span style="font-size:.9em">Lao-Tseu</span></br>
+    <b>{{ 'no.result.found' | i18n }}</b></br>
+    <i></i> </br>
+    <span style="font-size:.9em">{{ 'laozi' | i18n }}</span></br>
     <img data-src="https://media.giphy.com/media/ozXTrqRgqFcly/giphy.gif" />
   </div>
 </div>

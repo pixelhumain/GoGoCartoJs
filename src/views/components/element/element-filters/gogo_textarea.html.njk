@@ -4,7 +4,7 @@
     <div style="display: inline">{{ longText.first|safe }}</div>
     {% if longText.second %}
       <div style="display:none" class="text-more">{{ longText.second|safe }}</div>  
-      <a class="show-more">Afficher plus</a>
+      <a class="show-more">{{ 'show.more' | i18n }}</a>
     {% endif %}
   </div>     
 {% endif %}

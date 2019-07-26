@@ -20,30 +20,30 @@ export class DocumentTitleModule
 
     if (App.dataType == AppDataType.SearchResults)
     {
-      title = 'Recherche : ' + App.searchBarComponent.getCurrSearchText();
+      title = App.config.translate('search.for')+ ' : ' + App.searchBarComponent.getCurrSearchText();
     }
     else if (App.mode == AppModes.List)
     {
-      title = 'Liste des ' + App.config.text.elementPlural + this.getLocationAddressForTitle();
+      title = App.config.translate('list.of') + ' ' + App.config.translate('element.plural') + ' ' + this.getLocationAddressForTitle();
     }
     else
     {
       switch (App.state)
       {
         case AppStates.ShowElement:
-          title = capitalize(App.config.text.element) + ' - ' + elementName;
+          title = capitalize(App.config.translate('element')) + ' - ' + elementName;
           break;
 
         case AppStates.ShowElementAlone:
-          title = capitalize(App.config.text.element) + ' - ' + elementName;
+          title = capitalize(App.config.translate('element')) + ' - ' + elementName;
           break;
 
         case AppStates.ShowDirections:
-          title = 'Itinéraire - ' + elementName;
+          title = App.config.translate('route') + ' - ' + elementName;
           break;
 
         case AppStates.Normal:
-          title = 'Carte des ' + App.config.text.elementPlural + this.getLocationAddressForTitle();
+          title = App.config.translate('map.of') + ' ' + App.config.translate('element.plural') + ' ' + this.getLocationAddressForTitle();
           break;
       }
     }

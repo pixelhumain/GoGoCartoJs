@@ -84,7 +84,7 @@ gulp.task('gzip_styles', ['prod_styles'], function() {
 gulp.task('concat_directory', function() {
   return gulp.src(['build/libs.js',
                    'build/templates.js',
-                   'build/directory.js', 
+                   'build/directory.js'
                    ])
     .pipe(concat('gogocarto.js'))
     .pipe(gulp.dest('dist'));

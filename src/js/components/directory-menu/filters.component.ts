@@ -191,7 +191,7 @@ export class FiltersComponent
 
     if (optionId == 'all')
     {
-      $('#menu-subcategories-title').text("Tous les " + App.config.text.elementPlural);
+      $('#menu-subcategories-title').text("Tous les " + App.config.translate('element.plural'));
     }
     else
     {

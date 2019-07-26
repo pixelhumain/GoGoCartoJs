@@ -1,35 +1,35 @@
 {% set contributionType = {
-  '0': "Ajout",
-  '1': 'Modification',
-  '2': "Vote",
-  '3': "Signalement",
-  '4': "Import"
+  '0': "add",
+  '1': 'modification',
+  '2': "vote",
+  '3': "reporting",
+  '4': "import"
   }
 %} 
 
 {% set elementStatus = {
-  '' : 'En attente',
-  '-5': "modified pending",
-  '-4': 'Supprimé', 
-  '-3': 'Refusé (votes) ', 
-  '-2': 'Refusé (admin)', 
-  '-1': 'En attente (modifs)', 
-   '0': 'En attente (ajout)',
-   '1': 'Validé (admin)',
-   '2': 'Validé (votes)',
-   '3': 'Ajouté par admin',
-   '4': 'Modifié par admin',
-   '5': 'Modifié par propriétaire',
-   '6': 'Modifié avec lien direct'
+  '' : 'waiting',
+  '-5': "modified.pending",
+  '-4': 'removed', 
+  '-3': 'refused.votes', 
+  '-2': 'refused.admin', 
+  '-1': 'pending.modifications', 
+   '0': 'pending.add',
+   '1': 'validated.admin',
+   '2': 'validated.votes',
+   '3': 'added.admin',
+   '4': 'modified.admin',
+   '5': 'modified.owner',
+   '6': 'modified.direct.link'
   }
 %} 
 
 {% set userRoles = {
-  '0': "Anonyme",
-  '1': 'Anonyme avec email',
-  '2': "Utilisateur loggué",
-  '3': "Admin",
-  '4': 'Anonyme avec lien'
+  '0': "anonymous",
+  '1': 'anonymous.email',
+  '2': "logged.user",
+  '3': "admin",
+  '4': 'anonymous.link'
   }
 %} 
 
@@ -41,17 +41,17 @@
   {% if item.userRole == 3 or item.status > 2 %}
     <div class="contribution-status"> 
         {% set title = contributionType[item.type] if (item.type == 4) else elementStatus[item.status] %}
-        <span class="label {{ labelClass }}">{{ title }}</span>
-        par <u>{{ item.user }}</u> 
-        <span class="label label-default">{{ userRoles[item.userRole] }}</span> 
+        <span class="label {{ labelClass }}">{{ title|i18n }}</span>
+        {{ 'by' | i18n }} <u>{{ item.user }}</u> 
+        <span class="label label-default">{{ userRoles[item.userRole] | i18n }}</span> 
         <span class="vote-report-comment">{{ item.resolvedMessage}}<span>        
     </div>
     <div class="contribution-updated-at">{{ item.updatedAt }}</div>
   {% else %}    
     {% if item.status %} {# pending contribution have status to null #}
       <div> 
-          <b>{{ contributionType[item.type] | upper }}</b>          
-          <span class="label {{ labelClass }}">{{ elementStatus[item.status] }}</span>
+          <b>{{ contributionType[item.type] | i18n | upper }}</b>          
+          <span class="label {{ labelClass }}">{{ elementStatus[item.status]|i18n }}</span>
           {% if item.resolvedMessage %}<span class="vote-report-comment" style="padding:0 10px"> {{ item.resolvedMessage}}</span>{% endif %}
           {% if item.resolvedBy %}<span>(<u>{{item.resolvedBy }}</u>)</span>{% endif %}   
           
@@ -60,9 +60,9 @@
     {% endif %}
 
     <div> 
-      Proposé par <u>{{ item.user }}</u> 
-      <span class="label label-default">{{ userRoles[item.userRole] }}</span>    
-      le {{ item.createdAt}}  
+      {{ 'proposed.by' | i18n }} <u>{{ item.user }}</u> 
+      <span class="label label-default">{{ userRoles[item.userRole] | i18n}}</span>    
+      {{ 'the' | i18n }} {{ item.createdAt}}  
     </div>
   {% endif %}
 </div>

@@ -3,28 +3,13 @@ import { TileLayer } from '../map/tile-layer.class';
 import { GoGoFeature } from './gogo-feature.class';
 import { ElementStatus } from '../classes';
 import { DEFAULT_FEATURES } from './gogo-default-feature' ;
+import { FR } from '../../locale/fr';
+import { EN } from '../../locale/en';
 declare var L : any;
 declare var tinycolor;
 
 export class GoGoConfig
 {
-  readonly text =
-  {
-    element: 'élément',
-    elementDefinite: "l'élément",
-    elementIndefinite: "un élément",
-    elementPlural: 'éléments',
-    collaborativeModeration: `<p>
-        Lorsqu'un élément est ajouté ou modifié, la mise à jour des données n'est pas instantanée. L'élément va d'abords apparaître "grisé" sur la carte,
-        et il sera alors possible à tous les utilisateurs logué de voter une et une seule fois pour cet élément.
-        Ce vote n'est pas une opinion, mais un partage de connaissance.
-        Si vous connaissez cet élément, ou savez que cet élément n'existe pas, alors votre savoir nous intéresse !
-      </p>
-      <p>
-        Au bout d'un certain nombre de votes, l'élément pourra alors être automatiquement validé ou refusé.
-        En cas de litige (des votes à la fois positifs et négatifs), un modérateur interviendra au plus vite. On compte sur vous!
-      </p>`
-  };
   readonly data =
   {
     taxonomy: undefined,
@@ -174,18 +159,25 @@ export class GoGoConfig
     mapControls: undefined,
     mapListBtn: undefined,
     pending: tinycolor("#565656")
-  }
+  };
   readonly fonts =
   {
     mainFont: 'Roboto',
     titleFont: undefined, // by default titleFont
-  }
+  };
 
   readonly images =
   {
     buttonOpenMenu: undefined,
     menuTopImage: undefined
-  }
+  };
+
+  readonly language = 'en';
+
+  readonly i18n = {
+    en: EN,
+    fr: FR
+  };
 
 	constructor(config : any)
 	{
@@ -238,8 +230,19 @@ export class GoGoConfig
       if (!this.colors.interactiveSection) this.colors.interactiveSection = this.colors.secondary;
       if (!this.colors.searchBar) this.colors.searchBar = this.colors.textDark;
     }
+    this.modifyTranslations(this, config.translations);
+
     console.log(this);
 	}
+  
+  // Function for i18n, mapping between the given entry and the string according to the language chosen
+  translate(entry: string): string
+  {
+    let value = this.i18n[this.language][entry];
+    if(!value)
+      console.warn(`[GoGoCartoJS] Entry '$(entry)' not found`);
+    return value;
+  }
 
   isFeatureActivated(featureName) : boolean
   {
@@ -306,6 +309,14 @@ export class GoGoConfig
       if (prop == "text") prop = color.isDark() ? 'textDark' : 'testLight';
       if (prop == "textSoft") prop = color.isDark() ? 'textDarkSoft' : 'testLightSoft';
       gogoConfig[prop] = color;
+    }
+  }
+
+  private modifyTranslations(gogoConfig, userConfig)
+  {
+    for(let prop in userConfig)
+    {
+      gogoConfig.i18n[gogoConfig.language][prop] = userConfig[prop];
     }
   }
 

@@ -1,12 +1,12 @@
 {% extends "components/modals/abstract-modal.html.njk" %}
 
-{% block submitText %}Supprimer{% endblock %}
+{% block submitText %}{{ 'remove' | i18n }}{% endblock %}
 
 {% block id %}delete{% endblock %}
 
 {% block content %}
-	<h5 id="modal-title">Supprimer <span class="elementName"></span> ?</h5>
-	<p>Un mail sera envoyé à {{ config.text.elementDefinite }}</p>	
+	<h5 id="modal-title">{{ 'remove' | i18n }}<span class="elementName"></span> ?</h5>
+	<p>{{ 'email.will.be.sent.to' | i18n }}{{ 'element.definite' | i18n }}</p>	
 	
 	<p id="select-error" class="error"></p>
 

@@ -3,23 +3,23 @@
 {% block id %}send-email{% endblock %}
 
 {% block content %}
-	<h5 id="modal-title">Envoyer un mail à <span class="elementName"></span></h5> 	 
+	<h5 id="modal-title">{{ 'send.email.to' | i18n}}<span class="elementName"></span></h5> 	 
 
-	<p id="message-error" class="error">Désolé, une erreur s'est produite</p>   
+	<p id="message-error" class="error">{{ 'error.occured' | i18n}}</p>   
 
-	<p id="mail-error" class="error" style="margin-bottom: -15px;">Veuillez renseigner une adresse mail valide</p>
+	<p id="mail-error" class="error" style="margin-bottom: -15px;">{{ 'enter.valid.email' | i18n}}</p>
 	<div class="input-field" >
-		<input class="input-mail validate" id="send-mail-origin" type="email" placeholder="Votre adresse mail" style="margin-bottom: 0">
+		<input class="input-mail validate" id="send-mail-origin" type="email" placeholder="{{ 'your.email' | i18n}}" style="margin-bottom: 0">
 	</div>
 
-	<p id="content-error" class="error">Vous devez remplir les champs ci-dessous</p>
+	<p id="content-error" class="error">{{ 'fill.fields.below' | i18n}}</p>
 
 	<div class="input-field">
-		<input class="input-mail-subject required" type="text" placeholder="Objet du message"/>
+		<input class="input-mail-subject required" type="text" placeholder="{{ 'placeholder.input.subject.email' | i18n}}"/>
 	</div>
 
-	<label class="small-label" for="input-mail-value">Contenu du message</label>
+	<label class="small-label" for="input-mail-value">{{ 'email.content' | i18n}}</label>
 	<div class="input-field">
-		<textarea class="input-mail-content materialize-textarea required" id="input-mail-value" type="text" placeholder="Tapez votre message ici"></textarea>					
+		<textarea class="input-mail-content materialize-textarea required" id="input-mail-value" type="text" placeholder="{{ 'type.message.here' | i18n}}"></textarea>					
 	</div>		
 {% endblock %}

@@ -3,13 +3,13 @@
   {% if config.isFeatureAvailable('favorite') %} 
     <div class="menu-element-item gogo-color-link item-add-favorite">
       <span class="menu-icon gogo-icon-star-empty small-icon tooltipped" 
-      data-position="top" data-delay="0" data-tooltip="Enregistrer comme favoris"></span>
-      <span class="menu-element-item-text">Enregistrer</span>
+      data-position="top" data-delay="0" data-tooltip="{{ 'save.as.favorites' | i18n }}"></span>
+      <span class="menu-element-item-text">{{ 'save' | i18n }}</span>
     </div>
     <div class="menu-element-item gogo-color-link item-remove-favorite" style="display:none">
       <span class="menu-icon gogo-icon-star-full small-icon tooltipped"
-      data-position="top" data-delay="0" data-tooltip="Retirer des favoris"></span>
-      <span class="menu-element-item-text favorite">Enregistré</span>
+      data-position="top" data-delay="0" data-tooltip="{{ 'remove.from.favorites' | i18n }}"></span>
+      <span class="menu-element-item-text favorite">{{ 'saved' | i18n }}</span>
     </div>
   {% endif %}
 
@@ -17,7 +17,7 @@
     {% for stamp in allowedStamps %}
       <div class="menu-element-item gogo-color-link item-stamp" data-stamp-id="{{ stamp.id }}" data-element-id="{{ element.id }}">
         <span class="menu-icon {{ stamp.icon }} small-icon tooltipped" 
-        data-position="top" data-delay="0" data-tooltip="Etiquetter {{ stamp.name }}"></span>
+        data-position="top" data-delay="0" data-tooltip="{{ 'label' | i18n}} {{ stamp.name }}"></span>
         <span class="menu-element-item-text">{{ stamp.name }}</span>
       </div>
     {% endfor %}
@@ -26,50 +26,50 @@
   {% if not isMapMode %}
     <div class="menu-element-item gogo-color-link item-show-on-map"> 
       <span class="menu-icon gogo-icon-locate tooltipped" 
-      data-position="top" data-delay="0" data-tooltip="Afficher sur la carte"></span>
-      <span class="menu-element-item-text">Voir sur la carte</span>
+      data-position="top" data-delay="0" data-tooltip="{{ 'show.on.map' |i18n }}"></span>
+      <span class="menu-element-item-text">{{ 'see.on.map' |i18n }}</span>
     </div>     
   {% endif %}
 
   {% if config.isFeatureAvailable('share') %} 
     <div class="menu-element-item gogo-color-link item-share-url">
       <span class="menu-icon gogo-icon-share-alt tooltipped"
-      data-position="top" data-delay="0" data-tooltip="Partager l'URL"></span>
-      <span class="menu-element-item-text">Partager l'URL</span>
+      data-position="top" data-delay="0" data-tooltip="{{ 'share.url' | i18n }}"></span>
+      <span class="menu-element-item-text">{{ 'share.url' | i18n }}</span>
     </div>
   {% endif %}
 
   {% if config.isFeatureAvailable('directions') %} 
     <div class="menu-element-item gogo-color-link item-directions">
       <span class="menu-icon gogo-icon-directions tooltipped" 
-      data-position="top" data-delay="0" data-tooltip="Itinéraire vers cet élément"></span>
-      <span class="menu-element-item-text">Itinéraire</span>
+      data-position="top" data-delay="0" data-tooltip="{{ 'route.to.element' | i18n }}"></span>
+      <span class="menu-element-item-text">{{ 'route' | i18n }}</span>
     </div>
   {% endif %}
 
   {% if config.isFeatureAvailable('edit') and (not element.isPending or config.isFeatureAvailable('directModeration')) and element.isEditable %} 
     <div class="menu-element-item gogo-color-link item-edit">
-      {% set editText = 'Modifier' if config.isFeatureAvailable('directModeration') else 'Proposer des modifications' %}
+      {% set editText = 'edit' if config.isFeatureAvailable('directModeration') else 'propose.changes' %}
       <a href={{ editUrl }} {% if isIframe %}target="_blank"{% endif %}>
       <span class="menu-icon gogo-icon-edit tooltipped" 
-      data-position="top" data-delay="0" data-tooltip="{{ editText }}"></span>
-      <span class="menu-element-item-text">{{ editText }}</span></a>
+      data-position="top" data-delay="0" data-tooltip="{{ editText|i18n }}"></span>
+      <span class="menu-element-item-text">{{ editText|i18n }}</span></a>
     </div>
   {% endif %}
 
   {% if config.isFeatureAvailable('report') and not element.isPending %} 
     <div class="menu-element-item gogo-color-link item-report"> 
       <span class="menu-icon btn-report gogo-icon-exclamation-1 tooltipped" 
-      data-position="top" data-delay="0" data-tooltip="Signaler une erreur"></span>
-      <span class="menu-element-item-text">Signaler une erreur</span>
+      data-position="top" data-delay="0" data-tooltip="{{ 'report.error' | i18n }}"></span>
+      <span class="menu-element-item-text">{{ 'report.error' | i18n }}</span>
     </div>
   {% endif %}     
 
   {% if config.isFeatureAvailable('delete') and element.status != ElementStatus.PendingAdd %} 
     <div class="menu-element-item gogo-color-link item-delete"> 
       <span class="menu-icon btn-delete gogo-icon-delete tooltipped" 
-      data-position="top" data-delay="0" data-tooltip="Supprimer"></span>
-      <span class="menu-element-item-text">Supprimer</span>
+      data-position="top" data-delay="0" data-tooltip="{{ 'remove' | i18n }}"></span>
+      <span class="menu-element-item-text">{{ 'remove' | i18n }}</span>
     </div>  
   {% endif %}     
 </div>

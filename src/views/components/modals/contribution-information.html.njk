@@ -1,14 +1,14 @@
 <div id="modal-contribution"  class="modal page-modal about-modal custom-scroll-bar-light">
     <div class="modal-content page-modal-content">
         <span class="icon btn-back gogo-icon-material-design-icons-1" onclick="$('#modal-contribution').closeModal()"></span>
-        <h1>Modération collabortive</h1>
-	    	{{ config.text.collaborativeModeration | safe }}
+        <h1>{{ 'collaborative.moderation' | i18n }}</h1>
+	    	{{ 'collaborative.moderation.paragaphs' | i18n | safe}}
 		<div class="page-modal-footer">
 		<button type="button"
 				onclick="$('#modal-contribution').closeModal()"  
 				class="btn waves-effect waves-light">
-			OK!
-		</button>
+    {{ 'ok' | i18n }}      
+    </button>
 		</div>
 
     </div>

@@ -1,27 +1,27 @@
 {% macro render(item, lastElement, smallWidth) %}
 
 {% set userRoles = {
-  '0': "Anonyme",
-  '1': 'Anonyme avec mail',
-  '2': "Utilisateur loggué",
-  '3': "Admin"
+  '0': "anonymous",
+  '1': 'anonymous.email',
+  '2': "logged.user",
+  '3': "admin"
   }
 %} 
 
 {% set reportValues = {
-  '0': "L'élément n'existe plus",
-  '1': 'Les informations sont incorrectes',
-  '2': "L'élément ne respecte pas la charte",
-  '4': "L'élément est référencé plusieurs fois"
+  '0': "element.no.longer.exists",
+  '1': 'informations.incorrect',
+  '2': "element.no.respect.charter",
+  '4': "element.referenced.several.times"
   }
 %} 
 
 {% set voteValues = {
-  '-2': 'Ne respecte pas la charte',
-  '-1': "N'existe pas",
-  '0': 'Existe mais infos mauvaises',
-  '1': 'Existe',
-  '2': 'Existe et valide info'
+  '-2': 'does.not.respect.charter',
+  '-1': "does.not.exist",
+  '0': 'exists.but.incorrect.informations',
+  '1': 'exists',
+  '2': 'exists.and.correct.informations'
   }
 %} 
 
@@ -32,7 +32,7 @@
 <div class="vote-report-item {{ '' if lastElement else 'item-container' }}">
   <div style="margin-bottom:5px">
     {% set labelClass = 'label-success' if item.type == 2 and item.value >= 0 else 'label-danger' %}
-    <span class="label {{ labelClass }}">{{ itemValues[item.value] }}</span> 
+    <span class="label {{ labelClass }}">{{ itemValues[item.value] | i18n }}</span> 
     <div style="float:right">{{ item.createdAt }}</div> 
     {% if smallWidth|default(false) %}
       </br>
@@ -40,8 +40,8 @@
     {% else %}
       <span style="margin:0 5px">
     {% endif %}    
-      Par : <u>{{ item.userEmail if item.userEmail else 'Anonyme'}}</u>
-      <span class="label label-default" style="margin-left:5px">{{ userRoles[item.userRole] }}</span> 
+      {{ 'by' | i18n }} : <u>{{ item.userEmail if item.userEmail else 'anonymous' |i18n }}</u>
+      <span class="label label-default" style="margin-left:5px">{{ userRoles[item.userRole] | i18n }}</span> 
     </span> 
   </div> 
 

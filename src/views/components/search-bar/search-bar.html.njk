@@ -25,24 +25,24 @@
     <div class="search-options" style="display:none">        
         {% if config.isFeatureActivated('searchPlace') %}
             <input class="search-option-radio-btn" name="search-type-option" data-name="place" type="radio" id="search-option-place" checked/>
-            <label class="search-option-radio-label" for="search-option-place">Un lieu</label>
+            <label class="search-option-radio-label" for="search-option-place">{{ 'place' | i18n }}</label>
         {% endif %}
         {% if config.isFeatureActivated('searchElements') %}
             <input class="search-option-radio-btn" name="search-type-option" data-name="element" type="radio" id="search-option-element"/>        
             <label class="search-option-radio-label" for="search-option-element">
-                {{ config.text.elementIndefinite | capitalize }}
+                {{ 'element.indefinite' | i18n | capitalize }}
             </label>
         {% endif %}
         
-        <button class="search-action-btn search-btn btn waves-effects">chercher</button>
+        <button class="search-action-btn search-btn btn waves-effects">{{ 'search' | i18n }}</button>
         <button class="search-action-btn search-cancel-btn btn waves-effects" style="display:none">
-            annuler
+            {{ 'cancel' | i18n }}
             {% import 'components/spinner-loader.html.njk' as spinnerLoader %}
             {{ spinnerLoader.create('search-spinner-loader') }}
         </button>        
     </div>
 
-    <div class='search-no-result' style="display:none">Aucun résultat trouvé</div>
+    <div class='search-no-result' style="display:none"> {{ 'no.result.found' | i18n }}</div>
     
 </div>
 
