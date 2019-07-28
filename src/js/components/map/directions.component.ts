@@ -8,18 +8,18 @@ declare let window : any;
 
 export class DirectionsComponent
 {
-	routingControl : any;	
+	routingControl : any;
 	isActive : boolean = false;
 
-  constructor() {} 
+  constructor() {}
 
   initialize()
   {
-  	$('#btn-close-directions').click( () => 
+  	$('#btn-close-directions').click( () =>
 		{
 			App.setState(AppStates.ShowElement, { id : App.infoBarComponent.getCurrElementId() });
 		});
-  } 
+  }
 
 	clear()
 	{
@@ -36,27 +36,28 @@ export class DirectionsComponent
 
 	private clearRoute()
 	{
-		if (this.routingControl) 
+		if (this.routingControl)
 		{
-			this.routingControl.spliceWaypoints(0,2);		
-			App.map().removeControl(this.routingControl);	
+			this.routingControl.spliceWaypoints(0,2);
+			App.map().removeControl(this.routingControl);
 		}
 	};
 
-	calculateRoute(origin : L.LatLng, element : Element) 
+	calculateRoute(origin : L.LatLng, element : Element)
 	{
 		this.clear();
+		$('#directory-menu-spinner-loader').show();
 
 		let waypoints = [
 		    origin,
 		    element.position,
 		];
 		//console.log("calculate route", waypoints);
-
+		L.Language = App.config.language;
 		this.routingControl = L.Routing.control({
 			router: L.Routing.mapbox('pk.eyJ1IjoiZ29nb2NhcnRvIiwiYSI6ImNqYnhxeHUxZzJ3cG4zMnIyNmZiajF6dmwifQ.2G5IM4roIgpU_fvPBOpssw'),
 			plan: L.Routing.plan(
-				waypoints, 
+				waypoints,
 				{
 					// deleteing start and end markers
 					createMarker: function(i, wp) { return null; },
@@ -64,7 +65,6 @@ export class DirectionsComponent
 					showAlternatives: false
 				}
 			),
-			language: 'fr',
 			routeWhileDragging: false,
 			showAlternatives: false,
 			altLineOptions: {
@@ -80,27 +80,27 @@ export class DirectionsComponent
 		// somethingis happenning an display spinner loader
 		this.showItineraryPanel(element);
 
-		this.routingControl.on('routesfound', (ev) => 
+		this.routingControl.on('routesfound', (ev) =>
 		{
 			this.showItineraryPanel(element);
 		});
 
-		// fit bounds 
-		this.routingControl.on('routeselected', function(e) 
-		{	    
+		// fit bounds
+		this.routingControl.on('routeselected', function(e)
+		{
 	    var r = e.route;
 	    var line = L.Routing.line(r);
 	    var bounds = line.getBounds();
 	    App.map().fitBounds(bounds);
 		});
 
-		this.routingControl.on('routingerror', (ev) => 
+		this.routingControl.on('routingerror', (ev) =>
 		{
 			$('#modal-directions-fail').openModal();
 			this.clear();
 		});
 
-		this.isActive = true;			
+		this.isActive = true;
 	};
 
 	hideItineraryPanel()
@@ -110,8 +110,9 @@ export class DirectionsComponent
 
 	showItineraryPanel(element : Element)
 	{
-		$('#directory-menu-main-container').removeClass().addClass("directions");	
-		$('.leaflet-routing-container').prependTo('.directory-menu-content');	
+		$('#directory-menu-main-container').removeClass().addClass("directions");
+		$('.leaflet-routing-container').prependTo('.directory-menu-content');
+		$('#directory-menu-spinner-loader').hide();
 		setTimeout(() => { $('.leaflet-routing-container').find('h2 .distance').addClass('gogo-color-soft'); }, 200);
 	}
 }

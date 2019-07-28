@@ -8,12 +8,12 @@
 {
   .directory-menu-header
 	{
-    width: 100%;   
-    border-radius: 0;  
+    width: 100%;
+    border-radius: 0;
 
-		.directions-header 
-		{ 
-			display : block; 
+		.directions-header
+		{
+			display : block;
 
 			h3
 			{
@@ -25,19 +25,19 @@
         font-weight: 600;
         line-height: 3rem;
         margin: 0;
-			}      
+			}
 		}
 	}
 
 	.directory-menu-content .filter-menu { display : none; }
 
-	.directory-menu-content 
-  {     
-    #directory-menu-spinner-loader { display: block; }
-  }  
+	.directory-menu-content
+  {
+    #directory-menu-spinner-loader { display: none; }
+  }
 }
 
-#directory-menu #directory-menu-main-container 
+#directory-menu #directory-menu-main-container
 {
   .directions-header { display : none; position: relative }
 }
