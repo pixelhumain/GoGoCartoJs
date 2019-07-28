@@ -33,15 +33,15 @@ export class OptionValue
 		}
 		else if (typeof $optionValueJson == 'object')
 		{
-			if ($optionValueJson["@id"]) {
+			if ($optionValueJson["@id"])
 				this.optionId = parseUriId($optionValueJson["@id"]);
-			} else {
-				this.optionId = $optionValueJson.categoryId || $optionValueJson.optionId;
-				this.index = $key;
-				this.description = $optionValueJson.description || '';
-			}			
-		}	
-		this.diff = $optionValueJson.diff;	
+			else
+				this.optionId = $optionValueJson.id || $optionValueJson.categoryId || $optionValueJson.optionId;
+
+			this.index = $optionValueJson.index || $key;
+			this.description = $optionValueJson.description || '';
+		}
+		this.diff = $optionValueJson.diff;
 	}
 
 	get option() : Option

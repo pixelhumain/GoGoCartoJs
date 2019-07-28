@@ -23,7 +23,7 @@
   {% if urls %}
     {% for currentUrl in urls %}
       {{ url.value|gogo_url }}
-    {% endfor %}    
+    {% endfor %}
   {% endif %}
 
   {{ ''|gogo_separator }}
@@ -34,12 +34,6 @@
 {{ taxonomy|gogo_taxonomy }}
 
 {{ tags|gogo_tags}}
-
-{% if commitment %}
-{{ ''|gogo_separator }}
-{{ 'Engagement Citoyen'|gogo_title }}
-{{ commitment|gogo_textarea(truncate = 400) }}
-{% endif %}
 
 {# Open Hours #}
 {% if formatedOpenHours|length or openHoursMoreInfos %}
