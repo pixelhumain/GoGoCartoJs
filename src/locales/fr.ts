@@ -14,14 +14,18 @@ export const FR =
   'around.map.center': 'autour du centre de la carte',
 
   //B
-  'by': 'Par',
+  'back.to.default.view': "Retourner à la vue par défault",
   'back.to.map': "Retour à la carte",
+  'by': 'Par',
 
   //C
   'cancel': 'Annuler',
   'can.not.locate.address': 'Impossible de localiser cette adresse !',
   'card': 'Fiche',
+  'change.tiles': 'Changer le Fond de Carte',
+  'check.uncheck.all': 'Cocher/Décocher Tout',
   'close': 'Fermer',
+  'close.menu': 'Fermer le Menu',
   'collaborative.moderation': 'Modération collaborative',
   'collaborative.moderation.paragaphs': `<p>
     Lorsqu'un élément est ajouté ou modifié, la mise à jour des données n'est pas instantanée. L'élément va d'abords apparaître "grisé" sur la carte,
@@ -67,6 +71,7 @@ export const FR =
   'exists.but.i.do.not.know.anything.else.about.it': 'existe, mais je n\'en sais pas plus sur lui',
   'exists.and.i.validate.the.accuracy.of.the.given.informations': 'existe et je valide l\'exactitude des informations renseignées',
   'exists.but.incorrect.informations': 'Existe mais les informations sont incorrectes',
+  'export.iframe': 'Exporter une Iframe',
 
   //F
   'fill.fields.below':'Vous devez remplir les champs ci-dessous',
@@ -75,6 +80,7 @@ export const FR =
   'found.one.or.several' : '(s) trouvé-e(s)',
 
   //G
+  'geolocalize': 'Geolocaliser votre position',
   'geolocation.error': 'Erreur de géolocalisation',
 
   //H
@@ -165,6 +171,7 @@ export const FR =
   'share.url': 'Partager l\'URL',
   'share.your.knowledge.about': 'Partagez votre connaissance concernant',
   'show.as.list': 'Afficher sous forme de liste',
+  'show.hide.detail': 'Afficher/Masquer le détail',
   'show.more': 'Afficher plus',
   'show.on.map': 'Afficher sur la carte',
   'show.only': 'Afficher uniquement',
@@ -173,7 +180,8 @@ export const FR =
   'show.only.elements.validation.process': 'Afficher uniquement les éléments en cours de validation',
   'show.only.favorites' : 'Afficher uniquement les favoris',
   'show.only.selected.categories': 'Afficher uniquement les catégories actuellement sélectionnées',
-  'starting.address': 'Entrez une adresse de départ',
+  'starting.address': "L'adresse de départ",
+  'starting.address.title': 'Entrez une adresse de départ',
 
   //T
   'the': 'le',

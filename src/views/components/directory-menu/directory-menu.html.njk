@@ -6,20 +6,20 @@
 	{% endif %}
   <div class="directory-menu-header gogo-section-searchbar">
 
-		{% include 'components/search-bar/search-bar.html.njk' %}	
+		{% include 'components/search-bar/search-bar.html.njk' %}
 
-		<div class="btn-close-menu large-screen tooltipped" data-tooltip="Fermer le menu" data-position="right" data-delay="300"><span class="gogo-color-link arrow-left">◀</span></div>		
+		<div class="btn-close-menu large-screen tooltipped" data-tooltip="{{ 'close.menu' | i18n }}" data-position="right" data-delay="300"><span class="gogo-color-link arrow-left">◀</span></div>
 
 		<div class="directions-header subheader">
 		    <h3>{{ 'route.calculation' | i18n }}</h3>
 		    <span class="icon gogo-icon-close gogo-color-link btn-close" id="btn-close-directions"></span>
 		</div>
-		
+
 		<div class="shadow-bottom"></div>
-	</div>	
+	</div>
 
 	<div class="directory-menu-content gogo-section-content">
-	  
+
 	  {% import 'components/spinner-loader.html.njk' as spinnerLoader %}
 	  {{ spinnerLoader.create('directory-menu-spinner-loader') }}
 

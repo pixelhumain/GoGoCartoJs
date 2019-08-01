@@ -1,49 +1,49 @@
 {% if config.isFeatureActivated('searchPlace') or config.isFeatureActivated('searchElements') %}
 
 <div class="search-bar-with-options-container">
-    
+
     {# Search Input #}
-    <div class="input-field search-bar-container"> 
+    <div class="input-field search-bar-container">
         <a class="gogo-icon-search gogo-h-primary search-icon search-bar-icon"></a>
 
         {% if config.isFeatureActivated('searchGeolocate') %}
             <a class="gogo-icon-locate gogo-h-primary search-icon tooltipped search-geolocalize"
-                data-position="right" data-delay="0" data-tooltip="Geolocaliser votre position"></a>
+                data-position="right" data-delay="0" data-tooltip="{{ 'geolocalize' | i18n }}"></a>
         {% endif %}
 
         <input class="validate search-bar gogo-section-content"
-        	   type="text" 
-        	   name="adresse" 
-        	   onClick="this.setSelectionRange(0, this.value.length)" 
+        	   type="text"
+        	   name="adresse"
+        	   onClick="this.setSelectionRange(0, this.value.length)"
         	   {% if config.address %}
-        	   value="{{ config.address | replace({'-': ' '}) | capitalize }}" 
+        	   value="{{ config.address | replace({'-': ' '}) | capitalize }}"
         	   {% endif %}
-        />            
+        />
     </div>
 
     {# Search Options #}
-    <div class="search-options" style="display:none">        
+    <div class="search-options" style="display:none">
         {% if config.isFeatureActivated('searchPlace') %}
             <input class="search-option-radio-btn" name="search-type-option" data-name="place" type="radio" id="search-option-place" checked/>
             <label class="search-option-radio-label" for="search-option-place">{{ 'place' | i18n }}</label>
         {% endif %}
         {% if config.isFeatureActivated('searchElements') %}
-            <input class="search-option-radio-btn" name="search-type-option" data-name="element" type="radio" id="search-option-element"/>        
+            <input class="search-option-radio-btn" name="search-type-option" data-name="element" type="radio" id="search-option-element"/>
             <label class="search-option-radio-label" for="search-option-element">
                 {{ 'element.indefinite' | i18n | capitalize }}
             </label>
         {% endif %}
-        
+
         <button class="search-action-btn search-btn btn waves-effects">{{ 'search' | i18n }}</button>
         <button class="search-action-btn search-cancel-btn btn waves-effects" style="display:none">
             {{ 'cancel' | i18n }}
             {% import 'components/spinner-loader.html.njk' as spinnerLoader %}
             {{ spinnerLoader.create('search-spinner-loader') }}
-        </button>        
+        </button>
     </div>
 
     <div class='search-no-result' style="display:none"> {{ 'no.result.found' | i18n }}</div>
-    
+
 </div>
 
 {#{% if config.range %}
@@ -51,10 +51,10 @@
         <div class="range-field" id="search-distance-container">
           <input type="range" id="search-distance-input" min="30" max="150" value="{{ config.range }}" />
         </div>
-       
+
         <div id='search-distance-value-container'>
-            <span id='search-distance-value'>{{ config.range }} km</span> 
-        </div>    
+            <span id='search-distance-value'>{{ config.range }} km</span>
+        </div>
     </div>
 {% endif %}#}
 

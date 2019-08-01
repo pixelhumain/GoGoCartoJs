@@ -14,14 +14,18 @@ export const EN =
   'around.map.center': 'around map center',
 
   //B
-  'by': 'By',
+  'back.to.default.view': "Back to Default View",
   'back.to.map': "Back To Map",
+  'by': 'By',
 
   //C
   'cancel': 'Cancel',
   'can.not.locate.address': 'Can not locate this address !',
   'card': 'Card',
+  'change.tiles': 'Change Tiles Layer',
+  'check.uncheck.all': 'Check/Uncheck All',
   'close': 'Close',
+  'close.menu': 'Close Menu',
   'collaborative.moderation': 'Collaborative moderation',
   'collaborative.moderation.paragaphs': `<p>
     When an element is added or modified, the update of the data is not instantaneous. The element will initially appear "grayed" on the map,
@@ -67,6 +71,7 @@ export const EN =
   'exists.but.i.do.not.know.anything.else.about.it': 'exists, but I do not know anything else about it',
   'exists.and.i.validate.the.accuracy.of.the.given.informations': 'exists, and I validate the accuracy of the given informations',
   'exists.but.incorrect.informations': 'Exists but informations are incorrect',
+  'export.iframe': 'Export Iframe',
 
   //F
   'fill.fields.below': 'You must fill in the fields below',
@@ -75,6 +80,7 @@ export const EN =
   'found.one.or.several' : 'found',
 
   //G
+  'geolocalize': 'Geolocalize your position',
   'geolocation.error': 'Geolocation error',
 
   //H
@@ -165,6 +171,7 @@ export const EN =
   'share.url': 'Share',
   'share.your.knowledge.about': 'Share your knowledge about',
   'show.as.list': 'Show as List',
+  'show.hide.detail': 'Show/Hide Detail',
   'show.more': 'Show more',
   'show.on.map': 'Show on the map',
   'show.only': 'Show only',
@@ -173,7 +180,8 @@ export const EN =
   'show.only.elements.validation.process': 'Show only elements in the process of validation',
   'show.only.favorites' : 'Show only favorites',
   'show.only.selected.categories': 'Show only currently selected categories',
-  'starting.address': 'Enter a starting address',
+  'starting.address': 'Starting address',
+  'starting.address.title': 'Enter a starting address',
 
   //T
   'the': 'the',

@@ -7,21 +7,21 @@
 {% block id %}pick-address{% endblock %}
 
 {% block content %}
-  <h5 id="modal-title">{{ 'starting.address' | i18n }}</h5>
+  <h5 id="modal-title">{{ 'starting.address.title' | i18n }}</h5>
   <div class="modal-error-msg">{{ 'can.not.locate.address' | i18n }}</div>
-  <input type="text" 
+  <input type="text"
          class="input-simple-modal"
          onClick="this.setSelectionRange(0, this.value.length)"
-         placeholder="L'adresse de départ"  />  
+         placeholder="{{ 'starting.address' | i18n }}"  />
 {% endblock %}
 
 <div id="modal-directions-fail" class="modal">
   <div class="modal-content">
 
     <h5 id="modal-title">{{ 'route.calculation' | i18n }}</h5>
-    <p>{{ 'error.occurend.route.calculation' | i18n }}</p>   
+    <p>{{ 'error.occurend.route.calculation' | i18n }}</p>
   </div>
   <div class="modal-footer">
     <span class="modal-action modal-close waves-effect waves-light btn-flat">{{'ok' | i18n }}</span>
-  </div>   
+  </div>
 </div>
