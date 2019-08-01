@@ -36,7 +36,7 @@ export function parseUriId($uriId : string) : string
   return splited[splited.length - 1];
 }
 
-export function splitLongText(text : string, length : number, size : number = 50) 
+export function splitLongText(text : string, length : number, size : number = 50)
 {
   // if the text is just a bit longer than the length, we cut it more so the text2 is not so short
   if (text.length < length + size) {
@@ -56,4 +56,36 @@ export function formatPhoneNumber(value)
   if (!value) return '';
   if (value.length == 10) return value.replace(/(.{2})(?!$)/g,"$1 ");
   return value;
-}  
+}
+
+export function camelToProper(value)
+{
+  if (value == null || value == "") { return value; }
+  var newText = "";
+  var characters = value.split("");
+  for (var i = 0; i < characters.length; i++) {
+    if (characters[i] == characters[i].toUpperCase()
+        && i != 0
+        && !(characters[i + 1] == characters[i + 1].toUpperCase())
+        && characters[i - 1] != " ") {
+      newText += " ";
+    }
+    newText += characters[i];
+  }
+  return newText;
+}
+
+export function snakeToProper(value)
+{
+  let result = [];
+  for (let txt of value.split('_'))
+  {
+    result.push(txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+  }
+  return result.join(' ');
+}
+
+export function formatLabel(value)
+{
+  return snakeToProper(camelToProper(value)).replace('  ', ' ');
+}

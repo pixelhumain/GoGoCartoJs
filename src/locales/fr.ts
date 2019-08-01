@@ -80,6 +80,7 @@ export const FR =
   'found.one.or.several' : '(s) trouvé-e(s)',
 
   //G
+  'general.infos': 'Informations générales',
   'geolocalize': 'Geolocaliser votre position',
   'geolocation.error': 'Erreur de géolocalisation',
 
@@ -125,6 +126,8 @@ export const FR =
 
   //O
   'ok': 'OK!',
+  'openhours': "Horaires d'ouverture",
+  'other.infos': 'Autres Informations',
 
   //P
   'pending.add': 'En attente (ajout)',
@@ -180,6 +183,7 @@ export const FR =
   'show.only.elements.validation.process': 'Afficher uniquement les éléments en cours de validation',
   'show.only.favorites' : 'Afficher uniquement les favoris',
   'show.only.selected.categories': 'Afficher uniquement les catégories actuellement sélectionnées',
+  'source': 'Origine',
   'starting.address': "L'adresse de départ",
   'starting.address.title': 'Entrez une adresse de départ',
 
@@ -189,9 +193,13 @@ export const FR =
   'to.moderate': 'A modérer',
   'type.message.here': 'Taper votre message ici',
 
+  //U
+  'updated.at': 'Dernières mise à jour',
+
   //V
   'validated.admin': 'Validé (admin)',
   'validated.votes': 'Validé (votes)',
+  'video': 'Video',
   'vote': 'Voter',
 
   //W

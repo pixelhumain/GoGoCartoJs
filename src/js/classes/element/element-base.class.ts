@@ -2,14 +2,14 @@ import { Contribution, VoteReport, OptionValue, PostalAddress, Option, CategoryV
 import { capitalize } from "../../utils/string-helpers";
 import { App } from "../../gogocarto";
 
-export enum ElementStatus 
+export enum ElementStatus
 {
-  DynamicImportTemp = -7, // Temporary status used while importing  
+  DynamicImportTemp = -7, // Temporary status used while importing
   Duplicate = -6,
   ModifiedElement = -5,
   Deleted = -4,
   CollaborativeRefused = -3,
-  AdminRefused = -2,    
+  AdminRefused = -2,
   PendingModification = -1,
   PendingAdd = 0,
   AdminValidate = 1,
@@ -24,12 +24,12 @@ export enum ElementStatus
 export enum ElementModerationState
 {
   GeolocError = -2,
-  NoOptionProvided = -1,     
+  NoOptionProvided = -1,
   NotNeeded = 0,
   ReportsSubmitted = 1,
-  VotesConflicts = 2, 
+  VotesConflicts = 2,
   PendingForTooLong = 3,
-  PossibleDuplicate = 4  
+  PossibleDuplicate = 4
 }
 
 export class ElementBase
@@ -41,17 +41,17 @@ export class ElementBase
   address : PostalAddress;
   optionsValues : OptionValue[] = [];
   mainOptionOwnerIds : number[] = [];
-  optionTree : OptionValue; 
+  optionTree : OptionValue;
 
   // OPTIONAL DATA
   status : ElementStatus;
-  moderationState : ElementModerationState;  
+  moderationState : ElementModerationState;
   searchScore : number = null;
   isFullyLoaded : boolean = false;
   isEditable : boolean = true;
 
   // SPECIFIC DATA
-  openHours : any;  
+  openHours : any;
   formatedOpenHours;
   images : string[];
   stamps : any[] = [];
@@ -63,20 +63,20 @@ export class ElementBase
   reports : VoteReport[];
   contributions : Contribution[];
   pendingContribution : Contribution;
-  votes : VoteReport[];  
+  votes : VoteReport[];
 
   // PENDING ELEMENTS
-  modifiedElement : ElementBase = null;    
+  modifiedElement : ElementBase = null;
 
   constructor(elementJson : any)
   {
-    this.updateWithJson(elementJson);    
+    this.updateWithJson(elementJson);
   }
 
-  updateWithJson(elementJson : any) 
+  updateWithJson(elementJson : any)
   {
-    App.elementJsonParser.load(elementJson, this);    
-  }  
+    App.elementJsonParser.load(elementJson, this);
+  }
 
   createOptionsTree()
   {
@@ -100,9 +100,9 @@ export class ElementBase
 
   gogoTaxonomy() : CategoryValue[]
   {
-    if (this.status == ElementStatus.PendingModification && this.modifiedElement)  
+    if (this.status == ElementStatus.PendingModification && this.modifiedElement)
       return this.modifiedElement.getRootCategoriesValues();
-    else 
+    else
       return this.getRootCategoriesValues();
   }
 

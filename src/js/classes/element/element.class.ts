@@ -4,10 +4,12 @@ export { ElementStatus, ElementModerationState } from './element-base.class';
 import { Marker } from "../../components/map/marker.component";
 import { ElementComponent } from "../../components/element/element.component";
 import { OptionValue, CategoryValue, Option, Category, Contribution, VoteReport, Stamp } from "../classes";
-import { capitalize } from "../../utils/string-helpers";
+import { capitalize, formatLabel } from "../../utils/string-helpers";
 
 import { App } from "../../gogocarto";
 declare var $, Map;
+
+var CORE_FIELDS = ['id', 'name', 'description', 'descriptionMore', 'address', 'telephone', 'email', 'website', 'urls', 'tags', 'vimeoId', 'images', 'sourceKey', 'updatedAt', 'createdAt', 'status', 'moderationState']
 
 export class Element extends ElementBase
 {
@@ -158,10 +160,17 @@ export class Element extends ElementBase
       reports: this.reports,
       votes: this.votes
     };
+    let customData = [];
     $.each(this.data, (key, value) => {
        if(!(key in result)) result[key] = this.formatProp(key)
+       if (value && typeof(value) != 'object' && CORE_FIELDS.indexOf(key) == -1) {
+         value = result[key];
+         if (Array.isArray(value)) value = value.join(', ');
+         customData.push(`<b>${formatLabel(key)}</b> ${value}`);
+       }
     });
-    result['data'] = this.data;
+
+    result['customData'] = customData;
     return result;
   }
 

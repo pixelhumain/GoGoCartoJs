@@ -3,12 +3,9 @@
 {# -------------- #}
 {{ descriptionMore|gogo_textarea(truncate = 400) }}
 
-{# Categories  #}
-{{ taxonomy|gogo_taxonomy }}
-
 {% if address or telephone or email or website or urls %}
   {# Contact infos #}
-  {{ 'Informations générales'|gogo_title }}
+  {{ 'general.infos'|i18n|gogo_title }}
 
   {# Address #}
   {{ address|gogo_text }}
@@ -32,12 +29,16 @@
 
 {% endif %}
 
+{# Categories  #}
+{% if taxonomy|length %}
+  {{ taxonomy|gogo_taxonomy }}
+{% endif %}
 {{ tags|gogo_tags}}
 
 {# Open Hours #}
 {% if formatedOpenHours|length or openHoursMoreInfos %}
   {{ ''|gogo_separator }}
-  {{ "Horaires d'ouverture"|gogo_title }}
+  {{ "openhours"|i18n|gogo_title }}
   {{ formatedOpenHours|gogo_openhours }}
   {{ openHoursMoreInfos|gogo_text }}
 {% endif %}
@@ -45,22 +46,24 @@
 {# Vidéo #}
 {% if vimeoId %}
   {{ ''|gogo_separator }}
-  {{ 'Video'|gogo_title }}
+  {{ 'video'|i18n|gogo_title }}
   {{ vimeoId|gogo_vimeo }}
 {% endif %}
 
-{% for key, value in data %}
-  {% if not value|is_object and key not in ['id', 'name', 'description', 'descriptionMore', 'address', 'telephone', 'email', 'website', 'urls', 'tags', 'vimeoId', 'images'] %}
-    <h3>{{ key|replace('_', ' ')|capitalize }}</h3>
-    {% if value|is_array %}
-      {{ value|join(', ') }}
-    {% elseif value|is_string %}
+{% if customData|length %}
+  {{ ''|gogo_separator }}
+  <h3>{{ 'other.infos' | i18n }}</h3>
+  <div class="other-infos">
+    {% for value in customData %}
       {{ value|gogo_textarea }}
-    {% else %}
-      {{ value }}
-    {% endif %}
-  {% endif %}
-{% endfor %}
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% if updatedAt %}
+  {{ ''|gogo_separator }}
+  <div class="field-updated-at">{{ 'updated.at' | i18n }} : {{updatedAt}}</div>
+{% endif %}
 
 
 

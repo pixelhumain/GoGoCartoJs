@@ -80,6 +80,7 @@ export const EN =
   'found.one.or.several' : 'found',
 
   //G
+  'general.infos': 'General Informations',
   'geolocalize': 'Geolocalize your position',
   'geolocation.error': 'Geolocation error',
 
@@ -125,6 +126,8 @@ export const EN =
 
   //O
   'ok': 'OK!',
+  'openhours': "Open Hours",
+  'other.infos': 'Other Informations',
 
   //P
   'pending.add': 'Pending (add)',
@@ -180,6 +183,7 @@ export const EN =
   'show.only.elements.validation.process': 'Show only elements in the process of validation',
   'show.only.favorites' : 'Show only favorites',
   'show.only.selected.categories': 'Show only currently selected categories',
+  'source': 'Source',
   'starting.address': 'Starting address',
   'starting.address.title': 'Enter a starting address',
 
@@ -189,9 +193,13 @@ export const EN =
   'to.moderate': 'To moderate',
   'type.message.here': 'Type your message here',
 
+  //U
+  'updated.at': 'Updated At',
+
   //V
   'validated.admin': 'Validated (admin)',
   'validated.votes': 'Validated (votes)',
+  'video': 'Video',
   'vote': 'Vote',
 
   //W

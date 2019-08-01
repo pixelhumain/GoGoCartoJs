@@ -3,16 +3,16 @@
 	@import "element-menu";
 	@import "interactive-section";
 	@import "admin";
-	
+
 	@import "element-header";
 	@import "element-body";
 	@import "element-images";
 	@import "element-filters";
 	@import "element-categories";
 
-	list-style-type: none;	
+	list-style-type: none;
 	@include flexbox();
-  @include flex-flow(column nowrap);  
+  @include flex-flow(column nowrap);
 
 	h3
 	{
@@ -26,11 +26,11 @@
 
 		&.first-element-of-body-content { padding-top: .5rem; }
 		&.unique-element-between-dividers { display: none; }
-	}	
+	}
 
 	.info-bar-divider ~ h3 {
 		padding-top: 1rem;
-	}	
+	}
 
 	.row { margin-bottom: 0 }
 
@@ -40,7 +40,8 @@
 	{
 	  height: 1px;
 	  overflow: hidden;
-	  margin: .5rem 0;
+	  margin-bottom: .3rem;
+    margin-top: .7rem;
 	}
 
 	.btn
@@ -49,12 +50,12 @@
   	line-height: 2rem;
   	padding: 0 1rem;
   	margin-bottom: 1rem;
-	}  
+	}
 
-	span.added 
+	span.added
 	{
 		color: #3a772c
-	}	
+	}
 
 	span.removed
 	{
@@ -66,5 +67,5 @@
 	a > span.equals
 	{
 		color: rgba(0, 0, 0, 0.87) !important;
-	}  
+	}
 }
