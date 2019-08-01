@@ -27,6 +27,16 @@ export class TemplateModule
 		this.nunjucksEnvironment.addFilter('i18n', function(entry) {
 		    return App.config.translate(entry);
 		});
+		this.nunjucksEnvironment.addFilter('is_string', function(obj) {
+		  return typeof obj == 'string';
+		});
+		this.nunjucksEnvironment.addFilter('is_array', function(obj) {
+		  return Array.isArray(obj);
+		});
+		this.nunjucksEnvironment.addFilter('is_object', function(obj) {
+		  return typeof obj == 'object';
+		});
+
 	}
 
 	initialize()

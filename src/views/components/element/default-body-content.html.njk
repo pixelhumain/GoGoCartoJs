@@ -3,7 +3,10 @@
 {# -------------- #}
 {{ descriptionMore|gogo_textarea(truncate = 400) }}
 
-{% if address or telephone or email or website or element.urls %}
+{# Categories  #}
+{{ taxonomy|gogo_taxonomy }}
+
+{% if address or telephone or email or website or urls %}
   {# Contact infos #}
   {{ 'Informations générales'|gogo_title }}
 
@@ -19,7 +22,6 @@
   {# WebSite #}
   {{ website|gogo_url }}
 
-  {% set urls = element.urls %}
   {% if urls %}
     {% for currentUrl in urls %}
       {{ url.value|gogo_url }}
@@ -29,9 +31,6 @@
   {{ ''|gogo_separator }}
 
 {% endif %}
-
-{# Categories  #}
-{{ taxonomy|gogo_taxonomy }}
 
 {{ tags|gogo_tags}}
 
@@ -49,4 +48,19 @@
   {{ 'Video'|gogo_title }}
   {{ vimeoId|gogo_vimeo }}
 {% endif %}
+
+{% for key, value in data %}
+  {% if not value|is_object and key not in ['id', 'name', 'description', 'descriptionMore', 'address', 'telephone', 'email', 'website', 'urls', 'tags', 'vimeoId', 'images'] %}
+    <h3>{{ key|replace('_', ' ')|capitalize }}</h3>
+    {% if value|is_array %}
+      {{ value|join(', ') }}
+    {% elseif value|is_string %}
+      {{ value|gogo_textarea }}
+    {% else %}
+      {{ value }}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+
 

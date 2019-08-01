@@ -161,6 +161,7 @@ export class Element extends ElementBase
     $.each(this.data, (key, value) => {
        if(!(key in result)) result[key] = this.formatProp(key)
     });
+    result['data'] = this.data;
     return result;
   }
 
