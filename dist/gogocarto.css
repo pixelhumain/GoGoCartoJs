@@ -3728,6 +3728,8 @@ th {
       padding-left: 1.5rem;
       padding-right: 1rem;
       line-height: 2rem; }
+    .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .other-infos .field {
+      margin-bottom: .4rem; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container .element-item .collapsible-body .category-wrapper .option-value {
       margin-bottom: 3px;
       border-left: 10px solid;
@@ -6319,6 +6321,13 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           left: 0;
           width: 100%;
           height: 100%; }
+      .gogo-load-css .gogocarto-container .element-item .field-updated-at {
+        text-align: center;
+        font-style: italic;
+        opacity: .7;
+        margin-top: 1.2rem; }
+      .gogo-load-css .gogocarto-container .element-item .other-infos .field {
+        margin-bottom: .5rem; }
       .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-name {
         padding-top: 1rem; }
       .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper + .category-name {
@@ -6411,7 +6420,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       .gogo-load-css .gogocarto-container .element-item .info-bar-divider {
         height: 1px;
         overflow: hidden;
-        margin: .5rem 0; }
+        margin-bottom: .3rem;
+        margin-top: .7rem; }
       .gogo-load-css .gogocarto-container .element-item .btn, .gogo-load-css .gogocarto-container .element-item .btn-large {
         height: 2rem;
         line-height: 2rem;
