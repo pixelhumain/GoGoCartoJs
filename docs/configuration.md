@@ -30,11 +30,11 @@ Menu
 ```
 You can custom the menu **width** (in pixel)
 
-If your taxonomy is complex, you should better use the option **showOnePanePerMainOption** 
-It will add a vertical side bar with all the main option icons. clicking each main option icon will show a diferent pane 
+If your taxonomy is complex, you should better use the option **showOnePanePerMainOption**
+It will add a vertical side bar with all the main option icons. clicking each main option icon will show a diferent pane
 for each main option children.
 
-[Check OneFilterPanePerMainOption Demo](https://pixelhumain.github.io/GoGoCartoJs/web/examples/index-full-taxonomy.html#/carte/@45.94,-0.38,10z?cat=all) 
+[Check OneFilterPanePerMainOption Demo](https://pixelhumain.github.io/GoGoCartoJs/web/examples/index-full-taxonomy.html#/carte/@45.94,-0.38,10z?cat=all)
 
 Set **smallWidthStyle** to false to use smaller font size and margins, so the taxonomy fit better into the fixed width
 
@@ -79,7 +79,7 @@ If **activate** is set to false, nothing happens on marker click, the info bar i
 
 Custom **bodyTemplate** and **headerTemplate** of an element can be provided. See [Info Bar Templates](info-bar-templates.md) to learn how to build a template.
 An object need to be given with the following options:
-  * **content** is a string containing inline template, or an url to a template file. 
+  * **content** is a string containing inline template, or an url to a template file.
   * **isMardown** is set to true, if the content given uses Markdown syntax, false otherwise.
   * **type** must be set to "url", if the content is remote, or "string" so the content is used as is.
 
@@ -99,17 +99,25 @@ Marker
 When activated, the popup is a content displayed on top of the marker, by default only when mouse hover the marker
 Same as `InfoBar` templates, you can customize the popup when mouse hover a marker. by default this popup display the name of the element
 
-Texts
+Internationalization
 ------
-Custom texts to label the elements of the dataset.
+Choose the language (only french and english for now), and overwrite any translation if desired
 ```javascript
-"text": {
-  "element": "organisation",
-  "elementDefinite": "l'organisation",
-  "elementIndefinite": "une organisation",
-  "elementPlural": "organisations"
-},
+"language": "en",
+"translations": { // used this property to overwrite any translation
+  "show.as.list": "Display List View", // will use "Display List View" instead of default "Show as List"
+}
 ```
+A common use case is to overwrite the way we call an "element". For exemple if I'm collecting data about NGO organisations, I will better display "choose an organisation" instead of "choose an element". Here are the translations keys to overwrite
+```javascript
+"translations": {
+  "element": "organisation",
+  "element.definite": "the organisation",
+  "element.indefinite": "an organisation",
+  "element.plural": "organisations"
+  }
+```
+If you want to translate GoGoCartoJs for a new language, your help will be very appreciated! Please contact the developer team if you don't know how to do it.
 
 Map
 ------
@@ -121,7 +129,7 @@ Map
   },
   "defaultCenter": { "lat": 46, "lng": 0 },
   "maxBounds": {
-    "_southWest": { "lat": -90, "lng": -180 }, 
+    "_southWest": { "lat": -90, "lng": -180 },
     "_northEast": { "lat": 90, "lng": 180 }
   },
   "useClusters": true,
@@ -156,14 +164,14 @@ Please visit [Features Documentation](features.md) to discover in detail the fea
   "favorite": // save an element as favotite (using cookies)
   "share": // get the element url inside gogocarto
   "directions": // calculate routing towards the element position
-  "edit": // Open the given edit page in a new tab 
+  "edit": // Open the given edit page in a new tab
   "delete": // Open a popup dialog and send delete request to your server
   "report":  // Open a report dialog and send a report request to your server
-  
+
   "sendMail": // view or send a mail to an Element. this security.hideMailsByShowingSendMailButton
-  
+
   "listMode": // access to list mode
-  
+
   "export": // popup to get the iframe code of the current map
   "layers": // choose different tile layer for the map
   "mapdefaultview": // restore viewport to default viewport
@@ -176,7 +184,7 @@ Please visit [Features Documentation](features.md) to discover in detail the fea
 },
 ```
 
-If you don't provide any features config, a default set of basic config will be loaded. 
+If you don't provide any features config, a default set of basic config will be loaded.
 If you provide a features config, only the features listed in it will be available. To simply activate a feature, just add it on the list
 ```javascript
 "features": {
@@ -191,27 +199,27 @@ All the features can be configured with the following attributes
 "url": ""
 "inIframe": default true
 ```
-**roles** : an array of the role who can access this feature. you can use your own roles names, for example ['anonymous', 'user', 'admin']. 
+**roles** : an array of the role who can access this feature. you can use your own roles names, for example ['anonymous', 'user', 'admin'].
 **url** : the following features need an URL to an API to work : edit, report, delete, sendMail, searchElements
 **inIframe** activate or not the feature when gogocarto is loaded in iframe
 
 Here an example of full custom features configuration
 ```javascript
-"features": 
+"features":
 {
   listMode: {},
   searchPlace: { },
   searchGeolocate: {},
-  searchElements:   { 
-      url: 'http://localhost/GoGoCarto/web/app_dev.php/api/elements/search' 
+  searchElements:   {
+      url: 'http://localhost/GoGoCarto/web/app_dev.php/api/elements/search'
   },
-  delete:   { 
-      url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/delete', 
-      roles: ['admin'], inIframe: false 
-  },            
-  report:   { 
-      url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/report', 
-      roles: ['anonymous', 'user'] 
+  delete:   {
+      url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/delete',
+      roles: ['admin'], inIframe: false
+  },
+  report:   {
+      url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/report',
+      roles: ['anonymous', 'user']
   },
   edit:     { url: 'http://localhost/GoGoCarto/web/app_dev.php/elements/edit/' },
   sendMail: { url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/sendMail' },
@@ -221,9 +229,9 @@ Here an example of full custom features configuration
   share: { },
   layers: { },
   mapdefaultview: { },
-  customPopup: {  
-    inIframe: false, 
-    options: { 
+  customPopup: {
+    inIframe: false,
+    options: {
       text: "Hello ! this is some custom text",
       showOnlyOnce: true, // If user click "close" the popup will never show again
       id: 4, // bump this id everytime you want the showOnlyOnce to be reseted
@@ -252,7 +260,7 @@ Images
 ```javascript
 images: {
   menuTopImage: "http://url/to/image",
-  buttonOpenMenu: "http://url/to/image"  
+  buttonOpenMenu: "http://url/to/image"
 }
 ```
 MenuTopImage
