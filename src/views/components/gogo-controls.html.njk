@@ -2,9 +2,11 @@
   {% if config.isFeatureActivated('searchPlace') or config.isFeatureActivated('searchElements') %}
     <div id="mobile-search-icon" class="feature-button gogo-section-primary leaflet-bar"><i class="gogo-icon-search"></i></div>
   {% endif %}
-  <div id="mobile-filters-icon" class="feature-button leaflet-bar gogo-primary gogo-section-controls">
+  <div id="mobile-filters-icon" class="feature-button leaflet-bar gogo-primary gogo-section-controls {{ 'with-image' if config.images.buttonOpenMenu else ''}}">
+    {% if config.images.buttonOpenMenu %}
+      <img src="{{ config.images.buttonOpenMenu }}" />
+    {% endif %}
     <i class="gogo-icon-filters-1"></i>
-    {% if config.images.buttonOpenMenu %}<img src="{{ config.images.buttonOpenMenu }}" />{% endif %}
   </div>
   {% if config.isFeatureActivated('listMode') %}
     <div class="show-as-list-button feature-button gogo-section-controls leaflet-bar">

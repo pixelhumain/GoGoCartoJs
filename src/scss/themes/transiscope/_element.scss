@@ -1,11 +1,11 @@
 .element-item {
-  .collapsible-header {  
+  .collapsible-header {
     .name { font-weight: 900; }
     .collapsible-header-more { line-height: 1.3rem; }
     .element-main-icon { display: none !important; }
 
-    .collapsible-header-title .gogo-icon-close {       
-      &:before {        
+    .collapsible-header-title .gogo-icon-close {
+      &:before {
         border-radius: 3px;
         padding: 2px;
       }
@@ -18,23 +18,23 @@
     margin-left: 10px;
     font-size: 12px;
   }
-  @media (max-width: 460px) { 
+  @media (max-width: 460px) {
     .menu-element.full-text { padding: 0; }
     .menu-element-item {
        margin: 0 .5rem !important;
       .menu-element-item-text { font-size: 11px; margin-left: 5px;}
       .menu-icon { font-size: 16px; }
-    }      
+    }
   }
 
-  .collapsible-body {   
+  .collapsible-body {
 
     .collapsible-body-main-content { padding: 0; padding-bottom: 1rem; }
 
     .info-bar-divider { display: none; }
 
     .field-textarea { line-height: 1.3rem; }
-    .field {      
+    .field {
       padding-left: 1.5rem;
       @media #{$small-only} { padding-left: .8rem; }
       padding-top: .8rem;
@@ -45,15 +45,15 @@
       &.field-taxonomy {
         padding: 0;
 
-        h3.category-name {          
-          margin-left: 0;          
+        h3.category-name {
+          margin-left: 0;
           margin-bottom: 0;
           padding-bottom: 1rem;
         }
       }
 
       &.field-textarea.first-element-of-body-content {
-        padding-top: 1.3rem;       
+        padding-top: 1.3rem;
         padding-bottom: 0;
       }
     }
@@ -85,8 +85,8 @@
         padding-left: 1rem;
         line-height: 2.5rem;
         .option-name { line-height: 2.5rem; }
-        .icon.fa, .icon.fab, .icon.fas  { 
-          margin-right: 10px; 
+        .icon.fa, .icon.fab, .icon.fas  {
+          margin-right: 10px;
           font-size: .9rem;
           padding-top: .8rem;
         }
@@ -103,13 +103,13 @@
       border: none;
       margin-left: 0;
       padding-left: 0;
-      .option-value { 
-        padding-left: .9rem; 
-        margin-top: -8px; 
+      .option-value {
+        padding-left: .9rem;
+        margin-top: -8px;
         height: 1.5rem;
         line-height: 1.5rem;
-        .option-name { 
-          color: inherit; 
+        .option-name {
+          color: inherit;
           margin-left: 4px;
           line-height: 1rem;
           &:before {
@@ -118,8 +118,8 @@
             margin-right: 6px;
           }
         }
-        .icon:not(.gogo-icon-external-link) { 
-          display: none;           
+        .icon:not(.gogo-icon-external-link) {
+          display: none;
         }
       }
     }
@@ -134,51 +134,51 @@
     }
 
     .field-tags {
-      
+
       margin-top: 1rem !important;
       margin-bottom: -10px;
       text-align: center;
 
-      .gogo-tag {        
+      .gogo-tag {
         border-radius: 0;
         padding: 4px 14px;
       }
     }
   }
-  .menu-element { 
+  .menu-element {
     .menu-element-item {
       display: inline-block;
       font-weight: bold;
 
-      .menu-icon.gogo-icon-star-full { 
-        color: white; 
+      .menu-icon.gogo-icon-star-full {
+        color: white;
         &:before { background-color: #f09b00; }
       }
     }
-  } 
+  }
 
   .inline-option-values {
     width: calc(100% - 140px);
     font-weight: normal;
 
-    .inline-option-value {     
-      
+    .inline-option-value {
+
       margin-right: 20px;
-      display: inline-block;  
+      display: inline-block;
       @media #{$medium-and-up} {
-        .icon { 
-          margin-right: 5px; 
+        .icon {
+          margin-right: 5px;
           font-size: .9rem;
           padding-top: .6rem;
           background-color: transparent;
           &.disabled { color: #bbbbbb; }
         }
-        .option-value { 
+        .option-value {
           line-height: 2rem;
           font-style: normal;
           font-weight: normal;
 
-          &.same-icon-as-last-item { 
+          &.same-icon-as-last-item {
             margin-left: -17px;
             &:before {
               content: "+";
@@ -188,12 +188,13 @@
         }
       }
 
-      @media #{$small-only} { 
+      @media #{$small-only} {
         &[main-category-owner-name="Sources"] { display: none; }
         .option-value { display: none; }
-        .icon { 
+        .icon {
           color: white;
           border-radius: 50%;
+          line-height: 10px;
           font-size: .9rem;
           padding: 10px 9px;
           margin-right: 5px;
@@ -204,8 +205,8 @@
           }
         }
         margin-right: 0;
-      }   
-    }    
+      }
+    }
   }
 
   .collapsible-header .custom-header { margin-bottom: .8rem; }
@@ -213,19 +214,19 @@
   .expand-label {
     width: auto;
     float: right;
-    border: 2px solid;    
+    border: 2px solid;
     padding: 8px 15px !important;
     text-align: center;
     border-radius: 20px;
     margin-top: -3px;
     margin-right: -.5rem;
     &:before {
-      margin-right: 8px;      
+      margin-right: 8px;
       border-radius: 50%;
       padding: 0 4px;
-    }    
+    }
   }
-  &.active .expand-label:before { 
+  &.active .expand-label:before {
     content: "-";
     padding: 0 6px;
     padding-bottom: 1px;
@@ -235,27 +236,27 @@
   &:not(.active) .expand-label:before { content: "+" }
 }
 
-#element-info-bar.display-aside .element-item .collapsible-header 
+#element-info-bar.display-aside .element-item .collapsible-header
 {
   padding: .5rem 0;
   padding-left: .5rem;
-  .collapsible-header-title { 
+  .collapsible-header-title {
     padding-bottom: 1rem;
-    
-    .gogo-icon-close { 
+
+    .gogo-icon-close {
       font-size: .8rem;
     }
   }
 
-  .name {     
-    font-size: 1.4rem;    
+  .name {
+    font-size: 1.4rem;
     line-height: 1.8rem;
   }
 }
 
 #element-info-bar.display-bottom {
   .gogo-icon-close { font-size: .9rem; }
-  .collapsible-header .name { font-size: 15px; } 
+  .collapsible-header .name { font-size: 15px; }
 
   .element-item.active {
     .collapsible-header-title {
@@ -265,7 +266,7 @@
     }
   }
 
-  @media #{$small-only} { 
+  @media #{$small-only} {
     .element-item .expand-label {
       margin-right: 10px;
       font-size: 13px;
@@ -274,7 +275,7 @@
     }
   }
   .element-item.active {
-    .expand-label.transform-big {      
+    .expand-label.transform-big {
       @media #{$small-only} { padding: 8px 10px !important; }
     }
 

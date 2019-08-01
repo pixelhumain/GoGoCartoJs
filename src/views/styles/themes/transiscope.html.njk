@@ -1,11 +1,11 @@
-<style> 
+<style>
   .gogo-load-css .custom-scroll-bar::-webkit-scrollbar-thumb { background-color: {{ contentBgd }}; }
 
   {# ELEMENT #}
 
   .gogo-load-css .gogo-theme-transiscope .element-item .collapsible-header { background-color: {{ text }}; }
-  .gogo-load-css .gogo-theme-transiscope .element-item .collapsible-header-title .gogo-icon-close:before { 
-    background-color: {{ primary }}; 
+  .gogo-load-css .gogo-theme-transiscope .element-item .collapsible-header-title .gogo-icon-close:before {
+    background-color: {{ primary }};
     color: {{ textLight }};
   }
   .gogo-load-css .gogo-theme-transiscope .collapsible-body p { background-color: {{ contentBgd }}; }
@@ -54,9 +54,9 @@
   {# MARKER #}
 
   .gogo-load-css .gogo-theme-transiscope .iconInsideMarker-wrapper { background-color: transparent; }
-  .gogo-load-css .gogo-theme-transiscope .iconInsideMarker-wrapper .iconInsideMarker { color: {{ textLight }}; }  
+  .gogo-load-css .gogo-theme-transiscope .iconInsideMarker-wrapper .iconInsideMarker { color: {{ textLight }}; }
 
-  {# CONTROLS #}  
+  {# CONTROLS #}
   .gogo-load-css .gogo-theme-transiscope #map-gogo-controls .show-as-list-button { color: {{ secondary }}; }
   .gogo-load-css .gogo-theme-transiscope #gogo-controls-mobile #mobile-filters-icon { background-color: {{ text }}; }
   .gogo-load-css .gogo-theme-transiscope #gogo-controls-mobile .show-as-list-button { color: {{ primary }}; }
@@ -64,19 +64,19 @@
     background-color: {{ secondary }} !important;
     color: {{ textLight }};
   }
-  
+
   {# MENU #}
 
   .gogo-load-css #directory-menu-main-container .directory-menu-header .btn-close-menu.large-screen .arrow-left { color: {{ secondary }}; }
 
   {# MENU HEADER #}
-  
-  .gogo-load-css .gogo-theme-transiscope .search-bar-container .search-icon { color: {{ textLight }} !important; }
-  .gogo-load-css .gogo-theme-transiscope .search-bar-container .search-bar { background-color: {{ primary }} !important; }
-  .gogo-load-css .gogo-theme-transiscope .search-bar-container .search-bar::-webkit-input-placeholder  { color: {{ textLight }} !important; } 
-  .gogo-load-css .gogo-theme-transiscope .search-bar-container .search-bar::-moz-placeholder  { color: {{ textLight }} !important; }
-  .gogo-load-css .gogo-theme-transiscope .search-bar-container .search-bar:-ms-input-placeholder  { color: {{ textLight }} !important; }
-  .gogo-load-css .gogo-theme-transiscope .search-bar-container .search-bar:-moz-placeholder { color: {{ textLight }} !important; }
+
+  .gogo-load-css .gogo-theme-transiscope .search-bar-with-options-container:not(.mobile) .search-icon { color: {{ textLight }} !important; }
+  .gogo-load-css .gogo-theme-transiscope .search-bar-with-options-container:not(.mobile) .search-bar { background-color: {{ primary }} !important; }
+  .gogo-load-css .gogo-theme-transiscope .search-bar-with-options-container:not(.mobile) .search-bar::-webkit-input-placeholder  { color: {{ textLight }} !important; }
+  .gogo-load-css .gogo-theme-transiscope .search-bar-with-options-container:not(.mobile) .search-bar::-moz-placeholder  { color: {{ textLight }} !important; }
+  .gogo-load-css .gogo-theme-transiscope .search-bar-with-options-container:not(.mobile) .search-bar:-ms-input-placeholder  { color: {{ textLight }} !important; }
+  .gogo-load-css .gogo-theme-transiscope .search-bar-with-options-container:not(.mobile) .search-bar:-moz-placeholder { color: {{ textLight }} !important; }
   .gogo-load-css .gogo-theme-transiscope .search-options .search-action-btn { color: {{ searchBar }}; }
 
   {# MENU FILTER #}
@@ -84,14 +84,14 @@
   .gogo-load-css .sub-categories-content { background-color: {{ background }} !important; }
   .gogo-load-css .sub-categories-content .subcategorie-option-item { background-color: {{ contentBgd }};  }
   .gogo-load-css .sub-categories-content .subcategorie-option-item.disabled { color: {{ disabled }}; }
-  .gogo-load-css .sub-categories-content .subcategorie-option-item.disabled .icon { color: {{ disabled }} !important; } 
+  .gogo-load-css .sub-categories-content .subcategorie-option-item.disabled .icon { color: {{ disabled }} !important; }
   .gogo-load-css .sub-categories-content .subcategorie-option-item:not(.expanded) .option-name .arrow-after { border-color: {{ primary }} transparent transparent transparent; }
   .gogo-load-css .sub-categories-content .subcategorie-option-item.expanded .option-name .arrow-after { border-color:  transparent transparent {{ primary }} transparent; }
   .gogo-load-css .sub-categories-content .subcategory-item .checkbox-wrapper [type="checkbox"].filled-in + label:before {
     border-right: 3px solid {{ primary }};
     border-bottom: 3px solid {{ primary }};
   }
-  .gogo-load-css .sub-categories-content .subcategory-item .checkbox-wrapper [type="checkbox"].filled-in:not(:checked) + label:before {       
+  .gogo-load-css .sub-categories-content .subcategory-item .checkbox-wrapper [type="checkbox"].filled-in:not(:checked) + label:before {
     border-right: 3px solid {{ disabled }};
     border-bottom: 3px solid {{ disabled }};
   }
@@ -99,35 +99,35 @@
 
   .gogo-load-css #main-option-all > .category-wrapper:first-child .name-wrapper { color: {{ primary }}; }
   .gogo-load-css #main-option-all > .category-wrapper:first-child .subcategorie-option-item.checked .icon:not(.subIcon) { color: {{ textLight }}; }
-  .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) .name-wrapper { color: {{ secondary }}; } 
+  .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) .name-wrapper { color: {{ secondary }}; }
   .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) [type="checkbox"].filled-in:checked + label:before {
     border-right: 3px solid {{ secondary }};
     border-bottom: 3px solid {{ secondary }};
-  } 
+  }
   .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) .subcategorie-option-item.checked .icon { color: {{ secondary }}; }
-  .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) .subcategorie-option-item .icon { color: {{ text }}; background-color: transparent; }           
-  .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) .subcategorie-option-item:hover .subcategorie-option-checkbox + label:before { 
-    color: {{ secondary }}; 
-    border-color: {{ secondary }} 
-  }  
-  .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) .subcategorie-option-item:not(.expanded) .option-name .arrow-after { 
-    border-color: {{ secondary }} transparent transparent transparent; opacity: 1; 
+  .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) .subcategorie-option-item .icon { color: {{ text }}; background-color: transparent; }
+  .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) .subcategorie-option-item:hover .subcategorie-option-checkbox + label:before {
+    color: {{ secondary }};
+    border-color: {{ secondary }}
   }
-  .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) .subcategorie-option-item:not(.expanded) .option-name:hover .arrow-after { 
-    border-color: {{ secondary }} transparent transparent transparent !important; opacity: 1; 
+  .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) .subcategorie-option-item:not(.expanded) .option-name .arrow-after {
+    border-color: {{ secondary }} transparent transparent transparent; opacity: 1;
   }
-  .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) .subcategorie-option-item.expanded .option-name .arrow-after { 
-    border-color:  transparent transparent {{ secondary }} transparent; opacity: 1; top: 1rem; 
+  .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) .subcategorie-option-item:not(.expanded) .option-name:hover .arrow-after {
+    border-color: {{ secondary }} transparent transparent transparent !important; opacity: 1;
   }
-  .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) .subcategorie-option-item.expanded .option-name:hover .arrow-after { 
-    border-color:  transparent transparent {{ secondary }} transparent !important; opacity: 1; 
+  .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) .subcategorie-option-item.expanded .option-name .arrow-after {
+    border-color:  transparent transparent {{ secondary }} transparent; opacity: 1; top: 1rem;
   }
-  .gogo-load-css .show-only-container .subcategorie-option-item:not(.checked) .icon:before { color: {{ disabled }} !important } 
-  .gogo-load-css .show-only-container .subcategorie-option-item:not(.checked) .option-name { color: {{ disabled }} } 
-  .gogo-load-css #filter-favorite.checked .icon:before { color: #ff8f00 !important }  
-  .gogo-load-css #filter-favorite.checked .option-name { color: #ff8f00 }                      
+  .gogo-load-css #main-option-all > .category-wrapper:not(:first-child) .subcategorie-option-item.expanded .option-name:hover .arrow-after {
+    border-color:  transparent transparent {{ secondary }} transparent !important; opacity: 1;
+  }
+  .gogo-load-css .show-only-container .subcategorie-option-item:not(.checked) .icon:before { color: {{ disabled }} !important }
+  .gogo-load-css .show-only-container .subcategorie-option-item:not(.checked) .option-name { color: {{ disabled }} }
+  .gogo-load-css #filter-favorite.checked .icon:before { color: #ff8f00 !important }
+  .gogo-load-css #filter-favorite.checked .option-name { color: #ff8f00 }
   .gogo-load-css .sub-categories-content .show-only-title { color: {{ primary }}; }
 
   .gogo-load-css .subcategorie-option-item .elements-by-category-count { background-color: {{ background }}; color: {{ primary }}; }
-  
+
 </style>

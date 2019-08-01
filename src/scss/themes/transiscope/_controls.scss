@@ -6,11 +6,10 @@
   }
   #mobile-filters-icon {
     border-radius: 0 8px 8px 0;
-    padding-top: 5px;
-    i { display: none; } 
-    img { display: inline-block; }   
+    img { display: inline-block; }
+    &.with-image { i { display: none; } }
   }
-  .show-as-list-button, .show-as-map-button {    
-    border-radius: 8px;    
+  .show-as-list-button, .show-as-map-button {
+    border-radius: 8px;
   }
 }
