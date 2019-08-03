@@ -16,7 +16,7 @@ export class ElementMenuComponent
 
 	constructor(dom : any, element : Element)
 	{
-		this.dom = $(dom);  
+		this.dom = $(dom);
 		this.element = element;
 		this.initialize();
 		this.updateFavoriteIcon();
@@ -30,21 +30,26 @@ export class ElementMenuComponent
 
 	checkDisplayFullText()
 	{
-		let fullText = this.dom.width() >= this.dom.find('.menu-element-item:visible').length*130;
-		this.showFullTextMenu(fullText);
+		if (App.mode == AppModes.List && this.dom.width() > 750)
+			this.showFullTextMenu(true);
+		else
+		{
+			let fullText = this.dom.width() >= this.dom.find('.menu-element-item:visible').length*130;
+			this.showFullTextMenu(fullText);
+		}
 	}
 
 	showFullTextMenu(bool : boolean)
 	{
-		if (bool) this.dom.addClass("full-text").find('.tooltipped').tooltip('remove');	
+		if (bool) this.dom.addClass("full-text").find('.tooltipped').tooltip('remove');
 		else this.dom.removeClass("full-text");
 	}
 
 	private initialize()
 	{
-		this.dom.find('.tooltipped').tooltip();		
+		this.dom.find('.tooltipped').tooltip();
 		let that = this;
-		
+
 		// STAMPS
 		this.dom.find('.item-stamp').each(function() { new StampComponent(this, that.element); });
 
@@ -64,7 +69,7 @@ export class ElementMenuComponent
 		});
 
 		// SHOW ON MAP
-		this.dom.find('.item-show-on-map').click(() => 
+		this.dom.find('.item-show-on-map').click(() =>
 		{
 			this.dom.find('.menu-icon').hideTooltip();
 			App.setState(AppStates.ShowElement ,{id: this.element.id});
@@ -72,33 +77,33 @@ export class ElementMenuComponent
 
 		// SHARE
 		this.dom.find('.item-share-url').click(() =>
-		{		
+		{
 			let modal = $('#modal-share-element');
 			modal.find(".modal-footer").attr('option-id', this.element.colorOptionId);
 
-			let url = window.location.origin + window.location.pathname 
-			url += App.routerModule.generate('show_element', { name :  capitalize(slugify(this.element.name)), id : this.element.id }, true);	
+			let url = window.location.origin + window.location.pathname
+			url += App.routerModule.generate('show_element', { name :  capitalize(slugify(this.element.name)), id : this.element.id }, true);
 
 			modal.find('.input-simple-modal').val(url);
 			modal.openModal();
-		});	
-		
+		});
+
 		// FAVORITE
-		this.dom.find('.item-add-favorite').click(() => 
+		this.dom.find('.item-add-favorite').click(() =>
 		{
 			App.favoriteModule.addFavorite(this.element.id);
 			this.updateFavoriteIcon();
 			if (App.mode == AppModes.Map)
 			{
 				this.element.marker.update();
-				this.element.marker.animateDrop();			
-			}			
-		});		
-		this.dom.find('.item-remove-favorite').click(() => 
-		{		
-			App.favoriteModule.removeFavorite(this.element.id);			
+				this.element.marker.animateDrop();
+			}
+		});
+		this.dom.find('.item-remove-favorite').click(() =>
+		{
+			App.favoriteModule.removeFavorite(this.element.id);
 			this.updateFavoriteIcon();
 			if (App.mode == AppModes.Map) this.element.marker.update();
-		});	
-	}	
+		});
+	}
 }

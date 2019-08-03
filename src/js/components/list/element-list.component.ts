@@ -164,13 +164,15 @@ export class ElementListComponent
 		if (!$(elementHeaderDom).hasClass('initialized'))
 		{
 			element.component.initialize();
-			element.component.menuComponent.showFullTextMenu(true);
+
 			element.component.imagesComponent.onNewImageDisplayed.do( (image) => {
 				elementDom.find('.img-overlay').css('height', elementDom.find('.img-container').height());
 			});
 
 			setTimeout( () => { $(elementHeaderDom).addClass('initialized'); }, 0);
 		}
+
+		setTimeout( () => { element.component.menuComponent.checkDisplayFullText(); }, 0);
 
 		// on open animation end
 		setTimeout( () => { this.onElementFullyOpenned(elementDom); }, 300);
