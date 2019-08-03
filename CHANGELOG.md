@@ -1,3 +1,6 @@
+# 1.5.1
+* BUG: Fix some bug around categories after 1.5.0
+
 # 1.5.0
 * BUG: Fix reponsive behaviour
 * FEATURE: Internationalization is On ! English and French available
