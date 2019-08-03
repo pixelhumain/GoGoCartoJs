@@ -76,6 +76,7 @@ export class ElementListComponent
 		let elementsToDisplay : Element[] = $elementList.filter( (el) => el.isFullyLoaded);
 
 		this.elementToDisplayCount = elementsToDisplay.length;
+		console.log('-------------');
 		console.log('ElementList draw', elementsToDisplay.length);
 
 		if (App.dataType == AppDataType.All)
@@ -94,7 +95,7 @@ export class ElementListComponent
 
 		// If new elements to display are different than the visible one, draw them
 		let newIdsToDisplay = elementsToDisplay.map( (el) => el.id);
-		console.log('Visible elements', this.visibleElementIds, "new elements", newIdsToDisplay);
+		console.log('Already Visible elements', this.visibleElementIds, "new elements length", newIdsToDisplay.length);
 		if (newIdsToDisplay.length >= maxElementsToDisplay && arraysEqual(newIdsToDisplay, this.visibleElementIds)) { console.log("nothing to draw"); return; }
 
 		let newElementsToDisplayIncludesPerfectlyOldOnes = false;

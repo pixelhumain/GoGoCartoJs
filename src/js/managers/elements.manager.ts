@@ -6,9 +6,9 @@ export class ElementsManager
 {
   constructor()
   {
-    App.ajaxModule.onNewElements.do( (result) => { this.handleNewElementsReceivedFromServer(result); });  
-    App.elementsJsonModule.onNewsElementsConverted.do( (newElements)=> { App.elementsModule.addElements(newElements); });  
-    App.elementsModule.onElementsToDisplayChanged.do( (ElementsToDisplayChanged)=> { this.handleElementsToDisplayChanged(ElementsToDisplayChanged); });    
+    App.ajaxModule.onNewElements.do( (result) => { this.handleNewElementsReceivedFromServer(result); });
+    App.elementsJsonModule.onNewsElementsConverted.do( (newElements)=> { App.elementsModule.addElements(newElements); });
+    App.elementsModule.onElementsToDisplayChanged.do( (ElementsToDisplayChanged)=> { this.handleElementsToDisplayChanged(ElementsToDisplayChanged); });
   }
 
   checkForNewElementsToRetrieve($getFullRepresentation = false)
@@ -19,14 +19,14 @@ export class ElementsManager
     {
       this.retrieveMissingElementsViaApi($getFullRepresentation);
     }
-  }   
+  }
 
   private retrieveMissingElementsViaApi($getFullRepresentation : boolean)
   {
     // console.log("checkForNewelementToRetrieve, fullRepresentation", $getFullRepresentation);
     let result = App.boundsModule.calculateFreeBounds($getFullRepresentation);
     // console.log("checkForNewelementToRetrieve, calculateBounds", result);
-    if (result.status == "allRetrieved") 
+    if (result.status == "allRetrieved")
     {
       App.elementListComponent.handleAllElementsRetrieved();
       return; // nothing to do, all elements already retrieved
@@ -37,29 +37,29 @@ export class ElementsManager
       App.boundsModule.updateFilledBoundsWithBoundsReceived(result.expectedFillBounds, App.currMainId,  $getFullRepresentation);
       this.handleNewElementsReceivedFromServer({'data': [], 'fullRepresentation': $getFullRepresentation});
       return;
-    }    
+    }
 
     // Normal behaviour, getting missing elements via Ajax request
     let freeBounds = result.freeBounds;
     let expectedFilledBounds = result.expectedFillBounds;
-    if (freeBounds && freeBounds.length > 0) App.ajaxModule.getElementsInBounds(freeBounds, $getFullRepresentation, expectedFilledBounds); 
-  }   
+    if (freeBounds && freeBounds.length > 0) App.ajaxModule.getElementsInBounds(freeBounds, $getFullRepresentation, expectedFilledBounds);
+  }
 
   handleNewElementsReceivedFromServer(result)
-  {        
-    let elementsJson = result.data || result["@graph"] || result; 
+  {
+    let elementsJson = result.data || result["@graph"] || result;
     if (result.mapping) App.elementJsonParser.compactMapping = result.mapping;
     let elements = App.elementsJsonModule.convertJsonElements(elementsJson, true, result.fullRepresentation);
     // console.log("new Elements length", elements);
-    
+
     // on add markerClusterGroup after first elements received
-    if (elements.newElementsLength > 0 || App.mode == AppModes.List) 
+    if (elements.newElementsLength > 0 || App.mode == AppModes.List)
     {
-      App.elementsModule.updateElementsToDisplay(true);  
+      App.elementsModule.updateElementsToDisplay(true);
     }
 
     App.filtersComponent.updateElementCount();
-  }; 
+  };
 
   handleElementsToDisplayChanged(result : ElementsToDisplayChanged)
   {
@@ -76,7 +76,7 @@ export class ElementsManager
     {
       if (!App.mapComponent.isInitialized) { return;}
 
-      if (App.config.map.useClusters) App.mapComponent.markersGroup.restoreUnclusters(true);     
+      if (App.config.map.useClusters) App.mapComponent.markersGroup.restoreUnclusters(true);
 
       // In some cases, markerCluster works faster clearing alls markers and adding them again
       if (result.elementsToRemove.length + result.newElements.length > result.elementsToDisplay.length)
@@ -88,13 +88,13 @@ export class ElementsManager
       {
         App.mapComponent.removeMarkers(result.elementsToRemove.map( (e) => e.marker.getLeafletMarker()));
         App.mapComponent.addMarkers(result.newElements.map( (e) => e.marker.getLeafletMarker()));
-      }      
+      }
 
       if (App.config.map.useClusters) App.mapComponent.markersGroup.checkForUnclestering(App.map().getBounds());
-    }  
+    }
 
     let end = new Date().getTime();
-    //console.log("ElementsToDisplayChanged in " + (end-start) + " ms");  
-  };  
+    //console.log("ElementsToDisplayChanged in " + (end-start) + " ms");
+  };
 
 }

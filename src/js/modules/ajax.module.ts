@@ -29,7 +29,7 @@ export class AjaxModule
 
 	allElementsReceived = false;
 
-	constructor() { }  
+	constructor() { }
 
 	sendRequest(route : string, method : string, data : any, callbackSuccess?, callbackFailure?)
 	{
@@ -39,37 +39,37 @@ export class AjaxModule
 			method: method,
 			data: data,
 			success: response => { if (response && callbackSuccess) callbackSuccess(response); },
-			error: response => { 
+			error: response => {
 				// when working with cross domain, there is a bug the server return empty response (status code = 0)
 				// even if the request has been completed
 				if (response.status == 0 && callbackSuccess) callbackSuccess(response);
-				else if (callbackFailure) callbackFailure(response.data); 
+				else if (callbackFailure) callbackFailure(response.data);
 			}
 		});
 	}
 
 	getElementById(elementId, callbackSuccess?, callbackFailure?)
 	{
-		if (elementId == this.currElementIdRetrieving) return;		
+		if (elementId == this.currElementIdRetrieving) return;
 		this.currElementIdRetrieving = elementId;
-		
+
 		$.ajax({
 			url: this.getSingleElementApiUrl(elementId),
 			method: "post",
 			data: { },
-			success: response => 
-			{	        
+			success: response =>
+			{
 				if (response)
-				{					
-					let elementJson;	
-					if (response.data) elementJson = Array.isArray(response.data) ? response.data[0] : response.data;			
+				{
+					let elementJson;
+					if (response.data) elementJson = Array.isArray(response.data) ? response.data[0] : response.data;
 					else elementJson = response;
 
-					if (callbackSuccess) callbackSuccess(elementJson); 					
-				}	
-				else if (callbackFailure) callbackFailure(response); 
-				
-				this.currElementIdRetrieving = null;				       
+					if (callbackSuccess) callbackSuccess(elementJson);
+				}
+				else if (callbackFailure) callbackFailure(response);
+
+				this.currElementIdRetrieving = null;
 			},
 			error: response => { if (callbackFailure) callbackFailure(response); this.currElementIdRetrieving = null; }
 		});
@@ -77,7 +77,7 @@ export class AjaxModule
 
 	getElementsInBounds($bounds : L.LatLngBounds[], getFullRepresentation : boolean = false, expectedFilledBounds : L.LatLngBounds)
 	{
-		if (this.currBoundsRetrieving && $bounds[0].equals(this.currBoundsRetrieving[0])) return;		
+		if (this.currBoundsRetrieving && $bounds[0].equals(this.currBoundsRetrieving[0])) return;
 		this.currBoundsRetrieving = $bounds;
 
 		// if invalid location we abort
@@ -86,22 +86,22 @@ export class AjaxModule
 		let boundsResult = this.convertBoundsIntoParams($bounds);
 
 		let bnds = boundsResult.boundsJson;
-		let dataRequest : any = { 
-															bounds : boundsResult.boundsString, 
+		let dataRequest : any = {
+															bounds : boundsResult.boundsString,
 															boundsJson : JSON.stringify(boundsResult.boundsJson),
 															categories : App.currMainId != "all" ? [App.currMainId] : null,
-															fullRepresentation : getFullRepresentation, 
+															fullRepresentation : getFullRepresentation,
 															ontology : getFullRepresentation ? 'gogofull' : 'gogocompact',
 															stampsIds : App.request.stampsIds
-														};		
+														};
 		let route;
 		if (getFullRepresentation) route = App.config.data.elements;
 		else route = App.config.data.elementsCompactApiUrl || App.config.data.elements;
-		
-		this.sendAjaxElementRequest(new Request(route, dataRequest), expectedFilledBounds);
-	}	
 
-	private convertBoundsIntoParams($bounds : L.LatLngBounds[]) 
+		this.sendAjaxElementRequest(new Request(route, dataRequest), expectedFilledBounds);
+	}
+
+	private convertBoundsIntoParams($bounds : L.LatLngBounds[])
 	{
 		let stringifiedBounds = "";
 		let digits = 5;
@@ -119,7 +119,7 @@ export class AjaxModule
 		if ($bounds.length < 4)
 		{
 			let emptyBound = L.latLngBounds(L.latLng(0,0), L.latLng(0,0));
-			for (var i = $bounds.length; i < 4; i++) boundsLessDigits.push(emptyBound);			
+			for (var i = $bounds.length; i < 4; i++) boundsLessDigits.push(emptyBound);
 		}
 
 		return {boundsString: stringifiedBounds, boundsJson: boundsLessDigits};
@@ -128,11 +128,11 @@ export class AjaxModule
 	private getSingleElementApiUrl($elementId : any) : string
 	{
 		let route = "";
-		if (App.config.data.elementByIdUrl) 
+		if (App.config.data.elementByIdUrl)
 		{
 			route = App.config.data.elementByIdUrl;
 			if (route.indexOf('{ID}') > 0) route = route.replace('{ID}', $elementId.toString());
-			else 
+			else
 			{
 				if (route.slice(-1) != '/') route += '/';
 				route += $elementId;
@@ -149,7 +149,7 @@ export class AjaxModule
 		// console.log("Ajax send elements request ", $request);
 
 		if (this.isRetrievingElements)
-		{		
+		{
 			//console.log("Ajax isRetrieving");
 			this.requestWaitingToBeExecuted = true;
 			this.waitingRequestFullRepresentation = $request.data.fullRepresentation;
@@ -158,38 +158,38 @@ export class AjaxModule
 
 		this.isRetrievingElements = true;
 		this.currRequest = $request;
-		// let start = new Date().getTime();			
-		
+		// let start = new Date().getTime();
+
 		$.ajax({
 			url: $request.route,
 			method: "post",
 			data: $request.data,
 			beforeSend: () =>
-			{ 				
-				this.loaderTimer = setTimeout(function() { $('#directory-loading').show(); }, 1500); 
+			{
+				this.loaderTimer = setTimeout(function() { $('#directory-loading').show(); }, 1500);
 			},
 			success: response =>
-			{	
+			{
 				if (typeof response == "string") response = JSON.parse(response);
 				if (response.data !== null)
 				{
-					// let end = new Date().getTime();					
-					// console.log("receive " + response.data.length + " elements in " + (end-start) + " ms. fullRepresentation", response.fullRepresentation);				
+					// let end = new Date().getTime();
+					console.log("Ajax receive " + response.data.length + " elements");
 
 					response.fullRepresentation = response.ontology == "gogocompact" ? false : true;
-					
+
 					if ($expectedFilledBounds)
 						App.boundsModule.updateFilledBoundsWithBoundsReceived($expectedFilledBounds, $request.data.categories,  $request.data.fullRepresentation);
 
 					if (response.allElementsSends || !App.config.data.requestByBounds) this.allElementsReceived = true;
 
-					this.onNewElements.emit(response);				
-				}			     
+					this.onNewElements.emit(response);
+				}
 			},
 			complete: () =>
 			{
 			  this.isRetrievingElements = false;
-			  this.currBoundsRetrieving = null; 
+			  this.currBoundsRetrieving = null;
 			  clearTimeout(this.loaderTimer);
 			  setTimeout( () => $('#directory-loading').hide(), 250);
 			  if (this.requestWaitingToBeExecuted)
