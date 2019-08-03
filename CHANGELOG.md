@@ -1,4 +1,5 @@
-# 1.4.4
+# 1.5.0
+* BUG: Fix reponsive behaviour
 * FEATURE: Internationalization is On ! English and French available
 * MINOR: Improve responsive design for transiscope theme
 * BUG: Fix Element list bug
