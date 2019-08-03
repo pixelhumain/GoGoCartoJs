@@ -104,7 +104,7 @@ export const FR =
   'logged.user': 'Utilisateur loggué',
 
   //M
-  'map.of': 'Map of',
+  'map.of': 'Carte des',
   'mark.as.resolved': 'Marqué comme résolu',
   'menu': 'menu',
   'modification': 'Modification',

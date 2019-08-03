@@ -238,6 +238,7 @@ export class GoGoConfig
   // Function for i18n, mapping between the given entry and the string according to the language chosen
   translate(entry: string): string
   {
+    if (!entry) return;
     let value = this.i18n[this.language][entry];
     if(!value)
       console.warn(`[GoGoCartoJS] Entry '${entry}' not found`);
@@ -294,7 +295,7 @@ export class GoGoConfig
           else
             this.recursiveFillProperty(gogoConfig[prop], userConfig[prop]);
         }
-        else
+        else if (prop && prop != 'translations')
         {
           console.warn("[GoGoCarto] Config option '" + prop + "' does not exist");
         }
