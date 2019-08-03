@@ -299,7 +299,7 @@ export class InfoBarComponent
 		{
 			this.elementVisible.component.menuComponent.checkDisplayFullText();
 			this.dom.find('.element-item').removeClass('active');
-			let elementInfoBar_newHeight = this.dom.find('#element-info').outerHeight(true) - this.dom.find('.moreDetails').outerHeight(true);
+			let elementInfoBar_newHeight = this.dom.find('.collapsible-header').outerHeight(true) + this.dom.find('.menu-element').outerHeight(true);
 			this.dom.animate({'height': elementInfoBar_newHeight }, 400, 'swing');
 			setTimeout(() => this.dom.find('.moreDetails').hide(), 400);
 		}
