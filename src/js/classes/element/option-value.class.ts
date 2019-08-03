@@ -41,6 +41,7 @@ export class OptionValue
 			this.index = $optionValueJson.index || $key;
 			this.description = $optionValueJson.description || '';
 		}
+		if (this.optionId) this.optionId = this.optionId.toString();
 		this.diff = $optionValueJson.diff;
 	}
 
