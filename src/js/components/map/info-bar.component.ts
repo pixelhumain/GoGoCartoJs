@@ -55,6 +55,7 @@ export class InfoBarComponent
 			(response) => {
 				element.updateWithJson(response);
 				this.showElement(element.id);
+				App.historyModule.updateCurrState(); // update url with the element name we just received
 				if (callback) callback();
 			},
 			() => {
