@@ -63,18 +63,21 @@ export class BoundsModule
 		{
 			ratio = 0;
 		}
+		console.log("extend map bounds", App.map().getBounds());
 		App.boundsModule.extendBounds(ratio, App.map().getBounds());
 	}
 
 	extendBounds($ratio : number, $bounds : L.LatLngBounds = this.extendedBounds)
 	{
+		console.log("current bounds", $bounds, "extended", this.extendedBounds, "ratio", $ratio);
 		if (this.currRetrievingComplete(true)) {
 			this.extendedBounds = this.maxBounds;
 			return null;
 		}
 		if (!$bounds) { console.log("bounds uncorrect", $bounds); return null;}
 		this.extendedBounds = $bounds.pad($ratio);
-		return this.extendBounds;
+		console.log("new bounds", this.extendedBounds);
+		return this.extendedBounds;
 	}
 
 	updateFilledBoundsAccordingToNewMainOptionId()

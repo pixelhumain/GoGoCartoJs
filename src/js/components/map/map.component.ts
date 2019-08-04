@@ -1,4 +1,4 @@
-import { AppModule, AppStates } from "../../app.module";
+import { AppModule, AppStates, AppModes } from "../../app.module";
 import { Element, ViewPort, Event } from "../../classes/classes";
 import { GeocodeResult, RawBounds } from "../../modules/geocoder.module";
 import * as Cookies from "../../utils/cookies";
@@ -31,18 +31,18 @@ export class MapComponent
 	// requested bounds who could not be displayed when map not initialized (see fitbounds method)
 	waitingBounds : L.LatLngBounds = null;
 
-	getMap(){ return this.map_; }; 
+	getMap(){ return this.map_; };
 	getCenter() : L.LatLng { return this.viewport ? L.latLng(this.viewport.lat, this.viewport.lng) : null; }
 	getBounds() : L.LatLngBounds { return this.isMapLoaded ? this.map_.getBounds() : null; }
 	getZoom() { return this.map_.getZoom(); }
 	getOldZoom() { return this.oldZoom; }
 
 	show() { $('#directory-content-map').show(); }
-	
+
 	hide() { $('#directory-content-map').hide(); }
 
-	initialize() 
-	{	
+	initialize()
+	{
 		if (this.isInitialized) { this.resize(); return; }
 
 		let configTileLayers = App.config.map.tileLayers;
@@ -64,13 +64,13 @@ export class MapComponent
 
 		L.control.attribution({prefix: '<a target="_blank" href="https://pixelhumain.gitlab.io/GoGoCartoJs">GoGoCarto</a> | <a target="_blank" href="https://leafletjs.com">Leaflet</a>'}).addTo(this.map_);
 
-		setTimeout(function() { 
-			$('.leaflet-control-zoom').addClass('gogo-section-controls');				
+		setTimeout(function() {
+			$('.leaflet-control-zoom').addClass('gogo-section-controls');
 			$('.leaflet-control-zoom a').addClass('gogo-color-link');
-			$('.leaflet-control-layers').addClass('gogo-section-controls');	
+			$('.leaflet-control-layers').addClass('gogo-section-controls');
 		}, 0);
-		
-		if (App.config.map.useClusters) 
+
+		if (App.config.map.useClusters)
 		{
 			this.markersGroup = L.markerClusterGroup({
 			    spiderfyOnMaxZoom: true,
@@ -83,7 +83,7 @@ export class MapComponent
 			    animate: false,
 			    iconCreateFunction: function(cluster) {
 						var childCount = cluster.getChildCount();
-						
+
 						var c = ' marker-cluster-';
 						if (childCount < 10) { c += 'small'; }
 						else if (childCount < 100) { c += 'medium'; }
@@ -110,23 +110,24 @@ export class MapComponent
 
 		this.map_.addLayer(this.markersGroup);
 
-		L.control.zoom({position:'topright'}).addTo(this.map_);		
+		L.control.zoom({position:'topright'}).addTo(this.map_);
 		L.control.layers(baseLayers, {}, {position:'topright', collapsed: false}).addTo(this.map_);
 
 		this.map_.on('singleclick', (e) => { this.onClick.emit(); });
-		this.map_.on('moveend', (e) => 
-		{ 
-			let visibleMarkersLength = $('.leaflet-marker-icon:visible').length;		
-			App.boundsModule.extendMapBounds(this.oldZoom, this.map_.getZoom(), visibleMarkersLength);			
-			
+		this.map_.on('moveend', (e) =>
+		{
+			if (App.mode != AppModes.Map) return;
+			let visibleMarkersLength = $('.leaflet-marker-icon:visible').length;
+			App.boundsModule.extendMapBounds(this.oldZoom, this.map_.getZoom(), visibleMarkersLength);
+
 			this.updateViewPort();
-			this.onIdle.emit(); 
-			this.oldZoom = this.map_.getZoom();			
+			this.onIdle.emit();
+			this.oldZoom = this.map_.getZoom();
 		});
-		this.map_.on('load', (e) => 
-		{ 
-			this.isMapLoaded = true; 
-			this.onMapLoaded.emit();			
+		this.map_.on('load', (e) =>
+		{
+			this.isMapLoaded = true;
+			this.onMapLoaded.emit();
 		});
 
 		this.resize();
@@ -136,7 +137,7 @@ export class MapComponent
 		// there is already an address geocoded or a viewport defined
 		if (this.waitingBounds) this.fitBounds(this.waitingBounds, false);
 		else if (this.viewport) setTimeout( () => { this.setViewPort(this.viewport); },200);
-		
+
 		this.onMapReady.emit();
 	};
 
@@ -203,7 +204,7 @@ export class MapComponent
 		/*if (this.isMapLoaded && animate) App.map().flyToBounds(bounds);
 		else*/ App.map().fitBounds(bounds);
 		setTimeout( () => { App.mapManager.handleMapIdle(); console.log("force idle"); }, 500);
-	}		
+	}
 
 	fitDefaultBounds()
 	{
@@ -240,7 +241,7 @@ export class MapComponent
 			 return this.map_.getBounds().contains(position);
 		}
 		console.log("MapComponent->contains : map not loaded or element position undefined");
-		return false;		
+		return false;
 	}
 
 	extendedContains(position : L.LatLngExpression) : boolean
@@ -259,10 +260,10 @@ export class MapComponent
 		this.viewport.lat =  this.map_.getCenter().lat;
 		this.viewport.lng =  this.map_.getCenter().lng;
 		this.viewport.zoom = this.getZoom();
-	}	
+	}
 
 	setViewPort($viewport : ViewPort, $panMapToViewport : boolean = true)
-	{		
+	{
 		if (this.map_ && $viewport && $panMapToViewport)
 		{
 			//console.log("setViewPort", $viewport);

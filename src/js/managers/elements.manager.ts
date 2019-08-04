@@ -33,7 +33,7 @@ export class ElementsManager
     }
     else if (result.status == "included")
     {
-      // We simulate the end of a successeful ajax request 
+      // We simulate the end of a successeful ajax request
       App.boundsModule.updateFilledBoundsWithBoundsReceived(result.expectedFillBounds, App.currMainId,  $getFullRepresentation);
       this.handleNewElementsReceivedFromServer({'data': [], 'fullRepresentation': $getFullRepresentation});
       return;
@@ -53,7 +53,7 @@ export class ElementsManager
     // console.log("new Elements length", elements);
 
     // on add markerClusterGroup after first elements received
-    if (elements.newElementsLength > 0 || App.mode == AppModes.List)
+    if (elements.newElementsLength > 0 || App.mode == AppModes.List && result.fullRepresentation)
     {
       App.elementsModule.updateElementsToDisplay(true);
     }
