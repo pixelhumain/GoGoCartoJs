@@ -1,3 +1,6 @@
+# 1.5.2
+* BUG: Fix Element list extend bounds
+
 # 1.5.1
 * BUG: Fix some bug around categories after 1.5.0
 
