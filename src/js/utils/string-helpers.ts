@@ -66,7 +66,7 @@ export function camelToProper(value)
   for (var i = 0; i < characters.length; i++) {
     if (characters[i] == characters[i].toUpperCase()
         && i != 0
-        && !(characters[i + 1] == characters[i + 1].toUpperCase())
+        && characters[i + 1] && !(characters[i + 1] == characters[i + 1].toUpperCase())
         && characters[i - 1] != " ") {
       newText += " ";
     }

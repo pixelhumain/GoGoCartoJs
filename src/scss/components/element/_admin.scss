@@ -48,8 +48,7 @@
 }
 
 .info-bar-tabs.tabs {
-    z-index: 40;
-    .tab a { cursor: pointer; }    
+    .tab a { cursor: pointer; }
 }
 
 .item-container
@@ -72,13 +71,13 @@
 
 .vote-report-comment { font-style: italic }
 
-.body-admin-tab-content { 
+.body-admin-tab-content {
     display:none; // hidden by default
-    padding-right: 10px; 
+    padding-right: 10px;
     font-size: .9em;
     .vote-report-item { padding: 0 !important }
 }
 
-    
+
 
 

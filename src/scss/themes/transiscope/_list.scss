@@ -4,7 +4,7 @@
     line-height: 2rem;
     border-radius: 5px;
     top: 15px;
-    padding: 0px 15px;    
+    padding: 0px 15px;
     left: initial !important;
     text-transform: uppercase;
     text-decoration: none;
@@ -12,7 +12,7 @@
     font-weight: bold;
     float: right;
     margin-top: 12px;
-    margin-right: -8px;    
+    margin-right: -8px;
 
     .btn-back {
       font-size: 1.2rem;
@@ -30,13 +30,13 @@
 
     @media (min-width: 1500px) { left: 0px; }
   }
-  
+
   text-align: left;
 }
 
 #directory-content-list .element-item {
-  
-  &:not(.active) { @include box-shadow-1(none); }  
+
+  &:not(.active) { @include box-shadow-1(none); }
   .collapsible-body { border-bottom: none; }
   .section { margin-right: 0; }
 
@@ -44,7 +44,7 @@
     width: 100%;padding: 0;
     .inline-option-value[main-category-owner-name="Sources"] {
       float: right;
-      margin-right: 0;      
+      margin-right: 0;
     }
   }
 
@@ -52,7 +52,7 @@
     text-align: right;
     padding: 0;
     padding-right: 10px;
-    height: 2.3rem !important;
+    min-height: 2.3rem !important;
     .menu-element-item .menu-icon {
       font-size: 18px !important;
       &:before { line-height: 2.3rem !important; }
@@ -62,12 +62,12 @@
       font-size: 11px;
       line-height: 2.5rem;
     }
-  }      
+  }
 
   .expand-label { display: none }
 
   .location {
-    font-weight: normal;    
+    font-weight: normal;
     .postalCode { font-size: 14px; }
   }
 
@@ -76,7 +76,7 @@
   .collapsible-body .tags-container {
     margin-bottom: 0;
     padding-bottom: 1rem;
-  } 
+  }
 
   .section-taxonomy .category-wrapper:last-child .option-value:last-child { margin-bottom: 0; }
 }

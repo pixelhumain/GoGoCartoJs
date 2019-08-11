@@ -4,7 +4,7 @@
 }
 
 .menu-element
-{	
+{
 	z-index: 10;
 	position: absolute;
 	bottom: 0;
@@ -13,14 +13,14 @@
 
 	.menu-element-item-text { display: none; }
 
-	&:not(.full-text) { height: 3rem; }
+	&:not(.full-text) { min-height: 3rem; }
 
 	&.full-text
 	{
 		padding: .3rem 0 .8rem 0;
 		@media #{$small-only} { padding-top: 0; }
 
-		.menu-element-item {			
+		.menu-element-item {
 			@media #{$small-only} { margin: 0 6px -.9rem 6px }
 			margin: 0 10px -.5rem 10px;
 			@media (min-width: 1400px) { margin: 0 .8rem -.5rem .8rem; }
@@ -50,13 +50,13 @@
 
 		.menu-icon
 		{
-			font-size: 20px;	
-			float: left;		
+			font-size: 20px;
+			float: left;
 
-			&.small-icon { font-size: 18px; }			
+			&.small-icon { font-size: 18px; }
 			&:before { line-height: 2.8rem; }
 
-			@media #{$medium-and-up} 
+			@media #{$medium-and-up}
 			{
 				font-size: 22px;
 
@@ -70,12 +70,12 @@
 			padding: 2px;
 			padding-bottom: 3px;
 			border: none;
-		}	
+		}
 
 		&.item-stamp.filled {
 			color : rgb(255, 171, 0);
 			font-weight: bold;
-		}		
+		}
 	}
 }
 

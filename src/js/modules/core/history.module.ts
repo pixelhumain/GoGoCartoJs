@@ -9,7 +9,7 @@ declare let $;
 declare let Routing;
 
 $(document).ready(function()
-{	
+{
    // Gets history state from browser
    window.onpopstate = (event : PopStateEvent) =>
    {
@@ -25,7 +25,7 @@ $(document).ready(function()
 
 export class HistoryModule
 {
-	constructor() { }  
+	constructor() { }
 
 	updateCurrState(options?)
 	{
@@ -36,7 +36,7 @@ export class HistoryModule
 	pushNewState(options?)
 	{
 		if (history.state === null) this.updateHistory(false, options);
-		else this.updateHistory(true, options);		
+		else this.updateHistory(true, options);
 	};
 
 	private updateHistory($pushState : boolean, $options? : any)
@@ -86,22 +86,22 @@ export class HistoryModule
 
 		if (App.dataType == AppDataType.SearchResults && App.state == AppStates.Normal)
 		{
-			route = App.routerModule.generate('search', { mode :  mode, text : historyState.text });	
-		}		
+			route = App.routerModule.generate('search', { mode :  mode, text : historyState.text });
+		}
 		else if (App.mode == AppModes.List)
 		{
 			// in list mode we don't care about state
-			route = App.routerModule.generate('normal', { mode :  mode, addressAndViewport: addressAndViewport });	
+			route = App.routerModule.generate('normal', { mode :  mode, addressAndViewport: addressAndViewport });
 		}
 		else
 		{
 			switch (App.state)
 			{
-				case AppStates.Normal:	
-					route = App.routerModule.generate('normal', { mode :  mode, addressAndViewport: addressAndViewport });	
+				case AppStates.Normal:
+					route = App.routerModule.generate('normal', { mode :  mode, addressAndViewport: addressAndViewport });
 					break;
 
-				case AppStates.ShowElement:	
+				case AppStates.ShowElement:
 				case AppStates.ShowElementAlone:
 				case AppStates.ShowDirections:
 					if (!historyState.id) return;
@@ -110,14 +110,14 @@ export class HistoryModule
 
 					if (App.state == AppStates.ShowDirections)
 					{
-						route = App.routerModule.generate('show_directions', { name :  capitalize(slugify(element.name)), id : element.id, addressAndViewport: addressAndViewport });	
-					}	
+						route = App.routerModule.generate('show_directions', { name :  capitalize(slugify(element.name)), id : element.id, addressAndViewport: addressAndViewport });
+					}
 					else
 					{
-						route = App.routerModule.generate('show_element', { name :  capitalize(slugify(element.name)), id : element.id, addressAndViewport: addressAndViewport });	
-					}						
-					break;		
-			}		
+						route = App.routerModule.generate('show_element', { name :  capitalize(slugify(element.name)) || 'id', id : element.id, addressAndViewport: addressAndViewport });
+					}
+					break;
+			}
 		}
 
 		if (route && historyState.filters) route += '?cat=' + historyState.filters;

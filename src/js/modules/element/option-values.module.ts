@@ -77,14 +77,14 @@ export class ElementOptionValuesModule
   // of those deepest options so filters can works properly
   private lookforMissingParentsOption(element : ElementBase)
   {
-    let optionValuesIds = element.optionsValues.map( (el) => el.optionId);
+    let optionValuesIds = element.optionsValues.map( (el) => el.optionId.toString());
     for(let optionValue of element.optionsValues)
       for (let parentOptionId of optionValue.option.parentOptionIds)
         if (optionValuesIds.indexOf(parentOptionId.toString()) == -1)
         {
           let newOption = this.createOptionValueForElement(parentOptionId, 0, element);
           // console.log("Missing option", newOption.option.nameShort, element.name);
-          optionValuesIds.push(parentOptionId);
+          optionValuesIds.push(parentOptionId.toString());
         }
   }
 

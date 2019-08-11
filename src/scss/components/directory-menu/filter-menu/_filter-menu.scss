@@ -13,17 +13,17 @@
 {
   font-size: .95rem;
   .subcategorie-option-item .arrow-after{ margin-left: .5rem; }
-  .icon { 
-    margin-right: .6rem;   
+  .icon {
+    margin-right: .6rem;
   }
 
-  .category-wrapper .subcategories-wrapper:not(.no-withdrawal) 
+  .category-wrapper .subcategories-wrapper:not(.no-withdrawal)
   {
     margin-left: 1rem;
   }
 
-  .main-categories { 
-    width: 3rem; 
+  .main-categories {
+    width: 3rem;
     overflow: visible;
     .icon { height: 3.4rem; width: 3rem;}
     .icon:before { left: .6rem; }
@@ -31,27 +31,27 @@
   .sub-categories .sub-categories-content { padding-right: 0; }
   .sub-categories:not(.with-left-border) .sub-categories-content { padding-left: .2rem; }
 
-  .subcategory-item { 
-    padding-left: .6rem; 
+  .subcategory-item {
+    padding-left: .6rem;
     font-size: .9rem;
   }
-  .subcategorie-option-item { padding-left: .5rem; }  
-  
+  .subcategorie-option-item { padding-left: .5rem; }
+
   .category-wrapper .category-wrapper {
     .subcategory-item { padding-left: .7rem; }
-    .subcategorie-option-item { padding-left: .6rem; }  
+    .subcategorie-option-item { padding-left: .6rem; }
   }
 }
 
-#directory-menu 
+#directory-menu
 {
-	.filter-menu 
-	{ 
+	.filter-menu
+	{
 		width: 100%;
     height: auto;
     position: relative;
     @include flexbox();
-    @include flex-flow(row nowrap); 
+    @include flex-flow(row nowrap);
     @include flex(1 auto);
     @media #{$small-only} { height: 100% }
   }
@@ -62,21 +62,21 @@
 		padding-top: .6rem;
     height: 100%;
 
-    .main-icon 
+    .main-icon
     {
       padding-top: 0px;
 
-      &:not(.active) { .main-icon-text { transform: rotateZ(-45deg); opacity: .8; } }     
+      &:not(.active) { .main-icon-text { transform: rotateZ(-45deg); opacity: .8; } }
       &:hover { .main-icon-text { opacity: 1; } }
-      .main-icon-text 
+      .main-icon-text
       {
         text-transform: uppercase;
         @include transition(transform .2s)
         font-size: 0.85rem;
         font-weight: bold;
-        opacity: 1;        
+        opacity: 1;
       }
-    }    
+    }
 
     .icon
     {
@@ -123,14 +123,14 @@
 
 	    &.active
 	    {
-    		padding-right: 8px;    		
+    		padding-right: 8px;
 	    }
     }
 
     .main-gogo-icon-background
     {
   	  position: absolute;
-  	  top : .6rem;    
+  	  top : .6rem;
 	    border-radius: 0 50% 50% 0;
     }
 	}
@@ -140,14 +140,14 @@
     &:after {
       content: "+";
       font-size: 1.4rem;
-      font-weight: normal;    
+      font-weight: normal;
       padding: 3px 11px;
       border-radius: 3px;
       margin-left: 5px;
       top: 5px;
       line-height: 1rem;
       position: absolute;
-      right: 0;
+      right: -38px;
       z-index: 10;
       top: 11px;
     }
@@ -164,14 +164,14 @@
 
 	.sub-categories
 	{
-		@include flex(1 auto);		
+		@include flex(1 auto);
 
 		.sub-categorie-main-title
 		{
 			height: 3rem;
-			line-height: 3rem;			
+			line-height: 3rem;
 			font-weight:bold;
-			text-align:center;	
+			text-align:center;
       overflow: hidden;
 
 			@media #{$small-only} { font-size: 1.2rem;}
@@ -189,11 +189,11 @@
 				height: 100%;
 				margin: 0;
 				border: 0;
-				box-shadow: none;		
+				box-shadow: none;
 				padding-bottom: 2rem;
 				overflow-y: auto;
 				overflow-x: hidden;
 			}
 		}
-	}		
+	}
 }
