@@ -96,7 +96,6 @@ export const FR =
   "logged.user":"Utilisateur loggué",
 
   //M
-<<<<<<< HEAD
   "map.of":"Carte des",
   "mark.as.resolved":"Marqué comme résolu",
   "menu":"menu",
@@ -107,18 +106,6 @@ export const FR =
   "modified.owner":"Modifié par propriétaire",
   "modified.pending":"en attente de modification",
   "my.position":"ma position",
-=======
-  'map.of': 'Carte des',
-  'mark.as.resolved': 'Marqué comme résolu',
-  'menu': 'menu',
-  'modification': 'Modification',
-  'modification.plural': 'Modifications',
-  'modified.admin': 'Modifié par admin',
-  'modified.direct.link': 'Modifié avec lien direct',
-  'modified.owner': 'Modifié par propriétaire',
-  'modified.pending': 'en attente de modification',
-  'my.position': 'ma position',
->>>>>>> master
 
   //N
   "new":"Nouvel ",
