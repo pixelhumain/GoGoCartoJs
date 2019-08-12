@@ -11,7 +11,8 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream'),
     tsify = require("tsify"),
     notifier = require('node-notifier'),
-    nunjucks = require('gulp-nunjucks');
+    nunjucks = require('gulp-nunjucks'),
+    addMissingEntries = require('./addMissingEntries');
 
 function handleError(err)
 {
@@ -152,3 +153,7 @@ gulp.task('production', function() {
     gulp.start('gzip_styles', 'gzip_js');
 });
 
+gulp.task('addMissingEntries', function ()
+{
+  addMissingEntries();
+});
