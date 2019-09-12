@@ -54,16 +54,18 @@ export class Element extends ElementBase
 
 	update($force : boolean = false)
 	{
-		//console.log("marker update needToBeUpdated", this.needToBeUpdatedWhenShown);
+		// console.log("marker update needToBeUpdated", this.needToBeUpdatedWhenShown);
 		if (this.needToBeUpdatedWhenShown || App.mode == AppModes.List || $force)
 		{
 			App.elementIconsModule.updateIconsToDisplay(this);
 			let optionValuesToUpdate = this.getCurrOptionsValues().filter( (optionValue) => optionValue.isFilledByFilters);
 			optionValuesToUpdate.push(this.getCurrMainOptionValue());
 			for(let optionValue of optionValuesToUpdate) App.elementOptionValuesModule.updateOptionValueColor(this, optionValue);
-
-			this.colorOptionId = this.iconsToDisplay.length > 0 && this.getIconsToDisplay()[0] ? this.getIconsToDisplay()[0].colorOptionId : null;
-
+			this.colorOptionId = this.getIconsToDisplay().length > 0 && this.getIconsToDisplay()[0] ? this.getIconsToDisplay()[0].colorOptionId : null;
+      if (!this.colorOptionId) {
+        let coloredOptionValues = optionValuesToUpdate.filter( (ov) => ov && ov.colorOptionId);
+        this.colorOptionId = coloredOptionValues.length > 0 ? coloredOptionValues[0].colorOptionId : null;
+      }
 			if (this.marker) this.marker.update();
 			this.needToBeUpdatedWhenShown = false;
 		}
@@ -158,7 +160,8 @@ export class Element extends ElementBase
       pendingContribution: this.pendingContribution,
       contributions: this.contributions,
       reports: this.reports,
-      votes: this.votes
+      votes: this.votes,
+      colorOptionId: this.colorOptionId
     };
     let customData = [];
     $.each(this.data, (key, value) => {

@@ -108,12 +108,13 @@ export class ElementOptionValuesModule
           && optionValue.option.ownerId !== $optionValue.option.ownerId
           && optionValue.categoryOwner.ownerId == $optionValue.categoryOwner.ownerId
       );
+      // console.log("\n\n----------\nChecking option", $optionValue.option.name);
 
-      //console.log("siblingsOptionsForColoring", siblingsOptionsForColoring.map( (op) => op.option.name));
+      // console.log("siblingsOptionsForColoring", siblingsOptionsForColoring.map( (op) => op.option.name));
       if (siblingsOptionsForColoring.length > 0)
       {
         option = <Option> siblingsOptionsForColoring.shift().option;
-        //console.log("-> sibling found : ", option.name);
+        // console.log("-> sibling found : ", option.name);
         colorId = option.id;
       }
       else
