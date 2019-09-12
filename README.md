@@ -14,7 +14,7 @@ Discover
 Demo
 -----
 
-[Try it Now!](https://pixelhumain.gitlab.io/GoGoCartoJs/web/examples)
+[Try it Now!](https://pixelhumain.github.io/GoGoCartoJs/web/examples)
 
 
 Install / Download
