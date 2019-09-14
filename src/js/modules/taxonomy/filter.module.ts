@@ -30,7 +30,7 @@ export class FilterModule
 		}
 		else
 		{
-			if (element.isPending()) return false;	
+			if (element.isPending()) return false;
 		}
 
 		if (!App.config.menu.showOnePanePerMainOption)
@@ -50,11 +50,11 @@ export class FilterModule
 		}
 		else
 		{
-			let mainOption = App.taxonomyModule.getCurrMainOption();			
-			let mainOptionFilled = this.recursivelyCheckedInOption(mainOption, element);			
+			let mainOption = App.taxonomyModule.getCurrMainOption();
+			let mainOptionFilled = this.recursivelyCheckedInOption(mainOption, element);
 			let otherCategoriesFilled = App.taxonomyModule.otherRootCategories.every( (category) => this.recursivelyCheckInCategory(category, element));
 			return mainOptionFilled && otherCategoriesFilled;
-		}		
+		}
 	}
 
   log = false;
@@ -82,6 +82,7 @@ export class FilterModule
 		if (this.log) console.log("--" + "Category", category.name);
 
 		if (!category.useForFiltering) return true;
+		if (category.isDisabled && !category.isMandatory) return true;
 		let checkedOptions = category.checkedOptions;
 		let elementOptions = element.getOptionValueByCategoryId(category.id);
 		if (App.config.menu.showOnePanePerMainOption) elementOptions = elementOptions.filter((optValue) => optValue.optionId != App.currMainId);
@@ -90,13 +91,13 @@ export class FilterModule
 		if (elementOptions.length == 0 && this.log) console.log("--" + "Element don't have options in this category. Catgeoyr mandatory ? ", category.isMandatory);
 		if (elementOptions.length == 0) return !category.isMandatory && category.isChecked;
 
-		let isSomeOptionInCategoryCheckedOptions = elementOptions.some(optionValue => checkedOptions.indexOf(optionValue.option) > -1); 
+		let isSomeOptionInCategoryCheckedOptions = elementOptions.some(optionValue => checkedOptions.indexOf(optionValue.option) > -1);
 
 		if (this.log) console.log("--" + "isSomeOptionInCategoryCheckedOptions", isSomeOptionInCategoryCheckedOptions);
 		if (isSomeOptionInCategoryCheckedOptions)
 			return true;
 		else
-		{				
+		{
 			if (this.log) console.log("--" + "So we checked in suboptions", category.name);
 			return elementOptions.some( (optionValue) => this.recursivelyCheckedInOption(optionValue.option, element));
 		}
