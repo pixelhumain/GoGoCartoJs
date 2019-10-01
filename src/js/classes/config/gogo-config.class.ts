@@ -126,9 +126,7 @@ export class GoGoConfig
   {
     userRoles: ['anonymous'],
     userEmail: '',
-    loginAction: function() { console.warn("[GoGoCarto] You need login to access this feature"); },
-
-    hideMailsByShowingSendMailButton: true,
+    loginAction: function() { console.warn("[GoGoCarto] You need login to access this feature"); }
   };
   theme = 'default';
   // see gogo-styles for defaut values
@@ -187,7 +185,7 @@ export class GoGoConfig
     this.recursiveFillProperty(this, config);
     this.data.retrieveElementsByApi = typeof this.data.elements == "string";
     if (config.map && config.map.defaultBounds) this.map.defaultBoundsProvided = true;
-    if (!this.features['sendMail'].active) this.security.hideMailsByShowingSendMailButton = false;
+    if (!this.features['sendMail'].url) this.features['sendMail'].active = false;
 
     if (!this.colors.menuOptionHover ) {
       let menuOptionHover = tinycolor(this.colors.contentBackground.toString());
