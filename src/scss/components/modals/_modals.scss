@@ -2,7 +2,7 @@
 {
     position: absolute;
     .modal-footer { background-color: #444; }
-}  
+}
 
 .simple-modal.modal
 {
@@ -28,12 +28,12 @@
 
   .modal-footer
   {
-    padding-right: 2.5rem;    
+    padding-right: 2.5rem;
 
     .modal-action
     {
-      
-      color: white;      
+
+      color: white;
       font-size: .9rem;
       padding: 0 25px;
 
@@ -43,40 +43,40 @@
         &:hover{ background-color: #ec787d }
       }
     }
-  }  
+  }
 
   .input-simple-modal
   {
     &:focus
     {
-      border-color: $secondary-color; 
+      border-color: $secondary-color;
       box-shadow: none;
     }
 
     &::selection {
-      background-color: $secondary-color; 
+      background-color: $secondary-color;
         color: white;
     }
     &::-moz-selection {
-      background-color: $secondary-color; 
+      background-color: $secondary-color;
         color: white;
     }
   }
 }
 
 .page-modal .btn-back
-{ 
+{
   float: left;
   font-size: 2rem;
   line-height: 4rem;
-  padding: 0 2rem;  
+  padding: 0 2rem;
   margin-left: -2rem;
-}  
+}
 
 // vote and report-error modals
 .modal.action-modal
 {
-  h5 
+  h5
   {
     text-align: center;
     margin-bottom: 1.5rem;
@@ -144,7 +144,7 @@
     margin-bottom: 1.5rem;
   }
 
-  label { 
+  label {
     font-size: .8rem ;
     &:not(:last-child) { margin-bottom: 15px; }
     strong { font-weight: bold; }
@@ -180,8 +180,13 @@
 {
   width: 90%;
 
-  .modal-content { padding: 0; overflow: auto; }
+  .modal-content {
+    padding: 0;
+    overflow: auto;
+    height: calc(100% - 52px);
+    text-align: center;
+  }
 
-  img { width: 100%; }
-  
+  img { max-width: 100%; object-fit: scale-down;}
+
 }
