@@ -27,12 +27,15 @@ var elements = [
     "commitment": "Short Description Je souhaiterai proposer aux citoyens, une initiation à la gravure sur brique de lait. Pour permettre à cet atelier d'être en adéquation avec Alternatiba, le thème serait la création d'une monnaie locale, où chacun pourrait graver ce qu'il aimerait voir apparaitre sur cette monnaie. Une expos",
 
     // "image" : "https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.italyguides.it%2Fimages%2Fgridfolio%2Ftaormina%2Ftaormina.02.jpg&f=1",
-    // "images": [ "https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.italyguides.it%2Fimages%2Fgridfolio%2Ftaormina%2Ftaormina.02.jpg&f=1", "http://engineering.naukri.com/wp-content/uploads/sites/19/2015/10/open-source.png", "https://images.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.clipartbest.com%2Fcliparts%2FRcA%2FErG%2FRcAErGEei.png&f=1"],
-
-    "website": "https://example.fr",
+    "images": [ "images.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.italyguides.it%2Fimages%2Fgridfolio%2Ftaormina%2Ftaormina.02.jpg&f=1", "http://engineering.naukri.com/wp-content/uploads/sites/19/2015/10/open-source.png", "https://images.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.clipartbest.com%2Fcliparts%2FRcA%2FErG%2FRcAErGEei.png&f=1"],
+    "files": [
+      "https://www.php.net/images/logos/php-logo.svg",
+      "www.php.net/images/logos/php-logo.svg"
+    ],
+    "website": "example.fr",
     "urls": {
-      "communecter": "http://communeter.org",
-      "peertube": "http://framatub.org"
+      "communecter": "communeter.org",
+      "peertube": "framatub.org"
     },
     // "urls": ["http://communeter.org", "http://framatube.org"],
     // "urls": [

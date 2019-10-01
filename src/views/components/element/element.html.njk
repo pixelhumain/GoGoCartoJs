@@ -2,8 +2,8 @@
 {# -------------- #}
 {#  ELEMENT INFO  #}
 {# -------------- #}
-<li id="element-info-{{ element.id }}" 
-  class="element-item gogo-section-content" 
+<li id="element-info-{{ element.id }}"
+  class="element-item gogo-section-content"
   data-element-id="{{ element.id }}">
 
 {% set pendingClass = 'pending' if (element.isPending or element.isDeleted) and config.isFeatureAvailable('pending') else '' %}
@@ -11,11 +11,11 @@
 
 {# HEADER #}
 <div class="collapsible-header {{pendingClass}}" option-id={{mainOptionToDisplay.colorOptionId}}>
-  {% include here ~ 'header.html.njk' %} 
+  {% include here ~ 'header.html.njk' %}
 </div>
 
 {# INTERACTIVE SECTION #}
-{% include here ~ 'interactive-section.html.njk' %}  
+{% include here ~ 'interactive-section.html.njk' %}
 
 {# MENU #}
 {% include here ~ 'menu.html.njk' %}
@@ -35,8 +35,8 @@
   {% if element.images.length %}
     <div class="img-container">
       <ul class="images-carousel">
-        {% for currentImage in element.images %}
-          <li><img src="{{ currentImage }}" class="gogo-img"/></li>
+        {% for imageUrl in element.images %}
+          <li><img src="{{ imageUrl|add_protocol_if_need }}" class="gogo-img"/></li>
         {% endfor %}
       </ul>
     </div>
@@ -50,15 +50,15 @@
         <span class="img-navigation-btn next"><span class="icon gogo-icon-chevron-right"></span></span>
       </div>
     {% endif %}
-    <div class="collapsible-body-main-content gogo-section-contentBody">       
+    <div class="collapsible-body-main-content gogo-section-contentBody">
       <div class="body-main-tab-content">
-        
+
         {# Votes and reports #}
         {% if config.isFeatureAvailable('directModeration') %}
           {% include here ~ "admin/pending-contribution.html.njk" %}
           {% import here ~ "admin/votes-reports.html.njk" as VotesReportsRenderer %}
           {{ VotesReportsRenderer.render('Votes', element.votes, smallWidth) }}
-          {{ VotesReportsRenderer.render('Erreurs signalées', element.reports, smallWidth) }}      
+          {{ VotesReportsRenderer.render('Erreurs signalées', element.reports, smallWidth) }}
         {% endif %}
 
         {# Element description #}
@@ -69,9 +69,9 @@
       {% if isHistoryAvailable %}
         <div class="body-admin-tab-content">
           {% include here ~ "admin/contributions.html.njk" %}
-        </div>   
-      {% endif %} 
-    </div> 
+        </div>
+      {% endif %}
+    </div>
   </div>
 </div>
 

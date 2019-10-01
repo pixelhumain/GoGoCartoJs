@@ -4,7 +4,7 @@
   {% if pending %}
     {{ value|safe }}
   {% else %}
-   <a href="{{ value }}" target="_blank">{{ value|safe }}</a>
+   <a href="{{ value|add_protocol_if_need }}" target="_blank">{{ value|safe }}</a>
   {% endif %}
 </div>
 {% endif %}
