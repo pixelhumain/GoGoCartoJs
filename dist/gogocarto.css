@@ -6641,9 +6641,12 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       width: 90%; }
       .gogo-load-css .gogocarto-container #modal-image .modal-content {
         padding: 0;
-        overflow: auto; }
+        overflow: auto;
+        height: calc(100% - 52px);
+        text-align: center; }
       .gogo-load-css .gogocarto-container #modal-image img {
-        width: 100%; }
+        max-width: 100%;
+        object-fit: scale-down; }
     .gogo-load-css .gogocarto-container .shadow-bottom {
       width: 100%;
       margin-right: 0;

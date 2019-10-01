@@ -1,3 +1,11 @@
+# 1.6.0
+* BUG: Marker color not properly set
+* BUG: Non mandatory categories better handled for filtering
+* BUG: Some translations not properly used
+* FEATURE: Handle files with gogo_files filter
+* FEATURE: add automatically missing "http" protocol for urls
+* BUG: sendMail feature was not working properly
+
 # 1.5.2
 * BUG: Fix Element list extend bounds
 
@@ -24,5 +32,5 @@
 * FEATURE: Display number of element for each category
 * MINOR: Improve UI (theme, fontawesome icons)
 
-#1.4
+# 1.4
 * Creation of this changelog
