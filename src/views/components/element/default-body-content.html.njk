@@ -60,6 +60,12 @@
   </div>
 {% endif %}
 
+{% if files|length %}
+  {{ ''|gogo_separator }}
+  <h3>{{ 'files' | i18n }}</h3>
+  {{ files|gogo_files }}
+{% endif %}
+
 {% if updatedAt %}
   {{ ''|gogo_separator }}
   <div class="field-updated-at">{{ 'updated.at' | i18n }} : {{updatedAt}}</div>

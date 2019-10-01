@@ -1,0 +1,9 @@
+{% if value and value|length > 0 %}
+  <div class="field field-files files-container">
+    {% for fileUrl in value %}
+      <div class="gogo-file">
+        <a href="{{ fileUrl }}" target="_blank">{{ fileUrl|name_from_url }}</a>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}

@@ -61,10 +61,16 @@ export class ElementJsonParserModule
     element.openHours = elementJson.openHours;
     App.elementFormaterModule.calculateFormatedOpenHours(element);
     element.stamps = elementJson.stamps || [];
+
     element.images = [];
     if(elementJson.image) element.images.push(elementJson.image);
     else if (elementJson.images) element.images = [].concat(elementJson.images);
-    element.images = element.images.filter((imageUrl) => imageUrl.length > 0);
+    element.images = element.images.filter((imageUrl) => imageUrl.length > 5);
+
+    element.files = [];
+    if(elementJson.file) element.files.push(elementJson.file);
+    else if (elementJson.files) element.files = [].concat(elementJson.files);
+    element.files = element.files.filter((url) => url.length > 5);
 
     // CUSTOM DATA
     element.data = elementJson;

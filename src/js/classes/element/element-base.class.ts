@@ -54,6 +54,7 @@ export class ElementBase
   openHours : any;
   formatedOpenHours;
   images : string[];
+  files : string[];
   stamps : any[] = [];
 
   // CUSTOM DATA

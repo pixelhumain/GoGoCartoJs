@@ -12,7 +12,7 @@ declare var commonmark;
 
 export class TemplateElementFiltersModule
 {
-  filters = [ 'gogo_text', 'gogo_email', 'gogo_openhours', 'gogo_tags', 'gogo_vimeo', 'gogo_url', 'gogo_title', 'gogo_separator', 'gogo_taxonomy', 'gogo_textarea', 'gogo_tel' ];
+  filters = [ 'gogo_text', 'gogo_email', 'gogo_openhours', 'gogo_tags', 'gogo_vimeo', 'gogo_url', 'gogo_title', 'gogo_separator', 'gogo_taxonomy', 'gogo_textarea', 'gogo_tel', 'gogo_files' ];
 
   public addGoGoFilters(nunjucksEnvironment)
   {
@@ -43,7 +43,7 @@ export class TemplateElementFiltersModule
         break;
       case 'gogo_tel':
         functionToAdd['formatPhoneNumber'] = formatPhoneNumber;
-        break;      
+        break;
       default:
     }
     return functionToAdd;

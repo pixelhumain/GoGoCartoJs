@@ -66,6 +66,7 @@ export const EN =
   "export.iframe": "Export Iframe",
 
   //F
+  "files": "Files",
   "fill.fields.below": "You must fill in the fields below",
   "find.route": "Find the route",
   "find.a.place": "Find a place",

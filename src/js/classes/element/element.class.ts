@@ -154,6 +154,7 @@ export class Element extends ElementBase
       isPending: this.isPending(),
       isDeleted: this.isDeleted(),
       images: this.images,
+      files: this.files,
       needsModeration: this.needsModeration(),
       formatedOpenHours: this.formatedOpenHours,
       isEditable: this.isEditable,

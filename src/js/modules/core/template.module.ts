@@ -36,6 +36,11 @@ export class TemplateModule
 		this.nunjucksEnvironment.addFilter('is_object', function(obj) {
 		  return typeof obj == 'object';
 		});
+		this.nunjucksEnvironment.addFilter('name_from_url', function(url) {
+		  let splited = url.split('/');
+		  let name = splited[splited.length - 1];
+		  return name.replace(/[a-z0-9]{13}_/, ''); // remove 13 character hash on the beginning of the file name, method used by gogocarto
+		});
 
 	}
 
