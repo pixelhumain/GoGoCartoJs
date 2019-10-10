@@ -4,8 +4,8 @@
 * @Last Modified by:   Sebastian Castro
 * @Last Modified time: 2018-07-04 17:09:40
 */
-.category-wrapper .subcategories-wrapper:not(.no-withdrawal) 
-{   
+.category-wrapper .subcategories-wrapper:not(.no-withdrawal)
+{
 	margin-left: 1.3rem;
   border-left: 1px dotted #c3c3c3;
 
@@ -13,7 +13,7 @@
   margin-top: 0;
 
   .category-wrapper { margin-top: 0}
-  
+
   .subcategory-item
   {
   	font-size: 85%;
@@ -26,7 +26,7 @@
 		.subcategorie-checkbox
 		{
 			+ label:after { width: 15px; height: 15px; }
-			
+
 			+ label:before { width: 5px; height: 9px; top: 9px; left: 2px; }
 		}
 
@@ -36,19 +36,19 @@
     .checkbox-wrapper .checkbox-container{ top: -4px; }
   }
 
-  .subcategorie-option-item 
+  .subcategorie-option-item
   {
   	font-size: 95%;
     line-height: 2.4rem;
     height: 2.4rem;
     padding-left: 1rem;
 
-    .icon { 
-      font-size: 1.2rem; 
-      padding-top: 1px; 
-      margin-right: .8rem; 
+    .icon {
+      font-size: 1.2rem;
+      padding-top: 1px;
+      margin-right: .8rem;
     }
-    .icon.fa, .icon.fas, .icon.fab {
+    .icon.fa, .icon.fas, .icon.fab, .icon.far {
       font-size: 1.1rem;
       padding-top: .7rem;
     }
@@ -60,11 +60,11 @@
       opacity: .8;
     }
 
-  	.subcategorie-option-checkbox 
+  	.subcategorie-option-checkbox
 		{
 		  + label:before { width: 10px; height: 10px; left: 3px; }
 
 			&:checked + label:before { width: 6px; height: 10px; left: 2px; }
 		}
-  }  
+  }
 }

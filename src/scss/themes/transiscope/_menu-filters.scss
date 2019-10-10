@@ -1,33 +1,33 @@
-.sub-categories 
-{ 
-  border-left: none;  
+.sub-categories
+{
+  border-left: none;
 
-  .sub-categories-content {    
+  .sub-categories-content {
 
-    ul { padding-right: 10px; padding-left: 5px; }    
+    ul { padding-right: 10px; padding-left: 5px; }
 
-    .subcategorie-option-item { 
-      
+    .subcategorie-option-item {
+
       margin-bottom: 3px;
       padding-left: 0;
       line-height: 2.5rem;
       height: 2.5rem;
 
-      &.expanded { 
-        margin-bottom: 0; 
+      &.expanded {
+        margin-bottom: 0;
       }
 
-      &.disabled {         
-        .icon {          
+      &.disabled {
+        .icon {
           background-color: transparent;
           opacity: 1;
         }
-      }    
+      }
 
       .option-name {
         font-weight: 500;
         font-size: 13px;
-        padding-left: .6rem;  
+        padding-left: .6rem;
         @include transition(color .1s);
       }
 
@@ -38,10 +38,10 @@
         right: 1rem;
         top: 1.1rem;
         border-radius: 1px;
-      }   
+      }
 
-      .option-name:hover .arrow-after 
-      { 
+      .option-name:hover .arrow-after
+      {
         margin-right: -1px;
         margin-top: -1px;
       }
@@ -52,32 +52,32 @@
       }
 
       &.expanded .option-name
-      { 
-        &:hover .arrow-after { margin-bottom: -3px; } 
-        .arrow-after { margin-bottom: -3px; } 
+      {
+        &:hover .arrow-after { margin-bottom: -3px; }
+        .arrow-after { margin-bottom: -3px; }
       }
 
       .icon {
         padding-top: .2rem;
         font-size: 17px;
         height: 3rem;
-        width: 2.5rem;  
-        margin-right: 0;        
+        width: 2.5rem;
+        margin-right: 0;
         @include transition(color .3s);
 
         &.fa.fa-recycle, &.fa.fa-link { padding-top: .8rem;}
-      }  
-      .icon.fa, .icon.fab, .icon.fas  { padding-top: .7rem; }     
- 
+      }
+      .icon.fa, .icon.fab, .icon.fas, .icon.far  { padding-top: .7rem; }
+
       &:not(.expanded) .option-name .arrow-after { opacity: 1; }
       &.expanded       .option-name .arrow-after { opacity: 1; top: .9rem; }
-    }  
+    }
 
     .subcategory-item {
       .name-wrapper  { margin-left: 3rem; margin-right: 0; font-weight: 900; }
-      .checkbox-wrapper { 
-        left: 0; right: initial; 
-        
+      .checkbox-wrapper {
+        left: 0; right: initial;
+
         [type="checkbox"].filled-in + label:after {
           background-color: transparent;
           border: none;
@@ -86,9 +86,9 @@
         [type="checkbox"].filled-in + label:before {
           top: 7px;
           width: 9px;
-          height: 15px;          
+          height: 15px;
         }
-        [type="checkbox"].filled-in:not(:checked) + label:before {    
+        [type="checkbox"].filled-in:not(:checked) + label:before {
           @include transition(none);
         }
       }
@@ -98,10 +98,10 @@
     .category-wrapper .subcategories-wrapper:not(.no-withdrawal) {
       margin-left: 0 !important;
       margin-bottom: 6px;
-      border: none; 
+      border: none;
 
-      .subcategorie-option-item { 
-        margin-bottom: 0; 
+      .subcategorie-option-item {
+        margin-bottom: 0;
         line-height: 2.7rem;
         height: 2.7rem;
 
@@ -110,13 +110,13 @@
         .icon {
           font-size: .85rem;
         }
-        .icon.fa, .icon.fab, .icon.fas { padding-top: .95rem; }      
-      }      
+        .icon.fa, .icon.fab, .icon.fas, .icon.far { padding-top: .95rem; }
+      }
     }
 
     #main-option-all {
       // Main category DOMAINES
-      & > .category-wrapper:first-child {       
+      & > .category-wrapper:first-child {
         .subcategorie-option-item .subIcon { background-color: transparent; }
         .subcategorie-option-item:not(.checked) .icon { background-color: transparent; }
 
@@ -126,7 +126,7 @@
         [type="checkbox"].filled-in:checked + label:before {
           top: 7px;
           width: 9px;
-          height: 15px;          
+          height: 15px;
         }
       }
 
@@ -137,11 +137,11 @@
       .icon {
         padding-top: 3px;
         padding-left: 10px;
-        background-color: transparent;  
+        background-color: transparent;
       }
     }
 
-    .show-only-title {      
+    .show-only-title {
       padding-left: 0;
       margin-bottom: 0;
       padding-left: 0;
@@ -149,6 +149,6 @@
       border-top: none;
       margin-top: 0;
       padding-top: 0;
-    }    
-  }  
+    }
+  }
 }

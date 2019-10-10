@@ -16,36 +16,36 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 
-	&:not(.expanded) 
-  { 
+	&:not(.expanded)
+  {
   	.gogo-icon-name-wrapper  .option-name
 		{
-      &:hover .arrow-after { margin-bottom: -5px; } 
-      .arrow-after { margin-bottom: -4px; }	
+      &:hover .arrow-after { margin-bottom: -5px; }
+      .arrow-after { margin-bottom: -4px; }
     }
   }
 
-	.gogo-icon-name-wrapper 
+	.gogo-icon-name-wrapper
 	{
     margin-right: 3rem;
     position: relative;
 
-    .option-name { 
-      position: absolute; width: 100%; 
+    .option-name {
+      position: absolute; width: 100%;
       &:hover
       {
-        .arrow-after 
-        { 
+        .arrow-after
+        {
           border: solid 6px;
           margin-bottom: 1px;
         }
-      }  
+      }
 
-      &.without-icon .elements-by-category-count { right: 0 !important; }    
-    }    
+      &.without-icon .elements-by-category-count { right: 0 !important; }
+    }
 	}
 
-  .elements-by-category-count { 
+  .elements-by-category-count {
     display:none;
     padding: 2px 8px;
     font-size: .8em;
@@ -70,11 +70,11 @@
   }
 
 	.icon { font-size: 1.3rem; }
-  .icon.fa, .icon.fas, .icon.fab { font-size: 1.2rem; }
+  .icon.fa, .icon.fas, .icon.fab, .icon.far { font-size: 1.2rem; }
 
-	.subcategorie-option-checkbox 
+	.subcategorie-option-checkbox
 	{
-	  + label:before 
+	  + label:before
 	  {
 	    width: 13px;
 	    height: 13px;
@@ -86,9 +86,9 @@
 	    margin-top: 2px;
 	  }
 
-		&:checked 
+		&:checked
 		{
-		  + label:before 
+		  + label:before
 		  {
 		    top: 2px;
 			  left: 1px;
@@ -112,23 +112,23 @@
     position: absolute;
     right: 0;
     top: 0;
-    bottom: 0;    
+    bottom: 0;
 
 		.checkbox-container
 		{
 	    position: absolute;
 	    top: .6rem;
 	    right: 0rem;
-		}	
+		}
 	}
 
 	&:hover
 	{
-		cursor: pointer;	
+		cursor: pointer;
 
     .checkbox-wrapper {
       background: none;
       background-color: transparent;
-    }	
-	}	
-}	
+    }
+	}
+}

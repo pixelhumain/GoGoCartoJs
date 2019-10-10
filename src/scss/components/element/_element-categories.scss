@@ -1,9 +1,9 @@
 .collapsible-body
 {
-  .category-name 
-  { 
+  .category-name
+  {
     padding-top: 1rem;
-  }  
+  }
 
   .category-wrapper + .category-name  { padding-top: 1.2rem; }
 
@@ -13,86 +13,86 @@
   {
     margin-top: 0 !important;
 
-    a.option-url { 
-      color: inherit; 
+    a.option-url {
+      color: inherit;
     }
 
-    .strong { text-decoration: underline }  
+    .strong { text-decoration: underline }
 
-    &:not(:first-child) { margin-top: .5rem; }    
+    &:not(:first-child) { margin-top: .5rem; }
 
     // a category inside an other, so we add margin
-    .category-wrapper 
+    .category-wrapper
     {
       margin-left: .5rem;
       .category-wrapper  { margin-left: 1.2rem; }
-      
+
       padding-left: .5rem;
       border-left: 1px dotted #c3c3c3;
 
-      h3.category-name { 
-        font-size: 85%; 
+      h3.category-name {
+        font-size: 85%;
         padding-bottom: .4rem;
-        padding-top: .5rem; 
+        padding-top: .5rem;
         margin-bottom: 0;
         padding-left: .6rem;
       }
 
       // underline just first option in option Tree
-      .strong { text-decoration: none !important }  
-    }     
+      .strong { text-decoration: none !important }
+    }
 
-    .option-name 
+    .option-name
     {
       &.main-option { font-weight : bold }
     }
 
-    .inline-option 
-    { 
+    .inline-option
+    {
       font-style: italic;
       span.disabled { color: #9C9C9C; }
     }
 
-    .option-description 
-    { 
-      padding: .5rem; 
+    .option-description
+    {
+      padding: .5rem;
       font-style: italic;
       font-size: .9rem;
       color: #5d5d5d;
 
-      &.disabled { color: #9C9C9C; }        
-    }      
-    
+      &.disabled { color: #9C9C9C; }
+    }
+
     .option-value
-    { 
-      line-height: 2.5rem;        
+    {
+      line-height: 2.5rem;
       padding: 0;
       position-relative
 
-      &.inline 
+      &.inline
       {
         display: inline-block;
         font-style: italic;
         &:not(.last) { &:after { content: ","; } }
-        &:not(.first) { .icon { margin-left: .5rem; } }        
+        &:not(.first) { .icon { margin-left: .5rem; } }
         .icon { margin-right: .8rem; }
       }
 
-      .icon 
-      { 
+      .icon
+      {
         font-size: 1.2rem;
-        &.gogo-icon-marker { font-size : 1.1rem; } 
+        &.gogo-icon-marker { font-size : 1.1rem; }
         &.disabled { color:#BFBFBF !important; }
-      }  
-      .icon.fa, .icon.fab, .icon.fas { font-size: 1.1rem; padding-top: .8rem; } 
+      }
+      .icon.fa, .icon.fab, .icon.fas, .icon.far { font-size: 1.1rem; padding-top: .8rem; }
 
-      &.disabled { color: #9C9C9C !important; }     
+      &.disabled { color: #9C9C9C !important; }
 
       .gogo-icon-external-link {
         float: right;
         font-size: .8rem;
       }
     }
-    .category-wrapper .option-value { padding-left: .6rem; }      
-  }  
-} 
+    .category-wrapper .option-value { padding-left: .6rem; }
+  }
+}
