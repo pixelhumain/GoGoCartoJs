@@ -71,9 +71,14 @@ export const EN = {
   'export.iframe': 'Export Iframe',
 
   //F
-  files: 'Files',
-  'fill.fields.below': 'You must fill in the fields below',
-  'find.route': 'Find the route',
+  "files": "Files",
+  "fill.fields.below": "You must fill in the fields below",
+  "filter.date.view.day": "Day",
+  "filter.date.view.month": "Month",
+  "filter.date.view.range": "Range",
+  "filter.date.view.week": "Week",
+  "filter.date.view.year": "Year",
+  "find.route": "Find the route",
   'found.one.or.several': '(s) found',
 
   //G

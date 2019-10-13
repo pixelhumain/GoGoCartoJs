@@ -46,5 +46,13 @@
     background-color: {{ background }};
     border: 1px solid {{ background.darken(5) }};
   }
-  {% set background = background.lighten(5) %} /* restor color */
+  {% set background = background.lighten(5) %} /* restore color */
+
+  .gogo-load-css input[type=text] {
+    border-bottom: 1px solid {{ textSoft }};
+  }
+
+  .dropdown-menu {
+    color: {{ text }};
+  }
 </style>

@@ -71,10 +71,15 @@ export const FR = {
   'export.iframe': 'Exporter une Iframe',
 
   //F
-  files: 'Fichiers',
-  'fill.fields.below': 'Vous devez remplir les champs ci-dessous',
-  'find.route': "Calculer l'itinéraire",
-  'found.one.or.several': '(s) trouvé-e(s)',
+  "files": "Fichiers",
+  "fill.fields.below":"Vous devez remplir les champs ci-dessous",
+  "filter.date.view.day": "Jour",
+  "filter.date.view.month": "Mois",
+  "filter.date.view.range": "Plage",
+  "filter.date.view.week": "Semaine",
+  "filter.date.view.year": "Année",
+  "find.route":"Calculer l'itinéraire",
+  "found.one.or.several":"(s) trouvé-e(s)",
 
   //G
   'general.infos': 'Informations générales',
