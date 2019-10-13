@@ -1,4 +1,4 @@
-import { Option, Category, Element, ElementModerationState} from "../../classes/classes";
+import { Option, Category, Element, ElementModerationState, MenuFilter} from "../../classes/classes";
 
 import { App } from "../../gogocarto";
 declare var $ : any;
@@ -21,8 +21,8 @@ export class FilterModule
 	{
 		if (element.optionsValues.length == 0) return false;
 
+		// FAVORITE, PENDING, MODERATION FILTERS
 		if (this.showOnlyFavorite_) return element.isFavorite;
-
 		if (this.showOnlyModeration_ && (!element.needsModeration() || element.moderationState == ElementModerationState.PossibleDuplicate)) return false;
 		if (App.config.isFeatureAvailable('pending'))
 		{
@@ -33,7 +33,68 @@ export class FilterModule
 			if (element.isPending()) return false;
 		}
 
-		if (!App.config.menu.showOnePanePerMainOption)
+		// CUSTOM FILTERS (except taxonomy)
+		for(let filter of App.config.menu.filters)
+		{
+			switch (filter.type) {
+				case "date":
+					if (!this.filterDate(element, filter)) return false;
+					break;
+			}
+		}
+
+		// TAXONOMY FILTER (at the end because it is the most costly operation)
+		if (App.config.menu.filters.some( (filter) => filter.type == "taxonomy"))
+			return this.filterTaxonomy(element);
+	}
+
+  private filterDate(element: Element, filter: MenuFilter) : boolean
+  {
+  	let filterValue = filter.currentValue
+  	let elementDate = this.parseDate(element.data[filter.field]);
+    console.log(filterValue);
+  	// RANGE
+    if (filter.currentValue.startDate && filter.currentValue.endDate)
+  		return elementDate.getTime() <= this.parseDate(filter.currentValue.endDate).getTime()
+  					 && elementDate.getTime() >= this.parseDate(filter.currentValue.startDate).getTime();
+  	// DATES
+    else if (filter.currentValue.dates)
+  		return filterValue.dates.length == 0 || filterValue.dates.some( (date) => {
+  			return date.getYear() == elementDate.getYear() && date.getMonth() == elementDate.getMonth() && date.getDate() == elementDate.getDate();
+  		});
+    // MONTH
+    else if (filter.currentValue.month !== undefined && filter.currentValue.year)
+      return elementDate.getMonth() == filter.currentValue.month && elementDate.getYear() == filter.currentValue.year;
+    // YEAR
+    else if (filter.currentValue.year)
+      return elementDate.getYear() == filter.currentValue.year;
+    else
+      return true
+  }
+
+  // return the number of days since
+  private parseDate(date)
+  {
+  	let dateObject;
+  	if (typeof(date) == "string")
+  	{
+  		if (date.split('/').length == 3)
+	  	{
+	  		let splited = date.split('/');
+	  		date = splited[2] + '-' + splited[1] + '-' + splited[0];
+	  	}
+	  	dateObject = (new Date(date));
+  	} else {
+  		dateObject = date;
+  	}
+  	return dateObject;
+  }
+
+  log = false;
+
+  private filterTaxonomy(element: Element)
+  {
+  	if (!App.config.menu.showOnePanePerMainOption)
 		{
 			let checkedMainOptions = App.taxonomyModule.taxonomy.nonDisabledOptions;
 			if (checkedMainOptions.length == 1)
@@ -55,9 +116,7 @@ export class FilterModule
 			let otherCategoriesFilled = App.taxonomyModule.otherRootCategories.every( (category) => this.recursivelyCheckInCategory(category, element));
 			return mainOptionFilled && otherCategoriesFilled;
 		}
-	}
-
-  log = false;
+  }
 
 	private recursivelyCheckedInOption(option : Option, element : Element) : boolean
 	{

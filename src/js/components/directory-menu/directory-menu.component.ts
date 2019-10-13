@@ -6,7 +6,7 @@ import { App } from "../../gogocarto";
 import { Event } from "../../classes/classes";
 
 export class DirectoryMenuComponent
-{		
+{
 	openMenu : boolean = false;
 	width : number;
 	dom;
@@ -26,15 +26,15 @@ export class DirectoryMenuComponent
 	constructor() { }
 
 	initialize()
-	{				
+	{
 		this.dom = $('#directory-menu');
     this.dragTarget =  $('.directory-menu-drag-target');
     this.overlay = $('#directory-menu-overlay');
 
-    this.dragTarget.css({'left': 0});    
+    this.dragTarget.css({'left': 0});
 
     this.dragTarget.click(() => { this.hide(); });
-    this.overlay.click(() => { this.hide(); });	
+    this.overlay.click(() => { this.hide(); });
 
 		$('.btn-close-menu.large-screen').tooltip();
 
@@ -44,21 +44,21 @@ export class DirectoryMenuComponent
     } else {
       this.show();
     }
-	}	
+	}
 
-	show() 
-	{    
+	show()
+	{
     this.dom.show();
-    this.onShow.emit();    
+    this.onShow.emit();
 
-    this.dom.velocity({left: 0}, this.ANIM_200); 
+    this.dom.velocity({left: 0}, this.ANIM_200);
     this.overlay.show().velocity({opacity: 1}, this.ANIM_200);
 
     // Fixs strange bug those container were not taking full width, they need a redraw for the width to be calculating again
     setTimeout( () => { this.dom.find('#other-categories, .show-only-container ').css('width', '99%'); }, 0);
 
     setTimeout( () => {
-    	App.filtersComponent.updateMainOptionBackground();	
+    	App.filtersComponent.updateMainOptionBackground();
 
     	let dragTargetWidth = App.component.width() - this.width + 20;
       this.dragTarget.css({width: dragTargetWidth + 'px', right: 0, left: ''});
@@ -70,10 +70,10 @@ export class DirectoryMenuComponent
 
       // same fix as above
       this.dom.find('#other-categories, .show-only-container ').css('width', '100%');
-    }, 400);     			
+    }, 400);
   }
 
-	hide() 
+	hide()
   {
     this.onHide.emit();
 
@@ -83,29 +83,29 @@ export class DirectoryMenuComponent
 
     setTimeout( () => {
     	this.overlay.hide();
-    	this.dom.hide();   
-			
-			$('.show-directory-menu-button').show();	
+    	this.dom.hide();
+
+			$('.show-directory-menu-button').show();
 			this.dom.find('.tooltipped').tooltip('remove');
 			$('.btn-close-menu.large-screen').hideTooltip();
 
-			App.component.updateMapSize(); 
-			App.component.updateComponentsSize(); 
-    }, 400);    
+			App.component.updateMapSize();
+			App.component.updateComponentsSize();
+    }, 400);
   }
 
   initTouchMenu()
   {
   	this.dragTarget.hammer({
       prevent_default: false
-    }).bind('pan', (e) => 
+    }).bind('pan', (e) =>
     {
-      if (e.gesture.pointerType == "touch") 
+      if (e.gesture.pointerType == "touch")
       {
         var direction = e.gesture.direction;
         var x = e.gesture.center.x;
         var y = e.gesture.center.y;
-        var velocityX = e.gesture.velocityX;  
+        var velocityX = e.gesture.velocityX;
 
         // Keep within boundaries
         if (x > this.width) { x = this.width; }
@@ -123,7 +123,7 @@ export class DirectoryMenuComponent
 			}
 
     }).bind('panend', (e) => {
-      if (e.gesture.pointerType == "touch") 
+      if (e.gesture.pointerType == "touch")
       {
         var velocityX = e.gesture.velocityX;
 
@@ -133,8 +133,8 @@ export class DirectoryMenuComponent
       }
      });
   }
-	
-	updateSize() 
+
+	updateSize()
 	{
     // update menu width
 		let menuwidth, pageWidth = App.component.width();
@@ -145,18 +145,18 @@ export class DirectoryMenuComponent
       menuSmallWidth += 50;
       menuBigWidth += 50;
     }
-		
+
 		if (pageWidth > 850) {
       menuwidth =  pageWidth > 1450 ? menuBigWidth : menuSmallWidth;
 		} else {
       menuwidth =  Math.min(Math.min(Math.max(pageWidth - 60, menuSmallWidth), menuBigWidth), pageWidth - 50);
 		}
-		
+
 		this.dom.css('width', menuwidth + 'px');
 		this.width = menuwidth;
-		
+
 		if (menuwidth < 340 || App.config.menu.smallWidthStyle) this.dom.addClass('small-width');
-		else this.dom.removeClass('small-width');	
+		else this.dom.removeClass('small-width');
 	}
 }
 

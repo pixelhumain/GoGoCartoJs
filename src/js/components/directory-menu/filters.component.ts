@@ -4,6 +4,7 @@ import { AppModule, AppModes } from "../../app.module";
 import { Category, Option } from "../../modules/taxonomy/taxonomy.module";
 import { App } from "../../gogocarto";
 import { Element } from "../../classes/classes";
+import { FilterDateComponent } from './filter-date.component';
 
 export class FiltersComponent
 {
@@ -102,6 +103,21 @@ export class FiltersComponent
       e.preventDefault();
     });
 
+    // -------------------------------
+    // ------ CUSTOM FILTERS ---------
+    // -------------------------------
+
+    for(let filter of App.config.menu.filters) {
+      switch (filter.type) {
+        case "date": new FilterDateComponent(filter);  break;
+      }
+    }
+
+    $('.subcategory-item.filter').click(function()
+    {
+      $(this).next('.filter-wrapper').slideToggle({ duration: 350, easing: "easeOutQuart"});
+      $(this).toggleClass('expanded');
+    });
 
     // -------------------------------
     // ------ MAIN OPTIONS -----------
@@ -121,11 +137,10 @@ export class FiltersComponent
     });
 
 
-
     // ----------------------------------
     // ------ CATEGORIES ----------------
     // ----------------------------------
-    $('.subcategory-item .name-wrapper:not(.uncheckable)').click(function()
+    $('.subcategory-item:not(.filter).name-wrapper:not(.uncheckable)').click(function()
     {
       let categoryId = $(this).attr('data-category-id');
       App.taxonomyModule.getCategoryById(categoryId).toggleChildrenDetail();

@@ -1,15 +1,17 @@
 @import 'leaflet-routing-machine';
 @import 'filter-menu/filter-menu';
+@import 'filter-menu/filters-commons';
+@import 'filter-menu/filter-date';
 @import 'directory-menu-directions';
 
 #directory-menu
 {
 	z-index: 998;
-	overflow-y:hidden; 
+	overflow-y:hidden;
   @include transition(height .5s);
   @include box-shadow(4px 0 2px rgba(0, 0, 0, 0.2), -1px 0 2px rgba(0, 0, 0, 0.2));
 
-	@media #{$medium-and-up} 
+	@media #{$medium-and-up}
 	{
 		overflow: visible;
 	}
@@ -25,7 +27,7 @@
     .menu-top-image { width: 100%; }
 
     .directory-menu-header
-    {      
+    {
       width: 100%;
       z-index: 2;
       position: relative;
@@ -33,27 +35,27 @@
       .search-bar-container { @media #{$small-only} {display:none;} }
 
       .btn-close-menu.large-screen
-      {        
+      {
         position: absolute;
         right: 0px;
         top: 0;
         width: 24px;
         bottom: 0;
-        
+
         @include align(center);
         display:none;
 
         .arrow-left
-        {          
+        {
           font-size: 12px;
           padding-left: 5px;
           transform: scaleY(1.8);
-        }            
-      }      
+        }
+      }
 
       .subheader
       {
-        position: relative;       
+        position: relative;
 
         .btn-close
         {
@@ -63,8 +65,8 @@
           top: 7px;
           padding: 0 1rem;
           z-index: 50;
-        }       
-      }           
+        }
+      }
 
       @include transition(all .5s);
 
@@ -79,14 +81,14 @@
       }
     }
 
-    .shadow-bottom { bottom: -8px; border-top: none; width: calc(100% - 12px); }  	
+    .shadow-bottom { bottom: -8px; border-top: none; width: calc(100% - 12px); }
 
     .directory-menu-content
-    {     
+    {
       @include flexbox();
       @include flex(1 auto);
-      position: relative;  
-      height: 100px; // Fixs strange bug on firefox, director menu bigger than screen      
+      position: relative;
+      height: 100px; // Fixs strange bug on firefox, director menu bigger than screen
 
       #directory-menu-spinner-loader
       {
@@ -94,12 +96,12 @@
         left: 40%;
         position: absolute;
         display: none;
-      }    
-    }      		
+      }
+    }
 	}
 
   .btn-close-menu.small-screen
-  { 
+  {
     text-transform: uppercase;
     width: 100%;
     border-radius: 0;
@@ -109,14 +111,14 @@
     box-shadow: 1px -2px 11px 2px rgba(0, 0, 0, 0.25);
 
     @media (min-width : 850px) { display:none; }
-  }  
+  }
 }
 
 @media (min-width: 850px) {
   .directory-menu-drag-target { display:none !important; }
 }
 
-#directory-menu-overlay {  
+#directory-menu-overlay {
   display:none;
   position: absolute;
   top: 0;

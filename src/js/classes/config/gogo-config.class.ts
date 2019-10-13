@@ -1,7 +1,7 @@
 import { App } from "../../gogocarto";
 import { TileLayer } from '../map/tile-layer.class';
 import { GoGoFeature } from './gogo-feature.class';
-import { ElementStatus } from '../classes';
+import { ElementStatus, MenuFilter } from '../classes';
 import { DEFAULT_FEATURES } from './gogo-default-feature' ;
 import { FR } from '../../../locales/fr';
 import { EN } from '../../../locales/en';
@@ -30,7 +30,8 @@ export class GoGoConfig
     displayNumberOfElementForEachCategory: false,
     displayNumberOfElementRoundResults: false,
     filters: [
-     { type: "taxonomy"}
+     new MenuFilter({ type: "taxonomy"}),
+     new MenuFilter({ type: "date", field: "event_date", label: "Filtrer par Date", views: ["day", "week", "month", "range"], defaultView: "range"})
     ]
   };
   readonly infobar =
@@ -236,6 +237,8 @@ export class GoGoConfig
 
     // FEATURES
     if (!config.features) config.features = DEFAULT_FEATURES;
+
+    for(let i = 0; i < this.menu.filters.length; i++) (<any>this.menu.filters[i]).id = i;
 
     console.log(this);
 	}

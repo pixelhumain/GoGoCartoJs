@@ -3,6 +3,7 @@
 @import 'modules/variables';
 @import "vendors/components/toast";
 @import "vendors/components/tooltip";
+@import "vendors/bootstrap-datepicker3";
 
 // the lean-overlay added my materialize for modals is outside of gogo-load-css container
 .lean-overlay {
@@ -18,6 +19,28 @@
   display: none;
 }
 
+// bootstrap dropdown used by datepicker
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  float: left;
+  min-width: 160px;
+  padding: 10px;
+  margin: 2px 0 0;
+  font-size: 14px;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
 // Every styles will be loaded inside this container
 // This permit to encapsulate styles, and reuse them
 // If I want to use materialize in my all page (while including gogocarto inside the page) I can simply add
@@ -28,7 +51,7 @@
   @import "vendors/marker-clusterer";
 
   @import "themes/themes";
-  
+
   height:100%;
   width:100%;
 
@@ -36,11 +59,11 @@
   {
     @include flexbox();
     @include flex(1 auto);
-    height: 100%;    
+    height: 100%;
     position: relative;
     overflow: hidden;
 
-    @import "components/loaders";  
+    @import "components/loaders";
     @import "components/directory-menu/directory-menu";
     @import 'components/icons';
     @import "components/map/map";
@@ -59,20 +82,20 @@
 
     #directory-menu
     {
-      position:absolute;      
+      position:absolute;
       height:100%;
-    } 
+    }
 
     #directory-content
     {
-      position: relative; 
+      position: relative;
       background-color: #9e9e9e;
       overflow: hidden;
-    
-      @include flex(1 auto);      
+
+      @include flex(1 auto);
       @include flexbox();
       @include flex-flow(column nowrap);
-    }  
+    }
 
     h1
     {
