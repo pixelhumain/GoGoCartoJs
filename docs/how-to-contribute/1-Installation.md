@@ -15,7 +15,7 @@ Gulp tasks
 - Build : `gulp build`
 - Watch for changes, and automatically build : `gulp watch`
 - Create new distribution files : `gulp cleanDist && gulp build && gulp dist && gulp production`
-- Add new entries of 'en.ts' to the other locale files : `gulp addMissingEntries`
+- Add new entries of 'en.ts' to the other locale files : `gulp i18nAddMissingEntries`
 
 
 Continue with

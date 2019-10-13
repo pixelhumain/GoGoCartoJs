@@ -12,7 +12,7 @@ var gulp = require('gulp'),
     tsify = require("tsify"),
     notifier = require('node-notifier'),
     nunjucks = require('gulp-nunjucks'),
-    addMissingEntries = require('./addMissingEntries');
+    i18nAddMissingEntries = require('./i18nAddMissingEntries');
 
 function handleError(err)
 {
@@ -153,7 +153,7 @@ gulp.task('production', function() {
     gulp.start('gzip_styles', 'gzip_js');
 });
 
-gulp.task('addMissingEntries', function ()
+gulp.task('i18nAddMissingEntries', function ()
 {
-  addMissingEntries();
+  i18nAddMissingEntries();
 });
