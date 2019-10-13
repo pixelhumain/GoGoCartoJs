@@ -1,0 +1,68 @@
+{% set pendingIsActive = config.isFeatureAvailable('pending') %}
+{% set favoriteIsActive = config.isFeatureAvailable('favorite') %}
+{% set moderationIsActive = config.isFeatureAvailable('moderation') %}
+
+{# Section title #}
+{% if pendingIsActive or favoriteIsActive or moderationIsActive %}
+  <li class="subcategory-item expanded unexpandable top-separator show-only-title">
+    <div class="name-wrapper">
+      <span class="name">{{ 'show.only' | i18n }}</span>
+    </div>
+  </li>
+{% endif %}
+
+<div class="options-wrapper show-only-container">
+
+  {# ELEMENT WITH PENDING STATUS#}
+  {% if pendingIsActive %}
+    <li class="subcategorie-option-item row tooltipped" id="filter-pending"
+        data-position="right" data-delay="700" data-tooltip="{{ 'show.only.elements.validation.process' | i18n }}">
+      <span class="icon gogo-icon-attention"></span>
+      <span class="option-name">
+        <span class="validation-process-info">{{ 'pending.validation' | i18n }}</span>
+      </span>
+
+      {# --- CHECKBOX ---- #}
+      <div class="checkbox-wrapper">
+        <div class="checkbox-container">
+          <input type="checkbox" class="subcategorie-option-checkbox pending-checkbox show-unique-checkbox" id="pending-checkbox" data-type='pending' data="pending" />
+          <label for="pending-checkbox" ></label>
+        </div>
+      </div>
+    </li>
+  {% endif %}
+
+  {# ELEMENTS NEED MODERATION #}
+  {% if moderationIsActive %}
+    <li class="subcategorie-option-item row tooltipped" id="filter-moderation"
+        data-position="right" data-delay="700" data-tooltip="{{ 'show.only.elements.to.moderate' | i18n }}">
+      <span class="icon gogo-icon-moderation"></span>
+      <span class="option-name">{{ 'to.moderate' | i18n }}</span>
+
+      {# --- CHECKBOX ---- #}
+      <div class="checkbox-wrapper">
+        <div class="checkbox-container">
+          <input type="checkbox" class="subcategorie-option-checkbox moderation-checkbox show-unique-checkbox" id="moderation-checkbox" data-type='moderation' data="moderation" />
+          <label for="moderation-checkbox" ></label>
+        </div>
+      </div>
+    </li>
+  {% endif %}
+
+  {# FAVORITE #}
+  {% if favoriteIsActive %}
+    <li class="subcategorie-option-item row tooltipped" id="filter-favorite" data-position="right" data-delay="700" data-tooltip="{{ 'show.only.favorites' | i18n }}">
+      <span class="icon gogo-icon-star-full"></span>
+      <span class="option-name">{{ 'your.favorites' | i18n }}</span>
+
+      {# --- CHECKBOX ---- #}
+      <div class="checkbox-wrapper">
+        <div class="checkbox-container">
+          <input type="checkbox" class="subcategorie-option-checkbox favorite-checkbox show-unique-checkbox" id="favorite-checkbox" data-type='favorite' data="favorite" />
+          <label for="favorite-checkbox" ></label>
+        </div>
+      </div>
+    </li>
+  {% endif %}
+
+</div>
