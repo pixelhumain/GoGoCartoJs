@@ -28,7 +28,10 @@ export class GoGoConfig
     showCheckboxForMainFilterPane: true,
     showCheckboxForSubFilterPane: true,
     displayNumberOfElementForEachCategory: false,
-    displayNumberOfElementRoundResults: false
+    displayNumberOfElementRoundResults: false,
+    filters: [
+     { type: "taxonomy"}
+    ]
   };
   readonly infobar =
   {
@@ -183,10 +186,12 @@ export class GoGoConfig
     // Copy all the defined options
     // All the options non specified will be initialized with default values
     this.recursiveFillProperty(this, config);
+
     this.data.retrieveElementsByApi = typeof this.data.elements == "string";
     if (config.map && config.map.defaultBounds) this.map.defaultBoundsProvided = true;
     if (!this.features['sendMail'].url) this.features['sendMail'].active = false;
 
+    // COLORS
     if (!this.colors.menuOptionHover ) {
       let menuOptionHover = tinycolor(this.colors.contentBackground.toString());
       this.colors.menuOptionHover = menuOptionHover.isDark() ? menuOptionHover.lighten(5) : menuOptionHover.darken(5);
@@ -203,14 +208,12 @@ export class GoGoConfig
       this.colors.disabled = disabled.isDark() ? disabled.lighten(35) : disabled.darken(35);
     }
     if (!this.colors.mapControlsBgd) { this.colors.mapControlsBgd = this.colors.contentBackground; }
-
     if (config.colors && !config.colors.text && !config.colors.textDark && !config.colors.textLight) {
       if (this.colors.contentBackground.isDark())
         this.colors.textDark = this.colors.contentBackground;
       else
         this.colors.textLight = this.colors.contentBackground;
     }
-
     if (!this.colors.textLightSoft) {
       this.colors.textLightSoft = tinycolor(this.colors.textLight.toString()).darken(15);
     }
@@ -220,7 +223,6 @@ export class GoGoConfig
     if (!this.colors.mapListBtn) {
       this.colors.mapListBtn = tinycolor.readability(this.colors.primary, this.colors.mapControlsBgd) ? this.colors.primary : this.colors.mapControls;
     }
-
     if (this.theme == "transiscope") {
       this.colors.infoBarHeader = this.colors.textDark;
       this.colors.infoBarMenu = this.colors.primary;
@@ -228,7 +230,12 @@ export class GoGoConfig
       if (!this.colors.interactiveSection) this.colors.interactiveSection = this.colors.secondary;
       if (!this.colors.searchBar) this.colors.searchBar = this.colors.textDark;
     }
+
+    // TRANSLATIONS
     this.modifyTranslations(this, config.translations);
+
+    // FEATURES
+    if (!config.features) config.features = DEFAULT_FEATURES;
 
     console.log(this);
 	}
