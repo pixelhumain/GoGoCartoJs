@@ -11,7 +11,7 @@ const gulp = require('gulp'),
   tsify = require('tsify'),
   notifier = require('node-notifier'),
   nunjucks = require('gulp-nunjucks'),
-  addMissingEntries = require('./addMissingEntries');
+  i18nAddMissingEntries = require('./i18nAddMissingEntries');
 
 const handleError = err => {
   console.log(err.toString());
@@ -133,5 +133,4 @@ exports.dist = gulp.series(cleanDist, gulp.parallel(
                   gulp.series(concatDirectory, prodJs, gzipJs),
                   gulp.series(concatCss, prodStyles, gzipStyles),
                   fontAssets, imageAssets));
-
-exports.addMissingEntries = async () => addMissingEntries();
+exports.i18nAddMissingEntries = async () => i18nAddMissingEntries();

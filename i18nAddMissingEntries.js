@@ -67,7 +67,7 @@ function beautifyAndWriteFile(JSONContent, beforeEqualText, filepath)
   fs.writeFileSync(filepath, content);
 }
 
-function addMissingEntries()
+function i18nAddMissingEntries()
 {
   let directoryFiles = browseLocalesDirectory();
 
@@ -96,4 +96,4 @@ function addMissingEntries()
   }
 }
 
-module.exports = addMissingEntries;
+module.exports = i18nAddMissingEntries;
