@@ -26,6 +26,7 @@ Gulp Tasks
 - Watch for changes, and automatically build: `node_modules/.bin/gulp watch`
 - Create new distribution files: `node_modules/.bin/gulp cleanDist && node_modules/.bin/gulp build && node_modules/.bin/gulp dist && node_modules/.bin/gulp production`
 - Add new entries of 'en.ts' to the other locale files: `node_modules/.bin/gulp addMissingEntries`
+- Add new entries of 'en.ts' to the other locale files : `gulp i18nAddMissingEntries`
 
 
 Continue With
