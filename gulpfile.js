@@ -44,11 +44,12 @@ gulp.task("scriptsDirectory", function () {
 });
 
 gulp.task('scriptsLibs', function() {
-  return gulp.src(['src/js/libs/**/!(leaflet-routing-machine)*.js',
+  return gulp.src(['src/js/libs/**/!(leaflet-routing-machine|bootstrap-datepicker)*.js',
                   'src/js/libs/leaflet-routing-machine.js' ,
+                  'src/js/libs/bootstrap-datepicker.js' ,
+                  'src/js/libs/datepicker-locales/**/*.js' ,
                   '!src/js/libs/materialize/unused/**/*.js',
-                  '!src/js/libs/nunjucks-slim.js',
-                  '!src/js/libs/commonmark.js'
+                  '!src/js/libs/nunjucks-slim.js'
                    ])
     .pipe(concat('libs.js'))
     .pipe(gulp.dest('build'));
