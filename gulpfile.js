@@ -53,6 +53,8 @@ const scriptsLibs = () =>
   gulp.src([
     'src/js/libs/**/!(leaflet-routing-machine)*.js',
     'src/js/libs/leaflet-routing-machine.js',
+    'src/js/libs/bootstrap-datepicker.js' ,
+    'src/js/libs/datepicker-locales/**/*.js' ,
     '!src/js/libs/materialize/unused/**/*.js'
   ])
   .pipe(concat('libs.js'))
