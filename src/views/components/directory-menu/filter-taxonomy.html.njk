@@ -1,0 +1,31 @@
+{% import 'components/directory-menu/category-item.html.njk' as categoryRenderer %}
+
+{% if config.menu.showOnePanePerMainOption %}
+  {# FIRST CATEGORY MAIN OPTIONS #}
+  <div id="main-option-all" class="main-option-subcategories-container show-one-pane-per-main-option" style="display:none;">
+    {{ categoryRenderer.renderItem(mainCategory, not config.menu.showOnePanePerMainOption, config.menu.showCheckboxForMainFilterPane, config) }}
+  </div>
+  {# FIRST CATEGORY SUB CATEGORIES AND OPTIONS #}
+  {% for mainOption in mainCategory.options %}
+    <div id="main-option-{{ mainOption.id }}" class="main-option-subcategories-container" style="display:none">
+      {% for category in mainOption.subcategories %}
+        {{ categoryRenderer.renderItem(category, true, config.menu.showCheckboxForSubFilterPane, config) }}
+      {% endfor %}
+    </div>
+  {% endfor %}
+
+  {# OTHERS CATEGORIES #}
+  {% set otherCategories = rootCategories.slice(1) %}
+  <div id="other-categories">
+    {% for rootCategory in otherCategories %}
+      {{ categoryRenderer.renderItem(rootCategory, true, true, config) }}
+    {% endfor %}
+  </div>
+{% else %}
+  {# ALL CATEGORIES #}
+  <div id="main-option-all" class="main-option-subcategories-container" style="display:none;">
+    {% for rootCategory in rootCategories %}
+      {{ categoryRenderer.renderItem(rootCategory, not config.menu.showOnePanePerMainOption, config.menu.showCheckboxForMainFilterPane, config) }}
+    {% endfor %}
+  </div>
+{% endif %}

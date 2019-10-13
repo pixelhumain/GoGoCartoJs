@@ -29,6 +29,9 @@ export class GoGoConfig {
     showCheckboxForSubFilterPane: true,
     displayNumberOfElementForEachCategory: false,
     displayNumberOfElementRoundResults: false,
+    filters: [
+     { type: "taxonomy"}
+    ]
   };
   readonly infobar = {
     width: undefined,
@@ -203,8 +206,9 @@ export class GoGoConfig {
       this.search.canAutocomplete = false;
     }
 
-    if (!this.colors.menuOptionHover) {
-      const menuOptionHover = tinycolor(this.colors.contentBackground.toString());
+    // COLORS
+    if (!this.colors.menuOptionHover ) {
+      let menuOptionHover = tinycolor(this.colors.contentBackground.toString());
       this.colors.menuOptionHover = menuOptionHover.isDark() ? menuOptionHover.lighten(5) : menuOptionHover.darken(5);
     }
     if (!this.colors.contentBackgroundElementBody) {
@@ -218,15 +222,11 @@ export class GoGoConfig {
       const disabled = tinycolor(this.colors.contentBackground.toString()).greyscale();
       this.colors.disabled = disabled.isDark() ? disabled.lighten(35) : disabled.darken(35);
     }
-    if (!this.colors.mapControlsBgd) {
-      this.colors.mapControlsBgd = this.colors.contentBackground;
-    }
-
+    if (!this.colors.mapControlsBgd) { this.colors.mapControlsBgd = this.colors.contentBackground; }
     if (config.colors && !config.colors.text && !config.colors.textDark && !config.colors.textLight) {
       if (this.colors.contentBackground.isDark()) this.colors.textDark = this.colors.contentBackground;
       else this.colors.textLight = this.colors.contentBackground;
     }
-
     if (!this.colors.textLightSoft) {
       this.colors.textLightSoft = tinycolor(this.colors.textLight.toString()).darken(15);
     }
@@ -238,15 +238,19 @@ export class GoGoConfig {
         ? this.colors.primary
         : this.colors.mapControls;
     }
-
-    if (this.theme == 'transiscope') {
+    if (this.theme == "transiscope") {
       this.colors.infoBarHeader = this.colors.textDark;
       this.colors.infoBarMenu = this.colors.primary;
       this.colors.menuOptionHover = this.colors.contentBackground;
       if (!this.colors.interactiveSection) this.colors.interactiveSection = this.colors.secondary;
       if (!this.colors.searchBar) this.colors.searchBar = this.colors.textDark;
     }
+
+    // TRANSLATIONS
     this.modifyTranslations(this, config.translations);
+
+    // FEATURES
+    if (!config.features) config.features = DEFAULT_FEATURES;
 
     console.log(this);
   }
