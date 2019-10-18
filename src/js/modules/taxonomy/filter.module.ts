@@ -38,8 +38,9 @@ export class FilterModule
 		{
 			switch (filter.type) {
 				case "date":
-					if (!this.filterDate(element, filter)) return false;
-					break;
+					if (!this.filterDate(element, filter)) return false; break;
+        case "number":
+          if (!this.filterNumber(element, filter)) return false; break;
 			}
 		}
 
@@ -52,7 +53,7 @@ export class FilterModule
   {
   	let filterValue = filter.currentValue
   	let elementDate = this.parseDate(element.data[filter.field]);
-    console.log(filterValue);
+
   	// RANGE
     if (filter.currentValue.startDate && filter.currentValue.endDate)
   		return elementDate.getTime() <= this.parseDate(filter.currentValue.endDate).getTime()
@@ -70,6 +71,18 @@ export class FilterModule
       return elementDate.getYear() == filter.currentValue.year;
     else
       return true
+  }
+
+  private filterNumber(element: Element, filter: MenuFilter) : boolean
+  {
+    let filterValue = filter.currentValue
+    let elementValue = element.data[filter.field];
+
+    if (filterValue.value != undefined)
+      return elementValue == filterValue.value;
+    if (filterValue.min != undefined && filterValue.max != undefined)
+      return elementValue <= filterValue.max && elementValue >= filterValue.min
+    return true
   }
 
   // return the number of days since

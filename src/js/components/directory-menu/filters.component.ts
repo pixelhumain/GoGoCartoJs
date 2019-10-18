@@ -5,6 +5,7 @@ import { Category, Option } from "../../modules/taxonomy/taxonomy.module";
 import { App } from "../../gogocarto";
 import { Element } from "../../classes/classes";
 import { FilterDateComponent } from './filter-date.component';
+import { FilterNumberComponent } from './filter-number.component';
 
 export class FiltersComponent
 {
@@ -110,6 +111,7 @@ export class FiltersComponent
     for(let filter of App.config.menu.filters) {
       switch (filter.type) {
         case "date": new FilterDateComponent(filter);  break;
+        case "number": new FilterNumberComponent(filter);  break;
       }
     }
 
