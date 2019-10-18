@@ -1,19 +1,11 @@
 declare let $ : any;
 import { App } from "../../gogocarto";
 import { MenuFilter } from "../../classes/classes";
+import { FilterAbstractComponent } from "./filter-abstract.component"
 
-export class FilterDateComponent
+export class FilterDateComponent extends FilterAbstractComponent
 {
-  filter = null;
   contextDate = null;
-
-  constructor(filter: MenuFilter) {
-    this.filter = filter;
-    this.initialize();
-  }
-
-  get dom() { return $(`.filter-wrapper[data-id=${this.filter.id}]`) }
-  get clearButton() { return $(`.btn-clear-filter[data-id=${this.filter.id}]`) }
 
   initialize()
   {
@@ -49,12 +41,11 @@ export class FilterDateComponent
     this.dom.find('.view-filter[data-name=day]').datepicker({ // https://uxsolutions.github.io/bootstrap-datepicker
       todayBtn: "linked",
       language: App.config.language,
-      multidate: self.filter.subtype != "range" && self.filter.options.multidate,
+      multidate: self.filter.multiday,
     }).on("changeDate", function(e) {
       self.filter.currentValue = { dates: e.dates };
-      if (e.dates.length > 0) self.clearButton.show();
       self.contextDate = e.date;
-      App.elementsModule.updateElementsToDisplay(true);
+      if (e.dates.length > 0) self.emitFilterSet();
     });
 
     // WEEK
@@ -109,25 +100,19 @@ export class FilterDateComponent
       autoclose: true,
       language: App.config.language,
     }).on("changeDate", function(e) {
-        self.filter.currentValue = { startDate: self.dom.find('input[name=start]').val(), endDate: self.dom.find('input[name=end]').val() };
-        self.clearButton.show();
-        App.elementsModule.updateElementsToDisplay(true);
+        let startDate = self.dom.find('input[name=start]').val();
+        self.filter.currentValue = { startDate: startDate, endDate: self.dom.find('input[name=end]').val() };
+        if (startDate) self.emitFilterSet();
     });
+  }
 
-    // CLEAR BUTTON
-    this.clearButton.click(function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      self.dom.find('.view-filter[data-name=day]').find('td.active').removeClass('active')
-      self.dom.find('.view-filter[data-name=week]').find('.selected-week').removeClass('selected-week')
-      self.dom.find('.view-filter[data-name=month]').find('.active').removeClass('active')
-      self.filter.currentValue = {};
-      self.contextDate = null;
-      App.elementsModule.updateElementsToDisplay(true);
-      $(this).hide();
-      self.dom.find('.view-filter').datepicker('clearDates');
-      return false;
-    })
+  handleClear()
+  {
+    this.dom.find('.view-filter[data-name=day]').find('td.active').removeClass('active')
+    this.dom.find('.view-filter[data-name=week]').find('.selected-week').removeClass('selected-week')
+    this.dom.find('.view-filter[data-name=month]').find('.active').removeClass('active')
+    this.contextDate = null;
+    this.dom.find('.view-filter').datepicker('clearDates');
   }
 
   bindWeekClick()
@@ -185,8 +170,7 @@ export class FilterDateComponent
     weekDisplay += ' - ' + $.fn.datepicker.DPGlobal.formatDate(this.filter.currentValue.endDate, endDateFormat, App.config.language)
 
     viewFilter.find('.datepicker-days .datepicker-switch').text(weekDisplay).addClass('week-value');
-    this.clearButton.show();
-    App.elementsModule.updateElementsToDisplay(true);
+    this.emitFilterSet();
   }
 
   onMonthChange(date)
@@ -194,7 +178,6 @@ export class FilterDateComponent
     if (!date) return;
     this.filter.currentValue = { month: date.getMonth(), year: date.getYear() };
     this.contextDate = date;
-    App.elementsModule.updateElementsToDisplay(true);
-    this.clearButton.show();
+    this.emitFilterSet();
   }
 }
