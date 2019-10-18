@@ -1,5 +1,3 @@
-<li class="subcategory-item expanded unexpandable top-separator show-only-title">
-  <div class="name-wrapper">
-    <span class="name">{{ filter.label }}</span>
-  </div>
-</li>
+{% if filter.subtype == "value" %}
+  <input type="number" class="simple-value" name="filter-number" />
+{% endif %}
