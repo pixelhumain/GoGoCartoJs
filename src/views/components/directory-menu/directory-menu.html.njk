@@ -57,7 +57,28 @@
 
 						{# ALL FILTERS INCLUDING TAXONOMY #}
 						{% for filter in config.menu.filters %}
-					  	{% include 'components/directory-menu/filter-' ~ filter.type ~ '.html.njk' %}
+							{% if filter.type != "taxonomy" %}
+								{# Filter Label and Clear button#}
+								<li class="subcategory-item filter top-separator">
+	  							<div class="name-wrapper {{ 'expanded' if filter.expandedByDefault else ''}}">
+								    <span class="name">{{ filter.label }}</span>
+								    <div class="arrow-after"></div>
+								  </div>
+								  <div class="btn-clear-filter" data-id={{ filter.id }}>
+								    <span class="label">{{ 'clear'|i18n }}</span>
+								    <span class="gogo-icon-close"></span>
+								  </div>
+								</li>
+								{# Filter content wrapper #}
+								<div class="filter-wrapper gogo-{{ filter.type }}-filter" data-id={{ filter.id }}
+										 style="{{ '' if filter.expandedByDefault else 'display: none' }}">
+							{% endif %}
+
+					  		{% include 'components/directory-menu/filter-' ~ filter.type ~ '.html.njk' ignore missing %}
+
+					  	{% if filter.type != "taxonomy" %}
+					  		</div>
+					  	{% endif %}
 					  {% endfor %}
 
 						{% include 'components/directory-menu/show-only-favorite-pending-moderation.html.njk' %}

@@ -5,7 +5,7 @@ export class MenuFilter
   field : string;
   subtype : string;
   currentValue : any = {};
-  expanded_by_default : boolean = true;
+  expandedByDefault : boolean = true;
   options : any = {};
 
   constructor(data: any)
