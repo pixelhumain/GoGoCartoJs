@@ -28,9 +28,10 @@ gulp.task("scriptsDirectory", function () {
     return browserify({
         basedir: '.',
         debug: true,
-        entries: ['src/js/gogocarto.ts'],
+        entries: ['src/js/main.js'],
         cache: {},
-        packageCache: {}
+        packageCache: {},
+        standalone: 'goGoCarto'
     })
     .plugin(tsify)
     .transform('babelify', {
