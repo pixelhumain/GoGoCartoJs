@@ -6,7 +6,8 @@ import { DEFAULT_FEATURES } from './gogo-default-feature' ;
 import { FR } from '../../../locales/fr';
 import { EN } from '../../../locales/en';
 declare var L : any;
-declare var tinycolor;
+import * as tinycolor2 from 'tinycolor2';
+var tinycolor = (<any>tinycolor2).default;
 
 export class GoGoConfig
 {
