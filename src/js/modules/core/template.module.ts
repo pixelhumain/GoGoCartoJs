@@ -7,7 +7,6 @@ import { TemplateElementFiltersModule } from "../element/template-element-filter
 import * as nunjucks from "nunjucks";
 
 declare var $;
-declare var commonmark;
 
 export class TemplateModule
 {
