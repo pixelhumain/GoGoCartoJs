@@ -1,10 +1,10 @@
 import { OptionValue } from "../../classes/classes";
 import { capitalize } from "../../utils/string-helpers";
-declare var JsDiff : any;
+import * as JsDiff from "diff";
 
 export class ElementDiffModule
 {
-  getDiffValue(value, modifiedValue, propertyName)
+  getDiffValue(value, modifiedValue)
   {
     let spanClass = '',
     span = null;
@@ -50,7 +50,7 @@ export class ElementDiffModule
         newOv.diff = 'added';
       }
       else
-      {        
+      {
         let modifiedValue = capitalize(newOv.description);
         let value = capitalize(optionValues[index].description),
         spanClass = '',
