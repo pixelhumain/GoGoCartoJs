@@ -4,9 +4,9 @@ import { App } from "../../gogocarto";
 import { GoGoConfig } from "../../classes/config/gogo-config.class";
 import { TemplateElementModule } from "../element/template-element.module";
 import { TemplateElementFiltersModule } from "../element/template-element-filters.module";
+import * as nunjucks from "nunjucks";
 
 declare var $;
-declare var nunjucks;
 declare var commonmark;
 
 export class TemplateModule
