@@ -1,5 +1,4 @@
 declare var $;
-declare var nunjucks, goGoCarto;
 
 import { AppModule, AppDataType, AppModes, AppStates } from './app.module';
 import { getQueryParams } from "./utils/params";
@@ -146,5 +145,6 @@ export class GoGoCartoModule
 	}
 }
 
-// instanciate a GoGoCartoModule
-goGoCarto = function(container, options) { return new GoGoCartoModule(container, options); }
+export default function goGoCarto (container, options){
+	return new GoGoCartoModule(container, options);
+}
