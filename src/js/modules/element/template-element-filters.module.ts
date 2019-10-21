@@ -7,7 +7,6 @@ import { Event } from "../../classes/classes";
 import { splitLongText, formatPhoneNumber } from "../../utils/string-helpers";
 
 declare var $;
-declare var nunjucks;
 declare var commonmark;
 
 export class TemplateElementFiltersModule

@@ -4,9 +4,9 @@ import { App } from "../../gogocarto";
 import { GoGoConfig } from "../../classes/config/gogo-config.class";
 import { Event } from "../../classes/classes";
 import { TemplateNames, TemplateConfig } from '../../classes/config/template-config.class';
+import * as commonmark from 'commonmark';
+
 declare var $;
-declare var nunjucks;
-declare var commonmark;
 
 export class TemplateElementModule
 {
@@ -21,7 +21,7 @@ export class TemplateElementModule
 
   markerPopupConfig : TemplateConfig;
   markerPopupTemplate : any = null; // nunjucks template
-  
+
   initialize()
   {
     this.bodyConfig = new TemplateConfig(App.config.infobar.bodyTemplate, TemplateNames.ElementBody);
@@ -52,7 +52,7 @@ export class TemplateElementModule
         });
         break;
     }
-  }  
+  }
 
   // If there is a body template configured, then we use it. We use the default body otherwise.
   renderBody(element): any
@@ -123,5 +123,5 @@ export class TemplateElementModule
     let parser = new commonmark.Parser()
     let htmlRenderer = new commonmark.HtmlRenderer();
     return htmlRenderer.render(parser.parse(markdownString));
-  }  
+  }
 }
