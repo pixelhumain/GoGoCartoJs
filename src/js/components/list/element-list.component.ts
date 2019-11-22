@@ -61,7 +61,7 @@ export class ElementListComponent
 
 	hideSpinnerLoader() { $('#directory-list-spinner-loader').hide(); }
 
-	clear() { $('#directory-content-list li').remove(); this.visibleElementIds = []; }
+	clear() { $('#directory-content-list li, #directory-content-list .title-separator').remove(); this.visibleElementIds = []; }
 
 	reInitializeElementToDisplayLength()
 	{
@@ -82,7 +82,10 @@ export class ElementListComponent
 		if (App.dataType == AppDataType.All)
 		{
 			for(element of elementsToDisplay) element.updateDistance();
-			elementsToDisplay.sort(this.compareDistance);
+			if (App.config.infobar.displayDateField)
+				elementsToDisplay.sort(this.compareDate);
+			else
+				elementsToDisplay.sort(this.compareDistance);
 		}
 		else if (App.dataType == AppDataType.SearchResults)
 		{
@@ -120,10 +123,24 @@ export class ElementListComponent
 		let that = this;
 
 		console.log("startIndex", startIndex, "endIndex", endIndex);
+		let currMonth = null; let currYear = null;
+		let prevMonth = null; let prevYear = null
 		for(let i = startIndex; i < endIndex; i++)
 		{
 			element = elementsToDisplay[i];
 			this.visibleElementIds.push(element.id);
+			if (App.config.infobar.displayDateField)
+			{
+				currMonth = element.dateToDisplay.getMonth()
+				currYear = element.dateToDisplay.getFullYear()
+				if (currMonth != prevMonth || currYear != prevYear)
+				{
+					console.log("Display titre index is", i)
+					listContentDom.append(`<div class="title-separator">${$.fn.datepicker.dates[App.config.language].months[currMonth]} ${currYear}</div>`)
+				}
+				prevMonth = currMonth
+				prevYear = currYear
+			}
 			listContentDom.append(element.component.render());
 			// bind element header click
 			element.component.dom.find('.collapsible-header').click(function() { that.onElementOpen(this); });
@@ -244,8 +261,17 @@ export class ElementListComponent
 
 	private compareDistance(a:Element,b:Element)
 	{
-	  if (a.distanceFromBoundsCenter == b.distanceFromBoundsCenter) return 0;
-	  return a.distanceFromBoundsCenter < b.distanceFromBoundsCenter ? -1 : 1;
+	  if (a.distance == b.distance) return 0;
+	  return a.distance < b.distance ? -1 : 1;
+	}
+
+	private compareDate(a:Element, b:Element)
+	{
+		if (a.dateToDisplay.getDate() == b.dateToDisplay.getDate() &&
+				a.dateToDisplay.getMonth() == b.dateToDisplay.getMonth() &&
+				a.dateToDisplay.getFullYear() == b.dateToDisplay.getFullYear())
+			return a.distance < b.distance ? -1 : 1
+	  return a.dateToDisplay < b.dateToDisplay ? -1 : 1;
 	}
 
 	private compareSearchScore(a:Element,b:Element)

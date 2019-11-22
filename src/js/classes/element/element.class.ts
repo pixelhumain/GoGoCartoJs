@@ -176,7 +176,7 @@ export class Element extends ElementBase
     result['customData'] = customData;
 
     if (App.config.infobar.displayDateField) {
-      let date = App.filterModule.parseDate(this.data[App.config.infobar.displayDateField])
+      let date = this.dateToDisplay
       if (date)
       {
         let localeDates = $.fn.datepicker.dates[App.config.language];

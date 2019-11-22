@@ -24,6 +24,9 @@ export class ElementJsonParserModule
       this.loadFromCompactJson(elementJson, element);
     else
       this.loadFromFullJson(elementJson, element);
+
+    if (App.config.infobar.displayDateField)
+      element.dateToDisplay = App.filterModule.parseDate(element.data[App.config.infobar.displayDateField])
   }
 
   private loadFromCompactJson(elementJson : any, element : Element | ElementBase)
