@@ -138,11 +138,16 @@ export class ElementListComponent
 			if (App.dataType == AppDataType.All)
 			{
 				// expand bounds
-				console.log("not enugh elements, expand bounds");
+				let isAlreadyMaxBounds = App.boundsModule.extendedBounds == App.boundsModule.maxBounds;
+				console.log("not enugh elements, expand bounds. IsAlreadyMaxBounds", isAlreadyMaxBounds);
 				if (App.boundsModule.extendBounds(0.5)) {
 					this.showSpinnerLoader();
 					App.elementsManager.checkForNewElementsToRetrieve(true);
 				} else {
+					// When switching to List mode, we initialize bounds from the viewport
+					// If all elements are already retrieve, the bounds are extended to maxBounds in extendBounds method
+					// Then, only once after this setup to the maxBounds, we need to updateElementToDisplay
+					if (!isAlreadyMaxBounds) App.elementsModule.updateElementsToDisplay(true, false);
 					this.handleAllElementsRetrieved();
 				}
 			}
