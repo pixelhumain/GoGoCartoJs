@@ -28,9 +28,10 @@ gulp.task("scriptsDirectory", function () {
     return browserify({
         basedir: '.',
         debug: true,
-        entries: ['src/js/gogocarto.ts'],
+        entries: ['src/js/main.js'],
         cache: {},
-        packageCache: {}
+        packageCache: {},
+        standalone: 'goGoCarto'
     })
     .plugin(tsify)
     .transform('babelify', {
@@ -49,7 +50,6 @@ gulp.task('scriptsLibs', function() {
                   'src/js/libs/bootstrap-datepicker.js' ,
                   'src/js/libs/datepicker-locales/**/*.js' ,
                   '!src/js/libs/materialize/unused/**/*.js',
-                  '!src/js/libs/nunjucks-slim.js'
                    ])
     .pipe(concat('libs.js'))
     .pipe(gulp.dest('build'));
@@ -64,7 +64,7 @@ gulp.task('templates', function() {
 
 gulp.task('sass', function () {
   return gulp.src(['src/scss/**/*.scss'])
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sass({ includePaths: ['node_modules']}).on('error', sass.logError))
     .pipe(gulp.dest('web/assets'));
 });
 

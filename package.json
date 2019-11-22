@@ -15,9 +15,18 @@
   "engines": {
     "node": "6.5.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "commonmark": "^0.29.0",
+    "diff": "^4.0.1",
+    "nunjucks": "^3.2.0",
+    "tinycolor2": "^1.4.1"
+  },
   "devDependencies": {
+    "@types/commonmark": "^0.27.4",
+    "@types/diff": "^4.0.2",
     "@types/leaflet": "^1.0.42",
+    "@types/nunjucks": "^3.1.2",
+    "@types/tinycolor2": "^1.4.2",
     "babel-preset-es2015": "^6.18.0",
     "babelify": "^7.3.0",
     "browserify": "^13.1.1",
@@ -34,7 +43,6 @@
     "gulp-uglify": "^2.0.0",
     "natives": "^1.1.6",
     "node-notifier": "^4.6.1",
-    "nunjucks": "^3.2.0",
     "tsify": "^2.0.7",
     "typescript": "^2.1.4",
     "vinyl-source-stream": "^1.1.0",

@@ -5,10 +5,11 @@ import { CategoryOptionTreeNode, CategoryOptionTreeNodeType } from "../../compon
 import { App } from "../../gogocarto";
 import { capitalize, slugify } from "../../utils/string-helpers";
 declare let $ : any;
-declare var tinycolor : any;
+import * as tinycolor2 from 'tinycolor2';
+var tinycolor = (<any>tinycolor2).default;
 
 export class Option extends CategoryOptionTreeNode
-{ 
+{
 	color : string;
 	softColor : string;
 	icon : string;
@@ -19,7 +20,7 @@ export class Option extends CategoryOptionTreeNode
 
   displayChildrenInMenu : boolean;
 	displayChildrenInInfoBar : boolean;
-  
+
   intId : number; // And Id as number, used for creating the option url
 
 	parentOptionIds : number[] = [];
@@ -31,7 +32,7 @@ export class Option extends CategoryOptionTreeNode
 		this.name = capitalize($optionJson.name);
 		this.nameShort = capitalize($optionJson.nameShort || this.name);
 		this.id = ('id' in $optionJson) ? '' + $optionJson.id : slugify(this.nameShort);
-		this.intId = typeof $optionJson.id == 'number' ? $optionJson.id : $optionJson.intId;		
+		this.intId = typeof $optionJson.id == 'number' ? $optionJson.id : $optionJson.intId;
 		this.url = $optionJson.url;
 
 		this.displayInMenu = $optionJson.displayInMenu !== false;
@@ -41,14 +42,14 @@ export class Option extends CategoryOptionTreeNode
 
 		this.showExpanded = $optionJson.showExpanded || false;
 		this.unexpandable = $optionJson.unexpandable || false;
-		
+
 		this.color = $optionJson.color ? tinycolor($optionJson.color) : null;
 		this.softColor = tinycolor($optionJson.softColor || this.color);
 		this.icon = $optionJson.icon;
 		if (this.icon && (this.icon.indexOf("fab ") > 0 || this.icon.indexOf("fas ") > 0)) this.icon += " fa";
 		this.textHelper = $optionJson.textHelper;
 		this.useIconForMarker = ('useIconForMarker' in $optionJson) ? $optionJson.useIconForMarker : !!this.icon;
-		this.useColorForMarker = ('useColorForMarker' in $optionJson) ? $optionJson.useColorForMarker : !!this.color;		
+		this.useColorForMarker = ('useColorForMarker' in $optionJson) ? $optionJson.useColorForMarker : !!this.color;
 	}
 
 	addCategory($category : Category) { this.children.push($category);  }
