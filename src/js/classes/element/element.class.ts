@@ -204,8 +204,21 @@ export class Element extends ElementBase {
         customData.push(`<b>${formatLabel(key)}</b> ${value}`);
       }
     });
-
     result['customData'] = customData;
+
+    if (App.config.infobar.displayDateField) {
+      let date = App.filterModule.parseDate(this.data[App.config.infobar.displayDateField])
+      if (date)
+      {
+        let localeDates = $.fn.datepicker.dates[App.config.language];
+        result['gogoDisplayDateNumber'] = date.getDate();
+        result['gogoDisplayDateDayShort'] = localeDates.daysShort[date.getDay()];
+        result['gogoDisplayDateDay'] = localeDates.days[date.getDay()];
+        result['gogoDisplayDateMonthShort'] = localeDates.monthsShort[date.getMonth()];
+        result['gogoDisplayDateMonth'] = localeDates.months[date.getMonth()];
+        result['gogoDisplayDateYear'] = date.getFullYear();
+      }
+    }
     return result;
   }
 
