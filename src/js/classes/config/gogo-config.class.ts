@@ -30,9 +30,9 @@ export class GoGoConfig {
     displayNumberOfElementForEachCategory: false,
     displayNumberOfElementRoundResults: false,
     filters: [
-     new MenuFilter({ type: "taxonomy"}),
-     new MenuFilter({ type: "date", field: "event_date", label: "Filtrer par Date", views: ["day", "week", "month", "range"], defaultView: "range", multiday: true}),
-     new MenuFilter({ type: "number", field: "price", label: "Prix", subtype: "value"})
+      new MenuFilter({ type: "taxonomy"}),
+      new MenuFilter({ type: "date", field: "event_date", label: "Filtrer par Date", views: ["day", "week", "month", "range"], defaultView: "range", multiday: true}),
+      new MenuFilter({ type: "number", field: "price", label: "Prix", subtype: "value"})
     ]
   };
   readonly infobar = {
@@ -48,6 +48,7 @@ export class GoGoConfig {
       type: 'string', // string | url
       isMarkdown: true,
     },
+    displayDateField: undefined
   };
   readonly marker = {
     displayPopup: true,
@@ -254,7 +255,14 @@ export class GoGoConfig {
     // FEATURES
     if (!config.features) config.features = DEFAULT_FEATURES;
 
-    for(let i = 0; i < this.menu.filters.length; i++) (<any>this.menu.filters[i]).id = i;
+    // FILTERS
+    for(let i = 0; i < this.menu.filters.length; i++) {
+      let menu = <any> this.menu.filters[i];
+      menu.id = i; // give an id to each filter
+      // if there is a date filter, display the date-header in info bar & list
+      if (menu.type == "date" && this.infobar.displayDateField == undefined)
+        this.infobar.displayDateField = menu.field;
+    }
 
     console.log(this);
   }
