@@ -141,21 +141,29 @@ export class ElementListComponent {
 
     if ($animate) $('#directory-content-list .elements-container').animate({ scrollTop: '0' }, 500);
     $('#directory-content-list ul').collapsible({ accordion: true });
-
     // if the list is not full, we send ajax request
-    if (elementsToDisplay.length < maxElementsToDisplay) {
-      if (App.dataType == AppDataType.All) {
+    if (elementsToDisplay.length < maxElementsToDisplay)
+    {
+      if (App.dataType == AppDataType.All)
+      {
         // expand bounds
-        if (this.log) console.log('not enugh elements, expand bounds');
+        let isAlreadyMaxBounds = App.boundsModule.extendedBounds == App.boundsModule.maxBounds;
+        console.log("not enugh elements, expand bounds. IsAlreadyMaxBounds", isAlreadyMaxBounds);
         if (App.boundsModule.extendBounds(0.5)) {
           this.showSpinnerLoader();
           App.elementsManager.checkForNewElementsToRetrieve(true);
         } else {
+          // When switching to List mode, we initialize bounds from the viewport
+          // If all elements are already retrieve, the bounds are extended to maxBounds in extendBounds method
+          // Then, only once after this setup to the maxBounds, we need to updateElementToDisplay
+          if (!isAlreadyMaxBounds) App.elementsModule.updateElementsToDisplay(true, false);
           this.handleAllElementsRetrieved();
         }
       }
-    } else {
-      if (this.log) console.log('list is full');
+    }
+    else
+    {
+      // console.log("list is full");
       // waiting for scroll bottom to add more elements to the list
       this.isListFull = true;
     }
