@@ -1,55 +1,90 @@
 .collapsible-header
 {
-  padding: 0; 
+  padding: 0;
   position: relative;
 
   i { margin-right: 0; padding-left: 0.3rem; }
 
   a { text-decoration: underline; }
 
-  .collapsible-header-title 
-  {     
+  .header-date {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    width: 100px;
+    text-align: center;
+    font-weight: bold;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 10px 0;
+
+    .date-component {
+      line-height: 1
+    }
+    .date-day, .date-month-short, .date-year { display: none; }
+    .date-number {
+      font-size: 1.8rem;
+    }
+    .date-day-short {
+      opacity: .8;
+      font-size: .9rem;
+    }
+    .date-month {
+      font-size: .8rem;
+      text-transform: uppercase;
+      opacity: .8;
+    }
+
+  }
+  .header-date + .header-content {
+    margin-left: 100px;
+  }
+  .collapsible-header-title
+  {
     position: relative;
     padding: 0;
     @media #{$medium-and-up} { padding: 1rem; padding-bottom: .5rem; }
-    margin-bottom: 0rem; 
+    margin-bottom: 0rem;
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 2rem;
     padding: .5rem 0;
     font-weight: bold;
 
-    .distance 
-    { 
-      float: right; 
+    .distance
+    {
+      float: right;
       margin-left: 1rem;
-    } 
-    
-    .location { display: none; } 
+    }
+
+    .location { display: none; }
   }
 
   .custom-header {
     margin-bottom: .5rem;
   }
 
-  .collapsible-header-more 
-  { 
-    line-height: 1.5rem; 
+  .collapsible-header-more
+  {
+    line-height: 1.5rem;
     padding: 0;
     @media #{$medium-and-up} { padding: 0 1rem; }
     margin-bottom: .5rem;
 
-    .inline-option-values  
-    { 
+    .inline-option-values
+    {
       font-weight: bold;
       font-style: italic;
       padding-left: 0;
       margin-bottom: .3rem;
 
-      .option-value 
+      .option-value
       {
-        &.disabled { color: #9C9C9C; font-weight: normal; }        
+        &.disabled { color: #9C9C9C; font-weight: normal; }
       }
     }
-  }   
-} 
+  }
+}

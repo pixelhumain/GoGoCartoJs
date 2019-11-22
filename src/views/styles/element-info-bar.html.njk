@@ -7,7 +7,7 @@
   .gogo-load-css .collapsible-header:hover .expand-label { color: {{ primary }}; }
 
   .gogo-load-css .interactive-section { background-color: {{ interactiveColor }}; }
-  
+
   {% if config.colors.infoBarMenu %}
     .gogo-load-css .gogocarto-container .element-item .menu-element { background-color: {{ config.colors.infoBarMenu }}; }
     .gogo-load-css .gogocarto-container #element-info-bar .element-item.active .expand-label.transform-big { background-color: {{ config.colors.infoBarMenu }}; }
@@ -18,8 +18,8 @@
   {% endif %}
 
   .gogo-load-css .gogocarto-container #directory-content-list .element-item .collapsible-header,
-  #element-info-bar.display-bottom .collapsible-header { 
-    background-color: {{ contentBgd }}; 
+  .gogo-load-css #element-info-bar.display-bottom .collapsible-header {
+    background-color: {{ contentBgd }};
     border-color: {{ lineBorder }};
     color: {{ text }};
   }
@@ -32,7 +32,7 @@
   .gogo-load-css .gogocarto-container .element-item .info-bar-divider { background-color: {{ lineBorder }}; }
   .gogo-load-css .gogocarto-container .element-item .collapsible-body { background-color: {{ contentBackgroundElementBody }}; }
   .gogo-load-css .gogocarto-container .element-item .collapsible-body-main-content { background-color: {{ contentBackgroundElementBody }}; }
-  
+
 
   .gogo-load-css .tabs.info-bar-tabs {
     background-color: {{ textDark }};

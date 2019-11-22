@@ -85,8 +85,7 @@ export class FilterModule
     return true
   }
 
-  // return the number of days since
-  private parseDate(date)
+  public parseDate(date)
   {
   	let dateObject;
   	if (typeof(date) == "string")
