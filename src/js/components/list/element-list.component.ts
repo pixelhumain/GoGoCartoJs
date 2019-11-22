@@ -65,10 +65,7 @@ export class ElementListComponent {
     $('#directory-list-spinner-loader').hide();
   }
 
-  clear() {
-    $('#directory-content-list li').remove();
-    this.visibleElementIds = [];
-  }
+	clear() { $('#directory-content-list li, #directory-content-list .title-separator').remove(); this.visibleElementIds = []; }
 
   reInitializeElementToDisplayLength() {
     this.clear();
@@ -85,6 +82,18 @@ export class ElementListComponent {
     this.elementToDisplayCount = elementsToDisplay.length;
     if (this.log) console.log('-------------');
     if (this.log) console.log('ElementList draw', elementsToDisplay.length);
+		if (App.dataType == AppDataType.All)
+		{
+			for(element of elementsToDisplay) element.updateDistance();
+			if (App.config.infobar.displayDateField)
+				elementsToDisplay.sort(this.compareDate);
+			else
+				elementsToDisplay.sort(this.compareDistance);
+		}
+		else if (App.dataType == AppDataType.SearchResults)
+		{
+			elementsToDisplay.sort(this.compareSearchScore);
+		}
 
     if (App.dataType == AppDataType.All) {
       for (element of elementsToDisplay) element.updateDistance();
@@ -119,12 +128,26 @@ export class ElementListComponent {
 
     const listContentDom = $('#directory-content-list ul.collapsible');
     const that = this;
+		if (this.log) console.log('startIndex', startIndex, 'endIndex', endIndex);
 
-    console.log('element to draw', newElementsToDraw);
+    let currMonth = null; let currYear = null;
+		let prevMonth = null; let prevYear = null
     for (const element of newElementsToDraw) {
       this.visibleElementIds.push(element.id);
-      listContentDom.append(element.component.render());
-      // bind element header click
+			if (App.config.infobar.displayDateField)
+			{
+				currMonth = element.dateToDisplay.getMonth()
+				currYear = element.dateToDisplay.getFullYear()
+				if (currMonth != prevMonth || currYear != prevYear)
+				{
+					console.log("Display titre index is", i)
+					listContentDom.append(`<div class="title-separator">${$.fn.datepicker.dates[App.config.language].months[currMonth]} ${currYear}</div>`)
+				}
+				prevMonth = currMonth
+				prevYear = currYear
+			}
+			listContentDom.append(element.component.render());
+			// bind element header click
       element.component.dom.find('.collapsible-header').click(function () {
         that.onElementOpen(this);
       });
@@ -253,4 +276,18 @@ export class ElementListComponent {
     if (a.searchScore == b.searchScore) return 0;
     return a.searchScore < b.searchScore ? 1 : -1;
   }
+	private compareDate(a:Element, b:Element)
+	{
+		if (a.dateToDisplay.getDate() == b.dateToDisplay.getDate() &&
+				a.dateToDisplay.getMonth() == b.dateToDisplay.getMonth() &&
+				a.dateToDisplay.getFullYear() == b.dateToDisplay.getFullYear())
+			return a.distance < b.distance ? -1 : 1
+	  return a.dateToDisplay < b.dateToDisplay ? -1 : 1;
+	}
+
+	private compareSearchScore(a:Element,b:Element)
+	{
+	  if (a.searchScore == b.searchScore) return 0;
+	  return a.searchScore < b.searchScore ? 1 : -1;
+	}
 }

@@ -48,7 +48,7 @@ export class GoGoConfig {
       type: 'string', // string | url
       isMarkdown: true,
     },
-    displayDateField: undefined
+    displayDateField: undefined // name of the field who will provide the main element date
   };
   readonly marker = {
     displayPopup: true,

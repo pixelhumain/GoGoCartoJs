@@ -37,6 +37,7 @@
       {% set address = element.originalAddress %}
       {% if address %}
         <span class="location gogo-color-soft">
+          <span class="fa fa-map icon-address"></span>
           {% if address.postalCode %}<span class="postalCode">{{ address.postalCode }}</span>{% endif %}
           {% if address.addressLocality %}<span class="city"> {{ address.addressLocality }}</span>{% endif %}
         </span>
