@@ -7,9 +7,17 @@
     <span class="button-text">{{ 'back.to.map' | i18n }}</span>
   </span>
 
+  <div class="location-range">
+    <span class="range-title">{{ 'search.radius' | i18n }}</span>
+    <span class="range-start">0</span>
+    <div id="location-slider"></div>
+    <span class="range-end">1000</span>
+  </div>
+
   <div class="title-text" style="display:none">
     {{ results | i18n }}
     <span class="element-list-title-number-results"></span>
+    <span class="element-list-title-search-radius"></span>
     <span class="element-list-title-text"></span>
   </div>
 

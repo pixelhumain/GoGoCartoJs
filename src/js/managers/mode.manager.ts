@@ -79,6 +79,7 @@ export class ModeManager {
       }
 
       App.boundsModule.createBoundsFromLocation(centerLocation);
+      App.elementListComponent.updateLocRangeSliderFromCurrBounds();
       App.elementsManager.checkForNewElementsToRetrieve(true);
     } else if (App.dataType == AppDataType.SearchResults) {
       App.elementsModule.updateElementsToDisplay(true, false);

@@ -49,6 +49,12 @@ export class BoundsModule {
   }
 
   log = false;
+	// the actual displayed bounds radius (distance from corner to center)
+	boundsRadiusInKm() : number
+	{
+		if (!this.extendedBounds) return 0;
+		return Math.floor(this.extendedBounds.getNorthEast().distanceTo(this.extendedBounds.getCenter()) / 1000);
+	}
 
   extendMapBounds($oldZoom, $newZoom, $numberMarkerVisible) {
     let ratio;

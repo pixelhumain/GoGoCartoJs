@@ -282,12 +282,6 @@ export class MapComponent {
 		else*/ this.map_.setView(location, zoom);
   }
 
-  // the actual displayed map radius (distance from croner to center)
-  mapRadiusInKm(): number {
-    if (!this.isMapLoaded) return 0;
-    return Math.floor(this.map_.getBounds().getNorthEast().distanceTo(this.map_.getCenter()) / 1000);
-  }
-
   // distance from last saved location to a position
   distanceFromLocationTo(position: L.LatLng) {
     if (!App.geocoder.getLocation()) return null;
