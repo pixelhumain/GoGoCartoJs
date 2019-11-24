@@ -10,7 +10,7 @@ import { ViewPort, Event } from "../classes/classes";
 export interface GeocodeResult
 {
 	getCoordinates() : L.LatLngTuple;
-	getFormattedAddress() : string;	
+	getFormattedAddress() : string;
 	getBounds() : RawBounds;
 }
 
@@ -35,14 +35,14 @@ export class GeocoderModule
 
 	getLocation() : L.LatLng
 	{
-		return this.location;		
+		return this.location;
 	}
 
 	getBounds() : L.LatLngBounds
 	{
 		if (!this.lastResultBounds) return null;
 		return this.lastResultBounds;
-	}	
+	}
 
 	getLocationSlug() : string { return slugify(this.lastAddressRequest); }
 	getLocationAddress() : string { return this.lastAddressRequest; }
@@ -61,7 +61,7 @@ export class GeocoderModule
 		//this.geocoder = GeocoderJS.createGeocoder({'provider': 'google', 'useSSL':true });
 	}
 
-	geocodeAddress( address, callbackComplete?, callbackFail? ) 
+	geocodeAddress( address, callbackComplete?, callbackFail? )
 	{
 		// console.log("geocode address : ", address);
 		this.lastAddressRequest = address;
@@ -86,9 +86,9 @@ export class GeocoderModule
 			if (!fake)
 			{
 				this.geocoder.geocode( address, (results : GeocodeResult[]) =>
-				{			
-					if (results !== null && results.length > 0) 
-					{				
+				{
+					if (results !== null && results.length > 0)
+					{
 						this.lastResults = results;
 						this.lastResultBounds = this.latLngBoundsFromRawBounds(this.lastResults[0].getBounds());
 
@@ -97,11 +97,11 @@ export class GeocoderModule
 
 						this.onGeocodeResult.emit();
 
-						if (callbackComplete) callbackComplete(results);	
-					} 	
+						if (callbackComplete) callbackComplete(results);
+					}
 					else
 					{
-						if (callbackFail) callbackFail();			
+						if (callbackFail) callbackFail();
 					}
 				});
 			}
@@ -127,42 +127,77 @@ export class GeocoderModule
 				this.lastResultBounds = this.latLngBoundsFromRawBounds(this.lastResults[0].getBounds());
 
 				callbackComplete(results);
-			}	
-		}			
+			}
+		}
 	}
 
-	geolocateUser(callbackComplete?, forceApi = false)
-	{		
-		if (navigator.geolocation && !forceApi) {
+	geolocateUser(callbackComplete?, callbackError?, forceApi = false)
+	{
+		if ('geolocation' in navigator && !forceApi) {
+			var geocodeOptions = {
+			  enableHighAccuracy: true,
+			  maximumAge        : 30000,
+			  timeout           : 27000
+			};
+
 			navigator.geolocation.getCurrentPosition((position) => {
-				// associate zoom to accuracy
-				let zoom = 17 - Math.log(position.coords.accuracy / 3000) * Math.LOG2E;
-				zoom = Math.min(zoom, 16);
-				zoom = Math.max(zoom, 8);
-				let viewPort = new ViewPort(position.coords.latitude, position.coords.longitude, zoom);
-				this.handleGeolocalisationResponse(viewPort, callbackComplete);
-			}, (e) => { 
-				console.error("Erreur while geolocating", e); 
-				this.geolocateUser(callbackComplete, true);
-			}, 
-			{enableHighAccuracy: true});
+					// associate zoom to accuracy
+					let zoom = 17 - Math.log(position.coords.accuracy / 3000) * Math.LOG2E;
+					zoom = Math.min(zoom, 16);
+					zoom = Math.max(zoom, 8);
+					let viewPort = new ViewPort(position.coords.latitude, position.coords.longitude, zoom);
+					this.handleGeolocalisationResponse(viewPort);
+					callbackComplete(viewPort);
+				},
+				(error) => { this.geocodeError(callbackComplete, callbackError, error) },
+				geocodeOptions
+			);
 		}
 		else
+		{
+			console.log("geocode with API");
 			$.getJSON("http://www.geoplugin.net/json.gp", (data) => {  // "http://ip-api.com/json/"
+		    console.log("result", data);
 		    if (data) {
 			    let viewPort = new ViewPort(parseFloat(data.geoplugin_latitude), parseFloat(data.geoplugin_longitude), 14);
-			    this.handleGeolocalisationResponse(viewPort, callbackComplete);
+			    this.handleGeolocalisationResponse(viewPort);
+			    callbackComplete(viewPort);
 			   } else {
-			   	App.component.toastMessage("Désolé, impossible de calculer votre position", 6000);
-			   	console.error("Erreur while geolocating", data);
+			   	 this.geocodeError(callbackComplete, callbackError);
 			   }
-			});
+			}).error(() => { this.geocodeError(callbackComplete, callbackError); });
+		}
 	}
 
-	private handleGeolocalisationResponse(viewPort : ViewPort, callbackComplete)
+	private geocodeError(callbackComplete, callbackError, error : any = {})
+	{
+		console.error("Erreur while geolocating", error);
+		if (error.code == 1) {
+			// permission denied with navigator geoloc
+			App.component.toastMessage("Géolocalisation refusée", 6000);
+		}
+		else if (!error.code)
+		{
+			// Geocode with API failed
+			App.component.toastMessage("La géolocalisation a échouée", 6000);
+		}
+		else
+		{
+			// error from navigator geoloc (unavailable or timeout), try with json API
+			this.geolocateUser(callbackComplete, callbackError, true);
+		}
+
+		// Real error, we initialize to default bounds
+		if (error.code == 1 || !error.code)
+		{
+			let viewport = new ViewPort(App.boundsModule.defaultCenter.lat, App.boundsModule.defaultCenter.lng, 7);
+			this.handleGeolocalisationResponse(viewport);
+			callbackError(viewport);
+		}
+	}
+	private handleGeolocalisationResponse(viewPort : ViewPort)
 	{
 		this.location = viewPort.toLocation();
     this.onGeolocalizationResult.emit(viewPort);
-    callbackComplete(viewPort);
 	}
 }

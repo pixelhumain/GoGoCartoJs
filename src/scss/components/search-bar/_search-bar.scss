@@ -1,8 +1,8 @@
 @import 'search-bar-mobile';
 @import 'search-overlay-mobile';
-@import 'search-result-header';  
+@import 'search-result-header';
 
-.search-bar-with-options-container 
+.search-bar-with-options-container
 {
   .search-bar-container
   {
@@ -11,11 +11,11 @@
     text-align: center;
     margin: 0;
     padding-bottom: 0;
-    padding-left: .7rem;  
+    padding-left: .7rem;
 
     .search-icon
     {
-      position: absolute;  
+      position: absolute;
       font-size: 1.2rem;
       height: 2rem;
       line-height: 2rem;
@@ -34,8 +34,8 @@
       box-shadow: none !important;
       margin: 0;
       text-align: left;
-      padding-left: 2.2rem;   
-      font-weight: bold; 
+      padding-left: 2.2rem;
+      font-weight: bold;
       height: 2rem;
       width: 100%;
       border: none !important;
@@ -54,16 +54,16 @@
         border-color: $error-color !important;
       }
 
-      &::-webkit-input-placeholder { 
+      &::-webkit-input-placeholder {
         color: #949494;
       }
-      &::-moz-placeholder { 
+      &::-moz-placeholder {
         color: #949494;
       }
-      &:-ms-input-placeholder { 
+      &:-ms-input-placeholder {
         color: #949494;
       }
-      &:-moz-placeholder { 
+      &:-moz-placeholder {
         color: #949494;
       }
     }
@@ -71,11 +71,11 @@
 
   .search-options
   {
-  	padding: 0 .7rem;	
+  	padding: 0 .7rem;
     padding-bottom: .7rem;
 
-  	label.search-option-radio-label 
-  	{  
+  	label.search-option-radio-label
+  	{
       font-size: .9rem;
       line-height: 2.1rem;
       padding-left: 27px;
@@ -101,24 +101,36 @@
   	.search-action-btn
   	{
   		float: right;
-  		font-size: .85rem;    
+  		font-size: .85rem;
       height: 1.8rem;
-      line-height: 1.8rem;    
+      line-height: 1.8rem;
       padding: 0 10px;
   	}
-
-  	#search-spinner-loader
-    {
-      height: 12px;
-      width: 12px;
-      top: 1px;
-      margin-left: 5px;
-      .spinner-layer { border-color: #5d5d5d; }
-      .circle-clipper .circle { border-width: 2px; }
-    }
   }
 
-  .search-no-result 
+  #search-spinner-loader, #geolocate-spinner-loader
+  {
+    height: 12px;
+    width: 12px;
+    top: 1px;
+    margin-left: 5px;
+    .spinner-layer { border-color: #5d5d5d; }
+    .circle-clipper .circle { border-width: 2px; }
+  }
+  #geolocate-spinner-loader {
+    height: 18px;
+    width: 18px;
+    display: none;
+    position: absolute;
+    top: 7px;
+    right: 0;
+  }
+  .search-geolocalize.loading {
+    &:before { content: none; }
+    #geolocate-spinner-loader { display: block; }
+  }
+
+  .search-no-result
   {
     color: white;
     padding-bottom: .7rem;
@@ -128,7 +140,7 @@
   }
 }
 
-#directory-menu.small-width 
+#directory-menu.small-width
 {
   .search-options { padding-left: 7px; }
   .search-options label.search-option-radio-label { margin-right: 0}

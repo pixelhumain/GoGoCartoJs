@@ -1,5 +1,6 @@
 {% if config.isFeatureActivated('searchPlace') or config.isFeatureActivated('searchElements') %}
 
+{% import 'components/spinner-loader.html.njk' as spinnerLoader %}
 <div class="search-bar-with-options-container">
 
     {# Search Input #}
@@ -7,8 +8,11 @@
         <a class="gogo-icon-search gogo-h-primary search-icon search-bar-icon"></a>
 
         {% if config.isFeatureActivated('searchGeolocate') %}
+
             <a class="gogo-icon-locate gogo-h-primary search-icon tooltipped search-geolocalize"
-                data-position="right" data-delay="0" data-tooltip="{{ 'geolocalize' | i18n }}"></a>
+                data-position="right" data-delay="0" data-tooltip="{{ 'geolocalize' | i18n }}">
+                {{ spinnerLoader.create('geolocate-spinner-loader') }}
+            </a>
         {% endif %}
 
         <input class="validate search-bar gogo-section-content"
@@ -37,7 +41,6 @@
         <button class="search-action-btn search-btn btn waves-effects">{{ 'search' | i18n }}</button>
         <button class="search-action-btn search-cancel-btn btn waves-effects" style="display:none">
             {{ 'cancel' | i18n }}
-            {% import 'components/spinner-loader.html.njk' as spinnerLoader %}
             {{ spinnerLoader.create('search-spinner-loader') }}
         </button>
     </div>

@@ -21,18 +21,18 @@ export class SearchBarComponent
 	constructor() {}
 
 	initialize()
-	{		
+	{
 		this.searchInput().keyup((e) =>
-		{    
+		{
 			if(e.keyCode == 13) { this.handleSearchAction(); } // press enter
 		});
 
-		$('.search-bar-icon').click(() => this.handleSearchAction());	
+		$('.search-bar-icon').click(() => this.handleSearchAction());
 
 		$('.search-btn').click(() => this.handleSearchAction());
 		$('.search-cancel-btn').click(() => this.clearLoader());
 
-		$('#btn-close-search-result').click(() => this.clearElementSearchResult());	
+		$('#btn-close-search-result').click(() => this.clearElementSearchResult());
 
 		$('.search-geolocalize').tooltip();
 		$('.search-geolocalize').click(() => this.geolocateUser());
@@ -45,7 +45,7 @@ export class SearchBarComponent
 			default: App.config.translate('find.a.place') + ", " + App.config.translate('element.indefinite') + "...",
 			place: App.config.translate('enter.an.address.postal.code.city'),
 			element: App.config.translate('enter.the.name.of') + App.config.translate('element.indefinite')
-		}		
+		}
 
 		this.updateSearchPlaceholder();
 
@@ -63,68 +63,72 @@ export class SearchBarComponent
 
 		let searchText = this.searchInput().val();
 
-		switch (this.searchType()) 
-    { 
-      case "place": 
-        App.geocoder.geocodeAddress(searchText, 
-          (result) => { 
-            this.clearSearchResult(false); 
-            this.hideSearchOptions(); 
+		switch (this.searchType())
+    {
+      case "place":
+        App.geocoder.geocodeAddress(searchText,
+          (result) => {
+            this.clearSearchResult(false);
+            this.hideSearchOptions();
             this.displaySearchResultMarkerOnMap();
-            App.mapComponent.fitBounds(App.geocoder.getBounds(), true); 
+            App.mapComponent.fitBounds(App.geocoder.getBounds(), true);
           },
           () => {
           	this.clearLoader();
           	$('.search-no-result').show();
-          }); 
-        break; 
-      case "element": 
-        let value = this.searchInput().val(); 
-        if (value) 
-          this.searchElements(searchText); 
-        else 
-          this.clearSearchResult(); 
-        break; 
-    } 
+          });
+        break;
+      case "element":
+        let value = this.searchInput().val();
+        if (value)
+          this.searchElements(searchText);
+        else
+          this.clearSearchResult();
+        break;
+    }
 	}
 
 	handleGeocodeResult()
 	{
 		this.setValue(App.geocoder.getLocationAddress());
 		this.clearLoader();
-	}	
+	}
 
 	geolocateUser()
 	{
 		this.beforeSearch();
-		App.geocoder.geolocateUser( (result:ViewPort) => 
+		$('.search-geolocalize').addClass('loading');
+		App.geocoder.geolocateUser((result:ViewPort) =>
 		{
 			this.clearSearchResult(true);
 			this.setValue("Geolocalisé");
-			this.hideSearchOptions();			
 			this.clearLoader();
+			$('.search-geolocalize').removeClass('loading');
 			this.displaySearchResultMarkerOnMap();
+		}, () => {
+			this.clearLoader();
+			$('.search-geolocalize').removeClass('loading');
 		});
-	}	
+	}
 
 	searchElements($text : string, $backFromHistory = false)
-	{		
+	{
 		this.setValue($text);
 		this.currSearchText = $text;
 
 		let route = App.config.features.searchElements.url;
-		let data =  { text: $text }; 
+		let data =  { text: $text };
 
 		if (route) {
 			App.ajaxModule.sendRequest(route, 'get', data,
-			(searchResult) => 
+			(searchResult) =>
 			{
-	      App.setDataType(AppDataType.SearchResults, $backFromHistory, searchResult);       
-	 
-	      this.clearLoader();       
-	      this.showSearchResultLabel(searchResult.data.length);   
+	      App.setDataType(AppDataType.SearchResults, $backFromHistory, searchResult);
+
+	      this.clearLoader();
+	      this.showSearchResultLabel(searchResult.data.length);
 	 			App.gogoControlComponent.updatePosition();
-	 			this.hideMobileSearchBar(); 			
+	 			this.hideMobileSearchBar();
 			},
 			(error) =>
 			{
@@ -134,17 +138,17 @@ export class SearchBarComponent
 		else
 		{
 			// TODO search through already received elements.
-		}			
+		}
 	}
 
-	showMobileSearchBar() { 
+	showMobileSearchBar() {
 		$('#search-overlay-mobile').fadeIn(250);
 		$('.search-bar-with-options-container').show();
 		$('.search-bar').focus();
 		App.gogoControlComponent.hide(0);
 	}
 
-	hideMobileSearchBar() { 
+	hideMobileSearchBar() {
 		// console.log("hide mobile search bar");
 		$('#search-overlay-mobile').fadeOut(150);
 		$('.search-bar-with-options-container.mobile').hide();
@@ -165,14 +169,14 @@ export class SearchBarComponent
 	showSearchOptions()
 	{
 		$('.search-options').slideDown(350);
-		if (!this.isSearchOptionVisible()) 
+		if (!this.isSearchOptionVisible())
 			$('#directory-menu-main-container .directory-menu-header').addClass("expanded");
 
 		this.updateSearchPlaceholder();
 	}
 
 	hideSearchOptions()
-	{		
+	{
 		$('#directory-menu-main-container .directory-menu-header').removeClass("expanded");
 		this.searchInput().blur();
 		this.updateSearchPlaceholder();
@@ -190,10 +194,10 @@ export class SearchBarComponent
 				case "place":   placeholder = this.placeholders.place;   break;
 				case "element": placeholder = this.placeholders.element; break;
 			}
-		}			
+		}
 
 		this.searchInput().attr("placeholder", placeholder);
-	}	
+	}
 
 	showSearchResultLabel($number : number)
 	{
@@ -211,7 +215,7 @@ export class SearchBarComponent
 		App.gogoControlComponent.updatePosition();
 	}
 
-	clearElementSearchResult() 
+	clearElementSearchResult()
 	{
 		this.clearSearchResult();
 		App.setMode(AppModes.Map);
@@ -219,22 +223,22 @@ export class SearchBarComponent
 
 	clearSearchResult(resetValue = true)
 	{
-		App.setDataType(AppDataType.All);		
-		this.hideSearchResult();		
-		this.clearLoader();	
+		App.setDataType(AppDataType.All);
+		this.hideSearchResult();
+		this.clearLoader();
 		if (this.locationMarker) this.locationMarker.remove();
 		this.currSearchText = '';
 		if (resetValue) {
 			this.setValue("");
 			App.elementListComponent.setTitle("");
-		}		
-		setTimeout( () => { this.hideSearchOptions(); }, 200);		
+		}
+		setTimeout( () => { this.hideSearchOptions(); }, 200);
 	}
 
 	setValue($value : string)
 	{
 		this.searchInput().val($value);
-	}  
+	}
 
 	getCurrSearchText() { return this.currSearchText; }
 
@@ -263,7 +267,8 @@ export class SearchBarComponent
 
 	private displaySearchResultMarkerOnMap()
 	{
+		if (!App.map()) return;
 		this.locationMarker = new L.Marker(App.geocoder.getLocation(), { icon: this.locationIcon }).addTo(App.map());
 	}
-    
+
 }
