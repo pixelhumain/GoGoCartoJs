@@ -6,24 +6,28 @@ import { Event } from '../../classes/event.class';
 import { arraysEqual } from '../../utils/array';
 
 declare let $;
+import * as noUiSlider from 'nouislider';
 
 export class ElementListComponent {
   elementToDisplayCount = 0;
   visibleElementIds: string[] = [];
 
-  // Number of element in one list
-  ELEMENT_LIST_SIZE_STEP = 15;
-  // Basicly we display 1 ELEMENT_LIST_SIZE_STEP, but if user need
-  // for, we display an others ELEMENT_LIST_SIZE_STEP more
-  stepsCount = 1;
-  isListFull = false;
+	// Number of element in one list
+	ELEMENT_LIST_SIZE_STEP : number = 5;
+	// Basicly we display 1 ELEMENT_LIST_SIZE_STEP, but if user need
+	// for, we display an others ELEMENT_LIST_SIZE_STEP more
+	stepsCount : number = 1;
+	isListFull : boolean = false;
 
   // last request was send with this distance
   lastDistanceRequest = 10;
 
-  isInitialized = false;
+	isInitialized : boolean = false;
 
-  constructor() {}
+	locRangeSlider;
+	locRangeValue : number = null;
+
+	constructor() {}
 
   initialize() {
     // detect when user reach bottom of list
@@ -36,7 +40,35 @@ export class ElementListComponent {
         that.handleBottom();
       }
     });
-  }
+		this.locRangeSlider = $('#directory-content-list #location-slider')[0];
+		noUiSlider.create(this.locRangeSlider, {
+	    start: [10],
+	    connect: true,
+	    format: {
+        to: function (value) {
+            return value.toFixed(0) + ' km';
+        },
+        from: function (value) {
+            return Number(value.replace(' km', ''));
+        }
+    	},
+    	step: 1,
+	    tooltips: true,
+	    range: {
+        'min': 1,
+        'max': 1000
+	    }
+		});
+
+		$('#directory-content-list .noUi-tooltip').addClass('gogo-section-content-opposite')
+
+		this.locRangeSlider.noUiSlider.on('change.one', (values) => {
+			let radius = Number(values[0].replace(' km', ''))
+			this.locRangeValue = radius;
+			App.boundsModule.createBoundsFromLocation(App.boundsModule.extendedBounds.getCenter(), radius)
+			App.elementsManager.checkForNewElementsToRetrieve(true);
+		});
+	}
 
   update($elementsToDisplay: Element[]) {
     if ($elementsToDisplay.length == 0) this.stepsCount = 1;
@@ -67,11 +99,19 @@ export class ElementListComponent {
 
 	clear() { $('#directory-content-list li, #directory-content-list .title-separator').remove(); this.visibleElementIds = []; }
 
-  reInitializeElementToDisplayLength() {
-    this.clear();
-    $('#directory-content-list .elements-container').animate({ scrollTop: '0' }, 0);
-    this.stepsCount = 1;
-  }
+	updateLocRangeSliderFromCurrBounds()
+	{
+		this.locRangeValue = App.boundsModule.boundsRadiusInKm();
+		console.log("updateLocRangeSliderFromCurrBounds", this.locRangeValue);
+		this.locRangeSlider.noUiSlider.set(this.locRangeValue)
+	}
+
+	reInitializeElementToDisplayLength()
+	{
+		this.clear();
+		$('#directory-content-list .elements-container').animate({scrollTop: '0'}, 0);
+		this.stepsCount = 1;
+	}
 
   log = false;
 
@@ -85,8 +125,12 @@ export class ElementListComponent {
 		if (App.dataType == AppDataType.All)
 		{
 			for(element of elementsToDisplay) element.updateDistance();
-			if (App.config.infobar.displayDateField)
+
+			if (App.config.infobar.displayDateField) {
+				if (this.locRangeValue != null)
+					elementsToDisplay = elementsToDisplay.filter(el => el.distance < this.locRangeValue);
 				elementsToDisplay.sort(this.compareDate);
+			}
 			else
 				elementsToDisplay.sort(this.compareDistance);
 		}
@@ -95,12 +139,7 @@ export class ElementListComponent {
 			elementsToDisplay.sort(this.compareSearchScore);
 		}
 
-    if (App.dataType == AppDataType.All) {
-      for (element of elementsToDisplay) element.updateDistance();
-      elementsToDisplay.sort(this.compareDistance);
-    } else if (App.dataType == AppDataType.SearchResults) {
-      elementsToDisplay.sort(this.compareSearchScore);
-    }
+		let maxElementsToDisplay = this.ELEMENT_LIST_SIZE_STEP * this.stepsCount;
 
     const maxElementsToDisplay = this.ELEMENT_LIST_SIZE_STEP * this.stepsCount;
 
@@ -134,11 +173,8 @@ export class ElementListComponent {
       startIndex = 0;
     }
 
-    const listContentDom = $('#directory-content-list ul.collapsible');
-    const that = this;
-		if (this.log) console.log('startIndex', startIndex, 'endIndex', endIndex);
-
-    let currMonth = null; let currYear = null;
+		console.log("startIndex", startIndex, "endIndex", endIndex);
+		let currMonth = null; let currYear = null;
 		let prevMonth = null; let prevYear = null
 		for(let i = startIndex; i < endIndex; i++)
 		{
@@ -150,7 +186,7 @@ export class ElementListComponent {
 				currYear = element.dateToDisplay.getFullYear()
 				if (currMonth != prevMonth || currYear != prevYear)
 				{
-					console.log("Display titre index is", i)
+					// month/year title
 					listContentDom.append(`<div class="title-separator">${$.fn.datepicker.dates[App.config.language].months[currMonth]} ${currYear}</div>`)
 				}
 				prevMonth = currMonth
@@ -193,10 +229,33 @@ export class ElementListComponent {
     }
   }
 
-  private onElementOpen(elementHeaderDom) {
-    const elementDom = $(elementHeaderDom).closest('.element-item');
-    const elementId = elementDom.data('element-id');
-    const element = App.elementById(elementId);
+		// if the list is not full, we send ajax request
+		if (elementsToDisplay.length < maxElementsToDisplay)
+		{
+			if (App.dataType == AppDataType.All)
+			{
+				// expand bounds
+				let isAlreadyMaxBounds = App.boundsModule.extendedBounds == App.boundsModule.maxBounds;
+				console.log("not enugh elements, expand bounds. IsAlreadyMaxBounds", isAlreadyMaxBounds);
+				if (App.boundsModule.extendBounds(0.5)) {
+					this.showSpinnerLoader();
+					App.elementsManager.checkForNewElementsToRetrieve(true);
+				} else {
+					// When switching to List mode, we initialize bounds from the viewport
+					// If all elements are already retrieve, the bounds are extended to maxBounds in extendBounds method
+					// Then, only once after this setup to the maxBounds, we need to updateElementToDisplay
+					if (!isAlreadyMaxBounds) App.elementsModule.updateElementsToDisplay(true, false);
+					this.handleAllElementsRetrieved();
+				}
+			}
+		}
+		else
+		{
+			// console.log("list is full");
+			// waiting for scroll bottom to add more elements to the list
+			this.isListFull = true;
+		}
+	}
 
     // initialize element component
     if (!$(elementHeaderDom).hasClass('initialized')) {

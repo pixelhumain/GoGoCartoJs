@@ -173,6 +173,7 @@ export const EN = {
   'save.as.favorites': 'Save as favorites',
   search: 'Search',
   'search.for': 'Search for',
+  'search.radius': 'Radius',
   'see.on.map': 'See on the map',
   'select.type.error': 'You must select a type of error!',
   send: 'Send',

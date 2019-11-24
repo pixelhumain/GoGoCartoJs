@@ -168,11 +168,13 @@ export const FR = {
   'route.to.element': 'Itinéraire vers cet élément',
 
   //S
+
   save: 'Enregistrer',
   saved: 'Enregistré',
   'save.as.favorites': 'Enregistrer comme favoris',
   search: 'Chercher',
   'search.for': 'Recherche de',
+  'search.radius': 'Rayon',
   'see.on.map': 'Voir sur la carte',
   'select.type.error': "Vous devez sélectionner un type d'erreur!",
   send: 'Envoyer',
