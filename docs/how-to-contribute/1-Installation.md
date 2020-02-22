@@ -1,24 +1,34 @@
-Installation instructions
-=======================
+Installation Instructions
+=========================
 
-Simply clone the repository and run
-```
+Clone the repository and run:
+
+```shell
 npm install
-gulp build
+node_modules/.bin/gulp build
 ```
-Then duplicate the web/dev-local.html file into web/dev.html (non versionned), and go to
-http://localhost/GoGoCartoJs/web/dev.html
 
-Gulp tasks
+Then duplicate the `web/dev-local.html` file into `web/dev.html` (non versionned).
+
+Run the server:
+
+```shell
+node_modules/.bin/http-server
+```
+
+Go to:
+http://localhost:8080/web/dev.html
+
+Gulp Tasks
 ----------
 
-- Build : `gulp build`
-- Watch for changes, and automatically build : `gulp watch`
-- Create new distribution files : `gulp cleanDist && gulp build && gulp dist && gulp production`
-- Add new entries of 'en.ts' to the other locale files : `gulp addMissingEntries`
+- Build: `node_modules/.bin/gulp build`
+- Watch for changes, and automatically build: `node_modules/.bin/gulp watch`
+- Create new distribution files: `node_modules/.bin/gulp cleanDist && node_modules/.bin/gulp build && node_modules/.bin/gulp dist && node_modules/.bin/gulp production`
+- Add new entries of 'en.ts' to the other locale files: `node_modules/.bin/gulp addMissingEntries`
 
 
-Continue with
-----
+Continue With
+-------------
+
 [Coding conventions](2-Coding-conventions.md)
-
