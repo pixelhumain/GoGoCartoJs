@@ -47,5 +47,8 @@
     "typescript": "^2.1.4",
     "vinyl-source-stream": "^2.0.0",
     "watchify": "^3.11.1"
+  },
+  "scripts": {
+    "postinstall": "cd src/js && npm install"
   }
 }

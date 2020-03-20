@@ -41,9 +41,18 @@ const scriptsDirectory = () =>
   .pipe(source('directory.js'))
   .pipe(gulp.dest('build'));
 
+const scriptsDeps = () =>
+  gulp.src([
+    'src/js/node_modules/jquery/dist/jquery.min.js',
+    'src/js/node_modules/jquery-ui-dist/jquery-ui.min.js'
+  ])
+  .pipe(concat('deps.js'))
+  .pipe(gulp.dest('build'));
+
 const scriptsLibs = () =>
-  gulp.src(['src/js/libs/**/!(leaflet-routing-machine)*.js',
-    'src/js/libs/leaflet-routing-machine.js' ,
+  gulp.src([
+    'src/js/libs/**/!(leaflet-routing-machine)*.js',
+    'src/js/libs/leaflet-routing-machine.js',
     '!src/js/libs/materialize/unused/**/*.js'
   ])
   .pipe(concat('libs.js'))
@@ -72,7 +81,9 @@ const gzipStyles = () =>
     .pipe(gulp.dest('dist'));
 
 const concatDirectory = () =>
-  gulp.src(['build/libs.js',
+  gulp.src([
+    'build/deps.js',
+    'build/libs.js',
     'build/templates.js',
     'build/directory.js'
   ])
@@ -111,11 +122,12 @@ const cleanDist = () => del(['dist']);
 
 const watchStyles = () => gulp.watch(['src/scss/**/*.scss'], styles);
 const watchDirectory = () => gulp.watch(['src/js/**/*.ts', 'src/locales/**/*.ts'], scriptsDirectory);
+const watchDeps = () => gulp.watch('src/js/node_modules/**/*.js', scriptsDeps);
 const watchLibs = () => gulp.watch('src/js/libs/**/*.js', scriptsLibs);
 const watchTemplates = () => gulp.watch('src/views/**/*.njk', templates);
 
-exports.watch = gulp.parallel(watchStyles, watchDirectory, watchLibs, watchTemplates);
-exports.build = gulp.series(cleanBuild, gulp.parallel(styles, scriptsDirectory, scriptsLibs, templates));
+exports.watch = gulp.parallel(watchStyles, watchDirectory, watchDeps, watchLibs, watchTemplates);
+exports.build = gulp.series(cleanBuild, gulp.parallel(styles, scriptsDirectory, scriptsDeps, scriptsLibs, templates));
 exports.cleanDist = cleanDist;
 exports.dist = gulp.parallel(concatDirectory, concatCss, fontAssets, imageAssets);
 exports.production = gulp.parallel(gulp.series(prodStyles, gzipStyles), gulp.series(concatDirectory, prodJs, gzipJs));

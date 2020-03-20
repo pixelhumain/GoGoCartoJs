@@ -2,6 +2,7 @@
 /TODO
 .sass-cache
 /build/
+/src/js/node_modules/
 web/assets/*.css
 
 web/dev\.html

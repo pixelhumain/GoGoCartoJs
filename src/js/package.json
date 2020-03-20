@@ -1,0 +1,9 @@
+{
+  "name": "gogocarto-js-deps",
+  "version": "1.6.1",
+  "license": "AGPL-3.0",
+  "dependencies": {
+    "jquery": "2.2.1",
+    "jquery-ui-dist": "^1.12.1"
+  }
+}
