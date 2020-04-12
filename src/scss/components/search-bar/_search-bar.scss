@@ -4,9 +4,10 @@
 
 .search-bar-with-options-container
 {
+  padding-bottom: .7rem;
+
   .search-bar-container
   {
-    height: 3.5rem;
     padding: .7rem;
     text-align: center;
     margin: 0;
@@ -67,45 +68,34 @@
         color: #949494;
       }
     }
-  }
 
-  .search-options
-  {
-  	padding: 0 .7rem;
-    padding-bottom: .7rem;
+    .search-bar-autocomplete-results-container
+    {
+      font-size: 16px;
+      font-weight: bold;
+      @include border-radius(5px);
+      max-height: 80vh;
+      overflow: auto;
 
-  	label.search-option-radio-label
-  	{
-      font-size: .9rem;
-      line-height: 2.1rem;
-      padding-left: 27px;
-      margin-right: 13px;
-
-      &:before
-      {
-      	border: 2px solid;
-      	top: 3px;
-  	    width: 14px;
-  	    height: 14px;
+      @media (min-width: 850px) {
+        text-transform: uppercase;
+        font-size: .8rem;
       }
 
-      &:after
+      li
       {
-      	border: 2px solid;
-    		top: 3px;
-  	    width: 14px;
-  	    height: 14px;
-      }
-  	}
+        padding: .5rem;
+        min-height: 40px;
+        cursor: pointer;
+        @include flexbox;
+        @include align(center);
 
-  	.search-action-btn
-  	{
-  		float: right;
-  		font-size: .85rem;
-      height: 1.8rem;
-      line-height: 1.8rem;
-      padding: 0 10px;
-  	}
+        &:hover
+        {
+          background-color: rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
   }
 
   #search-spinner-loader, #geolocate-spinner-loader
@@ -117,6 +107,14 @@
     .spinner-layer { border-color: #5d5d5d; }
     .circle-clipper .circle { border-width: 2px; }
   }
+  #search-spinner-loader {
+    height: 18px;
+    width: 18px;
+    display: none;
+    position: absolute;
+    top: 7px;
+    left: 0;
+  }
   #geolocate-spinner-loader {
     height: 18px;
     width: 18px;
@@ -124,6 +122,10 @@
     position: absolute;
     top: 7px;
     right: 0;
+  }
+  .search-bar-icon.loading {
+    &:before { content: none; }
+    #search-spinner-loader { display: block; }
   }
   .search-geolocalize.loading {
     &:before { content: none; }
@@ -133,15 +135,9 @@
   .search-no-result
   {
     color: white;
-    padding-bottom: .7rem;
+    padding-top: .7rem;
     text-decoration: underline;
     text-align: center;
     font-weight: bold;
   }
-}
-
-#directory-menu.small-width
-{
-  .search-options { padding-left: 7px; }
-  .search-options label.search-option-radio-label { margin-right: 0}
 }

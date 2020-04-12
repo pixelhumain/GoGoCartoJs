@@ -106,9 +106,10 @@ export class GoGoConfig
     layers:          new GoGoFeature(),
     mapdefaultview:  new GoGoFeature(),
 
-    pending:    new GoGoFeature(),
+    pending:          new GoGoFeature(),
     searchPlace:      new GoGoFeature(),
     searchElements:   new GoGoFeature(),
+    searchCategories: new GoGoFeature(),
     searchGeolocate:  new GoGoFeature(),
 
     // element interaction / moderation

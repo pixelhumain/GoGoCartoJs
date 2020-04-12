@@ -1,5 +1,5 @@
 <div id="gogo-controls-mobile">
-  {% if config.isFeatureActivated('searchPlace') or config.isFeatureActivated('searchElements') %}
+  {% if config.isFeatureActivated('searchPlace') or config.isFeatureActivated('searchElements') or config.isFeatureActivated('searchCategories') %}
     <div id="mobile-search-icon" class="feature-button gogo-section-primary leaflet-bar"><i class="gogo-icon-search"></i></div>
   {% endif %}
   <div id="mobile-filters-icon" class="feature-button leaflet-bar gogo-primary gogo-section-controls {{ 'with-image' if config.images.buttonOpenMenu else ''}}">

@@ -1,17 +1,10 @@
-import { AppModule, AppStates, AppDataType, AppModes } from "../../app.module";
-import { GeocodeResult } from "../../modules/geocoder.module";
+import { AppDataType, AppModes } from "../../app.module";
 declare var $, L;
 import { App } from "../../gogocarto";
 import { ViewPort } from "../../classes/classes";
 
 export class SearchBarComponent
 {
-	placeholders = {
-		default: "",
-		place: "",
-		element: ""
-	}
-
 	searchInput() { return $('.search-bar'); }
 
 	locationMarker : L.Marker;
@@ -22,36 +15,96 @@ export class SearchBarComponent
 
 	initialize()
 	{
-		this.searchInput().keyup((e) =>
-		{
-			if(e.keyCode == 13) { this.handleSearchAction(); } // press enter
+		$.widget('custom.gogoAutocomplete', $.ui.autocomplete, {
+			_resizeMenu: function() {}
+		});
+
+		this.searchInput().gogoAutocomplete({
+			appendTo: '.search-bar-container',
+			classes: {
+				'ui-autocomplete': 'search-bar-autocomplete-results-container'
+			},
+			position: {
+				at: 'left bottom+5'
+			},
+			source: ({ term }, response) => {
+				this.beforeSearch();
+
+				interface SearchResult {
+					label: string;
+					type: string;
+					value: any;
+				};
+
+				let elementsResults: Array<SearchResult>|false, optionsResults: Array<SearchResult>|false = false;
+				const resolveResults = ({ elements = false, options = false }: { elements?: Array<SearchResult>|false, options?: Array<SearchResult>|false }) => {
+					let results = [{ label: App.config.translate('search.by.geographic.location'), type: 'search_geocoded', value: term }];
+					elementsResults = elements ? elements : elementsResults;
+					optionsResults = options ? options : optionsResults;
+
+					if (elementsResults && optionsResults) {
+						if (elementsResults.length > 0) {
+							results.push({ label: App.config.translate('search.by.elements'), type: 'search_elements', value: { term, results: { data: elementsResults.map(elementResult => elementResult.value) } } })
+							results = [ ...results, ...elementsResults ];
+						}
+
+						this.searchLoading(true);
+
+						response([ ...results, ...optionsResults ]);
+					}
+				}
+
+				const route = App.config.features.searchElements.url;
+				if (route) {
+					App.ajaxModule.sendRequest(route, 'get', { text: term },
+					({ data: results }) => {
+						resolveResults({ elements: results.map(result => ({
+							label: result.name,
+							type: 'element',
+							value: result,
+						})) })
+					});
+				}
+
+				resolveResults({
+					options: App.taxonomyModule.options
+						.filter(option => option.name.toLowerCase().includes(term.toLowerCase()))
+						.map(option => ({ label: option.name, type: 'option', value: option }))
+				});
+			},
+			select: (event, ui) => {
+				this.beforeSearch();
+
+				if ('search_geocoded' === ui.item.type) {
+					App.geocoder.geocodeAddress(ui.item.value,
+						() => {
+							this.clearSearchResult(false);
+							this.displaySearchResultMarkerOnMap(App.geocoder.getLocation());
+							App.mapComponent.fitBounds(App.geocoder.getBounds(), true);
+						},
+						() => {
+							this.searchLoading(true);
+							$('.search-no-result').show();
+						});
+				}
+				if ('search_elements' === ui.item.type) {
+					this.searchLoading(true);
+					this.currSearchText = ui.item.value.term;
+					App.setDataType(AppDataType.SearchResults, false, ui.item.value.results);
+					this.showSearchResultLabel(ui.item.value.results.length);
+					App.gogoControlComponent.updatePosition();
+					this.hideMobileSearchBar();
+				}
+				event.preventDefault();
+			}
 		});
 
 		$('.search-bar-icon').click(() => this.handleSearchAction());
-
-		$('.search-btn').click(() => this.handleSearchAction());
-		$('.search-cancel-btn').click(() => this.clearLoader());
 
 		$('#btn-close-search-result').click(() => this.clearElementSearchResult());
 
 		$('.search-geolocalize').tooltip();
 		$('.search-geolocalize').click(() => this.geolocateUser());
-
-		this.searchInput().on('click', (e) => { e.preventDefault();e.stopPropagation(); });
-		this.searchInput().on('focus', () => { this.showSearchOptions(); });
-		this.searchInput().on('keyup', () => this.showSearchOptions());
-
-		this.placeholders = {
-			default: App.config.translate('find.a.place') + ", " + App.config.translate('element.indefinite') + "...",
-			place: App.config.translate('enter.an.address.postal.code.city'),
-			element: App.config.translate('enter.the.name.of') + App.config.translate('element.indefinite')
-		}
-
-		this.updateSearchPlaceholder();
-
-		$('.search-option-radio-btn').change( () => this.updateSearchPlaceholder() );
-
-		$('#directory-content, .directory-menu-content, header').click( () => this.hideSearchOptions() );
 
 		$('#search-overlay-mobile .overlay').click( () => this.hideMobileSearchBar() );
 	}
@@ -63,18 +116,21 @@ export class SearchBarComponent
 
 		let searchText = this.searchInput().val();
 
-		switch (this.searchType())
+		let searchType = 'place';
+		if (searchText === 'element') {
+			searchType = 'element';
+		}
+		switch (searchType)
     {
       case "place":
         App.geocoder.geocodeAddress(searchText,
           (result) => {
             this.clearSearchResult(false);
-            this.hideSearchOptions();
-            this.displaySearchResultMarkerOnMap();
+            this.displaySearchResultMarkerOnMap(App.geocoder.getLocation());
             App.mapComponent.fitBounds(App.geocoder.getBounds(), true);
           },
           () => {
-          	this.clearLoader();
+						this.searchLoading(true);
           	$('.search-no-result').show();
           });
         break;
@@ -91,23 +147,17 @@ export class SearchBarComponent
 	handleGeocodeResult()
 	{
 		this.setValue(App.geocoder.getLocationAddress());
-		this.clearLoader();
 	}
 
 	geolocateUser()
 	{
 		this.beforeSearch();
-		$('.search-geolocalize').addClass('loading');
-		App.geocoder.geolocateUser((result:ViewPort) =>
-		{
-			this.clearSearchResult(true);
+		App.geocoder.geolocateUser((result: ViewPort) => {
+			this.clearSearchResult();
 			this.setValue("Geolocalisé");
-			this.clearLoader();
-			$('.search-geolocalize').removeClass('loading');
-			this.displaySearchResultMarkerOnMap();
+			this.displaySearchResultMarkerOnMap(App.geocoder.getLocation());
 		}, () => {
-			this.clearLoader();
-			$('.search-geolocalize').removeClass('loading');
+			this.searchLoading(true);
 		});
 	}
 
@@ -125,13 +175,14 @@ export class SearchBarComponent
 			{
 	      App.setDataType(AppDataType.SearchResults, $backFromHistory, searchResult);
 
-	      this.clearLoader();
+	      this.searchLoading(true);
 	      this.showSearchResultLabel(searchResult.data.length);
 	 			App.gogoControlComponent.updatePosition();
 	 			this.hideMobileSearchBar();
 			},
 			(error) =>
 			{
+				this.searchLoading(true);
 				//App.geocoder.geocodeAddress('');
 			});
 		}
@@ -166,37 +217,14 @@ export class SearchBarComponent
 			$('.search-bar-with-options-container').removeClass('mobile gogo-section-content').prependTo('.directory-menu-header').show();
 	}
 
-	showSearchOptions()
+	private searchLoading(stop: boolean = false): void
 	{
-		$('.search-options').slideDown(350);
-		if (!this.isSearchOptionVisible())
-			$('#directory-menu-main-container .directory-menu-header').addClass("expanded");
-
-		this.updateSearchPlaceholder();
-	}
-
-	hideSearchOptions()
-	{
-		$('#directory-menu-main-container .directory-menu-header').removeClass("expanded");
-		this.searchInput().blur();
-		this.updateSearchPlaceholder();
-		$('#directory-menu-main-container .search-options').slideUp(250);
-	}
-
-	updateSearchPlaceholder()
-	{
-		let placeholder = '';
-		if (!this.isSearchOptionVisible()) placeholder = this.placeholders.default;
-		else
-		{
-			switch (this.searchType())
-			{
-				case "place":   placeholder = this.placeholders.place;   break;
-				case "element": placeholder = this.placeholders.element; break;
-			}
+		if (stop) {
+			$('.search-bar-icon').removeClass('loading')
+			return;
 		}
 
-		this.searchInput().attr("placeholder", placeholder);
+		$('.search-bar-icon').addClass('loading');
 	}
 
 	showSearchResultLabel($number : number)
@@ -204,7 +232,6 @@ export class SearchBarComponent
 		$('.search-result-number').text($number);
 		$('.search-result-value').text(this.currSearchText);
 		$('.search-results').show();
-		$('.search-options').hide();
 		$('#element-info-bar').addClass('with-search-result-header');
 	}
 
@@ -225,14 +252,20 @@ export class SearchBarComponent
 	{
 		App.setDataType(AppDataType.All);
 		this.hideSearchResult();
-		this.clearLoader();
-		if (this.locationMarker) this.locationMarker.remove();
+		this.searchLoading(true);
+		this.clearLocationMarker();
 		this.currSearchText = '';
 		if (resetValue) {
 			this.setValue("");
 			App.elementListComponent.setTitle("");
 		}
-		setTimeout( () => { this.hideSearchOptions(); }, 200);
+	}
+
+	private clearLocationMarker(): void
+	{
+		if (this.locationMarker) {
+			this.locationMarker.remove();
+		}
 	}
 
 	setValue($value : string)
@@ -242,33 +275,15 @@ export class SearchBarComponent
 
 	getCurrSearchText() { return this.currSearchText; }
 
-	isSearchOptionVisible() : boolean
-	{
-		return $('.search-options:visible').length;
-	}
-
-	private searchType() : string
-	{
-		return $('.search-option-radio-btn:checked').attr('data-name');
-	}
-
-	private clearLoader()
-	{
-		$('.search-btn').show();
-		$('.search-cancel-btn').hide();
-	}
-
 	private beforeSearch()
 	{
 		$('.search-no-result').hide();
-		$('.search-cancel-btn').show();
-		$('.search-btn').hide();
+		this.searchLoading();
 	}
 
-	private displaySearchResultMarkerOnMap()
+	private displaySearchResultMarkerOnMap(location: L.LatLng)
 	{
 		if (!App.map()) return;
-		this.locationMarker = new L.Marker(App.geocoder.getLocation(), { icon: this.locationIcon }).addTo(App.map());
+		this.locationMarker = new L.Marker(location, { icon: this.locationIcon }).addTo(App.map());
 	}
-
 }

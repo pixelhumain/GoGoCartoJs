@@ -10,8 +10,14 @@ import { ViewPort, Event } from "../classes/classes";
 export interface GeocodeResult
 {
 	getCoordinates() : L.LatLngTuple;
-	getFormattedAddress() : string;
+	getFormattedAddress() : string|undefined;
 	getBounds() : RawBounds;
+	getStreetNumber() : string|undefined;
+	getStreetName() : string|undefined;
+	getZipcode() : string|undefined;
+	getCity() : string|undefined;
+	getRegion() : string|undefined;
+	getCountry() : string|undefined;
 }
 
 // south, west, north, east
@@ -48,7 +54,7 @@ export class GeocoderModule
 	getLocationAddress() : string { return this.lastAddressRequest; }
 	setLocationAddress($address : string) { this.lastAddressRequest = $address; }
 
-	private latLngBoundsFromRawBounds(rawbounds : RawBounds) : L.LatLngBounds
+	latLngBoundsFromRawBounds(rawbounds : RawBounds) : L.LatLngBounds
 	{
 		let corner1 = L.latLng(rawbounds[0], rawbounds[1]);
 		let corner2 = L.latLng(rawbounds[2], rawbounds[3]);
