@@ -75,6 +75,7 @@ export const EN =
   //G
   "general.infos": "General Informations",
   "geolocalize": "Geolocalize your position",
+  "geolocalized":"Geolocalized",
   "geolocation.error": "Geolocation error",
 
   //H

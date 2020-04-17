@@ -43,8 +43,8 @@
     "http-server": "^0.12.1",
     "natives": "^1.1.6",
     "node-notifier": "^4.6.1",
-    "tsify": "^2.0.7",
-    "typescript": "^2.1.4",
+    "tsify": "^4.0",
+    "typescript": "^3.8",
     "vinyl-source-stream": "^2.0.0",
     "watchify": "^3.11.1"
   },

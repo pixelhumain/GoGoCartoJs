@@ -230,3 +230,45 @@
 .gogo-icon-number:before {
   content: "\22";
 }
+.gogo-icon-recycle:before {
+  content: "\23";
+}
+.gogo-icon-download-1:before {
+  content: "\24";
+}
+.gogo-icon-upload:before {
+  content: "\25";
+}
+.gogo-icon-images:before {
+  content: "\26";
+}
+.gogo-icon-add-file:before {
+  content: "\27";
+}
+.gogo-icon-search-file:before {
+  content: "\28";
+}
+.gogo-icon-image:before {
+  content: "\29";
+}
+.gogo-icon-images-1:before {
+  content: "\2a";
+}
+.gogo-icon-image-1:before {
+  content: "\2b";
+}
+.gogo-icon-upload-1:before {
+  content: "\2c";
+}
+.gogo-icon-upload-2:before {
+  content: "\2d";
+}
+.gogo-icon-download:before {
+  content: "\2e";
+}
+.gogo-icon-image-2:before {
+  content: "\2f";
+}
+.gogo-icon-database:before {
+  content: "\3a";
+}

@@ -74,7 +74,8 @@ export const FR =
 
   //G
   "general.infos":"Informations générales",
-  "geolocalize":"Geolocaliser votre position",
+  "geolocalize":"Géolocaliser votre position",
+  "geolocalized":"Géolocalisé",
   "geolocation.error":"Erreur de géolocalisation",
 
   //H

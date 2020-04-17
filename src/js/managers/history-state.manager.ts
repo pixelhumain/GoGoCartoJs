@@ -12,34 +12,34 @@ export class HistoryStateManager
   */
   load(historystate : HistoryState, $backFromHistory = false)
   {
-    if (historystate === null) return;  
+    if (historystate === null) return;
     this.lastHistoryState = historystate;
-    console.log("loadHistorystate", historystate);  
+    console.log("loadHistorystate", historystate);
 
     if (historystate.dataType == AppDataType.SearchResults)
     {
       // force setting dataType before searchBarComponent to avoid history issues
       App.setDataType(historystate.dataType, true);
-      App.searchBarComponent.searchElements(historystate.text, $backFromHistory);
+      App.searchBarComponent.loadSearchElements(historystate.text, $backFromHistory);
       $('#directory-spinner-loader').hide();
-    }  
+    }
     else
     {
       // check viewport and address from cookies
-      if (App.config.map.saveViewportInCookies && !historystate.viewport && !historystate.address && historystate.state == AppStates.Normal) 
+      if (App.config.map.saveViewportInCookies && !historystate.viewport && !historystate.address && historystate.state == AppStates.Normal)
       {
         console.log("no viewport nor address provided, using cookies values", Cookies.readCookie('viewport'), Cookies.readCookie('address'));
         if (Cookies.readCookie('viewport')) historystate.viewport = new ViewPort().fromString(Cookies.readCookie('viewport'));
         if (Cookies.readCookie('address')) historystate.address = Cookies.readCookie('address');
         if (historystate.address) $('.search-bar').val(historystate.address);
-      }    
-    }    
+      }
+    }
 
     if (historystate.filters) App.filterRoutingModule.loadFiltersFromString(historystate.filters);
-    else App.filtersComponent.setMainOption('all'); 
+    else App.filtersComponent.setMainOption('all');
 
     if (historystate.dataType == AppDataType.All && historystate.viewport && historystate.state != AppStates.ShowElementAlone)
-    {      
+    {
       // if map not loaded we just set the mapComponent viewport without changing the
       // actual viewport of the map, because it will be done in
       // map initialisation
@@ -51,18 +51,18 @@ export class HistoryStateManager
         App.boundsModule.createBoundsFromLocation(L.latLng(historystate.viewport.lat, historystate.viewport.lng));
       }
 
-      $('#directory-spinner-loader').hide();  
+      $('#directory-spinner-loader').hide();
 
       if (historystate.mode == AppModes.List )
       {
         let location = L.latLng(historystate.viewport.lat, historystate.viewport.lng);
-      }  
-    }  
+      }
+    }
 
     App.setMode(historystate.mode, $backFromHistory, false);
-    
+
     // if address is provided we geolocalize this address
-    if (historystate.dataType == AppDataType.All && historystate.address) 
+    if (historystate.dataType == AppDataType.All && historystate.address)
     {
       if (historystate.address == "geolocalize")
       {
@@ -71,9 +71,9 @@ export class HistoryStateManager
       else
       {
         App.geocoder.geocodeAddress(
-          historystate.address, 
-          (results) => 
-          { 
+          historystate.address,
+          (results) =>
+          {
             // if viewport is given, nothing to do, we already did initialization with viewport
             if (historystate.viewport && historystate.mode == AppModes.Map) return;
             // fit bounds anyway so the mapcomponent will register App requested bounds for later
@@ -82,37 +82,37 @@ export class HistoryStateManager
           () => {
             // failure callback
             App.searchBarComponent.setValue("");
-            if (!historystate.viewport) 
+            if (!historystate.viewport)
             {
               App.mapComponent.fitDefaultBounds();
               App.component.toastMessage("Erreur, cette adresse n'a pas pu être localisée : " + historystate.address)
             }
-          }  
+          }
         );
-      }      
+      }
     }
-    
+
     if (!historystate.viewport && !historystate.address && (App.config.data.retrieveElementsByApi || App.config.map.defaultBoundsProvided) && historystate.state != AppStates.ShowElementAlone) {
       console.log("fit default bounds no viewport no address");
       App.mapComponent.fitDefaultBounds();
-    } 
+    }
 
-    if (historystate.id) 
+    if (historystate.id)
     {
-      setTimeout( () => { 
+      setTimeout( () => {
         App.setState(
           historystate.state,
           {
-            id: historystate.id, 
+            id: historystate.id,
             panToLocation: (historystate.viewport === null)
           },
           $backFromHistory);
-        $('#directory-spinner-loader').hide();    
-      }, 400);  
+        $('#directory-spinner-loader').hide();
+      }, 400);
     }
     else
     {
-      App.setState(historystate.state, null, $backFromHistory);    
-    }    
-  };    
+      App.setState(historystate.state, null, $backFromHistory);
+    }
+  };
 }

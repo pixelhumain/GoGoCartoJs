@@ -88,11 +88,30 @@
         min-height: 40px;
         cursor: pointer;
         @include flexbox;
+        @include flex-wrap(wrap);
         @include align(center);
+        text-align: left;
 
         &:hover
         {
           background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        &.nested
+        {
+          padding-left: 3rem;
+        }
+
+        .label
+        {
+          @include flex(1);
+        }
+        .subLabel
+        {
+          @include flex(0 1 100%);
+          text-align: right;
+          padding-top: .3rem;
+          font-weight: normal;
         }
       }
     }
