@@ -36,21 +36,22 @@ export class SearchBarComponent
 		$.widget('custom.gogoAutocomplete', $.ui.autocomplete, {
 			_resizeMenu: () => {},
 			_renderItem: (ul, item) => {
-				const li = $('<li>');
+				const li = $('<li>').addClass('search-bar-autocomplete-result-item');
+				const wrapper = $('<div>').addClass('search-bar-autocomplete-result-item-wrapper');
 				if (item.icon) {
-					li.append(`<div class="icon ${item.icon}"></div>`);
+					wrapper.append(`<div class="icon ${item.icon}"></div>`);
 				}
 				if (['element', 'option'].includes(item.type)) {
-					li.addClass('nested');
+					wrapper.addClass('nested');
 				}
 
-				li.append(`<div class="label">${item.label}</div>`);
+				wrapper.append(`<div class="label">${item.label}</div>`);
 
 				if (item.subLabel) {
-					li.append(`<div class="subLabel">${item.subLabel}</div>`);
+					wrapper.append(`<div class="subLabel">${item.subLabel}</div>`);
 				}
 
-				return li.appendTo(ul);
+				return li.append(wrapper).appendTo(ul);
 			}
 		});
 
@@ -69,6 +70,7 @@ export class SearchBarComponent
 					this.setAutocompleteItems(term, elementsResults, optionsResults, response);
 				});
 			},
+			focus: (event, ui) => event.preventDefault(),
 			select: (event, ui) => {
 				this.beforeSearch();
 
@@ -90,7 +92,7 @@ export class SearchBarComponent
 		});
 
 		this.searchInput().keyup((e) => {
-			if (e.keyCode === 13) { // press enter
+			if (e.keyCode === 13 && 0 === $('.search-bar-autocomplete-results-container').find('.ui-state-active')) { // press enter and no item is focused
 				this.handleSearchAction();
 			}
 		});
