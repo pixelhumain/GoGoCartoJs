@@ -1,212 +1,234 @@
-import { AppModule, AppModes } from "../../app.module";
-import { Option } from "../../classes/taxonomy/option.class";
+import { AppModule, AppModes } from '../../app.module';
+import { Option } from '../../classes/taxonomy/option.class';
 
-import { App } from "../../gogocarto";
-declare let $ : any;
+import { App } from '../../gogocarto';
+declare let $: any;
 
-export enum CategoryOptionTreeNodeType
-{
-	Option,
-	Category
+export enum CategoryOptionTreeNodeType {
+  Option,
+  Category,
 }
 
 /**
-* Class representating a Node in the Directory Menu Tree
-*
-* A CategoryOptionTreeNode can be a Category or an Option
-*/
-export class CategoryOptionTreeNode 
-{
-	id : any;
-	name : string;
-	nameShort: string;
+ * Class representating a Node in the Directory Menu Tree
+ *
+ * A CategoryOptionTreeNode can be a Category or an Option
+ */
+export class CategoryOptionTreeNode {
+  id: any;
+  name: string;
+  nameShort: string;
 
-	displayInMenu : boolean;
-	displayInInfoBar : boolean;
+  displayInMenu: boolean;
+  displayInInfoBar: boolean;
 
-	showExpanded : boolean;
-	unexpandable : boolean;
+  showExpanded: boolean;
+  unexpandable: boolean;
 
-	children : CategoryOptionTreeNode[] = [];
+  children: CategoryOptionTreeNode[] = [];
 
-	// is the node han't be touched for now, it's on it's first initialized state
-	isPristine : boolean = true;
+  // is the node han't be touched for now, it's on it's first initialized state
+  isPristine = true;
 
-	ownerId : number = null;
-	// main option Id, or "all"
-	mainOwnerId : any = null;
+  ownerId: number = null;
+  // main option Id, or "all"
+  mainOwnerId: any = null;
 
-	isChecked : boolean = true;
-	isDisabled : boolean = false;		
+  isChecked = true;
+  isDisabled = false;
 
-	isMainOption : boolean = false;
+  isMainOption = false;
 
-	constructor(private TYPE : CategoryOptionTreeNodeType, private DOM_ID : string, private DOM_CHECKBOX_ID : string, private DOM_CHILDREN_CLASS : string) {};
+  constructor(
+    private TYPE: CategoryOptionTreeNodeType,
+    private DOM_ID: string,
+    private DOM_CHECKBOX_ID: string,
+    private DOM_CHILDREN_CLASS: string
+  ) {}
 
-	getDom() { return $(this.DOM_ID + this.id); }
+  getDom() {
+    return $(this.DOM_ID + this.id);
+  }
 
-	getDomCheckbox() { return $(this.DOM_CHECKBOX_ID + this.id); }
+  getDomCheckbox() {
+    return $(this.DOM_CHECKBOX_ID + this.id);
+  }
 
-	getDomChildren() { return this.getDom().next(this.DOM_CHILDREN_CLASS);}
+  getDomChildren() {
+    return this.getDom().next(this.DOM_CHILDREN_CLASS);
+  }
 
-	getOwner() : CategoryOptionTreeNode 
-	{ 
-		if (this.TYPE == CategoryOptionTreeNodeType.Option)
-			return App.taxonomyModule.getCategoryById(this.ownerId); 
+  getOwner(): CategoryOptionTreeNode {
+    if (this.TYPE == CategoryOptionTreeNodeType.Option) return App.taxonomyModule.getCategoryById(this.ownerId);
 
-		if (this.TYPE == CategoryOptionTreeNodeType.Category)
-			return App.taxonomyModule.getOptionById(this.ownerId); 
+    if (this.TYPE == CategoryOptionTreeNodeType.Category) return App.taxonomyModule.getOptionById(this.ownerId);
 
-		return null;
-	}
+    return null;
+  }
 
-	getMainOwner() { return ["RootFakeOption", "all"].indexOf(this.mainOwnerId) > -1 ? this : App.taxonomyModule.getOptionById(this.mainOwnerId); }
-	getMainCategoryOwner() : CategoryOptionTreeNode { return this.getMainOwner().getOwner(); }
+  getMainOwner() {
+    return ['RootFakeOption', 'all'].indexOf(this.mainOwnerId) > -1
+      ? this
+      : App.taxonomyModule.getOptionById(this.mainOwnerId);
+  }
+  getMainCategoryOwner(): CategoryOptionTreeNode {
+    return this.getMainOwner().getOwner();
+  }
 
-	protected disabledChildren() : CategoryOptionTreeNode[] { return this.children.filter( child => child.isDisabled); }
-	protected nonDisabledChildren() : CategoryOptionTreeNode[] { return this.children.filter( child => !child.isDisabled); }
-	protected checkedChildren() : CategoryOptionTreeNode[] { return this.children.filter( child => child.isChecked); }
+  protected disabledChildren(): CategoryOptionTreeNode[] {
+    return this.children.filter((child) => child.isDisabled);
+  }
+  protected nonDisabledChildren(): CategoryOptionTreeNode[] {
+    return this.children.filter((child) => !child.isDisabled);
+  }
+  protected checkedChildren(): CategoryOptionTreeNode[] {
+    return this.children.filter((child) => child.isChecked);
+  }
 
-	isOption() { return this.TYPE == CategoryOptionTreeNodeType.Option }
+  isOption() {
+    return this.TYPE == CategoryOptionTreeNodeType.Option;
+  }
 
-	setChecked(bool : boolean)
-	{
-		this.isChecked = bool;
-		this.getDom().toggleClass("checked", bool);
-		this.getDomCheckbox().prop("checked", bool);
-		this.isPristine = false;
-	}
+  setChecked(bool: boolean) {
+    this.isChecked = bool;
+    this.getDom().toggleClass('checked', bool);
+    this.getDomCheckbox().prop('checked', bool);
+    this.isPristine = false;
+  }
 
-	setDisabled(bool : boolean)
-	{
-		this.isDisabled = bool;
-		this.getDom().toggleClass("disabled", bool);
-		if (bool) this.setChecked(false);			
-		this.isPristine = false;
-	}
+  setDisabled(bool: boolean) {
+    this.isDisabled = bool;
+    this.getDom().toggleClass('disabled', bool);
+    if (bool) this.setChecked(false);
+    this.isPristine = false;
+  }
 
-	toggle(value : boolean = null, humanAction : boolean = true)
-	{		
-		let check;
-		if (value != null) check = value;
-		else check = !this.isChecked;
+  toggle(value: boolean = null, humanAction = true) {
+    let check;
+    if (value != null) check = value;
+    else check = !this.isChecked;
 
-		if (this.isOption() && this.isPristine && humanAction)
-		{
-			this.recursivelyGetPristine(this).forEach( (node) => {
-				node.toggle(false, false);
-			});
-			// force check to true, becasue in pristine mode input is unchecked but option class is checked and not disabled
-			check = true;
-		}			
+    if (this.isOption() && this.isPristine && humanAction) {
+      this.recursivelyGetPristine(this).forEach((node) => {
+        node.toggle(false, false);
+      });
+      // force check to true, becasue in pristine mode input is unchecked but option class is checked and not disabled
+      check = true;
+    }
 
-		this.setChecked(check);
-		this.setDisabled(!check);
+    this.setChecked(check);
+    this.setDisabled(!check);
 
-		if (!this.isMainOption || !App.config.menu.showOnePanePerMainOption) 
-		{
-			for (let child of this.children) child.toggle(check, false);
-		}
+    if (!this.isMainOption || !App.config.menu.showOnePanePerMainOption) {
+      for (const child of this.children) child.toggle(check, false);
+    }
 
-		if(humanAction)
-		{
-			if (this.getOwner()) this.getOwner().updateState();
-			
-			// delay the update so it's not freezing the UI
-			setTimeout( () => {
-				App.elementsModule.updateElementsToDisplay(check, true);
-				App.historyModule.updateCurrState();
-			},200);				
-		}
-	}
+    if (humanAction) {
+      if (this.getOwner()) this.getOwner().updateState();
 
-	toggleVisibility(value : boolean, recursive : boolean = false)
-	{
-		//console.log("toggle visibility ", value);
-		this.isChecked = value;
+      // delay the update so it's not freezing the UI
+      setTimeout(() => {
+        App.elementsModule.updateElementsToDisplay(check, true);
+        App.historyModule.updateCurrState();
+      }, 200);
+    }
+  }
 
-		if (value) this.getDom().show();
-		else { this.getDom().hide();}
+  toggleVisibility(value: boolean, recursive = false) {
+    //console.log("toggle visibility ", value);
+    this.isChecked = value;
 
-		if (this.isMainOption)
-		{
-			$('#main-option-gogo-icon-' + this.id).toggle(value);
-		}
+    if (value) this.getDom().show();
+    else {
+      this.getDom().hide();
+    }
 
-		if (value && this.getOwner()) this.getOwner().toggleVisibility(true);
+    if (this.isMainOption) {
+      $('#main-option-gogo-icon-' + this.id).toggle(value);
+    }
 
-		if (recursive) for (let child of this.children) child.toggleVisibility(value, true);
-	}
+    if (value && this.getOwner()) this.getOwner().toggleVisibility(true);
 
-	updateState(propage = true)
-	{
-		if (this.isMainOption && App.config.menu.showOnePanePerMainOption) return;	
+    if (recursive) for (const child of this.children) child.toggleVisibility(value, true);
+  }
 
-		if (this.children.length == 0) 
-			this.setDisabled(!this.isChecked);
-		else
-		{
-			let disabledChildrenCount = this.children.filter( (child : CategoryOptionTreeNode) => child.isDisabled).length;
+  updateState(propage = true) {
+    if (this.isMainOption && App.config.menu.showOnePanePerMainOption) return;
 
-			//console.log("Option " + this.name + " update state, nbre children disabled = ", disabledChildrenCount);
+    if (this.children.length == 0) this.setDisabled(!this.isChecked);
+    else {
+      const disabledChildrenCount = this.children.filter((child: CategoryOptionTreeNode) => child.isDisabled).length;
 
-			if (disabledChildrenCount == this.children.length)
-				this.setDisabled(true);	
-			else
-				this.setDisabled(false);
+      //console.log("Option " + this.name + " update state, nbre children disabled = ", disabledChildrenCount);
 
-			let checkedChildrenCount = this.children.filter( (child : CategoryOptionTreeNode) => child.isChecked).length;
-			if (checkedChildrenCount == this.children.length)
-				this.setChecked(true);
-			else
-				this.setChecked(false)
-		}		
+      if (disabledChildrenCount == this.children.length) this.setDisabled(true);
+      else this.setDisabled(false);
 
-		if (this.getOwner() && propage) this.getOwner().updateState();	
-	}
+      const checkedChildrenCount = this.children.filter((child: CategoryOptionTreeNode) => child.isChecked).length;
+      if (checkedChildrenCount == this.children.length) this.setChecked(true);
+      else this.setChecked(false);
+    }
 
-	recursivelyUpdateStates()
-	{
-		for(let child of this.children)
-		{
-			child.recursivelyUpdateStates();
-		}
+    if (this.getOwner() && propage) this.getOwner().updateState();
+  }
 
-		this.updateState();
-	}
+  recursivelyUpdateStates() {
+    for (const child of this.children) {
+      child.recursivelyUpdateStates();
+    }
 
-	isExpanded() : boolean { return this.getDom().hasClass('expanded'); }
-	isUnexpandable() : boolean { return this.getDom().hasClass('unexpandable'); }
+    this.updateState();
+  }
 
-	toggleChildrenDetail()
-	{
-		if (this.isUnexpandable()) return;
+  isExpanded(): boolean {
+    return this.getDom().hasClass('expanded');
+  }
+  isUnexpandable(): boolean {
+    return this.getDom().hasClass('unexpandable');
+  }
 
-		if (this.isExpanded())
-		{
-			this.getDomChildren().stop(true,false).slideUp({ duration: 350, easing: "easeOutQuart", queue: false, complete: function() {$(this).css('height', '');}});
-			this.getDom().removeClass('expanded');
-		}
-		else
-		{
-			this.getDomChildren().stop(true,false).slideDown({ duration: 350, easing: "easeOutQuart", queue: false, complete: function() {$(this).css('height', '');}});
-			this.getDom().addClass('expanded');
-		}
-	}
+  toggleChildrenDetail() {
+    if (this.isUnexpandable()) return;
 
-	getSiblingsPristine() : CategoryOptionTreeNode[]
-	{
-		return this.getOwner().children.filter( (node) => node.isPristine && node.id != this.id); 
-	}
+    if (this.isExpanded()) {
+      this.getDomChildren()
+        .stop(true, false)
+        .slideUp({
+          duration: 350,
+          easing: 'easeOutQuart',
+          queue: false,
+          complete: function () {
+            $(this).css('height', '');
+          },
+        });
+      this.getDom().removeClass('expanded');
+    } else {
+      this.getDomChildren()
+        .stop(true, false)
+        .slideDown({
+          duration: 350,
+          easing: 'easeOutQuart',
+          queue: false,
+          complete: function () {
+            $(this).css('height', '');
+          },
+        });
+      this.getDom().addClass('expanded');
+    }
+  }
 
-	private recursivelyGetPristine(currOption : CategoryOptionTreeNode)
-	{
-		let resultNodes = [];
-		resultNodes = resultNodes.concat(currOption.getSiblingsPristine());
-		let parentOption = currOption.getOwner().getOwner();
-		if (this.isMainOption || App.config.menu.showOnePanePerMainOption && parentOption && parentOption.isMainOption) return resultNodes;
-		else if (parentOption) resultNodes = resultNodes.concat(this.recursivelyGetPristine(parentOption));		
+  getSiblingsPristine(): CategoryOptionTreeNode[] {
+    return this.getOwner().children.filter((node) => node.isPristine && node.id != this.id);
+  }
 
-		return resultNodes;
-	}
+  private recursivelyGetPristine(currOption: CategoryOptionTreeNode) {
+    let resultNodes = [];
+    resultNodes = resultNodes.concat(currOption.getSiblingsPristine());
+    const parentOption = currOption.getOwner().getOwner();
+    if (this.isMainOption || (App.config.menu.showOnePanePerMainOption && parentOption && parentOption.isMainOption))
+      return resultNodes;
+    else if (parentOption) resultNodes = resultNodes.concat(this.recursivelyGetPristine(parentOption));
+
+    return resultNodes;
+  }
 }

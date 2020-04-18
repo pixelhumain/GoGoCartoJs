@@ -1,10 +1,10 @@
 export const DEFAULT_FEATURES = {
   listMode: {},
-  searchPlace: { },
+  searchPlace: {},
   searchGeolocate: {},
   favorite: {},
   share: {},
-  directions: {},           
+  directions: {},
   layers: {},
-  mapdefaultview: {}
+  mapdefaultview: {},
 };

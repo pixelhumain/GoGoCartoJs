@@ -6,6 +6,6 @@
         "lib": ["DOM", "ES2020"]
     },
     "files": [
-    	"src/js/**/*.ts"
+        "src/js/**/*.ts"
     ]
 }

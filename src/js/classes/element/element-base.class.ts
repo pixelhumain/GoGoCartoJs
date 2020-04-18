@@ -1,9 +1,8 @@
-import { Contribution, VoteReport, OptionValue, PostalAddress, Option, CategoryValue } from "../classes";
-import { capitalize } from "../../utils/string-helpers";
-import { App } from "../../gogocarto";
+import { Contribution, VoteReport, OptionValue, PostalAddress, Option, CategoryValue } from '../classes';
+import { capitalize } from '../../utils/string-helpers';
+import { App } from '../../gogocarto';
 
-export enum ElementStatus
-{
+export enum ElementStatus {
   DynamicImportTemp = -7, // Temporary status used while importing
   Duplicate = -6,
   ModifiedElement = -5,
@@ -18,107 +17,95 @@ export enum ElementStatus
   ModifiedByAdmin = 4,
   ModifiedByOwner = 5,
   ModifiedFromHash = 6,
-  DynamicImport = 7
+  DynamicImport = 7,
 }
 
-export enum ElementModerationState
-{
+export enum ElementModerationState {
   GeolocError = -2,
   NoOptionProvided = -1,
   NotNeeded = 0,
   ReportsSubmitted = 1,
   VotesConflicts = 2,
   PendingForTooLong = 3,
-  PossibleDuplicate = 4
+  PossibleDuplicate = 4,
 }
 
-export class ElementBase
-{
+export class ElementBase {
   // MANDATORY DATA
-  id : string;
-  name : string;
-  position : L.LatLng;
-  address : PostalAddress;
-  optionsValues : OptionValue[] = [];
-  mainOptionOwnerIds : number[] = [];
-  optionTree : OptionValue;
+  id: string;
+  name: string;
+  position: L.LatLng;
+  address: PostalAddress;
+  optionsValues: OptionValue[] = [];
+  mainOptionOwnerIds: number[] = [];
+  optionTree: OptionValue;
 
   // OPTIONAL DATA
-  status : ElementStatus;
-  moderationState : ElementModerationState;
-  searchScore : number = null;
-  isFullyLoaded : boolean = false;
-  isEditable : boolean = true;
+  status: ElementStatus;
+  moderationState: ElementModerationState;
+  searchScore: number = null;
+  isFullyLoaded = false;
+  isEditable = true;
 
   // SPECIFIC DATA
-  openHours : any;
+  openHours: any;
   formatedOpenHours;
-  images : string[];
-  files : string[];
-  stamps : any[] = [];
+  images: string[];
+  files: string[];
+  stamps: any[] = [];
 
   // CUSTOM DATA
-  data : any = {};
+  data: any = {};
 
   // ADMIN HISTORY DATA
-  reports : VoteReport[];
-  contributions : Contribution[];
-  pendingContribution : Contribution;
-  votes : VoteReport[];
+  reports: VoteReport[];
+  contributions: Contribution[];
+  pendingContribution: Contribution;
+  votes: VoteReport[];
 
   // PENDING ELEMENTS
-  modifiedElement : ElementBase = null;
+  modifiedElement: ElementBase = null;
 
-  constructor(elementJson : any)
-  {
+  constructor(elementJson: any) {
     this.updateWithJson(elementJson);
   }
 
-  updateWithJson(elementJson : any)
-  {
+  updateWithJson(elementJson: any) {
     App.elementJsonParser.load(elementJson, this);
   }
 
-  createOptionsTree()
-  {
+  createOptionsTree() {
     App.elementOptionValuesModule.createOptionsTree(this);
   }
 
-  getOptionTree()
-  {
+  getOptionTree() {
     if (this.optionTree) return this.optionTree;
     this.createOptionsTree();
     return this.optionTree;
   }
 
-  getRootCategoriesValues() : CategoryValue[]
-  {
-    let optionTree = this.getOptionTree();
+  getRootCategoriesValues(): CategoryValue[] {
+    const optionTree = this.getOptionTree();
     if (optionTree.children.length == 0) return [];
     if (optionTree.children[0].category.isRootCategory) return optionTree.children;
     return optionTree.children[0].children[0].children;
   }
 
-  gogoTaxonomy() : CategoryValue[]
-  {
+  gogoTaxonomy(): CategoryValue[] {
     if (this.status == ElementStatus.PendingModification && this.modifiedElement)
       return this.modifiedElement.getRootCategoriesValues();
-    else
-      return this.getRootCategoriesValues();
+    else return this.getRootCategoriesValues();
   }
 
-  getOptionValueByCategoryId($categoryId)
-  {
+  getOptionValueByCategoryId($categoryId) {
     return this.optionsValues.filter((oV) => oV.categoryOwner.id == $categoryId);
   }
 
-  getOptionValuesNames()
-  {
-    return this.optionsValues.map( (ov) => ov.option.nameShort);
+  getOptionValuesNames() {
+    return this.optionsValues.map((ov) => ov.option.nameShort);
   }
 
-  haveOption($option : Option)
-  {
-    return this.optionsValues.map( (ov) => ov.optionId).indexOf($option.id) >= 0;
+  haveOption($option: Option) {
+    return this.optionsValues.map((ov) => ov.optionId).indexOf($option.id) >= 0;
   }
 }

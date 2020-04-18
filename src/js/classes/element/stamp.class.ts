@@ -1,15 +1,13 @@
-export class Stamp
-{
-  id : any;
-  name : string = '';
-  icon : string = '';
-  elementIds : any[] = [];
+export class Stamp {
+  id: any;
+  name = '';
+  icon = '';
+  elementIds: any[] = [];
 
-  constructor($json)
-  {
+  constructor($json) {
     this.id = $json.id || $json.name;
     this.name = $json.name;
-    this.icon = $json.icon;  
-    this.elementIds = $json.elementIds;  
+    this.icon = $json.icon;
+    this.elementIds = $json.elementIds;
   }
 }

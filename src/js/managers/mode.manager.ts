@@ -1,22 +1,19 @@
-import { App } from "../gogocarto";
-import { AppDataType } from "../app.module";
-import { capitalize, unslugify } from "../utils/string-helpers";
+import { App } from '../gogocarto';
+import { AppDataType } from '../app.module';
+import { capitalize, unslugify } from '../utils/string-helpers';
 
-export enum AppModes
-{
+export enum AppModes {
   Map = 1,
-  List = 2
+  List = 2,
 }
 
-export class ModeManager
-{
-  private mode_ : AppModes = null;
+export class ModeManager {
+  private mode_: AppModes = null;
 
   /*
-  * Change App mode
-  */
-  setMode($mode : AppModes, $backFromHistory : boolean = false, $updateTitleAndState = true)
-  {
+   * Change App mode
+   */
+  setMode($mode: AppModes, $backFromHistory = false, $updateTitleAndState = true) {
     App.elementsModule.clearCurrentsElement();
     App.elementListComponent.clear();
 
@@ -24,7 +21,7 @@ export class ModeManager
     else this.setListMode();
 
     // if previous mode wasn't null
-    let oldMode = this.mode_;
+    const oldMode = this.mode_;
     this.mode_ = $mode;
 
     // update history if we need to
@@ -32,19 +29,17 @@ export class ModeManager
 
     App.gogoControlComponent.updatePosition();
 
-    setTimeout( () => App.elementsModule.updateElementsToDisplay(true) , 300);
+    setTimeout(() => App.elementsModule.updateElementsToDisplay(true), 300);
 
-    if ($updateTitleAndState)
-    {
+    if ($updateTitleAndState) {
       App.documentTitleModule.updateDocumentTitle();
 
       // after clearing, we set the current state again
-      if ($mode == AppModes.Map) App.setState(App.state, {id : App.stateManager.stateElementId});
+      if ($mode == AppModes.Map) App.setState(App.state, { id: App.stateManager.stateElementId });
     }
   }
 
-  private setMapMode()
-  {
+  private setMapMode() {
     App.mapComponent.show();
     App.elementListComponent.hide();
 
@@ -53,40 +48,38 @@ export class ModeManager
     if (App.mapComponent.isMapLoaded) App.boundsModule.extendBounds(0, App.mapComponent.getBounds());
   }
 
-  private setListMode()
-  {
+  private setListMode() {
     App.mapComponent.hide();
     App.elementListComponent.show();
 
     // console.log("list mode", App.geocoder.getLocation());
 
-    if (App.dataType == AppDataType.All)
-    {
-      let centerLocation : L.LatLng;
-      let address = App.geocoder.lastAddressRequest;
+    if (App.dataType == AppDataType.All) {
+      let centerLocation: L.LatLng;
+      const address = App.geocoder.lastAddressRequest;
 
       if (App.mapComponent.isInitialized) {
         centerLocation = App.mapComponent.getCenter();
         App.elementListComponent.setTitle(App.config.translate('around.map.center'));
-      }
-      else if (App.geocoder.getLocation()) {
+      } else if (App.geocoder.getLocation()) {
         centerLocation = App.geocoder.getLocation();
-        App.elementListComponent.setTitle(` ${App.config.translate('around')} <i>${capitalize(unslugify(address))}</i>`);
-      }
-      else {
+        App.elementListComponent.setTitle(
+          ` ${App.config.translate('around')} <i>${capitalize(unslugify(address))}</i>`
+        );
+      } else {
         centerLocation = App.boundsModule.defaultCenter;
         App.elementListComponent.setTitle('');
       }
 
       App.boundsModule.createBoundsFromLocation(centerLocation);
       App.elementsManager.checkForNewElementsToRetrieve(true);
-    }
-    else if (App.dataType == AppDataType.SearchResults)
-    {
-      App.elementsModule.updateElementsToDisplay(true,false);
+    } else if (App.dataType == AppDataType.SearchResults) {
+      App.elementsModule.updateElementsToDisplay(true, false);
       App.elementListComponent.setTitle('');
     }
   }
 
-  get mode() { return this.mode_; }
+  get mode() {
+    return this.mode_;
+  }
 }

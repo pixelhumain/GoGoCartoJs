@@ -1,34 +1,37 @@
-import { AppModule, AppStates, AppDataType, AppModes } from "../app.module";
+import { AppModule, AppStates, AppDataType, AppModes } from '../app.module';
 
-import { App } from "../gogocarto";
+import { App } from '../gogocarto';
 
-declare var routie: any, $;
+declare let routie: any, $;
 
-export class LoginModule
-{
-	private roles_ : string[];
-	private userEmail : string = '';
+export class LoginModule {
+  private roles_: string[];
+  private userEmail = '';
 
-	constructor($roles : string[] | string, $userEmail : string = '') 
-	{ 
-		this.setRoles($roles); 
-		this.setUserEmail($userEmail);
-	}
+  constructor($roles: string[] | string, $userEmail = '') {
+    this.setRoles($roles);
+    this.setUserEmail($userEmail);
+  }
 
-	setRoles($roles : string[] | string)
-	{ 
-		if (typeof $roles == 'string') this.roles_ = [$roles];	
-		else this.roles_ = $roles;
-	}
+  setRoles($roles: string[] | string) {
+    if (typeof $roles == 'string') this.roles_ = [$roles];
+    else this.roles_ = $roles;
+  }
 
-	setUserEmail(userEmail) { this.userEmail = userEmail; }
+  setUserEmail(userEmail) {
+    this.userEmail = userEmail;
+  }
 
-	getUserEmail() { return this.userEmail; }
+  getUserEmail() {
+    return this.userEmail;
+  }
 
-	getRoles() { return this.roles_; }
+  getRoles() {
+    return this.roles_;
+  }
 
-  loginAction() { 
-  	if (typeof App.config.security.loginAction == 'function') App.config.security.loginAction()
-  	else eval(App.config.security.loginAction);
+  loginAction() {
+    if (typeof App.config.security.loginAction == 'function') App.config.security.loginAction();
+    else eval(App.config.security.loginAction);
   }
 }

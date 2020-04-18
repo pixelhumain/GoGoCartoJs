@@ -1,210 +1,208 @@
-import { AppModule, AppStates, AppModes, AppDataType } from "../../app.module";
-import { App } from "../../gogocarto";
-declare var $;	
+import { AppModule, AppStates, AppModes, AppDataType } from '../../app.module';
+import { App } from '../../gogocarto';
+declare let $;
 
-import { Event } from "../../classes/event.class";
-import { Element, ElementStatus } from "../../classes/classes";
+import { Event } from '../../classes/event.class';
+import { Element, ElementStatus } from '../../classes/classes';
 
-export interface ElementsToDisplayChanged
-{ 
-	elementsToDisplay : Element[];
-	newElements : Element[];
-	elementsToRemove : Element[];
+export interface ElementsToDisplayChanged {
+  elementsToDisplay: Element[];
+  newElements: Element[];
+  elementsToRemove: Element[];
 }
 
-export class ElementsModule
-{
-	onElementsToDisplayChanged = new Event<ElementsToDisplayChanged>();
+export class ElementsModule {
+  onElementsToDisplayChanged = new Event<ElementsToDisplayChanged>();
 
-	private everyElements_ : Element[][] = [];
-	private everyElementsId_ : string[] = [];
-	
-	// current visible elements
-	private visibleElements_ : Element[][] = [];
-	private searchResultElements_ : Element[] = [];	
+  private everyElements_: Element[][] = [];
+  private everyElementsId_: string[] = [];
 
-	firstElementsHaveBeendisplayed : boolean = false;	
+  // current visible elements
+  private visibleElements_: Element[][] = [];
+  private searchResultElements_: Element[] = [];
 
-	initialize()
-	{
-		this.everyElements_['all'] = [];
-		this.visibleElements_['all'] = [];
-		for(let option of App.taxonomyModule.getMainOptions())
-		{
-			this.everyElements_[option.id] = [];
-			this.visibleElements_[option.id] = [];
-		}	
-	}	
+  firstElementsHaveBeendisplayed = false;
 
-	addElements(newElements : Element[])
-	{
-		for(let element of newElements)
-		{
-			for (let mainId of element.mainOptionOwnerIds)
-			{
-				this.everyElements_[mainId].push(element);
-			}				
-			this.everyElements_['all'].push(element);
-			this.everyElementsId_.push(element.id);
-		}	
+  initialize() {
+    this.everyElements_['all'] = [];
+    this.visibleElements_['all'] = [];
+    for (const option of App.taxonomyModule.getMainOptions()) {
+      this.everyElements_[option.id] = [];
+      this.visibleElements_[option.id] = [];
+    }
+  }
 
-		App.favoriteModule.checkCookies();	
-		App.stampModule.checkForAddingStamps(newElements);
-	}	
+  addElements(newElements: Element[]) {
+    for (const element of newElements) {
+      for (const mainId of element.mainOptionOwnerIds) {
+        this.everyElements_[mainId].push(element);
+      }
+      this.everyElements_['all'].push(element);
+      this.everyElementsId_.push(element.id);
+    }
 
-	clearCurrentsElement()
-	{
-		//console.log("clearCurrElements");
-		let visibleElements = this.currVisibleElements();
-		if (!visibleElements || !visibleElements.length) return;
-		let l = visibleElements.length;
-		while(l--)
-		{
-			visibleElements[l].isDisplayed = false;
-		}
-		let markers = visibleElements.map( (e) => e.marker.getLeafletMarker());
-		App.mapComponent.removeMarkers(markers);
+    App.favoriteModule.checkCookies();
+    App.stampModule.checkForAddingStamps(newElements);
+  }
 
-		this.clearCurrVisibleElements();
-	}	
+  clearCurrentsElement() {
+    //console.log("clearCurrElements");
+    const visibleElements = this.currVisibleElements();
+    if (!visibleElements || !visibleElements.length) return;
+    let l = visibleElements.length;
+    while (l--) {
+      visibleElements[l].isDisplayed = false;
+    }
+    const markers = visibleElements.map((e) => e.marker.getLeafletMarker());
+    App.mapComponent.removeMarkers(markers);
 
-	// check elements in bounds and who are not filtered
-	updateElementsToDisplay(checkInAllElements = true, filterHasChanged = false) 
-	{	
-		if (App.mode == AppModes.Map && !App.mapComponent.isMapLoaded) return;
+    this.clearCurrVisibleElements();
+  }
 
-		let elements : Element[] = [];
+  // check elements in bounds and who are not filtered
+  updateElementsToDisplay(checkInAllElements = true, filterHasChanged = false) {
+    if (App.mode == AppModes.Map && !App.mapComponent.isMapLoaded) return;
 
-		// Getting the element array to work on
-		if ( (App.state == AppStates.ShowElementAlone || App.state == AppStates.ShowDirections ) && App.mode == AppModes.Map) 
-			elements = [App.DEAModule.getElement()];		
-		else if (App.dataType == AppDataType.All)
-		{			
-			if (checkInAllElements || this.visibleElements_.length === 0) 
-					elements = this.currEveryElements();
-			else elements = this.currVisibleElements();
-		}
-		else if (App.dataType == AppDataType.SearchResults)
-		{
-			elements = this.searchResultElements_;
-		}		
-		
-		if (!elements) return;
+    let elements: Element[] = [];
 
-		let i : number, element : Element;
+    // Getting the element array to work on
+    if ((App.state == AppStates.ShowElementAlone || App.state == AppStates.ShowDirections) && App.mode == AppModes.Map)
+      elements = [App.DEAModule.getElement()];
+    else if (App.dataType == AppDataType.All) {
+      if (checkInAllElements || this.visibleElements_.length === 0) elements = this.currEveryElements();
+      else elements = this.currVisibleElements();
+    } else if (App.dataType == AppDataType.SearchResults) {
+      elements = this.searchResultElements_;
+    }
 
-	 	let newElements : Element[] = [];
-	 	let elementsToRemove : Element[] = [];		
-		
-		i = elements.length;
-		let filterModule = App.filterModule;	
-		let currBounds = App.boundsModule.extendedBounds;
-		let start = new Date().getTime();
+    if (!elements) return;
 
-		// console.log("updateElementsToDisplay. Nbre element à traiter : " + i, checkInAllElements);
+    let i: number, element: Element;
 
-		while(i--)
-		{
-			element = elements[i];
+    const newElements: Element[] = [];
+    const elementsToRemove: Element[] = [];
 
-			if (!element) break;
+    i = elements.length;
+    const filterModule = App.filterModule;
+    const currBounds = App.boundsModule.extendedBounds;
+    const start = new Date().getTime();
 
-			let elementInBounds = false;
-			if (this.noNeedToCheckBounds()) elementInBounds = true;
-			else elementInBounds = currBounds && element.position && currBounds.contains(element.position);
+    // console.log("updateElementsToDisplay. Nbre element à traiter : " + i, checkInAllElements);
 
-			if (elementInBounds && filterModule.checkIfElementPassFilters(element))
-			{
-				if (!element.isDisplayed)
-				{
-					element.isDisplayed = true;
-					this.currVisibleElements().push(element);
-					newElements.push(element);
-				}
-			}
-			else
-			{
-				if (element.isDisplayed) 
-				{
-					element.isDisplayed = false;
-					elementsToRemove.push(element);
-					let index = this.currVisibleElements().indexOf(element);
-					if (index > -1) this.currVisibleElements().splice(index, 1);
-				}
-			}
-		}
+    while (i--) {
+      element = elements[i];
 
-		let end = new Date().getTime();
-		let time = end - start;
+      if (!element) break;
 
-		//window.console.log("UpdateElementsToDisplay en " + time + " ms");
-		this.onElementsToDisplayChanged.emit({
-			elementsToDisplay: this.currVisibleElements(), 
-			newElements : newElements, 
-			elementsToRemove : elementsToRemove
-		});
+      let elementInBounds = false;
+      if (this.noNeedToCheckBounds()) elementInBounds = true;
+      else elementInBounds = currBounds && element.position && currBounds.contains(element.position);
 
-		this.updateElementsIcons(filterHasChanged);		
+      if (elementInBounds && filterModule.checkIfElementPassFilters(element)) {
+        if (!element.isDisplayed) {
+          element.isDisplayed = true;
+          this.currVisibleElements().push(element);
+          newElements.push(element);
+        }
+      } else {
+        if (element.isDisplayed) {
+          element.isDisplayed = false;
+          elementsToRemove.push(element);
+          const index = this.currVisibleElements().indexOf(element);
+          if (index > -1) this.currVisibleElements().splice(index, 1);
+        }
+      }
+    }
 
-		// strange bug, at initialization, some isolated markers are not displayed
-		// refreshing the elementModule solve this...
-		if (!this.firstElementsHaveBeendisplayed && this.currVisibleElements() && this.currVisibleElements().length > 0)		
-		{
-			this.firstElementsHaveBeendisplayed = true;
-			setTimeout( () => { this.updateElementsToDisplay(true) }, 100);
-		}		
-	};
+    const end = new Date().getTime();
+    const time = end - start;
 
-	private noNeedToCheckBounds()
-	{
-		return App.mode == AppModes.List && 
-					(App.dataType != AppDataType.All || App.ajaxModule.allElementsReceived);
-	}
+    //window.console.log("UpdateElementsToDisplay en " + time + " ms");
+    this.onElementsToDisplayChanged.emit({
+      elementsToDisplay: this.currVisibleElements(),
+      newElements: newElements,
+      elementsToRemove: elementsToRemove,
+    });
 
-	updateElementsIcons(somethingChanged : boolean = false)
-	{
-		//console.log("UpdateCurrElements somethingChanged", somethingChanged);
-		let start = new Date().getTime();
+    this.updateElementsIcons(filterHasChanged);
 
-		let visibleElements = this.currVisibleElements();
-		if (!visibleElements || !visibleElements.length) return;
-		
-		let l = visibleElements.length;
-		let element : Element;
-		while(l--)
-		{
-			element = visibleElements[l];
-			if (somethingChanged) element.needToBeUpdatedWhenShown = true;
+    // strange bug, at initialization, some isolated markers are not displayed
+    // refreshing the elementModule solve this...
+    if (!this.firstElementsHaveBeendisplayed && this.currVisibleElements() && this.currVisibleElements().length > 0) {
+      this.firstElementsHaveBeendisplayed = true;
+      setTimeout(() => {
+        this.updateElementsToDisplay(true);
+      }, 100);
+    }
+  }
 
-			// if domMarker not visible that's mean that marker is in a cluster
-			if (element.marker.domMarker().is(':visible')) element.update();
-		}
-		let end = new Date().getTime();
-		let time = end - start;
-		//window.console.log("updateElementsIcons " + time + " ms");
-	}
+  private noNeedToCheckBounds() {
+    return App.mode == AppModes.List && (App.dataType != AppDataType.All || App.ajaxModule.allElementsReceived);
+  }
 
-	setSearchResultElement(elements : Element[]) { this.searchResultElements_ = elements; }
-	getSearchElements() : Element[] { return this.searchResultElements_; }
+  updateElementsIcons(somethingChanged = false) {
+    //console.log("UpdateCurrElements somethingChanged", somethingChanged);
+    const start = new Date().getTime();
 
-	get everyElements()        { return this.everyElements_; }
-	get everyElementsId()      { return this.everyElementsId_; }
-	get visibleElements()      { return this.visibleElements_; }
-	get searchResultElements() { return this.searchResultElements_; }
+    const visibleElements = this.currVisibleElements();
+    if (!visibleElements || !visibleElements.length) return;
 
-	currVisibleElements()      { return this.visibleElements_[App.currMainId]; }
-	currEveryElements()        { return this.everyElements_[App.currMainId]; }
-	setCurrVisibleElements(elements : Element[]) { this.visibleElements_[App.currMainId] = elements; }
+    let l = visibleElements.length;
+    let element: Element;
+    while (l--) {
+      element = visibleElements[l];
+      if (somethingChanged) element.needToBeUpdatedWhenShown = true;
 
-	private clearCurrVisibleElements() { this.visibleElements_[App.currMainId] = []; }
+      // if domMarker not visible that's mean that marker is in a cluster
+      if (element.marker.domMarker().is(':visible')) element.update();
+    }
+    const end = new Date().getTime();
+    const time = end - start;
+    //window.console.log("updateElementsIcons " + time + " ms");
+  }
 
-	allElements() { return this.everyElements_['all']; }
+  setSearchResultElement(elements: Element[]) {
+    this.searchResultElements_ = elements;
+  }
+  getSearchElements(): Element[] {
+    return this.searchResultElements_;
+  }
 
-	getElementById(elementId) : Element
-	{
-		for (let i = 0; i < this.allElements().length; i++) {
-			if (this.allElements()[i].id == elementId) return this.allElements()[i];
-		}
-		return null;
-	};
+  get everyElements() {
+    return this.everyElements_;
+  }
+  get everyElementsId() {
+    return this.everyElementsId_;
+  }
+  get visibleElements() {
+    return this.visibleElements_;
+  }
+  get searchResultElements() {
+    return this.searchResultElements_;
+  }
+
+  currVisibleElements() {
+    return this.visibleElements_[App.currMainId];
+  }
+  currEveryElements() {
+    return this.everyElements_[App.currMainId];
+  }
+  setCurrVisibleElements(elements: Element[]) {
+    this.visibleElements_[App.currMainId] = elements;
+  }
+
+  private clearCurrVisibleElements() {
+    this.visibleElements_[App.currMainId] = [];
+  }
+
+  allElements() {
+    return this.everyElements_['all'];
+  }
+
+  getElementById(elementId): Element {
+    for (let i = 0; i < this.allElements().length; i++) {
+      if (this.allElements()[i].id == elementId) return this.allElements()[i];
+    }
+    return null;
+  }
 }

@@ -1,43 +1,36 @@
-import { App } from "../../gogocarto";
-declare var L;
+import { App } from '../../gogocarto';
+declare let L;
 
-export class ViewPort
-{
-  constructor(public lat : number = 0, 
-          public lng :number = 0, 
-          public zoom : number = 0)
-  {
+export class ViewPort {
+  constructor(public lat: number = 0, public lng: number = 0, public zoom: number = 0) {
     this.lat = lat || 0;
     this.lng = lng || 0;
     this.zoom = zoom || 0;
   }
 
-  toString()
-  {
-    let digits = this.zoom > 14 ? 4 : this.zoom > 10 ? 3 : 2;
+  toString() {
+    const digits = this.zoom > 14 ? 4 : this.zoom > 10 ? 3 : 2;
     return `@${this.lat.toFixed(digits)},${this.lng.toFixed(digits)},${this.zoom}z`;
   }
 
-  fromString(string : string)
-  {
+  fromString(string: string) {
     if (!string) return null;
 
-    let decode = string.split('@').pop().split(',');
+    const decode = string.split('@').pop().split(',');
     if (decode.length != 3) {
-      console.log("ViewPort fromString erreur", string);
+      console.log('ViewPort fromString erreur', string);
       return null;
     }
     this.lat = parseFloat(decode[0]) % 360;
     this.lng = parseFloat(decode[1]) % 360;
-    this.zoom = parseInt(decode[2].slice(0,-1));
+    this.zoom = parseInt(decode[2].slice(0, -1));
 
     //console.log("ViewPort fromString Done", this);
 
     return this;
   }
 
-  toLocation()
-  {
+  toLocation() {
     return L.latLng(this.lat, this.lng);
   }
 }
