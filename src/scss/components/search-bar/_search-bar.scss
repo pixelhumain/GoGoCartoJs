@@ -24,8 +24,14 @@
       &:before { line-height: 2rem; }
       &:hover { cursor: pointer; }
 
-      &.search-bar-icon { left: 1.2rem; }
-      &.search-geolocalize { right: 1.4rem; }
+      &.search-bar-icon
+      {
+        left: 1.2rem;
+      }
+      &.search-geolocalize
+      {
+        right: 1.4rem;
+      }
     }
 
     .search-bar
@@ -119,27 +125,19 @@
 
   #search-spinner-loader, #geolocate-spinner-loader
   {
-    height: 12px;
-    width: 12px;
-    top: 1px;
     margin-left: 5px;
+    top: 7px;
+    height: 18px;
+    width: 18px;
+    display: none;
+    position: absolute;
     .spinner-layer { border-color: #5d5d5d; }
     .circle-clipper .circle { border-width: 2px; }
   }
   #search-spinner-loader {
-    height: 18px;
-    width: 18px;
-    display: none;
-    position: absolute;
-    top: 7px;
     left: 0;
   }
   #geolocate-spinner-loader {
-    height: 18px;
-    width: 18px;
-    display: none;
-    position: absolute;
-    top: 7px;
     right: 0;
   }
   .search-bar-icon.loading {

@@ -57,7 +57,7 @@ export class SearchBarComponent
 		this.searchInput().gogoAutocomplete({
 			appendTo: '.search-bar-container',
 			classes: {
-				'ui-autocomplete': 'search-bar-autocomplete-results-container'
+				'ui-autocomplete': 'search-bar-autocomplete-results-container gogo-section-content'
 			},
 			position: {
 				at: 'left bottom+5'
@@ -106,8 +106,14 @@ export class SearchBarComponent
 	{
 		let items: AutocompleteItem[] = [{ label: App.config.translate('search.by.geographic.location'), type: 'search_geocoded', value: term, icon: 'gogo-icon-internet' }];
 
+		if (optionsResults.length > 0) {
+			items = [ ...items, ...optionsResults.slice(0, 10).map(({ type, value }) => (
+				{ type, value, label: value.name, icon: value.icon }
+			)) ]
+		}
+
 		if (elementsResults.length > 0) {
-			items.push({ label: App.config.translate('search.by.elements'), type: 'search_elements', value: { term, results: { data: elementsResults.map(elementResult => elementResult.value) } }, icon: 'gogo-icon-database' })
+			items.push({ label: `${App.config.translate('search.by.elements.containing')} ${term}`, type: 'search_elements', value: { term, results: { data: elementsResults.map(elementResult => elementResult.value) } }, icon: 'gogo-icon-database' })
 			items = [ ...items, ...elementsResults.slice(0, 10).map(({ type, value }) => {
 				const elementItem: AutocompleteItem = { type, value, label: value.name };
 				if (value.address) {
@@ -134,7 +140,7 @@ export class SearchBarComponent
 			}) ];
 		}
 
-		response([ ...items, ...optionsResults.map(({ type, value }) => ({ type, value, label: value.name })) ]);
+		response(items);
 	}
 
 	private searchTerm(term: string, callback: (elementsResults: SearchResult[], optionsResults: SearchResult[]) => void): void
@@ -158,6 +164,8 @@ export class SearchBarComponent
 					value: result,
 				})) })
 			});
+		} else {
+			resolveResults({ elements: [] });
 		}
 
 		resolveResults({

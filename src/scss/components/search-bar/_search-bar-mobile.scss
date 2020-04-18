@@ -50,10 +50,12 @@
 
   #search-spinner-loader {
     top: 17px;
+    left: 12px;
   }
 
   #geolocate-spinner-loader {
-    display: none !important;
+    top: 17px;
+    right: 22px;
   }
 
   .search-no-result

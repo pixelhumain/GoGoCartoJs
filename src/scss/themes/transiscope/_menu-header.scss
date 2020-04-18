@@ -15,7 +15,14 @@
 
       &:before { line-height: 2.5rem; }
 
-      &.search-bar-icon { left: 2rem; }
+      &.search-bar-icon
+      {
+        &.loading
+        {
+          left: 1.4rem;
+        }
+        left: 2rem;
+      }
       &.search-geolocalize { right: 2.8rem; }
     }
 
@@ -31,6 +38,11 @@
     {
       border-radius: 0;
       width: 95%;
+    }
+
+    #search-spinner-loader, #geolocate-spinner-loader
+    {
+      top: 10px;
     }
   }
 }

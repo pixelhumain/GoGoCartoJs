@@ -158,7 +158,7 @@ export const EN =
   "saved": "Saved",
   "save.as.favorites": "Save as favorites",
   "search": "Search",
-  "search.by.elements": "Search by elements",
+  "search.by.elements.containing": "Search by elements containing:",
   "search.by.geographic.location": "Search by geographic location",
   "search.for": "Search for",
   "see.on.map": "See on the map",

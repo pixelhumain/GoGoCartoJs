@@ -9,5 +9,3 @@ Discover the power of GoGoCarto with examples !
 - [Custom Icons with font awesome](examples/index-fontawesome-icons.html)
 - [Distant Configuration](examples/index-distant-configuration.html)
 - [Distant Taxonomy and Dataset](examples/index-distant.html)
-
-

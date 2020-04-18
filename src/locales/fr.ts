@@ -158,7 +158,7 @@ export const FR =
   "saved":"Enregistré",
   "save.as.favorites":"Enregistrer comme favoris",
   "search":"Chercher",
-  "search.by.elements": "Rechercher par éléments",
+  "search.by.elements.containing": "Rechercher par éléments contenant :",
   "search.by.geographic.location": "Rechercher par lieu géographique",
   "search.for":"Recherche de",
   "see.on.map":"Voir sur la carte",

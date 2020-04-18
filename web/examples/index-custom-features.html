@@ -2,11 +2,10 @@
 <html lang="en">
   <head>
     <!-- Loading library -->
-    <link rel="stylesheet" href="../../dist/gogocarto.min.css"> 
+    <link rel="stylesheet" href="../../dist/gogocarto.min.css">
     <script src="../../dist/gogocarto.min.js"></script>
 
     <!-- Icons and Fonts -->
-    <link href="https://file.myfontastic.com/p9QtVQwDCkDvVq6VJesnxg/icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 
     <!-- Load data -->
@@ -14,9 +13,9 @@
     <script src="../data/taxonomy-simple.js"></script>
 
     <!-- Examples related stuff -->
-    <link rel="stylesheet" href="examples.css"> 
-    <meta charset="utf-8">    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>     
+    <link rel="stylesheet" href="examples.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
 
   <body>
@@ -25,8 +24,7 @@
   </body>
 
   <script>
-    $(document).ready(function()
-    {   
+    $(document).ready(function() {
       carto = goGoCarto('#gogocarto', {
         data:
         {
@@ -36,17 +34,17 @@
         features:
         {
           searchPlace: { },
-          searchGeolocate: { },           
-          report:   { 
-              url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/report', 
-              roles: ['anonymous', 'user', 'admin'] 
+          searchGeolocate: { },
+          report:   {
+              url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/report',
+              roles: ['anonymous', 'user', 'admin']
           },
           edit:     { url: 'http://localhost/GoGoCarto/web/app_dev.php/elements/edit/' },
           sendMail: { url: 'http://localhost/GoGoCarto/web/app_dev.php/interact/sendMail' },
           favorite: { inIframe: false },
           directions: { roles: ['admin'] },
           export:   { inIframe: false },
-          pending:  { inIframe: false, roles: ['anonymous', 'user', 'admin'] },            
+          pending:  { inIframe: false, roles: ['anonymous', 'user', 'admin'] },
           elementHistory: { inIframe: false, roles: ['admin'] },
           directModeration: { roles: ['admin'] },
           share: { },
@@ -59,6 +57,5 @@
         },
       });
     });
-  </script>  
+  </script>
 </html>
-
