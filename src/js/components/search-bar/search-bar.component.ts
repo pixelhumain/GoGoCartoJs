@@ -166,7 +166,7 @@ export class SearchBarComponent {
           if (element) {
             const optionsToDisplay = element.getIconsToDisplay();
             if (optionsToDisplay.length > 0) {
-              elementItem.icon = optionsToDisplay[0].option.icon;
+              elementItem.icon = optionsToDisplay[0]?.option.icon;
             }
           }
 
