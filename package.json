@@ -18,6 +18,8 @@
   "dependencies": {
     "commonmark": "^0.29.0",
     "diff": "^4.0.1",
+    "jquery": "2.2.1",
+    "jquery-ui-dist": "^1.12.1",
     "nunjucks": "^3.2.0",
     "tinycolor2": "^1.4.1"
   },
@@ -47,8 +49,5 @@
     "typescript": "^3.8",
     "vinyl-source-stream": "^2.0.0",
     "watchify": "^3.11.1"
-  },
-  "scripts": {
-    "postinstall": "cd src/js && npm install"
   }
 }
