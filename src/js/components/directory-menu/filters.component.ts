@@ -160,14 +160,11 @@ export class FiltersComponent
     // -------------------------------
     $('.subcategorie-option-item:not(#filter-favorite):not(#filter-pending):not(#filter-moderation) .option-name').click(function(e : Event)
     {
-      let optionDom = $(this).closest('.subcategorie-option-item');
-      let optionId = optionDom.attr('data-option-id');
-      let option = App.taxonomyModule.getOptionById(optionId);
+      const optionDom = $(this).closest('.subcategorie-option-item');
+      const optionId = optionDom.attr('data-option-id');
+      const uncheckable = optionDom.hasClass('uncheckable');
 
-      if (option.isMainOption && App.config.menu.showOnePanePerMainOption) App.filtersComponent.setMainOption(option.id);
-      else if (optionDom.hasClass('uncheckable')) return;
-      else if (option.isCollapsible()) option.toggleChildrenDetail()
-      else option.toggle();
+      this.setOption(optionId, uncheckable);
     });
 
     $('.subcategorie-option-item:not(#filter-favorite):not(#filter-pending):not(#filter-moderation)').find('.icon, .checkbox-wrapper').click(function(e)
@@ -181,7 +178,19 @@ export class FiltersComponent
     });
   }
 
-  setMainOption(optionId)
+  public setOption(optionId, uncheckable: boolean = false): void
+  {
+    const option = App.taxonomyModule.getOptionById(optionId);
+
+    if (option.isMainOption && App.config.menu.showOnePanePerMainOption) {
+      App.filtersComponent.setMainOption(option.id);
+    }
+    else if (uncheckable) return;
+    else if (option.isCollapsible()) option.toggleChildrenDetail()
+    else option.toggle();
+  }
+
+  public setMainOption(optionId): void
   {
     if (this.currentActiveMainOptionId == optionId) return;
     if (this.currentActiveMainOptionId != null) App.elementsModule.clearCurrentsElement();

@@ -75,6 +75,9 @@ export class SearchBarComponent
 				if ('search_geocoded' === ui.item.type) {
 					this.searchGeocoded(ui.item.value);
 				}
+				if ('option' === ui.item.type) {
+					this.searchOption(ui.item.value);
+				}
 				if ('search_elements' === ui.item.type) {
 					this.searchElements(ui.item.value.term, ui.item.value.results);
 				}
@@ -188,6 +191,12 @@ export class SearchBarComponent
 				this.searchLoading(true);
 				$('.search-no-result').show();
 			});
+	}
+
+	private searchOption(option): void
+	{
+		this.searchLoading(true);
+		App.filtersComponent.setOption(option.id);
 	}
 
 	private searchElements(term: string, searchResults, backFromHistory: boolean = false): void
