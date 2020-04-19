@@ -39,7 +39,7 @@ export class SearchBarComponent {
         if (item.icon) {
           wrapper.append(`<div class="icon ${item.icon}"></div>`);
         }
-        if (['element', 'option'].includes(item.type)) {
+        if ('element' === item.type) {
           wrapper.addClass('nested');
         }
 
@@ -114,7 +114,7 @@ export class SearchBarComponent {
   ): void {
     let items: AutocompleteItem[] = [
       {
-        label: App.config.translate('search.by.geographic.location'),
+        label: App.config.translate('geographic.location'),
         type: 'search_geocoded',
         value: term,
         icon: 'gogo-icon-marker-symbol',
@@ -127,7 +127,7 @@ export class SearchBarComponent {
         ...optionsResults.slice(0, 10).map(({ type, value }) => ({
           type,
           value,
-          label: value.name,
+          label: `${App.config.translate('category')} "${value.name}"`,
           icon: value.icon,
         })),
       ];
@@ -135,7 +135,7 @@ export class SearchBarComponent {
 
     if (elementsResults.length > 0) {
       items.push({
-        label: `${App.config.translate('search.by.elements.containing')} "${term}" (${
+        label: `${App.config.translate('elements.containing')} "${term}" (${
           elementsResults.length
         } ${App.config.translate('results').toLowerCase()})`,
         type: 'search_elements',

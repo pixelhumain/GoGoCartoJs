@@ -21,6 +21,7 @@ export const FR = {
   cancel: 'Annuler',
   'can.not.locate.address': 'Impossible de localiser cette adresse !',
   card: 'Fiche',
+  category: 'Catégorie',
   'change.tiles': 'Changer le Fond de Carte',
   'check.uncheck.all': 'Cocher/Décocher Tout',
   close: 'Fermer',
@@ -44,6 +45,7 @@ export const FR = {
   //E
   edit: 'Modifier',
   element: 'élément',
+  'elements.containing': 'Éléments contenant',
   'element.definite': "l'élément",
   'element.no.longer.exists': "L'élement n'existe plus",
   'element.no.respect.charter': "L'élément ne respecte pas la charte",
@@ -76,6 +78,7 @@ export const FR = {
 
   //G
   'general.infos': 'Informations générales',
+  'geographic.location': 'Lieu géographique',
   geolocalize: 'Géolocaliser votre position',
   geolocalized: 'Géolocalisé',
   'geolocation.error': 'Erreur de géolocalisation',
@@ -162,8 +165,6 @@ export const FR = {
   saved: 'Enregistré',
   'save.as.favorites': 'Enregistrer comme favoris',
   search: 'Chercher',
-  'search.by.elements.containing': 'Rechercher par éléments contenant :',
-  'search.by.geographic.location': 'Rechercher par lieu géographique',
   'search.for': 'Recherche de',
   'see.on.map': 'Voir sur la carte',
   'select.type.error': "Vous devez sélectionner un type d'erreur!",

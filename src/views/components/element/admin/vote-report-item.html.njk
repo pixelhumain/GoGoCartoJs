@@ -6,7 +6,7 @@
   '2': "logged.user",
   '3': "admin"
   }
-%} 
+%}
 
 {% set reportValues = {
   '0': "element.no.longer.exists",
@@ -14,7 +14,7 @@
   '2': "element.no.respect.charter",
   '4': "element.referenced.several.times"
   }
-%} 
+%}
 
 {% set voteValues = {
   '-2': 'does.not.respect.charter',
@@ -23,7 +23,7 @@
   '1': 'exists',
   '2': 'exists.and.correct.informations'
   }
-%} 
+%}
 
 {# item.type : Report => 3, Vote => 2 #}
 
@@ -32,18 +32,18 @@
 <div class="vote-report-item {{ '' if lastElement else 'item-container' }}">
   <div style="margin-bottom:5px">
     {% set labelClass = 'label-success' if item.type == 2 and item.value >= 0 else 'label-danger' %}
-    <span class="label {{ labelClass }}">{{ itemValues[item.value] | i18n }}</span> 
-    <div style="float:right">{{ item.createdAt }}</div> 
+    <span class="label {{ labelClass }}">{{ itemValues[item.value] | i18n }}</span>
+    <div style="float:right">{{ item.createdAt }}</div>
     {% if smallWidth|default(false) %}
       </br>
       <span style="display:block;padding-top: 5px;">
     {% else %}
       <span style="margin:0 5px">
-    {% endif %}    
+    {% endif %}
       {{ 'by' | i18n }} : <u>{{ item.userEmail if item.userEmail else 'anonymous' |i18n }}</u>
-      <span class="label label-default" style="margin-left:5px">{{ userRoles[item.userRole] | i18n }}</span> 
-    </span> 
-  </div> 
+      <span class="label label-default" style="margin-left:5px">{{ userRoles[item.userRole] | i18n }}</span>
+    </span>
+  </div>
 
   <div class="vote-report-comment">{{ item.comment|capitalize }}</div>
 </div>

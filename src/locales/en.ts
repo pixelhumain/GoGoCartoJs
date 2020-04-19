@@ -19,8 +19,9 @@ export const EN = {
 
   //C
   cancel: 'Cancel',
-  'can.not.locate.address': 'Can not locate this address !',
+  'can.not.locate.address': 'Can not locate this address!',
   card: 'Card',
+  category: 'Category',
   'change.tiles': 'Change Tiles Layer',
   'check.uncheck.all': 'Check/Uncheck All',
   close: 'Close',
@@ -31,7 +32,7 @@ export const EN = {
   'collaborative.moderation.second.paragraph':
     'After a certain number of votes, the element can then be automatically validated or refused. In case of dispute (both positive and negative votes), a moderator will intervene as soon as possible. We count on you!',
   'comment.for.moderation': 'Comment for moderation',
-  'copy.html.code': 'Copy this HTML code into your website !',
+  'copy.html.code': 'Copy this HTML code into your website!',
 
   //D
   decide: 'Decide',
@@ -44,6 +45,7 @@ export const EN = {
   //E
   edit: 'Edit',
   element: 'element',
+  'elements.containing': 'Elements containing',
   'element.definite': 'the element',
   'element.no.longer.exists': 'The element no longer exists',
   'element.no.respect.charter': 'The element does not respect the charter',
@@ -76,6 +78,7 @@ export const EN = {
 
   //G
   'general.infos': 'General Informations',
+  'geographic.location': 'Geographic location',
   geolocalize: 'Geolocalize your position',
   geolocalized: 'Geolocalized',
   'geolocation.error': 'Geolocation error',
@@ -90,7 +93,7 @@ export const EN = {
   'iframe.initialized.position.map':
     'The iframe will be initialized in the current position of the map. Move the map to the desired position before opening this window !',
   import: 'Import',
-  'informations.incorrect': 'The informations are incorrect',
+  'informations.incorrect': 'Incorrect information',
 
   //L
   label: 'Label',
@@ -162,8 +165,6 @@ export const EN = {
   saved: 'Saved',
   'save.as.favorites': 'Save as favorites',
   search: 'Search',
-  'search.by.elements.containing': 'Search by elements containing:',
-  'search.by.geographic.location': 'Search by geographic location',
   'search.for': 'Search for',
   'see.on.map': 'See on the map',
   'select.type.error': 'You must select a type of error!',
@@ -204,11 +205,11 @@ export const EN = {
 
   //W
   waiting: 'Waiting',
-  'what.error.to.report': 'What error do you want to report ?',
+  'what.error.to.report': 'What error do you want to report?',
   width: 'Width',
 
   //Y
-  'you.must.select.your.vote': 'You must select your vote !',
+  'you.must.select.your.vote': 'You must select your vote!',
   'your.email': 'Your email address',
   'your.favorites': 'Favorites',
 };
