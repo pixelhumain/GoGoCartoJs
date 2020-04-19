@@ -1,5 +1,3 @@
-declare let $;
-
 import { AppModule, AppDataType, AppModes, AppStates } from './app.module';
 import { getQueryParams } from './utils/params';
 import { afterTemplateLoaded } from './themes';

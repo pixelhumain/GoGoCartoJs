@@ -1,7 +1,10 @@
 import { AppDataType, AppModes, AppStates } from '../../app.module';
-declare let $, L;
 import { App } from '../../gogocarto';
-import { ViewPort } from '../../classes/classes';
+
+interface CustomJQuery extends JQuery {
+  gogoAutocomplete(options: JQueryUI.AutocompleteOptions): JQuery;
+  gogoAutocomplete(methodName: 'search', value?: string): void;
+}
 
 interface SearchResult {
   type: string;
@@ -17,19 +20,19 @@ interface AutocompleteItem {
 }
 
 export class SearchBarComponent {
-  searchInput() {
-    return $('.search-bar');
+  searchInput(): CustomJQuery {
+    return $('.search-bar') as CustomJQuery;
   }
 
-  locationMarker: L.Marker;
-  locationIcon = L.divIcon({ className: 'marker-location-position' });
+  private locationMarker: L.Marker;
+  private locationIcon: L.DivIcon = L.divIcon({ className: 'marker-location-position' });
   private currSearchText = '';
-
-  constructor() {}
 
   initialize(): void {
     $.widget('custom.gogoAutocomplete', $.ui.autocomplete, {
-      _resizeMenu: () => {},
+      _resizeMenu: () => {
+        // Intentionally left empty
+      },
       _renderItem: (ul, item) => {
         const li = $('<li>').addClass('search-bar-autocomplete-result-item');
         const wrapper = $('<div>').addClass('search-bar-autocomplete-result-item-wrapper');
@@ -65,7 +68,7 @@ export class SearchBarComponent {
           this.setAutocompleteItems(term, elementsResults, optionsResults, response);
         });
       },
-      focus: (event, ui) => event.preventDefault(),
+      focus: (event) => event.preventDefault(),
       select: (event, ui) => {
         this.beforeSearch();
 
@@ -86,9 +89,9 @@ export class SearchBarComponent {
       },
     });
 
-    this.searchInput().keyup((e) => {
-      // press enter and no item is focused
-      if (e.keyCode === 13 && 0 === $('.search-bar-autocomplete-results-container').find('.ui-state-active')) {
+    this.searchInput().keypress((e) => {
+      // Enter pressed
+      if (e.keyCode === 13) {
         this.handleSearchAction();
       }
     });
@@ -114,7 +117,7 @@ export class SearchBarComponent {
         label: App.config.translate('search.by.geographic.location'),
         type: 'search_geocoded',
         value: term,
-        icon: 'gogo-icon-internet',
+        icon: 'gogo-icon-marker-symbol',
       },
     ];
 
@@ -132,7 +135,9 @@ export class SearchBarComponent {
 
     if (elementsResults.length > 0) {
       items.push({
-        label: `${App.config.translate('search.by.elements.containing')} ${term}`,
+        label: `${App.config.translate('search.by.elements.containing')} "${term}" (${
+          elementsResults.length
+        } ${App.config.translate('results').toLowerCase()})`,
         type: 'search_elements',
         value: {
           term,
@@ -144,7 +149,7 @@ export class SearchBarComponent {
       });
       items = [
         ...items,
-        ...elementsResults.slice(0, 10).map(({ type, value }) => {
+        ...elementsResults.slice(0, 4).map(({ type, value }) => {
           const elementItem: AutocompleteItem = {
             type,
             value,
@@ -160,13 +165,6 @@ export class SearchBarComponent {
             }
             if (subLabel) {
               elementItem.subLabel = subLabel;
-            }
-          }
-          const element = App.elementsModule.getElementById(value.id);
-          if (element) {
-            const optionsToDisplay = element.getIconsToDisplay();
-            if (optionsToDisplay.length > 0) {
-              elementItem.icon = optionsToDisplay[0]?.option.icon;
             }
           }
 
@@ -190,7 +188,7 @@ export class SearchBarComponent {
     }: {
       elements?: SearchResult[] | false;
       options?: SearchResult[] | false;
-    }) => {
+    }): void => {
       elementsResults = elements ? elements : elementsResults;
       optionsResults = options ? options : optionsResults;
 
@@ -251,7 +249,7 @@ export class SearchBarComponent {
   }
 
   private searchElement(element): void {
-    this.searchLoading(true);
+    this.clearSearchResult(false);
     App.setState(AppStates.ShowElement, { id: element.id, mapPan: true });
   }
 
@@ -260,10 +258,12 @@ export class SearchBarComponent {
     const searchTerm = this.searchInput().val();
 
     this.beforeSearch();
-    this.searchTerm(searchTerm, (elementsResults: SearchResult[], optionsResults: SearchResult[]) => {
+    this.searchTerm(searchTerm, (elementsResults: SearchResult[]) => {
       this.searchLoading(true);
       if (elementsResults.length > 0) {
-        this.searchElement(elementsResults[0].value);
+        this.searchElements(searchTerm, {
+          data: elementsResults.map((elementResult) => elementResult.value),
+        });
         return;
       }
       this.searchGeocoded(searchTerm);
@@ -277,7 +277,7 @@ export class SearchBarComponent {
   geolocateUser(): void {
     this.beforeSearch();
     App.geocoder.geolocateUser(
-      (result: ViewPort) => {
+      () => {
         this.clearSearchResult();
         this.setValue(App.config.translate('geolocalized'));
         this.displaySearchResultMarkerOnMap(App.geocoder.getLocation());
@@ -301,7 +301,7 @@ export class SearchBarComponent {
         'get',
         data,
         (searchResult) => this.searchElements(text, searchResult, backFromHistory),
-        (error) => {
+        () => {
           this.searchLoading(true);
           //App.geocoder.geocodeAddress('');
         }
@@ -319,7 +319,6 @@ export class SearchBarComponent {
   }
 
   hideMobileSearchBar(): void {
-    // console.log("hide mobile search bar");
     $('#search-overlay-mobile').fadeOut(150);
     $('.search-bar-with-options-container.mobile').hide();
     App.gogoControlComponent.show(0);

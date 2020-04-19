@@ -138,7 +138,7 @@ export class GeocoderModule {
     }
   }
 
-  geolocateUser(callbackComplete?, callbackError?, forceApi = false) {
+  geolocateUser(callbackComplete?: (viewPort: ViewPort) => void, callbackError?, forceApi = false) {
     if ('geolocation' in navigator && !forceApi) {
       const geocodeOptions = {
         enableHighAccuracy: true,

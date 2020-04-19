@@ -1,7 +1,6 @@
-import { AppModule, AppStates, AppModes } from './app.module';
 import { App } from './gogocarto';
 
-declare let $, window: any, Materialize: any;
+declare const $: any, window: Window, Materialize: any;
 
 export class AppComponent {
   inforBarAnimationTimer;

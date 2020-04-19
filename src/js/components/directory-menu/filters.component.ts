@@ -1,7 +1,4 @@
-declare let $, jQuery: any;
-
-import { AppModule, AppModes } from '../../app.module';
-import { Category, Option } from '../../modules/taxonomy/taxonomy.module';
+import { AppModes } from '../../app.module';
 import { App } from '../../gogocarto';
 import { Element } from '../../classes/classes';
 
@@ -21,7 +18,7 @@ export class FiltersComponent {
     // -------------------------------
     // --------- FAVORITE-------------
     // -------------------------------
-    $('#filter-favorite').click(function (e: Event) {
+    $('#filter-favorite').click(function (e: JQueryMouseEventObject) {
       const favoriteCheckbox = $('#favorite-checkbox');
 
       const checkValue = !favoriteCheckbox.is(':checked');
@@ -48,7 +45,7 @@ export class FiltersComponent {
     // -------------------------------
     // --------- PENDING-------------
     // -------------------------------
-    $('#filter-pending').click(function (e: Event) {
+    $('#filter-pending').click(function (e: JQueryMouseEventObject) {
       const pendingCheckbox = $('#pending-checkbox');
 
       const checkValue = !pendingCheckbox.is(':checked');
@@ -75,7 +72,7 @@ export class FiltersComponent {
     // -------------------------------
     // --------- MODERAITON-------------
     // -------------------------------
-    $('#filter-moderation').click(function (e: Event) {
+    $('#filter-moderation').click(function (e: JQueryMouseEventObject) {
       const moderationCheckbox = $('#moderation-checkbox');
 
       const checkValue = !moderationCheckbox.is(':checked');
@@ -104,7 +101,7 @@ export class FiltersComponent {
     // -------------------------------
     const that = this;
 
-    $('.main-categories .main-icon').click(function (e) {
+    $('.main-categories .main-icon').click(function (e: JQueryMouseEventObject) {
       const optionId = $(this).attr('data-option-id');
       that.setMainOption(optionId);
     });
@@ -125,7 +122,7 @@ export class FiltersComponent {
       App.taxonomyModule.getCategoryById(categoryId).toggleChildrenDetail();
     });
 
-    $('.subcategory-item .checkbox-wrapper').click(function (e) {
+    $('.subcategory-item .checkbox-wrapper').click(function (e: JQueryMouseEventObject) {
       e.stopPropagation();
       e.stopImmediatePropagation();
       e.preventDefault();
@@ -136,12 +133,12 @@ export class FiltersComponent {
 
     // Add surbrillance in main-categories sidebar filters menu whenn hovering a main category
     $('#main-option-all.show-one-pane-per-main-option .gogo-icon-name-wrapper').hover(
-      function (e: Event) {
+      function (e: JQueryMouseEventObject) {
         const optionId = $(this).attr('data-option-id');
         const sidebarIcon = $('#main-option-gogo-icon-' + optionId);
         if (!sidebarIcon.hasClass('hover')) sidebarIcon.addClass('hover');
       },
-      function (e: Event) {
+      function (e: JQueryMouseEventObject) {
         const optionId = $(this).attr('data-option-id');
         const sidebarIcon = $('#main-option-gogo-icon-' + optionId);
         sidebarIcon.removeClass('hover');
@@ -152,17 +149,17 @@ export class FiltersComponent {
     // -------------------------------
     $(
       '.subcategorie-option-item:not(#filter-favorite):not(#filter-pending):not(#filter-moderation) .option-name'
-    ).click(function (e: Event) {
-      const optionDom = $(this).closest('.subcategorie-option-item');
+    ).click((e: JQueryMouseEventObject) => {
+      const optionDom = $(e.currentTarget).closest('.subcategorie-option-item');
       const optionId = optionDom.attr('data-option-id');
       const uncheckable = optionDom.hasClass('uncheckable');
 
-      this.setOption(optionId, uncheckable);
+      App.filtersComponent.setOption(optionId, uncheckable);
     });
 
     $('.subcategorie-option-item:not(#filter-favorite):not(#filter-pending):not(#filter-moderation)')
       .find('.icon, .checkbox-wrapper')
-      .click(function (e) {
+      .click(function (e: JQueryMouseEventObject) {
         e.stopPropagation();
         e.stopImmediatePropagation();
         e.preventDefault();

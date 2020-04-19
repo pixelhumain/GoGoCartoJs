@@ -1,5 +1,4 @@
 import { App } from './gogocarto';
-declare let $;
 
 export function afterTemplateLoaded() {
   if (App.config.theme == 'transiscope') {
