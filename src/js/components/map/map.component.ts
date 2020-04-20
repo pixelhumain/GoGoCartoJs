@@ -3,7 +3,15 @@ import { Element, ViewPort, Event } from '../../classes/classes';
 import { GeocodeResult, RawBounds } from '../../modules/geocoder.module';
 import * as Cookies from '../../utils/cookies';
 import { App } from '../../gogocarto';
-declare let $, L: any;
+
+declare module 'leaflet' {
+  interface MarkerClusterGroupOptions {
+    spiderfyOnHover?: boolean;
+    spiderfyMaxCount?: number;
+  }
+
+  function markerClusterGroup(options?: MarkerClusterGroupOptions): MarkerClusterGroup;
+}
 
 /**
  * The Map Component who encapsulate the map
@@ -130,7 +138,7 @@ export class MapComponent {
         },
       });
     } else {
-      this.markersGroup = L.layerGroup();
+      this.markersGroup = L.layerGroup([]);
     }
 
     this.markersGroup.on('spiderfied', (clusters, markers) => {
@@ -212,7 +220,7 @@ export class MapComponent {
   }
 
   fitElementsBounds(elements: Element[]) {
-    const bounds = L.latLngBounds();
+    const bounds = L.latLngBounds([]);
     for (const element of elements) bounds.extend(element.position);
     this.fitBounds(bounds);
   }

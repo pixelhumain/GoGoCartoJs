@@ -1,3 +1,4 @@
+import { nfd } from 'unorm';
 import { AppDataType, AppModes, AppStates } from '../../app.module';
 import { App } from '../../gogocarto';
 
@@ -208,13 +209,20 @@ export class SearchBarComponent {
         });
       });
     } else {
-      resolveResults({ elements: [] });
+      resolveResults({
+        elements: this.searchInResults(
+          term,
+          App.config.data.elements,
+          (element: any) => element.name
+        ).map((element) => ({ type: 'element', value: element })),
+      });
     }
 
     resolveResults({
-      options: App.taxonomyModule.options
-        .filter((option) => option.name.toLowerCase().includes(term.toLowerCase()))
-        .map((option) => ({ type: 'option', value: option })),
+      options: this.searchInResults(term, App.taxonomyModule.options, (option) => option.name).map((option) => ({
+        type: 'option',
+        value: option,
+      })),
     });
   }
 
@@ -243,7 +251,7 @@ export class SearchBarComponent {
     this.searchLoading(true);
     this.currSearchText = term;
     App.setDataType(AppDataType.SearchResults, backFromHistory, searchResults);
-    this.showSearchResultLabel(searchResults.length);
+    this.showSearchResultLabel(searchResults.data.length);
     App.gogoControlComponent.updatePosition();
     this.hideMobileSearchBar();
   }
@@ -251,6 +259,15 @@ export class SearchBarComponent {
   private searchElement(element): void {
     this.clearSearchResult(false);
     App.setState(AppStates.ShowElement, { id: element.id, mapPan: true });
+  }
+
+  private searchInResults<T>(searched: string, results: T[], toString: (result: T) => string): T[] {
+    const removeDiactrics = (str: string) => nfd(str).replace(/[\u0300-\u036f]/g, '');
+
+    return results.filter((result) => {
+      const noDiacriticsResult = removeDiactrics(toString(result)).toLowerCase();
+      return noDiacriticsResult.includes(removeDiactrics(searched).toLowerCase());
+    });
   }
 
   // handle all validation by user (input key enter pressed, icon click...)
@@ -307,7 +324,11 @@ export class SearchBarComponent {
         }
       );
     } else {
-      // TODO search through already received elements.
+      this.searchElements(
+        text,
+        { data: this.searchInResults(text, App.config.data.elements, (element: any) => element.name) },
+        backFromHistory
+      );
     }
   }
 
