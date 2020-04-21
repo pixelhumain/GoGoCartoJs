@@ -66,7 +66,7 @@ export class RouterModule {
         const initialState = new HistoryState();
 
         initialState.dataType = AppDataType.SearchResults;
-        initialState.mode = AppModes.Map;
+        initialState.mode = AppModes.List;
         initialState.state = AppStates.Normal;
         initialState.text = text;
         initialState.filters = this.filtersSerializedParam;

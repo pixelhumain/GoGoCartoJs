@@ -74,7 +74,7 @@ export const EN = {
   files: 'Files',
   'fill.fields.below': 'You must fill in the fields below',
   'find.route': 'Find the route',
-  'found.one.or.several': 'found',
+  'found.one.or.several': '(s) found',
 
   //G
   'general.infos': 'General Informations',

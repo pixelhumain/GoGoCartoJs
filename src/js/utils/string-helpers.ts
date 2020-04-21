@@ -1,3 +1,5 @@
+import { nfd } from 'unorm';
+
 export function slugify(text): string {
   if (!text) return '';
   const from = 'ãàáäâẽèéëêìíïîõòóöôùúüûñç·/_,:;';
@@ -85,3 +87,5 @@ export function snakeToProper(value) {
 export function formatLabel(value) {
   return snakeToProper(camelToProper(value)).replace('  ', ' ');
 }
+
+export const removeDiactrics = (str: string) => nfd(str).replace(/[\u0300-\u036f]/g, '');

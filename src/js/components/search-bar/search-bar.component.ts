@@ -1,6 +1,6 @@
-import { nfd } from 'unorm';
 import { AppDataType, AppModes, AppStates } from '../../app.module';
 import { App } from '../../gogocarto';
+import { removeDiactrics } from '../../utils/string-helpers';
 
 interface CustomJQuery extends JQuery {
   gogoAutocomplete(options: JQueryUI.AutocompleteOptions): JQuery;
@@ -262,8 +262,6 @@ export class SearchBarComponent {
   }
 
   private searchInResults<T>(searched: string, results: T[], toString: (result: T) => string): T[] {
-    const removeDiactrics = (str: string) => nfd(str).replace(/[\u0300-\u036f]/g, '');
-
     return results.filter((result) => {
       const noDiacriticsResult = removeDiactrics(toString(result)).toLowerCase();
       return noDiacriticsResult.includes(removeDiactrics(searched).toLowerCase());
