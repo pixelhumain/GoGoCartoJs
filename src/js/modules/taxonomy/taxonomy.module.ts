@@ -58,14 +58,7 @@ export class TaxonomyModule {
       option.isMainOption = true;
     }
 
-    if (this.rootCategories.length > 1) {
-      for (const rootCategory of this.rootCategories) {
-        this.recursivelyCalculateParentsOptionIds(rootCategory, this.taxonomy.options[0]);
-      }
-      return;
-    }
-
-    this.recursivelyCalculateParentsOptionIds(this.mainCategory);
+    this.recursivelyCalculateParentIds(this.rootCategories);
   }
 
   private recursivelyCreateCategoryAndOptions(categoryJson: any): Category {
@@ -124,29 +117,39 @@ export class TaxonomyModule {
     this.options.push(option);
   }
 
-  // We want every option to know all those parents Option ids
-  // this method calculate those for all options
-  private recursivelyCalculateParentsOptionIds(category: Category, parentOption: Option = null): void {
-    for (const option of category.children) {
-      if (option.isMainOption || parentOption === null) {
-        option.mainOwnerId = 'all';
-      } else if (parentOption.isMainOption || (!parentOption.mainOwnerId && parentOption.id != 'Racine')) {
-        option.mainOwnerId = parentOption.id;
-      } else {
-        option.mainOwnerId = parentOption.mainOwnerId;
-      }
+  // Every option knows all its parent ids (option and category)
+  private recursivelyCalculateParentIds(categories: Category[], parentOption: Option = null): void {
+    for (const category of categories) {
+      for (const option of category.children) {
+        if (option.isMainOption || parentOption === null) {
+          option.mainOwnerId = 'all';
+        } else if (parentOption.isMainOption || (!parentOption.mainOwnerId && parentOption.id != 'Racine')) {
+          option.mainOwnerId = parentOption.id;
+        } else {
+          option.mainOwnerId = parentOption.mainOwnerId;
+        }
 
-      if (parentOption) {
-        (<Option>option).parentOptionIds = parentOption.parentOptionIds.concat([parentOption.id]);
-        (<Option>option).parentCategoryIds = parentOption.parentCategoryIds.concat([category.id]);
-      } else {
-        (<Option>option).parentCategoryIds.push(category.id);
-      }
+        if (parentOption) {
+          (<Option>option).parentOptionIds = parentOption.parentOptionIds.concat([parentOption.id]);
+          (<Option>option).parentCategoryIds = parentOption.parentCategoryIds.concat([
+            { id: category.id, mandatorySiblingIds: this.getMandatorySiblingCategoryIds(category, categories) },
+          ]);
+        } else {
+          (<Option>option).parentCategoryIds.push({
+            id: category.id,
+            mandatorySiblingIds: this.getMandatorySiblingCategoryIds(category, categories),
+          });
+        }
 
-      for (const subcategory of option.children) {
-        this.recursivelyCalculateParentsOptionIds(<Category>subcategory, <Option>option);
+        this.recursivelyCalculateParentIds(<Category[]>option.children, <Option>option);
       }
     }
+  }
+
+  private getMandatorySiblingCategoryIds(category: Category, categories: Category[]): any[] {
+    return categories
+      .filter((siblingCategory) => siblingCategory.id !== category.id && siblingCategory.isMandatory)
+      .map((category) => category.id);
   }
 
   getMainOptions(): Option[] {

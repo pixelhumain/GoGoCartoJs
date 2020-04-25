@@ -247,14 +247,21 @@ export class SearchBarComponent {
 
   private searchOption(option: Option): void {
     this.searchLoading(true);
-    App.taxonomyModule.categories.forEach((category) => category.toggle(false));
-    option.parentCategoryIds.forEach((parentCategoryIds) =>
-      App.taxonomyModule.getCategoryById(parentCategoryIds).toggleChildrenDetail(true)
-    );
+    // Uncheck all categories
+    App.taxonomyModule.categories.forEach((category) => category.toggle(false, false));
+    // Expand the related categories and check the mandatory sibling categories
+    option.parentCategoryIds.forEach((parentCategoryId) => {
+      App.taxonomyModule.getCategoryById(parentCategoryId.id).toggleChildrenDetail(true);
+      parentCategoryId.mandatorySiblingIds.forEach((categoryId) =>
+        App.taxonomyModule.getCategoryById(categoryId).toggle(true, false)
+      );
+    });
+    // Expand the related options
     option.parentOptionIds.forEach((parentOptionId) =>
-      App.filtersComponent.setOption(parentOptionId, false, true, false)
+      App.filtersComponent.setOption(parentOptionId, false, false, true)
     );
-    App.filtersComponent.setOption(option.id, false, null, true);
+    // Check the option
+    App.filtersComponent.setOption(option.id, false, true, null, true);
   }
 
   private searchElements(term: string, searchResults, backFromHistory = false): void {

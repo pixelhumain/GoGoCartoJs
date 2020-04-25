@@ -8,6 +8,11 @@ import { capitalize, slugify } from '../../utils/string-helpers';
 import * as tinycolor2 from 'tinycolor2';
 const tinycolor = (<any>tinycolor2).default;
 
+interface parentCategoryId {
+  id: any;
+  mandatorySiblingIds: any[];
+}
+
 export class Option extends CategoryOptionTreeNode {
   color: string;
   softColor: string;
@@ -23,7 +28,7 @@ export class Option extends CategoryOptionTreeNode {
   intId: number; // And Id as number, used for creating the option url
 
   parentOptionIds: (string | number)[] = [];
-  parentCategoryIds: number[] = [];
+  parentCategoryIds: parentCategoryId[] = [];
 
   constructor($optionJson: any) {
     super(CategoryOptionTreeNodeType.Option, '#option-', '#option-checkbox-', '.subcategories-wrapper');

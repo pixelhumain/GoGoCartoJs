@@ -172,6 +172,7 @@ export class FiltersComponent {
   public setOption(
     optionId,
     uncheckable = false,
+    humanAction: boolean = true,
     forceExpand: null | boolean = null,
     forceChecked: null | boolean = null
   ): void {
@@ -187,12 +188,12 @@ export class FiltersComponent {
     if (option.isCollapsible()) {
       option.toggleChildrenDetail(forceExpand);
       if (null !== forceChecked) {
-        option.toggle(forceChecked);
+        option.toggle(forceChecked, humanAction);
       }
       return;
     }
 
-    option.toggle(forceChecked);
+    option.toggle(forceChecked, humanAction);
   }
 
   public setMainOption(optionId): void {

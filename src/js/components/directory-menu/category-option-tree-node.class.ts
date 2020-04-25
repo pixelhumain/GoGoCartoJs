@@ -103,7 +103,7 @@ export class CategoryOptionTreeNode {
     this.isPristine = false;
   }
 
-  toggle(value: boolean = null, humanAction = true): void {
+  toggle(value: boolean = null, humanAction: boolean = true): void {
     let check = !this.isChecked;
     if (value !== null) {
       check = value;
