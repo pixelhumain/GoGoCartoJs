@@ -1,12 +1,9 @@
-import { AppModule, AppStates, AppModes } from '../../app.module';
 import { Option } from './option.class';
 import {
   CategoryOptionTreeNode,
   CategoryOptionTreeNodeType,
 } from '../../components/directory-menu/category-option-tree-node.class';
 import { capitalize } from '../../utils/string-helpers';
-import { App } from '../../gogocarto';
-declare let $: any;
 
 export class Category extends CategoryOptionTreeNode {
   enableDescription: boolean;

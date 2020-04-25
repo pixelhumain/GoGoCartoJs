@@ -1,6 +1,7 @@
 import { AppDataType, AppModes, AppStates } from '../../app.module';
 import { App } from '../../gogocarto';
 import { removeDiactrics } from '../../utils/string-helpers';
+import { Option } from '../../classes/classes';
 
 interface CustomJQuery extends JQuery {
   gogoAutocomplete(options: JQueryUI.AutocompleteOptions): JQuery;
@@ -219,10 +220,12 @@ export class SearchBarComponent {
     }
 
     resolveResults({
-      options: this.searchInResults(term, App.taxonomyModule.options, (option) => option.name).map((option) => ({
-        type: 'option',
-        value: option,
-      })),
+      options: this.searchInResults(term, App.taxonomyModule.options, (option) => option.name)
+        .filter((option) => option.displayInMenu)
+        .map((option) => ({
+          type: 'option',
+          value: option,
+        })),
     });
   }
 
@@ -242,9 +245,16 @@ export class SearchBarComponent {
     );
   }
 
-  private searchOption(option): void {
+  private searchOption(option: Option): void {
     this.searchLoading(true);
-    App.filtersComponent.setOption(option.id);
+    App.taxonomyModule.categories.forEach((category) => category.toggle(false));
+    option.parentCategoryIds.forEach((parentCategoryIds) =>
+      App.taxonomyModule.getCategoryById(parentCategoryIds).toggleChildrenDetail(true)
+    );
+    option.parentOptionIds.forEach((parentOptionId) =>
+      App.filtersComponent.setOption(parentOptionId, false, true, false)
+    );
+    App.filtersComponent.setOption(option.id, false, null, true);
   }
 
   private searchElements(term: string, searchResults, backFromHistory = false): void {

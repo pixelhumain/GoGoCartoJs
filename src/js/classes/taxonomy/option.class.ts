@@ -1,13 +1,10 @@
-import { AppModule, AppStates, AppModes } from '../../app.module';
 import { Category } from './category.class';
 import {
   CategoryOptionTreeNode,
   CategoryOptionTreeNodeType,
 } from '../../components/directory-menu/category-option-tree-node.class';
 
-import { App } from '../../gogocarto';
 import { capitalize, slugify } from '../../utils/string-helpers';
-declare let $: any;
 import * as tinycolor2 from 'tinycolor2';
 const tinycolor = (<any>tinycolor2).default;
 
@@ -25,7 +22,8 @@ export class Option extends CategoryOptionTreeNode {
 
   intId: number; // And Id as number, used for creating the option url
 
-  parentOptionIds: number[] = [];
+  parentOptionIds: (string | number)[] = [];
+  parentCategoryIds: number[] = [];
 
   constructor($optionJson: any) {
     super(CategoryOptionTreeNodeType.Option, '#option-', '#option-checkbox-', '.subcategories-wrapper');
@@ -53,7 +51,7 @@ export class Option extends CategoryOptionTreeNode {
     this.useColorForMarker = 'useColorForMarker' in $optionJson ? $optionJson.useColorForMarker : !!this.color;
   }
 
-  addCategory($category: Category) {
+  addCategory($category: Category): void {
     this.children.push($category);
   }
 

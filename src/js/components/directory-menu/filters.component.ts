@@ -169,19 +169,39 @@ export class FiltersComponent {
       });
   }
 
-  public setOption(optionId, uncheckable = false): void {
+  public setOption(
+    optionId,
+    uncheckable = false,
+    forceExpand: null | boolean = null,
+    forceChecked: null | boolean = null
+  ): void {
     const option = App.taxonomyModule.getOptionById(optionId);
 
     if (option.isMainOption && App.config.menu.showOnePanePerMainOption) {
       App.filtersComponent.setMainOption(option.id);
-    } else if (uncheckable) return;
-    else if (option.isCollapsible()) option.toggleChildrenDetail();
-    else option.toggle();
+      return;
+    }
+    if (uncheckable) {
+      return;
+    }
+    if (option.isCollapsible()) {
+      option.toggleChildrenDetail(forceExpand);
+      if (null !== forceChecked) {
+        option.toggle(forceChecked);
+      }
+      return;
+    }
+
+    option.toggle(forceChecked);
   }
 
   public setMainOption(optionId): void {
-    if (this.currentActiveMainOptionId == optionId) return;
-    if (this.currentActiveMainOptionId != null) App.elementsModule.clearCurrentsElement();
+    if (this.currentActiveMainOptionId == optionId) {
+      return;
+    }
+    if (this.currentActiveMainOptionId != null) {
+      App.elementsModule.clearCurrentsElement();
+    }
 
     const oldId = this.currentActiveMainOptionId;
     this.currentActiveMainOptionId = optionId;
@@ -197,7 +217,9 @@ export class FiltersComponent {
     App.infoBarComponent.hide();
 
     //console.log("setMainOptionId " + optionId + " / oldOption : " + oldId);
-    if (oldId != null) App.historyModule.updateCurrState();
+    if (oldId != null) {
+      App.historyModule.updateCurrState();
+    }
 
     setTimeout(() => {
       App.elementListComponent.reInitializeElementToDisplayLength();

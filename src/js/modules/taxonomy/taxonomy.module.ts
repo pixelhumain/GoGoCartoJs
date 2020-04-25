@@ -1,9 +1,7 @@
-import { AppModule, AppStates, AppModes } from '../../app.module';
 import { Option, Category } from '../../classes/classes';
 export { Option, Category } from '../../classes/classes';
 import { slugify } from '../../utils/string-helpers';
 import { App } from '../../gogocarto';
-declare let $: any;
 
 export class TaxonomyModule {
   categories: Category[] = [];
@@ -22,15 +20,21 @@ export class TaxonomyModule {
     this.categories = [];
   }
 
-  createTaxonomyFromJson(taxonomyJson) {
+  createTaxonomyFromJson(taxonomyJson): void {
     const isSkosTaxonomy = taxonomyJson['@graph'];
-    if (isSkosTaxonomy) taxonomyJson = App.taxonomySkosModule.convertSkosIntoGoGoTaxonomy(taxonomyJson);
+    if (isSkosTaxonomy) {
+      taxonomyJson = App.taxonomySkosModule.convertSkosIntoGoGoTaxonomy(taxonomyJson);
+    }
 
-    if (Array.isArray(taxonomyJson) && taxonomyJson.length == 1) taxonomyJson = taxonomyJson[0];
+    if (Array.isArray(taxonomyJson) && taxonomyJson.length == 1) {
+      taxonomyJson = taxonomyJson[0];
+    }
 
     // If multiple root categories, we encapsulate them into a single fake category & root option
     if (Array.isArray(taxonomyJson) && taxonomyJson.length > 1) {
-      for (const json of taxonomyJson) json.isRootCategory = true;
+      for (const json of taxonomyJson) {
+        json.isRootCategory = true;
+      }
       taxonomyJson = {
         name: 'RootFakeCategory',
         options: [
@@ -43,17 +47,25 @@ export class TaxonomyModule {
           },
         ],
       };
-    } else if (!isSkosTaxonomy) taxonomyJson.isRootCategory = true;
+    } else if (!isSkosTaxonomy) {
+      taxonomyJson.isRootCategory = true;
+    }
 
     this.taxonomy = this.recursivelyCreateCategoryAndOptions(taxonomyJson);
     this.rootCategories =
       this.taxonomy.name == 'RootFakeCategory' ? this.taxonomy.options[0].subcategories : [this.taxonomy];
-    for (const option of this.mainCategory.children) option.isMainOption = true;
+    for (const option of this.mainCategory.children) {
+      option.isMainOption = true;
+    }
 
-    if (this.rootCategories.length > 1)
-      for (const rootCategory of this.rootCategories)
+    if (this.rootCategories.length > 1) {
+      for (const rootCategory of this.rootCategories) {
         this.recursivelyCalculateParentsOptionIds(rootCategory, this.taxonomy.options[0]);
-    else this.recursivelyCalculateParentsOptionIds(this.mainCategory);
+      }
+      return;
+    }
+
+    this.recursivelyCalculateParentsOptionIds(this.mainCategory);
   }
 
   private recursivelyCreateCategoryAndOptions(categoryJson: any): Category {
@@ -61,13 +73,17 @@ export class TaxonomyModule {
   }
 
   private recursivelyCreateCategory(categoryJson: any): Category {
-    if (!categoryJson.id) categoryJson.id = this.categoriesCreatedCount++;
+    if (!categoryJson.id) {
+      categoryJson.id = this.categoriesCreatedCount++;
+    }
 
     const category = new Category(categoryJson);
 
-    if (categoryJson.options)
-      for (const optionJson of categoryJson.options) this.recursivelyCreateOption(optionJson, category);
-    else if (categoryJson.subcategories)
+    if (categoryJson.options) {
+      for (const optionJson of categoryJson.options) {
+        this.recursivelyCreateOption(optionJson, category);
+      }
+    } else if (categoryJson.subcategories) {
       this.recursivelyCreateOption(
         {
           subcategories: categoryJson.subcategories,
@@ -77,24 +93,25 @@ export class TaxonomyModule {
         },
         category
       );
+    }
 
     this.categories.push(category);
 
     return category;
   }
 
-  private recursivelyCreateOption(optionJson: any, parentCatgeory: Category) {
+  private recursivelyCreateOption(optionJson: any, parentCategory: Category): void {
     optionJson.intId = this.optionsCreatedCount++;
     const option = new Option(optionJson);
-    option.ownerId = parentCatgeory.id;
+    option.ownerId = parentCategory.id;
 
-    if (optionJson.subcategories)
+    if (optionJson.subcategories) {
       for (const subcategoryJson of optionJson.subcategories) {
         const subcategory = this.recursivelyCreateCategoryAndOptions(subcategoryJson);
         subcategory.ownerId = option.id;
         option.addCategory(subcategory);
       }
-    else if (optionJson.suboptions) {
+    } else if (optionJson.suboptions) {
       const subcategory = this.recursivelyCreateCategoryAndOptions({
         options: optionJson.suboptions,
         showExpanded: optionJson.showExpanded,
@@ -103,20 +120,28 @@ export class TaxonomyModule {
       option.addCategory(subcategory);
     }
 
-    parentCatgeory.addOption(option);
+    parentCategory.addOption(option);
     this.options.push(option);
   }
 
   // We want every option to know all those parents Option ids
   // this method calculate those for all options
-  private recursivelyCalculateParentsOptionIds(category: Category, parentOption: Option = null) {
+  private recursivelyCalculateParentsOptionIds(category: Category, parentOption: Option = null): void {
     for (const option of category.children) {
-      if (option.isMainOption || parentOption === null) option.mainOwnerId = 'all';
-      else if (parentOption.isMainOption || (!parentOption.mainOwnerId && parentOption.id != 'Racine'))
+      if (option.isMainOption || parentOption === null) {
+        option.mainOwnerId = 'all';
+      } else if (parentOption.isMainOption || (!parentOption.mainOwnerId && parentOption.id != 'Racine')) {
         option.mainOwnerId = parentOption.id;
-      else option.mainOwnerId = parentOption.mainOwnerId;
+      } else {
+        option.mainOwnerId = parentOption.mainOwnerId;
+      }
 
-      if (parentOption) (<Option>option).parentOptionIds = parentOption.parentOptionIds.concat([parentOption.id]);
+      if (parentOption) {
+        (<Option>option).parentOptionIds = parentOption.parentOptionIds.concat([parentOption.id]);
+        (<Option>option).parentCategoryIds = parentOption.parentCategoryIds.concat([category.id]);
+      } else {
+        (<Option>option).parentCategoryIds.push(category.id);
+      }
 
       for (const subcategory of option.children) {
         this.recursivelyCalculateParentsOptionIds(<Category>subcategory, <Option>option);

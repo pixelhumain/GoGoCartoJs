@@ -103,10 +103,11 @@ export class CategoryOptionTreeNode {
     this.isPristine = false;
   }
 
-  toggle(value: boolean = null, humanAction = true) {
-    let check;
-    if (value != null) check = value;
-    else check = !this.isChecked;
+  toggle(value: boolean = null, humanAction = true): void {
+    let check = !this.isChecked;
+    if (value !== null) {
+      check = value;
+    }
 
     if (this.isOption() && this.isPristine && humanAction) {
       this.recursivelyGetPristine(this).forEach((node) => {
@@ -120,11 +121,15 @@ export class CategoryOptionTreeNode {
     this.setDisabled(!check);
 
     if (!this.isMainOption || !App.config.menu.showOnePanePerMainOption) {
-      for (const child of this.children) child.toggle(check, false);
+      for (const child of this.children) {
+        child.toggle(check, false);
+      }
     }
 
     if (humanAction) {
-      if (this.getOwner()) this.getOwner().updateState();
+      if (this.getOwner()) {
+        this.getOwner().updateState();
+      }
 
       // delay the update so it's not freezing the UI
       setTimeout(() => {
@@ -187,10 +192,12 @@ export class CategoryOptionTreeNode {
     return this.getDom().hasClass('unexpandable');
   }
 
-  toggleChildrenDetail() {
-    if (this.isUnexpandable()) return;
+  toggleChildrenDetail(forceExpand: null | boolean = null): void {
+    if (this.isUnexpandable()) {
+      return;
+    }
 
-    if (this.isExpanded()) {
+    if (false === forceExpand || (null === forceExpand && this.isExpanded())) {
       this.getDomChildren()
         .stop(true, false)
         .slideUp({
@@ -202,19 +209,20 @@ export class CategoryOptionTreeNode {
           },
         });
       this.getDom().removeClass('expanded');
-    } else {
-      this.getDomChildren()
-        .stop(true, false)
-        .slideDown({
-          duration: 350,
-          easing: 'easeOutQuart',
-          queue: false,
-          complete: function () {
-            $(this).css('height', '');
-          },
-        });
-      this.getDom().addClass('expanded');
+      return;
     }
+
+    this.getDomChildren()
+      .stop(true, false)
+      .slideDown({
+        duration: 350,
+        easing: 'easeOutQuart',
+        queue: false,
+        complete: function () {
+          $(this).css('height', '');
+        },
+      });
+    this.getDom().addClass('expanded');
   }
 
   getSiblingsPristine(): CategoryOptionTreeNode[] {
