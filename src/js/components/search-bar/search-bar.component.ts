@@ -100,7 +100,7 @@ export class SearchBarComponent {
     this.searchInput().click(() => this.searchInput().gogoAutocomplete('search'));
     $('.search-bar-icon').click(() => this.handleSearchAction());
 
-    $('#btn-close-search-result').click(() => this.clearElementSearchResult());
+    $('#btn-close-search-result').click(() => this.resetElementsSearchResult());
 
     $('.search-geolocalize').tooltip();
     $('.search-geolocalize').click(() => this.geolocateUser());
@@ -233,8 +233,8 @@ export class SearchBarComponent {
     App.geocoder.geocodeAddress(
       address,
       () => {
-        App.setMode(AppModes.Map);
-        this.clearSearchResult(false);
+        this.resetOptionSearchResult();
+        this.resetElementsSearchResult(false);
         this.displaySearchResultMarkerOnMap(App.geocoder.getLocation());
         App.mapComponent.fitBounds(App.geocoder.getBounds(), true);
       },
@@ -247,6 +247,7 @@ export class SearchBarComponent {
 
   private searchOption(option: Option): void {
     this.searchLoading(true);
+    this.resetElementsSearchResult(false);
     // Uncheck all categories
     App.taxonomyModule.categories.forEach((category) => category.toggle(false, false));
     // Expand the related categories and check the mandatory sibling categories
@@ -266,6 +267,7 @@ export class SearchBarComponent {
 
   private searchElements(term: string, searchResults, backFromHistory = false): void {
     this.searchLoading(true);
+    this.resetOptionSearchResult();
     this.currSearchText = term;
     App.setDataType(AppDataType.SearchResults, backFromHistory, searchResults);
     this.showSearchResultLabel(searchResults.data.length);
@@ -274,7 +276,8 @@ export class SearchBarComponent {
   }
 
   private searchElement(element): void {
-    this.clearSearchResult(false);
+    this.resetOptionSearchResult();
+    this.resetSearchResult(false);
     App.setState(AppStates.ShowElement, { id: element.id, mapPan: true });
   }
 
@@ -285,7 +288,7 @@ export class SearchBarComponent {
     });
   }
 
-  // handle all validation by user (input key enter pressed, icon click...)
+  // Handle forced search action by user (input key enter pressed, icon click)
   private handleSearchAction(): void {
     const searchTerm = this.searchInput().val();
 
@@ -302,15 +305,16 @@ export class SearchBarComponent {
     });
   }
 
-  handleGeocodeResult(): void {
+  public handleGeocodeResult(): void {
     this.setValue(App.geocoder.getLocationAddress());
   }
 
-  geolocateUser(): void {
+  public geolocateUser(): void {
     this.beforeSearch();
     App.geocoder.geolocateUser(
       () => {
-        this.clearSearchResult();
+        this.resetOptionSearchResult();
+        this.resetElementsSearchResult();
         this.setValue(App.config.translate('geolocalized'));
         this.displaySearchResultMarkerOnMap(App.geocoder.getLocation());
       },
@@ -347,20 +351,20 @@ export class SearchBarComponent {
     }
   }
 
-  showMobileSearchBar(): void {
+  public showMobileSearchBar(): void {
     $('#search-overlay-mobile').fadeIn(250);
     $('.search-bar-with-options-container').show();
     $('.search-bar').focus();
     App.gogoControlComponent.hide(0);
   }
 
-  hideMobileSearchBar(): void {
+  public hideMobileSearchBar(): void {
     $('#search-overlay-mobile').fadeOut(150);
     $('.search-bar-with-options-container.mobile').hide();
     App.gogoControlComponent.show(0);
   }
 
-  update(): void {
+  public update(): void {
     if (App.component.width() <= 600) {
       const mobileSearchBar = $('.search-bar-with-options-container');
       if (mobileSearchBar.parent('#search-overlay-mobile').length != 1) {
@@ -385,25 +389,30 @@ export class SearchBarComponent {
     $('.search-bar-icon').addClass('loading');
   }
 
-  showSearchResultLabel($number: number): void {
+  private showSearchResultLabel($number: number): void {
     $('.search-result-number').text($number);
     $('.search-result-value').text(this.currSearchText);
     $('.search-results').show();
     $('#element-info-bar').addClass('with-search-result-header');
   }
 
-  hideSearchResult(): void {
+  private hideSearchResult(): void {
     $('.search-results').hide();
     $('#element-info-bar').removeClass('with-search-result-header');
     App.gogoControlComponent.updatePosition();
   }
 
-  clearElementSearchResult(): void {
-    this.clearSearchResult();
+  private resetOptionSearchResult(): void {
+    App.taxonomyModule.categories.forEach((category) => category.toggle(true, false));
+    App.filtersComponent.setMainOption('all');
+  }
+
+  private resetElementsSearchResult(resetValue: boolean = true): void {
+    this.resetSearchResult(resetValue);
     App.setMode(AppModes.Map);
   }
 
-  clearSearchResult(resetValue = true): void {
+  private resetSearchResult(resetValue: boolean = true): void {
     App.setDataType(AppDataType.All);
     this.hideSearchResult();
     this.searchLoading(true);
@@ -421,11 +430,11 @@ export class SearchBarComponent {
     }
   }
 
-  setValue($value: string): void {
+  public setValue($value: string): void {
     this.searchInput().val($value);
   }
 
-  getCurrSearchText(): string {
+  public getCurrSearchText(): string {
     return this.currSearchText;
   }
 
