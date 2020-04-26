@@ -234,7 +234,8 @@ export class SearchBarComponent {
       address,
       () => {
         this.searchLoading(true);
-        this.resetAllSearchResults(false);
+        this.resetOptionSearchResult();
+        this.resetElementsSearchResult(false);
 
         this.displaySearchResultMarkerOnMap(App.geocoder.getLocation());
         App.mapComponent.fitBounds(App.geocoder.getBounds(), true);
@@ -248,13 +249,18 @@ export class SearchBarComponent {
 
   private searchOption(option: Option): void {
     this.searchLoading(true);
-    this.resetAllSearchResults(false);
+    this.resetOptionSearchResult(false);
+    this.resetElementsSearchResult(false);
 
     if (App.config.menu.showOnePanePerMainOption) {
       // Uncheck only the pane categories
-      option.parentCategoryIds.forEach((parentCategoryId) =>
-        App.taxonomyModule.getCategoryById(parentCategoryId.id).toggle(false, false)
-      );
+      option.parentCategoryIds.forEach((parentCategoryId) => {
+        const category = App.taxonomyModule.getCategoryById(parentCategoryId.id);
+        if (category.isRootCategory) {
+          return;
+        }
+        category.toggle(false, false);
+      });
     } else {
       // Uncheck all categories
       App.taxonomyModule.categories.forEach((category) => category.toggle(false, false));
@@ -276,7 +282,8 @@ export class SearchBarComponent {
 
   private searchElements(term: string, searchResults, backFromHistory = false): void {
     this.searchLoading(true);
-    this.resetAllSearchResults(false);
+    this.resetOptionSearchResult();
+    this.resetElementsSearchResult(false);
 
     this.currSearchText = term;
     App.setDataType(AppDataType.SearchResults, backFromHistory, searchResults);
@@ -287,8 +294,8 @@ export class SearchBarComponent {
 
   private searchElement(element): void {
     this.searchLoading(true);
-    // No map mode to prevent a race condition with the show element
-    this.resetAllSearchResults(false, true);
+    this.resetOptionSearchResult();
+    this.resetSearchResult(false);
 
     App.setState(AppStates.ShowElement, { id: element.id, mapPan: true });
   }
@@ -414,18 +421,11 @@ export class SearchBarComponent {
     App.gogoControlComponent.updatePosition();
   }
 
-  private resetAllSearchResults(resetSearchValue = true, noMapMode = false): void {
-    this.resetOptionSearchResult();
-    if (noMapMode) {
-      this.resetSearchResult(resetSearchValue);
-      return;
-    }
-    this.resetElementsSearchResult(resetSearchValue);
-  }
-
-  private resetOptionSearchResult(): void {
+  private resetOptionSearchResult(setAllOption = true): void {
     App.taxonomyModule.categories.forEach((category) => category.toggle(true, false));
-    App.filtersComponent.setMainOption('all');
+    if (setAllOption) {
+      App.filtersComponent.setMainOption('all');
+    }
   }
 
   private resetElementsSearchResult(resetValue = true): void {
