@@ -233,8 +233,9 @@ export class SearchBarComponent {
     App.geocoder.geocodeAddress(
       address,
       () => {
-        this.resetOptionSearchResult();
-        this.resetElementsSearchResult(false);
+        this.searchLoading(true);
+        this.resetAllSearchResults(false);
+
         this.displaySearchResultMarkerOnMap(App.geocoder.getLocation());
         App.mapComponent.fitBounds(App.geocoder.getBounds(), true);
       },
@@ -247,7 +248,8 @@ export class SearchBarComponent {
 
   private searchOption(option: Option): void {
     this.searchLoading(true);
-    this.resetElementsSearchResult(false);
+    this.resetAllSearchResults(false);
+
     if (App.config.menu.showOnePanePerMainOption) {
       // Uncheck only the pane categories
       option.parentCategoryIds.forEach((parentCategoryId) =>
@@ -274,7 +276,8 @@ export class SearchBarComponent {
 
   private searchElements(term: string, searchResults, backFromHistory = false): void {
     this.searchLoading(true);
-    this.resetOptionSearchResult();
+    this.resetAllSearchResults(false);
+
     this.currSearchText = term;
     App.setDataType(AppDataType.SearchResults, backFromHistory, searchResults);
     this.showSearchResultLabel(searchResults.data.length);
@@ -283,8 +286,10 @@ export class SearchBarComponent {
   }
 
   private searchElement(element): void {
-    this.resetOptionSearchResult();
-    this.resetSearchResult(false);
+    this.searchLoading(true);
+    // No map mode to prevent a race condition with the show element
+    this.resetAllSearchResults(false, true);
+
     App.setState(AppStates.ShowElement, { id: element.id, mapPan: true });
   }
 
@@ -409,6 +414,15 @@ export class SearchBarComponent {
     App.gogoControlComponent.updatePosition();
   }
 
+  private resetAllSearchResults(resetSearchValue = true, noMapMode = false): void {
+    this.resetOptionSearchResult();
+    if (noMapMode) {
+      this.resetSearchResult(resetSearchValue);
+      return;
+    }
+    this.resetElementsSearchResult(resetSearchValue);
+  }
+
   private resetOptionSearchResult(): void {
     App.taxonomyModule.categories.forEach((category) => category.toggle(true, false));
     App.filtersComponent.setMainOption('all');
@@ -422,7 +436,6 @@ export class SearchBarComponent {
   private resetSearchResult(resetValue = true): void {
     App.setDataType(AppDataType.All);
     this.hideSearchResult();
-    this.searchLoading(true);
     this.clearLocationMarker();
     this.currSearchText = '';
     if (resetValue) {
