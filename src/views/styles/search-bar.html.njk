@@ -1,6 +1,13 @@
 <style>
   .gogo-load-css .search-bar { background-color: {{ contentBgd }} !important; }
-  .gogo-load-css .search-bar-autocomplete-results-container { background-color: {{ contentBgd }} !important; }
+
+  .gogo-load-css .search-bar-autocomplete-result-item .element-name {
+    color: {{ textSoft }};
+  }
+  .gogo-load-css .search-bar-autocomplete-result-item.option .icon {
+    opacity: .7;
+    color: {{ primary }};
+  }
   .gogo-load-css .search-bar::selection {
     background: {{ searchBar }};
     color: white;

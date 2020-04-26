@@ -36,7 +36,7 @@ export class SearchBarComponent {
         // Intentionally left empty
       },
       _renderItem: (ul, item) => {
-        const li = $('<li>').addClass('search-bar-autocomplete-result-item');
+        const li = $('<li>').addClass(`search-bar-autocomplete-result-item ${item.type}`);
         const wrapper = $('<div>').addClass('search-bar-autocomplete-result-item-wrapper');
         if (item.icon) {
           wrapper.append(`<div class="icon ${item.icon}"></div>`);
@@ -129,17 +129,17 @@ export class SearchBarComponent {
         ...optionsResults.slice(0, 10).map(({ type, value }) => ({
           type,
           value,
-          label: `${App.config.translate('category')} "${value.name}"`,
-          icon: value.icon,
+          label: `<span class="category-label">${App.config.translate('category')}</span>
+                  <span class="category-name">${value.name}</span>`,
+          icon: value.icon || 'gogo-icon-stamp-2',
         })),
       ];
     }
 
     if (elementsResults.length > 0) {
       items.push({
-        label: `${App.config.translate('elements.containing')} "${term}" (${
-          elementsResults.length
-        } ${App.config.translate('results').toLowerCase()})`,
+        label: `${App.config.translate('elements.containing')} <span class="search-term">${term}</span> (${
+          elementsResults.length})`,
         type: 'search_elements',
         value: {
           term,
@@ -155,7 +155,7 @@ export class SearchBarComponent {
           const elementItem: AutocompleteItem = {
             type,
             value,
-            label: value.name,
+            label: `<span class="element-name">${value.name}</span>`,
           };
           if (value.address) {
             let subLabel = '';

@@ -77,27 +77,28 @@
 
     .search-bar-autocomplete-results-container
     {
-      font-size: 16px;
-      font-weight: bold;
-      @include border-radius(5px);
+      position: absolute;
+      z-index: 5;
+      padding: .5rem 0;
+      left: 0 !important;
+      top: auto !important;
+      margin-top: .5rem;
+      width: 400px;
+      max-width: 100vw;
+      box-shadow: 0 0 0 1px rgba(99,114,130,.16), 0 8px 16px rgba(27,39,51,.08);
+      border-radius: 0 4px 4px 4px;
       max-height: 80vh;
       overflow: auto;
 
-      @media (min-width: 850px) {
-        text-transform: uppercase;
-        font-size: .8rem;
-      }
-
       .search-bar-autocomplete-result-item
       {
-        min-height: 40px;
         cursor: pointer;
 
         .search-bar-autocomplete-result-item-wrapper
         {
-          padding: .5rem;
+          padding: .7rem 1rem;
           @include flexbox;
-          @include flex-wrap(wrap);
+          @include flex-wrap(nowrap);
           @include align(center);
           text-align: left;
 
@@ -108,20 +109,69 @@
 
           &.nested
           {
-            padding-left: 2rem;
+            padding-left: 1rem;
           }
 
           .label
           {
-            @include flex(1);
+            @include flex(1 auto);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
           .subLabel
           {
-            @include flex(0 1 100%);
             text-align: right;
-            padding-top: .3rem;
-            font-weight: normal;
+            opacity: .8;
+            font-size: .85rem;
+            width: 7.5rem;
+            flex-shrink: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
           }
+          .icon {
+            padding: 0;
+            margin-right: 0 !important;
+            font-size: 1.1rem;
+            width: 2rem;
+            flex-shrink: 0;
+          }
+          .category-label {
+            opacity: .9;
+            font-size: .9rem;
+          }
+          .category-name {
+            font-style: italic;
+            font-size: .9rem;
+            font-weight: bold;
+            margin-left: .3rem;
+          }
+          .element-name {
+            font-size: .9rem;
+            font-weight: bold;
+            font-style: italic;
+          }
+          .search-term {
+            margin: 0 3px;
+            &:after { content: '"'; }
+            &:before { content: '"'; }
+          }
+        }
+        &.search_elements, &.search_geocoded + .option {
+          border-top: 1px solid #eee;
+          padding-top: .3rem;
+          margin-top: .3rem;
+        }
+        &.search_elements, &.search_geocoded {
+          .label {
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: .8rem;
+          }
+        }
+        &.search_elements {
+          padding-top: .6rem;
         }
       }
     }
