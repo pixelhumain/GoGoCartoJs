@@ -169,6 +169,10 @@ export class FiltersComponent {
       });
   }
 
+  /**
+   * @param {null|boolean} forceExpand If not null, the option will never be toggled.
+   * @param {null|boolean} forceChecked If not null, the option will be checked if it's collapsible.
+   */
   public setOption(
     optionId,
     uncheckable = false,
@@ -187,13 +191,14 @@ export class FiltersComponent {
     }
     if (option.isCollapsible()) {
       option.toggleChildrenDetail(forceExpand);
-      if (null !== forceChecked) {
-        option.toggle(forceChecked, humanAction);
+      if (null === forceChecked) {
+        return;
       }
-      return;
     }
 
-    option.toggle(forceChecked, humanAction);
+    if (null === forceExpand || null !== forceChecked) {
+      option.toggle(forceChecked, humanAction);
+    }
   }
 
   public setMainOption(optionId): void {

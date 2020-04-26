@@ -52,13 +52,13 @@ export class TaxonomyModule {
     }
 
     this.taxonomy = this.recursivelyCreateCategoryAndOptions(taxonomyJson);
-    this.rootCategories =
-      this.taxonomy.name == 'RootFakeCategory' ? this.taxonomy.options[0].subcategories : [this.taxonomy];
+    const parentOption = this.taxonomy.name == 'RootFakeCategory' ? this.taxonomy.options[0] : null;
+    this.rootCategories = parentOption ? parentOption.subcategories : [this.taxonomy];
     for (const option of this.mainCategory.children) {
       option.isMainOption = true;
     }
 
-    this.recursivelyCalculateParentIds(this.rootCategories);
+    this.recursivelyCalculateParentIds(this.rootCategories, parentOption);
   }
 
   private recursivelyCreateCategoryAndOptions(categoryJson: any): Category {

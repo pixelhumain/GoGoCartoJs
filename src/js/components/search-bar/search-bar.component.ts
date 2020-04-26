@@ -261,7 +261,7 @@ export class SearchBarComponent {
       App.filtersComponent.setOption(parentOptionId, false, false, true)
     );
     // Check the option
-    App.filtersComponent.setOption(option.id, false, true, null, true);
+    App.filtersComponent.setOption(option.id, false, true, false, true);
   }
 
   private searchElements(term: string, searchResults, backFromHistory = false): void {
