@@ -248,8 +248,15 @@ export class SearchBarComponent {
   private searchOption(option: Option): void {
     this.searchLoading(true);
     this.resetElementsSearchResult(false);
-    // Uncheck all categories
-    App.taxonomyModule.categories.forEach((category) => category.toggle(false, false));
+    if (App.config.menu.showOnePanePerMainOption) {
+      // Uncheck only the pane categories
+      option.parentCategoryIds.forEach((parentCategoryId) =>
+        App.taxonomyModule.getCategoryById(parentCategoryId.id).toggle(false, false)
+      );
+    } else {
+      // Uncheck all categories
+      App.taxonomyModule.categories.forEach((category) => category.toggle(false, false));
+    }
     // Expand the related categories and check the mandatory sibling categories
     option.parentCategoryIds.forEach((parentCategoryId) => {
       App.taxonomyModule.getCategoryById(parentCategoryId.id).toggleChildrenDetail(true);
@@ -407,12 +414,12 @@ export class SearchBarComponent {
     App.filtersComponent.setMainOption('all');
   }
 
-  private resetElementsSearchResult(resetValue: boolean = true): void {
+  private resetElementsSearchResult(resetValue = true): void {
     this.resetSearchResult(resetValue);
     App.setMode(AppModes.Map);
   }
 
-  private resetSearchResult(resetValue: boolean = true): void {
+  private resetSearchResult(resetValue = true): void {
     App.setDataType(AppDataType.All);
     this.hideSearchResult();
     this.searchLoading(true);

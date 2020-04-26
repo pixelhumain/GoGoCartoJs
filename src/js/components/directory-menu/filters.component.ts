@@ -176,7 +176,7 @@ export class FiltersComponent {
   public setOption(
     optionId,
     uncheckable = false,
-    humanAction: boolean = true,
+    humanAction = true,
     forceExpand: null | boolean = null,
     forceChecked: null | boolean = null
   ): void {
@@ -196,7 +196,7 @@ export class FiltersComponent {
       }
     }
 
-    if (null === forceExpand || null !== forceChecked) {
+    if (null === forceExpand || null !== forceChecked) {
       option.toggle(forceChecked, humanAction);
     }
   }
