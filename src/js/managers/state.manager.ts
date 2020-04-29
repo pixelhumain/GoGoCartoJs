@@ -28,17 +28,16 @@ export class StateManager {
     return this.stateElementId_;
   }
 
-  /*
-   * Change App state
-   */
-  setState($newState: AppStates, options: AppStateOptions = {}, backFromHistory = false) {
+  setState(newState: AppStates, options: AppStateOptions = {}, backFromHistory = false): void {
     // console.log("AppModule set State : " + AppStates[$newState]  +  ', options = ',options);
     const element = options && options.id ? App.elementById(options.id) : null;
 
     const oldStateName = this.state_;
-    this.state_ = $newState;
+    this.state_ = newState;
 
-    if (oldStateName == AppStates.ShowDirections && App.directionsComponent) App.directionsComponent.clear();
+    if (oldStateName == AppStates.ShowDirections && App.directionsComponent) {
+      App.directionsComponent.clear();
+    }
 
     if (oldStateName == AppStates.ShowElementAlone) {
       App.elementsModule.clearCurrentsElement();
@@ -47,7 +46,7 @@ export class StateManager {
 
     this.stateElementId_ = options ? options.id : null;
 
-    switch ($newState) {
+    switch (newState) {
       case AppStates.Normal:
         this.setNormalState();
         break;
@@ -64,13 +63,16 @@ export class StateManager {
 
     if (
       !backFromHistory &&
-      (oldStateName !== $newState ||
-        $newState == AppStates.ShowElement ||
-        $newState == AppStates.ShowElementAlone ||
-        $newState == AppStates.ShowDirections)
+      (oldStateName !== newState ||
+        newState == AppStates.ShowElement ||
+        newState == AppStates.ShowElementAlone ||
+        newState == AppStates.ShowDirections)
     ) {
-      if (App.dataType == AppDataType.All) App.historyModule.pushNewState(options);
-      else App.historyModule.updateCurrState(options);
+      if (App.dataType == AppDataType.All) {
+        App.historyModule.pushNewState(options);
+      } else {
+        App.historyModule.updateCurrState(options);
+      }
     }
 
     App.documentTitleModule.updateDocumentTitle(options);

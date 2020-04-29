@@ -430,7 +430,8 @@ export class SearchBarComponent {
 
   private resetElementsSearchResult(resetValue = true): void {
     this.resetSearchResult(resetValue);
-    App.setMode(AppModes.Map);
+    App.setMode(AppModes.Map, false, false);
+    App.setState(AppStates.Normal);
   }
 
   private resetSearchResult(resetValue = true): void {

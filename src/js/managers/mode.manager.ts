@@ -13,29 +13,36 @@ export class ModeManager {
   /*
    * Change App mode
    */
-  setMode($mode: AppModes, $backFromHistory = false, $updateTitleAndState = true) {
+  setMode(mode: AppModes, backFromHistory = false, updateTitleAndState = true) {
     App.elementsModule.clearCurrentsElement();
     App.elementListComponent.clear();
 
-    if ($mode == AppModes.Map) this.setMapMode();
-    else this.setListMode();
+    if (mode == AppModes.Map) {
+      this.setMapMode();
+    } else {
+      this.setListMode();
+    }
 
     // if previous mode wasn't null
     const oldMode = this.mode_;
-    this.mode_ = $mode;
+    this.mode_ = mode;
 
     // update history if we need to
-    if (oldMode != null && !$backFromHistory) App.historyModule.pushNewState();
+    if (oldMode != null && !backFromHistory) {
+      App.historyModule.pushNewState();
+    }
 
     App.gogoControlComponent.updatePosition();
 
     setTimeout(() => App.elementsModule.updateElementsToDisplay(true), 300);
 
-    if ($updateTitleAndState) {
+    if (updateTitleAndState) {
       App.documentTitleModule.updateDocumentTitle();
 
       // after clearing, we set the current state again
-      if ($mode == AppModes.Map) App.setState(App.state, { id: App.stateManager.stateElementId });
+      if (mode == AppModes.Map) {
+        App.setState(App.state, { id: App.stateManager.stateElementId });
+      }
     }
   }
 

@@ -55,7 +55,6 @@ import { SendEmailComponent } from './components/modals/send-email.component';
 
 // OTHERS
 import { GoGoConfig } from './classes/config/gogo-config.class';
-import { App } from './gogocarto';
 import * as Cookies from './utils/cookies';
 
 // EXPORT
@@ -185,8 +184,8 @@ export class AppModule {
     return this.modeManager.mode;
   }
 
-  setMode($mode: AppModes, $backFromHistory = false, $updateTitleAndState = true) {
-    this.modeManager.setMode($mode, $backFromHistory, $updateTitleAndState);
+  setMode(mode: AppModes, backFromHistory = false, updateTitleAndState = true) {
+    this.modeManager.setMode(mode, backFromHistory, updateTitleAndState);
   }
 
   get dataType() {
