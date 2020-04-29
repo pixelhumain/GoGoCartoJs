@@ -99,6 +99,10 @@ export class ElementComponent {
       if (App.mode == AppModes.Map && App.infoBarComponent.isVisible) App.infoBarComponent.updateInfoBarHeaderSize();
     });
 
+    this.dom.find('.gogo-element').click(function() {
+      App.setState(AppStates.ShowElementAlone, { id: $(this).data('target') });
+    });
+
     // replace send-email-btn by email value, cause we need to see the email to validate or not
     if (this.element.isPending()) $('.field-email').html(this.element.formatProp('email'));
 

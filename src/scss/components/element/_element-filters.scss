@@ -22,11 +22,11 @@
   }
 }
 
-.field-tags
+.field-tags, .field-elements
 {
   margin-top: .8rem;
 
-  .gogo-tag
+  .gogo-tag, .gogo-element
   {
     margin-right: 8px;
     border-radius: 5px;
@@ -34,6 +34,10 @@
     padding: 0px 10px;
     display: inline-block;
     margin-bottom: 8px;
+  }
+  .gogo-element:hover {
+    cursor: pointer;
+    background-color: #dad9d9;
   }
 }
 
