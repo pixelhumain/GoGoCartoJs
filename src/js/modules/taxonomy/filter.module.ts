@@ -40,10 +40,10 @@ export class FilterModule {
 
     if (!App.config.menu.showOnePanePerMainOption) {
       const checkedMainOptions = App.taxonomyModule.taxonomy.nonDisabledOptions;
-      if (checkedMainOptions.length == 1) return this.recursivelyCheckedInOption(checkedMainOptions[0], element);
+      if (checkedMainOptions.length == 1) return this.recursivelyCheckInOption(checkedMainOptions[0], element);
       else
         return checkedMainOptions.some(
-          (mainOption) => element.haveOption(mainOption) || this.recursivelyCheckedInOption(mainOption, element)
+          (mainOption) => element.haveOption(mainOption) || this.recursivelyCheckInOption(mainOption, element)
         );
     } else if (App.currMainId == 'all') {
       const mainOptionsChecked = App.taxonomyModule.getMainOptions().filter((child) => !child.isDisabled);
@@ -54,7 +54,7 @@ export class FilterModule {
       return mainCategoryFilled && otherCategoriesFilled;
     } else {
       const mainOption = App.taxonomyModule.getCurrMainOption();
-      const mainOptionFilled = this.recursivelyCheckedInOption(mainOption, element);
+      const mainOptionFilled = this.recursivelyCheckInOption(mainOption, element);
       const otherCategoriesFilled = App.taxonomyModule.otherRootCategories.every((category) =>
         this.recursivelyCheckInCategory(category, element)
       );
@@ -64,7 +64,7 @@ export class FilterModule {
 
   log = false;
 
-  private recursivelyCheckedInOption(option: Option, element: Element): boolean {
+  private recursivelyCheckInOption(option: Option, element: Element): boolean {
     if (this.log) console.log('Check for option ', option.name);
 
     let result;
@@ -101,7 +101,7 @@ export class FilterModule {
     if (isSomeOptionInCategoryCheckedOptions) return true;
     else {
       if (this.log) console.log('--' + 'So we checked in suboptions', category.name);
-      return elementOptions.some((optionValue) => this.recursivelyCheckedInOption(optionValue.option, element));
+      return elementOptions.some((optionValue) => this.recursivelyCheckInOption(optionValue.option, element));
     }
   }
 }
