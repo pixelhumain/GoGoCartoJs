@@ -48,6 +48,8 @@ export class BoundsModule {
     //if (this.extendedBounds) L.rectangle(this.extendedBounds, {color: "blue", weight: 3}).addTo(App.map());
   }
 
+  log = false;
+
   extendMapBounds($oldZoom, $newZoom, $numberMarkerVisible) {
     let ratio;
     if ($newZoom == $oldZoom) {
@@ -57,22 +59,22 @@ export class BoundsModule {
     } else {
       ratio = 0;
     }
-    console.log('extend map bounds', App.map().getBounds());
+    if (this.log) console.log('extend map bounds', App.map().getBounds());
     App.boundsModule.extendBounds(ratio, App.map().getBounds());
   }
 
   extendBounds($ratio: number, $bounds: L.LatLngBounds = this.extendedBounds) {
-    console.log('current bounds', $bounds, 'extended', this.extendedBounds, 'ratio', $ratio);
+    if (this.log) console.log('current bounds', $bounds, 'extended', this.extendedBounds, 'ratio', $ratio);
     if (this.currRetrievingComplete(true)) {
       this.extendedBounds = this.maxBounds;
       return null;
     }
     if (!$bounds) {
-      console.log('bounds uncorrect', $bounds);
+      if (this.log) console.log('bounds uncorrect', $bounds);
       return null;
     }
     this.extendedBounds = $bounds.pad($ratio);
-    console.log('new bounds', this.extendedBounds);
+    if (this.log) console.log('new bounds', this.extendedBounds);
     return this.extendedBounds;
   }
 
@@ -109,7 +111,7 @@ export class BoundsModule {
     else this.compactRepresentationFilledBound[mainOptionId] = expectedBound;
 
     if (this.maxBounds && expectedBound.contains(this.maxBounds)) {
-      console.log('AllBoundsRetrived, fullRespresentation', getFullRepresentation);
+      if (this.log) console.log('AllBoundsRetrived, fullRespresentation', getFullRepresentation);
       if (getFullRepresentation) this.fullRepresentationRetrievingComplete[mainOptionId] = true;
       else this.compactRepresentationRetrievingComplete[mainOptionId] = true;
     }
