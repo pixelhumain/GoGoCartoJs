@@ -236,6 +236,7 @@ export class SearchBarComponent {
         this.searchLoading(true);
         this.resetOptionSearchResult();
         this.resetElementsSearchResult(false);
+        this.hideMobileSearchBar();
 
         this.displaySearchResultMarkerOnMap(App.geocoder.getLocation());
         App.mapComponent.fitBounds(App.geocoder.getBounds(), true);
@@ -251,6 +252,7 @@ export class SearchBarComponent {
     this.searchLoading(true);
     this.resetOptionSearchResult(false);
     this.resetElementsSearchResult(false);
+    this.hideMobileSearchBar();
 
     if (App.config.menu.showOnePanePerMainOption) {
       // Uncheck only the pane categories
@@ -284,18 +286,19 @@ export class SearchBarComponent {
     this.searchLoading(true);
     this.resetOptionSearchResult();
     this.resetElementsSearchResult(false);
+    this.hideMobileSearchBar();
 
     this.currSearchText = term;
     App.setDataType(AppDataType.SearchResults, backFromHistory, searchResults);
     this.showSearchResultLabel(searchResults.data.length);
     App.gogoControlComponent.updatePosition();
-    this.hideMobileSearchBar();
   }
 
   private searchElement(element): void {
     this.searchLoading(true);
     this.resetOptionSearchResult();
     this.resetSearchResult(false);
+    this.hideMobileSearchBar();
 
     App.setState(AppStates.ShowElement, { id: element.id, mapPan: true });
   }
