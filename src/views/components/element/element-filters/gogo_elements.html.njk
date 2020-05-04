@@ -1,7 +1,8 @@
 {% if value and value|length > 0 %}
   <div class="field field-elements">
-    {% for elementRef in value %}
-      <div class="gogo-element" data-target="{{ elementRef.id }}">{{ elementRef.name }}</div>
+    {# Value should follow this type { "4": "Example 1", "5": "Example 2" } #}
+    {% for id, name in value %}
+      <div class="gogo-element" data-target="{{ id }}">{{ name }}</div>
     {% endfor %}
   </div>
 {% endif %}
