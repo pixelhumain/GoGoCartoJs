@@ -76,13 +76,15 @@ export class ElementListComponent {
     this.stepsCount = 1;
   }
 
+  log = false;
+
   private draw($elementList: Element[], $animate = false) {
     let element: Element;
     const elementsToDisplay: Element[] = $elementList.filter((el) => el.isFullyLoaded);
 
     this.elementToDisplayCount = elementsToDisplay.length;
-    console.log('-------------');
-    console.log('ElementList draw', elementsToDisplay.length);
+    if (this.log) console.log('-------------');
+    if (this.log) console.log('ElementList draw', elementsToDisplay.length);
 
     if (App.dataType == AppDataType.All) {
       for (element of elementsToDisplay) element.updateDistance();
@@ -97,9 +99,9 @@ export class ElementListComponent {
 
     // If new elements to display are different than the visible one, draw them
     const newIdsToDisplay = elementsToDisplay.map((el) => el.id);
-    console.log('Already Visible elements', this.visibleElementIds, 'new elements length', newIdsToDisplay.length);
+    if (this.log) console.log('Already Visible elements', this.visibleElementIds, 'new elements length', newIdsToDisplay.length);
     if (newIdsToDisplay.length >= maxElementsToDisplay && arraysEqual(newIdsToDisplay, this.visibleElementIds)) {
-      console.log('nothing to draw');
+      if (this.log) console.log('nothing to draw');
       return;
     }
 
@@ -110,7 +112,7 @@ export class ElementListComponent {
         if (newIdsToDisplay[i] !== this.visibleElementIds[i]) newElementsToDisplayIncludesPerfectlyOldOnes = false;
       }
     }
-    console.log('newElementsToDisplayIncludesPerfectlyOldOnes', newElementsToDisplayIncludesPerfectlyOldOnes);
+    if (this.log) console.log('newElementsToDisplayIncludesPerfectlyOldOnes', newElementsToDisplayIncludesPerfectlyOldOnes);
 
     let startIndex,
       endIndex = Math.min(maxElementsToDisplay, elementsToDisplay.length);
@@ -124,7 +126,7 @@ export class ElementListComponent {
     const listContentDom = $('#directory-content-list ul.collapsible');
     const that = this;
 
-    console.log('startIndex', startIndex, 'endIndex', endIndex);
+    if (this.log) console.log('startIndex', startIndex, 'endIndex', endIndex);
     for (let i = startIndex; i < endIndex; i++) {
       element = elementsToDisplay[i];
       this.visibleElementIds.push(element.id);
@@ -142,7 +144,7 @@ export class ElementListComponent {
     if (elementsToDisplay.length < maxElementsToDisplay) {
       if (App.dataType == AppDataType.All) {
         // expand bounds
-        console.log('not enugh elements, expand bounds');
+        if (this.log) console.log('not enugh elements, expand bounds');
         if (App.boundsModule.extendBounds(0.5)) {
           this.showSpinnerLoader();
           App.elementsManager.checkForNewElementsToRetrieve(true);
@@ -151,7 +153,7 @@ export class ElementListComponent {
         }
       }
     } else {
-      // console.log("list is full");
+      if (this.log) console.log("list is full");
       // waiting for scroll bottom to add more elements to the list
       this.isListFull = true;
     }
@@ -234,7 +236,7 @@ export class ElementListComponent {
   private handleBottom() {
     if (this.isListFull) {
       this.stepsCount++;
-      console.log('bottom reached');
+      if (this.log) console.log('bottom reached');
       this.isListFull = false;
       this.draw(App.elements());
     }
