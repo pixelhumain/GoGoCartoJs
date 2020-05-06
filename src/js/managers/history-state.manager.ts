@@ -67,7 +67,7 @@ export class HistoryStateManager {
     App.setMode(historystate.mode, $backFromHistory, false);
 
     // if address is provided we geolocalize this address
-    if (historystate.dataType == AppDataType.All && historystate.address) {
+    if (historystate.dataType == AppDataType.All && historystate.address && !historystate.id) {
       if (historystate.address == 'geolocalize') {
         App.searchBarComponent.geolocateUser();
       } else {
@@ -112,7 +112,7 @@ export class HistoryStateManager {
           $backFromHistory
         );
         $('#directory-spinner-loader').hide();
-      }, 400);
+      }, 0);
     } else {
       App.setState(historystate.state, null, $backFromHistory);
     }

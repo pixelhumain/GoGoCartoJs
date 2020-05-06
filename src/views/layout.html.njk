@@ -1,35 +1,35 @@
   <div class="gogo-load-css">
   <div class="gogocarto-container gogo-theme-{{ config.theme }}">
-    
+
     {# Menu #}
-    <section id="directory-menu" style="display:none"> 
-       {% include 'components/directory-menu/directory-menu.html.njk' %} 
+    <section id="directory-menu" style="display:none">
+       {% include 'components/directory-menu/directory-menu.html.njk' %}
     </section>
 
     {# drag zone for openning menu in mobile devices #}
     <div class="directory-menu-drag-target"></div>
     {# overlay to partially mask the directory-content when openning menu in small screens #}
     <div id="directory-menu-overlay"></div>
-     
-    {# The directory, map or list displaying, and element information bar #} 
+
+    {# The directory, map or list displaying, and element information bar #}
     <section id="directory-content">
-      
-      {% include 'modals.html.njk' %} 
+
+      {% include 'modals.html.njk' %}
 
       {% import 'components/spinner-loader.html.njk' as spinnerLoader%}
-      {{ spinnerLoader.create('directory-spinner-loader') }}  
+      {{ spinnerLoader.create('directory-spinner-loader') }}
 
       {% include 'components/search-bar/search-results-header.html.njk' %}
 
-      <div id="directory-content-map" style="display:none"> 
-        {% include 'components/map/map.html.njk' %}       
-      </div> 
+      <div id="directory-content-map" style="display:none">
+        {% include 'components/map/map.html.njk' %}
+      </div>
 
       {# section containing information one a specific element, displayed upon map #}
-      {% include 'components/map/info-bar.html.njk' %}    
+      {% include 'components/map/info-bar.html.njk' %}
 
       <div id="directory-content-list" class="gogo-section-background" style="display:none">
-        {% include 'components/list/list.html.njk' %}       
+        {% include 'components/list/list.html.njk' %}
       </div>
 
       {% include 'components/gogo-controls.html.njk' %}
@@ -40,9 +40,9 @@
       instead of inside the directory menu #}
       <div id="search-overlay-mobile">
         <div class="overlay"></div>
-      </div>   
+      </div>
 
-    </section>  
+    </section>
 
   </div>
 </div>

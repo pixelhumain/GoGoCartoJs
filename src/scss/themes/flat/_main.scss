@@ -1,0 +1,124 @@
+.gogo-theme-flat.gogocarto-container {
+
+  .moreIconContainer .moreIconWrapper { background-color: #DADAD9; }
+
+  .show-directory-menu-button .arrow-right {
+    display: none;
+  }
+
+  .element-item .collapsible-body .category-wrapper .option-value {
+    color: inherit;
+  }
+
+  .element-item .collapsible-header-more .inline-option-values {
+    .icon { display: none; }
+    .option-value
+    {
+      color: inherit;
+    }
+    .inline-option-value:not(:last-child) {
+      &:after { content: ","; margin-right: 5px; }
+    }
+  }
+
+  .subcategorie-option-item .icon { background-color: transparent; }
+
+  // MENU
+  #directory-menu, #element-info-bar.display-aside {
+    box-shadow: 0 0 0 1px rgba(99,114,130,.16), 0 8px 16px rgba(27,39,51,.08);
+  }
+  .shadow-bottom {
+    display: none !important;
+  }
+  @media (min-width: 850px) {
+    .search-bar-container .search-bar {
+      text-transform: none !important;
+      font-size: .9rem !important;
+    }
+    #directory-menu #directory-menu-main-container .directory-menu-header {
+      width: 100%;
+      border-radius: 0;
+    }
+  }
+  .show-directory-menu-button .arrow-right {
+    display: none;
+  }
+
+  // MAP
+  .leaflet-control-zoom.leaflet-bar.leaflet-control, .gogo-map-control,
+  .feature-button, .leaflet-control-layers {
+    box-shadow: 0 0 0 1px rgba(99,114,130,.16), 0 8px 16px rgba(27,39,51,0.04);
+  }
+  #map-gogo-controls .gogo-map-control {
+    font-weight: bold;
+    padding-right: 13px;
+  }
+  .leaflet-control-layers-base label { border: none; }
+  .leaflet-control-layers-list {
+    padding: 8px 0;
+  }
+  .leaflet-control-layers-base label:hover {
+    background-color: rgba(123, 123, 123, 0.09);
+  }
+
+  // SCROLL BAR
+  .custom-scroll-bar::-webkit-scrollbar-track {
+    border: none;
+  }
+
+  .custom-scroll-bar::-webkit-scrollbar {
+    width: 8px !important;
+  }
+
+  .custom-scroll-bar::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    border: none;
+  }
+
+  // LIST
+  #directory-content-list .collapsible.popout > li {
+    margin-bottom: 4px;
+    box-shadow: none;
+    border-radius: 3px;
+  }
+  #directory-content-list .collapsible.popout > li .collapsible-header {
+    border: none;
+    border-radius: 3px;
+    padding-bottom: 1px;
+  }
+
+  // ELEMENT
+  @media (min-width: 850px) {
+    .element-item .menu-element.full-text {
+      padding: 0 0 6px 0;
+    }
+  }
+  .element-item .menu-element.full-text .menu-element-item-text {
+    text-transform: capitalize;
+    font-size: .9rem !important;
+    font-weight: bold;
+  }
+  .element-item h3 {
+    font-size: 1rem;
+    text-transform: none;
+  }
+
+  // BUTTONS
+  .btn, .btn-flat {
+    box-shadow: none;
+    font-weight: bold;
+    border-radius: 5px;
+    letter-spacing: initial;
+    text-transform: capitalize;
+    padding: 0 1.5rem;
+  }
+  .btn:hover {
+    box-shadow: none;
+    opacity: .8;
+  }
+  #element-info-bar .element-item.active .expand-label.transform-big {
+    box-shadow: none;
+    border-radius: 5px;
+  }
+
+}

@@ -107,7 +107,7 @@ export const EN = {
   //M
   'map.of': 'Map of',
   'mark.as.resolved': 'Mark as resolved',
-  menu: 'menu',
+  menu: 'Menu',
   modification: 'Modification',
   'modification.plural': 'Modifications',
   'modified.admin': 'Modified by admin',
@@ -122,6 +122,7 @@ export const EN = {
   'no.longer.exist': 'no longer exist',
   'no.moderation.necessary': 'No moderation necessary',
   'no.result.found': 'No result found',
+  'no.result.found.hint': "Failure is the fundation of success",
   'non.consensual.votes': 'Non-consensual votes',
   'not.correct.informations':
     "The informations are incorrect (if you can correct them, please do so via the button 'Propose changes')",

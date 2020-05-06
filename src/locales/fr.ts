@@ -107,7 +107,7 @@ export const FR = {
   //M
   'map.of': 'Carte des',
   'mark.as.resolved': 'Marqué comme résolu',
-  menu: 'menu',
+  menu: 'Menu',
   modification: 'Modification',
   'modification.plural': 'Modifications',
   'modified.admin': 'Modifié par admin',
@@ -122,6 +122,7 @@ export const FR = {
   'no.longer.exist': "n'existe plus",
   'no.moderation.necessary': 'Pas de modération nécessaire',
   'no.result.found': 'Aucun résultat trouvé',
+  'no.result.found.hint': "L'échec est le fondement de la réussite",
   'non.consensual.votes': 'Votes non consensuels',
   'not.correct.informations':
     "Les informations sont incorrectes (si vous êtes en mesure de les corriger, merci de le faire via le bouton 'Proposer des Modifications')",

@@ -49,8 +49,8 @@ export class HistoryModule {
     historyState.filters = App.filterRoutingModule.getFiltersToString();
     historyState.text = App.searchBarComponent.getCurrSearchText();
 
-    // if ($pushState) console.log("NEW Sate", AppStates[historyState.state]);
-    // else console.log("UPDATE State", AppStates[historyState.state]);
+    if ($pushState) console.log("NEW STATE", AppStates[historyState.state], historyState);
+    else console.log("UPDATE STATE", AppStates[historyState.state], historyState);
 
     const route = this.generateRoute(historyState);
 

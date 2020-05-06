@@ -9,4 +9,9 @@
 
 .custom-scroll-bar-light::-webkit-scrollbar-thumb {
     background-color: #c3c3c3;
+    min-height: 40px;
+}
+
+.dropdown-content {
+  @extend .custom-scroll-bar-light;
 }
