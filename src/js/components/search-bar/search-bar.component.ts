@@ -1,7 +1,8 @@
 import { AppDataType, AppModes, AppStates } from '../../app.module';
 import { App } from '../../gogocarto';
 import { removeDiactrics } from '../../utils/string-helpers';
-import { Option } from '../../classes/classes';
+import { Option, ViewPort } from '../../classes/classes';
+import { GeocodeResult } from '../../modules/geocoder.module';
 
 interface CustomJQuery extends JQuery {
   gogoAutocomplete(options: JQueryUI.AutocompleteOptions): JQuery;
@@ -139,7 +140,8 @@ export class SearchBarComponent {
     if (elementsResults.length > 0) {
       items.push({
         label: `${App.config.translate('elements.containing')} <span class="search-term">${term}</span> (${
-          elementsResults.length})`,
+          elementsResults.length
+        })`,
         type: 'search_elements',
         value: {
           term,
@@ -180,22 +182,35 @@ export class SearchBarComponent {
 
   private searchTerm(
     term: string,
-    callback: (elementsResults: SearchResult[], optionsResults: SearchResult[]) => void
+    callback: (
+      elementsResults: SearchResult[],
+      optionsResults: SearchResult[],
+      locationsResults?: SearchResult[]
+    ) => void,
+    searchGeocoded = false
   ): void {
     let elementsResults: SearchResult[] | false,
-      optionsResults: SearchResult[] | false = false;
+      optionsResults: SearchResult[] | false,
+      locationsResults: SearchResult[] | false = false;
     const resolveResults = ({
       elements = false,
       options = false,
+      locations = false,
     }: {
       elements?: SearchResult[] | false;
       options?: SearchResult[] | false;
+      locations?: SearchResult[] | false;
     }): void => {
       elementsResults = elements ? elements : elementsResults;
       optionsResults = options ? options : optionsResults;
+      locationsResults = locations ? locations : locationsResults;
 
-      if (elementsResults && optionsResults) {
+      if (elementsResults && optionsResults && !searchGeocoded) {
         callback(elementsResults, optionsResults);
+      }
+
+      if (elementsResults && optionsResults && locationsResults) {
+        callback(elementsResults, optionsResults, locationsResults);
       }
     };
 
@@ -227,19 +242,30 @@ export class SearchBarComponent {
           value: option,
         })),
     });
+
+    if (searchGeocoded) {
+      App.geocoder.geocodeAddress(term, (results: GeocodeResult[]) => {
+        resolveResults({
+          locations: results.map((location) => ({
+            type: 'geocoded',
+            value: location,
+          })),
+        });
+      });
+    }
   }
 
   private searchGeocoded(address: string): void {
     App.geocoder.geocodeAddress(
       address,
-      () => {
+      (results: GeocodeResult[]) => {
         this.searchLoading(true);
         this.resetOptionSearchResult();
         this.resetElementsSearchResult(false);
         this.hideMobileSearchBar();
 
-        this.displaySearchResultMarkerOnMap(App.geocoder.getLocation());
-        App.mapComponent.fitBounds(App.geocoder.getBounds(), true);
+        this.displaySearchResultMarkerOnMap(L.latLng(results[0].getCoordinates()));
+        App.mapComponent.fitBounds(App.geocoder.latLngBoundsFromRawBounds(results[0].getBounds()), true);
       },
       () => {
         this.searchLoading(true);
@@ -310,21 +336,47 @@ export class SearchBarComponent {
     });
   }
 
+  private compareResult(searched: string, result: string): boolean {
+    return removeDiactrics(searched).toLowerCase() === removeDiactrics(result).toLowerCase();
+  }
+
   // Handle forced search action by user (input key enter pressed, icon click)
   private handleSearchAction(): void {
     const searchTerm = this.searchInput().val();
 
     this.beforeSearch();
-    this.searchTerm(searchTerm, (elementsResults: SearchResult[]) => {
-      this.searchLoading(true);
-      if (elementsResults.length > 0) {
-        this.searchElements(searchTerm, {
-          data: elementsResults.map((elementResult) => elementResult.value),
-        });
-        return;
-      }
-      this.searchGeocoded(searchTerm);
-    });
+    this.searchTerm(
+      searchTerm,
+      (elementsResults, _, locationsResults) => {
+        this.searchLoading(true);
+        if (locationsResults.length > 0) {
+          const matchingLocations: GeocodeResult[] = locationsResults
+            .map((locationResult) => locationResult.value)
+            .filter(
+              (location: GeocodeResult) =>
+                this.compareResult(searchTerm, location.getCity()) ||
+                this.compareResult(searchTerm, location.getRegion())
+            );
+          if (matchingLocations.length > 0) {
+            this.displaySearchResultMarkerOnMap(L.latLng(matchingLocations[0].getCoordinates()));
+            App.mapComponent.fitBounds(App.geocoder.latLngBoundsFromRawBounds(matchingLocations[0].getBounds()), true);
+
+            return;
+          }
+        }
+        if (elementsResults.length > 0) {
+          this.searchElements(searchTerm, {
+            data: elementsResults.map((elementResult) => elementResult.value),
+          });
+
+          return;
+        }
+
+        // Fallback to geocoded search if no precise results found in locations or elements.
+        this.searchGeocoded(searchTerm);
+      },
+      true
+    );
   }
 
   public handleGeocodeResult(): void {
@@ -334,11 +386,11 @@ export class SearchBarComponent {
   public geolocateUser(): void {
     this.beforeSearch();
     App.geocoder.geolocateUser(
-      () => {
+      (viewport: ViewPort) => {
         this.resetOptionSearchResult();
         this.resetElementsSearchResult();
         this.setValue(App.config.translate('geolocalized'));
-        this.displaySearchResultMarkerOnMap(App.geocoder.getLocation());
+        this.displaySearchResultMarkerOnMap(L.latLng(viewport.toLocation()));
       },
       () => {
         this.searchLoading(true);

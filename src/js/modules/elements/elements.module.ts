@@ -61,21 +61,31 @@ export class ElementsModule {
 
   // check elements in bounds and who are not filtered
   updateElementsToDisplay(checkInAllElements = true, filterHasChanged = false) {
-    if (App.mode == AppModes.Map && !App.mapComponent.isMapLoaded) return;
+    if (App.mode == AppModes.Map && !App.mapComponent.isMapLoaded) {
+      return;
+    }
 
     let elements: Element[] = [];
 
     // Getting the element array to work on
-    if ((App.state == AppStates.ShowElementAlone || App.state == AppStates.ShowDirections) && App.mode == AppModes.Map)
+    if (
+      (App.state == AppStates.ShowElementAlone || App.state == AppStates.ShowDirections) &&
+      App.mode == AppModes.Map
+    ) {
       elements = [App.DEAModule.getElement()];
-    else if (App.dataType == AppDataType.All) {
-      if (checkInAllElements || this.visibleElements_.length === 0) elements = this.currEveryElements();
-      else elements = this.currVisibleElements();
+    } else if (App.dataType == AppDataType.All) {
+      if (checkInAllElements || this.visibleElements_.length === 0) {
+        elements = this.currEveryElements();
+      } else {
+        elements = this.currVisibleElements();
+      }
     } else if (App.dataType == AppDataType.SearchResults) {
       elements = this.searchResultElements_;
     }
 
-    if (!elements) return;
+    if (!elements) {
+      return;
+    }
 
     let i: number, element: Element;
 
@@ -92,11 +102,16 @@ export class ElementsModule {
     while (i--) {
       element = elements[i];
 
-      if (!element) break;
+      if (!element) {
+        break;
+      }
 
       let elementInBounds = false;
-      if (this.noNeedToCheckBounds()) elementInBounds = true;
-      else elementInBounds = currBounds && element.position && currBounds.contains(element.position);
+      if (this.noNeedToCheckBounds()) {
+        elementInBounds = true;
+      } else {
+        elementInBounds = currBounds && element.position && currBounds.contains(element.position);
+      }
 
       if (elementInBounds && filterModule.checkIfElementPassFilters(element)) {
         if (!element.isDisplayed) {
@@ -109,7 +124,9 @@ export class ElementsModule {
           element.isDisplayed = false;
           elementsToRemove.push(element);
           const index = this.currVisibleElements().indexOf(element);
-          if (index > -1) this.currVisibleElements().splice(index, 1);
+          if (index > -1) {
+            this.currVisibleElements().splice(index, 1);
+          }
         }
       }
     }

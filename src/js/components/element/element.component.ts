@@ -99,7 +99,7 @@ export class ElementComponent {
       if (App.mode == AppModes.Map && App.infoBarComponent.isVisible) App.infoBarComponent.updateInfoBarHeaderSize();
     });
 
-    this.dom.find('.gogo-element').click(function() {
+    this.dom.find('.gogo-element').click(function () {
       App.setState(AppStates.ShowElementAlone, { id: $(this).data('target') });
     });
 

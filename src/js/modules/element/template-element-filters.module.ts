@@ -22,7 +22,7 @@ export class TemplateElementFiltersModule {
     'gogo_textarea',
     'gogo_tel',
     'gogo_files',
-    'gogo_elements'
+    'gogo_elements',
   ];
 
   public addGoGoFilters(nunjucksEnvironment) {

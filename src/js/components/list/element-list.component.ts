@@ -99,7 +99,8 @@ export class ElementListComponent {
 
     // If new elements to display are different than the visible one, draw them
     const newIdsToDisplay = elementsToDisplay.map((el) => el.id);
-    if (this.log) console.log('Already Visible elements', this.visibleElementIds, 'new elements length', newIdsToDisplay.length);
+    if (this.log)
+      console.log('Already Visible elements', this.visibleElementIds, 'new elements length', newIdsToDisplay.length);
     if (newIdsToDisplay.length >= maxElementsToDisplay && arraysEqual(newIdsToDisplay, this.visibleElementIds)) {
       if (this.log) console.log('nothing to draw');
       return;
@@ -112,7 +113,8 @@ export class ElementListComponent {
         if (newIdsToDisplay[i] !== this.visibleElementIds[i]) newElementsToDisplayIncludesPerfectlyOldOnes = false;
       }
     }
-    if (this.log) console.log('newElementsToDisplayIncludesPerfectlyOldOnes', newElementsToDisplayIncludesPerfectlyOldOnes);
+    if (this.log)
+      console.log('newElementsToDisplayIncludesPerfectlyOldOnes', newElementsToDisplayIncludesPerfectlyOldOnes);
 
     let startIndex,
       endIndex = Math.min(maxElementsToDisplay, elementsToDisplay.length);
@@ -153,7 +155,7 @@ export class ElementListComponent {
         }
       }
     } else {
-      if (this.log) console.log("list is full");
+      if (this.log) console.log('list is full');
       // waiting for scroll bottom to add more elements to the list
       this.isListFull = true;
     }

@@ -41,8 +41,10 @@ export class GeocoderModule {
     return this.location;
   }
 
-  getBounds(): L.LatLngBounds {
-    if (!this.lastResultBounds) return null;
+  getBounds(): null | L.LatLngBounds {
+    if (!this.lastResultBounds) {
+      return null;
+    }
     return this.lastResultBounds;
   }
 
@@ -56,9 +58,10 @@ export class GeocoderModule {
     this.lastAddressRequest = $address;
   }
 
-  latLngBoundsFromRawBounds(rawbounds: RawBounds): L.LatLngBounds {
+  public latLngBoundsFromRawBounds(rawbounds: RawBounds): L.LatLngBounds {
     const corner1 = L.latLng(rawbounds[0], rawbounds[1]);
     const corner2 = L.latLng(rawbounds[2], rawbounds[3]);
+
     return L.latLngBounds(corner1, corner2);
   }
 
@@ -70,7 +73,7 @@ export class GeocoderModule {
     //this.geocoder = GeocoderJS.createGeocoder({'provider': 'google', 'useSSL':true });
   }
 
-  geocodeAddress(address, callbackComplete?, callbackFail?) {
+  public geocodeAddress(address, callbackComplete?, callbackFail?): void {
     // console.log("geocode address : ", address);
     this.lastAddressRequest = address;
 
@@ -97,14 +100,21 @@ export class GeocoderModule {
             this.lastResults = results;
             this.lastResultBounds = this.latLngBoundsFromRawBounds(this.lastResults[0].getBounds());
 
-            if (this.lastResults && this.lastResults[0]) this.location = L.latLng(this.lastResults[0].getCoordinates());
-            else location = null;
+            if (this.lastResults && this.lastResults[0]) {
+              this.location = L.latLng(this.lastResults[0].getCoordinates());
+            } else {
+              this.location = null;
+            }
 
             this.onGeocodeResult.emit();
 
-            if (callbackComplete) callbackComplete(results);
+            if (callbackComplete) {
+              callbackComplete(results);
+            }
           } else {
-            if (callbackFail) callbackFail();
+            if (callbackFail) {
+              callbackFail();
+            }
           }
         });
       } else {

@@ -1,6 +1,3 @@
-import { App } from '../../gogocarto';
-declare let L;
-
 export class ViewPort {
   constructor(public lat: number = 0, public lng: number = 0, public zoom: number = 0) {
     this.lat = lat || 0;
@@ -8,13 +5,15 @@ export class ViewPort {
     this.zoom = zoom || 0;
   }
 
-  toString() {
+  toString(): string {
     const digits = this.zoom > 14 ? 4 : this.zoom > 10 ? 3 : 2;
     return `@${this.lat.toFixed(digits)},${this.lng.toFixed(digits)},${this.zoom}z`;
   }
 
-  fromString(string: string) {
-    if (!string) return null;
+  fromString(string: string): null | ViewPort {
+    if (!string) {
+      return null;
+    }
 
     const decode = string.split('@').pop().split(',');
     if (decode.length != 3) {
@@ -30,7 +29,7 @@ export class ViewPort {
     return this;
   }
 
-  toLocation() {
+  toLocation(): L.LatLng {
     return L.latLng(this.lat, this.lng);
   }
 }
