@@ -46,15 +46,13 @@ export class ElementsModule {
   }
 
   clearCurrentsElement() {
-    //console.log("clearCurrElements");
     const visibleElements = this.currVisibleElements();
     if (!visibleElements || !visibleElements.length) return;
     let l = visibleElements.length;
     while (l--) {
       visibleElements[l].isDisplayed = false;
     }
-    const markers = visibleElements.map((e) => e.marker.getLeafletMarker());
-    App.mapComponent.removeMarkers(markers);
+    App.mapComponent.clearMarkers();
 
     this.clearCurrVisibleElements();
   }
