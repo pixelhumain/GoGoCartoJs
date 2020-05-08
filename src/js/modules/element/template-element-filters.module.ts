@@ -4,7 +4,7 @@ import { App } from '../../gogocarto';
 import { GoGoConfig } from '../../classes/config/gogo-config.class';
 import { Event } from '../../classes/classes';
 
-import { splitLongText, formatPhoneNumber } from '../../utils/string-helpers';
+import { splitLongText, formatPhoneNumber, applyGlossary } from '../../utils/string-helpers';
 
 declare let $;
 
@@ -50,6 +50,7 @@ export class TemplateElementFiltersModule {
     switch (filter) {
       case 'gogo_textarea':
         functionToAdd['splitLongText'] = splitLongText;
+        functionToAdd['applyGlossary'] = applyGlossary;
         break;
       case 'gogo_tel':
         functionToAdd['formatPhoneNumber'] = formatPhoneNumber;

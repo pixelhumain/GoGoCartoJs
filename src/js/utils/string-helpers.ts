@@ -89,3 +89,11 @@ export function formatLabel(value) {
 }
 
 export const removeDiactrics = (str: string) => nfd(str).replace(/[\u0300-\u036f]/g, '');
+
+export function applyGlossary(value: String, glossary) : String {
+  for(const word in glossary) {
+    let regExp = new RegExp(`(${word})`, "i");
+    value = value.replace(regExp, `<span class="glossary" title="${glossary[word]}">\$1</span>`)
+  }
+  return value;
+}

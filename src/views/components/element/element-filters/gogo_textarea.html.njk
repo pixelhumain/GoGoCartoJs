@@ -1,10 +1,12 @@
 {% if value %}
   {% set longText = splitLongText(value, truncate|default(1000), tolerance|default(50)) %}
+  {% set visibleText = applyGlossary(longText.first, glossary|default({})) %}
   <div class="field field-textarea">
-    <div style="display: inline">{{ longText.first|safe }}</div>
+    <div style="display: inline">{{ visibleText|safe }}</div>
     {% if longText.second %}
-      <div style="display:none" class="text-more">{{ longText.second|safe }}</div>  
+      {% set hiddenText = applyGlossary(longText.second, glossary|default({})) %}
+      <div style="display:none" class="text-more">{{ hiddenText|safe }}</div>
       <a class="show-more">{{ 'show.more' | i18n }}</a>
     {% endif %}
-  </div>     
+  </div>
 {% endif %}

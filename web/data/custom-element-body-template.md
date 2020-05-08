@@ -1,7 +1,9 @@
 Hello my custom template
 ===================
 
-{{ motivation|gogo_textarea(truncate = 400) }}
+{{ description|gogo_textarea(truncate = 400, glossary = {
+  'proposer': 'Un glossaire',
+  'short': 'Petite'}) }}
 
 **Created at : {{ createdAt }}**
 {{ blop|gogo_tags }}
