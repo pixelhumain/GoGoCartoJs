@@ -85,6 +85,7 @@ export const EN = {
 
   //H
   height: 'Height',
+  'hide.header': 'Hide header navbar',
   historical: 'Historical',
 
   //I

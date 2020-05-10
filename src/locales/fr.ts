@@ -85,6 +85,7 @@ export const FR = {
 
   //H
   height: 'Hauteur',
+  'hide.header': "Masquer le menu d'en tête",
   historical: 'Historique',
 
   //I

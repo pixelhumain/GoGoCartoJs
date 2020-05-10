@@ -3,14 +3,14 @@
   <div class="modal-content">
   	<form>
 	    <h5 id="modal-title">{{ 'copy.html.code'|i18n }}</h5>
-	    <p class="subtitle">{{ 'iframe.initialized.position.map'|i18n }}</p>	 
+	    <p class="subtitle">{{ 'iframe.initialized.position.map'|i18n }}</p>
 
 	    <label for="iframe-width">{{ 'width'|i18n }}</label>
-	    <input type="number" class="iframe-input iframe-param" id="iframe-width" value="800"/>      
+	    <input type="number" class="iframe-input iframe-param" id="iframe-width" value="800"/>
 
       <label for="iframe-height">{{ 'height'|i18n }}</label>
       <input type="number" class="iframe-input iframe-param" id="iframe-height" value="600"/>
-      
+
       <div class="checkboxes-container">
         {% if config.isFeatureAvailable('stamp') %}
           {% for stamp in allowedStamps %}
@@ -21,26 +21,29 @@
 
         <input type="checkbox" class="iframe-param" id="part-taxonomy-checkbox" />
         <label for="part-taxonomy-checkbox">{{ 'show.only.selected.categories'|i18n }}</label>
+
+        <input type="checkbox" class="iframe-param" id="hide-header"/>
+        <label for="hide-header">{{ 'hide.header'|i18n }}</label>
       </div>
 
 			<div class="input-field">
-				<input class="validate" 
+				<input class="validate"
 	    	   type="textarea"
-	    	   id="iframe-code"  
-	    	   onClick="this.setSelectionRange(0, this.value.length)" 
+	    	   id="iframe-code"
+	    	   onClick="this.setSelectionRange(0, this.value.length)"
 		    />
 			</div>
-			
-			<div class="footer">				
+
+			<div class="footer">
 				<button type="button"
-					onclick="$('#modal-iframe').closeModal()"  
+					onclick="$('#modal-iframe').closeModal()"
 					class="btn waves-effect waves-light">
 				{{ 'ok'|i18n }}
 			</button>
 			</div>
 
-		</form>	    
+		</form>
 
   </div>
-   
+
 </div>

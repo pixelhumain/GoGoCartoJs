@@ -52,6 +52,7 @@ export class MapControlsComponent {
     src += window.location.search.length > 0 ? window.location.search + '&' : '?';
     src += 'iframe=1';
     if ($('#part-taxonomy-checkbox').is(':checked')) src += '&fullTaxonomy=0';
+    if ($('#hide-header').is(':checked')) src += '&noheader=1';
 
     const stampsIds = [];
     $('#modal-iframe .iframe-param.stamp-param').each(function () {
