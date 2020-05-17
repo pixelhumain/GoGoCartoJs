@@ -19,7 +19,6 @@ const handleError = err => {
     'title': 'Gulp worflow',
     'message': 'Typescript error'
   });
-  this.emit('end');
 };
 
 const scriptsDirectory = () =>
