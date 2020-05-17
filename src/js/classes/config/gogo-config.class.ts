@@ -1,6 +1,7 @@
 import { App } from '../../gogocarto';
 import { TileLayer } from '../map/tile-layer.class';
 import { GoGoFeature } from './gogo-feature.class';
+import { ElementStatus, MenuFilter } from '../classes';
 import { DEFAULT_FEATURES } from './gogo-default-feature';
 import { FR } from '../../../locales/fr';
 import { EN } from '../../../locales/en';

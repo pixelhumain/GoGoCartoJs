@@ -4,9 +4,9 @@ import { ElementsToDisplayChanged } from '../../modules/elements/elements.module
 import { Element } from '../../classes/classes';
 import { Event } from '../../classes/event.class';
 import { arraysEqual } from '../../utils/array';
+import * as noUiSlider from 'nouislider';
 
 declare let $;
-import * as noUiSlider from 'nouislider';
 
 export class ElementListComponent {
   elementToDisplayCount = 0;
@@ -117,7 +117,7 @@ export class ElementListComponent {
 
   private draw($elementList: Element[], $animate = false) {
     let element: Element;
-    const elementsToDisplay: Element[] = $elementList.filter((el) => el.isFullyLoaded);
+    let elementsToDisplay: Element[] = $elementList.filter((el) => el.isFullyLoaded);
 
     this.elementToDisplayCount = elementsToDisplay.length;
     if (this.log) console.log('-------------');
@@ -138,8 +138,6 @@ export class ElementListComponent {
 		{
 			elementsToDisplay.sort(this.compareSearchScore);
 		}
-
-		let maxElementsToDisplay = this.ELEMENT_LIST_SIZE_STEP * this.stepsCount;
 
     const maxElementsToDisplay = this.ELEMENT_LIST_SIZE_STEP * this.stepsCount;
 
@@ -166,7 +164,9 @@ export class ElementListComponent {
     }
 
 		console.log("startIndex", startIndex, "endIndex", endIndex);
-		let currMonth = null; let currYear = null;
+		let listContentDom = $('#directory-content-list ul.collapsible');
+    const that = this;
+    let currMonth = null; let currYear = null;
 		let prevMonth = null; let prevYear = null
     for (const element of newElementsToDraw) {
       this.visibleElementIds.push(element.id);
@@ -218,35 +218,13 @@ export class ElementListComponent {
       // waiting for scroll bottom to add more elements to the list
       this.isListFull = true;
     }
-  }
-
-		// if the list is not full, we send ajax request
-		if (elementsToDisplay.length < maxElementsToDisplay)
-		{
-			if (App.dataType == AppDataType.All)
-			{
-				// expand bounds
-				let isAlreadyMaxBounds = App.boundsModule.extendedBounds == App.boundsModule.maxBounds;
-				console.log("not enugh elements, expand bounds. IsAlreadyMaxBounds", isAlreadyMaxBounds);
-				if (App.boundsModule.extendBounds(0.5)) {
-					this.showSpinnerLoader();
-					App.elementsManager.checkForNewElementsToRetrieve(true);
-				} else {
-					// When switching to List mode, we initialize bounds from the viewport
-					// If all elements are already retrieve, the bounds are extended to maxBounds in extendBounds method
-					// Then, only once after this setup to the maxBounds, we need to updateElementToDisplay
-					if (!isAlreadyMaxBounds) App.elementsModule.updateElementsToDisplay(true, false);
-					this.handleAllElementsRetrieved();
-				}
-			}
-		}
-		else
-		{
-			// console.log("list is full");
-			// waiting for scroll bottom to add more elements to the list
-			this.isListFull = true;
-		}
 	}
+
+  private onElementOpen(elementHeaderDom)
+  {
+    let elementDom = $(elementHeaderDom).closest('.element-item');
+    let elementId = elementDom.data('element-id');
+    let element =  App.elementById(elementId);
 
     // initialize element component
     if (!$(elementHeaderDom).hasClass('initialized')) {
@@ -331,10 +309,6 @@ export class ElementListComponent {
     return a.distanceFromBoundsCenter < b.distanceFromBoundsCenter ? -1 : 1;
   }
 
-  private compareSearchScore(a: Element, b: Element) {
-    if (a.searchScore == b.searchScore) return 0;
-    return a.searchScore < b.searchScore ? 1 : -1;
-  }
 	private compareDate(a:Element, b:Element)
 	{
 		if (a.dateToDisplay.getDate() == b.dateToDisplay.getDate() &&

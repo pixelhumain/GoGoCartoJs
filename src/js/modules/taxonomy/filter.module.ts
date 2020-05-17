@@ -94,11 +94,13 @@ export class FilterModule {
   	let dateObject;
   	if (typeof(date) == "string")
   	{
+      // Convert "30/05/2012" to "2012-05-30"
   		if (date.split('/').length == 3)
 	  	{
 	  		let splited = date.split('/');
 	  		date = splited[2] + '-' + splited[1] + '-' + splited[0];
 	  	}
+      // Expect "2012-05-30" format
 	  	dateObject = (new Date(date));
   	} else {
   		dateObject = date;
@@ -114,9 +116,9 @@ export class FilterModule {
 		{
 			let checkedMainOptions = App.taxonomyModule.taxonomy.nonDisabledOptions;
 			if (checkedMainOptions.length == 1)
-				return this.recursivelyCheckedInOption(checkedMainOptions[0], element);
+				return this.recursivelyCheckInOption(checkedMainOptions[0], element);
 			else
-				return checkedMainOptions.some( (mainOption) => element.haveOption(mainOption) || this.recursivelyCheckedInOption(mainOption, element));
+				return checkedMainOptions.some( (mainOption) => element.haveOption(mainOption) || this.recursivelyCheckInOption(mainOption, element));
 		}
 		else if (App.currMainId == 'all')
 		{
@@ -128,13 +130,13 @@ export class FilterModule {
 		else
 		{
 			let mainOption = App.taxonomyModule.getCurrMainOption();
-			let mainOptionFilled = this.recursivelyCheckedInOption(mainOption, element);
+			let mainOptionFilled = this.recursivelyCheckInOption(mainOption, element);
 			let otherCategoriesFilled = App.taxonomyModule.otherRootCategories.every( (category) => this.recursivelyCheckInCategory(category, element));
 			return mainOptionFilled && otherCategoriesFilled;
 		}
   }
 
-	private recursivelyCheckedInOption(option : Option, element : Element) : boolean
+	private recursivelyCheckInOption(option : Option, element : Element) : boolean
 	{
 		if (this.log) console.log( "Check for option ", option.name);
 
