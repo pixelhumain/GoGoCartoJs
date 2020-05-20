@@ -129,6 +129,9 @@ const watchTemplates = () => gulp.watch('src/views/**/*.njk', templates);
 exports.watch = gulp.parallel(watchStyles, watchDirectory, watchDeps, watchLibs, watchTemplates);
 exports.build = gulp.series(cleanBuild, gulp.parallel(styles, scriptsDirectory, scriptsDeps, scriptsLibs, templates));
 exports.cleanDist = cleanDist;
-exports.dist = gulp.parallel(concatDirectory, concatCss, fontAssets, imageAssets);
-exports.production = gulp.parallel(gulp.series(prodStyles, gzipStyles), gulp.series(concatDirectory, prodJs, gzipJs));
+exports.dist = gulp.series(cleanDist, gulp.parallel(
+                  gulp.series(concatDirectory, prodJs, gzipJs),
+                  gulp.series(concatCss, prodStyles, gzipStyles),
+                  fontAssets, imageAssets));
+
 exports.addMissingEntries = async () => addMissingEntries();
