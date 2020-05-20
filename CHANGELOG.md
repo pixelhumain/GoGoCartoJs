@@ -1,3 +1,7 @@
+# 1.6.2
+* FEATURE: New search engine, with autcomplete from elements and categories
+* MINOR: New flat theme
+
 # 1.6.0
 * BUG: Marker color not properly set
 * BUG: Non mandatory categories better handled for filtering
