@@ -45,12 +45,8 @@
   }
 
   // MAP
-  .leaflet-control-zoom.leaflet-bar.leaflet-control, .gogo-map-control,
-  .feature-button, .leaflet-control-layers {
-    box-shadow: 0 0 0 1px rgba(99,114,130,.16), 0 8px 16px rgba(27,39,51,0.04);
-  }
   #map-gogo-controls .gogo-map-control {
-    font-weight: bold;
+    font-weight: 600;
     padding-right: 13px;
   }
   .leaflet-control-layers-base label { border: none; }
@@ -60,19 +56,9 @@
   .leaflet-control-layers-base label:hover {
     background-color: rgba(123, 123, 123, 0.09);
   }
-
-  // SCROLL BAR
-  .custom-scroll-bar::-webkit-scrollbar-track {
-    border: none;
-  }
-
-  .custom-scroll-bar::-webkit-scrollbar {
-    width: 8px !important;
-  }
-
-  .custom-scroll-bar::-webkit-scrollbar-thumb {
-    border-radius: 0;
-    border: none;
+  .search-bar-with-options-container .search-bar-container .search-bar {
+    font-weight: 600;
+    box-shadow: none !important;
   }
 
   // LIST
@@ -96,17 +82,55 @@
   .element-item .menu-element.full-text .menu-element-item-text {
     text-transform: capitalize;
     font-size: .9rem !important;
-    font-weight: bold;
+    font-weight: 600;
   }
   .element-item h3 {
     font-size: 1rem;
     text-transform: none;
   }
+  #element-info-bar .element-item.active .expand-label.transform-big {
+    box-shadow: none;
+    border-radius: 5px;
+  }
+  .element-item .field b {
+    font-weight: 600;
+  }
+  @media only screen and (min-width: 601px) {
+    .gogo-load-css .gogocarto-container .element-item .menu-element .menu-element-item .menu-icon {
+      font-size: 1.2rem;
+    }
+  }
+  #directory-content-list .element-item .name {
+    font-size: 1rem;
+    .location { font-size: .95rem; }
+    .location .postalCode { font-size: .85rem; }
+  }
+  .element-item .collapsible-header .collapsible-header-more .inline-option-values {
+    font-style: normal;
+    font-weight: normal;
+  }
+  .icon {
+    font-size: 1.3rem;
+  }
+  .icon.fa, .icon.fab, .icon.fas, .icon.far {
+    font-size: 1.2rem;
+  }
+}
+
+// Reuse in GoGoCarto backend
+.gogo-theme-flat {
+  // MAP
+  .leaflet-control-zoom.leaflet-bar.leaflet-control, .gogo-map-control,
+  .feature-button, .leaflet-control-layers {
+    box-shadow: 0 0 0 1px rgba(99,114,130,.16), 0 8px 16px rgba(27,39,51,0.04) !important;
+    border: none !important;
+  }
 
   // BUTTONS
   .btn, .btn-flat {
     box-shadow: none;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 1rem;
     border-radius: 5px;
     letter-spacing: initial;
     text-transform: capitalize;
@@ -116,9 +140,31 @@
     box-shadow: none;
     opacity: .8;
   }
-  #element-info-bar .element-item.active .expand-label.transform-big {
-    box-shadow: none;
-    border-radius: 5px;
+
+  // MODALS
+  .modal {
+    border-radius: 10px !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+  }
+  .modal .modal-footer .modal-action {
+    color: inherit !important;
+  }
+  .modal .footer {
+    margin-bottom: -1rem;
   }
 
+  // SCROLL BAR
+  .custom-scroll-bar::-webkit-scrollbar-track {
+    border: none;
+  }
+
+  .custom-scroll-bar::-webkit-scrollbar {
+    width: 8px !important;
+  }
+
+  .custom-scroll-bar::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    border: none;
+  }
 }
