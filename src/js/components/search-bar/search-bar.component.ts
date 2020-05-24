@@ -74,20 +74,16 @@ export class SearchBarComponent {
       focus: (event) => event.preventDefault(),
       select: (event, ui) => {
         this.beforeSearch();
-
-        if ('search_geocoded' === ui.item.type) {
-          this.searchGeocoded(ui.item.value);
+        switch (ui.item.type) {
+          case 'search_geocoded':
+            this.searchGeocoded(ui.item.value); break;
+          case 'option':
+            this.searchOption(ui.item.value); break;
+          case 'search_elements':
+            this.searchElements(ui.item.value.term, ui.item.value.results); break;
+          case 'element':
+            this.searchElement(ui.item.value); break;
         }
-        if ('option' === ui.item.type) {
-          this.searchOption(ui.item.value);
-        }
-        if ('search_elements' === ui.item.type) {
-          this.searchElements(ui.item.value.term, ui.item.value.results);
-        }
-        if ('element' === ui.item.type) {
-          this.searchElement(ui.item.value);
-        }
-
         event.preventDefault();
       },
     });
@@ -438,7 +434,12 @@ export class SearchBarComponent {
     App.gogoControlComponent.show(0);
   }
 
+  lastComponentWidth = null;
   public update(): void {
+    // prevent updating for nothing, because if you are typing something in the search bar
+    // while the resize happen, it loose the focus
+    if (App.component.width() == this.lastComponentWidth) return;
+
     if (App.component.width() <= 600) {
       const mobileSearchBar = $('.search-bar-with-options-container');
       if (mobileSearchBar.parent('#search-overlay-mobile').length != 1) {
@@ -452,6 +453,7 @@ export class SearchBarComponent {
         .prependTo('.directory-menu-header')
         .show();
     }
+    this.lastComponentWidth = App.component.width();
   }
 
   private searchLoading(stop = false): void {

@@ -12,7 +12,6 @@
         {% if config.isFeatureActivated('searchGeolocate') %}
             <a class="gogo-icon-locate gogo-h-primary search-icon tooltipped search-geolocalize"
                 data-position="right" data-delay="0" data-tooltip="{{ 'geolocalize' | i18n }}">
-                {{ spinnerLoader.create('geolocate-spinner-loader') }}
             </a>
         {% endif %}
 

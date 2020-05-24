@@ -93,6 +93,9 @@
       .search-bar-autocomplete-result-item
       {
         cursor: pointer;
+        &.option .icon::before {
+          float: left;
+        }
 
         .search-bar-autocomplete-result-item-wrapper
         {
@@ -177,9 +180,8 @@
     }
   }
 
-  #search-spinner-loader, #geolocate-spinner-loader
+  #search-spinner-loader
   {
-    margin-left: 5px;
     top: 7px;
     height: 18px;
     width: 18px;
@@ -191,16 +193,9 @@
   #search-spinner-loader {
     left: 0;
   }
-  #geolocate-spinner-loader {
-    right: 0;
-  }
   .search-bar-icon.loading {
     &:before { content: none; }
     #search-spinner-loader { display: block; }
-  }
-  .search-geolocalize.loading {
-    &:before { content: none; }
-    #geolocate-spinner-loader { display: block; }
   }
 
   .search-no-result
