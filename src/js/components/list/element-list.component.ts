@@ -106,37 +106,27 @@ export class ElementListComponent {
       return;
     }
 
-    let newElementsToDisplayIncludesPerfectlyOldOnes = false;
-    if (newIdsToDisplay.length > this.visibleElementIds.length) {
-      newElementsToDisplayIncludesPerfectlyOldOnes = true;
-      for (let i = 0; i < this.visibleElementIds.length; ++i) {
-        if (newIdsToDisplay[i] !== this.visibleElementIds[i]) newElementsToDisplayIncludesPerfectlyOldOnes = false;
-      }
-    }
-    if (this.log)
-      console.log('newElementsToDisplayIncludesPerfectlyOldOnes', newElementsToDisplayIncludesPerfectlyOldOnes);
-
-    let startIndex,
-      endIndex = Math.min(maxElementsToDisplay, elementsToDisplay.length);
-    if (newElementsToDisplayIncludesPerfectlyOldOnes) {
-      startIndex = this.visibleElementIds.length;
+    let newElementsToDisplayIncludesOldOnes = this.visibleElementIds.every(id => newIdsToDisplay.indexOf(id) !== -1);
+    let newElementsToDraw;
+    if (newElementsToDisplayIncludesOldOnes) {
+      newElementsToDraw = elementsToDisplay.filter(el => this.visibleElementIds.indexOf(el.id) == -1)
     } else {
       this.clear();
-      startIndex = 0;
+      newElementsToDraw = elementsToDisplay;
     }
 
     const listContentDom = $('#directory-content-list ul.collapsible');
     const that = this;
 
-    if (this.log) console.log('startIndex', startIndex, 'endIndex', endIndex);
-    for (let i = startIndex; i < endIndex; i++) {
-      element = elementsToDisplay[i];
+    console.log("element to draw", newElementsToDraw);
+    for (let element of newElementsToDraw) {
       this.visibleElementIds.push(element.id);
       listContentDom.append(element.component.render());
       // bind element header click
       element.component.dom.find('.collapsible-header').click(function () {
         that.onElementOpen(this);
       });
+      if (this.visibleElementIds.length >= maxElementsToDisplay) break; // only display limited elements count
     }
 
     if ($animate) $('#directory-content-list .elements-container').animate({ scrollTop: '0' }, 500);
