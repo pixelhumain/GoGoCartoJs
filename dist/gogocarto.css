@@ -3520,7 +3520,7 @@ th {
           height: 2.5rem;
           padding: 0 3rem;
           width: 95%; }
-        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-bar-with-options-container .search-bar-container #search-spinner-loader, .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-bar-with-options-container .search-bar-container #geolocate-spinner-loader {
+        .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header .search-bar-with-options-container .search-bar-container #search-spinner-loader {
           top: 10px; }
     .gogo-load-css .gogo-theme-transiscope.gogocarto-container #directory-menu #directory-menu-main-container .sub-categories {
       border-left: none; }
@@ -4082,10 +4082,9 @@ th {
   @media (min-width: 850px) {
     .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container .search-bar-with-options-container .search-bar-container {
       padding-left: 6px; } }
-  .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container .directory-menu-header .search-bar-with-options-container .search-bar-container #search-spinner-loader, .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container .directory-menu-header .search-bar-with-options-container .search-bar-container #geolocate-spinner-loader {
-    top: 10px; }
   .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container .directory-menu-header .search-bar-with-options-container .search-bar-container #search-spinner-loader {
-    left: 5px; }
+    top: 10px;
+    left: 8px; }
   .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container #directory-menu .main-categories {
     width: 3.8rem;
     position: relative; }
@@ -4171,11 +4170,8 @@ th {
       border-radius: 0; } }
   .gogo-load-css .gogo-theme-flat.gogocarto-container .show-directory-menu-button .arrow-right {
     display: none; }
-  .gogo-load-css .gogo-theme-flat.gogocarto-container .leaflet-control-zoom.leaflet-bar.leaflet-control, .gogo-load-css .gogo-theme-flat.gogocarto-container .gogo-map-control,
-  .gogo-load-css .gogo-theme-flat.gogocarto-container .feature-button, .gogo-load-css .gogo-theme-flat.gogocarto-container .leaflet-control-layers {
-    box-shadow: 0 0 0 1px rgba(99, 114, 130, 0.16), 0 8px 16px rgba(27, 39, 51, 0.04); }
   .gogo-load-css .gogo-theme-flat.gogocarto-container #map-gogo-controls .gogo-map-control {
-    font-weight: bold;
+    font-weight: 600;
     padding-right: 13px; }
   .gogo-load-css .gogo-theme-flat.gogocarto-container .leaflet-control-layers-base label {
     border: none; }
@@ -4183,13 +4179,9 @@ th {
     padding: 8px 0; }
   .gogo-load-css .gogo-theme-flat.gogocarto-container .leaflet-control-layers-base label:hover {
     background-color: rgba(123, 123, 123, 0.09); }
-  .gogo-load-css .gogo-theme-flat.gogocarto-container .custom-scroll-bar::-webkit-scrollbar-track {
-    border: none; }
-  .gogo-load-css .gogo-theme-flat.gogocarto-container .custom-scroll-bar::-webkit-scrollbar {
-    width: 8px !important; }
-  .gogo-load-css .gogo-theme-flat.gogocarto-container .custom-scroll-bar::-webkit-scrollbar-thumb {
-    border-radius: 0;
-    border: none; }
+  .gogo-load-css .gogo-theme-flat.gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar {
+    font-weight: 600;
+    box-shadow: none !important; }
   .gogo-load-css .gogo-theme-flat.gogocarto-container #directory-content-list .collapsible.popout > li {
     margin-bottom: 4px;
     box-shadow: none;
@@ -4204,23 +4196,61 @@ th {
   .gogo-load-css .gogo-theme-flat.gogocarto-container .element-item .menu-element.full-text .menu-element-item-text {
     text-transform: capitalize;
     font-size: .9rem !important;
-    font-weight: bold; }
+    font-weight: 600; }
   .gogo-load-css .gogo-theme-flat.gogocarto-container .element-item h3 {
     font-size: 1rem;
     text-transform: none; }
-  .gogo-load-css .gogo-theme-flat.gogocarto-container .btn, .gogo-load-css .gogo-theme-flat.gogocarto-container .btn-large, .gogo-load-css .gogo-theme-flat.gogocarto-container .btn-flat {
+  .gogo-load-css .gogo-theme-flat.gogocarto-container #element-info-bar .element-item.active .expand-label.transform-big {
     box-shadow: none;
-    font-weight: bold;
+    border-radius: 5px; }
+  .gogo-load-css .gogo-theme-flat.gogocarto-container .element-item .field b {
+    font-weight: 600; }
+  @media only screen and (min-width: 601px) {
+    .gogo-load-css .gogo-theme-flat.gogocarto-container .gogo-load-css .gogocarto-container .element-item .menu-element .menu-element-item .menu-icon {
+      font-size: 1.2rem; } }
+  .gogo-load-css .gogo-theme-flat.gogocarto-container #directory-content-list .element-item .name {
+    font-size: 1rem; }
+    .gogo-load-css .gogo-theme-flat.gogocarto-container #directory-content-list .element-item .name .location {
+      font-size: .95rem; }
+    .gogo-load-css .gogo-theme-flat.gogocarto-container #directory-content-list .element-item .name .location .postalCode {
+      font-size: .85rem; }
+  .gogo-load-css .gogo-theme-flat.gogocarto-container .element-item .collapsible-header .collapsible-header-more .inline-option-values {
+    font-style: normal;
+    font-weight: normal; }
+  .gogo-load-css .gogo-theme-flat.gogocarto-container .icon {
+    font-size: 1.3rem; }
+  .gogo-load-css .gogo-theme-flat.gogocarto-container .icon.fa, .gogo-load-css .gogo-theme-flat.gogocarto-container .icon.fab, .gogo-load-css .gogo-theme-flat.gogocarto-container .icon.fas, .gogo-load-css .gogo-theme-flat.gogocarto-container .icon.far {
+    font-size: 1.2rem; }
+  .gogo-load-css .gogo-theme-flat .leaflet-control-zoom.leaflet-bar.leaflet-control, .gogo-load-css .gogo-theme-flat .gogo-map-control,
+  .gogo-load-css .gogo-theme-flat .feature-button, .gogo-load-css .gogo-theme-flat .leaflet-control-layers {
+    box-shadow: 0 0 0 1px rgba(99, 114, 130, 0.16), 0 8px 16px rgba(27, 39, 51, 0.04) !important;
+    border: none !important; }
+  .gogo-load-css .gogo-theme-flat .btn, .gogo-load-css .gogo-theme-flat .btn-large, .gogo-load-css .gogo-theme-flat .btn-flat {
+    box-shadow: none;
+    font-weight: 600;
+    font-size: 1rem;
     border-radius: 5px;
     letter-spacing: initial;
     text-transform: capitalize;
     padding: 0 1.5rem; }
-  .gogo-load-css .gogo-theme-flat.gogocarto-container .btn:hover, .gogo-load-css .gogo-theme-flat.gogocarto-container .btn-large:hover {
+  .gogo-load-css .gogo-theme-flat .btn:hover, .gogo-load-css .gogo-theme-flat .btn-large:hover {
     box-shadow: none;
     opacity: .8; }
-  .gogo-load-css .gogo-theme-flat.gogocarto-container #element-info-bar .element-item.active .expand-label.transform-big {
-    box-shadow: none;
-    border-radius: 5px; }
+  .gogo-load-css .gogo-theme-flat .modal {
+    border-radius: 10px !important;
+    box-shadow: none !important;
+    overflow: hidden !important; }
+  .gogo-load-css .gogo-theme-flat .modal .modal-footer .modal-action {
+    color: inherit !important; }
+  .gogo-load-css .gogo-theme-flat .modal .footer {
+    margin-bottom: -1rem; }
+  .gogo-load-css .gogo-theme-flat .custom-scroll-bar::-webkit-scrollbar-track {
+    border: none; }
+  .gogo-load-css .gogo-theme-flat .custom-scroll-bar::-webkit-scrollbar {
+    width: 8px !important; }
+  .gogo-load-css .gogo-theme-flat .custom-scroll-bar::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    border: none; }
   .gogo-load-css .gogocarto-container {
     display: -webkit-box;
     display: -moz-box;
@@ -5891,11 +5921,9 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         right: 5px;
         font-size: 24px !important; }
       .gogo-load-css .gogocarto-container #search-overlay-mobile .search-bar-with-options-container.mobile #search-spinner-loader {
+        margin-left: 5px;
         top: 17px;
         left: 12px; }
-      .gogo-load-css .gogocarto-container #search-overlay-mobile .search-bar-with-options-container.mobile #geolocate-spinner-loader {
-        top: 17px;
-        right: 22px; }
       .gogo-load-css .gogocarto-container #search-overlay-mobile .search-bar-with-options-container.mobile .search-no-result {
         color: inherit;
         font-size: 13px;
@@ -6021,6 +6049,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           overflow: auto; }
           .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item {
             cursor: pointer; }
+            .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item.option .icon::before {
+              float: left; }
             .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper {
               padding: .7rem 1rem;
               display: -webkit-box;
@@ -6093,28 +6123,21 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
               font-size: .8rem; }
             .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item.search_elements {
               padding-top: .6rem; }
-      .gogo-load-css .gogocarto-container .search-bar-with-options-container #search-spinner-loader, .gogo-load-css .gogocarto-container .search-bar-with-options-container #geolocate-spinner-loader {
-        margin-left: 5px;
+      .gogo-load-css .gogocarto-container .search-bar-with-options-container #search-spinner-loader {
         top: 7px;
         height: 18px;
         width: 18px;
         display: none;
         position: absolute; }
-        .gogo-load-css .gogocarto-container .search-bar-with-options-container #search-spinner-loader .spinner-layer, .gogo-load-css .gogocarto-container .search-bar-with-options-container #geolocate-spinner-loader .spinner-layer {
+        .gogo-load-css .gogocarto-container .search-bar-with-options-container #search-spinner-loader .spinner-layer {
           border-color: #5d5d5d; }
-        .gogo-load-css .gogocarto-container .search-bar-with-options-container #search-spinner-loader .circle-clipper .circle, .gogo-load-css .gogocarto-container .search-bar-with-options-container #geolocate-spinner-loader .circle-clipper .circle {
+        .gogo-load-css .gogocarto-container .search-bar-with-options-container #search-spinner-loader .circle-clipper .circle {
           border-width: 2px; }
       .gogo-load-css .gogocarto-container .search-bar-with-options-container #search-spinner-loader {
         left: 0; }
-      .gogo-load-css .gogocarto-container .search-bar-with-options-container #geolocate-spinner-loader {
-        right: 0; }
       .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-icon.loading:before {
         content: none; }
       .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-icon.loading #search-spinner-loader {
-        display: block; }
-      .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-geolocalize.loading:before {
-        content: none; }
-      .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-geolocalize.loading #geolocate-spinner-loader {
         display: block; }
       .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-no-result {
         color: white;

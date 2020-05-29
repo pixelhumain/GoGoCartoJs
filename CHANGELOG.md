@@ -1,4 +1,4 @@
-# 1.6.2
+# 1.6.3
 * FEATURE: New search engine, with autcomplete from elements and categories
 * MINOR: New flat theme
 
