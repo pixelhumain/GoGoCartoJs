@@ -5030,7 +5030,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           width: 100%; }
         .gogo-load-css .gogocarto-container #directory-menu #directory-menu-main-container .directory-menu-header {
           width: 100%;
-          z-index: 2;
+          z-index: 50;
           position: relative;
           -webkit-transition: all 0.5s;
           -moz-transition: all 0.5s;
