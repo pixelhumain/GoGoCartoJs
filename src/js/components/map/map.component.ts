@@ -101,6 +101,13 @@ export class MapComponent {
       $('.leaflet-control-layers').addClass('gogo-section-controls');
     }, 0);
 
+    // Note : Mapbox's simplestyle-spec is used as reference for style props and default values
+    // @see https://github.com/mapbox/simplestyle-spec
+    if (App.config.map.geojsonLayers) {
+      (typeof App.config.map.geojsonLayers === 'string') ? this.loadRemoteGeoJSON(this.map_, App.config.map.geojsonLayers) :
+          this.loadInlineGeoJSON(this.map_, App.config.map.geojsonLayers);
+    }
+
     if (App.config.map.useClusters) {
       this.markersGroup = L.markerClusterGroup({
         spiderfyOnMaxZoom: true,
@@ -306,5 +313,39 @@ export class MapComponent {
     const zoom = this.getZoom();
     const old_zoom = this.getOldZoom();
     return zoom != old_zoom && old_zoom != -1 && zoom > old_zoom;
+  }
+
+  loadInlineGeoJSON(map, layersConfig) {
+    let featuresCollection = layersConfig as GeoJSONFeatureCollection;
+    for (const geoJSONFeature of featuresCollection.features) {
+      L.geoJSON(geoJSONFeature, {
+        pointToLayer: function (feature, latlng) {
+          return L.circleMarker(latlng);
+        },
+        style: function (feature) {
+          let props = feature.properties || {};
+          return {
+            fillColor: props['fill'] || App.config.colors.secondary,
+            fillOpacity: props['fill-opacity'] || 0.6,
+            color: props['stroke'] || App.config.colors.textDark,
+            opacity: props['stroke-opacity'] || 1,
+            weight: props['stroke-width'] || 2
+          };
+        }
+      }).addTo(map);
+    }
+  }
+
+  loadRemoteGeoJSON(map, layersConfigUrl: string) {
+      $.ajax({
+          url: layersConfigUrl,
+          method: 'get',
+          success: (response) => {
+              if (typeof response == 'string') response = JSON.parse(response);
+              if (response.features !== null) {
+                  this.loadInlineGeoJSON(map, response);
+              }
+          }
+      });
   }
 }
