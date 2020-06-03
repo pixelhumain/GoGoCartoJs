@@ -74,13 +74,10 @@
 
   .directory-menu-header .search-bar-with-options-container .search-bar-container
   {
-    #search-spinner-loader, #geolocate-spinner-loader
-    {
-      top: 10px;
-    }
     #search-spinner-loader
     {
-      left: 5px;
+      top: 10px;
+      left: 8px;
     }
   }
 
@@ -107,7 +104,6 @@
   #directory-menu #main-option-gogo-icon-all.active { padding-left: 7px; }
   #directory-menu.small-width #main-option-gogo-icon-all { padding-right: 2px !important; padding-left: 0px; }
   #directory-menu.small-width #main-option-gogo-icon-all.active { padding-left: 0px; }
-
 
   .element-item .info-bar-divider {
     background-color: transparent !important;

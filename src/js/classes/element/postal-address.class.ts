@@ -5,6 +5,7 @@ export class PostalAddress {
   addressLocality = '';
   postalCode = '';
   formatedAddress = '';
+  addressCountry = '';
 
   constructor($addressJson) {
     if (typeof $addressJson == 'string') this.formatedAddress = $addressJson;
@@ -13,6 +14,7 @@ export class PostalAddress {
       this.addressLocality = capitalize($addressJson.addressLocality || '');
       this.postalCode = $addressJson.postalCode;
       this.formatedAddress = $addressJson.customFormatedAddress || '';
+      this.addressCountry = $addressJson.addressCountry || '';
     }
   }
 

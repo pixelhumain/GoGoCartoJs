@@ -187,6 +187,7 @@ export class Element extends ElementBase {
       images: this.images,
       files: this.files,
       needsModeration: this.needsModeration(),
+      moderationState: this.moderationState,
       formatedOpenHours: this.formatedOpenHours,
       isEditable: this.isEditable,
       pendingContribution: this.pendingContribution,
