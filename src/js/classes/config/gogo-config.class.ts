@@ -82,6 +82,7 @@ export class GoGoConfig {
       new TileLayer('thunderforest', 'https://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png'),
       new TileLayer('Pas de fond', ''),
     ],
+    geojsonLayers: []
   };
   readonly features = {
     // element menu
@@ -291,7 +292,7 @@ export class GoGoConfig {
 
   private recursiveFillProperty(gogoConfig, userConfig) {
     // we don't want to apply recursively inside objects properties
-    const objectsProperties = ['roles', 'defaultCenter', 'defaultBounds', 'tileLayers', 'options'];
+    const objectsProperties = ['roles', 'defaultCenter', 'defaultBounds', 'tileLayers', 'geojsonLayers', 'options'];
 
     // if we provide feature config, we enable it automatically
     if (gogoConfig instanceof GoGoFeature) gogoConfig.active = true;
