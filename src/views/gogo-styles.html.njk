@@ -65,6 +65,7 @@
   {{ createBackgroung('bg-soft-color-as', text) }}
   {{ createBackgroung('bg-color-as', text) }}
   .gogo-load-css .gogo-color-as { color: #5b5b5b; }
+  .gogo-load-css .gogo-border-color-as { border-color: #5b5b5b; }
 
   {% for option in optionList %}
      {% if option.icon or option.color %}
@@ -76,6 +77,7 @@
       {{ createBackgroung(name|safe, softColor) }}
       {% if option.color %}
         .gogo-load-css .gogo-color-as[option-id="{{ option.id }}"] { color: {{ option.color }} }
+        .gogo-load-css .gogo-border-color-as[option-id="{{ option.id }}"] { border-color: {{ option.color }} }
       {% endif %}
     {% endif %}
   {% endfor %}
