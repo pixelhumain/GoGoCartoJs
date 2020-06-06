@@ -230,8 +230,9 @@ export class GoGoConfig {
   // Function for i18n, mapping between the given entry and the string according to the language chosen
   translate(entry: string): string {
     if (!entry) return;
-    const value = this.i18n[this.language][entry];
+    let value = this.i18n[this.language][entry];
     if (!value) console.warn(`[GoGoCartoJS] Entry '${entry}' not found`);
+    value = value.replace(/\$\{(.+)\}/, (match, otherEntry) => this.translate(otherEntry))
     return value;
   }
 
