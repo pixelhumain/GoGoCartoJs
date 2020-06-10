@@ -9,7 +9,7 @@ var taxonomy = {
       "color":"#98A100",
       "softColor":"#808700",
       "icon":"fa fa-transgender-alt"
-    },    
+    },
     {
       "id":10517,
       "name":"Voyages",
@@ -23,13 +23,6 @@ var taxonomy = {
       "color":"#00537E",
       "softColor":"#22698E",
       "icon":"fa fa-forward"
-    },
-    {
-      "id":10452,
-      "name":"Habitat",
-      "color":"#7E3200",
-      "softColor":"#864C26",
-      "icon":"fa fa-linux"
     }
-  ]  
+  ]
 }

@@ -62,7 +62,7 @@ export class RouterModule {
 
         this.startState(initialState);
       },
-      'search /:mode/recherche/:text': (mode, text) => {
+      'search /:mode/rechercher/:text': (mode, text) => {
         const initialState = new HistoryState();
 
         initialState.dataType = AppDataType.SearchResults;
@@ -72,6 +72,17 @@ export class RouterModule {
         initialState.filters = this.filtersSerializedParam;
 
         this.startState(initialState);
+      },
+      'search_option /category/:name/:id': (mode, id) => {
+        const initialState = new HistoryState();
+
+        initialState.dataType = AppDataType.All;
+        initialState.mode = AppModes.Map;
+        initialState.state = AppStates.Normal;
+        initialState.filters = this.filtersSerializedParam;
+
+        this.startState(initialState);
+        App.searchBarComponent.searchOption(App.taxonomyModule.getOptionById(id));
       },
     });
   }
@@ -101,7 +112,7 @@ export class RouterModule {
     }
   }
 
-  generate(routeName: string, options?: any, absoluteUrl?: boolean) {
+  generate(routeName: string, options?: any) {
     return '#' + routie.lookup(routeName, options);
   }
 

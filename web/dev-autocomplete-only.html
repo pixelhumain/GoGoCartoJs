@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="assets/gogocarto.css">
     <link rel="stylesheet" href="assets/images/styles.css">
 
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
     <script src="../build/deps.js"></script>
@@ -30,6 +29,9 @@
     <script>
       $(document).ready(function() {
         carto = goGoCarto('#gogocarto', {
+          mode: {
+            autocompleteOnly: true,
+          },
           data:
           {
             taxonomy: taxonomy,
@@ -37,10 +39,23 @@
           },
           theme: "flat"
         });
+
+        $('.search-bar').on('searchRoute', function(evt, data) {
+          console.log("search route", evt, data);
+        })
       });
+
+
     </script>
   </head>
-  <body>
-    <div id="gogocarto"></div>
+
+  <body class="gogo-load-css">
+    <div class="gogocarto-container">
+      <div class="autocomplete-container">
+        <input class="search-bar" type="text"/>
+        <button class="search-bar-icon">Search</button>
+      </div>
+    </div>
   </body>
+
 </html>

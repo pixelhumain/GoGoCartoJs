@@ -4,7 +4,7 @@
 <div class="search-bar-with-options-container">
 
     {# Search Input #}
-    <div class="input-field search-bar-container">
+    <div class="input-field search-bar-container autocomplete-container">
         <a class="gogo-icon-search gogo-h-primary search-icon search-bar-icon">
             {{ spinnerLoader.create('search-spinner-loader') }}
         </a>
@@ -18,7 +18,7 @@
         <input class="validate search-bar gogo-section-content"
         	     type="text"
         	     name="adresse"
-               placeholder="{{ 'search' | i18n }}"
+                 placeholder="{{ 'search' | i18n }}"
         	     onClick="this.setSelectionRange(0, this.value.length)"
         	     {% if config.address %}
         	     value="{{ config.address | replace({'-': ' '}) | capitalize }}"

@@ -10,6 +10,9 @@ import * as tinycolor2 from 'tinycolor2';
 const tinycolor = (<any>tinycolor2).default;
 
 export class GoGoConfig {
+  readonly mode = {
+    autocompleteOnly: false, // we use gogocarto lib only to create the autoComplete search input
+  }
   readonly data = {
     taxonomy: undefined,
     elements: undefined,
