@@ -163,7 +163,7 @@ export class GoGoConfig {
     menuTopImage: undefined,
   };
 
-  readonly language = 'en';
+  language = 'en'; // use 'test' to display the entry names
 
   readonly i18n = {
     en: EN,
@@ -230,8 +230,12 @@ export class GoGoConfig {
   // Function for i18n, mapping between the given entry and the string according to the language chosen
   translate(entry: string): string {
     if (!entry) return;
-    let value = this.i18n[this.language][entry];
-    if (!value) console.warn(`[GoGoCartoJS] Entry '${entry}' not found`);
+    if (this.language == 'test') return `i18n(${entry})`;
+    let value = this.i18n[this.language] ? this.i18n[this.language][entry] : null;
+    if (!value) {
+      console.warn(`[GoGoCartoJS] Entry '${entry}' not found for language ${this.language}. Using english`);
+      value = this.i18n['en'][entry];
+    }
     value = value.replace(/\$\{(.+)\}/, (match, otherEntry) => this.translate(otherEntry))
     return value;
   }

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <style>
+      html, body, #gogocarto
+      {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+    <link rel="stylesheet" href="assets/gogocarto.css">
+    <link rel="stylesheet" href="assets/images/styles.css">
+
+    <script src="../build/deps.js"></script>
+    <script src="../build/libs.js"></script>
+    <script src="../build/directory.js"></script>
+    <script src="../build/templates.js"></script>
+
+    <script src="data/colors.js"></script>
+    <script src="data/taxonomy-simple.js"></script>
+    <script src="data/elements-single.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <script>
+      $(document).ready(function() {
+        carto = goGoCarto('#gogocarto', {
+          data:
+          {
+            taxonomy: taxonomy,
+            elements: elements
+          },
+          language: 'en', // use 'test' to display entries keys
+          i18n : { en: {
+            'element': 'musée',
+            'element.undefinite': 'un musée',
+            'element.definite': 'le musée',
+            'element.plural': 'musées'
+          }}
+        });
+      });
+    </script>
+
+  </head>
+  <body>
+    <div id="gogocarto"></div>
+  </body>
+</html>
