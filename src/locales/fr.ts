@@ -28,7 +28,7 @@ export const FR = {
   'close.menu': 'Fermer le Menu',
   'collaborative.moderation': 'Modération collaborative',
   'collaborative.moderation.first.paragraph':
-    "Lorsqu'${element.undefinite} est ajouté ou modifié, la mise à jour des données n'est pas instantanée: ${element.definite} va d'abords apparaître 'grisé sur la carte, et il sera alors possible à tous les utilisateur.ice.s logué de voter une et une seule fois. Ce vote n'est pas une opinion, mais un partage de connaissance. Si vous connaissez ${element.definite}, ou savez que ${element.definite} n'existe pas, alors votre savoir nous intéresse !",
+    "Lorsqu'${element.undefinite} est ajouté ou modifié, la mise à jour des données n'est pas instantanée: ${element.definite} va d'abords apparaître grisé sur la carte, et il sera alors possible à tous les utilisateur.ice.s logué de voter une et une seule fois. Ce vote n'est pas une opinion, mais un partage de connaissance. Si vous connaissez ${element.definite}, ou savez que ${element.definite} n'existe pas, alors votre savoir nous intéresse !",
   'collaborative.moderation.second.paragraph':
     "Au bout d'un certain nombre de votes, ${element.definite} pourra alors être automatiquement validé ou refusé. En cas de litige (des votes à la fois positifs et négatifs), un modérateur interviendra au plus vite. On compte sur vous!",
   'comment.for.moderation': 'Commentaire pour la modération',

@@ -239,7 +239,7 @@ export class GoGoConfig {
       console.warn(`[GoGoCartoJS] Entry '${entry}' not found for language ${this.language}. Using english`);
       value = this.i18n['en'][entry];
     }
-    value = value.replace(/\$\{(.+)\}/, (match, otherEntry) => this.translate(otherEntry))
+    value = value.replace(/\$\{([\w\.]+)\}/, (match, otherEntry) => this.translate(otherEntry))
     return value;
   }
 
