@@ -1,3 +1,6 @@
 {% if value %}
-  <div class="field field-text">{{ value|safe }}</div>
+  <div class="field field-text">
+    {% if label %}<span class="field-label">{{ label|safe }}</span>{% endif %}
+    <span class="value">{{ value|safe }}</span>
+  </div>
 {% endif %}

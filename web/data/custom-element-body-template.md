@@ -1,9 +1,14 @@
 Hello my custom template
 ===================
 
-{{ description|gogo_textarea(glossary = {'description': 'test de tooltipe un peu longue'}) }}
+{{ email|gogo_email(label = 'Mon email')}}
+{{ telephone|gogo_tel(label = 'Mon téléphone')}}
+{{ website|gogo_url(label = 'Site web') }}
+{{ createdAt|gogo_text(label = 'Created At') }}
 
-**Created at : {{ createdAt }}**
+{{ description|gogo_textarea(label = 'Description', glossary = {'description': 'test de tooltipe un peu longue'}) }}
+
+
 {{ blop|gogo_tags }}
 {{ friends|gogo_elements}}
 _________________

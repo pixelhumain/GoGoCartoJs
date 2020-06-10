@@ -4,7 +4,8 @@
   {% if not pending and config.isFeatureAvailable('sendMail') %}
     <button class="btn send-mail-btn">{{ 'send.email' | i18n}}</button>
   {% else %}
-    {{ value|safe }}
+    {% if label %}<span class="field-label">{{ label|safe }}</span>{% endif %}
+    <span class="value">{{ value|safe }}</span>
   {% endif %}
 </div>
 {% endif %}

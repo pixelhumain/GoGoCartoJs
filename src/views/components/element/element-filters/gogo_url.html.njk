@@ -1,5 +1,7 @@
 {% if value %}
 <div class="field field-url">
+  {% if label %}<span class="field-label">{{ label|safe }}</span>{% endif %}
+
   {% set pending = value.indexOf('span class') > 0 %}
   {% if pending %}
     {{ value|safe }}
