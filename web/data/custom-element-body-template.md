@@ -5,6 +5,7 @@ Hello my custom template
 
 **Created at : {{ createdAt }}**
 {{ blop|gogo_tags }}
+{{ friends|gogo_elements}}
 _________________
 
 {{ taxonomy|gogo_taxonomy}}

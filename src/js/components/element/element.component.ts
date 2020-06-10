@@ -101,6 +101,7 @@ export class ElementComponent {
     });
 
     this.dom.find('.gogo-element').click(function () {
+      App.searchBarComponent.resetSearchResult();
       if (App.mode == AppModes.List) App.setMode(AppModes.Map, false, false);
       App.setState(AppStates.ShowElementAlone, { id: $(this).data('target') });
     });

@@ -517,7 +517,7 @@ export class SearchBarComponent {
     App.setState(AppStates.Normal);
   }
 
-  private resetSearchResult(resetValue = true): void {
+  resetSearchResult(resetValue = true): void {
     App.setDataType(AppDataType.All);
     this.hideSearchResult();
     this.clearLocationMarker();
