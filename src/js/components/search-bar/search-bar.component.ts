@@ -95,7 +95,7 @@ export class SearchBarComponent {
       }
     });
     this.searchInput().click(() => this.searchInput().gogoAutocomplete('search'));
-    $('.search-bar-icon').click(() => this.handleSearchAction());
+    $('.search-bar-icon, .search-bar-btn').click(() => this.handleSearchAction());
 
     $('#btn-close-search-result').click(() => this.resetElementsSearchResult());
 
