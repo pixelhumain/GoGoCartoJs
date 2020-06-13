@@ -66,9 +66,9 @@ export class SearchBarComponent {
       },
       source: ({ term }, response) => {
         this.beforeSearch();
-        this.searchTerm(term, (elementsResults, optionsResults) => {
+        this.searchTerm(term, (elementsResults, optionsResults, locationsResults) => {
           this.searchLoading(true);
-          this.setAutocompleteItems(term, elementsResults, optionsResults, response);
+          this.setAutocompleteItems(term, elementsResults, optionsResults, locationsResults, response);
         });
       },
       focus: (event) => event.preventDefault(),
@@ -113,16 +113,25 @@ export class SearchBarComponent {
     term: string,
     elementsResults: SearchResult[],
     optionsResults: SearchResult[],
+    locationsResults: SearchResult[],
     response: (data: AutocompleteItem[]) => void
   ): void {
-    let items: AutocompleteItem[] = [
-      {
-        label: App.config.translate('geographic.location'),
-        type: 'search_geocoded',
-        value: term,
-        icon: 'gogo-icon-marker-symbol',
-      },
-    ];
+    let items: AutocompleteItem[] = [];
+
+    if (App.config.isFeatureAvailable('searchPlace')) {
+      items = [
+        ...items,
+        {
+          label: App.config.translate('geographic.location'),
+          type: 'search_geocoded',
+          value: term,
+          icon: 'gogo-icon-marker-symbol',
+        },
+      ];
+    }
+
+    if (locationsResults.length > 0) {
+    }
 
     if (optionsResults.length > 0) {
       items = [
@@ -185,13 +194,18 @@ export class SearchBarComponent {
     callback: (
       elementsResults: SearchResult[],
       optionsResults: SearchResult[],
-      locationsResults?: SearchResult[]
+      locationsResults: SearchResult[]
     ) => void,
-    searchGeocoded = false
+    searchLocations = false
   ): void {
+    const searchElements = App.config.isFeatureAvailable('searchElements');
+    const searchOptions = App.config.isFeatureAvailable('searchCategories');
+    searchLocations = App.config.isFeatureAvailable('searchPlace') && searchLocations;
+
     let elementsResults: SearchResult[] | false,
       optionsResults: SearchResult[] | false,
       locationsResults: SearchResult[] | false = false;
+
     const resolveResults = ({
       elements = false,
       options = false,
@@ -205,45 +219,49 @@ export class SearchBarComponent {
       optionsResults = options ? options : optionsResults;
       locationsResults = locations ? locations : locationsResults;
 
-      if (elementsResults && optionsResults && !searchGeocoded) {
-        callback(elementsResults, optionsResults);
-      }
-
       if (elementsResults && optionsResults && locationsResults) {
         callback(elementsResults, optionsResults, locationsResults);
       }
     };
 
-    const route = App.config.features.searchElements.url;
-    if (route) {
-      App.ajaxModule.sendRequest(route, 'get', { text: term }, ({ data: results }) => {
-        resolveResults({
-          elements: results.map((result) => ({
-            type: 'element',
-            value: result,
-          })),
+    if (searchElements) {
+      const route = App.config.features.searchElements.url;
+      if (route) {
+        App.ajaxModule.sendRequest(route, 'get', { text: term }, ({ data: results }) => {
+          resolveResults({
+            elements: results.map((result) => ({
+              type: 'element',
+              value: result,
+            })),
+          });
         });
-      });
+      } else {
+        resolveResults({
+          elements: this.searchInResults(
+            term,
+            App.config.data.elements,
+            (element: any) => element.name
+          ).map((element) => ({ type: 'element', value: element })),
+        });
+      }
     } else {
-      resolveResults({
-        elements: this.searchInResults(
-          term,
-          App.config.data.elements,
-          (element: any) => element.name
-        ).map((element) => ({ type: 'element', value: element })),
-      });
+      resolveResults({ elements: [] });
     }
 
-    resolveResults({
-      options: this.searchInResults(term, App.taxonomyModule.options, (option) => option.name)
-        .filter((option) => option.displayInMenu)
-        .map((option) => ({
-          type: 'option',
-          value: option,
-        })),
-    });
+    if (searchOptions) {
+      resolveResults({
+        options: this.searchInResults(term, App.taxonomyModule.options, (option) => option.name)
+          .filter((option) => option.displayInMenu)
+          .map((option) => ({
+            type: 'option',
+            value: option,
+          })),
+      });
+    } else {
+      resolveResults({ options: [] });
+    }
 
-    if (searchGeocoded) {
+    if (searchLocations) {
       App.geocoder.geocodeAddress(term, (results: GeocodeResult[]) => {
         resolveResults({
           locations: results.map((location) => ({
@@ -401,7 +419,9 @@ export class SearchBarComponent {
         }
 
         // Fallback to geocoded search if no precise results found in locations or elements.
-        this.searchGeocoded(searchTerm);
+        if (App.config.isFeatureAvailable('searchPlace')) {
+          this.searchGeocoded(searchTerm);
+        }
       },
       true
     );

@@ -253,7 +253,7 @@ export class GoGoConfig {
   }
 
   // is feature is activated and the actual user is granted to use it
-  isFeatureAvailable(featureName): boolean {
+  isFeatureAvailable(featureName: string): boolean {
     if (!this.features.hasOwnProperty(featureName)) {
       console.warn(`[GoGoCartoJs] feature ${featureName} doesn't exist`);
       return false;
