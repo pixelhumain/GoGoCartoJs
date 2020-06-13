@@ -76,13 +76,17 @@ export class SearchBarComponent {
         this.beforeSearch();
         switch (ui.item.type) {
           case 'search_geocoded':
-            this.searchGeocoded(ui.item.value); break;
+            this.searchGeocoded(ui.item.value);
+            break;
           case 'option':
-            this.searchOption(ui.item.value); break;
+            this.searchOption(ui.item.value);
+            break;
           case 'search_elements':
-            this.searchElements(ui.item.value.term, ui.item.value.results); break;
+            this.searchElements(ui.item.value.term, ui.item.value.results);
+            break;
           case 'element':
-            this.searchElement(ui.item.value); break;
+            this.searchElement(ui.item.value);
+            break;
         }
         event.preventDefault();
       },
@@ -248,14 +252,16 @@ export class SearchBarComponent {
           })),
         });
       });
+    } else {
+      resolveResults({ locations: [] });
     }
   }
 
   private searchGeocoded(address: string): void {
     if (App.config.mode.autocompleteOnly) {
-      let route = App.routerModule.generate('normal', { mode: 'carte', addressAndViewport: address });
+      const route = App.routerModule.generate('normal', { mode: 'carte', addressAndViewport: address });
       this.searchInput().trigger('searchRoute', route);
-      this.searchInput().trigger('searchGeocoder', { 'value': address });
+      this.searchInput().trigger('searchGeocoder', { value: address });
       return;
     }
 
@@ -279,7 +285,7 @@ export class SearchBarComponent {
 
   searchOption(option: Option): void {
     if (App.config.mode.autocompleteOnly) {
-      let route = App.routerModule.generate('search_option', { name: option.name, id: option.id });
+      const route = App.routerModule.generate('search_option', { name: option.name, id: option.id });
       this.searchInput().trigger('searchRoute', route);
       this.searchInput().trigger('searchCategory', { name: option.name, id: option.id });
       return;
@@ -320,9 +326,9 @@ export class SearchBarComponent {
 
   private searchElements(term: string, searchResults, backFromHistory = false): void {
     if (App.config.mode.autocompleteOnly) {
-      let route = App.routerModule.generate('search', { mode: 'liste', text: term });
+      const route = App.routerModule.generate('search', { mode: 'liste', text: term });
       this.searchInput().trigger('searchRoute', route);
-      this.searchInput().trigger('searchElements', { 'value': term });
+      this.searchInput().trigger('searchElements', { value: term });
       return;
     }
 
@@ -339,7 +345,7 @@ export class SearchBarComponent {
 
   private searchElement(element): void {
     if (App.config.mode.autocompleteOnly) {
-      let route = App.routerModule.generate('show_element', { name: element.name, id: element.id });
+      const route = App.routerModule.generate('show_element', { name: element.name, id: element.id });
       this.searchInput().trigger('searchRoute', route);
       this.searchInput().trigger('searchElement', { name: element.name, id: element.id });
       return;

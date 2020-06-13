@@ -106,10 +106,12 @@ export class ElementListComponent {
       return;
     }
 
-    let newElementsToDisplayIncludesOldOnes = this.visibleElementIds.every(id => newIdsToDisplay.indexOf(id) !== -1);
+    const newElementsToDisplayIncludesOldOnes = this.visibleElementIds.every(
+      (id) => newIdsToDisplay.indexOf(id) !== -1
+    );
     let newElementsToDraw;
     if (newElementsToDisplayIncludesOldOnes) {
-      newElementsToDraw = elementsToDisplay.filter(el => this.visibleElementIds.indexOf(el.id) == -1)
+      newElementsToDraw = elementsToDisplay.filter((el) => this.visibleElementIds.indexOf(el.id) == -1);
     } else {
       this.clear();
       newElementsToDraw = elementsToDisplay;
@@ -118,8 +120,8 @@ export class ElementListComponent {
     const listContentDom = $('#directory-content-list ul.collapsible');
     const that = this;
 
-    console.log("element to draw", newElementsToDraw);
-    for (let element of newElementsToDraw) {
+    console.log('element to draw', newElementsToDraw);
+    for (const element of newElementsToDraw) {
       this.visibleElementIds.push(element.id);
       listContentDom.append(element.component.render());
       // bind element header click

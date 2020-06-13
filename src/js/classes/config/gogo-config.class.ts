@@ -12,7 +12,7 @@ const tinycolor = (<any>tinycolor2).default;
 export class GoGoConfig {
   readonly mode = {
     autocompleteOnly: false, // we use gogocarto lib only to create the autoComplete search input
-  }
+  };
   readonly data = {
     taxonomy: undefined,
     elements: undefined,
@@ -239,7 +239,7 @@ export class GoGoConfig {
       console.warn(`[GoGoCartoJS] Entry '${entry}' not found for language ${this.language}. Using english`);
       value = this.i18n['en'][entry];
     }
-    value = value.replace(/\$\{([\w\.]+)\}/, (match, otherEntry) => this.translate(otherEntry))
+    value = value.replace(/\$\{([\w\.]+)\}/, (match, otherEntry) => this.translate(otherEntry));
     return value;
   }
 

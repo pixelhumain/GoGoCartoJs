@@ -1,3 +1,4 @@
+// prettier-ignore
 export const FR = {
   //A
   'accept': 'Accepter',
