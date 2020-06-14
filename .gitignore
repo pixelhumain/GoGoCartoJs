@@ -7,3 +7,4 @@ web/assets/*.css
 
 web/dev\.html
 /_site/
+/.idea

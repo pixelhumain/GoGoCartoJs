@@ -317,22 +317,24 @@ export class MapComponent {
 
   loadInlineGeoJSON(map, layersConfig) {
     let featuresCollection = layersConfig as GeoJSONFeatureCollection;
-    for (const geoJSONFeature of featuresCollection.features) {
-      L.geoJSON(geoJSONFeature, {
-        pointToLayer: function (feature, latlng) {
-          return L.circleMarker(latlng);
-        },
-        style: function (feature) {
-          let props = feature.properties || {};
-          return {
-            fillColor: props['fill'] || App.config.colors.secondary,
-            fillOpacity: props['fill-opacity'] || 0.6,
-            color: props['stroke'] || App.config.colors.textDark,
-            opacity: props['stroke-opacity'] || 1,
-            weight: props['stroke-width'] || 2
-          };
-        }
-      }).addTo(map);
+    if (featuresCollection.features){
+      for (const geoJSONFeature of featuresCollection.features) {
+        L.geoJSON(geoJSONFeature, {
+          pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng);
+          },
+          style: function (feature) {
+            let props = feature.properties || {};
+            return {
+              fillColor: props['fill'] || App.config.colors.secondary,
+              fillOpacity: props['fill-opacity'] || 0.6,
+              color: props['stroke'] || App.config.colors.textDark,
+              opacity: props['stroke-opacity'] || 1,
+              weight: props['stroke-width'] || 2
+            };
+          }
+        }).addTo(map);
+      }
     }
   }
 
