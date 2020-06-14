@@ -13,16 +13,13 @@
     <link rel="stylesheet" href="assets/gogocarto.css">
     <link rel="stylesheet" href="assets/images/styles.css">
 
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-
     <script src="../build/deps.js"></script>
     <script src="../build/libs.js"></script>
     <script src="../build/directory.js"></script>
     <script src="../build/templates.js"></script>
 
     <script src="data/colors.js"></script>
-    <script src="data/taxonomy-fontawesome.js"></script>
+    <script src="data/taxonomy-simple.js"></script>
     <script src="data/elements-single.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -35,10 +32,17 @@
             taxonomy: taxonomy,
             elements: elements
           },
-          theme: "flat"
+          language: 'en', // use 'test' to display entries keys
+          i18n : { en: {
+            'element': 'musée',
+            'element.undefinite': 'un musée',
+            'element.definite': 'le musée',
+            'element.plural': 'musées'
+          }}
         });
       });
     </script>
+
   </head>
   <body>
     <div id="gogocarto"></div>

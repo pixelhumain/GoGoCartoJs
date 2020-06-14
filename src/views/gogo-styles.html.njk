@@ -25,9 +25,9 @@
 {# The following file generate styling accoring to GoGoCartoJS configuration #}
 
 {% set textDark        = config.colors.textDark %}
-{% set textDarkSoft    = config.colors.textDarkSoft %}  
+{% set textDarkSoft    = config.colors.textDarkSoft %}
 {% set textLight       = config.colors.textLight %}
-{% set textLightSoft   = config.colors.textLightSoft %} 
+{% set textLightSoft   = config.colors.textLightSoft %}
 
 {% set contentBgd = config.colors.contentBackground %}
 {% set text     = config.colors.textDark if contentBgd.isLight() else config.colors.textLight %}
@@ -49,24 +49,25 @@
 {% set pending            = config.colors.pending %}
 
 <style>
-  {# DESIGN #}  
+  {# DESIGN #}
   {{ createBackgroung('section-content', contentBgd) }}
   {{ createBackgroung('section-contentBody', contentBackgroundElementBody) }}
   {{ createBackgroung('section-content-opposite', text) }}
   {{ createBackgroung('section-primary', primary) }}
   {{ createBackgroung('section-searchbar', searchBar) }}
-  {{ createBackgroung('section-background', background) }}  
+  {{ createBackgroung('section-background', background) }}
   {{ createBackgroung('section-background', background) }}
   {{ createBackgroung('section-controls', config.colors.mapControlsBgd, config.colors.mapControls) }}
   {{ createcolor('primary', primary) }}
 
   {# TAXONOMY COLORS #}
-  
+
   {{ createBackgroung('bg-soft-color-as', text) }}
   {{ createBackgroung('bg-color-as', text) }}
-  .gogo-load-css .gogo-color-as { color: #5b5b5b; }  
+  .gogo-load-css .gogo-color-as { color: #5b5b5b; }
+  .gogo-load-css .gogo-border-color-as { border-color: #5b5b5b; }
 
-  {% for option in optionList %} 
+  {% for option in optionList %}
      {% if option.icon or option.color %}
       {# if no softColor, softcolor equals color #}
       {% set softColor = option.softColor if option.softColor else option.color %}
@@ -76,15 +77,16 @@
       {{ createBackgroung(name|safe, softColor) }}
       {% if option.color %}
         .gogo-load-css .gogo-color-as[option-id="{{ option.id }}"] { color: {{ option.color }} }
+        .gogo-load-css .gogo-border-color-as[option-id="{{ option.id }}"] { border-color: {{ option.color }} }
       {% endif %}
     {% endif %}
-  {% endfor %}  
+  {% endfor %}
 
-  .gogo-load-css .pending { color: {{ pending }} !important; } 
-  .gogo-load-css .pending.gogo-bg-soft-color-as, .gogo-load-css .pending.gogo-bg-color-as  { 
-    background-color: {{ pending }} !important;  
+  .gogo-load-css .pending { color: {{ pending }} !important; }
+  .gogo-load-css .pending.gogo-bg-soft-color-as, .gogo-load-css .pending.gogo-bg-color-as  {
+    background-color: {{ pending }} !important;
     color: {{ config.colors.textDarkSoft if pending.isLight() else config.colors.textLightSoft }} !important;
-  }   
+  }
 
   {% if config.colors.infoBarMenu %}
     {{ createBackgroung('section-infobar-menu.menu-element', config.colors.infoBarMenu) }}

@@ -2,6 +2,7 @@
   {% set longText = splitLongText(value, truncate|default(1000), tolerance|default(50)) %}
   {% set visibleText = applyGlossary(longText.first, glossary|default({})) %}
   <div class="field field-textarea">
+    {% if label %}<span class="field-label">{{ label|safe }}</span>{% endif %}
     <div style="display: inline">{{ visibleText|safe }}</div>
     {% if longText.second %}
       {% set hiddenText = applyGlossary(longText.second, glossary|default({})) %}

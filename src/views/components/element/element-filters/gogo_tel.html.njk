@@ -1,3 +1,5 @@
 {% if value %}
-  <div class="field field-phone">{{ formatPhoneNumber(value)|safe }}</div>
+  <div class="field field-phone">
+    {% if label %}<span class="field-label">{{ label|safe }}</span>{% endif %}
+    <span class="value">{{ formatPhoneNumber(value)|safe }}</span></div>
 {% endif %}

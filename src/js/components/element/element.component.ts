@@ -84,6 +84,7 @@ export class ElementComponent {
     this.moderationComponent = new ModerationComponent(this.dom.find('.interactive-section'), this.element);
     this.interactiveComponent = new InteractiveSectionComponent(this.dom.find('.interactive-section'), this.element);
 
+    this.dom.find('.tooltipped').tooltip();
     this.dom.find('.send-mail-btn').click(() => App.sendEmailComponent.open(this.element));
 
     // SHOW LONG DESCRIPTION BUTTON
@@ -100,6 +101,7 @@ export class ElementComponent {
     });
 
     this.dom.find('.gogo-element').click(function () {
+      App.searchBarComponent.resetSearchResult();
       if (App.mode == AppModes.List) App.setMode(AppModes.Map, false, false);
       App.setState(AppStates.ShowElementAlone, { id: $(this).data('target') });
     });

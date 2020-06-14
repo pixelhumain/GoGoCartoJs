@@ -57,7 +57,7 @@ export class SearchBarComponent {
     });
 
     this.searchInput().gogoAutocomplete({
-      appendTo: '.search-bar-container',
+      appendTo: '.autocomplete-container',
       classes: {
         'ui-autocomplete': 'search-bar-autocomplete-results-container gogo-section-content',
       },
@@ -95,7 +95,7 @@ export class SearchBarComponent {
       }
     });
     this.searchInput().click(() => this.searchInput().gogoAutocomplete('search'));
-    $('.search-bar-icon').click(() => this.handleSearchAction());
+    $('.search-bar-icon, .search-bar-btn').click(() => this.handleSearchAction());
 
     $('#btn-close-search-result').click(() => this.resetElementsSearchResult());
 
@@ -252,6 +252,13 @@ export class SearchBarComponent {
   }
 
   private searchGeocoded(address: string): void {
+    if (App.config.mode.autocompleteOnly) {
+      let route = App.routerModule.generate('normal', { mode: 'carte', addressAndViewport: address });
+      this.searchInput().trigger('searchRoute', route);
+      this.searchInput().trigger('searchGeocoder', { 'value': address });
+      return;
+    }
+
     App.geocoder.geocodeAddress(
       address,
       (results: GeocodeResult[]) => {
@@ -270,7 +277,14 @@ export class SearchBarComponent {
     );
   }
 
-  private searchOption(option: Option): void {
+  searchOption(option: Option): void {
+    if (App.config.mode.autocompleteOnly) {
+      let route = App.routerModule.generate('search_option', { name: option.name, id: option.id });
+      this.searchInput().trigger('searchRoute', route);
+      this.searchInput().trigger('searchCategory', { name: option.name, id: option.id });
+      return;
+    }
+
     this.searchLoading(true);
     this.resetOptionSearchResult(false);
     this.resetElementsSearchResult(false);
@@ -305,6 +319,13 @@ export class SearchBarComponent {
   }
 
   private searchElements(term: string, searchResults, backFromHistory = false): void {
+    if (App.config.mode.autocompleteOnly) {
+      let route = App.routerModule.generate('search', { mode: 'liste', text: term });
+      this.searchInput().trigger('searchRoute', route);
+      this.searchInput().trigger('searchElements', { 'value': term });
+      return;
+    }
+
     this.searchLoading(true);
     this.resetOptionSearchResult();
     this.resetElementsSearchResult(false);
@@ -317,6 +338,13 @@ export class SearchBarComponent {
   }
 
   private searchElement(element): void {
+    if (App.config.mode.autocompleteOnly) {
+      let route = App.routerModule.generate('show_element', { name: element.name, id: element.id });
+      this.searchInput().trigger('searchRoute', route);
+      this.searchInput().trigger('searchElement', { name: element.name, id: element.id });
+      return;
+    }
+
     this.searchLoading(true);
     this.resetOptionSearchResult();
     this.resetSearchResult(false);
@@ -354,9 +382,7 @@ export class SearchBarComponent {
                 this.compareResult(searchTerm, location.getRegion())
             );
           if (matchingLocations.length > 0) {
-            this.displaySearchResultMarkerOnMap(L.latLng(matchingLocations[0].getCoordinates()));
-            App.mapComponent.fitBounds(App.geocoder.latLngBoundsFromRawBounds(matchingLocations[0].getBounds()), true);
-
+            this.searchGeocoded(searchTerm);
             return;
           }
         }
@@ -491,7 +517,7 @@ export class SearchBarComponent {
     App.setState(AppStates.Normal);
   }
 
-  private resetSearchResult(resetValue = true): void {
+  resetSearchResult(resetValue = true): void {
     App.setDataType(AppDataType.All);
     this.hideSearchResult();
     this.clearLocationMarker();

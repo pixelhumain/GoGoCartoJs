@@ -79,8 +79,7 @@ export class ElementMenuComponent {
       let url = window.location.origin + window.location.pathname;
       url += App.routerModule.generate(
         'show_element',
-        { name: capitalize(slugify(this.element.name)), id: this.element.id },
-        true
+        { name: capitalize(slugify(this.element.name)), id: this.element.id }
       );
 
       modal.find('.input-simple-modal').val(url);

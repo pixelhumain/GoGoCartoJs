@@ -42,7 +42,7 @@
     }
   }
 
-  .search-bar-with-options-container .search-bar-container .search-bar
+  .search-bar-container .search-bar
   {
     height: 2.5rem;
     padding-left: 3.2rem;
@@ -51,10 +51,10 @@
     -moz-transition: padding .3s;
     -o-transition: padding .3s;
   }
-  .search-bar-with-options-container .search-bar-container { padding-top: 7px; }
+  .search-bar-container { padding-top: 7px; }
 
-  .directory-menu-header .search-bar-with-options-container .search-bar-container .search-icon.search-geolocalize { line-height: 2.8rem; }
-  .directory-menu-header .search-bar-with-options-container .search-bar-container .search-icon.search-bar-icon {
+  .directory-menu-header .search-bar-container .search-icon.search-geolocalize { line-height: 2.8rem; }
+  .directory-menu-header .search-bar-container .search-icon.search-bar-icon {
     position: absolute;
     font-size: 1.2rem;
     left: auto;
@@ -68,11 +68,11 @@
       padding: 0 1.2rem;
     }
   }
-  @media (min-width: 850px) { .search-bar-with-options-container .search-bar-container {
+  @media (min-width: 850px) { .search-bar-container {
     padding-left: 6px;
   } }
 
-  .directory-menu-header .search-bar-with-options-container .search-bar-container
+  .directory-menu-header .search-bar-container
   {
     #search-spinner-loader
     {

@@ -29,6 +29,8 @@
   {# TOOLTIPS #}
   .backdrop, .material-tooltip, .toast, .main-option-tooltip {
     background-color: {{ textDark if text.isDark() else contentBgd }};
+    color: white;
+    border-color: {{ textDark if text.isDark() else contentBgd }};
     font-family: {{ mainFont }}, sans-serif;
   }
 

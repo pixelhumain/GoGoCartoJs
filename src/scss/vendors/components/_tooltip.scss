@@ -1,18 +1,15 @@
 .material-tooltip {
     padding: 10px 8px;
-    font-size: 1rem;
+    font-size: .9rem;
     z-index: 5000;
-    background-color: transparent;
     border-radius: 3px;
-    color: #fff;
+    max-width: 400px;
     min-height: 36px;
-    line-height: 1rem;
     // max-width: 350px;
-    opacity: 0;
+    opacity: .5;
     display: none;
     position: absolute;
     text-align: center;
-    overflow: hidden;
     left:0;
     top:0;
 
@@ -21,18 +18,36 @@
     @media #{$small-only} {
       display: none !important;
     }
-}
-
-.backdrop {
-  position: absolute;
-  opacity: 0;
-  display: none;
-  height: 7px;
-  width: 14px;
-  border-radius: 0 0 14px 14px;
-  background-color: #323232;
-  z-index: -1;
-  @include transform-origin( 50% 10%);
-
-  will-change: transform, opacity;
+    &:before {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border: .4em solid transparent;
+    }
+    &.position-top:before {
+      top: 100%;
+      left: 50%;
+      border-bottom-width: 0;
+      border-top-color: inherit;
+      transform: translate(-50%, 0);
+    }
+    &.position-bottom:before {
+      bottom: 100%;
+      left: 50%;
+      border-bottom-color: inherit;
+      transform: translate(-50%, 0);
+    }
+    &.position-right:before {
+      top: 50%;
+      right: 100%;
+      border-right-color: inherit;
+      transform: translate(0, -50%);
+    }
+    &.position-left:before {
+      top: 50%;
+      left: 100%;
+      border-left-color: inherit;
+      transform: translate(0, -50%);
+    }
 }

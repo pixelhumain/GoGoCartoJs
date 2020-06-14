@@ -88,6 +88,22 @@ export class GoGoCartoModule {
 
     App.taxonomyModule.createTaxonomyFromJson(taxonomy);
 
+    if (App.taxonomyModule.options.length) {
+      // Adds styles depending on configuration
+      const styles = App.templateModule.render('gogo-styles', {
+        optionList: App.taxonomyModule.options,
+        config: App.config,
+      });
+      const domToAddStyles = $('head').length ? $('head') : $('html');
+      if (domToAddStyles.length) domToAddStyles.append(styles);
+      else console.warn("[GoGoCarto] Cannot find Dom 'head' or 'html' to add styles");
+    }
+
+    if (App.config.mode.autocompleteOnly) {
+      App.searchBarComponent.initialize();
+      return;
+    }
+
     const layout = App.templateModule.render('layout', {
       rootCategories: App.taxonomyModule.rootCategories,
       mainCategory: App.taxonomyModule.mainCategory,
@@ -102,17 +118,6 @@ export class GoGoCartoModule {
 
     $(this.container).trigger('templateLoaded');
     afterTemplateLoaded();
-
-    if (App.taxonomyModule.options.length) {
-      // Adds styles depending on configuration
-      const styles = App.templateModule.render('gogo-styles', {
-        optionList: App.taxonomyModule.options,
-        config: App.config,
-      });
-      const domToAddStyles = $('head').length ? $('head') : $('html');
-      if (domToAddStyles.length) domToAddStyles.append(styles);
-      else console.warn("[GoGoCarto] Cannot find Dom 'head' or 'html' to add styles");
-    }
 
     setTimeout(() => {
       App.initialize();
