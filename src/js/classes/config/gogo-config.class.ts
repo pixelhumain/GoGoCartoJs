@@ -1,7 +1,6 @@
 import { App } from '../../gogocarto';
 import { TileLayer } from '../map/tile-layer.class';
 import { GoGoFeature } from './gogo-feature.class';
-import { ElementStatus } from '../classes';
 import { DEFAULT_FEATURES } from './gogo-default-feature';
 import { FR } from '../../../locales/fr';
 import { EN } from '../../../locales/en';
@@ -127,6 +126,17 @@ export class GoGoConfig {
       console.warn('[GoGoCarto] You need login to access this feature');
     },
   };
+  public static readonly GEOCODING_PROVIDER_NOMINATIM = 'nominatim';
+  public static readonly GEOCODING_PROVIDER_MAPBOX = 'mapbox';
+  readonly search: {
+    geocodingProvider: 'nominatim' | 'mapbox';
+    canAutocomplete: boolean;
+    meta: { apiKey?: string };
+  } = {
+    geocodingProvider: GoGoConfig.GEOCODING_PROVIDER_NOMINATIM,
+    canAutocomplete: undefined,
+    meta: {},
+  };
   theme = 'default';
   // see gogo-styles for defaut values
   readonly colors = {
@@ -174,13 +184,23 @@ export class GoGoConfig {
   };
 
   constructor(config: any) {
-    if (!config.features) config.features = DEFAULT_FEATURES;
+    if (!config.features) {
+      config.features = DEFAULT_FEATURES;
+    }
     // Copy all the defined options
     // All the options non specified will be initialized with default values
     this.recursiveFillProperty(this, config);
     this.data.retrieveElementsByApi = typeof this.data.elements == 'string';
-    if (config.map && config.map.defaultBounds) this.map.defaultBoundsProvided = true;
-    if (!this.features['sendMail'].url) this.features['sendMail'].active = false;
+    if (config.map && config.map.defaultBounds) {
+      this.map.defaultBoundsProvided = true;
+    }
+    if (!this.features['sendMail'].url) {
+      this.features['sendMail'].active = false;
+    }
+    this.search.canAutocomplete = true;
+    if (GoGoConfig.GEOCODING_PROVIDER_NOMINATIM === this.search.geocodingProvider) {
+      this.search.canAutocomplete = false;
+    }
 
     if (!this.colors.menuOptionHover) {
       const menuOptionHover = tinycolor(this.colors.contentBackground.toString());

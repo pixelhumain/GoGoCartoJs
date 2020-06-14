@@ -1,8 +1,7 @@
-import { AppDataType, AppModes, AppStates } from '../../app.module';
 import { App } from '../../gogocarto';
-import { removeDiactrics } from '../../utils/string-helpers';
-import { Option, ViewPort } from '../../classes/classes';
+import { AppDataType, AppModes, AppStates } from '../../app.module';
 import { GeocodeResult } from '../../modules/geocoder.module';
+import { Option, ViewPort } from '../../classes/classes';
 
 interface CustomJQuery extends JQuery {
   gogoAutocomplete(options: JQueryUI.AutocompleteOptions): JQuery;
@@ -66,7 +65,7 @@ export class SearchBarComponent {
       },
       source: ({ term }, response) => {
         this.beforeSearch();
-        this.searchTerm(term, (elementsResults, optionsResults, locationsResults) => {
+        App.search.searchTerm(term, (elementsResults, optionsResults, locationsResults) => {
           this.searchLoading(true);
           this.setAutocompleteItems(term, elementsResults, optionsResults, locationsResults, response);
         });
@@ -118,7 +117,7 @@ export class SearchBarComponent {
   ): void {
     let items: AutocompleteItem[] = [];
 
-    if (App.config.isFeatureAvailable('searchPlace')) {
+    if (App.config.isFeatureAvailable('searchPlace') && !App.config.search.canAutocomplete) {
       items = [
         ...items,
         {
@@ -131,12 +130,20 @@ export class SearchBarComponent {
     }
 
     if (locationsResults.length > 0) {
+      items = [
+        ...items,
+        ...locationsResults.slice(0, 4).map(({ type, value }: { type: string; value: GeocodeResult }) => ({
+          type,
+          value,
+          label: `<span class="geocoded-name">${value.getCity()}</span>`,
+        })),
+      ];
     }
 
     if (optionsResults.length > 0) {
       items = [
         ...items,
-        ...optionsResults.slice(0, 10).map(({ type, value }) => ({
+        ...optionsResults.slice(0, 10).map(({ type, value }: { type: string; value: Option }) => ({
           type,
           value,
           label: `<span class="category-label">${App.config.translate('category')}</span>
@@ -187,92 +194,6 @@ export class SearchBarComponent {
     }
 
     response(items);
-  }
-
-  private searchTerm(
-    term: string,
-    callback: (
-      elementsResults: SearchResult[],
-      optionsResults: SearchResult[],
-      locationsResults: SearchResult[]
-    ) => void,
-    searchLocations = false
-  ): void {
-    const searchElements = App.config.isFeatureAvailable('searchElements');
-    const searchOptions = App.config.isFeatureAvailable('searchCategories');
-    searchLocations = App.config.isFeatureAvailable('searchPlace') && searchLocations;
-
-    let elementsResults: SearchResult[] | false,
-      optionsResults: SearchResult[] | false,
-      locationsResults: SearchResult[] | false = false;
-
-    const resolveResults = ({
-      elements = false,
-      options = false,
-      locations = false,
-    }: {
-      elements?: SearchResult[] | false;
-      options?: SearchResult[] | false;
-      locations?: SearchResult[] | false;
-    }): void => {
-      elementsResults = elements ? elements : elementsResults;
-      optionsResults = options ? options : optionsResults;
-      locationsResults = locations ? locations : locationsResults;
-
-      if (elementsResults && optionsResults && locationsResults) {
-        callback(elementsResults, optionsResults, locationsResults);
-      }
-    };
-
-    if (searchElements) {
-      const route = App.config.features.searchElements.url;
-      if (route) {
-        App.ajaxModule.sendRequest(route, 'get', { text: term }, ({ data: results }) => {
-          resolveResults({
-            elements: results.map((result) => ({
-              type: 'element',
-              value: result,
-            })),
-          });
-        });
-      } else {
-        resolveResults({
-          elements: this.searchInResults(
-            term,
-            App.config.data.elements,
-            (element: any) => element.name
-          ).map((element) => ({ type: 'element', value: element })),
-        });
-      }
-    } else {
-      resolveResults({ elements: [] });
-    }
-
-    if (searchOptions) {
-      resolveResults({
-        options: this.searchInResults(term, App.taxonomyModule.options, (option) => option.name)
-          .filter((option) => option.displayInMenu)
-          .map((option) => ({
-            type: 'option',
-            value: option,
-          })),
-      });
-    } else {
-      resolveResults({ options: [] });
-    }
-
-    if (searchLocations) {
-      App.geocoder.geocodeAddress(term, (results: GeocodeResult[]) => {
-        resolveResults({
-          locations: results.map((location) => ({
-            type: 'geocoded',
-            value: location,
-          })),
-        });
-      });
-    } else {
-      resolveResults({ locations: [] });
-    }
   }
 
   private searchGeocoded(address: string): void {
@@ -377,23 +298,12 @@ export class SearchBarComponent {
     App.setState(AppStates.ShowElement, { id: element.id, mapPan: true });
   }
 
-  private searchInResults<T>(searched: string, results: T[], toString: (result: T) => string): T[] {
-    return results.filter((result) => {
-      const noDiacriticsResult = removeDiactrics(toString(result)).toLowerCase();
-      return noDiacriticsResult.includes(removeDiactrics(searched).toLowerCase());
-    });
-  }
-
-  private compareResult(searched: string, result: string): boolean {
-    return removeDiactrics(searched).toLowerCase() === removeDiactrics(result).toLowerCase();
-  }
-
   // Handle forced search action by user (input key enter pressed, icon click)
   private handleSearchAction(): void {
     const searchTerm = this.searchInput().val();
 
     this.beforeSearch();
-    this.searchTerm(
+    App.search.searchTerm(
       searchTerm,
       (elementsResults, _, locationsResults) => {
         this.searchLoading(true);
@@ -402,8 +312,8 @@ export class SearchBarComponent {
             .map((locationResult) => locationResult.value)
             .filter(
               (location: GeocodeResult) =>
-                this.compareResult(searchTerm, location.getCity()) ||
-                this.compareResult(searchTerm, location.getRegion())
+                App.search.compareResult(searchTerm, location.getCity()) ||
+                App.search.compareResult(searchTerm, location.getRegion())
             );
           if (matchingLocations.length > 0) {
             this.searchGeocoded(searchTerm);
@@ -467,7 +377,7 @@ export class SearchBarComponent {
     } else {
       this.searchElements(
         text,
-        { data: this.searchInResults(text, App.config.data.elements, (element: any) => element.name) },
+        { data: App.search.searchInResults(text, App.config.data.elements, (element: any) => element.name) },
         backFromHistory
       );
     }

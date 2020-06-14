@@ -1,10 +1,9 @@
-declare let GeocoderJS;
 import { App } from '../gogocarto';
-declare let L, $;
-
-import { AppModule } from '../app.module';
-import { slugify } from '../utils/string-helpers';
 import { ViewPort, Event } from '../classes/classes';
+import { slugify } from '../utils/string-helpers';
+
+declare let GeocoderJS;
+declare let L, $;
 
 /** results type returned by geocoderJS */
 export interface GeocodeResult {

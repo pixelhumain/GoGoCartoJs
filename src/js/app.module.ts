@@ -10,7 +10,8 @@ import { GeocodingManager } from './managers/geocoding.manager';
 import { MapManager } from './managers/map.manager';
 
 // MODULES
-import { GeocoderModule, GeocodeResult } from './modules/geocoder.module';
+import { SearchModule } from './modules/search.module';
+import { GeocoderModule } from './modules/geocoder.module';
 import { FilterModule } from './modules/taxonomy/filter.module';
 import { FilterRoutingModule } from './modules/taxonomy/filter-routing.module';
 import { ElementsModule } from './modules/elements/elements.module';
@@ -80,6 +81,7 @@ export class AppModule {
   geocodingManager: GeocodingManager;
   mapManager: MapManager;
 
+  search = new SearchModule();
   geocoder = new GeocoderModule();
   filterModule = new FilterModule();
   filterRoutingModule = new FilterRoutingModule();
