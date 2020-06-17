@@ -53,6 +53,7 @@ export class ElementBase {
   images: string[];
   files: string[];
   stamps: any[] = [];
+  geoJSONFeature: any;
 
   // CUSTOM DATA
   data: any = {};

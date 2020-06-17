@@ -7,6 +7,7 @@ import { OptionValue, CategoryValue, Option, Category, Contribution, VoteReport,
 import { capitalize, formatLabel } from '../../utils/string-helpers';
 
 import { App } from '../../gogocarto';
+import {MapFeatureComponent} from "../../components/map/map-feature.component";
 declare let $, Map;
 
 const CORE_FIELDS = [
@@ -32,6 +33,7 @@ const CORE_FIELDS = [
 export class Element extends ElementBase {
   private marker_: Marker = null;
   private component_: ElementComponent = null;
+  private mapFeature_: MapFeatureComponent = null;
 
   colorOptionId: any;
 
@@ -63,6 +65,9 @@ export class Element extends ElementBase {
     App.elementIconsModule.updateIconsToDisplay(this);
 
     this.marker_ = new Marker(this.id, this.position);
+    if (this.geoJSONFeature) {
+      this.mapFeature_ = new MapFeatureComponent(this);
+    }
     this.isInitialized_ = true;
   }
 
