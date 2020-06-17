@@ -60,6 +60,7 @@ export class ElementJsonParserModule {
     element.openHours = elementJson.openHours;
     App.elementFormaterModule.calculateFormatedOpenHours(element);
     element.stamps = elementJson.stamps || [];
+    element.geoJSONFeature = elementJson.geoJSONFeature;
 
     element.images = [];
     if (elementJson.image) element.images.push(elementJson.image);

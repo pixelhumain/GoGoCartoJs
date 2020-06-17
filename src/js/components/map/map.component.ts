@@ -343,7 +343,7 @@ export class MapComponent {
           url: layersConfigUrl,
           method: 'get',
           success: (response) => {
-              if (typeof response == 'string') response = JSON.parse(response);
+              if (typeof response === 'string') response = JSON.parse(response);
               if (response.features !== null) {
                   this.loadInlineGeoJSON(map, response);
               }

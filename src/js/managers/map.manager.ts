@@ -35,7 +35,7 @@ export class MapManager {
     const that = this;
     setTimeout(function () {
       that.isClicking = false;
-    }, 100);
+    }, 400);
   }
 
   handleMarkerClick(marker: Marker) {
@@ -74,7 +74,7 @@ export class MapManager {
   handleMapClick() {
     if (this.isClicking) return;
 
-    //console.log("handle Map Click", AppStates[App.state]);
+    // console.log("handle Map Click", AppStates[App.state]);
 
     if (App.state == AppStates.ShowElement || App.state == AppStates.ShowElementAlone) {
       App.infoBarComponent.hide();
