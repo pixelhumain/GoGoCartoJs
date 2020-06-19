@@ -8,7 +8,7 @@ var elements = {
         "latitude": 45.8899453,
         "longitude": 6.1429706
       },
-      "taxonomy": [ 10485 ],
+      "taxonomy": [10485],
       "geoJSONFeature": {
         "type": "Feature",
         "geometry": {
@@ -290,7 +290,7 @@ var elements = {
         "latitude": 45.9078097,
         "longitude": 6.1051869
       },
-      "taxonomy": [ 10485 ],
+      "taxonomy": [10485],
       "geoJSONFeature": {
         "type": "Feature",
         "geometry": {
@@ -492,6 +492,70 @@ var elements = {
           "name": "Tramway Ligne 2",
           "stroke": "#009A9C",
           "stroke-width": 3
+        }
+      }
+    },
+    {
+      "id": "exemplesurface",
+      "name": "Exemple de surface",
+      "geo": {
+        "latitude": 45.90870407631052,
+        "longitude": 6.133546829223632
+      },
+      "taxonomy": [10473],
+      "geoJSONFeature": {
+        "type": "Feature",
+        "properties": {
+          "fill": "#00537E",
+          "fill-opacity": 0.4,
+          "stroke": "#00537E"
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                6.131486892700195,
+                45.90607627646407
+              ],
+              [
+                6.1324310302734375,
+                45.90559848130852
+              ],
+              [
+                6.13560676574707,
+                45.90762908231836
+              ],
+              [
+                6.135435104370116,
+                45.90834574729302
+              ],
+              [
+                6.136465072631835,
+                45.90989848966227
+              ],
+              [
+                6.136636734008789,
+                45.91085400183797
+              ],
+              [
+                6.132173538208008,
+                45.91174977956318
+              ],
+              [
+                6.131572723388671,
+                45.91151090691675
+              ],
+              [
+                6.131315231323242,
+                45.9090624030148
+              ],
+              [
+                6.131486892700195,
+                45.90607627646407
+              ]
+            ]
+          ]
         }
       }
     }
