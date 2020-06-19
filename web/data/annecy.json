@@ -916,7 +916,9 @@
       },
       "properties": {
         "code": "74010",
-        "nom": "Annecy"
+        "nom": "Annecy",
+        "fill": "#C1D3FF",
+        "fill-opacity": 0.5
       }
     }
   ]
