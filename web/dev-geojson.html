@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <style>
+      html, body, #gogocarto
+      {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+    <link rel="stylesheet" href="assets/gogocarto.css">
+    <link rel="stylesheet" href="assets/images/styles.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <script src="../build/deps.js"></script>
+    <script src="../build/libs.js"></script>
+    <script src="../build/directory.js"></script>
+    <script src="../build/templates.js"></script>
+
+    <script src="data/colors.js"></script>
+    <script src="data/taxonomy-simple.js"></script>
+    <script src="data/elements-geojson.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  </head>
+  <body>
+    <div id="gogocarto"></div>
+    <script>
+      $(document).ready(function() {
+        carto = goGoCarto('#gogocarto', {
+          data:
+            {
+              taxonomy: taxonomy,
+              elements: elements
+            },
+          theme: "flat",
+          map: {
+            geojsonLayers: '/web/data/annecy.json'
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
