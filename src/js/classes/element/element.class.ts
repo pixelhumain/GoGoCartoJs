@@ -177,6 +177,9 @@ export class Element extends ElementBase {
   get isInitialized() {
     return this.isInitialized_;
   }
+  get feature(): MapFeatureComponent {
+    return this.mapFeature_;
+  }
 
   toDisplay() {
     const result = {

@@ -3,6 +3,7 @@ import { Element, ViewPort, Event } from '../../classes/classes';
 import { GeocodeResult, RawBounds } from '../../modules/geocoder.module';
 import * as Cookies from '../../utils/cookies';
 import { App } from '../../gogocarto';
+import {MapFeatureComponent} from "./map-feature.component";
 
 declare module 'leaflet' {
   interface MarkerClusterGroupOptions {
@@ -31,6 +32,7 @@ export class MapComponent {
   map_: L.Map = null;
 
   markersGroup = null;
+  featuresGroup = null;
   isInitialized = false;
   isMapLoaded = false;
   oldZoom = -1;
@@ -154,6 +156,9 @@ export class MapComponent {
 
     this.map_.addLayer(this.markersGroup);
 
+    this.featuresGroup = L.layerGroup([]);
+    this.map_.addLayer(this.featuresGroup);
+
     L.control.zoom({ position: 'topright' }).addTo(this.map_);
     L.control.layers(baseLayers, {}, { position: 'topright', collapsed: false }).addTo(this.map_);
 
@@ -224,6 +229,24 @@ export class MapComponent {
 
   clearMarkers() {
     if (this.markersGroup) this.markersGroup.clearLayers();
+  }
+
+  addFeature(feature: MapFeatureComponent) {
+    this.featuresGroup.addLayer(feature.featureLayer);
+  }
+
+  addFeatures(features: MapFeatureComponent[]) {
+    if (!this.featuresGroup) return;
+    for (const feat of features) this.addFeature(feat);
+  }
+
+  removeFeatures(features: MapFeatureComponent[]) {
+    if (!this.featuresGroup) return;
+    for (const feat of features) this.removeFeature(feat);
+  }
+
+  removeFeature(feature: MapFeatureComponent) {
+    this.featuresGroup.removeLayer(feature.featureLayer);
   }
 
   fitElementsBounds(elements: Element[]) {

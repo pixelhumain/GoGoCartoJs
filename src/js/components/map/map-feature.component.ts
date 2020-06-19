@@ -3,6 +3,7 @@ import { Element } from '../../classes/classes';
 
 export class MapFeatureComponent {
     private element: Element;
+    private featureLayer_: L.GeoJSON;
 
     constructor(element: Element) {
         this.element = element;
@@ -10,7 +11,7 @@ export class MapFeatureComponent {
     }
 
     private initialize() {
-        let featureLayer = L.geoJSON(this.element.geoJSONFeature, {
+        this.featureLayer_ = L.geoJSON(this.element.geoJSONFeature, {
             style: function (feature) {
                 let props = feature.properties || {};
                 return {
@@ -23,13 +24,13 @@ export class MapFeatureComponent {
             }
         }).addTo(App.mapComponent.map_);
 
-        featureLayer.on('click', (ev: any) => {
+        this.featureLayer_.on('click', (ev: any) => {
             App.mapManager.handleMarkerClick(this.element.marker);
         });
-        featureLayer.on('mouseover', (ev: any) => {
+        this.featureLayer_.on('mouseover', (ev: any) => {
             this.showBigSize(ev.originalEvent.target);
         });
-        featureLayer.on('mouseout', (ev: any) => {
+        this.featureLayer_.on('mouseout', (ev: any) => {
             this.showNormalSize(ev.originalEvent.target);
         });
     }
@@ -42,5 +43,9 @@ export class MapFeatureComponent {
     showNormalSize(eventTarget) {
         this.element.marker.showNormalSize();
         eventTarget.classList.remove('PathHover');
+    }
+
+    get featureLayer(): L.GeoJSON {
+        return this.featureLayer_;
     }
 }
