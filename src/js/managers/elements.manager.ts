@@ -89,6 +89,9 @@ export class ElementsManager {
         App.mapComponent.addMarkers(result.newElements.map((e) => e.marker.getLeafletMarker()));
       }
 
+      App.mapComponent.addFeatures(result.newElements.filter((e) => e.feature).map((e) => e.feature));
+      App.mapComponent.removeFeatures(result.elementsToRemove.filter((e) => e.feature).map((e) => e.feature));
+
       if (App.config.map.useClusters) App.mapComponent.markersGroup.checkForUnclestering(App.map().getBounds());
     }
 
