@@ -446,48 +446,40 @@ th {
 
 .material-tooltip {
   padding: 10px 8px;
-  font-size: .9rem;
+  font-size: 1rem;
   z-index: 5000;
+  background-color: transparent;
   border-radius: 3px;
-  max-width: 400px;
+  color: #fff;
   min-height: 36px;
-  opacity: .5;
+  line-height: 1rem;
+  opacity: 0;
   display: none;
   position: absolute;
   text-align: center;
+  overflow: hidden;
   left: 0;
   top: 0;
   will-change: top, left; }
   @media only screen and (max-width: 600px) {
     .material-tooltip {
       display: none !important; } }
-  .material-tooltip:before {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    border: .4em solid transparent; }
-  .material-tooltip.position-top:before {
-    top: 100%;
-    left: 50%;
-    border-bottom-width: 0;
-    border-top-color: inherit;
-    transform: translate(-50%, 0); }
-  .material-tooltip.position-bottom:before {
-    bottom: 100%;
-    left: 50%;
-    border-bottom-color: inherit;
-    transform: translate(-50%, 0); }
-  .material-tooltip.position-right:before {
-    top: 50%;
-    right: 100%;
-    border-right-color: inherit;
-    transform: translate(0, -50%); }
-  .material-tooltip.position-left:before {
-    top: 50%;
-    left: 100%;
-    border-left-color: inherit;
-    transform: translate(0, -50%); }
+
+.backdrop {
+  position: absolute;
+  opacity: 0;
+  display: none;
+  height: 7px;
+  width: 14px;
+  border-radius: 0 0 14px 14px;
+  background-color: #323232;
+  z-index: -1;
+  -webkit-transform-origin: 50% 10%;
+  -moz-transform-origin: 50% 10%;
+  -ms-transform-origin: 50% 10%;
+  -o-transform-origin: 50% 10%;
+  transform-origin: 50% 10%;
+  will-change: transform, opacity; }
 
 .lean-overlay {
   position: fixed;
@@ -4065,18 +4057,18 @@ th {
     padding-right: 0; }
     .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container #directory-menu .main-categories .icon.main-icon.fa.active, .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container #directory-menu .main-categories .icon.main-icon.fas.active, .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container #directory-menu .main-categories .icon.main-icon.fab.active, .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container #directory-menu .main-categories .icon.main-icon.far.active {
       padding-left: 5px; }
-  .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container .search-bar-container .search-bar {
+  .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar {
     height: 2.5rem;
     padding-left: 3.2rem;
     transition: padding .3s;
     -webkit-transition: padding .3s;
     -moz-transition: padding .3s;
     -o-transition: padding .3s; }
-  .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container .search-bar-container {
+  .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container .search-bar-with-options-container .search-bar-container {
     padding-top: 7px; }
-  .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container .directory-menu-header .search-bar-container .search-icon.search-geolocalize {
+  .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container .directory-menu-header .search-bar-with-options-container .search-bar-container .search-icon.search-geolocalize {
     line-height: 2.8rem; }
-  .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container .directory-menu-header .search-bar-container .search-icon.search-bar-icon {
+  .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container .directory-menu-header .search-bar-with-options-container .search-bar-container .search-icon.search-bar-icon {
     position: absolute;
     font-size: 1.2rem;
     left: auto;
@@ -4085,12 +4077,12 @@ th {
     padding: 0 .6rem;
     border-radius: 5px 0px 0 5px;
     line-height: 2.8rem; }
-    .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container .directory-menu-header .search-bar-container .search-icon.search-bar-icon.loading {
+    .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container .directory-menu-header .search-bar-with-options-container .search-bar-container .search-icon.search-bar-icon.loading {
       padding: 0 1.2rem; }
   @media (min-width: 850px) {
-    .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container .search-bar-container {
+    .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container .search-bar-with-options-container .search-bar-container {
       padding-left: 6px; } }
-  .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container .directory-menu-header .search-bar-container #search-spinner-loader {
+  .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container .directory-menu-header .search-bar-with-options-container .search-bar-container #search-spinner-loader {
     top: 10px;
     left: 8px; }
   .gogo-load-css .gogo-theme-presdecheznous.gogocarto-container #directory-menu .main-categories {
@@ -4187,7 +4179,7 @@ th {
     padding: 8px 0; }
   .gogo-load-css .gogo-theme-flat.gogocarto-container .leaflet-control-layers-base label:hover {
     background-color: rgba(123, 123, 123, 0.09); }
-  .gogo-load-css .gogo-theme-flat.gogocarto-container .search-bar-container .search-bar {
+  .gogo-load-css .gogo-theme-flat.gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar {
     font-weight: 600;
     box-shadow: none !important; }
   .gogo-load-css .gogo-theme-flat.gogocarto-container #directory-content-list .collapsible.popout > li {
@@ -5991,168 +5983,168 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         font-style: italic; }
     .gogo-load-css .gogocarto-container .search-bar-with-options-container {
       padding-bottom: .7rem; }
+      .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container {
+        padding: .7rem;
+        text-align: center;
+        margin: 0;
+        padding-bottom: 0;
+        padding-left: .7rem; }
+        .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-icon {
+          position: absolute;
+          font-size: 1.2rem;
+          height: 2rem;
+          line-height: 2rem; }
+          .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-icon:before {
+            line-height: 2rem; }
+          .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-icon:hover {
+            cursor: pointer; }
+          .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-icon.search-bar-icon {
+            left: 1.2rem; }
+          .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-icon.search-geolocalize {
+            right: 1.4rem; }
+        .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar {
+          font-size: 16px;
+          padding: 0 .5rem 0 .5rem;
+          box-shadow: none !important;
+          margin: 0;
+          text-align: left;
+          padding-left: 2.2rem;
+          font-weight: bold;
+          height: 2rem;
+          width: 100%;
+          border: none !important;
+          padding-right: 2.3rem;
+          -webkit-border-radius: 5px;
+          -moz-border-radius: 5px;
+          border-radius: 5px;
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          box-sizing: border-box; }
+          @media (min-width: 850px) {
+            .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar {
+              text-transform: uppercase;
+              font-size: .8rem; } }
+          .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar.invalid {
+            border-color: #B90303 !important; }
+          .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar::-webkit-input-placeholder {
+            color: #949494; }
+          .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar::-moz-placeholder {
+            color: #949494; }
+          .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar:-ms-input-placeholder {
+            color: #949494; }
+          .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar:-moz-placeholder {
+            color: #949494; }
+        .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container {
+          position: absolute;
+          z-index: 5;
+          padding: .5rem 0;
+          left: 0 !important;
+          top: auto !important;
+          margin-top: .5rem;
+          width: 400px;
+          max-width: 100vw;
+          box-shadow: 0 0 0 1px rgba(99, 114, 130, 0.16), 0 8px 16px rgba(27, 39, 51, 0.08);
+          border-radius: 0 4px 4px 4px;
+          max-height: 80vh;
+          overflow: auto; }
+          .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item {
+            cursor: pointer; }
+            .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item.option .icon::before {
+              float: left; }
+            .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper {
+              padding: .7rem 1rem;
+              display: -webkit-box;
+              display: -moz-box;
+              display: -ms-flexbox;
+              display: -webkit-flex;
+              display: flex;
+              -webkit-flex-wrap: nowrap;
+              -moz-flex-wrap: nowrap;
+              -ms-flex-wrap: nowrap;
+              flex-wrap: nowrap;
+              -webkit-flex-align: center;
+              -ms-flex-align: center;
+              -webkit-align-items: center;
+              align-items: center;
+              text-align: left; }
+              .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper:hover, .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper.ui-state-active {
+                background-color: rgba(125, 125, 125, 0.08); }
+              .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper.nested {
+                padding-left: 1rem; }
+              .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper .label {
+                -webkit-box-flex: 1 auto;
+                -moz-box-flex: 1 auto;
+                -webkit-flex: 1 auto;
+                -ms-flex: 1 auto;
+                flex: 1 auto;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis; }
+              .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper .subLabel {
+                text-align: right;
+                opacity: .8;
+                font-size: .85rem;
+                width: 7.5rem;
+                flex-shrink: 0;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis; }
+              .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper .icon {
+                padding: 0;
+                margin-right: 0 !important;
+                font-size: 1.1rem;
+                width: 2rem;
+                flex-shrink: 0; }
+              .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper .category-label {
+                opacity: .9;
+                font-size: .9rem; }
+              .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper .category-name {
+                font-style: italic;
+                font-size: .9rem;
+                font-weight: bold;
+                margin-left: .3rem; }
+              .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper .element-name {
+                font-size: .9rem;
+                font-weight: bold;
+                font-style: italic; }
+              .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper .search-term {
+                margin: 0 3px; }
+                .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper .search-term:after {
+                  content: '"'; }
+                .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper .search-term:before {
+                  content: '"'; }
+            .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item.search_elements, .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item.search_geocoded + .option {
+              border-top: 1px solid #eee;
+              padding-top: .3rem;
+              margin-top: .3rem; }
+            .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item.search_elements .label, .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item.search_geocoded .label {
+              text-transform: uppercase;
+              font-weight: bold;
+              font-size: .8rem; }
+            .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item.search_elements {
+              padding-top: .6rem; }
+      .gogo-load-css .gogocarto-container .search-bar-with-options-container #search-spinner-loader {
+        top: 7px;
+        height: 18px;
+        width: 18px;
+        display: none;
+        position: absolute; }
+        .gogo-load-css .gogocarto-container .search-bar-with-options-container #search-spinner-loader .spinner-layer {
+          border-color: #5d5d5d; }
+        .gogo-load-css .gogocarto-container .search-bar-with-options-container #search-spinner-loader .circle-clipper .circle {
+          border-width: 2px; }
+      .gogo-load-css .gogocarto-container .search-bar-with-options-container #search-spinner-loader {
+        left: 0; }
+      .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-icon.loading:before {
+        content: none; }
+      .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-bar-icon.loading #search-spinner-loader {
+        display: block; }
       .gogo-load-css .gogocarto-container .search-bar-with-options-container .search-no-result {
         color: white;
         padding-top: .7rem;
         text-decoration: underline;
         text-align: center;
         font-weight: bold; }
-    .gogo-load-css .gogocarto-container .search-bar-container {
-      padding: .7rem;
-      text-align: center;
-      margin: 0;
-      padding-bottom: 0;
-      padding-left: .7rem; }
-      .gogo-load-css .gogocarto-container .search-bar-container .search-icon {
-        position: absolute;
-        font-size: 1.2rem;
-        height: 2rem;
-        line-height: 2rem; }
-        .gogo-load-css .gogocarto-container .search-bar-container .search-icon:before {
-          line-height: 2rem; }
-        .gogo-load-css .gogocarto-container .search-bar-container .search-icon:hover {
-          cursor: pointer; }
-        .gogo-load-css .gogocarto-container .search-bar-container .search-icon.search-bar-icon {
-          left: 1.2rem; }
-        .gogo-load-css .gogocarto-container .search-bar-container .search-icon.search-geolocalize {
-          right: 1.4rem; }
-      .gogo-load-css .gogocarto-container .search-bar-container .search-bar {
-        font-size: 16px;
-        padding: 0 .5rem 0 .5rem;
-        box-shadow: none !important;
-        margin: 0;
-        text-align: left;
-        padding-left: 2.2rem;
-        font-weight: bold;
-        height: 2rem;
-        width: 100%;
-        border: none !important;
-        padding-right: 2.3rem;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        border-radius: 5px;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box; }
-        @media (min-width: 850px) {
-          .gogo-load-css .gogocarto-container .search-bar-container .search-bar {
-            text-transform: uppercase;
-            font-size: .8rem; } }
-        .gogo-load-css .gogocarto-container .search-bar-container .search-bar.invalid {
-          border-color: #B90303 !important; }
-        .gogo-load-css .gogocarto-container .search-bar-container .search-bar::-webkit-input-placeholder {
-          color: #949494; }
-        .gogo-load-css .gogocarto-container .search-bar-container .search-bar::-moz-placeholder {
-          color: #949494; }
-        .gogo-load-css .gogocarto-container .search-bar-container .search-bar:-ms-input-placeholder {
-          color: #949494; }
-        .gogo-load-css .gogocarto-container .search-bar-container .search-bar:-moz-placeholder {
-          color: #949494; }
-    .gogo-load-css .gogocarto-container .search-bar-autocomplete-results-container {
-      position: absolute;
-      z-index: 5;
-      padding: .5rem 0;
-      left: 0 !important;
-      top: auto !important;
-      margin-top: .5rem;
-      width: 400px;
-      max-width: 100vw;
-      box-shadow: 0 0 0 1px rgba(99, 114, 130, 0.16), 0 8px 16px rgba(27, 39, 51, 0.08);
-      border-radius: 0 4px 4px 4px;
-      max-height: 80vh;
-      overflow: auto; }
-      .gogo-load-css .gogocarto-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item {
-        cursor: pointer; }
-        .gogo-load-css .gogocarto-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item.option .icon::before {
-          float: left; }
-        .gogo-load-css .gogocarto-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper {
-          padding: .7rem 1rem;
-          display: -webkit-box;
-          display: -moz-box;
-          display: -ms-flexbox;
-          display: -webkit-flex;
-          display: flex;
-          -webkit-flex-wrap: nowrap;
-          -moz-flex-wrap: nowrap;
-          -ms-flex-wrap: nowrap;
-          flex-wrap: nowrap;
-          -webkit-flex-align: center;
-          -ms-flex-align: center;
-          -webkit-align-items: center;
-          align-items: center;
-          text-align: left; }
-          .gogo-load-css .gogocarto-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper:hover, .gogo-load-css .gogocarto-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper.ui-state-active {
-            background-color: rgba(125, 125, 125, 0.08); }
-          .gogo-load-css .gogocarto-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper.nested {
-            padding-left: 1rem; }
-          .gogo-load-css .gogocarto-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper .label {
-            -webkit-box-flex: 1 auto;
-            -moz-box-flex: 1 auto;
-            -webkit-flex: 1 auto;
-            -ms-flex: 1 auto;
-            flex: 1 auto;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis; }
-          .gogo-load-css .gogocarto-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper .subLabel {
-            text-align: right;
-            opacity: .8;
-            font-size: .85rem;
-            width: 7.5rem;
-            flex-shrink: 0;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis; }
-          .gogo-load-css .gogocarto-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper .icon {
-            padding: 0;
-            margin-right: 0 !important;
-            font-size: 1.1rem;
-            width: 2rem;
-            flex-shrink: 0; }
-          .gogo-load-css .gogocarto-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper .category-label {
-            opacity: .9;
-            font-size: .9rem; }
-          .gogo-load-css .gogocarto-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper .category-name {
-            font-style: italic;
-            font-size: .9rem;
-            font-weight: bold;
-            margin-left: .3rem; }
-          .gogo-load-css .gogocarto-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper .element-name {
-            font-size: .9rem;
-            font-weight: bold;
-            font-style: italic; }
-          .gogo-load-css .gogocarto-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper .search-term {
-            margin: 0 3px; }
-            .gogo-load-css .gogocarto-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper .search-term:after {
-              content: '"'; }
-            .gogo-load-css .gogocarto-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item .search-bar-autocomplete-result-item-wrapper .search-term:before {
-              content: '"'; }
-        .gogo-load-css .gogocarto-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item.search_elements, .gogo-load-css .gogocarto-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item.search_geocoded + .option {
-          border-top: 1px solid #eee;
-          padding-top: .3rem;
-          margin-top: .3rem; }
-        .gogo-load-css .gogocarto-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item.search_elements .label, .gogo-load-css .gogocarto-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item.search_geocoded .label {
-          text-transform: uppercase;
-          font-weight: bold;
-          font-size: .8rem; }
-        .gogo-load-css .gogocarto-container .search-bar-autocomplete-results-container .search-bar-autocomplete-result-item.search_elements {
-          padding-top: .6rem; }
-    .gogo-load-css .gogocarto-container #search-spinner-loader {
-      top: 7px;
-      height: 18px;
-      width: 18px;
-      display: none;
-      position: absolute; }
-      .gogo-load-css .gogocarto-container #search-spinner-loader .spinner-layer {
-        border-color: #5d5d5d; }
-      .gogo-load-css .gogocarto-container #search-spinner-loader .circle-clipper .circle {
-        border-width: 2px; }
-    .gogo-load-css .gogocarto-container #search-spinner-loader {
-      left: 0; }
-    .gogo-load-css .gogocarto-container .search-bar-icon.loading:before {
-      content: none; }
-    .gogo-load-css .gogocarto-container .search-bar-icon.loading #search-spinner-loader {
-      display: block; }
     .gogo-load-css .gogocarto-container .element-item {
       /*
 * @Author: Sebastian Castro
@@ -6473,9 +6465,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           left: 6rem;
           right: 6rem;
           cursor: pointer !important; }
-      .gogo-load-css .gogocarto-container .element-item .field .field-label {
-        font-weight: 600;
-        display: inline; }
       .gogo-load-css .gogocarto-container .element-item .field-textarea {
         line-height: 1.5rem;
         text-align: justify; }
@@ -6527,8 +6516,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         padding-bottom: .3rem; }
       .gogo-load-css .gogocarto-container .element-item .other-infos .field {
         margin-bottom: .5rem; }
-      .gogo-load-css .gogocarto-container .element-item .glossary {
-        cursor: help; }
       .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-name {
         padding-top: 1rem; }
       .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper + .category-name {
