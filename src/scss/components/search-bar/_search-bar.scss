@@ -172,11 +172,12 @@
         &:before { content: '"'; }
       }
     }
-    &.search_elements, &.search_geocoded + .option {
+    + .search_elements, &.search_geocoded + .option {
       border-top: 1px solid #eee;
       padding-top: .3rem;
       margin-top: .3rem;
     }
+
     &.search_elements, &.search_geocoded {
       .label {
         text-transform: uppercase;
