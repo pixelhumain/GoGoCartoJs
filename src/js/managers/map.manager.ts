@@ -42,11 +42,11 @@ export class MapManager {
     if (App.mode != AppModes.Map) return;
 
     this.setTimeoutClicking();
-    this.onMarkerClick.emit(marker.getElement().id);
+    this.onMarkerClick.emit(marker.element.id);
 
     if (marker.isHalfHidden()) App.setState(AppStates.Normal);
 
-    App.setState(AppStates.ShowElement, { id: marker.getId() });
+    App.setState(AppStates.ShowElement, { id: marker.element.id });
   }
 
   handleMapIdle() {

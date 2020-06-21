@@ -1,51 +1,61 @@
 import { App } from '../../gogocarto';
 import { Element } from '../../classes/classes';
 
-export class MapFeatureComponent {
-    private element: Element;
-    private featureLayer_: L.GeoJSON;
+export class MapFeatureComponent
+{
+  private element: Element;
+  private featureLayer_: L.GeoJSON;
 
-    constructor(element: Element) {
-        this.element = element;
-        this.initialize();
+  constructor(element: Element) {
+    this.element = element;
+    this.initialize();
+  }
+
+  private defaultStyle() {
+    const props = this.element.geoJSONFeature.properties || {};
+    const elementColor = App.taxonomyModule.getOptionById(this.element.colorOptionId).color || App.config.colors.textDark;
+    return {
+      fillColor: props['fill'] || elementColor,
+      fillOpacity: props['fill-opacity'] || 0.4,
+      color: props['stroke'] || elementColor,
+      opacity: props['stroke-opacity'] || 1,
+      weight: props['stroke-width'] || 2.5
     }
+  }
 
-    private initialize() {
-        this.featureLayer_ = L.geoJSON(this.element.geoJSONFeature, {
-            style: function (feature) {
-                let props = feature.properties || {};
-                return {
-                    fillColor: props['fill'] || App.config.colors.secondary,
-                    fillOpacity: props['fill-opacity'] || 0.6,
-                    color: props['stroke'] || App.config.colors.textDark,
-                    opacity: props['stroke-opacity'] || 1,
-                    weight: props['stroke-width'] || 2
-                };
-            }
-        }).addTo(App.mapComponent.map_);
+  private initialize() {
+    this.featureLayer_ = L.geoJSON(this.element.geoJSONFeature, {
+      style: () => this.defaultStyle()
+    }).addTo(App.mapComponent.map_);
 
-        this.featureLayer_.on('click', (ev: any) => {
-            App.mapManager.handleMarkerClick(this.element.marker);
-        });
-        this.featureLayer_.on('mouseover', (ev: any) => {
-            this.showBigSize(ev.originalEvent.target);
-        });
-        this.featureLayer_.on('mouseout', (ev: any) => {
-            this.showNormalSize(ev.originalEvent.target);
-        });
-    }
+    this.featureLayer_.on('click', (ev: any) => {
+      App.mapManager.handleMarkerClick(this.element.marker);
+    });
+    this.featureLayer_.on('mouseover', (ev: any) => {
+      this.element.showBigSize();
+    });
+    this.featureLayer_.on('mouseout', (ev: any) => {
+      this.element.showNormalSize();
+    });
+  }
 
-    showBigSize(eventTarget) {
-        this.element.marker.showBigSize();
-        eventTarget.classList.add('PathHover');
-    }
+  update() {
+    this.featureLayer.setStyle(() => this.defaultStyle())
+  }
 
-    showNormalSize(eventTarget) {
-        this.element.marker.showNormalSize();
-        eventTarget.classList.remove('PathHover');
-    }
+  showBigSize() {
+    this.featureLayer.setStyle(() => {
+      return { weight: this.defaultStyle().weight * 1.5 };
+    })
+  }
 
-    get featureLayer(): L.GeoJSON {
-        return this.featureLayer_;
-    }
+  showNormalSize() {
+    this.featureLayer.setStyle((feature) => {
+      return { weight: this.defaultStyle().weight };
+    })
+  }
+
+  get featureLayer(): L.GeoJSON {
+    return this.featureLayer_;
+  }
 }

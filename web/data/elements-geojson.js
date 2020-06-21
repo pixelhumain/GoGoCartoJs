@@ -8,7 +8,7 @@ var elements = {
         "latitude": 45.8899453,
         "longitude": 6.1429706
       },
-      "taxonomy": [10485],
+      "taxonomy": [10485, 10473],
       "geoJSONFeature": {
         "type": "Feature",
         "geometry": {
@@ -277,9 +277,8 @@ var elements = {
           ]
         },
         "properties": {
-          "name": "Tramway Ligne 1",
-          "stroke": "#009A9C",
-          "stroke-width": 3
+          "stroke": "blue",
+          "stroke-width": 1
         }
       }
     },
@@ -290,7 +289,7 @@ var elements = {
         "latitude": 45.9078097,
         "longitude": 6.1051869
       },
-      "taxonomy": [10485],
+      "taxonomy": [10485, 10473],
       "geoJSONFeature": {
         "type": "Feature",
         "geometry": {
@@ -487,11 +486,6 @@ var elements = {
               0
             ]
           ]
-        },
-        "properties": {
-          "name": "Tramway Ligne 2",
-          "stroke": "#009A9C",
-          "stroke-width": 3
         }
       }
     },
@@ -505,11 +499,6 @@ var elements = {
       "taxonomy": [10473],
       "geoJSONFeature": {
         "type": "Feature",
-        "properties": {
-          "fill": "#00537E",
-          "fill-opacity": 0.4,
-          "stroke": "#00537E"
-        },
         "geometry": {
           "type": "Polygon",
           "coordinates": [

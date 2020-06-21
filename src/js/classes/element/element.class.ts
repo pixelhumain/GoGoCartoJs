@@ -64,7 +64,7 @@ export class Element extends ElementBase {
   initialize() {
     App.elementIconsModule.updateIconsToDisplay(this);
 
-    this.marker_ = new Marker(this.id, this.position);
+    this.marker_ = new Marker(this);
     if (this.geoJSONFeature) {
       this.mapFeature_ = new MapFeatureComponent(this);
     }
@@ -88,8 +88,25 @@ export class Element extends ElementBase {
         this.colorOptionId = coloredOptionValues.length > 0 ? coloredOptionValues[0].colorOptionId : null;
       }
       if (this.marker) this.marker.update();
+      if (this.feature) this.feature.update();
       this.needToBeUpdatedWhenShown = false;
     }
+    if (this.isDisplayedOnElementInfoBar()) this.showBigSize();
+  }
+
+  showBigSize() {
+    if (this.marker) this.marker.showBigSize();
+    if (this.feature) this.feature.showBigSize();
+  }
+
+  showNormalSize($force = false) {
+    if (!$force && this.isDisplayedOnElementInfoBar()) return;
+    if (this.marker) this.marker.showNormalSize();
+    if (this.feature) this.feature.showNormalSize();
+  }
+
+  isDisplayedOnElementInfoBar() {
+    return App.infoBarComponent.getCurrElementId() == this.id;
   }
 
   updateDistance() {

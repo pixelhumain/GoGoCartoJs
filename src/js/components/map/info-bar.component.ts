@@ -54,7 +54,7 @@ export class InfoBarComponent {
     // console.log("showElement", element);
 
     // if element already visible
-    if (this.elementVisible) this.elementVisible.marker.showNormalSize(true);
+    if (this.elementVisible) this.elementVisible.showNormalSize(true);
     this.elementVisible = element;
 
     if (!element.isFullyLoaded) {
@@ -122,12 +122,10 @@ export class InfoBarComponent {
 
     this.show();
 
-    element.marker.showNormalHidden();
-    element.marker.showBigSize();
+    element.showBigSize();
 
     setTimeout(() => {
-      element.marker.showNormalHidden();
-      element.marker.showBigSize();
+      element.showBigSize();
     }, 500);
 
     this.onShow.emit(elementId);
@@ -209,12 +207,12 @@ export class InfoBarComponent {
       if (this.elementVisible && this.isCurrentMarkerNotVisibleOnMap() && App.state != AppStates.ShowDirections) {
         console.log('info bar marker not visible', AppStates[App.state]);
         App.mapComponent.panToLocation(this.elementVisible.position);
-        this.elementVisible.marker.showBigSize();
+        this.elementVisible.showBigSize();
         setTimeout(() => {
-          this.elementVisible.marker.showBigSize();
+          this.elementVisible.showBigSize();
         }, 200);
         setTimeout(() => {
-          this.elementVisible.marker.showBigSize();
+          this.elementVisible.showBigSize();
         }, 1000);
       }
     }, 100);
@@ -250,7 +248,7 @@ export class InfoBarComponent {
 
     setTimeout(() => this.dom.find('#element-info').html(''), 350);
 
-    if (this.elementVisible && this.elementVisible.marker) this.elementVisible.marker.showNormalSize(true);
+    if (this.elementVisible) this.elementVisible.showNormalSize(true);
 
     this.elementVisible = null;
     this.isVisible = false;
