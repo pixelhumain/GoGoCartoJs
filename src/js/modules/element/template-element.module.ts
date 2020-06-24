@@ -88,8 +88,6 @@ export class TemplateElementModule {
       .replace(/&lt;/g, '<')
       .replace(/&quot;/g, '"');
     template = template.replace(/<hr \/>|<hr>/g, '<div class="info-bar-divider"></div>');
-    template = template.replace(/<h1>|<h2>|<h4>|<h5>/g, '<h3>');
-    template = template.replace(/<\/h1>|<\/h2>|<\/h4>|<\/h5>/g, '</h3>');
     return template;
   }
 
