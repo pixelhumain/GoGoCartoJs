@@ -96,7 +96,7 @@ export class TemplateElementModule {
   // Compile given content as a template once for all
   private compile(htmlElementConfig: TemplateConfig, content: any) {
     if (htmlElementConfig.isMarkdown) content = this.parseMarkdownSyntax(content);
-    const template = App.templateModule.compile(content);
+    const template = App.templateModule.compile(this.fixTemplate(content));
     switch (htmlElementConfig.name) {
       case TemplateNames.ElementBody:
         this.bodyTemplate = template;
