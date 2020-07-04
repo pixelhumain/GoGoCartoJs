@@ -25,9 +25,14 @@ export class ElementJsonParserModule {
     element.id = elementJson.id; // the element has been modified before to fixs bad ids
     for (let i = 0; i < this.compactMapping[1].length; ++i) {
       const attrName = this.compactMapping[1][i];
-      const value = elementJson[1][i];
-      element.data[attrName] = value;
+      let value = elementJson[1][i];
       if (attrName == 'images') element.images = value;
+      else if (attrName == 'name') element.name = capitalize(value);
+      else if (attrName == "address") {
+        if (typeof value == 'string') value = JSON.parse(value);
+        element.address = new PostalAddress(value);
+      }
+      else element.data[attrName] = value;
     }
     element.position = L.latLng(elementJson[2], elementJson[3]);
     App.elementOptionValuesModule.createOptionValues(elementJson[4], element);

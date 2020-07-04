@@ -10,6 +10,7 @@ import { App } from '../../gogocarto';
 import {MapFeatureComponent} from "../../components/map/map-feature.component";
 declare let $, Map;
 
+// Standard fields managed by default info bar template
 const CORE_FIELDS = [
   'id',
   'name',
