@@ -24,6 +24,7 @@ export const FR = {
   category: 'Catégorie',
   'change.tiles': 'Changer le Fond de Carte',
   'check.uncheck.all': 'Cocher/Décocher Tout',
+  'clear.filter': 'Effacer le Filtre',
   close: 'Fermer',
   'close.menu': 'Fermer le Menu',
   'collaborative.moderation': 'Modération collaborative',

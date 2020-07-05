@@ -122,7 +122,7 @@ export class ElementListComponent {
 		this.stepsCount = 1;
 	}
 
-  log = true;
+  log = false;
 
   private draw($elementList: Element[], $animate = false) {
     let element: Element;

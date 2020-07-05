@@ -113,6 +113,8 @@ export class FilterDateComponent extends FilterAbstractComponent
     this.dom.find('.view-filter[data-name=month]').find('.active').removeClass('active')
     this.contextDate = null;
     this.dom.find('.view-filter').datepicker('clearDates');
+    this.bindWeekClick();
+    this.bindMonthClick();
   }
 
   bindWeekClick()
