@@ -57,22 +57,27 @@ export class FilterModule {
   {
   	let filterValue = filter.currentValue
   	let elementDate = this.parseDate(element.data[filter.field]);
-
+    // Empty filter
+    if (!filterValue || Object.keys(filterValue).length === 0)
+      return true
+    // Empty value
+    else if (!elementDate)
+      return false
   	// RANGE
-    if (filter.currentValue.startDate && filter.currentValue.endDate)
-  		return elementDate.getTime() <= this.parseDate(filter.currentValue.endDate).getTime()
-  					 && elementDate.getTime() >= this.parseDate(filter.currentValue.startDate).getTime();
+    else if (filterValue.startDate && filterValue.endDate)
+  		return elementDate.getTime() <= this.parseDate(filterValue.endDate).getTime()
+  					 && elementDate.getTime() >= this.parseDate(filterValue.startDate).getTime();
   	// DATES
-    else if (filter.currentValue.dates)
+    else if (filterValue.dates)
   		return filterValue.dates.length == 0 || filterValue.dates.some( (date) => {
   			return date.getYear() == elementDate.getYear() && date.getMonth() == elementDate.getMonth() && date.getDate() == elementDate.getDate();
   		});
     // MONTH
-    else if (filter.currentValue.month !== undefined && filter.currentValue.year)
-      return elementDate.getMonth() == filter.currentValue.month && elementDate.getYear() == filter.currentValue.year;
+    else if (filterValue.month !== undefined && filterValue.year)
+      return elementDate.getMonth() == filterValue.month && elementDate.getYear() == filterValue.year;
     // YEAR
-    else if (filter.currentValue.year)
-      return elementDate.getYear() == filter.currentValue.year;
+    else if (filterValue.year)
+      return elementDate.getYear() == filterValue.year;
     else
       return true
   }

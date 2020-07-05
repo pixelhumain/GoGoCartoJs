@@ -68,8 +68,12 @@ export class ElementListComponent {
 			this.locRangeValue = radius;
       console.log("slider change", radius);
 			App.boundsModule.createBoundsFromLocation(App.boundsModule.extendedBounds.getCenter(), radius)
-      // draw again, this time filtering by distance will be different
-      this.draw(App.elementsModule.currVisibleElements());
+      if (App.ajaxModule.allElementsReceived) {
+        // draw again, this time filtering by distance will be different
+        this.draw(App.elementsModule.currVisibleElements());
+       } else {
+        App.elementsManager.checkForNewElementsToRetrieve(true);
+      }
       this.locRangeChanged = true
 			// App.elementsManager.checkForNewElementsToRetrieve(true);
 		});
@@ -122,7 +126,7 @@ export class ElementListComponent {
 		this.stepsCount = 1;
 	}
 
-  log = false;
+  log = true;
 
   private draw($elementList: Element[], $animate = false) {
     let element: Element;
@@ -214,18 +218,24 @@ export class ElementListComponent {
     {
       if (App.dataType == AppDataType.All)
       {
-        // expand bounds
-        let isAlreadyMaxBounds = App.boundsModule.extendedBounds == App.boundsModule.maxBounds;
-        console.log("not enugh elements, expand bounds. IsAlreadyMaxBounds", isAlreadyMaxBounds);
-        if (!App.ajaxModule.allElementsReceived && App.boundsModule.extendBounds(0.5)) {
-          this.showSpinnerLoader();
-          App.elementsManager.checkForNewElementsToRetrieve(true);
-        } else {
-          // When switching to List mode, we initialize bounds from the viewport
-          // If all elements are already retrieve, the bounds are extended to maxBounds in extendBounds method
-          // Then, only once after this setup to the maxBounds, we need to updateElementToDisplay
-          if (!isAlreadyMaxBounds) App.elementsModule.updateElementsToDisplay(true, false);
+        if (App.config.infobar.displayDateField) {
+          // in date mode, we rely on the location slider for changing the bounds, we do not
+          // expand them automatically
           this.handleAllElementsRetrieved();
+        } else {
+          // auto expand bounds
+          let isAlreadyMaxBounds = App.boundsModule.extendedBounds == App.boundsModule.maxBounds;
+          console.log("not enough elements, expand bounds. IsAlreadyMaxBounds", isAlreadyMaxBounds);
+          if (App.boundsModule.extendBounds(0.5)) {
+            this.showSpinnerLoader();
+            App.elementsManager.checkForNewElementsToRetrieve(true);
+          } else {
+            // When switching to List mode, we initialize bounds from the viewport
+            // If all elements are already retrieve, the bounds are extended to maxBounds in extendBounds method
+            // Then, only once after this setup to the maxBounds, we need to updateElementToDisplay
+            if (!isAlreadyMaxBounds) App.elementsModule.updateElementsToDisplay(true, false);
+            this.handleAllElementsRetrieved();
+          }
         }
       }
     }

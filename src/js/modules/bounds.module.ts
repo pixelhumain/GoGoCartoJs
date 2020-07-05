@@ -52,7 +52,7 @@ export class BoundsModule {
 	// the actual displayed bounds radius (distance from corner to center)
 	boundsRadiusInKm() : number
 	{
-		if (!this.extendedBounds) return null;
+		if (!App.mapComponent.isInitialized) return null;
     let bounds = App.map().getBounds()
 		return Math.floor(bounds.getNorthEast().distanceTo(bounds.getCenter()) / 1000);
 	}
