@@ -86,8 +86,13 @@ export class FilterModule {
   {
     let filterValue = filter.currentValue
     let elementValue = element.data[filter.field];
-
-    if (filterValue.value != undefined)
+    // Empty filter
+    if (!filterValue || Object.keys(filterValue).length === 0)
+      return true
+    // Empty value
+    else if (!elementValue)
+      return false
+    else if (filterValue.value != undefined)
       return elementValue == filterValue.value;
     if (filterValue.min != undefined && filterValue.max != undefined)
       return elementValue <= filterValue.max && elementValue >= filterValue.min

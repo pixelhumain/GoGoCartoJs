@@ -57,7 +57,7 @@ export class ElementListComponent {
 	    tooltips: true,
 	    range: {
         'min': 1,
-        'max': 1000
+        'max': 500
 	    }
 		});
 
