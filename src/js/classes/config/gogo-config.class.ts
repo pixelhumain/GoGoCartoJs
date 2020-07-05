@@ -31,8 +31,8 @@ export class GoGoConfig {
     displayNumberOfElementForEachCategory: false,
     displayNumberOfElementRoundResults: false,
     filters: [
+      new MenuFilter({ type: "date", field: "event_date", label: "Filtrer par Date", views: ["day", "week", "month", "range"], defaultView: "week", multiday: true}),
       new MenuFilter({ type: "taxonomy"}),
-      new MenuFilter({ type: "date", field: "event_date", label: "Filtrer par Date", views: ["day", "week", "month", "range"], defaultView: "range", multiday: true}),
       new MenuFilter({ type: "number", field: "price", label: "Prix", subtype: "value"})
     ]
   };

@@ -10,7 +10,7 @@ declare let $;
 
 export class ElementListComponent {
   elementToDisplayCount = 0;
-  visibleElementIds: string[] = [];
+  visibleElementIds : string[] = [];
 
 	// Number of element in one list
 	ELEMENT_LIST_SIZE_STEP : number = 5;
@@ -26,6 +26,7 @@ export class ElementListComponent {
 
 	locRangeSlider;
 	locRangeValue : number = null;
+  locRangeChanged : boolean = false; // If user manually changed the loc range
 
 	constructor() {}
 
@@ -46,10 +47,10 @@ export class ElementListComponent {
 	    connect: true,
 	    format: {
         to: function (value) {
-            return value.toFixed(0) + ' km';
+          return value.toFixed(0) + ' km';
         },
         from: function (value) {
-            return Number(value.replace(' km', ''));
+          return Number(value.replace(' km', ''));
         }
     	},
     	step: 1,
@@ -65,8 +66,12 @@ export class ElementListComponent {
 		this.locRangeSlider.noUiSlider.on('change.one', (values) => {
 			let radius = Number(values[0].replace(' km', ''))
 			this.locRangeValue = radius;
+      console.log("slider change", radius);
 			App.boundsModule.createBoundsFromLocation(App.boundsModule.extendedBounds.getCenter(), radius)
-			App.elementsManager.checkForNewElementsToRetrieve(true);
+      // draw again, this time filtering by distance will be different
+      this.draw(App.elementsModule.currVisibleElements());
+      this.locRangeChanged = true
+			// App.elementsManager.checkForNewElementsToRetrieve(true);
 		});
 	}
 
@@ -83,6 +88,7 @@ export class ElementListComponent {
 
   show() {
     $('#directory-content-list').show();
+    this.locRangeChanged = false // reinitialize this boolean
   }
 
   hide() {
@@ -97,11 +103,14 @@ export class ElementListComponent {
     $('#directory-list-spinner-loader').hide();
   }
 
-	clear() { $('#directory-content-list li, #directory-content-list .title-separator').remove(); this.visibleElementIds = []; }
+	clear() {
+    $('#directory-content-list li, #directory-content-list .title-separator').remove();
+    this.visibleElementIds = [];
+  }
 
 	updateLocRangeSliderFromCurrBounds()
 	{
-		this.locRangeValue = App.boundsModule.boundsRadiusInKm();
+		this.locRangeValue = App.boundsModule.boundsRadiusInKm() || 30;
 		console.log("updateLocRangeSliderFromCurrBounds", this.locRangeValue);
 		this.locRangeSlider.noUiSlider.set(this.locRangeValue)
 	}
@@ -113,12 +122,11 @@ export class ElementListComponent {
 		this.stepsCount = 1;
 	}
 
-  log = false;
+  log = true;
 
   private draw($elementList: Element[], $animate = false) {
     let element: Element;
-    let elementsToDisplay: Element[] = $elementList.filter((el) => el.isFullyLoaded);
-
+    let elementsToDisplay = $elementList.filter((el) => el.isFullyLoaded);
     this.elementToDisplayCount = elementsToDisplay.length;
     if (this.log) console.log('-------------');
     if (this.log) console.log('ElementList draw', elementsToDisplay.length);
@@ -147,7 +155,8 @@ export class ElementListComponent {
     const newIdsToDisplay = elementsToDisplay.map((el) => el.id);
     if (this.log)
       console.log('Already Visible elements', this.visibleElementIds, 'new elements length', newIdsToDisplay.length);
-    if (newIdsToDisplay.length >= maxElementsToDisplay && arraysEqual(newIdsToDisplay, this.visibleElementIds)) {
+    if ( (newIdsToDisplay.length >= maxElementsToDisplay || App.ajaxModule.allElementsReceived)
+         && arraysEqual(newIdsToDisplay, this.visibleElementIds)) {
       if (this.log) console.log('nothing to draw');
       return;
     }
@@ -163,11 +172,16 @@ export class ElementListComponent {
       newElementsToDraw = elementsToDisplay;
     }
 
-		console.log("startIndex", startIndex, "endIndex", endIndex);
+		if (this.log) console.log("startIndex", startIndex, "endIndex", endIndex);
 		let listContentDom = $('#directory-content-list ul.collapsible');
     const that = this;
     let currMonth = null; let currYear = null;
-		let prevMonth = null; let prevYear = null
+		let prevMonth = null; let prevYear = null;
+    if (App.config.infobar.displayDateField && startIndex > 0) {
+      let lastElement = elementsToDisplay[startIndex - 1]
+      prevMonth = lastElement.dateToDisplay.getMonth();
+      prevYear = lastElement.dateToDisplay.getFullYear();
+    }
     for (const element of newElementsToDraw) {
       this.visibleElementIds.push(element.id);
 			if (App.config.infobar.displayDateField)
@@ -182,6 +196,7 @@ export class ElementListComponent {
 				prevMonth = currMonth
 				prevYear = currYear
 			}
+      // add element
 			listContentDom.append(element.component.render());
 			// bind element header click
       element.component.dom.find('.collapsible-header').click(function () {
