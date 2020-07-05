@@ -25,6 +25,7 @@ export const EN = {
   'category': 'Category',
   'change.tiles': 'Change Tiles Layer',
   'check.uncheck.all': 'Check/Uncheck All',
+  'clear.filter': 'Clear Filter',
   'close': 'Close',
   'close.menu': 'Close Menu',
   'collaborative.moderation': 'Collaborative moderation',
