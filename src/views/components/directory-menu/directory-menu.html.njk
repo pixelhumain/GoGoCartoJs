@@ -61,11 +61,11 @@
 								{# Filter Label and Clear button #}
 								<li class="subcategory-item filter">
 	  							<div class="name-wrapper {{ '' if filter.contracted else 'expanded'}}">
-								    <span class="name">{{ filter.label }}</span>
+								    <span class="name">{{ filter.label|safe }}</span>
 								    <div class="arrow-after"></div>
 								  </div>
 								  <div class="btn-clear-filter tooltipped gogo-section-content-opposite" data-position="right" data-tooltip="{{ 'clear.filter' | i18n }}" data-id={{ filter.id }}>
-								    <span class="label">{{ 'clear'|i18n }}</span>
+								    {#<span class="label">{{ 'clear'|i18n }}</span>#}
 								    <span class="gogo-icon-close"></span>
 								  </div>
 								</li>

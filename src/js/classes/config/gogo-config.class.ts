@@ -28,9 +28,7 @@ export class GoGoConfig {
     displayNumberOfElementForEachCategory: false,
     displayNumberOfElementRoundResults: false,
     filters: [
-      new MenuFilter({ type: "date", field: "event_date", label: "Filtrer par Date", views: ["day", "week", "month", "range"], defaultView: "week", multiday: true}),
       new MenuFilter({ type: "taxonomy"}),
-      new MenuFilter({ type: "number", field: "price", label: "Prix", subtype: "value"})
     ]
   };
   readonly infobar = {
@@ -280,7 +278,7 @@ export class GoGoConfig {
 
   private recursiveFillProperty(gogoConfig, userConfig) {
     // we don't want to apply recursively inside objects properties
-    const objectsProperties = ['roles', 'defaultCenter', 'defaultBounds', 'tileLayers', 'options'];
+    const objectsProperties = ['roles', 'defaultCenter', 'defaultBounds', 'tileLayers', 'options', 'filters'];
 
     // if we provide feature config, we enable it automatically
     if (gogoConfig instanceof GoGoFeature) gogoConfig.active = true;
@@ -296,14 +294,20 @@ export class GoGoConfig {
             case 'defaultCenter':
               new_prop = L.latLng(userConfig[prop]);
               break;
+            case 'filters':
+              new_prop = []
+              for(let filter of userConfig[prop]) new_prop.push(new MenuFilter(filter));
+              break;
             default:
               new_prop = userConfig[prop];
               break;
           }
           gogoConfig[prop] = new_prop;
-        } else if (prop == 'colors') this.fillColors(gogoConfig[prop], userConfig[prop]);
+        }
+        else if (prop == 'colors') this.fillColors(gogoConfig[prop], userConfig[prop]);
         else this.recursiveFillProperty(gogoConfig[prop], userConfig[prop]);
-      } else if (prop && prop != 'translations') {
+      }
+      else if (prop && prop != 'translations') {
         console.warn("[GoGoCarto] Config option '" + prop + "' does not exist");
       }
     }

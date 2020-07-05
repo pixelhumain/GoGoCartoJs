@@ -35,7 +35,7 @@ export class FilterDateComponent extends FilterAbstractComponent
         self.bindMonthClick();
       }
     })
-    this.dom.find('.view-type.active').trigger('click')
+    setTimeout(() => this.dom.find('.view-type.active').trigger('click'), 0);
 
     // DAY
     this.dom.find('.view-filter[data-name=day]').datepicker({ // https://uxsolutions.github.io/bootstrap-datepicker
