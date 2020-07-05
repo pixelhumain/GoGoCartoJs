@@ -60,7 +60,7 @@
 							{% if filter.type != "taxonomy" %}
 								{# Filter Label and Clear button #}
 								<li class="subcategory-item filter">
-	  							<div class="name-wrapper {{ 'expanded' if filter.expandedByDefault else ''}}">
+	  							<div class="name-wrapper {{ '' if filter.contracted else 'expanded'}}">
 								    <span class="name">{{ filter.label }}</span>
 								    <div class="arrow-after"></div>
 								  </div>
@@ -71,7 +71,7 @@
 								</li>
 								{# Filter content wrapper #}
 								<div class="filter-wrapper gogo-{{ filter.type }}-filter" data-id={{ filter.id }}
-										 style="{{ '' if filter.expandedByDefault else 'display: none' }}">
+										 style="{{ 'display: none' if filter.contracted else '' }}">
 							{% endif %}
 
 					  		{% include 'components/directory-menu/filter-' ~ filter.type ~ '.html.njk' ignore missing %}

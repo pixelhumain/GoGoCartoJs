@@ -5,7 +5,7 @@ export class MenuFilter
   field : string;
   subtype : string;
   currentValue : any = {};
-  expandedByDefault : boolean = true;
+  contracted : boolean = true; // only label visible, need to click to expand
   options : any = {};
 
   constructor(data: any)
