@@ -44,16 +44,17 @@ export class BoundsModule {
       L.latLng($location.lat - degree, $location.lng - degree),
       L.latLng($location.lat + degree, $location.lng + degree)
     );
-    //console.log("CREATE BOUNDS from loaction", this.extendedBounds);
-    //if (this.extendedBounds) L.rectangle(this.extendedBounds, {color: "blue", weight: 3}).addTo(App.map());
+    // console.log("CREATE BOUNDS from loaction", this.extendedBounds);
+    // if (this.extendedBounds) L.rectangle(this.extendedBounds, {color: "blue", weight: 3}).addTo(App.map());
   }
 
   log = false;
 	// the actual displayed bounds radius (distance from corner to center)
 	boundsRadiusInKm() : number
 	{
-		if (!this.extendedBounds) return 0;
-		return Math.floor(this.extendedBounds.getNorthEast().distanceTo(this.extendedBounds.getCenter()) / 1000);
+		if (!this.extendedBounds) return null;
+    let bounds = App.map().getBounds()
+		return Math.floor(bounds.getNorthEast().distanceTo(bounds.getCenter()) / 1000);
 	}
 
   extendMapBounds($oldZoom, $newZoom, $numberMarkerVisible) {

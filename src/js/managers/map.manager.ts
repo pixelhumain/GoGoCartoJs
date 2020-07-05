@@ -52,8 +52,7 @@ export class MapManager {
   handleMapIdle() {
     if (App.mode != AppModes.Map) return;
 
-    // we need map to be loaded to get the radius of the viewport
-    // and get the elements inside
+    // Queue this method for when the map will be loaded
     if (!App.mapComponent.isMapLoaded) {
       App.mapComponent.onMapLoaded.do(() => {
         this.handleMapIdle();
