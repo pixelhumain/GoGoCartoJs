@@ -127,7 +127,7 @@ export class ElementListComponent {
   private draw($elementList: Element[], $animate = false) {
     let element: Element;
     let elementsToDisplay = $elementList.filter((el) => el.isFullyLoaded);
-    this.elementToDisplayCount = elementsToDisplay.length;
+
     if (this.log) console.log('-------------');
     if (this.log) console.log('ElementList draw', elementsToDisplay.length);
 		if (App.dataType == AppDataType.All)
@@ -147,6 +147,7 @@ export class ElementListComponent {
 			elementsToDisplay.sort(this.compareSearchScore);
 		}
 
+    this.elementToDisplayCount = elementsToDisplay.length;
     const maxElementsToDisplay = this.ELEMENT_LIST_SIZE_STEP * this.stepsCount;
 
     this.updateResultMessage();
@@ -158,6 +159,7 @@ export class ElementListComponent {
     if ( (newIdsToDisplay.length >= maxElementsToDisplay || App.ajaxModule.allElementsReceived)
          && arraysEqual(newIdsToDisplay, this.visibleElementIds)) {
       if (this.log) console.log('nothing to draw');
+      this.handleAllElementsRetrieved();
       return;
     }
 
@@ -215,7 +217,7 @@ export class ElementListComponent {
         // expand bounds
         let isAlreadyMaxBounds = App.boundsModule.extendedBounds == App.boundsModule.maxBounds;
         console.log("not enugh elements, expand bounds. IsAlreadyMaxBounds", isAlreadyMaxBounds);
-        if (App.boundsModule.extendBounds(0.5)) {
+        if (!App.ajaxModule.allElementsReceived && App.boundsModule.extendBounds(0.5)) {
           this.showSpinnerLoader();
           App.elementsManager.checkForNewElementsToRetrieve(true);
         } else {
