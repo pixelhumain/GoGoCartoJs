@@ -55,10 +55,16 @@
   .view-filter {
 
     display: none;
-    &[data-name=month] {
+    &[data-name=month], &[data-name=year] {
       .day { border-radius: 0; }
       tbody:hover .day:not(.new):not(.old) { background-color: #eeeeee; }
       .datepicker-days { opacity: 0; }
+    }
+
+    &[data-name=year] {
+      .month { border-radius: 0; }
+      tbody:hover .month:not(.new):not(.old) { background-color: #eeeeee; }
+      .datepicker-months { opacity: 0; }
     }
 
     &[data-name=week] {

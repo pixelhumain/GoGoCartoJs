@@ -34,6 +34,14 @@ export class FilterDateComponent extends FilterAbstractComponent
         self.onMonthChange(self.contextDate);
         self.bindMonthClick();
       }
+
+      if ($(this).data('name') == "year") {
+        // simulate date changed
+        viewFilter.find('.datepicker-days:visible .datepicker-switch').trigger('click')
+        viewFilter.find('.datepicker-months:visible .datepicker-switch').trigger('click')
+        self.onYearChange(self.contextDate);
+        self.bindYearClick();
+      }
     })
     setTimeout(() => this.dom.find('.view-type.active').trigger('click'), 0);
 
@@ -93,6 +101,16 @@ export class FilterDateComponent extends FilterAbstractComponent
     });
     self.bindMonthClick()
 
+    // YEAR
+    this.dom.find('.view-filter[data-name=year]').datepicker({ // https://uxsolutions.github.io/bootstrap-datepicker
+      language: App.config.language,
+    }).on("changeYear", function(e) {
+      self.onYearChange(e.date)
+    }).on('changeDecade', function(e) {
+      setTimeout( () => self.bindYearClick(), 0);
+    });
+    self.bindYearClick()
+
     // RANGE
     this.dom.find('.view-filter[data-name=range]').datepicker({ // https://uxsolutions.github.io/bootstrap-datepicker
       todayBtn: "linked",
@@ -111,10 +129,12 @@ export class FilterDateComponent extends FilterAbstractComponent
     this.dom.find('.view-filter[data-name=day]').find('td.active').removeClass('active')
     this.dom.find('.view-filter[data-name=week]').find('.selected-week').removeClass('selected-week')
     this.dom.find('.view-filter[data-name=month]').find('.active').removeClass('active')
+    this.dom.find('.view-filter[data-name=year]').find('.active').removeClass('active')
     this.contextDate = null;
     this.dom.find('.view-filter').datepicker('clearDates');
     this.bindWeekClick();
     this.bindMonthClick();
+    this.bindYearClick();
   }
 
   bindWeekClick()
@@ -140,6 +160,20 @@ export class FilterDateComponent extends FilterAbstractComponent
         self.dom.find('.view-filter[data-name=month]').find('.datepicker-days .datepicker-switch').trigger('click')
         // self.dom.find('.view-filter[data-name=month]').find('.datepicker-months').removeClass('force-display');
         self.bindMonthClick();
+      }, 0);
+    })
+  }
+
+  bindYearClick()
+  {
+    let self = this;
+    this.dom.find('.view-filter[data-name=year]').find('.datepicker-years .year').unbind().click(function() {
+      setTimeout( () => {
+        self.dom.find('.view-filter[data-name=year]').find('.datepicker-months .month:not(.old):not(.new)').first().trigger('click')
+        self.dom.find('.view-filter[data-name=year]').find('.datepicker-days .day:not(.old):not(.new)').first().trigger('click')
+        self.dom.find('.view-filter[data-name=year]').find('.datepicker-months .datepicker-switch').trigger('click')
+        self.dom.find('.view-filter[data-name=year]').find('.datepicker-months .datepicker-switch').trigger('click')
+        self.bindYearClick();
       }, 0);
     })
   }
@@ -179,6 +213,14 @@ export class FilterDateComponent extends FilterAbstractComponent
   {
     if (!date) return;
     this.filter.currentValue = { month: date.getMonth(), year: date.getYear() };
+    this.contextDate = date;
+    this.emitFilterSet();
+  }
+
+  onYearChange(date)
+  {
+    if (!date) return;
+    this.filter.currentValue = { year: date.getYear() };
     this.contextDate = date;
     this.emitFilterSet();
   }
