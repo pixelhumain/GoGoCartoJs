@@ -30,11 +30,11 @@ export class PickAddressComponent extends AbstractModalComponent {
 
       App.geocoder.geocodeAddress(
         address,
-        (success) => {
+        () => {
           this.dom.find('.modal-error-msg').hide();
           this.dom.closeModal();
         },
-        (error) => {
+        () => {
           this.dom.find('.modal-error-msg').show();
         }
       );

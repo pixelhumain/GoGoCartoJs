@@ -1,6 +1,6 @@
+import { Geocoded } from 'universal-geocoder';
 import { App } from '../../gogocarto';
 import { AppDataType, AppModes, AppStates } from '../../app.module';
-import { GeocodeResult } from '../../modules/geocoder.module';
 import { Option, ViewPort } from '../../classes/classes';
 
 interface CustomJQuery extends JQuery {
@@ -77,6 +77,9 @@ export class SearchBarComponent {
           case 'search_geocoded':
             this.searchGeocoded(ui.item.value);
             break;
+          case 'geocoded':
+            this.showGeocoded(ui.item.value);
+            break;
           case 'option':
             this.searchOption(ui.item.value);
             break;
@@ -132,10 +135,17 @@ export class SearchBarComponent {
     if (locationsResults.length > 0) {
       items = [
         ...items,
-        ...locationsResults.slice(0, 4).map(({ type, value }: { type: string; value: GeocodeResult }) => ({
+        ...locationsResults.slice(0, 4).map(({ type, value }: { type: string; value: Geocoded }) => ({
           type,
           value,
-          label: `<span class="geocoded-name">${value.getCity()}</span>`,
+          label: `<span class="geocoded-name">${
+            value.getFormattedAddress() ||
+            value.getStreetName() ||
+            value.getSubLocality() ||
+            value.getLocality() ||
+            value.getRegion() ||
+            value.getCountry()
+          }</span>`,
         })),
       ];
     }
@@ -206,20 +216,24 @@ export class SearchBarComponent {
 
     App.geocoder.geocodeAddress(
       address,
-      (results: GeocodeResult[]) => {
-        this.searchLoading(true);
-        this.resetOptionSearchResult();
-        this.resetElementsSearchResult(false);
-        this.hideMobileSearchBar();
-
-        this.displaySearchResultMarkerOnMap(L.latLng(results[0].getCoordinates()));
-        App.mapComponent.fitBounds(App.geocoder.latLngBoundsFromRawBounds(results[0].getBounds()), true);
+      (results) => {
+        this.showGeocoded(results[0]);
       },
       () => {
         this.searchLoading(true);
         $('.search-no-result').show();
       }
     );
+  }
+
+  private showGeocoded(result: Geocoded): void {
+    this.searchLoading(true);
+    this.resetOptionSearchResult();
+    this.resetElementsSearchResult(false);
+    this.hideMobileSearchBar();
+
+    this.displaySearchResultMarkerOnMap(L.latLng(result.getCoordinates()));
+    App.mapComponent.fitBounds(App.geocoder.latLngBoundsFromRawBounds(result.getBounds()), true);
   }
 
   searchOption(option: Option): void {
@@ -308,11 +322,11 @@ export class SearchBarComponent {
       (elementsResults, _, locationsResults) => {
         this.searchLoading(true);
         if (locationsResults.length > 0) {
-          const matchingLocations: GeocodeResult[] = locationsResults
+          const matchingLocations: Geocoded[] = locationsResults
             .map((locationResult) => locationResult.value)
             .filter(
-              (location: GeocodeResult) =>
-                App.search.compareResult(searchTerm, location.getCity()) ||
+              (location: Geocoded) =>
+                App.search.compareResult(searchTerm, location.getLocality()) ||
                 App.search.compareResult(searchTerm, location.getRegion())
             );
           if (matchingLocations.length > 0) {

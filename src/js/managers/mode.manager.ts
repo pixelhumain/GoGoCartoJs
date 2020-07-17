@@ -63,7 +63,7 @@ export class ModeManager {
 
     if (App.dataType == AppDataType.All) {
       let centerLocation: L.LatLng;
-      const address = App.geocoder.lastAddressRequest;
+      const address = App.geocoder.getLocationAddress();
 
       if (App.mapComponent.isInitialized) {
         centerLocation = App.mapComponent.getCenter();

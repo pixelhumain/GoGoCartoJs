@@ -79,7 +79,8 @@ export const EN = {
   'geographic.location': 'Geographic location',
   'geolocalize': 'Geolocalize your position',
   'geolocalized': 'Geolocalized',
-  'geolocation.error': 'Geolocation error',
+  'geolocation.error.refused': 'Geolocation refused',
+  'geolocation.error.failed': 'Geolocation has failed',
 
   //H
   'height': 'Height',

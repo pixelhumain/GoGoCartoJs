@@ -1,17 +1,9 @@
 import { App } from '../gogocarto';
-import { GeocodeResult } from '../modules/geocoder.module';
-import { Option } from '../modules/taxonomy/taxonomy.module';
 import { removeDiactrics } from '../utils/string-helpers';
 
 interface SearchResult {
   type: string;
   value: any;
-}
-
-class CategorySearchResult {
-  option: Option;
-  matchScore: number;
-  searchTextLeft: string;
 }
 
 /**
@@ -94,7 +86,7 @@ export class SearchModule {
     }
 
     if (searchLocations) {
-      App.geocoder.geocodeAddress(term, (results: GeocodeResult[]) => {
+      App.geocoder.geocodeAddress(term, (results) => {
         resolveResults({
           locations: results.map((location) => ({
             type: 'geocoded',

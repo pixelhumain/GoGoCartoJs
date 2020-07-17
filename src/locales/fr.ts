@@ -79,7 +79,8 @@ export const FR = {
   'geographic.location': 'Lieu géographique',
   'geolocalize': 'Géolocaliser votre position',
   'geolocalized': 'Géolocalisé',
-  'geolocation.error': 'Erreur de géolocalisation',
+  'geolocation.error.refused': 'Géolocalisation refusée',
+  'geolocation.error.failed': 'La géolocalisation a échoué',
 
   //H
   'height': 'Hauteur',

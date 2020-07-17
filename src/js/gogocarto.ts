@@ -132,6 +132,7 @@ export class GoGoCartoModule {
       App.directionsComponent.initialize();
       App.mapControlsComponent.initialize();
       App.customPopupComponent.initialize();
+      App.geocoder.initialize();
 
       App.component.initialize();
 

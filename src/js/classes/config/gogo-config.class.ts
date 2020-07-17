@@ -136,7 +136,7 @@ export class GoGoConfig {
   } = {
     geocodingProvider: GoGoConfig.GEOCODING_PROVIDER_NOMINATIM,
     canAutocomplete: undefined,
-    meta: {},
+    meta: { apiKey: '' },
   };
   theme = 'default';
   // see gogo-styles for defaut values
