@@ -33,7 +33,7 @@ export class GeocodingManager {
         App.boundsModule.createBoundsFromLocation(location);
         App.elementsModule.clearCurrentsElement();
         App.elementsModule.updateElementsToDisplay(true);
-        const address = App.geocoder.lastAddressRequest;
+        const address = App.geocoder.getLocationAddress();
         if (App.geocoder.getLocation())
           App.elementListComponent.setTitle(
             ` ${App.config.translate('around')} <i>${capitalize(unslugify(address))}</i>`

@@ -3,7 +3,8 @@
         "noImplicitAny": false,
         "target": "ES5",
         "module": "ES6",
-        "lib": ["DOM", "ES2020"]
+        "lib": ["DOM", "ES2020"],
+        "moduleResolution": "node"
     },
     "files": [
         "src/js/**/*.ts"
