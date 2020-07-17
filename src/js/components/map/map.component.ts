@@ -1,9 +1,8 @@
-import { AppModule, AppStates, AppModes } from '../../app.module';
+import { AppStates, AppModes } from '../../app.module';
 import { Element, ViewPort, Event } from '../../classes/classes';
-import { GeocodeResult, RawBounds } from '../../modules/geocoder.module';
 import * as Cookies from '../../utils/cookies';
 import { App } from '../../gogocarto';
-import {MapFeatureComponent} from "./map-feature.component";
+import { MapFeatureComponent } from './map-feature.component';
 
 declare module 'leaflet' {
   interface MarkerClusterGroupOptions {
@@ -106,8 +105,9 @@ export class MapComponent {
     // Note : Mapbox's simplestyle-spec is used as reference for style props and default values
     // @see https://github.com/mapbox/simplestyle-spec
     if (App.config.map.geojsonLayers) {
-      (typeof App.config.map.geojsonLayers === 'string') ? this.loadRemoteGeoJSON(this.map_, App.config.map.geojsonLayers) :
-          this.loadInlineGeoJSON(this.map_, App.config.map.geojsonLayers);
+      typeof App.config.map.geojsonLayers === 'string'
+        ? this.loadRemoteGeoJSON(this.map_, App.config.map.geojsonLayers)
+        : this.loadInlineGeoJSON(this.map_, App.config.map.geojsonLayers);
     }
 
     if (App.config.map.useClusters) {
@@ -339,38 +339,38 @@ export class MapComponent {
   }
 
   loadInlineGeoJSON(map, layersConfig) {
-    let featuresCollection = layersConfig as GeoJSONFeatureCollection;
-    if (featuresCollection.features){
+    const featuresCollection = layersConfig as GeoJSONFeatureCollection;
+    if (featuresCollection.features) {
       for (const geoJSONFeature of featuresCollection.features) {
         L.geoJSON(geoJSONFeature, {
           pointToLayer: function (feature, latlng) {
             return L.circleMarker(latlng);
           },
           style: function (feature) {
-            let props = feature.properties || {};
+            const props = feature.properties || {};
             return {
               fillColor: props['fill'] || App.config.colors.secondary,
               fillOpacity: props['fill-opacity'] || 0.6,
               color: props['stroke'] || App.config.colors.textDark,
               opacity: props['stroke-opacity'] || 1,
-              weight: props['stroke-width'] || 2
+              weight: props['stroke-width'] || 2,
             };
-          }
+          },
         }).addTo(map);
       }
     }
   }
 
   loadRemoteGeoJSON(map, layersConfigUrl: string) {
-      $.ajax({
-          url: layersConfigUrl,
-          method: 'get',
-          success: (response) => {
-              if (typeof response === 'string') response = JSON.parse(response);
-              if (response.features !== null) {
-                  this.loadInlineGeoJSON(map, response);
-              }
-          }
-      });
+    $.ajax({
+      url: layersConfigUrl,
+      method: 'get',
+      success: (response) => {
+        if (typeof response === 'string') response = JSON.parse(response);
+        if (response.features !== null) {
+          this.loadInlineGeoJSON(map, response);
+        }
+      },
+    });
   }
 }

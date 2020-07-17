@@ -1,8 +1,7 @@
 import { App } from '../../gogocarto';
 import { Element } from '../../classes/classes';
 
-export class MapFeatureComponent
-{
+export class MapFeatureComponent {
   private element: Element;
   private featureLayer_: L.GeoJSON;
 
@@ -13,19 +12,20 @@ export class MapFeatureComponent
 
   private defaultStyle() {
     const props = this.element.geoJSONFeature.properties || {};
-    const elementColor = App.taxonomyModule.getOptionById(this.element.colorOptionId).color || App.config.colors.textDark;
+    const elementColor =
+      App.taxonomyModule.getOptionById(this.element.colorOptionId).color || App.config.colors.textDark;
     return {
       fillColor: props['fill'] || elementColor,
       fillOpacity: props['fill-opacity'] || 0.4,
       color: props['stroke'] || elementColor,
       opacity: props['stroke-opacity'] || 1,
-      weight: props['stroke-width'] || 2.5
-    }
+      weight: props['stroke-width'] || 2.5,
+    };
   }
 
   private initialize() {
     this.featureLayer_ = L.geoJSON(this.element.geoJSONFeature, {
-      style: () => this.defaultStyle()
+      style: () => this.defaultStyle(),
     }).addTo(App.mapComponent.map_);
 
     this.featureLayer_.on('click', (ev: any) => {
@@ -40,19 +40,19 @@ export class MapFeatureComponent
   }
 
   update() {
-    this.featureLayer.setStyle(() => this.defaultStyle())
+    this.featureLayer.setStyle(() => this.defaultStyle());
   }
 
   showBigSize() {
     this.featureLayer.setStyle(() => {
       return { weight: this.defaultStyle().weight * 1.5 };
-    })
+    });
   }
 
   showNormalSize() {
     this.featureLayer.setStyle((feature) => {
       return { weight: this.defaultStyle().weight };
-    })
+    });
   }
 
   get featureLayer(): L.GeoJSON {

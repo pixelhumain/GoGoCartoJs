@@ -82,7 +82,7 @@ export class GoGoConfig {
       new TileLayer('thunderforest', 'https://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png'),
       new TileLayer('Pas de fond', ''),
     ],
-    geojsonLayers: []
+    geojsonLayers: [],
   };
   readonly features = {
     // element menu
