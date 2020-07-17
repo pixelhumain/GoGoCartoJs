@@ -7,7 +7,7 @@ import { OptionValue, CategoryValue, Option, Category, Contribution, VoteReport,
 import { capitalize, formatLabel } from '../../utils/string-helpers';
 
 import { App } from '../../gogocarto';
-import {MapFeatureComponent} from "../../components/map/map-feature.component";
+import { MapFeatureComponent } from '../../components/map/map-feature.component';
 declare let $, Map;
 
 // Standard fields managed by default info bar template
