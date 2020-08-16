@@ -172,7 +172,7 @@
         &:before { content: '"'; }
       }
     }
-    + .search_elements, &.search_geocoded + .option {
+    + .search_elements, &.search_geocoded + .option, &.geocoded + .option {
       border-top: 1px solid #eee;
       padding-top: .3rem;
       margin-top: .3rem;
@@ -187,6 +187,20 @@
     }
     &.search_elements {
       padding-top: .6rem;
+      .icon {
+        line-height: 1rem;
+        opacity: .9;
+        font-size: 1rem;
+      }
+    }
+    &.geocoded {
+      .label {
+        font-size: .9rem;
+      }
+      .icon {
+        line-height: .9rem;
+        opacity: .9;
+      }
     }
   }
 }
