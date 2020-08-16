@@ -87,7 +87,14 @@ export class GeocoderModule {
     const fake = false;
 
     if (!fake) {
-      this.geocoder.geocode(address, (results: Geocoded[]) => {
+      this.geocoder.geocode({
+        text: address,
+        locale: App.config.language,
+        south: App.config.map.maxBounds.getSouth(),
+        west: App.config.map.maxBounds.getWest(),
+        north: App.config.map.maxBounds.getNorth(),
+        east: App.config.map.maxBounds.getEast()
+      }, (results: Geocoded[]) => {
         if (results.length <= 0) {
           if (callbackFail) {
             callbackFail();
