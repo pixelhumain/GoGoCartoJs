@@ -1,3 +1,8 @@
+# 1.6.6
+* FEATURE: Use mapbox autocomplete geocoder
+* FEATURE: Ability to add shapes on the map
+* BUG: Various improvements on search bar
+
 # 1.6.3
 * FEATURE: New search engine, with autcomplete from elements and categories
 * MINOR: New flat theme
