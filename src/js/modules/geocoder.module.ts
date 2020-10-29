@@ -175,7 +175,7 @@ export class GeocoderModule {
         geocodeOptions
       );
     } else {
-      $.getJSON('http://www.geoplugin.net/json.gp', (data) => {
+      $.getJSON('https://www.geoplugin.net/json.gp', (data) => {
         if (!data) {
           this.geocodeError(callbackComplete, callbackError);
           return;
