@@ -6,9 +6,9 @@ import { App } from '../../gogocarto';
 import { Event } from '../../classes/classes';
 
 export class DirectoryMenuComponent {
-	openMenu : boolean = false;
-	width : number;
-	dom;
+  openMenu = false;
+  width: number;
+  dom;
 
   isPanning = false;
   dragTarget;
@@ -31,8 +31,12 @@ export class DirectoryMenuComponent {
 
     this.dragTarget.css({ left: 0 });
 
-    this.dragTarget.click(() => { this.hide(); });
-    this.overlay.click(() => { this.hide(); });
+    this.dragTarget.click(() => {
+      this.hide();
+    });
+    this.overlay.click(() => {
+      this.hide();
+    });
 
     $('.btn-close-menu.large-screen').tooltip();
 

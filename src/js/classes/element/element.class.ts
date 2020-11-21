@@ -234,10 +234,9 @@ export class Element extends ElementBase {
     result['customData'] = customData;
 
     if (App.config.infobar.displayDateField) {
-      let date = this.dateToDisplay
-      if (date)
-      {
-        let localeDates = $.fn.datepicker.dates[App.config.language];
+      const date = this.dateToDisplay;
+      if (date) {
+        const localeDates = $.fn.datepicker.dates[App.config.language];
         result['gogoDisplayDateNumber'] = date.getDate();
         result['gogoDisplayDateDayShort'] = localeDates.daysShort[date.getDay()];
         result['gogoDisplayDateDay'] = localeDates.days[date.getDay()];

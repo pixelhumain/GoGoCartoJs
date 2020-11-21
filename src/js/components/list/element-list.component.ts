@@ -1,34 +1,32 @@
-import { AppModule, AppStates, AppDataType } from '../../app.module';
+import { AppDataType } from '../../app.module';
 import { App } from '../../gogocarto';
-import { ElementsToDisplayChanged } from '../../modules/elements/elements.module';
 import { Element } from '../../classes/classes';
-import { Event } from '../../classes/event.class';
 import { arraysEqual } from '../../utils/array';
 import * as noUiSlider from 'nouislider';
 
-declare let $;
+declare let $ : any;
 
 export class ElementListComponent {
   elementToDisplayCount = 0;
-  visibleElementIds : string[] = [];
+  visibleElementIds: string[] = [];
 
-	// Number of element in one list
-	ELEMENT_LIST_SIZE_STEP : number = 5;
-	// Basicly we display 1 ELEMENT_LIST_SIZE_STEP, but if user need
-	// for, we display an others ELEMENT_LIST_SIZE_STEP more
-	stepsCount : number = 1;
-	isListFull : boolean = false;
+  // Number of element in one list
+  ELEMENT_LIST_SIZE_STEP = 5;
+  // Basicly we display 1 ELEMENT_LIST_SIZE_STEP, but if user need
+  // for, we display an others ELEMENT_LIST_SIZE_STEP more
+  stepsCount = 1;
+  isListFull = false;
 
   // last request was send with this distance
   lastDistanceRequest = 10;
 
-	isInitialized : boolean = false;
+  isInitialized = false;
 
-	locRangeSlider;
-	locRangeValue : number = null;
-  locRangeChanged : boolean = false; // If user manually changed the loc range
+  locRangeSlider: any;
+  locRangeValue: number = null;
+  locRangeChanged = false; // If user manually changed the loc range
 
-	constructor() {}
+  constructor() {}
 
   initialize() {
     // detect when user reach bottom of list
@@ -41,43 +39,43 @@ export class ElementListComponent {
         that.handleBottom();
       }
     });
-		this.locRangeSlider = $('#directory-content-list #location-slider')[0];
-		noUiSlider.create(this.locRangeSlider, {
-	    start: [10],
-	    connect: true,
-	    format: {
+    this.locRangeSlider = $('#directory-content-list #location-slider')[0];
+    noUiSlider.create(this.locRangeSlider, {
+      start: [10],
+      connect: true,
+      format: {
         to: function (value) {
           return value.toFixed(0) + ' km';
         },
         from: function (value) {
           return Number(value.replace(' km', ''));
-        }
-    	},
-    	step: 1,
-	    tooltips: true,
-	    range: {
-        'min': 1,
-        'max': 500
-	    }
-		});
+        },
+      },
+      step: 1,
+      tooltips: true,
+      range: {
+        min: 1,
+        max: 500,
+      },
+    });
 
-		$('#directory-content-list .noUi-tooltip').addClass('gogo-section-content-opposite')
+    $('#directory-content-list .noUi-tooltip').addClass('gogo-section-content-opposite');
 
-		this.locRangeSlider.noUiSlider.on('change.one', (values) => {
-			let radius = Number(values[0].replace(' km', ''))
-			this.locRangeValue = radius;
-      console.log("slider change", radius);
-			App.boundsModule.createBoundsFromLocation(App.boundsModule.extendedBounds.getCenter(), radius)
+    this.locRangeSlider.noUiSlider.on('change.one', (values) => {
+      const radius = Number(values[0].replace(' km', ''));
+      this.locRangeValue = radius;
+      console.log('slider change', radius);
+      App.boundsModule.createBoundsFromLocation(App.boundsModule.extendedBounds.getCenter(), radius);
       if (App.ajaxModule.allElementsReceived) {
         // draw again, this time filtering by distance will be different
         this.draw(App.elementsModule.currVisibleElements());
-       } else {
+      } else {
         App.elementsManager.checkForNewElementsToRetrieve(true);
       }
-      this.locRangeChanged = true
-			// App.elementsManager.checkForNewElementsToRetrieve(true);
-		});
-	}
+      this.locRangeChanged = true;
+      // App.elementsManager.checkForNewElementsToRetrieve(true);
+    });
+  }
 
   update($elementsToDisplay: Element[]) {
     if ($elementsToDisplay.length == 0) this.stepsCount = 1;
@@ -92,7 +90,7 @@ export class ElementListComponent {
 
   show() {
     $('#directory-content-list').show();
-    this.locRangeChanged = false // reinitialize this boolean
+    this.locRangeChanged = false; // reinitialize this boolean
   }
 
   hide() {
@@ -107,24 +105,22 @@ export class ElementListComponent {
     $('#directory-list-spinner-loader').hide();
   }
 
-	clear() {
+  clear() {
     $('#directory-content-list li, #directory-content-list .title-separator').remove();
     this.visibleElementIds = [];
   }
 
-	updateLocRangeSliderFromCurrBounds()
-	{
-		this.locRangeValue = App.boundsModule.boundsRadiusInKm() || 30;
-		console.log("updateLocRangeSliderFromCurrBounds", this.locRangeValue);
-		this.locRangeSlider.noUiSlider.set(this.locRangeValue)
-	}
+  updateLocRangeSliderFromCurrBounds() {
+    this.locRangeValue = App.boundsModule.boundsRadiusInKm() || 30;
+    console.log('updateLocRangeSliderFromCurrBounds', this.locRangeValue);
+    this.locRangeSlider.noUiSlider.set(this.locRangeValue);
+  }
 
-	reInitializeElementToDisplayLength()
-	{
-		this.clear();
-		$('#directory-content-list .elements-container').animate({scrollTop: '0'}, 0);
-		this.stepsCount = 1;
-	}
+  reInitializeElementToDisplayLength() {
+    this.clear();
+    $('#directory-content-list .elements-container').animate({ scrollTop: '0' }, 0);
+    this.stepsCount = 1;
+  }
 
   log = true;
 
@@ -134,22 +130,17 @@ export class ElementListComponent {
 
     if (this.log) console.log('-------------');
     if (this.log) console.log('ElementList draw', elementsToDisplay.length);
-		if (App.dataType == AppDataType.All)
-		{
-			for(element of elementsToDisplay) element.updateDistance();
+    if (App.dataType == AppDataType.All) {
+      for (element of elementsToDisplay) element.updateDistance();
 
-			if (App.config.infobar.displayDateField) {
-				if (this.locRangeValue != null)
-					elementsToDisplay = elementsToDisplay.filter(el => el.distance < this.locRangeValue);
-				elementsToDisplay.sort(this.compareDate);
-			}
-			else
-				elementsToDisplay.sort(this.compareDistance);
-		}
-		else if (App.dataType == AppDataType.SearchResults)
-		{
-			elementsToDisplay.sort(this.compareSearchScore);
-		}
+      if (App.config.infobar.displayDateField) {
+        if (this.locRangeValue != null)
+          elementsToDisplay = elementsToDisplay.filter((el) => el.distance < this.locRangeValue);
+        elementsToDisplay.sort(this.compareDate);
+      } else elementsToDisplay.sort(this.compareDistance);
+    } else if (App.dataType == AppDataType.SearchResults) {
+      elementsToDisplay.sort(this.compareSearchScore);
+    }
 
     this.elementToDisplayCount = elementsToDisplay.length;
     const maxElementsToDisplay = this.ELEMENT_LIST_SIZE_STEP * this.stepsCount;
@@ -160,8 +151,10 @@ export class ElementListComponent {
     const newIdsToDisplay = elementsToDisplay.map((el) => el.id);
     if (this.log)
       console.log('Already Visible elements', this.visibleElementIds, 'new elements length', newIdsToDisplay.length);
-    if ( (newIdsToDisplay.length >= maxElementsToDisplay || App.ajaxModule.allElementsReceived)
-         && arraysEqual(newIdsToDisplay, this.visibleElementIds)) {
+    if (
+      (newIdsToDisplay.length >= maxElementsToDisplay || App.ajaxModule.allElementsReceived) &&
+      arraysEqual(newIdsToDisplay, this.visibleElementIds)
+    ) {
       if (this.log) console.log('nothing to draw');
       this.handleAllElementsRetrieved();
       return;
@@ -173,38 +166,42 @@ export class ElementListComponent {
     let newElementsToDraw;
     if (newElementsToDisplayIncludesOldOnes) {
       newElementsToDraw = elementsToDisplay.filter((el) => this.visibleElementIds.indexOf(el.id) == -1);
+      // if (App.config.infobar.displayDateField) {
+      //   let lastElement = elementsToDisplay[startIndex - 1]
+      //   prevMonth = lastElement.dateToDisplay.getMonth();
+      //   prevYear = lastElement.dateToDisplay.getFullYear();
+      // }
     } else {
       this.clear();
       newElementsToDraw = elementsToDisplay;
     }
 
-		if (this.log) console.log("startIndex", startIndex, "endIndex", endIndex);
-		let listContentDom = $('#directory-content-list ul.collapsible');
+    const listContentDom = $('#directory-content-list ul.collapsible');
     const that = this;
-    let currMonth = null; let currYear = null;
-		let prevMonth = null; let prevYear = null;
-    if (App.config.infobar.displayDateField && startIndex > 0) {
-      let lastElement = elementsToDisplay[startIndex - 1]
-      prevMonth = lastElement.dateToDisplay.getMonth();
-      prevYear = lastElement.dateToDisplay.getFullYear();
-    }
+    let currMonth = null;
+    let currYear = null;
+    let prevMonth = null;
+    let prevYear = null;
+
     for (const element of newElementsToDraw) {
       this.visibleElementIds.push(element.id);
-			if (App.config.infobar.displayDateField)
-			{
-				currMonth = element.dateToDisplay.getMonth()
-				currYear = element.dateToDisplay.getFullYear()
-				if (currMonth != prevMonth || currYear != prevYear)
-				{
-					// month/year title
-					listContentDom.append(`<div class="title-separator">${$.fn.datepicker.dates[App.config.language].months[currMonth]} ${currYear}</div>`)
-				}
-				prevMonth = currMonth
-				prevYear = currYear
-			}
+      if (App.config.infobar.displayDateField) {
+        currMonth = element.dateToDisplay.getMonth();
+        currYear = element.dateToDisplay.getFullYear();
+        if (currMonth != prevMonth || currYear != prevYear) {
+          // month/year title
+          listContentDom.append(
+            `<div class="title-separator">${
+              $.fn.datepicker.dates[App.config.language].months[currMonth]
+            } ${currYear}</div>`
+          );
+        }
+        prevMonth = currMonth;
+        prevYear = currYear;
+      }
       // add element
-			listContentDom.append(element.component.render());
-			// bind element header click
+      listContentDom.append(element.component.render());
+      // bind element header click
       element.component.dom.find('.collapsible-header').click(function () {
         that.onElementOpen(this);
       });
@@ -214,18 +211,16 @@ export class ElementListComponent {
     if ($animate) $('#directory-content-list .elements-container').animate({ scrollTop: '0' }, 500);
     $('#directory-content-list ul').collapsible({ accordion: true });
     // if the list is not full, we send ajax request
-    if (elementsToDisplay.length < maxElementsToDisplay)
-    {
-      if (App.dataType == AppDataType.All)
-      {
+    if (elementsToDisplay.length < maxElementsToDisplay) {
+      if (App.dataType == AppDataType.All) {
         if (App.config.infobar.displayDateField) {
           // in date mode, we rely on the location slider for changing the bounds, we do not
           // expand them automatically
           this.handleAllElementsRetrieved();
         } else {
           // auto expand bounds
-          let isAlreadyMaxBounds = App.boundsModule.extendedBounds == App.boundsModule.maxBounds;
-          console.log("not enough elements, expand bounds. IsAlreadyMaxBounds", isAlreadyMaxBounds);
+          const isAlreadyMaxBounds = App.boundsModule.extendedBounds == App.boundsModule.maxBounds;
+          console.log('not enough elements, expand bounds. IsAlreadyMaxBounds', isAlreadyMaxBounds);
           if (App.boundsModule.extendBounds(0.5)) {
             this.showSpinnerLoader();
             App.elementsManager.checkForNewElementsToRetrieve(true);
@@ -238,20 +233,17 @@ export class ElementListComponent {
           }
         }
       }
-    }
-    else
-    {
+    } else {
       // console.log("list is full");
       // waiting for scroll bottom to add more elements to the list
       this.isListFull = true;
     }
-	}
+  }
 
-  private onElementOpen(elementHeaderDom)
-  {
-    let elementDom = $(elementHeaderDom).closest('.element-item');
-    let elementId = elementDom.data('element-id');
-    let element =  App.elementById(elementId);
+  private onElementOpen(elementHeaderDom) {
+    const elementDom = $(elementHeaderDom).closest('.element-item');
+    const elementId = elementDom.data('element-id');
+    const element = App.elementById(elementId);
 
     // initialize element component
     if (!$(elementHeaderDom).hasClass('initialized')) {
@@ -336,18 +328,18 @@ export class ElementListComponent {
     return a.distanceFromBoundsCenter < b.distanceFromBoundsCenter ? -1 : 1;
   }
 
-	private compareDate(a:Element, b:Element)
-	{
-		if (a.dateToDisplay.getDate() == b.dateToDisplay.getDate() &&
-				a.dateToDisplay.getMonth() == b.dateToDisplay.getMonth() &&
-				a.dateToDisplay.getFullYear() == b.dateToDisplay.getFullYear())
-			return a.distance < b.distance ? -1 : 1
-	  return a.dateToDisplay < b.dateToDisplay ? -1 : 1;
-	}
+  private compareDate(a: Element, b: Element) {
+    if (
+      a.dateToDisplay.getDate() == b.dateToDisplay.getDate() &&
+      a.dateToDisplay.getMonth() == b.dateToDisplay.getMonth() &&
+      a.dateToDisplay.getFullYear() == b.dateToDisplay.getFullYear()
+    )
+      return a.distance < b.distance ? -1 : 1;
+    return a.dateToDisplay < b.dateToDisplay ? -1 : 1;
+  }
 
-	private compareSearchScore(a:Element,b:Element)
-	{
-	  if (a.searchScore == b.searchScore) return 0;
-	  return a.searchScore < b.searchScore ? 1 : -1;
-	}
+  private compareSearchScore(a: Element, b: Element) {
+    if (a.searchScore == b.searchScore) return 0;
+    return a.searchScore < b.searchScore ? 1 : -1;
+  }
 }

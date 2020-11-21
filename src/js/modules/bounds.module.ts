@@ -49,13 +49,12 @@ export class BoundsModule {
   }
 
   log = false;
-	// the actual displayed bounds radius (distance from corner to center)
-	boundsRadiusInKm() : number
-	{
-		if (!App.mapComponent.isInitialized) return null;
-    let bounds = App.map().getBounds()
-		return Math.floor(bounds.getNorthEast().distanceTo(bounds.getCenter()) / 1000);
-	}
+  // the actual displayed bounds radius (distance from corner to center)
+  boundsRadiusInKm(): number {
+    if (!App.mapComponent.isInitialized) return null;
+    const bounds = App.map().getBounds();
+    return Math.floor(bounds.getNorthEast().distanceTo(bounds.getCenter()) / 1000);
+  }
 
   extendMapBounds($oldZoom, $newZoom, $numberMarkerVisible) {
     let ratio;

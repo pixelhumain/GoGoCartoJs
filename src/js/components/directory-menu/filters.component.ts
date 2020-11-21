@@ -2,7 +2,7 @@ import { AppModes } from '../../app.module';
 import { App } from '../../gogocarto';
 import { Element } from '../../classes/classes';
 
-import { Category, Option } from "../../modules/taxonomy/taxonomy.module";
+import { Category, Option } from '../../modules/taxonomy/taxonomy.module';
 import { FilterDateComponent } from './filter-date.component';
 import { FilterNumberComponent } from './filter-number.component';
 
@@ -104,16 +104,19 @@ export class FiltersComponent {
     // ------ CUSTOM FILTERS ---------
     // -------------------------------
 
-    for(let filter of App.config.menu.filters) {
+    for (const filter of App.config.menu.filters) {
       switch (filter.type) {
-        case "date": new FilterDateComponent(filter);  break;
-        case "number": new FilterNumberComponent(filter);  break;
+        case 'date':
+          new FilterDateComponent(filter);
+          break;
+        case 'number':
+          new FilterNumberComponent(filter);
+          break;
       }
     }
 
-    $('.subcategory-item.filter').click(function()
-    {
-      $(this).next('.filter-wrapper').slideToggle({ duration: 350, easing: "easeOutQuart"});
+    $('.subcategory-item.filter').click(function () {
+      $(this).next('.filter-wrapper').slideToggle({ duration: 350, easing: 'easeOutQuart' });
       $(this).toggleClass('expanded');
     });
 
@@ -135,12 +138,10 @@ export class FiltersComponent {
       );
     });
 
-
     // ----------------------------------
     // ------ CATEGORIES ----------------
     // ----------------------------------
-    $('.subcategory-item:not(.filter).name-wrapper:not(.uncheckable)').click(function()
-    {
+    $('.subcategory-item:not(.filter).name-wrapper:not(.uncheckable)').click(function () {
       const categoryId = $(this).attr('data-category-id');
       App.taxonomyModule.getCategoryById(categoryId).toggleChildrenDetail();
     });

@@ -56,7 +56,7 @@ export class ModeManager {
 
     if (App.config.infobar.displayDateField && App.elementListComponent.locRangeChanged) {
       // if bounds have been manually changed by user, we fit the map to those new bounds
-      App.mapComponent.fitBounds(App.boundsModule.extendedBounds)
+      App.mapComponent.fitBounds(App.boundsModule.extendedBounds);
     } else {
       App.boundsModule.extendBounds(0, App.mapComponent.getBounds());
     }

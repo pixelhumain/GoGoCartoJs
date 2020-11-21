@@ -87,36 +87,39 @@ export class GeocoderModule {
     const fake = false;
 
     if (!fake) {
-      this.geocoder.geocode({
-        text: address,
-        locale: App.config.language,
-        south: App.config.map.maxBounds.getSouth(),
-        west: App.config.map.maxBounds.getWest(),
-        north: App.config.map.maxBounds.getNorth(),
-        east: App.config.map.maxBounds.getEast()
-      }, (results: Geocoded[]) => {
-        if (results.length <= 0) {
-          if (callbackFail) {
-            callbackFail();
+      this.geocoder.geocode(
+        {
+          text: address,
+          locale: App.config.language,
+          south: App.config.map.maxBounds.getSouth(),
+          west: App.config.map.maxBounds.getWest(),
+          north: App.config.map.maxBounds.getNorth(),
+          east: App.config.map.maxBounds.getEast(),
+        },
+        (results: Geocoded[]) => {
+          if (results.length <= 0) {
+            if (callbackFail) {
+              callbackFail();
+            }
+            return;
           }
-          return;
+
+          this.lastResults = results;
+          this.lastResultBounds = this.latLngBoundsFromRawBounds(this.lastResults[0].getBounds());
+
+          if (this.lastResults && this.lastResults[0]) {
+            this.location = L.latLng(this.lastResults[0].getCoordinates());
+          } else {
+            this.location = null;
+          }
+
+          this.onGeocodeResult.emit();
+
+          if (callbackComplete) {
+            callbackComplete(results);
+          }
         }
-
-        this.lastResults = results;
-        this.lastResultBounds = this.latLngBoundsFromRawBounds(this.lastResults[0].getBounds());
-
-        if (this.lastResults && this.lastResults[0]) {
-          this.location = L.latLng(this.lastResults[0].getCoordinates());
-        } else {
-          this.location = null;
-        }
-
-        this.onGeocodeResult.emit();
-
-        if (callbackComplete) {
-          callbackComplete(results);
-        }
-      });
+      );
     } else {
       const result = {
         bounds: [0.069185, -0.641415, 44.1847351, -0.4699835],

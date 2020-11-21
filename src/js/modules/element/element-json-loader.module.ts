@@ -20,7 +20,7 @@ export class ElementJsonParserModule {
     if ($.isArray(elementJson) && elementJson.length >= 5) this.loadFromCompactJson(elementJson, element);
     else this.loadFromFullJson(elementJson, element);
     if (App.config.infobar.displayDateField)
-      element.dateToDisplay = App.filterModule.parseDate(element.data[App.config.infobar.displayDateField])
+      element.dateToDisplay = App.filterModule.parseDate(element.data[App.config.infobar.displayDateField]);
   }
 
   private loadFromCompactJson(elementJson: any, element: Element | ElementBase) {
@@ -30,11 +30,10 @@ export class ElementJsonParserModule {
       let value = elementJson[1][i];
       if (attrName == 'images') element.images = value;
       else if (attrName == 'name') element.name = capitalize(value);
-      else if (attrName == "address") {
+      else if (attrName == 'address') {
         if (typeof value == 'string') value = JSON.parse(value);
         element.address = new PostalAddress(value);
-      }
-      else element.data[attrName] = value;
+      } else element.data[attrName] = value;
     }
     element.position = L.latLng(elementJson[2], elementJson[3]);
     App.elementOptionValuesModule.createOptionValues(elementJson[4], element);

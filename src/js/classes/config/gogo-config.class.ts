@@ -1,7 +1,7 @@
 import { App } from '../../gogocarto';
 import { TileLayer } from '../map/tile-layer.class';
 import { GoGoFeature } from './gogo-feature.class';
-import { ElementStatus, MenuFilter } from '../classes';
+import { MenuFilter } from '../classes';
 import { DEFAULT_FEATURES } from './gogo-default-feature';
 import { FR } from '../../../locales/fr';
 import { EN } from '../../../locales/en';
@@ -30,9 +30,7 @@ export class GoGoConfig {
     showCheckboxForSubFilterPane: true,
     displayNumberOfElementForEachCategory: false,
     displayNumberOfElementRoundResults: false,
-    filters: [
-      new MenuFilter({ type: "taxonomy"}),
-    ]
+    filters: [new MenuFilter({ type: 'taxonomy' })],
   };
   readonly infobar = {
     width: undefined,
@@ -47,7 +45,7 @@ export class GoGoConfig {
       type: 'string', // string | url
       isMarkdown: true,
     },
-    displayDateField: undefined // name of the field who will provide the main element date
+    displayDateField: undefined, // name of the field who will provide the main element date
   };
   readonly marker = {
     displayPopup: true,
@@ -209,8 +207,8 @@ export class GoGoConfig {
     }
 
     // COLORS
-    if (!this.colors.menuOptionHover ) {
-      let menuOptionHover = tinycolor(this.colors.contentBackground.toString());
+    if (!this.colors.menuOptionHover) {
+      const menuOptionHover = tinycolor(this.colors.contentBackground.toString());
       this.colors.menuOptionHover = menuOptionHover.isDark() ? menuOptionHover.lighten(5) : menuOptionHover.darken(5);
     }
     if (!this.colors.contentBackgroundElementBody) {
@@ -224,7 +222,9 @@ export class GoGoConfig {
       const disabled = tinycolor(this.colors.contentBackground.toString()).greyscale();
       this.colors.disabled = disabled.isDark() ? disabled.lighten(35) : disabled.darken(35);
     }
-    if (!this.colors.mapControlsBgd) { this.colors.mapControlsBgd = this.colors.contentBackground; }
+    if (!this.colors.mapControlsBgd) {
+      this.colors.mapControlsBgd = this.colors.contentBackground;
+    }
     if (config.colors && !config.colors.text && !config.colors.textDark && !config.colors.textLight) {
       if (this.colors.contentBackground.isDark()) this.colors.textDark = this.colors.contentBackground;
       else this.colors.textLight = this.colors.contentBackground;
@@ -240,7 +240,7 @@ export class GoGoConfig {
         ? this.colors.primary
         : this.colors.mapControls;
     }
-    if (this.theme == "transiscope") {
+    if (this.theme == 'transiscope') {
       this.colors.infoBarHeader = this.colors.textDark;
       this.colors.infoBarMenu = this.colors.primary;
       this.colors.menuOptionHover = this.colors.contentBackground;
@@ -255,12 +255,11 @@ export class GoGoConfig {
     if (!config.features) config.features = DEFAULT_FEATURES;
 
     // FILTERS
-    for(let i = 0; i < this.menu.filters.length; i++) {
-      let menu = <any> this.menu.filters[i];
+    for (let i = 0; i < this.menu.filters.length; i++) {
+      const menu = <any>this.menu.filters[i];
       menu.id = i; // give an id to each filter
       // if there is a date filter, display the date-header in info bar & list
-      if (menu.type == "date" && this.infobar.displayDateField == undefined)
-        this.infobar.displayDateField = menu.field;
+      if (menu.type == 'date' && this.infobar.displayDateField == undefined) this.infobar.displayDateField = menu.field;
     }
 
     console.log(this);
@@ -307,7 +306,15 @@ export class GoGoConfig {
 
   private recursiveFillProperty(gogoConfig, userConfig) {
     // we don't want to apply recursively inside objects properties
-    const objectsProperties = ['roles', 'defaultCenter', 'defaultBounds', 'tileLayers', 'geojsonLayers', 'options', 'filters'];
+    const objectsProperties = [
+      'roles',
+      'defaultCenter',
+      'defaultBounds',
+      'tileLayers',
+      'geojsonLayers',
+      'options',
+      'filters',
+    ];
 
     // if we provide feature config, we enable it automatically
     if (gogoConfig instanceof GoGoFeature) gogoConfig.active = true;
@@ -324,19 +331,17 @@ export class GoGoConfig {
               new_prop = L.latLng(userConfig[prop]);
               break;
             case 'filters':
-              new_prop = []
-              for(let filter of userConfig[prop]) new_prop.push(new MenuFilter(filter));
+              new_prop = [];
+              for (const filter of userConfig[prop]) new_prop.push(new MenuFilter(filter));
               break;
             default:
               new_prop = userConfig[prop];
               break;
           }
           gogoConfig[prop] = new_prop;
-        }
-        else if (prop == 'colors') this.fillColors(gogoConfig[prop], userConfig[prop]);
+        } else if (prop == 'colors') this.fillColors(gogoConfig[prop], userConfig[prop]);
         else this.recursiveFillProperty(gogoConfig[prop], userConfig[prop]);
-      }
-      else if (prop && prop != 'translations') {
+      } else if (prop && prop != 'translations') {
         console.warn("[GoGoCarto] Config option '" + prop + "' does not exist");
       }
     }

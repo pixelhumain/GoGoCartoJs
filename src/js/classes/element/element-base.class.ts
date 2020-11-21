@@ -56,9 +56,9 @@ export class ElementBase {
   geoJSONFeature: any;
 
   // CUSTOM DATA
-  data : any = {};
+  data: any = {};
   // main element date used for filtering etc... Use config.infobar.displayDateField
-  dateToDisplay : Date = null;
+  dateToDisplay: Date = null;
 
   // ADMIN HISTORY DATA
   reports: VoteReport[];
