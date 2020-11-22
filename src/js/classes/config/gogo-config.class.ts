@@ -1,6 +1,7 @@
 import { App } from '../../gogocarto';
 import { TileLayer } from '../map/tile-layer.class';
 import { GoGoFeature } from './gogo-feature.class';
+import { MenuFilter } from '../classes';
 import { DEFAULT_FEATURES } from './gogo-default-feature';
 import { FR } from '../../../locales/fr';
 import { EN } from '../../../locales/en';
@@ -29,6 +30,7 @@ export class GoGoConfig {
     showCheckboxForSubFilterPane: true,
     displayNumberOfElementForEachCategory: false,
     displayNumberOfElementRoundResults: false,
+    filters: [new MenuFilter({ type: 'taxonomy' })],
   };
   readonly infobar = {
     width: undefined,
@@ -43,6 +45,7 @@ export class GoGoConfig {
       type: 'string', // string | url
       isMarkdown: true,
     },
+    displayDateField: undefined, // name of the field who will provide the main element date
   };
   readonly marker = {
     displayPopup: true,
@@ -203,6 +206,7 @@ export class GoGoConfig {
       this.search.canAutocomplete = false;
     }
 
+    // COLORS
     if (!this.colors.menuOptionHover) {
       const menuOptionHover = tinycolor(this.colors.contentBackground.toString());
       this.colors.menuOptionHover = menuOptionHover.isDark() ? menuOptionHover.lighten(5) : menuOptionHover.darken(5);
@@ -221,12 +225,10 @@ export class GoGoConfig {
     if (!this.colors.mapControlsBgd) {
       this.colors.mapControlsBgd = this.colors.contentBackground;
     }
-
     if (config.colors && !config.colors.text && !config.colors.textDark && !config.colors.textLight) {
       if (this.colors.contentBackground.isDark()) this.colors.textDark = this.colors.contentBackground;
       else this.colors.textLight = this.colors.contentBackground;
     }
-
     if (!this.colors.textLightSoft) {
       this.colors.textLightSoft = tinycolor(this.colors.textLight.toString()).darken(15);
     }
@@ -238,7 +240,6 @@ export class GoGoConfig {
         ? this.colors.primary
         : this.colors.mapControls;
     }
-
     if (this.theme == 'transiscope') {
       this.colors.infoBarHeader = this.colors.textDark;
       this.colors.infoBarMenu = this.colors.primary;
@@ -246,7 +247,20 @@ export class GoGoConfig {
       if (!this.colors.interactiveSection) this.colors.interactiveSection = this.colors.secondary;
       if (!this.colors.searchBar) this.colors.searchBar = this.colors.textDark;
     }
+
+    // TRANSLATIONS
     this.modifyTranslations(this, config.translations);
+
+    // FEATURES
+    if (!config.features) config.features = DEFAULT_FEATURES;
+
+    // FILTERS
+    for (let i = 0; i < this.menu.filters.length; i++) {
+      const menu = <any>this.menu.filters[i];
+      menu.id = i; // give an id to each filter
+      // if there is a date filter, display the date-header in info bar & list
+      if (menu.type == 'date' && this.infobar.displayDateField == undefined) this.infobar.displayDateField = menu.field;
+    }
 
     console.log(this);
   }
@@ -292,7 +306,15 @@ export class GoGoConfig {
 
   private recursiveFillProperty(gogoConfig, userConfig) {
     // we don't want to apply recursively inside objects properties
-    const objectsProperties = ['roles', 'defaultCenter', 'defaultBounds', 'tileLayers', 'geojsonLayers', 'options'];
+    const objectsProperties = [
+      'roles',
+      'defaultCenter',
+      'defaultBounds',
+      'tileLayers',
+      'geojsonLayers',
+      'options',
+      'filters',
+    ];
 
     // if we provide feature config, we enable it automatically
     if (gogoConfig instanceof GoGoFeature) gogoConfig.active = true;
@@ -307,6 +329,10 @@ export class GoGoConfig {
               break;
             case 'defaultCenter':
               new_prop = L.latLng(userConfig[prop]);
+              break;
+            case 'filters':
+              new_prop = [];
+              for (const filter of userConfig[prop]) new_prop.push(new MenuFilter(filter));
               break;
             default:
               new_prop = userConfig[prop];

@@ -1,0 +1,32 @@
+.noUi-horizontal {
+    height: 10px;
+    box-shadow: none !important;
+
+    .noUi-handle {
+      border: none;
+      width: 30px;
+      height: 20px;
+      right: -15px !important;
+      left: auto !important;
+      box-shadow: none !important;
+
+      &:after, &:before {
+        content: none;
+      }
+    }
+
+    .noUi-touch-area {
+      border-radius: 5px;
+    }
+
+    .noUi-tooltip {
+      right: auto;
+      top: -3px;
+      border-radius: 5px;
+      bottom: auto;
+      line-height: .9rem;
+      font-size: .8rem;
+      font-weight: bold;
+      min-width: 30px;
+    }
+}

@@ -146,7 +146,7 @@ export class SearchBarComponent {
             value.getRegion() ||
             value.getCountry()
           }</span>`,
-          icon: 'gogo-icon-marker-symbol'
+          icon: 'gogo-icon-marker-symbol',
         })),
       ];
     }

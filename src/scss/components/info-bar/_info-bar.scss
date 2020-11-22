@@ -2,11 +2,11 @@
 
 #element-info-bar
 {
-  .collapsible-header 
-  { 
+  .collapsible-header
+  {
     position: relative;
     z-index: 2;
-    span.added { color: #3ab33a;}     
+    span.added { color: #3ab33a;}
   }
 
   .collapsible-body
@@ -16,8 +16,8 @@
       height: 100%;
       width: 100%;
       position: absolute;
-      top: 0;   
-      left: 0; 
+      top: 0;
+      left: 0;
       overflow-y: auto;
     }
 
@@ -25,19 +25,23 @@
       height:33%;
       background-color: transparent;
     }
-  }    
+  }
 }
 
 #element-info-bar.display-bottom .element-item
-{ 
-  .collapsible-header 
-  { 
-    background-color: inherit !important; 
+{
+  .collapsible-header
+  {
+    background-color: inherit !important;
     a { color: inherit; &:hover { color: black; } }
-  } 
-  &:not(.active) .collapsible-header { border: none !important; }
+  }
 
-  .collapsible-header, .collapsible-body { 
+  &:not(.active) {
+    .collapsible-header { border: none !important; }
+    .header-date { opacity: .85; }
+  }
+
+  .collapsible-header, .collapsible-body {
     padding-left: .5rem;
     padding-right: .5rem;
 
@@ -47,13 +51,13 @@
       padding-top: 5px;
     }
   }
-} 
+}
 
 #element-info-bar.display-aside .element-item
 {
   .collapsible-header
-  {         
-    border: none;  
+  {
+    border: none;
     cursor: default;
     width: 100%;
 
@@ -81,5 +85,5 @@
     height: 100%;
     overflow-y: auto;
   }
-} 
+}
 

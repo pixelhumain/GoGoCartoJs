@@ -25,6 +25,7 @@ export const FR = {
   'category': 'Catégorie',
   'change.tiles': 'Changer le Fond de Carte',
   'check.uncheck.all': 'Cocher/Décocher Tout',
+  'clear.filter': 'Effacer le Filtre',
   'close': 'Fermer',
   'close.menu': 'Fermer le Menu',
   'collaborative.moderation': 'Modération collaborative',
@@ -69,10 +70,15 @@ export const FR = {
   'export.iframe': 'Exporter une Iframe',
 
   //F
-  'files': 'Fichiers',
-  'fill.fields.below': 'Vous devez remplir les champs ci-dessous',
-  'find.route': "Calculer l'itinéraire",
-  'found.one.or.several': '(s) trouvé-e(s)',
+  "files": "Fichiers",
+  "fill.fields.below":"Vous devez remplir les champs ci-dessous",
+  "filter.date.view.day": "Jour",
+  "filter.date.view.month": "Mois",
+  "filter.date.view.range": "Plage",
+  "filter.date.view.week": "Semaine",
+  "filter.date.view.year": "Année",
+  "find.route":"Calculer l'itinéraire",
+  "found.one.or.several":"(s) trouvé-e(s)",
 
   //G
   'general.infos': 'Informations générales',
@@ -167,6 +173,7 @@ export const FR = {
   'save.as.favorites': 'Enregistrer comme favoris',
   'search': 'Chercher',
   'search.for': 'Recherche de',
+  'search.radius': 'Rayon',
   'see.on.map': 'Voir sur la carte',
   'select.type.error': "Vous devez sélectionner un type d'erreur!",
   'send': 'Envoyer',

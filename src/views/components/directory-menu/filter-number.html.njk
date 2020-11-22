@@ -1,0 +1,5 @@
+{% if filter.subtype == "value" %}
+  <input type="number" class="simple-value" name="filter-number" />
+{% elif filter.subtype == "slider" %}
+  <div class="filter-number-slider"></div>
+{% endif %}

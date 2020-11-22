@@ -1,0 +1,19 @@
+<div class="view-selection" {% if filter.options.views|length <= 1 %}style="display: none"{% endif %}>
+  {% for view in filter.options.views %}
+    <button class="view-type {{ 'active' if filter.options.defaultView == view else ''}}" data-name="{{ view }}">{{ ('filter.date.view.' ~ view)|i18n}}</button>
+  {% endfor %}
+</div>
+
+<div class="view-filters">
+  {% for view in filter.options.views %}
+    <div class="view-filter {{ 'input-daterange input-group' if view == "range" else ''}}" data-name="{{ view }}">
+      {% if view == "range" %}
+        <div class="range-container">
+          <input type="text" class="input-sm form-control" name="start" />
+          <span class="input-group-addon col s2">to</span>
+          <input type="text" class="input-sm form-control" name="end" />
+        </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>

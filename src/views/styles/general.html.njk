@@ -48,5 +48,23 @@
     background-color: {{ background }};
     border: 1px solid {{ background.darken(5) }};
   }
-  {% set background = background.lighten(5) %} /* restor color */
+  {% set background = background.lighten(5) %} /* restore color */
+
+  {# SLIDER #}
+  .gogo-load-css .noUi-connect {
+    background-color: {{ primary }};
+    opacity: .5;
+  }
+  .gogo-load-css .noUi-tooltip:not(.gogo-section-content-opposite) {
+    color: {{ primary }};
+  }
+
+  .gogo-load-css input {
+    border-bottom: 1px solid {{ textSoft }} !important;
+  }
+  .gogo-load-css input:focus { box-shadow: 0 1px 0 0 {{ textSoft }} !important; }
+
+  .dropdown-menu {
+    color: {{ text }};
+  }
 </style>

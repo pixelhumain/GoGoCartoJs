@@ -3,6 +3,8 @@
 @import 'modules/variables';
 @import "vendors/components/toast";
 @import "vendors/components/tooltip";
+@import "vendors/bootstrap-datepicker3";
+@import "../../node_modules/nouislider/distribute/nouislider.css";
 
 // the lean-overlay added my materialize for modals is outside of gogo-load-css container
 .lean-overlay {
@@ -28,6 +30,28 @@
 	padding: 0;
 	position: absolute;
 	width: 1px;
+}
+
+// bootstrap dropdown used by datepicker
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  float: left;
+  min-width: 160px;
+  padding: 10px;
+  margin: 2px 0 0;
+  font-size: 14px;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
 }
 
 // Every styles will be loaded inside this container
@@ -64,6 +88,7 @@
     @import "components/modals/modals";
     @import "components/commons/shadow-bottom";
     @import "components/commons/scroll-bar";
+    @import "components/commons/slider";
     @import "components/custom-popup";
 
     font-size: .95rem;

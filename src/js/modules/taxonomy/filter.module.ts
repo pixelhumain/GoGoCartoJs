@@ -1,4 +1,4 @@
-import { Option, Category, Element, ElementModerationState } from '../../classes/classes';
+import { Option, Category, Element, ElementModerationState, MenuFilter } from '../../classes/classes';
 
 import { App } from '../../gogocarto';
 declare let $: any;
@@ -25,8 +25,8 @@ export class FilterModule {
   checkIfElementPassFilters(element: Element): boolean {
     if (element.optionsValues.length == 0) return false;
 
+    // FAVORITE, PENDING, MODERATION FILTERS
     if (this.showOnlyFavorite_) return element.isFavorite;
-
     if (
       this.showOnlyModeration_ &&
       (!element.needsModeration() || element.moderationState == ElementModerationState.PossibleDuplicate)
@@ -38,6 +38,88 @@ export class FilterModule {
       if (element.isPending()) return false;
     }
 
+    // CUSTOM FILTERS (except taxonomy)
+    for (const filter of App.config.menu.filters) {
+      switch (filter.type) {
+        case 'date':
+          if (!this.filterDate(element, filter)) return false;
+          break;
+        case 'number':
+          if (!this.filterNumber(element, filter)) return false;
+          break;
+      }
+    }
+
+    // TAXONOMY FILTER (at the end because it is the most costly operation)
+    if (App.config.menu.filters.some((filter) => filter.type == 'taxonomy')) return this.filterTaxonomy(element);
+    else return true;
+  }
+
+  private filterDate(element: Element, filter: MenuFilter): boolean {
+    const filterValue = filter.currentValue;
+    const elementDate = this.parseDate(element.data[filter.field]);
+    // Empty filter
+    if (!filterValue || Object.keys(filterValue).length === 0) return true;
+    // Empty value
+    else if (!elementDate) return false;
+    // RANGE
+    else if (filterValue.startDate && filterValue.endDate)
+      return (
+        elementDate.getTime() <= this.parseDate(filterValue.endDate).getTime() &&
+        elementDate.getTime() >= this.parseDate(filterValue.startDate).getTime()
+      );
+    // DATES
+    else if (filterValue.dates)
+      return (
+        filterValue.dates.length == 0 ||
+        filterValue.dates.some((date) => {
+          return (
+            date.getYear() == elementDate.getYear() &&
+            date.getMonth() == elementDate.getMonth() &&
+            date.getDate() == elementDate.getDate()
+          );
+        })
+      );
+    // MONTH
+    else if (filterValue.month !== undefined && filterValue.year)
+      return elementDate.getMonth() == filterValue.month && elementDate.getYear() == filterValue.year;
+    // YEAR
+    else if (filterValue.year) return elementDate.getYear() == filterValue.year;
+    else return true;
+  }
+
+  private filterNumber(element: Element, filter: MenuFilter): boolean {
+    const filterValue = filter.currentValue;
+    const elementValue = parseFloat(element.data[filter.field]);
+    // Empty filter
+    if (!filterValue || Object.keys(filterValue).length === 0) return true;
+    // Empty value
+    else if (!elementValue) return false;
+    else if (filterValue.value != undefined) return elementValue == filterValue.value;
+    if (filterValue.min != undefined && filterValue.max != undefined)
+      return elementValue <= filterValue.max && elementValue >= filterValue.min;
+    return true;
+  }
+
+  public parseDate(date) {
+    let dateObject;
+    if (typeof date == 'string') {
+      // Convert "30/05/2012" to "2012-05-30"
+      if (date.split('/').length == 3) {
+        const splited = date.split('/');
+        date = splited[2] + '-' + splited[1] + '-' + splited[0];
+      }
+      // Expect "2012-05-30" format
+      dateObject = new Date(date);
+    } else {
+      dateObject = date;
+    }
+    return dateObject;
+  }
+
+  log = false;
+
+  private filterTaxonomy(element: Element) {
     if (!App.config.menu.showOnePanePerMainOption) {
       const checkedMainOptions = App.taxonomyModule.taxonomy.nonDisabledOptions;
       if (checkedMainOptions.length == 1) return this.recursivelyCheckInOption(checkedMainOptions[0], element);
@@ -61,8 +143,6 @@ export class FilterModule {
       return mainOptionFilled && otherCategoriesFilled;
     }
   }
-
-  log = false;
 
   private recursivelyCheckInOption(option: Option, element: Element): boolean {
     if (this.log) console.log('Check for option ', option.name);

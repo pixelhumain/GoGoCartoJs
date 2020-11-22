@@ -25,6 +25,7 @@ export const EN = {
   'category': 'Category',
   'change.tiles': 'Change Tiles Layer',
   'check.uncheck.all': 'Check/Uncheck All',
+  'clear.filter': 'Clear Filter',
   'close': 'Close',
   'close.menu': 'Close Menu',
   'collaborative.moderation': 'Collaborative moderation',
@@ -69,9 +70,14 @@ export const EN = {
   'export.iframe': 'Export Iframe',
 
   //F
-  'files': 'Files',
-  'fill.fields.below': 'You must fill in the fields below',
-  'find.route': 'Find the route',
+  "files": "Files",
+  "fill.fields.below": "You must fill in the fields below",
+  "filter.date.view.day": "Day",
+  "filter.date.view.month": "Month",
+  "filter.date.view.range": "Range",
+  "filter.date.view.week": "Week",
+  "filter.date.view.year": "Year",
+  "find.route": "Find the route",
   'found.one.or.several': '(s) found',
 
   //G
@@ -167,6 +173,7 @@ export const EN = {
   'save.as.favorites': 'Save as favorites',
   'search': 'Search',
   'search.for': 'Search for',
+  'search.radius': 'Radius',
   'see.on.map': 'See on the map',
   'select.type.error': 'You must select a type of error!',
   'send': 'Send',

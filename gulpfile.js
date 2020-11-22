@@ -11,7 +11,7 @@ const gulp = require('gulp'),
   tsify = require('tsify'),
   notifier = require('node-notifier'),
   nunjucks = require('gulp-nunjucks'),
-  addMissingEntries = require('./addMissingEntries');
+  i18nAddMissingEntries = require('./i18nAddMissingEntries');
 
 const handleError = err => {
   console.log(err.toString());
@@ -19,7 +19,6 @@ const handleError = err => {
     'title': 'Gulp worflow',
     'message': 'Typescript error'
   });
-  this.emit('end');
 };
 
 const scriptsDirectory = () =>
@@ -53,6 +52,8 @@ const scriptsLibs = () =>
   gulp.src([
     'src/js/libs/**/!(leaflet-routing-machine)*.js',
     'src/js/libs/leaflet-routing-machine.js',
+    'src/js/libs/bootstrap-datepicker.js' ,
+    'src/js/libs/datepicker-locales/**/*.js' ,
     '!src/js/libs/materialize/unused/**/*.js'
   ])
   .pipe(concat('libs.js'))
@@ -133,5 +134,4 @@ exports.dist = gulp.series(cleanDist, gulp.parallel(
                   gulp.series(concatDirectory, prodJs, gzipJs),
                   gulp.series(concatCss, prodStyles, gzipStyles),
                   fontAssets, imageAssets));
-
-exports.addMissingEntries = async () => addMissingEntries();
+exports.i18nAddMissingEntries = async () => i18nAddMissingEntries();

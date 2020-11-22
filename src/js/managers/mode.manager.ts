@@ -52,7 +52,14 @@ export class ModeManager {
 
     App.mapComponent.initialize();
 
-    if (App.mapComponent.isMapLoaded) App.boundsModule.extendBounds(0, App.mapComponent.getBounds());
+    if (!App.mapComponent.isMapLoaded) return;
+
+    if (App.config.infobar.displayDateField && App.elementListComponent.locRangeChanged) {
+      // if bounds have been manually changed by user, we fit the map to those new bounds
+      App.mapComponent.fitBounds(App.boundsModule.extendedBounds);
+    } else {
+      App.boundsModule.extendBounds(0, App.mapComponent.getBounds());
+    }
   }
 
   private setListMode() {
@@ -78,7 +85,11 @@ export class ModeManager {
         App.elementListComponent.setTitle('');
       }
 
-      App.boundsModule.createBoundsFromLocation(centerLocation);
+      if (App.config.infobar.displayDateField) {
+        App.elementListComponent.updateLocRangeSliderFromCurrBounds();
+      } else {
+        App.boundsModule.createBoundsFromLocation(centerLocation);
+      }
       App.elementsManager.checkForNewElementsToRetrieve(true);
     } else if (App.dataType == AppDataType.SearchResults) {
       App.elementsModule.updateElementsToDisplay(true, false);
