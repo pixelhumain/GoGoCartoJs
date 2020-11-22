@@ -21,7 +21,10 @@
     }
   }
 
-  .name p { margin: 0; }
+  .name p { 
+    margin: 0; 
+    display: inline;
+  }
 }
 
 .filter-wrapper {

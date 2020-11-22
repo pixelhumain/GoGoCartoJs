@@ -75,45 +75,6 @@
       flex: 1 auto;
       align-self: center;
       margin: 0 1.5rem 0 1rem;
-    }
-    .noUi-horizontal {
-      height: 10px;
-      box-shadow: none !important;
-
-      .noUi-handle {
-        width: 30px;
-        height: 20px;
-        border: none;
-        right: -15px !important;
-        left: auto !important;
-        box-shadow: none !important;
-
-        &:after, &:before {
-          content: none;
-        }
-      }
-
-      .noUi-touch-area {
-        border-radius: 5px;
-      }
-
-      .noUi-tooltip {
-        right: auto;
-        top: -3px;
-        border-radius: 5px;
-        bottom: auto;
-        line-height: .9rem;
-        font-size: .8rem;
-        font-weight: bold;
-      }
-      .noUi-handle {
-        width: 30px;
-        height: 20px;
-        left: -17px;
-        top: -6px;
-        border: none;
-      }
-    }
-
+    }   
   }
 }

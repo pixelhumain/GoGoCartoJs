@@ -50,6 +50,15 @@
   }
   {% set background = background.lighten(5) %} /* restore color */
 
+  {# SLIDER #}
+  .gogo-load-css .noUi-connect {
+    background-color: {{ primary }};
+    opacity: .5;
+  }
+  .gogo-load-css .noUi-tooltip:not(.gogo-section-content-opposite) {
+    color: {{ primary }};
+  }
+
   .gogo-load-css input {
     border-bottom: 1px solid {{ textSoft }} !important;
   }

@@ -71,17 +71,17 @@
 								</li>
 								{# Filter content wrapper #}
 								<div class="filter-wrapper gogo-{{ filter.type }}-filter" data-id={{ filter.id }}
-										 style="{{ 'display: none' if filter.contracted else '' }}">
+								     style="{{ 'display: none' if filter.contracted else '' }}">
 							{% endif %}
 
 					  		{% include 'components/directory-menu/filter-' ~ filter.type ~ '.html.njk' ignore missing %}
 
-					  	{% if filter.type != "taxonomy" %}
-					  		</div>
-					  	{% endif %}
-					  {% endfor %}
+							{% if filter.type != "taxonomy" %}
+								</div>
+							{% endif %}
+					  	{% endfor %}
 
-						{% include 'components/directory-menu/show-only-favorite-pending-moderation.html.njk' %}
+					  	{% include 'components/directory-menu/show-only-favorite-pending-moderation.html.njk' %}
 
 					</ul>
 				</div>

@@ -2,7 +2,6 @@ import { AppModes } from '../../app.module';
 import { App } from '../../gogocarto';
 import { Element } from '../../classes/classes';
 
-import { Category, Option } from '../../modules/taxonomy/taxonomy.module';
 import { FilterDateComponent } from './filter-date.component';
 import { FilterNumberComponent } from './filter-number.component';
 

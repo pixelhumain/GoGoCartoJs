@@ -52,6 +52,7 @@ export class FilterModule {
 
     // TAXONOMY FILTER (at the end because it is the most costly operation)
     if (App.config.menu.filters.some((filter) => filter.type == 'taxonomy')) return this.filterTaxonomy(element);
+    else return true;
   }
 
   private filterDate(element: Element, filter: MenuFilter): boolean {
@@ -89,7 +90,7 @@ export class FilterModule {
 
   private filterNumber(element: Element, filter: MenuFilter): boolean {
     const filterValue = filter.currentValue;
-    const elementValue = element.data[filter.field];
+    const elementValue = parseFloat(element.data[filter.field]);
     // Empty filter
     if (!filterValue || Object.keys(filterValue).length === 0) return true;
     // Empty value
