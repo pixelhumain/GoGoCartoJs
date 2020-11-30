@@ -160,7 +160,7 @@ export class AjaxModule {
 
     $.ajax({
       url: $request.route,
-      method: 'post',
+      method: 'get',
       data: $request.data,
       beforeSend: () => {
         this.loaderTimer = setTimeout(function () {

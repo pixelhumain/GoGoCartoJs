@@ -65,6 +65,8 @@
     "watchify": "^3.11.1"
   },
   "scripts": {
-    "lint": "eslint '*/**/*.{js,ts}' --fix"
+    "lint": "eslint '*/**/*.{js,ts}' --fix",
+    "gulp-dev": "gulp watch",
+    "server-dev": "http-server"
   }
 }
