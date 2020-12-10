@@ -12,9 +12,6 @@
     "type": "git",
     "url": "https://gitlab.adullact.net/pixelhumain/GoGoCartoJs.git"
   },
-  "engines": {
-    "node": "6.5.0"
-  },
   "dependencies": {
     "commonmark": "^0.29.0",
     "diff": "^4.0.1",
