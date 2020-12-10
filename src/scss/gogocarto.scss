@@ -4,7 +4,7 @@
 @import "vendors/components/toast";
 @import "vendors/components/tooltip";
 @import "vendors/bootstrap-datepicker3";
-@import "../../node_modules/nouislider/distribute/nouislider.css";
+@import "nouislider/distribute/nouislider";
 
 // the lean-overlay added my materialize for modals is outside of gogo-load-css container
 .lean-overlay {
