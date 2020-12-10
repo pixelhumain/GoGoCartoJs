@@ -25,7 +25,7 @@ var elements = {
       "sourceKey":"Colibris",
       "email":"hidden",
       "image" : "https://images.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.italyguides.it%2Fimages%2Fgridfolio%2Ftaormina%2Ftaormina.02.jpg&f=1",
-      "optionValues":[
+      "taxonomy":[
         "10429",
         "10427"
       ]
@@ -53,7 +53,7 @@ var elements = {
       "openHoursMoreInfos":"",
       "sourceKey":"LMC",
       "email":"hidden",
-      "optionValues":[
+      "taxonomy":[
         10496,
         10498,
         10495,
@@ -84,7 +84,7 @@ var elements = {
       "openHoursMoreInfos":"Mardi, jeudi et vendredi de 10h30 à 18h30, mercredi de 13h à 18h30 et  samedi de 10h30 à 19h.",
       "sourceKey":"LMC",
       "email":"hidden",
-      "optionValues":[
+      "taxonomy":[
         10512,
         10513,
         10514,
@@ -117,7 +117,7 @@ var elements = {
       "openHoursMoreInfos":"Lundi-Samedi : 10h-20h\nDimanche : 10h-13h",
       "sourceKey":"LMC",
       "email":null,
-      "optionValues":[
+      "taxonomy":[
         10429,
         10427
       ]
@@ -145,7 +145,7 @@ var elements = {
       "openHoursMoreInfos":"",
       "sourceKey":"LMC",
       "email":"hidden",
-      "optionValues":[
+      "taxonomy":[
         10507,
         10496,
         10515,
@@ -183,7 +183,7 @@ var elements = {
       "openHoursMoreInfos":"Du lundi au samedi de 9h30 à 19h15.",
       "sourceKey":"LMC",
       "email":null,
-      "optionValues":[
+      "taxonomy":[
         10429,
         10427
       ]
@@ -211,7 +211,7 @@ var elements = {
       "openHoursMoreInfos":"ferme itinéraire :sur rendez vous uniquement",
       "sourceKey":"Colibris",
       "email":"hidden",
-      "optionValues":[
+      "taxonomy":[
         10479,
         10480,
         10473
@@ -240,7 +240,7 @@ var elements = {
       "openHoursMoreInfos":"Cueillette et distribution de paniers le Jeudi à partir de 17h.",
       "sourceKey":"Colibris",
       "email":"hidden",
-      "optionValues":[
+      "taxonomy":[
         10498,
         10496,
         10495,
@@ -273,7 +273,7 @@ var elements = {
       "openHoursMoreInfos":"6 jours sur 7 de 9h30 à 19h00",
       "sourceKey":"Colibris",
       "email":"hidden",
-      "optionValues":[
+      "taxonomy":[
         10429,
         10427
       ]
@@ -301,7 +301,7 @@ var elements = {
       "openHoursMoreInfos":"Tous les jours de la semaine de 9h à 18h.",
       "sourceKey":"Colibris",
       "email":"hidden",
-      "optionValues":[
+      "taxonomy":[
         10481,
         10480,
         10479,
@@ -334,7 +334,7 @@ var elements = {
       "openHoursMoreInfos":"des ateliers thématiques, des réunions \"nomade \" bimestrielles dans chacune des 45 communes de la vallée ; publications : dépliants de protection de la biodiversité et des livret de mise  en valeur.",
       "sourceKey":"Colibris",
       "email":"hidden",
-      "optionValues":[
+      "taxonomy":[
         10479,
         10480,
         10473
@@ -363,7 +363,7 @@ var elements = {
       "openHoursMoreInfos":"appel ou site web pour commander, puis rdv sur place pour réception et paiement",
       "sourceKey":"Colibris",
       "email":"hidden",
-      "optionValues":[
+      "taxonomy":[
         10433,
         10432,
         10435,

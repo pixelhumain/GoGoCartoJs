@@ -6,8 +6,7 @@ Hello my custom template
 {{ website|gogo_url(label = 'Site web') }}
 {{ createdAt|gogo_text(label = 'Created At') }}
 
-{{ description|gogo_textarea(label = 'Description', glossary = {'description': 'test de tooltipe un peu longue'}) }}
-
+{{ description|gogo_textarea(label = 'Description') }}
 
 {{ blop|gogo_tags }}
 {{ friends|gogo_elements}}
