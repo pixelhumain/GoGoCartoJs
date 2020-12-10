@@ -1,7 +1,7 @@
 export class GoGoFeature {
   active = false;
   url = '';
-  roles: string[] = ['anonymous', 'anonymous_with_mail', 'user', 'admin'];
+  roles: string[] = ['anonymous', 'user', 'admin'];
   inIframe = true;
   options: any = {};
 
