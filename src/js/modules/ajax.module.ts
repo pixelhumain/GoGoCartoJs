@@ -53,7 +53,7 @@ export class AjaxModule {
 
     $.ajax({
       url: this.getSingleElementApiUrl(elementId),
-      method: 'post',
+      method: 'get',
       data: {},
       success: (response) => {
         if (response) {
