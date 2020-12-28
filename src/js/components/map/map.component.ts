@@ -5,12 +5,7 @@ import { App } from '../../gogocarto';
 import { MapFeatureComponent } from './map-feature.component';
 
 declare module 'leaflet' {
-  interface MarkerClusterGroupOptions {
-    spiderfyOnHover?: boolean;
-    spiderfyMaxCount?: number;
-  }
-
-  function markerClusterGroup(options?: MarkerClusterGroupOptions): MarkerClusterGroup;
+  function markerClusterGroup(options?: any): any;
 }
 
 /**
