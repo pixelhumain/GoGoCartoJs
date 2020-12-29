@@ -168,7 +168,7 @@ Please visit [Features Documentation](features.md) to discover in detail the fea
   "delete": // Open a popup dialog and send delete request to your server
   "report":  // Open a report dialog and send a report request to your server
 
-  "sendMail": // view or send a mail to an Element. this security.hideMailsByShowingSendMailButton
+  "sendMail": // send an mail to an Element
 
   "listMode": // access to list mode
 
@@ -245,15 +245,12 @@ Security
 ```javascript
 "security": {
   "userRoles": ["user"], // other examples : ["ROLE_ADMIN", "ROLE_USER"]
-  "userEmail": "test@gt.gt",
-  "hideMailsByShowingSendMailButton": true
+  "userEmail": "test@gt.gt"
 },
 ```
 **userRoles** is used to know if the current user has access to different features.
 **userEmail** is used to prefill some interaction modals, like "report error", or "send mail".
 To set dynamically **userRole** and **userEmail**, please check [How to interact with Component](usage.md)
-
-**hideMailsByShowingSendMailButton** will prevent from displaying the email of the element. Instead a "sendMail" button is displayed, which will open a popup and send a request to your server for sending an email.
 
 Images
 ------
