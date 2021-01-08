@@ -41,7 +41,7 @@ export const EN = {
   'decide.for': 'Decide for',
   'does.not.exist': 'Does not exist',
   'does.not.respect.charter': 'Does not respect the charter',
-  'does.not.respect.charter.nothing.to.do.here': 'does not respect the charter, it has nothing to do here',
+  'does.not.respect.charter.should.not.be.listed.here': 'does not respect the charter, it has nothing to do here',
   'duplicate.on.map': 'is referenced several times on the map (duplicate)',
 
   //E

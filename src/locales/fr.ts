@@ -41,7 +41,7 @@ export const FR = {
   'decide.for': 'Décidez pour',
   'does.not.exist': "N'existe pas",
   'does.not.respect.charter': 'Ne respecte pas la charte',
-  'does.not.respect.charter.nothing.to.do.here': "ne respecte pas la charte, il n'a rien à faire ici",
+  'does.not.respect.charter.should.not.be.listed.here': "Ne respecte pas la charte, il n'a rien à faire ici",
   'duplicate.on.map': 'est référencé plusieurs fois sur la carte (doublon)',
 
   //E
