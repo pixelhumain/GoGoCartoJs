@@ -274,7 +274,13 @@ export class GoGoConfig {
       console.warn(`[GoGoCartoJS] Entry '${entry}' not found for language ${this.language}. Using english`);
       value = this.i18n['en'][entry];
     }
-    value = value.replace(/\$\{([\w\.]+)\}/, (match, otherEntry) => this.translate(otherEntry));
+    if (value)
+      value = value.replace(/\$\{([\w\.]+)\}/, (match, otherEntry) => this.translate(otherEntry));
+    else {
+      value = `MISSING TRANSLATION KEY : ${entry}`
+      console.warn(`[GoGoCartoJS] Entry '${entry}' does not exist in english`);
+    }
+
     return value;
   }
 
