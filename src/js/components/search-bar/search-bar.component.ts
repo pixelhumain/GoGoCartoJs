@@ -309,7 +309,7 @@ export class SearchBarComponent {
     this.resetOptionSearchResult();
     this.resetSearchResult(false);
     this.hideMobileSearchBar();
-
+    App.elementsJsonModule.convertJsonElements([element], true, true); // add it so it can retrieved again by it's ID
     App.setState(AppStates.ShowElement, { id: element.id, mapPan: true });
   }
 

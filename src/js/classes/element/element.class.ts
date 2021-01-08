@@ -29,6 +29,7 @@ const CORE_FIELDS = [
   'createdAt',
   'status',
   'moderationState',
+  'searchScore',
 ];
 
 export class Element extends ElementBase {
