@@ -140,7 +140,7 @@ export class FiltersComponent {
     // ----------------------------------
     // ------ CATEGORIES ----------------
     // ----------------------------------
-    $('.subcategory-item:not(.filter).name-wrapper:not(.uncheckable)').click(function () {
+    $('.subcategory-item:not(.filter) .name-wrapper:not(.uncheckable)').click(function () {
       const categoryId = $(this).attr('data-category-id');
       App.taxonomyModule.getCategoryById(categoryId).toggleChildrenDetail();
     });
