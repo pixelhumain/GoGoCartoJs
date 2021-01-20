@@ -47,7 +47,10 @@
     </div>
   {% endif %}
 
-  {% if config.isFeatureAvailable('edit') and (not element.isPending or config.isFeatureAvailable('directModeration')) and element.isEditable %} 
+  {% set readonlySources = config.features.edit.options.readonlySources %}
+  {% if config.isFeatureAvailable('edit') 
+        and (not element.isPending or config.isFeatureAvailable('directModeration')) 
+        and (not readonlySources or not (element.sourceKey in readonlySources)) %} 
     <div class="menu-element-item gogo-color-link item-edit">
       {% set editText = 'edit' if config.isFeatureAvailable('directModeration') else 'propose.changes' %}
       <a href={{ editUrl }} {% if isIframe %}target="_blank"{% endif %}>

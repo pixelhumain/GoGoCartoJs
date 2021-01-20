@@ -1,5 +1,4 @@
 import { Contribution, VoteReport, OptionValue, PostalAddress, Option, CategoryValue } from '../classes';
-import { capitalize } from '../../utils/string-helpers';
 import { App } from '../../gogocarto';
 
 export enum ElementStatus {
@@ -17,7 +16,7 @@ export enum ElementStatus {
   ModifiedByAdmin = 4,
   ModifiedByOwner = 5,
   ModifiedFromHash = 6,
-  DynamicImport = 7,
+  Imported = 7,
 }
 
 export enum ElementModerationState {
@@ -45,7 +44,6 @@ export class ElementBase {
   moderationState: ElementModerationState;
   searchScore: number = null;
   isFullyLoaded = false;
-  isEditable = true;
 
   // SPECIFIC DATA
   openHours: any;

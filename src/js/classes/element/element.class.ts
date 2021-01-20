@@ -216,7 +216,6 @@ export class Element extends ElementBase {
       needsModeration: this.needsModeration(),
       moderationState: this.moderationState,
       formatedOpenHours: this.formatedOpenHours,
-      isEditable: this.isEditable,
       pendingContribution: this.pendingContribution,
       contributions: this.contributions,
       reports: this.reports,
