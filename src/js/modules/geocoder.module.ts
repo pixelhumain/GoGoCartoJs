@@ -64,6 +64,8 @@ export class GeocoderModule {
     callbackComplete?: (results: Geocoded[]) => void,
     callbackFail?: () => void
   ): void {
+    if (!this.geocoder) return;
+
     this.lastAddressRequest = address;
 
     // if no address, we show france

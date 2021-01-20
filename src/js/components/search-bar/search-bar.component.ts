@@ -214,7 +214,7 @@ export class SearchBarComponent {
       this.searchInput().trigger('searchGeocoder', { value: address });
       return;
     }
-
+    
     App.geocoder.geocodeAddress(
       address,
       (results) => {
@@ -228,13 +228,21 @@ export class SearchBarComponent {
   }
 
   private showGeocoded(result: Geocoded): void {
-    this.searchLoading(true);
-    this.resetOptionSearchResult();
-    this.resetElementsSearchResult(false);
-    this.hideMobileSearchBar();
+    if (App.config.mode.autocompleteOnly) {
+      let address = (result as any).getDisplayName() // seems an error in universal gecoder, getFormatedAddress does not work
+      const route = App.routerModule.generate('normal', { mode: 'carte', addressAndViewport: address });
+      this.searchInput().trigger('searchRoute', route);
+      this.searchInput().trigger('searchGeocoder', { value: address });
+      return;
+    } else {
+      this.searchLoading(true);
+      this.resetOptionSearchResult();
+      this.resetElementsSearchResult(false);
+      this.hideMobileSearchBar();
 
-    this.displaySearchResultMarkerOnMap(L.latLng(result.getCoordinates()));
-    App.mapComponent.fitBounds(App.geocoder.latLngBoundsFromRawBounds(result.getBounds()), true);
+      this.displaySearchResultMarkerOnMap(L.latLng(result.getCoordinates()));
+      App.mapComponent.fitBounds(App.geocoder.latLngBoundsFromRawBounds(result.getBounds()), true);
+    }
   }
 
   searchOption(option: Option): void {

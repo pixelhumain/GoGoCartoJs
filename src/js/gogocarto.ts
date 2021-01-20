@@ -101,6 +101,7 @@ export class GoGoCartoModule {
 
     if (App.config.mode.autocompleteOnly) {
       App.searchBarComponent.initialize();
+      App.geocoder.initialize();
       return;
     }
 
