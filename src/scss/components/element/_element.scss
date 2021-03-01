@@ -14,7 +14,7 @@
 	@include flexbox();
   @include flex-flow(column nowrap);
 
-	h1, h2, h3, h4, h5
+	h1:not(.element-title), h2, h3, h4, h5
 	{
 		font-size: .85rem;
 		text-transform: uppercase;

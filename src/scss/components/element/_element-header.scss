@@ -7,6 +7,12 @@
 
   a { text-decoration: underline; }
 
+  .name h1 {
+    font-size: inherit;
+    margin: .5rem 0;
+    text-align: inherit;
+  }
+
   .header-date {
     position: absolute;
     left: 0;
