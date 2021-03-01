@@ -7402,6 +7402,10 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
           padding-left: 0.3rem; }
         .gogo-load-css .gogocarto-container .element-item .collapsible-header a {
           text-decoration: underline; }
+        .gogo-load-css .gogocarto-container .element-item .collapsible-header .name h1 {
+          font-size: inherit;
+          margin: .5rem 0;
+          text-align: inherit; }
         .gogo-load-css .gogocarto-container .element-item .collapsible-header .header-date {
           position: absolute;
           left: 0;
@@ -7657,7 +7661,7 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
             font-size: .8rem; }
         .gogo-load-css .gogocarto-container .element-item .collapsible-body .category-wrapper .category-wrapper .option-value {
           padding-left: .6rem; }
-      .gogo-load-css .gogocarto-container .element-item h1, .gogo-load-css .gogocarto-container .element-item h2, .gogo-load-css .gogocarto-container .element-item h3, .gogo-load-css .gogocarto-container .element-item h4, .gogo-load-css .gogocarto-container .element-item h5 {
+      .gogo-load-css .gogocarto-container .element-item h1:not(.element-title), .gogo-load-css .gogocarto-container .element-item h2, .gogo-load-css .gogocarto-container .element-item h3, .gogo-load-css .gogocarto-container .element-item h4, .gogo-load-css .gogocarto-container .element-item h5 {
         font-size: .85rem;
         text-transform: uppercase;
         font-weight: 600;
@@ -7666,9 +7670,9 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         margin-bottom: 1rem;
         padding-top: 1.5rem;
         text-align: left; }
-        .gogo-load-css .gogocarto-container .element-item h1.first-element-of-body-content, .gogo-load-css .gogocarto-container .element-item h2.first-element-of-body-content, .gogo-load-css .gogocarto-container .element-item h3.first-element-of-body-content, .gogo-load-css .gogocarto-container .element-item h4.first-element-of-body-content, .gogo-load-css .gogocarto-container .element-item h5.first-element-of-body-content {
+        .gogo-load-css .gogocarto-container .element-item h1:not(.element-title).first-element-of-body-content, .gogo-load-css .gogocarto-container .element-item h2.first-element-of-body-content, .gogo-load-css .gogocarto-container .element-item h3.first-element-of-body-content, .gogo-load-css .gogocarto-container .element-item h4.first-element-of-body-content, .gogo-load-css .gogocarto-container .element-item h5.first-element-of-body-content {
           padding-top: .5rem; }
-        .gogo-load-css .gogocarto-container .element-item h1.unique-element-between-dividers, .gogo-load-css .gogocarto-container .element-item h2.unique-element-between-dividers, .gogo-load-css .gogocarto-container .element-item h3.unique-element-between-dividers, .gogo-load-css .gogocarto-container .element-item h4.unique-element-between-dividers, .gogo-load-css .gogocarto-container .element-item h5.unique-element-between-dividers {
+        .gogo-load-css .gogocarto-container .element-item h1:not(.element-title).unique-element-between-dividers, .gogo-load-css .gogocarto-container .element-item h2.unique-element-between-dividers, .gogo-load-css .gogocarto-container .element-item h3.unique-element-between-dividers, .gogo-load-css .gogocarto-container .element-item h4.unique-element-between-dividers, .gogo-load-css .gogocarto-container .element-item h5.unique-element-between-dividers {
           display: none; }
       .gogo-load-css .gogocarto-container .element-item .info-bar-divider ~ h3 {
         padding-top: 1rem; }
