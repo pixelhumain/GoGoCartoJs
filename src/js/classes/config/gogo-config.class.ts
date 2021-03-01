@@ -16,10 +16,10 @@ export class GoGoConfig {
   readonly data = {
     taxonomy: undefined,
     elements: undefined,
+    elementsApiUrl: undefined,
     elementsCompactApiUrl: undefined,
     elementByIdUrl: undefined,
     requestByBounds: false,
-    retrieveElementsByApi: false,
     showPending: true,
   };
   readonly menu = {
@@ -194,7 +194,10 @@ export class GoGoConfig {
     // Copy all the defined options
     // All the options non specified will be initialized with default values
     this.recursiveFillProperty(this, config);
-    this.data.retrieveElementsByApi = typeof this.data.elements == 'string';
+    if (typeof this.data.elements == 'string') {
+      this.data.elementsApiUrl = this.data.elements;
+      this.data.elements = undefined;
+    }
     if (config.map && config.map.defaultBounds) {
       this.map.defaultBoundsProvided = true;
     }

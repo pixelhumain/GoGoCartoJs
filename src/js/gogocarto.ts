@@ -64,7 +64,7 @@ export class GoGoCartoModule {
 
   private checkForDistantTaxonomy(options: any) {
     const taxonomy = options.data.taxonomy;
-    if (!taxonomy || !options.data.elements) {
+    if (!taxonomy || (!options.data.elements && !options.data.elementsApiUrl)) {
       console.warn('[GoGoCarto] You must provide a taxonomy and elements dataset (both url or Json object)');
       return;
     }

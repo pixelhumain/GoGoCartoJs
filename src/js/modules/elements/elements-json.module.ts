@@ -67,11 +67,10 @@ export class ElementsJsonModule {
   }
 
   loadLocalElements() {
-    if (!App.config.data.retrieveElementsByApi) {
-      const elements = App.config.data.elements;
-      const elementJsonArray = elements.length ? elements : elements.data;
+    if (Array.isArray(App.config.data.elements)) {
+      const elementJsonArray = App.config.data.elements;
       const result = this.convertJsonElements(elementJsonArray, true, true);
-      App.ajaxModule.allElementsReceived = true;
+      if (!App.config.data.elementsApiUrl) App.ajaxModule.allElementsReceived = true;
       if (!App.config.map.defaultBoundsProvided && !App.historyStateManager.lastHistoryState.viewport) {
         console.log('fit to elements bounds');
         App.mapComponent.fitElementsBounds(result.elementsConverted);

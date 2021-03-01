@@ -17,8 +17,7 @@ export class ElementsManager {
 
   checkForNewElementsToRetrieve($getFullRepresentation = false) {
     if (App.dataType != AppDataType.All) return;
-
-    if (App.config.data.retrieveElementsByApi) {
+    if (App.config.data.elementsApiUrl) {
       this.retrieveMissingElementsViaApi($getFullRepresentation);
     }
   }

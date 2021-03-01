@@ -94,8 +94,8 @@ export class AjaxModule {
       stampsIds: App.request.stampsIds,
     };
     let route;
-    if (getFullRepresentation) route = App.config.data.elements;
-    else route = App.config.data.elementsCompactApiUrl || App.config.data.elements;
+    if (getFullRepresentation) route = App.config.data.elementsApiUrl;
+    else route = App.config.data.elementsCompactApiUrl || App.config.data.elementsApiUrl;
 
     this.sendAjaxElementRequest(new Request(route, dataRequest), expectedFilledBounds);
   }
@@ -136,7 +136,8 @@ export class AjaxModule {
         if (route.slice(-1) != '/') route += '/';
         route += $elementId;
       }
-    } else route = App.config.data.elements + '/' + $elementId;
+    } else 
+      route = App.config.data.elementsApiUrl + '/' + $elementId;
     return route;
   }
 
