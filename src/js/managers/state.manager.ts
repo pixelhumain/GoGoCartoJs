@@ -125,12 +125,8 @@ export class StateManager {
           App.setState(AppStates.Normal);
           if (historystate.viewport) App.mapComponent.setViewPort(historystate.viewport);
           else App.mapComponent.fitDefaultBounds();
-          setTimeout(() => {
-            App.infoBarComponent.hide();
-          }, 200);
-          setTimeout(() => {
-            App.infoBarComponent.hide();
-          }, 500);
+          
+          App.infoBarComponent.hide();
         }
       );
     }

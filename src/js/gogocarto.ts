@@ -138,9 +138,14 @@ export class GoGoCartoModule {
       App.component.initialize();
 
       App.templateModule.elementTemplate.onReady.do(() => {
+        App.elementsJsonModule.loadLocalElements()
+        // If only one element, open it (used by backend to improve SEO and sitemap)
+        if (App.elementsModule.allElements().length == 1) {
+          let element = App.elementsModule.allElements()[0]
+          let route = App.routerModule.generate('show_element', { name: element.name, id: element.id });
+          if (!window.location.hash) window.location.hash = route;
+        }
         App.routerModule.loadInitialState();
-        // wait for initial state to be loaded
-        setTimeout(() => App.elementsJsonModule.loadLocalElements(), 100);
       });
 
       App.templateModule.initialize();

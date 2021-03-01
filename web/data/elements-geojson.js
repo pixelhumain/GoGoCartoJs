@@ -1,6 +1,4 @@
-var elements = {
-  "ontology": "gogofull",
-  "data": [
+var elements = [
     {
       "id": "tramwayligne1",
       "name": "Tramway Ligne 1",
@@ -548,5 +546,4 @@ var elements = {
         }
       }
     }
-  ]
-};
+  ];

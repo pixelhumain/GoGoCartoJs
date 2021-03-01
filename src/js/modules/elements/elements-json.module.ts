@@ -71,7 +71,7 @@ export class ElementsJsonModule {
       const elementJsonArray = App.config.data.elements;
       const result = this.convertJsonElements(elementJsonArray, true, true);
       if (!App.config.data.elementsApiUrl) App.ajaxModule.allElementsReceived = true;
-      if (!App.config.map.defaultBoundsProvided && !App.historyStateManager.lastHistoryState.viewport) {
+      if (!App.config.map.defaultBoundsProvided && (!App.historyStateManager.lastHistoryState || !App.historyStateManager.lastHistoryState.viewport)) {
         console.log('fit to elements bounds');
         App.mapComponent.fitElementsBounds(result.elementsConverted);
       }

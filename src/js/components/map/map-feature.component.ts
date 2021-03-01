@@ -7,7 +7,11 @@ export class MapFeatureComponent {
 
   constructor(element: Element) {
     this.element = element;
-    this.initialize();
+    if (App.map()) {
+      this.initialize();
+    } else {
+      App.mapComponent.onMapReady.do(() => this.initialize());
+    }
   }
 
   private defaultStyle() {
@@ -26,7 +30,7 @@ export class MapFeatureComponent {
   private initialize() {
     this.featureLayer_ = L.geoJSON(this.element.geoJSONFeature, {
       style: () => this.defaultStyle(),
-    }).addTo(App.mapComponent.map_);
+    }).addTo(App.map());
 
     this.featureLayer_.on('click', (ev: any) => {
       App.mapManager.handleMarkerClick(this.element.marker);

@@ -24,21 +24,17 @@ export class DisplayElementAloneModule {
     this.elementShownAlone_ = element;
 
     App.elementsModule.clearCurrentsElement();
-
-    setTimeout(() => {
-      App.infoBarComponent.showElement(element.id);
-
+    App.infoBarComponent.showElement(element.id);
+    
+    if (panToElementLocation) {
       // we set a timeout to let the infobar show up
       // if we not do so, the map will not be centered in the element.position
-      if (panToElementLocation) {
+      setTimeout(() => {
+        App.mapComponent.panToLocation(element.position, 12, false);
         App.mapComponent.resize();
         App.mapComponent.panToLocation(element.position, 12, false);
-        setTimeout(() => {
-          App.mapComponent.resize();
-          App.mapComponent.panToLocation(element.position, 12, false);
-        }, 500);
-      }
-    }, 300);
+      }, 350);
+    }
   }
 
   end() {

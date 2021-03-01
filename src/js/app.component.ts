@@ -126,11 +126,6 @@ export class AppComponent {
       $('#element-info-bar').css('width', '100%');
     }
 
-    if ($refreshInfoBar)
-      setTimeout(() => {
-        App.infoBarComponent.refresh();
-      }, 100);
-
     if ($('#directory-menu').is(':visible') && !this.isMobileScreen()) {
       setTimeout(function () {
         $('#directory-content').css('margin-left', App.directoryMenuComponent.width);

@@ -133,15 +133,6 @@ export class InfoBarComponent {
     App.documentTitleModule.updateDocumentTitle();
   }
 
-  refresh() {
-    if (this.isVisible) {
-      this.show();
-      setTimeout(() => {
-        this.show();
-      }, 200);
-    }
-  }
-
   displayAside() {
     this.dom.addClass('display-aside');
     this.dom.removeClass('display-bottom');
@@ -205,7 +196,7 @@ export class InfoBarComponent {
     // is not hidded by the info bar
     setTimeout(() => {
       if (this.elementVisible && this.isCurrentMarkerNotVisibleOnMap() && App.state != AppStates.ShowDirections) {
-        console.log('info bar marker not visible', AppStates[App.state]);
+        // console.log('info bar marker not visible', AppStates[App.state]);
         App.mapComponent.panToLocation(this.elementVisible.position);
         this.elementVisible.showBigSize();
         setTimeout(() => {
@@ -227,6 +218,9 @@ export class InfoBarComponent {
   }
 
   hide(humanAction = true) {
+    clearTimeout(this.loaderTimer);
+    if (!this.isVisible) return;
+
     if (!this.isDisplayedAside()) {
       this.hideDetails();
       this.dom.animate({ height: '0' }, 350, 'swing', () => {
@@ -237,7 +231,7 @@ export class InfoBarComponent {
       $('#directory-content-map').css('margin-right', '0px');
 
       if (this.dom.is(':visible')) {
-        this.dom.animate({ right: '-500px' }, 350, 'swing', function () {
+        this.dom.stop(true).animate({ right: '-500px' }, 350, 'swing', function () {
           $(this).hide();
           App.component.updateMapSize();
         });
@@ -250,8 +244,8 @@ export class InfoBarComponent {
 
     if (this.elementVisible) this.elementVisible.showNormalSize(true);
 
-    this.elementVisible = null;
-    this.isVisible = false;
+    this.elementVisible = null;   
+    this.isVisible = false; 
   }
 
   get isDetailsVisible() {
