@@ -199,6 +199,7 @@ export const FR = {
   //T
   'the': 'le',
   'the.addition': "l'ajout",
+  'the.modification': "la modification",
   'to.moderate': 'A modérer',
   'type.message.here': 'Taper votre message ici',
 

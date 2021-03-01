@@ -199,6 +199,7 @@ export const EN = {
   //T
   'the': 'the',
   'the.addition': 'the addition',
+  'the.modification': "the modification",
   'to.moderate': 'To moderate',
   'type.message.here': 'Type your message here',
 

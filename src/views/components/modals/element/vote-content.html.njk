@@ -11,7 +11,7 @@
 	<input class="option-radio-btn "value="-1" name="voteOption" type="radio" id="option7"/>
 	<label class="option-radio-label" for="option7">
 		{% if isAdmin %}
-			{{ 'reject'|i18n }} {{ ('the.addition' if isPendingAdd else 'modifications')|i18n|lower }}
+			{{ 'reject'|i18n }} {{ ('the.addition' if isPendingAdd else 'the.modification')|i18n|lower }}
 		{% else %}
 			{{ 'i.do.not.agree.with.the.proposed.modifications'|i18n }}
 		{% endif %}
@@ -20,7 +20,7 @@
 	<input class="option-radio-btn "value="1" name="voteOption" type="radio" id="option6"/>
 	<label class="option-radio-label" for="option6">
 		{% if isAdmin %}
-			{{ 'accept'|i18n }} {{ ('the.addition' if isPendingAdd else 'modifications')|i18n|lower }}
+			{{ 'accept'|i18n }} {{ ('the.addition' if isPendingAdd else 'the.modification')|i18n|lower }}
 		{% else %}
 			{{ 'i.validate.the.proposed.modifications'|i18n }}
 		{% endif %}
