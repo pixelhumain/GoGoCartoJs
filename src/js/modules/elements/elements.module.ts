@@ -210,7 +210,7 @@ export class ElementsModule {
     this.visibleElements_[App.currMainId] = [];
   }
 
-  allElements() {
+  allElements() : Element[] {
     return this.everyElements_['all'];
   }
 

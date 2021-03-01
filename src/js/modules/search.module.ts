@@ -63,7 +63,7 @@ export class SearchModule {
         resolveResults({
           elements: this.searchInResults(
             term,
-            App.config.data.elements,
+            App.elementsModule.allElements(),
             (element: any) => element.name
           ).map((element) => ({ type: 'element', value: element })),
         });

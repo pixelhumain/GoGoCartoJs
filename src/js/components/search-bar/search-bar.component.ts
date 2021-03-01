@@ -400,7 +400,7 @@ export class SearchBarComponent {
     } else {
       this.searchElements(
         text,
-        { data: App.search.searchInResults(text, App.config.data.elements, (element: any) => element.name) },
+        { data: App.search.searchInResults(text, App.elementsModule.allElements(), (element: any) => element.name) },
         backFromHistory
       );
     }
