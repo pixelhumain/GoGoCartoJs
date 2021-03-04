@@ -15,7 +15,8 @@ export class FilterNumberComponent extends FilterAbstractComponent {
       });
     }
     else if (this.filter.subtype == "slider") {   
-      this.slider = this.dom.find('.filter-number-slider')[0];   
+      this.slider = this.dom.find('.filter-number-slider')[0];  
+      if (!this.slider) return; 
       noUiSlider.create(this.slider, {
         start: [this.filter.options.min, this.filter.options.max],
         connect: true,

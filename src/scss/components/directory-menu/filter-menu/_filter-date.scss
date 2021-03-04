@@ -35,8 +35,8 @@
     display: flex;
     display: flex;
     margin-bottom: 8px;
-    margin-right: 5px;
-    margin-left: 5px;
+    margin-right: .6rem;
+    margin-left: .6rem;
     .view-type {
       border: 1px solid #ddd;
       &:not(:last-child) { border-right: none; }
@@ -47,8 +47,7 @@
       line-height: 1.5rem;
       cursor: pointer;
       background-color: white;
-      &.active { background-color: #eee; border: 1px solid #ccc; border-right: none;}
-      // &.active ~ .view-type { border-left: none; } // TODO selector next siblings?
+      &.active { border: 1px solid #ccc; border-right: none;}
     }
   }
   .view-filter {

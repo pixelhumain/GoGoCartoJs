@@ -59,6 +59,12 @@
     color: {{ primary }};
   }
 
+  {# DATEPICKER #}
+  .gogo-load-css .gogocarto-container .gogo-date-filter .view-selection .view-type.active {
+    background-color: {{ primary }};
+    color: {{ textDark if primary.isLight() else textLight }};
+  }
+
   .gogo-load-css input {
     border-bottom: 1px solid {{ textSoft }} !important;
   }
