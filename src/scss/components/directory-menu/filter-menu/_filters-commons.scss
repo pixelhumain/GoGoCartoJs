@@ -32,3 +32,17 @@
     height: 2rem;
   }
 }
+
+.filter-header, .filter-paragraph {
+  padding-left: .6rem;
+}
+.filter-header h1 {
+  font-size: 2rem;
+  font-weight: bold;  
+}
+.filter-header h2 {
+  font-size: 1.8rem; 
+}
+.filter-header h3 {
+  font-size: 1.5rem;
+}

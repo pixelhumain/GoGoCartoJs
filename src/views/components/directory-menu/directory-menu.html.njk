@@ -57,7 +57,7 @@
 
 						{# ALL FILTERS INCLUDING TAXONOMY #}
 						{% for filter in config.menu.filters %}
-							{% if filter.type != "taxonomy" %}
+							{% if filter.type in ["date", "number"] %}
 								{# Filter Label and Clear button #}
 								<li class="subcategory-item filter">
 	  							<div class="name-wrapper {{ '' if filter.contracted else 'expanded'}}">
@@ -76,7 +76,7 @@
 
 					  		{% include 'components/directory-menu/filter-' ~ filter.type ~ '.html.njk' ignore missing %}
 
-							{% if filter.type != "taxonomy" %}
+							{% if filter.type in ["date", "number"] %}
 								</div>
 							{% endif %}
 					  	{% endfor %}
