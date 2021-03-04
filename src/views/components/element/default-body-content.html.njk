@@ -68,7 +68,7 @@
 
 {% if updatedAt %}
   {{ ''|gogo_separator }}
-  <div class="field-updated-at">{{ 'updated.at' | i18n }} : {{updatedAt}}</div>
+  <div class="field-updated-at">{{ 'updated.at' | i18n }} : {{updatedAt|date}}</div>
 {% endif %}
 
 

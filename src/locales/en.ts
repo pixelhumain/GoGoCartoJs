@@ -37,6 +37,7 @@ export const EN = {
   'copy.html.code': 'Copy this HTML code into your website!',
 
   //D
+  'date.defaultFormat': "MMMM Do YYYY, h:mm a",
   'decide': 'Decide',
   'decide.for': 'Decide for',
   'does.not.exist': 'Does not exist',

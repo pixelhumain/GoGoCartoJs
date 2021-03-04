@@ -1,12 +1,9 @@
-import { AppModule } from '../../app.module';
-
 import { App } from '../../gogocarto';
-import { GoGoConfig } from '../../classes/config/gogo-config.class';
 import { TemplateElementModule } from '../element/template-element.module';
 import { TemplateElementFiltersModule } from '../element/template-element-filters.module';
 import * as nunjucks from 'nunjucks';
 
-declare let $;
+declare let $, moment;
 
 export class TemplateModule {
   nunjucksEnvironment: any;
@@ -44,7 +41,22 @@ export class TemplateModule {
       if (!url.startsWith('http')) return 'http://' + url;
       else return url;
     });
-  }
+    // Date Filter, copied from https://github.com/techmsi/nunjucks-date/blob/master/src/index.js
+    const meridiemRegEx = new RegExp('(a{1,2}|p).?m{1}?.?', 'i'); // Capture the a or the p in the meridiem
+    const getMeridiemFormat = (dateString, format) =>
+      moment(dateString).format(format).replace(meridiemRegEx, '$1.m.');
+    const getFormat = (dateString, format) =>
+      moment(dateString).format(format);
+    this.nunjucksEnvironment.addFilter('date', function (dateString, ...args) {
+      const isMeridiemOnly = typeof args[0] === 'boolean';
+      let [format = null, isMeridiem = null] = args;  
+      if (!format) format = App.config.translate('date.defaultFormat')
+      if (!args.length) return getFormat(dateString, format);
+      if (format && isMeridiem) return getMeridiemFormat(dateString, format);
+      if (format && !isMeridiemOnly) return getFormat(dateString, format);
+      else return getMeridiemFormat(dateString, format);
+    });
+  }  
 
   initialize() {
     this.elementTemplate.initialize();

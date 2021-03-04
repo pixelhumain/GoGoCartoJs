@@ -5,7 +5,7 @@ import { MenuFilter } from '../classes';
 import { DEFAULT_FEATURES } from './gogo-default-feature';
 import { FR } from '../../../locales/fr';
 import { EN } from '../../../locales/en';
-declare let L: any;
+declare let L: any, $, moment;
 import * as tinycolor2 from 'tinycolor2';
 const tinycolor = (<any>tinycolor2).default;
 
@@ -265,6 +265,8 @@ export class GoGoConfig {
       if (menu.type == 'date' && this.infobar.displayDateField == undefined) this.infobar.displayDateField = menu.field;
     }
 
+    // set Moment locale using the datepicker locales (which use same options name than moment...)
+    moment.locale(this.language, $.fn.datepicker.dates[this.language])
     console.log(this);
   }
 

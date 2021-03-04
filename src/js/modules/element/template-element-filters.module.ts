@@ -1,11 +1,5 @@
-import { AppModule } from '../../app.module';
-
 import { App } from '../../gogocarto';
-import { GoGoConfig } from '../../classes/config/gogo-config.class';
-import { Event } from '../../classes/classes';
-
 import { splitLongText, formatPhoneNumber, applyGlossary } from '../../utils/string-helpers';
-
 declare let $;
 
 export class TemplateElementFiltersModule {
@@ -21,6 +15,7 @@ export class TemplateElementFiltersModule {
     'gogo_taxonomy',
     'gogo_textarea',
     'gogo_tel',
+    'gogo_date',
     'gogo_files',
     'gogo_elements',
   ];

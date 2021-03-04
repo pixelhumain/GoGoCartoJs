@@ -1,0 +1,6 @@
+{% if value %}
+  <div class="field field-date">
+    {% if label %}<span class="field-label">{{ label|safe }}</span>{% endif %}
+    {% set format = format|default(null) %}
+    <span class="value">{{ value|date(format) }}</span></div>
+{% endif %}

@@ -43,7 +43,8 @@ const scriptsDirectory = () =>
 const scriptsDeps = () =>
   gulp.src([
     'node_modules/jquery/dist/jquery.min.js',
-    'node_modules/jquery-ui-dist/jquery-ui.min.js'
+    'node_modules/jquery-ui-dist/jquery-ui.min.js',
+    'node_modules/moment/moment.js'
   ])
   .pipe(concat('deps.js'))
   .pipe(gulp.dest('build'));
