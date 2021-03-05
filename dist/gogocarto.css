@@ -1171,7 +1171,7 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
   margin-right: -5px; }
 
 /*# sourceMappingURL=bootstrap-datepicker3.css.map */
-/*! nouislider - 14.6.3 - 11/19/2020 */
+/*! nouislider - 14.0.3 - 10/10/2019 */
 /* Functional styling;
  * These styles are required for noUiSlider to function.
  * You don't need to change these rules to apply your design.
@@ -1190,7 +1190,8 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
   box-sizing: border-box; }
 
 .noUi-target {
-  position: relative; }
+  position: relative;
+  direction: ltr; }
 
 .noUi-base,
 .noUi-connects {
@@ -1211,7 +1212,7 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
   position: absolute;
   z-index: 1;
   top: 0;
-  right: 0;
+  left: 0;
   -ms-transform-origin: 0 0;
   -webkit-transform-origin: 0 0;
   -webkit-transform-style: preserve-3d;
@@ -1228,9 +1229,9 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
 
 /* Offset direction
  */
-.noUi-txt-dir-rtl.noUi-horizontal .noUi-origin {
-  left: 0;
-  right: auto; }
+html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
+  left: auto;
+  right: 0; }
 
 /* Give origins 0 height/width so they don't interfere with clicking the
  * connect elements.
@@ -1266,7 +1267,7 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
 .noUi-horizontal .noUi-handle {
   width: 34px;
   height: 28px;
-  right: -17px;
+  left: -17px;
   top: -6px; }
 
 .noUi-vertical {
@@ -1275,12 +1276,12 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
 .noUi-vertical .noUi-handle {
   width: 28px;
   height: 34px;
-  right: -6px;
+  left: -6px;
   top: -17px; }
 
-.noUi-txt-dir-rtl.noUi-horizontal .noUi-handle {
-  left: -17px;
-  right: auto; }
+html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
+  right: -17px;
+  left: auto; }
 
 /* Styling;
  * Giving the connect element a border radius causes issues with using transform: scale
@@ -1468,18 +1469,6 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
   transform: translate(0, -50%);
   top: 50%;
   right: 120%; }
-
-.noUi-horizontal .noUi-origin > .noUi-tooltip {
-  -webkit-transform: translate(50%, 0);
-  transform: translate(50%, 0);
-  left: auto;
-  bottom: 10px; }
-
-.noUi-vertical .noUi-origin > .noUi-tooltip {
-  -webkit-transform: translate(0, -18px);
-  transform: translate(0, -18px);
-  top: auto;
-  right: 28px; }
 
 .lean-overlay {
   position: fixed;
@@ -5888,7 +5877,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       border-radius: 2px;
       text-transform: capitalize;
       top: 1rem;
-      cursor: pointer; }
+      cursor: pointer;
+      background-color: #f44336a6; }
       .gogo-load-css .gogocarto-container .subcategory-item.filter .btn-clear-filter .gogo-icon-close {
         margin: 0 2px;
         margin-top: 2px;
@@ -5898,6 +5888,16 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       display: inline; }
     .gogo-load-css .gogocarto-container .filter-wrapper input {
       height: 2rem; }
+    .gogo-load-css .gogocarto-container .filter-header, .gogo-load-css .gogocarto-container .filter-paragraph {
+      padding-left: .6rem;
+      padding-right: .4rem; }
+    .gogo-load-css .gogocarto-container .filter-header h1 {
+      font-size: 2rem;
+      font-weight: bold; }
+    .gogo-load-css .gogocarto-container .filter-header h2 {
+      font-size: 1.8rem; }
+    .gogo-load-css .gogocarto-container .filter-header h3 {
+      font-size: 1.5rem; }
     .gogo-load-css .gogocarto-container .gogo-date-filter td, .gogo-load-css .gogocarto-container .gogo-date-filter th {
       padding: 0; }
     .gogo-load-css .gogocarto-container .gogo-date-filter thead {
@@ -5930,8 +5930,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
       display: flex;
       display: flex;
       margin-bottom: 8px;
-      margin-right: 5px;
-      margin-left: 5px; }
+      margin-right: .6rem;
+      margin-left: .6rem; }
       .gogo-load-css .gogocarto-container .gogo-date-filter .view-selection .view-type {
         border: 1px solid #ddd;
         flex-grow: 1;
@@ -5946,7 +5946,6 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         .gogo-load-css .gogocarto-container .gogo-date-filter .view-selection .view-type:last-child {
           border-radius: 0 3px 3px 0; }
         .gogo-load-css .gogocarto-container .gogo-date-filter .view-selection .view-type.active {
-          background-color: #eee;
           border: 1px solid #ccc;
           border-right: none; }
     .gogo-load-css .gogocarto-container .gogo-date-filter .view-filter {
@@ -7942,7 +7941,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         height: 20px;
         right: -15px !important;
         left: auto !important;
-        box-shadow: none !important; }
+        box-shadow: none !important;
+        background-color: transparent; }
         .gogo-load-css .gogocarto-container .noUi-horizontal .noUi-handle:after, .gogo-load-css .gogocarto-container .noUi-horizontal .noUi-handle:before {
           content: none; }
       .gogo-load-css .gogocarto-container .noUi-horizontal .noUi-touch-area {
