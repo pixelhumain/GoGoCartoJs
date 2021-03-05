@@ -38,6 +38,7 @@ export const FR = {
 
   //D
   'date.defaultFormat': "D MMMM YYYY à HH:mm",
+  'date.defaultFormatShort': "dd/mm/yyyy",
   'decide': 'Décider',
   'decide.for': 'Décidez pour',
   'does.not.exist': "N'existe pas",

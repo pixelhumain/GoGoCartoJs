@@ -221,6 +221,7 @@ export class Element extends ElementBase {
       reports: this.reports,
       votes: this.votes,
       colorOptionId: this.colorOptionId,
+      dateToDisplay: this.dateToDisplay
     };
     const customData = [];
     $.each(this.data, (key, value) => {
@@ -233,18 +234,6 @@ export class Element extends ElementBase {
     });
     result['customData'] = customData;
 
-    if (App.config.infobar.displayDateField) {
-      const date = this.dateToDisplay;
-      if (date) {
-        const localeDates = $.fn.datepicker.dates[App.config.language];
-        result['gogoDisplayDateNumber'] = date.getDate();
-        result['gogoDisplayDateDayShort'] = localeDates.daysShort[date.getDay()];
-        result['gogoDisplayDateDay'] = localeDates.days[date.getDay()];
-        result['gogoDisplayDateMonthShort'] = localeDates.monthsShort[date.getMonth()];
-        result['gogoDisplayDateMonth'] = localeDates.months[date.getMonth()];
-        result['gogoDisplayDateYear'] = date.getFullYear();
-      }
-    }
     return result;
   }
 

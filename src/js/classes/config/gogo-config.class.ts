@@ -266,7 +266,14 @@ export class GoGoConfig {
     }
 
     // set Moment locale using the datepicker locales (which use same options name than moment...)
-    moment.locale(this.language, $.fn.datepicker.dates[this.language])
+    let datepicker = $.fn.datepicker.dates[this.language]
+    moment.locale(this.language, {
+      months : datepicker.months,
+      monthsShort : datepicker.monthsShort,
+      weekdays : datepicker.days,
+      weekdaysShort : datepicker.daysShort,
+      weekdaysMin : datepicker.daysMin,
+    })
     console.log(this);
   }
 

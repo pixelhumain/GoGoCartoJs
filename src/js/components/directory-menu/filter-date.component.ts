@@ -50,7 +50,7 @@ export class FilterDateComponent extends FilterAbstractComponent {
         // https://uxsolutions.github.io/bootstrap-datepicker
         todayBtn: 'linked',
         language: App.config.language,
-        multidate: self.filter.multiday,
+        multidate: self.filter.options.multiday,
       })
       .on('changeDate', function (e) {
         self.filter.currentValue = { dates: e.dates };
@@ -137,13 +137,13 @@ export class FilterDateComponent extends FilterAbstractComponent {
       .datepicker({
         // https://uxsolutions.github.io/bootstrap-datepicker
         todayBtn: 'linked',
-        format: 'dd/mm/yyyy',
+        format: App.config.translate('date.defaultFormatShort'),
         autoclose: true,
         language: App.config.language,
       })
       .on('changeDate', function (e) {
-        const startDate = self.dom.find('input[name=start]').val();
-        self.filter.currentValue = { startDate: startDate, endDate: self.dom.find('input[name=end]').val() };
+        const startDate = self.dom.find('input[name=start]').datepicker('getDate');
+        self.filter.currentValue = { startDate: startDate, endDate: self.dom.find('input[name=end]').datepicker('getDate') };
         if (startDate) self.emitFilterSet();
       });
   }

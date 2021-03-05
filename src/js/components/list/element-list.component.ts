@@ -186,8 +186,8 @@ export class ElementListComponent {
     for (const element of newElementsToDraw) {
       this.visibleElementIds.push(element.id);
       if (App.config.infobar.displayDateField) {
-        currMonth = element.dateToDisplay.getMonth();
-        currYear = element.dateToDisplay.getFullYear();
+        currMonth = element.dateToDisplay.month();
+        currYear = element.dateToDisplay.year();
         if (currMonth != prevMonth || currYear != prevYear) {
           // month/year title
           listContentDom.append(
@@ -329,13 +329,9 @@ export class ElementListComponent {
   }
 
   private compareDate(a: Element, b: Element) {
-    if (
-      a.dateToDisplay.getDate() == b.dateToDisplay.getDate() &&
-      a.dateToDisplay.getMonth() == b.dateToDisplay.getMonth() &&
-      a.dateToDisplay.getFullYear() == b.dateToDisplay.getFullYear()
-    )
+    if (a.dateToDisplay.isSame(b.dateToDisplay, 'day'))
       return a.distance < b.distance ? -1 : 1;
-    return a.dateToDisplay < b.dateToDisplay ? -1 : 1;
+    return a.dateToDisplay.isBefore(b.dateToDisplay) ? -1 : 1;
   }
 
   private compareSearchScore(a: Element, b: Element) {

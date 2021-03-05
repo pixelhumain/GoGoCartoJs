@@ -1,5 +1,6 @@
 import { Contribution, VoteReport, OptionValue, PostalAddress, Option, CategoryValue } from '../classes';
 import { App } from '../../gogocarto';
+import { Moment } from 'moment';
 
 export enum ElementStatus {
   DynamicImportTemp = -7, // Temporary status used while importing
@@ -56,7 +57,7 @@ export class ElementBase {
   // CUSTOM DATA
   data: any = {};
   // main element date used for filtering etc... Use config.infobar.displayDateField
-  dateToDisplay: Date = null;
+  dateToDisplay: Moment = null;
 
   // ADMIN HISTORY DATA
   reports: VoteReport[];

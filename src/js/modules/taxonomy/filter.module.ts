@@ -1,7 +1,10 @@
 import { Option, Category, Element, ElementModerationState, MenuFilter } from '../../classes/classes';
+import { extendMoment } from 'moment-range';
 
 import { App } from '../../gogocarto';
-declare let $: any;
+declare let $: any, moment;
+
+moment = extendMoment(moment);
 
 export class FilterModule {
   showOnlyFavorite_ = false;
@@ -57,35 +60,50 @@ export class FilterModule {
 
   private filterDate(element: Element, filter: MenuFilter): boolean {
     const filterValue = filter.currentValue;
-    const elementDate = this.parseDate(element.data[filter.field]);
+    const elementDate = moment(element.data[filter.field]);
+    let elementRange = null;
+    if (filter.options.fieldEnd) {
+      const elementEndDate = moment(element.data[filter.options.fieldEnd]);
+      elementRange = moment.range(elementDate.startOf('day'), elementEndDate.endOf('day'));
+    } else {
+      elementRange = moment.range(elementDate.clone().startOf('day'), elementDate.clone().endOf('day'));
+    }
+    let targetRange = null;
+    // Handle 3 digits years like 121 which actually equals to 2021
+    if (filterValue.year && filterValue.year < 200) {
+      filterValue.year = filterValue.year - 100 + 2000
+    }
     // Empty filter
     if (!filterValue || Object.keys(filterValue).length === 0) return true;
     // Empty value
-    else if (!elementDate) return false;
+    else if (!elementDate) return false;    
     // RANGE
     else if (filterValue.startDate && filterValue.endDate)
-      return (
-        elementDate.getTime() <= this.parseDate(filterValue.endDate).getTime() &&
-        elementDate.getTime() >= this.parseDate(filterValue.startDate).getTime()
-      );
+      targetRange = moment.range(moment(filterValue.startDate).startOf('day'), moment(filterValue.endDate).endOf('day'))
     // DATES
-    else if (filterValue.dates)
-      return (
-        filterValue.dates.length == 0 ||
-        filterValue.dates.some((date) => {
-          return (
-            date.getYear() == elementDate.getYear() &&
-            date.getMonth() == elementDate.getMonth() &&
-            date.getDate() == elementDate.getDate()
-          );
-        })
-      );
+    else if (filterValue.dates) {
+      if (filterValue.dates.length == 0) return true;
+      console.log(filterValue.dates)
+      return filterValue.dates.some((date) => {
+        return elementRange.overlaps(moment.range(moment(date).startOf('day'), moment(date).endOf('day')))
+      });
+    }
     // MONTH
     else if (filterValue.month !== undefined && filterValue.year)
-      return elementDate.getMonth() == filterValue.month && elementDate.getYear() == filterValue.year;
+      targetRange = moment.range(
+        moment().month(filterValue.month).year(filterValue.year).startOf('month'),
+        moment().month(filterValue.month).year(filterValue.year).endOf('month')
+      )
     // YEAR
-    else if (filterValue.year) return elementDate.getYear() == filterValue.year;
-    else return true;
+    else if (filterValue.year) 
+      targetRange = moment.range(
+        moment().year(filterValue.year).startOf('year'),
+        moment().year(filterValue.year).endOf('year')
+      )
+    else 
+      return true;
+    
+    return targetRange ? targetRange.overlaps(elementRange) : true
   }
 
   private filterNumber(element: Element, filter: MenuFilter): boolean {
@@ -99,22 +117,6 @@ export class FilterModule {
     if (filterValue.min != undefined && filterValue.max != undefined)
       return elementValue <= filterValue.max && elementValue >= filterValue.min;
     return true;
-  }
-
-  public parseDate(date) {
-    let dateObject;
-    if (typeof date == 'string') {
-      // Convert "30/05/2012" to "2012-05-30"
-      if (date.split('/').length == 3) {
-        const splited = date.split('/');
-        date = splited[2] + '-' + splited[1] + '-' + splited[0];
-      }
-      // Expect "2012-05-30" format
-      dateObject = new Date(date);
-    } else {
-      dateObject = date;
-    }
-    return dateObject;
   }
 
   log = false;

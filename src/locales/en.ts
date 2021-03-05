@@ -38,6 +38,7 @@ export const EN = {
 
   //D
   'date.defaultFormat': "MMMM Do YYYY, h:mm a",
+  'date.defaultFormatShort': "yyyy/mm/dd",
   'decide': 'Decide',
   'decide.for': 'Decide for',
   'does.not.exist': 'Does not exist',

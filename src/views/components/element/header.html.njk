@@ -1,12 +1,12 @@
 {# Date (optional) #}
 {% if config.infobar.displayDateField %}
   <div class='header-date gogo-bg-soft-color-as' option-id={{mainOptionToDisplay.colorOptionId}}>
-    <span class="date-component date-day-short">{{ element.gogoDisplayDateDayShort }}</span>
-    <span class="date-component date-day">{{ element.gogoDisplayDateDay }}</span>
-    <span class="date-component date-number">{{ element.gogoDisplayDateNumber }}</span>
-    <span class="date-component date-month-short">{{ element.gogoDisplayDateMonthShort }}</span>
-    <span class="date-component date-month">{{ element.gogoDisplayDateMonth }}</span>
-    <span class="date-component date-year">{{ element.gogoDisplayDateYear }}</span>
+    <span class="date-component date-day-short">{{ element.dateToDisplay|date('ddd') }}</span>
+    <span class="date-component date-day">{{ element.dateToDisplay|date('dddd') }}</span>
+    <span class="date-component date-number">{{ element.dateToDisplay.date() }}</span>
+    <span class="date-component date-month-short">{{ element.dateToDisplay|date('MMM') }}</span>
+    <span class="date-component date-month">{{ element.dateToDisplay|date('MMMM') }}</span>
+    <span class="date-component date-year">{{ element.dateToDisplay|date('YYYY') }}</span>
   </div>
 {% endif %}
 

@@ -1,7 +1,7 @@
 import { Element, ElementBase, ElementStatus, PostalAddress } from '../../classes/classes';
 import { capitalize, slugify, splitLongText } from '../../utils/string-helpers';
 import { App } from '../../gogocarto';
-declare let $, L;
+declare let $, L, moment;
 
 export class ElementJsonParserModule {
   // contains the ontology of the compact Json. This mapping must be provided in the elements ajax response
@@ -20,7 +20,7 @@ export class ElementJsonParserModule {
     if ($.isArray(elementJson) && elementJson.length >= 5) this.loadFromCompactJson(elementJson, element);
     else this.loadFromFullJson(elementJson, element);
     if (App.config.infobar.displayDateField)
-      element.dateToDisplay = App.filterModule.parseDate(element.data[App.config.infobar.displayDateField]);
+      element.dateToDisplay = moment(element.data[App.config.infobar.displayDateField]);
   }
 
   private loadFromCompactJson(elementJson: any, element: Element | ElementBase) {
