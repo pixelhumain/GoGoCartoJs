@@ -65,7 +65,7 @@ export class ElementFormaterModule {
 
   private formateDailyTimeSlot(dailySlot) {
     if (dailySlot === null) return null;
-    return dailySlot.replace(/-/g, ' - ').replace(/,/g, ' et ');
+    return dailySlot.replace(/-/g, '<span class="hour-separator">-</span>').replace(/,/g, '<span class="slot-separator">   </span>');
   }
 
   private getValue(element: ElementBase, propertyName) {
