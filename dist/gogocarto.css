@@ -1171,7 +1171,7 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
   margin-right: -5px; }
 
 /*# sourceMappingURL=bootstrap-datepicker3.css.map */
-/*! nouislider - 14.0.3 - 10/10/2019 */
+/*! nouislider - 14.6.3 - 11/19/2020 */
 /* Functional styling;
  * These styles are required for noUiSlider to function.
  * You don't need to change these rules to apply your design.
@@ -1190,8 +1190,7 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
   box-sizing: border-box; }
 
 .noUi-target {
-  position: relative;
-  direction: ltr; }
+  position: relative; }
 
 .noUi-base,
 .noUi-connects {
@@ -1212,7 +1211,7 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
   position: absolute;
   z-index: 1;
   top: 0;
-  left: 0;
+  right: 0;
   -ms-transform-origin: 0 0;
   -webkit-transform-origin: 0 0;
   -webkit-transform-style: preserve-3d;
@@ -1229,9 +1228,9 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.focus {
 
 /* Offset direction
  */
-html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
-  left: auto;
-  right: 0; }
+.noUi-txt-dir-rtl.noUi-horizontal .noUi-origin {
+  left: 0;
+  right: auto; }
 
 /* Give origins 0 height/width so they don't interfere with clicking the
  * connect elements.
@@ -1267,7 +1266,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
 .noUi-horizontal .noUi-handle {
   width: 34px;
   height: 28px;
-  left: -17px;
+  right: -17px;
   top: -6px; }
 
 .noUi-vertical {
@@ -1276,12 +1275,12 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-origin {
 .noUi-vertical .noUi-handle {
   width: 28px;
   height: 34px;
-  left: -6px;
+  right: -6px;
   top: -17px; }
 
-html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
-  right: -17px;
-  left: auto; }
+.noUi-txt-dir-rtl.noUi-horizontal .noUi-handle {
+  left: -17px;
+  right: auto; }
 
 /* Styling;
  * Giving the connect element a border radius causes issues with using transform: scale
@@ -1469,6 +1468,18 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   transform: translate(0, -50%);
   top: 50%;
   right: 120%; }
+
+.noUi-horizontal .noUi-origin > .noUi-tooltip {
+  -webkit-transform: translate(50%, 0);
+  transform: translate(50%, 0);
+  left: auto;
+  bottom: 10px; }
+
+.noUi-vertical .noUi-origin > .noUi-tooltip {
+  -webkit-transform: translate(0, -18px);
+  transform: translate(0, -18px);
+  top: auto;
+  right: 28px; }
 
 .lean-overlay {
   position: fixed;
@@ -5128,8 +5139,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
     opacity: .8; }
   .gogo-load-css .gogo-theme-flat .modal {
     border-radius: 10px !important;
-    box-shadow: none !important;
-    overflow: hidden !important; }
+    box-shadow: none !important; }
   .gogo-load-css .gogo-theme-flat .modal .modal-footer .modal-action {
     color: inherit !important; }
   .gogo-load-css .gogo-theme-flat .modal .footer {
@@ -7404,7 +7414,8 @@ html[data-useragent*='MSIE 10.0'] .iconInsideMarker-wrapper {
         .gogo-load-css .gogocarto-container .element-item .collapsible-header .name h1 {
           font-size: inherit;
           margin: .5rem 0;
-          text-align: inherit; }
+          text-align: inherit;
+          display: inline; }
         .gogo-load-css .gogocarto-container .element-item .collapsible-header .header-date {
           position: absolute;
           left: 0;
