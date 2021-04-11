@@ -252,6 +252,7 @@ export class MapComponent {
 
   // fit map view to bounds
   fitBounds(bounds: L.LatLngBounds, animate = true) {
+    if (!bounds) return;
     // console.log("fitbounds", bounds);
     if (!this.isInitialized) {
       this.waitingBounds = bounds;

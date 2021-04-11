@@ -3,6 +3,7 @@ import { ViewPort, Event } from '../classes/classes';
 import { slugify } from '../utils/string-helpers';
 import UniversalGeocoder, { Geocoded, GeocoderProvider } from 'universal-geocoder';
 import { GoGoConfig } from '../classes/config/gogo-config.class';
+import { BoundingBox } from 'universal-geocoder/src/types';
 
 declare let L, $;
 
@@ -52,9 +53,10 @@ export class GeocoderModule {
     return this.lastAddressRequest;
   }
 
-  public latLngBoundsFromRawBounds(rawbounds: RawBounds): L.LatLngBounds {
-    const corner1 = L.latLng(rawbounds[0], rawbounds[1]);
-    const corner2 = L.latLng(rawbounds[2], rawbounds[3]);
+  public latLngBoundsFromRawBounds(rawbounds: BoundingBox): L.LatLngBounds {
+    if (!rawbounds) return null
+    const corner1 = L.latLng(rawbounds.latitudeSW, rawbounds.longitudeSW);
+    const corner2 = L.latLng(rawbounds.latitudeNE, rawbounds.longitudeNE);
 
     return L.latLngBounds(corner1, corner2);
   }
@@ -93,10 +95,14 @@ export class GeocoderModule {
         {
           text: address,
           locale: App.config.language,
-          south: App.config.map.maxBounds.getSouth(),
-          west: App.config.map.maxBounds.getWest(),
-          north: App.config.map.maxBounds.getNorth(),
-          east: App.config.map.maxBounds.getEast(),
+          bounds: {
+            latitudeSW: App.config.map.maxBounds.getSouthWest().lat,
+            longitudeSW: App.config.map.maxBounds.getSouthWest().lng,
+            latitudeNE: App.config.map.maxBounds.getNorthEast().lat,
+            longitudeNE: App.config.map.maxBounds.getNorthEast().lng,
+          },
+          shape: "geojson",
+          limit: 1          
         },
         (results: Geocoded[]) => {
           if (results.length <= 0) {

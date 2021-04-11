@@ -27,6 +27,7 @@ export class SearchBarComponent {
   }
 
   private locationMarker: L.Marker;
+  private locationShape: L.GeoJSON;
   private locationIcon: L.DivIcon = L.divIcon({ className: 'marker-location-position' });
   private currSearchText = '';
 
@@ -239,8 +240,17 @@ export class SearchBarComponent {
       this.resetOptionSearchResult();
       this.resetElementsSearchResult(false);
       this.hideMobileSearchBar();
-
-      this.displaySearchResultMarkerOnMap(L.latLng(result.getCoordinates()));
+      let geojson = (result as any).shape
+      if (geojson && geojson.type == "Polygon") {
+        console.log("geojson", geojson)
+        this.locationShape = L.geoJSON(geojson, {
+          style: function (feature) {
+            return {color: App.config.colors.primary, fillOpacity: 0.05, opacity: .7};
+          }
+        }).addTo(App.map())
+      } else {
+        this.displaySearchResultMarkerOnMap(L.latLng(<number>result.getCoordinates().latitude, <number>result.getCoordinates().longitude));
+      }
       App.mapComponent.fitBounds(App.geocoder.latLngBoundsFromRawBounds(result.getBounds()), true);
     }
   }
@@ -489,7 +499,10 @@ export class SearchBarComponent {
 
   private clearLocationMarker(): void {
     if (this.locationMarker) {
-      this.locationMarker.remove();
+      this.locationMarker.remove();      
+    }
+    if (this.locationShape) {
+      this.locationShape.remove();
     }
   }
 
