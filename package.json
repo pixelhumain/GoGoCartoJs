@@ -55,7 +55,7 @@
     "gulp-uglify": "^2.0.0",
     "http-server": "^0.12.1",
     "natives": "^1.1.6",
-    "node-notifier": "^4.6.1",
+    "node-notifier": "^8.0.1",
     "prettier": "^2.0.4",
     "tsify": "^4.0",
     "typescript": "^3.8",
