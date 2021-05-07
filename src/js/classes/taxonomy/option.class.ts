@@ -21,7 +21,7 @@ export class Option extends CategoryOptionTreeNode {
   useColorForMarker: boolean;
   textHelper: string;
   url: string; // allow to click an option inside the info bar
-
+  enableDescription: boolean;
   displayChildrenInMenu: boolean;
   displayChildrenInInfoBar: boolean;
 
@@ -36,6 +36,7 @@ export class Option extends CategoryOptionTreeNode {
     this.name = capitalize($optionJson.name);
     this.nameShort = capitalize($optionJson.nameShort || this.name);
     this.id = 'id' in $optionJson ? '' + $optionJson.id : slugify(this.nameShort);
+    this.customId = $optionJson.customId;
     this.intId = typeof $optionJson.id == 'number' ? $optionJson.id : $optionJson.intId;
     this.url = $optionJson.url;
 
@@ -44,6 +45,7 @@ export class Option extends CategoryOptionTreeNode {
     this.displayChildrenInMenu = $optionJson.displayChildrenInMenu !== false;
     this.displayChildrenInInfoBar = $optionJson.displayChildrenInInfoBar !== false;
 
+    this.enableDescription = $optionJson.enableDescription || false;
     this.showExpanded = $optionJson.showExpanded || false;
     this.unexpandable = $optionJson.unexpandable || false;
 

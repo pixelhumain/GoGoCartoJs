@@ -23,7 +23,7 @@
 	{% if option.displayInInfoBar %}
 	  {% if categoryValue.category.displaySuboptionsInline %}
 	  	{% set optionClass = 'inline' %}
-	  {% elseif categoryValue.category.enableDescription %}
+	  {% elseif option.enableDescription or categoryValue.category.enableDescription %}
 	  	{% set optionClass = 's6 m5' %}
 	  {% else %}
 	  	{% set optionClass = 's12' %}
@@ -47,7 +47,7 @@
 	  	{% if option.url %}</a>{% endif %}
 
 	  	{# Option Description #}
-	    {% if categoryValue.category.enableDescription %}
+	    {% if option.enableDescription or categoryValue.category.enableDescription %}
 	    	<span class="col s6 m7 option-description"><span class="{{ optionValue.diff }}">{{ optionValue.description|safe }}</span></span>
 	    {% endif %}
 	  </div>

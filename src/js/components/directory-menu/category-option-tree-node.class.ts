@@ -16,6 +16,7 @@ export enum CategoryOptionTreeNodeType {
  */
 export class CategoryOptionTreeNode {
   id: any;
+  customId: any;
   name: string;
   nameShort: string;
 

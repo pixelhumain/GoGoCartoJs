@@ -16,6 +16,7 @@ export class Category extends CategoryOptionTreeNode {
     super(CategoryOptionTreeNodeType.Category, '#category-', '#subcategorie-checkbox-', '.options-wrapper');
 
     this.id = $categoryJson.id;
+    this.customId = $categoryJson.customId;
     this.name = capitalize($categoryJson.name || '');
     this.nameShort = capitalize($categoryJson.nameShort || this.name);
 

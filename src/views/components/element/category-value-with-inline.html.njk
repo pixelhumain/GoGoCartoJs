@@ -22,38 +22,38 @@
 {% for optionValue in categoryValue.children %}
 	{% if optionValue.option.displayInInfoBar %}
 		{% set displayFirstCategoryInline = not categoryValue.category.enableDescription 
-																		and optionValue.children.length > 0 
-																		and optionValue.children[0].isLastCategoryDepth 
-																		and not optionValue.children[0].category.enableDescription %}
+											and optionValue.children.length > 0 
+											and optionValue.children[0].isLastCategoryDepth 
+											and not optionValue.children[0].category.enableDescription %}
 		<!-- <div>{{ optionValue.option.name }} : {{ optionValue.children.length }}, {{ optionValue.children[0].isLastCategoryDepth }}</div> -->
-		{% set colWidth = 's6 m5' if categoryValue.category.enableDescription else 's12' %}
-	  <div class='row'>
-	    <span class="option-value col {{ colWidth }}">
+		{% set colWidth = 's6 m5' if (option.enableDescription or categoryValue.category.enableDescription) else 's12' %}
+		<div class='row'>
+			<span class="option-value col {{ colWidth }}">
 
-	    	{% set iconClass = optionValue.option.icon if optionValue.option.icon else 'gogo-icon-angle-right' %}	
-	    	{% set iconColorId = optionValue.option.id if optionValue.option.icon else '' %}	
+				{% set iconClass = optionValue.option.icon if optionValue.option.icon else 'gogo-icon-angle-right' %}	
+				{% set iconColorId = optionValue.option.id if optionValue.option.icon else '' %}	
 				{% if iconClass %}    
 					<span class="icon {{ iconClass }} gogo-color-as" option-id={{ iconColorId }} ></span>
 				{% endif %}
-				
-	      <span class="option-name {{ optionValue.diff }}" option-id={{ optionValue.option.id }} >
-	      {{ optionValue.option.nameShort }}</span> 
+					
+				<span class="option-name {{ optionValue.diff }}" option-id={{ optionValue.option.id }} >
+					{{ optionValue.option.nameShort }}
+				</span> 
 
-	      {% if displayFirstCategoryInline %}
-	      	<span class="inline-option">(
-	      		{% for suboptionValue in optionValue.children[0].children %} 
-	      			<span class="{{ suboptionValue.diff }}">{{ suboptionValue.option.name }} {% if not loop.last %}, {% endif %}</span> 
-	      			
-		      	{% endfor %})
-		      </span>
-	      {% endif %}
+				{% if displayFirstCategoryInline %}
+					<span class="inline-option">(
+						{% for suboptionValue in optionValue.children[0].children %} 
+							<span class="{{ suboptionValue.diff }}">{{ suboptionValue.option.name }} {% if not loop.last %}, {% endif %}</span> 
+						{% endfor %})
+					</span>
+				{% endif %}
 
-	    </span>
-	    {% if categoryValue.category.enableDescription %}
-	    	<span class="col s6 m7 option-description"><span class="{{ optionValue.diff }}">{{ optionValue.description|safe }}</span></span>
-	    {% endif %}
-	  </div>
-  {% endif %}
+			</span>
+			{% if option.enableDescription or categoryValue.category.enableDescription %}
+				<span class="col s6 m7 option-description"><span class="{{ optionValue.diff }}">{{ optionValue.description|safe }}</span></span>
+			{% endif %}
+		</div>
+  	{% endif %}
 
 	{% set subcategoriesCount = optionValue.children.length %}
 	{% if displayFirstCategoryInline %}{% set subcategoriesCount = subcategoriesCount - 1 %}{% endif %}
