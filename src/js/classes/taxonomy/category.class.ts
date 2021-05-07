@@ -6,7 +6,6 @@ import {
 import { capitalize } from '../../utils/string-helpers';
 
 export class Category extends CategoryOptionTreeNode {
-  enableDescription: boolean;
   displaySuboptionsInline: boolean;
   useForFiltering: boolean; // if true, the element will be hidden when not fullfilling at least one checked option of this category
   isMandatory: boolean; // if the element have no option in this category, it will not be displayed
@@ -31,6 +30,7 @@ export class Category extends CategoryOptionTreeNode {
     this.unexpandable = $categoryJson.unexpandable || false;
 
     this.enableDescription = $categoryJson.enableDescription || false;
+    this.descriptionLabel = $categoryJson.descriptionLabel || '';
     this.displaySuboptionsInline = $categoryJson.displaySuboptionsInline || false;
     this.isMandatory = $categoryJson.isMandatory !== false;
     this.useForFiltering = $categoryJson.useForFiltering !== false;

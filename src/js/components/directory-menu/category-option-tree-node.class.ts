@@ -23,6 +23,8 @@ export class CategoryOptionTreeNode {
   displayInMenu: boolean;
   displayInInfoBar: boolean;
 
+  enableDescription: boolean;
+  descriptionLabel: string;
   showExpanded: boolean;
   unexpandable: boolean;
 
